@@ -260,6 +260,9 @@
           <a href="#cotizador" class="px-5 py-2.5 rounded-xl theme-accent-bg text-white text-xs font-semibold shadow-lg transition-all flex items-center gap-2">
             <span>⚡</span> Configurar Petición / Presupuesto
           </a>
+          <a href="#roi-simulador" class="px-4 py-2.5 rounded-xl border border-purple-500/40 bg-purple-500/10 hover:bg-purple-500/20 text-xs font-medium transition-all flex items-center gap-2 theme-accent-text">
+            <span>📊</span> Simular ROI & Ahorro
+          </a>
           <button onclick="switchView('forge')" class="px-4 py-2.5 rounded-xl theme-card border text-xs font-medium transition-all flex items-center gap-2 theme-accent-text">
             <span>🌌</span> Explorar el Gran Nexo Anuu-Forge (26 Artefactos)
           </button>
@@ -374,6 +377,21 @@
               <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Código limpio, documentado y desplegable en 1 clic</li>
             </ul>
           </div>
+        </div>
+      </section>
+
+      <!-- Sección Interactiva: Calculadora de ROI & Ahorro Financiero -->
+      <section id="roi-simulador" class="max-w-5xl mx-auto px-4 py-8">
+        <div class="text-center mb-6">
+          <span class="text-xs font-mono theme-accent-text uppercase tracking-widest">Retorno de Inversión Frío</span>
+          <h2 class="text-2xl font-bold text-white mt-1">Simulador de ROI & Ahorro Empresarial</h2>
+          <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
+            Demostración matemática directa: mueve los sliders para proyectar cuánto capital recupera tu empresa sustituyendo SaaS recurrentes, previniendo ciberataques de rescate o automatizando tareas manuales.
+          </p>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
+          <iframe id="roiCalculatorFrame" src="components/roi_calculator.html" class="w-full border-0 min-h-[780px] bg-transparent" title="Calculadora de ROI K4L1 STUDIO"></iframe>
         </div>
       </section>
 
@@ -602,6 +620,14 @@
 
       // Re-render del canvas de partículas con el nuevo color del tema
       initParticles();
+
+      // Sincronizar tema con iframe de calculadora ROI si está cargado
+      try {
+        const roiIframe = document.getElementById("roiCalculatorFrame");
+        if (roiIframe && roiIframe.contentWindow) {
+          roiIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
+        }
+      } catch(e) {}
     }
 
     // Inicializar tema guardado
