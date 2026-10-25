@@ -1075,13 +1075,14 @@
       document.getElementById("priceDisplay").innerText = `${min} € - ${max} €`;
     }
 
-    function handleFormSubmit(e) {
+    async function handleFormSubmit(e) {
       e.preventDefault();
       const service = document.querySelector('input[name="service"]:checked').value;
       const brief = document.getElementById("brief").value;
       const contact = document.getElementById("contact").value;
       const name = document.getElementById("clientName").value || "Cliente";
       const urgency = document.getElementById("urgency").value;
+      const priceDisplay = document.getElementById("priceDisplay").innerText;
 
       document.getElementById("quoteForm").classList.add("opacity-50", "pointer-events-none");
       document.getElementById("submitSuccess").classList.remove("hidden");
@@ -1092,6 +1093,25 @@
           <span>💬</span> Continuar conversación cifrada en Signal ahora mismo ↗
         </a>
       `;
+
+      // Despacho asíncrono a la infraestructura de intake (Worker o Webhook local)
+      const endpoint = window.FORGE_INTAKE_ENDPOINT || "/api/intake";
+      try {
+        await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            service,
+            urgency,
+            brief,
+            contact,
+            name,
+            presupuesto: priceDisplay
+          })
+        });
+      } catch (err) {
+        console.debug("[Forge Intake] Dispatch offline o en espera de Worker:", err);
+      }
     }
 
     // Iniciar con valores por defecto

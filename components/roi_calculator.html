@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de ROI & Ahorro Financiero | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.3s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-accent-bg {
+      background-color: var(--accent-primary);
+    }
+    .theme-accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+    .theme-accent-text {
+      color: var(--accent-secondary);
+    }
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Sliders personalizados */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #181824;
+      border-radius: 4px;
+      outline: none;
+      border: 1px solid var(--border-card);
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-primary);
+      transition: transform 0.1s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-primary);
+    }
+
+    /* Pestañas activas */
+    .scenario-tab.active {
+      background: var(--badge-bg);
+      border-color: var(--badge-border);
+      color: var(--accent-secondary);
+      box-shadow: 0 0 15px -3px var(--glow-color);
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Contenedor Maestro del Widget ROI -->
+  <div id="k4li-roi-calculator" class="max-w-5xl mx-auto space-y-6">
+
+    <!-- Header del Módulo -->
+    <div class="text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b theme-border">
+      <div>
+        <div class="flex items-center gap-2 justify-center sm:justify-start">
+          <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            ⚡ Análisis Financiero & ROI Frío
+          </span>
+          <span class="text-[11px] font-mono text-zinc-500">v2.4 Sovereign</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-black text-white mt-1.5 flex items-center gap-2 justify-center sm:justify-start">
+          <span>📊</span> Calculadora de Ahorro K4L1 STUDIO
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-2xl">
+          Demostración matemática de retorno de inversión. Mueve los controles para calcular cuánto capital recupera tu empresa eliminando costes recurrentes y blindando tu operativa.
+        </p>
+      </div>
+
+      <!-- Selector de Escenarios Rápidos -->
+      <div class="flex items-center gap-1.5 bg-black/40 p-1.5 rounded-xl border theme-border">
+        <button onclick="setScenario('ai')" id="tab-ai" class="scenario-tab active px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border border-transparent text-zinc-400">
+          🤖 IA Local
+        </button>
+        <button onclick="setScenario('security')" id="tab-security" class="scenario-tab px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border border-transparent text-zinc-400">
+          🛡️ Hardening/SIEM
+        </button>
+        <button onclick="setScenario('automation')" id="tab-automation" class="scenario-tab px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border border-transparent text-zinc-400">
+          ⚙️ Python Scripts
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel de Casos Predefinidos (Callout Educativo) -->
+    <div id="scenario-banner" class="p-4 rounded-xl theme-card border relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div class="space-y-1">
+        <span id="banner-tag" class="text-[11px] font-mono font-bold text-purple-400 uppercase">Caso A // Soberanía Tecnológica & IA</span>
+        <h3 id="banner-title" class="text-sm sm:text-base font-bold text-white">De 400 €/mes en OpenAI API a Coste Cero Recurrente</h3>
+        <p id="banner-desc" class="text-xs text-zinc-400 leading-relaxed max-w-3xl">
+          Si tu equipo gasta 400€/mes en tokens cloud, desplegar modelos privados on-premise amortiza la instalación en solo 2 meses, ahorra miles de euros en 1 año y elimina riesgos de multas de GDPR.
+        </p>
+      </div>
+      <div class="shrink-0 flex items-center gap-2">
+        <button onclick="applyPresetValues()" class="text-xs font-mono px-3 py-1.5 rounded-lg border theme-border bg-black/40 hover:bg-zinc-800 text-zinc-300 transition-all flex items-center gap-1.5">
+          <span>🔄</span> Cargar Ejemplo Real
+        </button>
+      </div>
+    </div>
+
+    <!-- Grid Central: Sliders Interactivos + Resultados Visuales -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- Columna Izquierda: Parámetros y Sliders (7 cols) -->
+      <div class="lg:col-span-7 theme-card p-5 rounded-2xl border space-y-5">
+        <div class="flex items-center justify-between border-b theme-border pb-3">
+          <h2 class="text-xs font-bold font-mono uppercase tracking-wider text-white flex items-center gap-2">
+            <span>⚙️</span> Variables de Operativa
+          </h2>
+          <span class="text-[11px] font-mono text-zinc-500">Ajuste en tiempo real</span>
+        </div>
+
+        <!-- Slider 1: Empleados / Peticiones -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-xs">
+            <label id="lbl-slider-volume" for="sliderVolume" class="font-bold text-zinc-300 flex items-center gap-1.5">
+              <span>👥</span> Peticiones de IA al Día / Consultas
+            </label>
+            <span id="val-slider-volume" class="font-mono font-bold text-sm theme-accent-text bg-black/40 px-2 py-0.5 rounded border theme-border">
+              2.500 req/día
+            </span>
+          </div>
+          <input type="range" id="sliderVolume" min="100" max="25000" step="100" value="2500" oninput="recalc()">
+          <div class="flex justify-between text-[10px] text-zinc-500 font-mono">
+            <span id="min-slider-volume">100 req/día</span>
+            <span id="max-slider-volume">25.000 req/día</span>
+          </div>
+        </div>
+
+        <!-- Slider 2: Gasto Mensual Actual / Ineficiencia -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-xs">
+            <label id="lbl-slider-cost" for="sliderCost" class="font-bold text-zinc-300 flex items-center gap-1.5">
+              <span>💸</span> Gasto Mensual Actual en Cloud / Horas Manuales
+            </label>
+            <span id="val-slider-cost" class="font-mono font-bold text-sm text-rose-400 bg-black/40 px-2 py-0.5 rounded border border-rose-900/50">
+              400 € / mes
+            </span>
+          </div>
+          <input type="range" id="sliderCost" min="50" max="3500" step="25" value="400" oninput="recalc()">
+          <div class="flex justify-between text-[10px] text-zinc-500 font-mono">
+            <span id="min-slider-cost">50 €</span>
+            <span id="max-slider-cost">3.500 € / mes</span>
+          </div>
+        </div>
+
+        <!-- Slider 3: Inversión en Servicio de Kali -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-xs">
+            <label id="lbl-slider-kali" for="sliderKali" class="font-bold text-zinc-300 flex items-center gap-1.5">
+              <span>⚡</span> Inversión Única con K4L1 STUDIO
+            </label>
+            <span id="val-slider-kali" class="font-mono font-bold text-sm text-emerald-400 bg-black/40 px-2 py-0.5 rounded border border-emerald-900/50">
+              850 € (Pago Único)
+            </span>
+          </div>
+          <input type="range" id="sliderKali" min="200" max="2500" step="50" value="850" oninput="recalc()">
+          <div class="flex justify-between text-[10px] text-zinc-500 font-mono">
+            <span id="min-slider-kali">200 € (Script ágil)</span>
+            <span id="max-slider-kali">2.500 € (Cluster completo)</span>
+          </div>
+        </div>
+
+        <!-- Parámetros Secundarios / Factores Clave -->
+        <div id="secondary-factors" class="pt-3 border-t theme-border grid grid-cols-2 gap-3">
+          <div class="bg-black/30 p-2.5 rounded-xl border theme-border">
+            <span class="text-[10px] text-zinc-500 font-mono uppercase block">Riesgo / Factor Cumplimiento</span>
+            <span id="factor-compliance" class="text-xs font-bold text-purple-300 flex items-center gap-1 mt-0.5">
+              <span>🛡️</span> GDPR 100% Protegido
+            </span>
+          </div>
+          <div class="bg-black/30 p-2.5 rounded-xl border theme-border">
+            <span class="text-[10px] text-zinc-500 font-mono uppercase block">Cuota Mensual Posterior</span>
+            <span id="factor-recurring" class="text-xs font-bold text-emerald-400 flex items-center gap-1 mt-0.5">
+              <span>0,00 €</span> / mes (Sin ataduras)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Métricas Frías, Gráficos de Ahorro y ROI (5 cols) -->
+      <div class="lg:col-span-5 space-y-4">
+
+        <!-- Card Principal de Ahorro Anual Proyectado -->
+        <div class="theme-card p-5 rounded-2xl border relative overflow-hidden">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[11px] font-mono text-zinc-400 uppercase tracking-widest">Ahorro Anual Neto Proyectado</span>
+            <span id="badge-roi" class="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-300">
+              ROI: +464%
+            </span>
+          </div>
+
+          <div class="my-2">
+            <div id="display-net-savings" class="text-3xl sm:text-4xl font-black font-mono tracking-tight text-white flex items-baseline gap-1">
+              3.950 <span class="text-xl sm:text-2xl font-bold theme-accent-text">€ / año</span>
+            </div>
+            <p id="display-amortization" class="text-xs font-mono text-emerald-400 mt-1 flex items-center gap-1">
+              <span>⚡</span> Inversión amortizada en <strong class="underline">2.1 meses</strong>
+            </p>
+          </div>
+
+          <!-- Barra Comparativa Visual: Status Quo vs Con Kali -->
+          <div class="space-y-3 pt-3 border-t theme-border">
+            <div>
+              <div class="flex justify-between text-[11px] font-mono text-zinc-400 mb-1">
+                <span>Gasto Acumulado Sin Kali (1 año):</span>
+                <span id="bar-val-old" class="text-rose-400 font-bold">4.800 €</span>
+              </div>
+              <div class="w-full bg-zinc-900 h-3 rounded-full overflow-hidden border border-zinc-800">
+                <div id="bar-progress-old" class="h-full bg-rose-600 rounded-full transition-all duration-300" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[11px] font-mono text-zinc-400 mb-1">
+                <span>Coste Total Con Kali (Setup Único):</span>
+                <span id="bar-val-kali" class="text-emerald-400 font-bold">850 €</span>
+              </div>
+              <div class="w-full bg-zinc-900 h-3 rounded-full overflow-hidden border border-zinc-800">
+                <div id="bar-progress-kali" class="h-full bg-emerald-500 rounded-full transition-all duration-300" style="width: 17.7%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfico SVG Dinámico: Curva de Payoff / Break-Even Mes a Mes -->
+        <div class="theme-card p-4 rounded-2xl border">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold font-mono text-zinc-300 flex items-center gap-1.5">
+              <span>📈</span> Curva de Amortización (12 Meses)
+            </span>
+            <span class="text-[10px] font-mono text-zinc-500">Punto de Retorno Crucial</span>
+          </div>
+
+          <div class="h-32 w-full relative">
+            <svg id="payoffSvg" viewBox="0 0 400 120" class="w-full h-full overflow-visible">
+              <defs>
+                <linearGradient id="kaliGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#10b981" stop-opacity="0.2"/>
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0.6"/>
+                </linearGradient>
+              </defs>
+              <!-- Cuadrícula horizontal sutil -->
+              <line x1="20" y1="20" x2="380" y2="20" stroke="#222" stroke-dasharray="3,3" />
+              <line x1="20" y1="60" x2="380" y2="60" stroke="#222" stroke-dasharray="3,3" />
+              <line x1="20" y1="100" x2="380" y2="100" stroke="#333" />
+              
+              <!-- Línea Roja: Gasto Acumulado Tradicional -->
+              <path id="pathOld" d="M 20 100 L 380 20" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" />
+              
+              <!-- Línea Verde: Gasto Solución Kali (Inversión inicial plana) -->
+              <path id="pathKali" d="M 20 85 L 380 85" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" />
+
+              <!-- Punto de Cruce / Break Even -->
+              <circle id="pointBreakeven" cx="80" cy="85" r="4.5" fill="#34d399" stroke="#047857" stroke-width="2" />
+              <text id="textBreakeven" x="90" y="80" fill="#34d399" font-size="9" font-family="monospace" font-weight="bold">Mes 2.1 (Break-Even)</text>
+            </svg>
+          </div>
+
+          <div class="flex items-center justify-between text-[10px] font-mono text-zinc-500 pt-1">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500 inline-block"></span> Gasto Acumulado Cloud</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> Coste Fijo con Kali</span>
+          </div>
+        </div>
+
+        <!-- Botón de Conversión Directa a Signal / Intake -->
+        <a id="btn-cta-action" href="https://signal.me/#u/k4li.89" target="_blank" class="w-full py-3.5 px-4 rounded-xl theme-accent-bg text-white font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2 hover:opacity-95 text-center">
+          <span>📩</span> Contratar esta Solución y Ahorrar 3.950 € ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Comparador Detallado de los 3 Ejemplos Canónicos -->
+    <div class="pt-4 border-t theme-border">
+      <div class="mb-4 text-center sm:text-left">
+        <span class="text-xs font-mono uppercase tracking-widest text-zinc-400">Casos Prácticos Documentados</span>
+        <h3 class="text-base font-bold text-white mt-0.5">Evidencia Numérica: ¿Dónde se Fuga el Capital?</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Tarjeta Ejemplo A -->
+        <div onclick="setScenario('ai')" class="theme-card p-4 rounded-xl border cursor-pointer hover:border-purple-500/50 transition-all">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-purple-400">🤖 Caso A: IA Local</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">Amortizado en 2 meses</span>
+          </div>
+          <p class="text-xs text-zinc-300 font-semibold">OpenAI APIs vs LLM Privado On-Premise</p>
+          <p class="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+            Una pyme con 400€/mes de API gasta 4.800€/año. Montar un modelo local (Llama-3/Mistral con GGUF) cuesta 850€ setup. Ahorro neto Año 1: <strong>3.950€</strong>. Años siguientes: <strong>4.800€/año 100% limpios</strong> y cero fugas de datos.
+          </p>
+        </div>
+
+        <!-- Tarjeta Ejemplo B -->
+        <div onclick="setScenario('security')" class="theme-card p-4 rounded-xl border cursor-pointer hover:border-emerald-500/50 transition-all">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-emerald-400">🛡️ Caso B: Hardening & SIEM</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Retorno 111x (11.011%)</span>
+          </div>
+          <p class="text-xs text-zinc-300 font-semibold">Prevención de 450€ vs Incidente de 50.000€</p>
+          <p class="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+            El coste medio de un rescate por ransomware, parada de negocio y peritaje forense supera los 50.000€. Una auditoría preventiva con despliegue Wazuh SIEM de <strong>450€</strong> neutraliza el vector inicial antes del secuestro.
+          </p>
+        </div>
+
+        <!-- Tarjeta Ejemplo C -->
+        <div onclick="setScenario('automation')" class="theme-card p-4 rounded-xl border cursor-pointer hover:border-amber-500/50 transition-all">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold text-amber-400">⚙️ Caso C: Bots Python</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">Amortizado en 8 días</span>
+          </div>
+          <p class="text-xs text-zinc-300 font-semibold">20h/semana manuales a 15€/h</p>
+          <p class="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+            20 horas semanales dedicadas a mover hojas de cálculo o scraping manual suponen 1.200€ - 1.300€/mes tirados. Un script de automatización Kali de <strong>350€</strong> se paga solo en su primera semana de ejecución.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acordeón de Documentación Técnica & Modo de Integración (Embed Guide) -->
+    <div class="theme-card rounded-xl border p-4 text-xs space-y-2">
+      <div class="flex items-center justify-between cursor-pointer select-none" onclick="toggleDoc()">
+        <span class="font-mono font-bold text-zinc-300 flex items-center gap-2">
+          <span>📖</span> Documentación Técnica de Integración & Exportación Web
+        </span>
+        <span id="doc-toggle-icon" class="text-zinc-500 font-mono text-sm">+</span>
+      </div>
+      
+      <div id="doc-content" class="hidden pt-3 border-t theme-border space-y-3 text-zinc-400">
+        <p>
+          Este componente interactivo está diseñado bajo una arquitectura modular y libre de dependencias pesadas. Puede embeberse directamente en cualquier landing page o SPA mediante iframe o inyección DOM.
+        </p>
+
+        <div class="space-y-1 font-mono text-[11px]">
+          <span class="text-zinc-300 block font-bold">1. Inserción mediante IFrame Reactivo:</span>
+          <pre class="bg-black/60 p-2.5 rounded-lg border theme-border text-purple-300 overflow-x-auto">&lt;iframe src="components/roi_calculator.html" class="w-full border-0 min-h-[640px] rounded-2xl"&gt;&lt;/iframe&gt;</pre>
+        </div>
+
+        <div class="space-y-1 font-mono text-[11px]">
+          <span class="text-zinc-300 block font-bold">2. Enlace Directo con Pre-Cálculo a Signal E2EE:</span>
+          <p class="text-zinc-400">
+            El botón CTA autogenera dinámicamente el mensaje cifrado para Signal (<code class="text-emerald-400">https://signal.me/#u/k4li.89</code>), incluyendo los valores calculados de ahorro y volumen de peticiones para agilizar el cierre del acuerdo comercial.
+          </p>
+        </div>
+
+        <div class="space-y-1 font-mono text-[11px]">
+          <span class="text-zinc-300 block font-bold">3. Compatibilidad con Sistema de Temas:</span>
+          <p class="text-zinc-400">
+            Hereda automáticamente el atributo <code class="text-purple-300">data-theme="anuu|blood|gw2"</code> del elemento raíz <code class="text-purple-300">&lt;html&gt;</code> para mantener una estética unificada con K4L1 STUDIO.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lógica JavaScript del Simulador ROI -->
+  <script>
+    // Configuración de Estados y Escenarios
+    const scenarios = {
+      ai: {
+        tag: "Caso A // Soberanía Tecnológica & IA",
+        title: "De 400 €/mes en OpenAI API a Coste Cero Recurrente",
+        desc: "Si tu equipo gasta 400€/mes en tokens cloud, desplegar modelos privados on-premise amortiza la instalación en 2 meses, ahorra miles de euros al año y elimina el riesgo de sanciones GDPR por fuga de datos.",
+        volLabel: "👥 Peticiones de IA al Día / Consultas",
+        volMin: 100, volMax: 25000, volStep: 100, volVal: 2500, volUnit: "req/día",
+        costLabel: "💸 Gasto Mensual Actual en Cloud / OpenAI APIs",
+        costMin: 50, costMax: 3500, costStep: 25, costVal: 400, costUnit: "€ / mes",
+        kaliLabel: "⚡ Inversión Despliegue IA Local Kali",
+        kaliMin: 450, kaliMax: 2500, kaliStep: 50, kaliVal: 850, kaliUnit: "€ (Setup Único)",
+        complianceFactor: "🛡️ 100% Soberano (Cero multas RGPD)",
+        recurringFactor: "0,00 € / mes (Hardware Propio)",
+        serviceName: "IA Local Soberana"
+      },
+      security: {
+        tag: "Caso B // Ciberdefensa & Auditoría Preventiva",
+        title: "Blindaje SIEM Preventivo (450€) vs Catástrofe de Ransomware (50.000€+)",
+        desc: "El impacto financiero medio de una intrusión con fuga o secuestro de datos supera los 50.000€ en pymes. El hardening de servidores Linux y monitorización activa con Wazuh neutralizan el vector de ataque antes del compromiso.",
+        volLabel: "🖥️ Estaciones de Trabajo / Servidores a Proteger",
+        volMin: 1, volMax: 150, volStep: 1, volVal: 15, volUnit: "equipos",
+        costLabel: "💥 Impacto Financiero Estimado de un Incidente",
+        costMin: 10000, costMax: 150000, costStep: 5000, costVal: 50000, costUnit: "€ (Riesgo)",
+        kaliLabel: "🛡️ Auditoría & Despliegue SIEM Wazuh Kali",
+        kaliMin: 450, kaliMax: 1800, kaliStep: 50, kaliVal: 450, kaliUnit: "€ (Auditoría Base)",
+        complianceFactor: "🔒 Cumplimiento ENS / NIS2 / ISO27001",
+        recurringFactor: "Prevención de 14-21 días de parada",
+        serviceName: "Hardening & SIEM"
+      },
+      automation: {
+        tag: "Caso C // Eficiencia Operativa & Automatización",
+        title: "20 Horas Manuales Semanales a Código Python Desatendido",
+        desc: "Tareas repetitivas de extracción, sincronización y formateo consumen 1.200€/mes de sueldo humano. Un bot en Python programado a medida amortiza su coste en sus primeros días y libera a tu equipo para tareas de alto valor.",
+        volLabel: "⏱️ Horas Manuales Perdidas por Semana",
+        volMin: 2, volMax: 80, volStep: 2, volVal: 20, volUnit: "horas/sem",
+        costLabel: "💼 Coste Mensual de Ineficiencia Humana (h × 4.33 × 15€)",
+        costMin: 200, costMax: 4000, costStep: 50, costVal: 1300, costUnit: "€ / mes",
+        kaliLabel: "⚙️ Desarrollo de Script / Bot Python Kali",
+        kaliMin: 200, kaliMax: 1000, kaliStep: 50, kaliVal: 350, kaliUnit: "€ (Entrega Final)",
+        complianceFactor: "⚡ 1.040 horas/año recuperadas",
+        recurringFactor: "0,00 € cuotas SaaS de terceros",
+        serviceName: "Automatización Python"
+      }
+    };
+
+    let currentScenario = 'ai';
+
+    function setScenario(key) {
+      currentScenario = key;
+      document.querySelectorAll('.scenario-tab').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`tab-${key}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const data = scenarios[key];
+      document.getElementById('banner-tag').innerText = data.tag;
+      document.getElementById('banner-title').innerText = data.title;
+      document.getElementById('banner-desc').innerText = data.desc;
+
+      // Actualizar etiquetas y límites de sliders
+      document.getElementById('lbl-slider-volume').innerHTML = `<span>👥</span> ${data.volLabel}`;
+      const sVol = document.getElementById('sliderVolume');
+      sVol.min = data.volMin; sVol.max = data.volMax; sVol.step = data.volStep; sVol.value = data.volVal;
+      document.getElementById('min-slider-volume').innerText = `${data.volMin.toLocaleString()} ${data.volUnit}`;
+      document.getElementById('max-slider-volume').innerText = `${data.volMax.toLocaleString()} ${data.volUnit}`;
+
+      document.getElementById('lbl-slider-cost').innerHTML = `<span>💸</span> ${data.costLabel}`;
+      const sCost = document.getElementById('sliderCost');
+      sCost.min = data.costMin; sCost.max = data.costMax; sCost.step = data.costStep; sCost.value = data.costVal;
+      document.getElementById('min-slider-cost').innerText = `${data.costMin.toLocaleString()} €`;
+      document.getElementById('max-slider-cost').innerText = `${data.costMax.toLocaleString()} ${data.costUnit}`;
+
+      document.getElementById('lbl-slider-kali').innerHTML = `<span>⚡</span> ${data.kaliLabel}`;
+      const sKali = document.getElementById('sliderKali');
+      sKali.min = data.kaliMin; sKali.max = data.kaliMax; sKali.step = data.kaliStep; sKali.value = data.kaliVal;
+      document.getElementById('min-slider-kali').innerText = `${data.kaliMin.toLocaleString()} €`;
+      document.getElementById('max-slider-kali').innerText = `${data.kaliMax.toLocaleString()} €`;
+
+      document.getElementById('factor-compliance').innerText = data.complianceFactor;
+      document.getElementById('factor-recurring').innerText = data.recurringFactor;
+
+      recalc();
+    }
+
+    function applyPresetValues() {
+      const data = scenarios[currentScenario];
+      document.getElementById('sliderVolume').value = data.volVal;
+      document.getElementById('sliderCost').value = data.costVal;
+      document.getElementById('sliderKali').value = data.kaliVal;
+      recalc();
+    }
+
+    function recalc() {
+      const vol = parseFloat(document.getElementById('sliderVolume').value);
+      const cost = parseFloat(document.getElementById('sliderCost').value);
+      const kali = parseFloat(document.getElementById('sliderKali').value);
+      const s = scenarios[currentScenario];
+
+      // Formateo de displays de sliders
+      document.getElementById('val-slider-volume').innerText = `${vol.toLocaleString()} ${s.volUnit}`;
+      document.getElementById('val-slider-cost').innerText = `${cost.toLocaleString()} ${s.costUnit}`;
+      document.getElementById('val-slider-kali').innerText = `${kali.toLocaleString()} €`;
+
+      let annualOld = 0;
+      let annualKali = kali;
+      let annualNetSavings = 0;
+      let monthsToBreakEven = 0;
+      let roiPercent = 0;
+
+      if (currentScenario === 'ai') {
+        annualOld = cost * 12;
+        annualNetSavings = annualOld - kali;
+        monthsToBreakEven = cost > 0 ? (kali / cost) : 0;
+        roiPercent = kali > 0 ? Math.round((annualNetSavings / kali) * 100) : 0;
+
+        document.getElementById('display-net-savings').innerHTML = `${Math.round(annualNetSavings).toLocaleString()} <span class="text-xl sm:text-2xl font-bold theme-accent-text">€ / año</span>`;
+        document.getElementById('display-amortization').innerHTML = `<span>⚡</span> Inversión amortizada en <strong class="underline">${monthsToBreakEven.toFixed(1)} meses</strong>`;
+      } 
+      else if (currentScenario === 'security') {
+        // En ciberseguridad, el cálculo refleja el ROSI (Return on Security Investment): Riesgo Mitigado vs Inversión
+        annualOld = cost; // Impacto financiero evitado
+        annualNetSavings = cost - kali;
+        roiPercent = kali > 0 ? Math.round((annualNetSavings / kali) * 100) : 0;
+
+        document.getElementById('display-net-savings').innerHTML = `${Math.round(annualNetSavings).toLocaleString()} <span class="text-xl sm:text-2xl font-bold theme-accent-text">€ prevenidos</span>`;
+        document.getElementById('display-amortization').innerHTML = `<span>🛡️</span> Retorno de Seguridad ROSI: <strong class="underline font-bold text-emerald-300">${(annualOld / kali).toFixed(0)}x por cada euro</strong>`;
+      } 
+      else if (currentScenario === 'automation') {
+        annualOld = cost * 12;
+        annualNetSavings = annualOld - kali;
+        monthsToBreakEven = cost > 0 ? (kali / cost) : 0;
+        const workDaysToBreakEven = Math.max(1, Math.round(monthsToBreakEven * 21));
+        roiPercent = kali > 0 ? Math.round((annualNetSavings / kali) * 100) : 0;
+
+        document.getElementById('display-net-savings').innerHTML = `${Math.round(annualNetSavings).toLocaleString()} <span class="text-xl sm:text-2xl font-bold theme-accent-text">€ / año</span>`;
+        document.getElementById('display-amortization').innerHTML = `<span>⚡</span> Amortizado en solo <strong class="underline">${workDaysToBreakEven} días hábiles</strong>`;
+      }
+
+      // Badge ROI
+      document.getElementById('badge-roi').innerText = `ROI: +${roiPercent.toLocaleString()}%`;
+
+      // Barras comparativas
+      document.getElementById('bar-val-old').innerText = `${Math.round(annualOld).toLocaleString()} €`;
+      document.getElementById('bar-val-kali').innerText = `${Math.round(annualKali).toLocaleString()} €`;
+
+      const maxVal = Math.max(annualOld, annualKali, 1);
+      const pctOld = Math.min(100, Math.round((annualOld / maxVal) * 100));
+      const pctKali = Math.min(100, Math.max(8, Math.round((annualKali / maxVal) * 100)));
+
+      document.getElementById('bar-progress-old').style.width = `${pctOld}%`;
+      document.getElementById('bar-progress-kali').style.width = `${pctKali}%`;
+
+      // Actualizar Gráfico SVG
+      updateSvgChart(cost, kali, currentScenario);
+
+      // Actualizar enlace CTA a Signal
+      const signalMsg = encodeURIComponent(`Hola Kali, he calculado un retorno con tu simulador de ROI: Servicio: ${s.serviceName}. Gasto/Riesgo actual: ${cost}€. Con tu solución de ${kali}€ obtengo un beneficio/ahorro de ${Math.round(annualNetSavings)}€. Quiero presupuestar este proyecto.`);
+      const cta = document.getElementById('btn-cta-action');
+      cta.href = `https://signal.me/#u/k4li.89?text=${signalMsg}`;
+      cta.innerHTML = `<span>📩</span> Contratar esta Solución y Proteger ${Math.round(annualNetSavings).toLocaleString()} € ↗`;
+    }
+
+    function updateSvgChart(cost, kali, scenario) {
+      const svg = document.getElementById('payoffSvg');
+      const pathOld = document.getElementById('pathOld');
+      const pathKali = document.getElementById('pathKali');
+      const point = document.getElementById('pointBreakeven');
+      const txt = document.getElementById('textBreakeven');
+
+      if (!svg || !pathOld || !pathKali) return;
+
+      if (scenario === 'security') {
+        // En seguridad: Línea de riesgo estático alta vs Inversión de hardening baja
+        pathOld.setAttribute('d', 'M 20 25 L 380 25');
+        pathKali.setAttribute('d', 'M 20 95 L 380 95');
+        point.setAttribute('cx', '50');
+        point.setAttribute('cy', '95');
+        txt.setAttribute('x', '60');
+        txt.setAttribute('y', '90');
+        txt.textContent = 'Blindaje Activo (Día 1)';
+        return;
+      }
+
+      // Escenario acumulativo mensual (IA o Automatización)
+      const months = 12;
+      const totalOld = cost * months;
+      const maxVal = Math.max(totalOld, kali * 1.5, 1);
+
+      // Alturas SVG: Y va de 105 (cero) a 20 (máximo)
+      const getY = (val) => 105 - (Math.min(val, maxVal) / maxVal) * 85;
+
+      const yOldStart = getY(0);
+      const yOldEnd = getY(totalOld);
+      pathOld.setAttribute('d', `M 20 ${yOldStart} L 380 ${yOldEnd}`);
+
+      const yKali = getY(kali);
+      pathKali.setAttribute('d', `M 20 ${yKali} L 380 ${yKali}`);
+
+      // Calcular intersección
+      const breakEvenMonth = cost > 0 ? (kali / cost) : 12;
+      const clampedMonth = Math.min(Math.max(breakEvenMonth, 0.2), 12);
+      const cx = 20 + (clampedMonth / 12) * 360;
+      const cy = yKali;
+
+      point.setAttribute('cx', cx.toFixed(1));
+      point.setAttribute('cy', cy.toFixed(1));
+
+      txt.setAttribute('x', Math.min(cx + 8, 260).toFixed(1));
+      txt.setAttribute('y', (cy - 6).toFixed(1));
+      txt.textContent = `Mes ${breakEvenMonth.toFixed(1)} (Break-Even)`;
+    }
+
+    function toggleDoc() {
+      const content = document.getElementById('doc-content');
+      const icon = document.getElementById('doc-toggle-icon');
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.innerText = '−';
+      } else {
+        content.classList.add('hidden');
+        icon.innerText = '+';
+      }
+    }
+
+    // Inicializar calculadora
+    setScenario('ai');
+  </script>
+</body>
+</html>
