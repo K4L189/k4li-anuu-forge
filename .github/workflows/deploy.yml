@@ -1,0 +1,70 @@
+name: "Deploy K4L1 STUDIO Nexus & GitHub Pages"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Permisos requeridos para desplegar en GitHub Pages y firmar tokens OIDC
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevenir despliegues simultáneos en cola
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  verify-integrity:
+    name: "Audit & Verify Asset / Link Integrity"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Códice Repositorio"
+        uses: actions/checkout@v4
+
+      - name: "Set up Python Environment (189.89.619 Hz)"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: "Execute 4NVSET Integrity & Asset Audit"
+        run: |
+          echo "### [4NVSET 🟢] Invocando Protocolo de Verificación de Integridad..." >> $GITHUB_STEP_SUMMARY
+          python3 scripts/verify_assets.py
+          
+          # Verificar configuración de .nojekyll
+          if [ -f ".nojekyll" ]; then
+            echo "- [x] Archivo .nojekyll detectado y verificado (GitHub Pages bypass listo)." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "::error::Archivo .nojekyll no encontrado en la raíz."
+            exit 1
+          fi
+
+          echo "- [x] Integridad de enlaces internos y assets verificada al 100%." >> $GITHUB_STEP_SUMMARY
+          echo "- Estado: **OPERACIONAL (Concilio ACE 161914)**" >> $GITHUB_STEP_SUMMARY
+
+  deploy:
+    name: "Deploy Nexus to GitHub Pages"
+    needs: verify-integrity
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Códice"
+        uses: actions/checkout@v4
+
+      - name: "Setup Pages Protocol"
+        uses: actions/configure-pages@v5
+
+      - name: "Upload GitHub Pages Artifact"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: "Deploy to GitHub Pages Edge"
+        id: deployment
+        uses: actions/deploy-pages@v4
