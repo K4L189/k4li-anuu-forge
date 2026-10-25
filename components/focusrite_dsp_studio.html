@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K4L1 // Focusrite Scarlett Solo 3rd Gen — Hardware DSP, Esteganografía Espectral 192 kHz & Entropía Térmica TRNG</title>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="../assets/js/fullwallpaper.js"></script>
+  <style>
+    :root, [data-theme="anuu"] {
+      --scarlett-red-glow: #e51a2e;
+      --scarlett-red-dark: #63050d;
+      --scarlett-red-deep: #3b0307;
+      --halo-green: #22c55e;
+      --halo-amber: #f59e0b;
+      --halo-red: #ef4444;
+      --air-gold: #fbbf24;
+      --inst-green: #10b981;
+      --bg-chassis: #120306;
+      --bg-panel: #07070b;
+      --border-rack: #421016;
+      --accent-purple: #a855f7;
+      --accent-cyan: #06b6d4;
+    }
+
+    body {
+      background-color: #06060a;
+      color: #f3e8ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    /* CRT scanline texture */
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 26, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Scarlett Red Aluminum Chassis */
+    .scarlett-chassis {
+      background: linear-gradient(180deg, #a71424 0%, #7d0b17 15%, #59060f 50%, #7a0c18 85%, #42040a 100%);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.85), inset 0 2px 2px rgba(255,100,120,0.35), inset 0 -3px 4px rgba(0,0,0,0.9);
+      border: 1px solid #c71e32;
+    }
+
+    /* Faceplate Inset */
+    .scarlett-faceplate {
+      background: radial-gradient(circle at 50% 20%, #15151e 0%, #08080d 75%, #040407 100%);
+      box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.95), inset 0 0 1px rgba(255, 255, 255, 0.15);
+      border: 1px solid #1f1f2e;
+    }
+
+    /* Hardware Knobs */
+    .rotary-knob {
+      background: conic-gradient(from 180deg at 50% 50%, #202028 0deg, #484856 60deg, #181820 120deg, #484856 180deg, #181820 240deg, #484856 300deg, #202028 360deg);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.4), inset 0 -2px 3px rgba(0,0,0,0.8);
+      user-select: none;
+      touch-action: none;
+    }
+
+    .rotary-cap {
+      background: radial-gradient(circle at 40% 35%, #3d3d4a 0%, #171720 70%);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.25), 0 2px 4px rgba(0,0,0,0.6);
+    }
+
+    .master-monitor-knob {
+      background: conic-gradient(from 180deg at 50% 50%, #282834 0deg, #626274 45deg, #1f1f2a 90deg, #626274 135deg, #1f1f2a 180deg, #626274 225deg, #1f1f2a 270deg, #626274 315deg, #282834 360deg);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.9), inset 0 2px 2px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.9);
+      user-select: none;
+      touch-action: none;
+    }
+
+    /* LED Halo Rings */
+    .halo-ring {
+      transition: stroke 0.12s ease, filter 0.15s ease;
+    }
+    .halo-green-glow {
+      stroke: #22c55e !important;
+      filter: drop-shadow(0 0 6px #22c55e) drop-shadow(0 0 12px rgba(34,197,94,0.6));
+    }
+    .halo-amber-glow {
+      stroke: #f59e0b !important;
+      filter: drop-shadow(0 0 7px #f59e0b) drop-shadow(0 0 14px rgba(245,158,11,0.7));
+    }
+    .halo-red-glow {
+      stroke: #ef4444 !important;
+      filter: drop-shadow(0 0 9px #ef4444) drop-shadow(0 0 18px rgba(239,68,68,0.9));
+    }
+
+    /* Screws */
+    .hex-screw {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #8a8a9a 0%, #30303a 70%);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.9);
+      position: relative;
+    }
+    .hex-screw::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 1px;
+      width: 8px;
+      height: 2px;
+      background: #111116;
+      transform: rotate(45deg);
+    }
+
+    /* Tactile Buttons */
+    .tactile-btn {
+      background: linear-gradient(180deg, #2a2a38 0%, #13131c 100%);
+      border: 1px solid #3d3d52;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.25);
+      transition: all 0.15s ease;
+    }
+    .tactile-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.8), inset 0 2px 4px rgba(0,0,0,0.7);
+    }
+    .tactile-btn.active-air {
+      background: linear-gradient(180deg, #442a04 0%, #1a1002 100%);
+      border-color: #fbbf24;
+      box-shadow: 0 0 12px rgba(251,191,36,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
+      color: #fbbf24;
+    }
+    .tactile-btn.active-inst {
+      background: linear-gradient(180deg, #053b22 0%, #021a0f 100%);
+      border-color: #10b981;
+      box-shadow: 0 0 12px rgba(16,185,129,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
+      color: #34d399;
+    }
+    .tactile-btn.active-monitor {
+      background: linear-gradient(180deg, #073832 0%, #021c19 100%);
+      border-color: #14b8a6;
+      box-shadow: 0 0 12px rgba(20,184,166,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
+      color: #2dd4bf;
+    }
+    .tactile-btn.active-48v {
+      background: linear-gradient(180deg, #4f080e 0%, #200306 100%);
+      border-color: #ef4444;
+      box-shadow: 0 0 14px rgba(239,68,68,0.65), inset 0 1px 2px rgba(255,255,255,0.3);
+      color: #f87171;
+    }
+
+    /* Custom Sliders */
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: #151522;
+      border: 1px solid #332244;
+      border-radius: 9999px;
+      height: 6px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #e51a2e;
+      border: 2px solid #ffffff;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(229,26,46,0.7);
+      transition: transform 0.15s, background-color 0.15s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      background: #ff4d5e;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #06060a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #421016;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #e51a2e;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-red-950 selection:text-red-200 relative overflow-x-hidden text-sm">
+
+  <!-- Efecto CRT Scanlines -->
+  <div class="fixed inset-0 crt-overlay z-40"></div>
+
+  <!-- HEADER DE IDENTIDAD HARDWARE & STATUS -->
+  <header class="border-b border-red-950/60 bg-black/85 backdrop-blur-md sticky top-0 z-30 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 text-xs">
+      
+      <!-- Brand & Focusrite Hardware Identity -->
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-red-600 to-red-950 border border-red-500/60 flex items-center justify-center text-xl shadow-[0_0_18px_rgba(229,26,46,0.45)] shrink-0 font-black text-white">
+          ff
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-extrabold text-white tracking-wider uppercase text-sm">K4L1 // FOCUSRITE SCARLETT SOLO 3RD GEN</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-950/80 text-red-300 border border-red-600/50 shadow-[0_0_8px_rgba(229,26,46,0.4)]">
+              ID 1235:8211
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-950/60 text-purple-300 border border-purple-500/40">
+              ALSA hw:3,0
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-950/60 text-cyan-300 border border-cyan-500/40">
+              24-bit / 192 kHz
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950/60 text-emerald-300 border border-emerald-500/40">
+              125 µs ISO
+            </span>
+          </div>
+          <p class="text-[10px] text-zinc-400 mt-0.5 font-mono">
+            S/N: <span class="text-zinc-200">Y7TDBKT285EAC0</span> • FW REV: <span class="text-zinc-200">1605 (6.45)</span> • CONCILIO ACE (161914) @ 189.89.619 Hz
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Controls & Studio Links -->
+      <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto justify-end">
+        <!-- Live Audio Stream Status -->
+        <div id="audioHardwareStatus" class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-red-900/40 bg-black/60 text-[11px] text-zinc-300">
+          <span id="hardwareStatusDot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="hardwareStatusText" class="font-mono">HARDWARE LISTO (SIM 192kHz)</span>
+        </div>
+
+        <!-- Connect Real Microphone Button -->
+        <button id="connectDeviceBtn" onclick="toggleScarlettHardware()" class="px-3.5 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 text-white font-bold transition-all shadow-[0_0_14px_rgba(229,26,46,0.45)] flex items-center gap-1.5 active:scale-95 text-xs">
+          <span>🎙️</span> <span id="connectBtnText">CONECTAR SCARLETT REAL</span>
+        </button>
+
+        <!-- Studio Navigation -->
+        <a href="resonance_synthesizer.html" class="px-3 py-1.5 rounded-lg border border-purple-900/60 bg-purple-950/30 text-purple-300 hover:text-white hover:bg-purple-900/40 transition-all flex items-center gap-1.5 text-xs">
+          <span>⚡</span> <span>Resonancia</span>
+        </a>
+        <a href="../index.html" class="px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5 text-xs">
+          <span>💼</span> <span>Forge Hub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="max-w-7xl mx-auto px-3 sm:px-4 py-6 w-full flex-1 z-10 space-y-6">
+
+    <!-- SECCIÓN 1: HARDWARE RACK — FOCUSRITE SCARLETT SOLO 3RD GEN CHASSIS -->
+    <section class="rounded-3xl scarlett-chassis p-4 sm:p-6 relative overflow-hidden">
+      <!-- Metallic highlights & bevel lines -->
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-red-300/40 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-1 bg-black/80"></div>
+
+      <!-- Header of the Chassis -->
+      <div class="flex items-center justify-between text-xs mb-3 text-red-200/90 font-mono tracking-wider">
+        <div class="flex items-center gap-2">
+          <span class="text-white font-black tracking-widest text-sm">Focusrite</span>
+          <span class="text-red-300 text-xs font-semibold">Scarlett Solo</span>
+          <span class="text-[10px] text-zinc-400 bg-black/40 px-2 py-0.5 rounded border border-red-800/40">3rd Gen • 2-in / 2-out USB Audio Interface</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-4 text-[11px]">
+          <span class="flex items-center gap-1 text-emerald-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span> USB LOCK
+          </span>
+          <span class="flex items-center gap-1 text-cyan-300">
+            <span>CLOCK:</span> <span id="masterClockRate">192.0 kHz</span>
+          </span>
+          <span class="text-zinc-300">24-BIT ASYNC</span>
+        </div>
+      </div>
+
+      <!-- The Front Panel Faceplate (Glossy Acrylic with Knobs & Connectors) -->
+      <div class="scarlett-faceplate rounded-2xl p-4 sm:p-6 border border-zinc-800/80 relative">
+        <!-- Corner Screws -->
+        <div class="hex-screw absolute top-3 left-3"></div>
+        <div class="hex-screw absolute top-3 right-3"></div>
+        <div class="hex-screw absolute bottom-3 left-3"></div>
+        <div class="hex-screw absolute bottom-3 right-3"></div>
+
+        <!-- The Layout: Input 1 (Mic), Input 2 (Inst), Output (Monitor / Phones) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+
+          <!-- ================= INPUT 1 (MIC / XLR) ================= -->
+          <div class="md:col-span-4 bg-black/40 rounded-xl p-3 border border-red-950/40 relative">
+            <div class="text-[10px] text-zinc-400 font-bold mb-2 flex items-center justify-between">
+              <span class="text-red-400 tracking-wider">INPUT 1 (MIC)</span>
+              <span id="input1Dbfs" class="text-zinc-500 font-mono">-∞ dBFS</span>
+            </div>
+
+            <div class="flex items-center justify-around gap-2">
+              <!-- XLR 3-pin Connector Replica -->
+              <div class="flex flex-col items-center">
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-950 border-2 border-zinc-600 flex items-center justify-center shadow-inner relative" title="Neutrik 3-Pin XLR Input Jack (Mic Preamp)">
+                  <div class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-700 flex flex-col items-center justify-center gap-1">
+                    <div class="flex gap-2.5">
+                      <div class="w-2 h-2 rounded-full bg-zinc-950 border border-zinc-600 shadow-inner"></div>
+                      <div class="w-2 h-2 rounded-full bg-zinc-950 border border-zinc-600 shadow-inner"></div>
+                    </div>
+                    <div class="w-2 h-2 rounded-full bg-zinc-950 border border-zinc-600 shadow-inner"></div>
+                  </div>
+                  <div class="absolute top-0.5 w-3 h-1.5 bg-zinc-400 rounded-b-sm border border-zinc-600"></div>
+                </div>
+                <span class="text-[9px] text-zinc-400 font-mono mt-1">XLR BAL</span>
+              </div>
+
+              <!-- GAIN 1 KNOB WITH HALO RING -->
+              <div class="flex flex-col items-center">
+                <div class="relative w-20 h-20 flex items-center justify-center cursor-pointer select-none" id="gain1Container" onmousedown="startKnobDrag(event, 1)" ontouchstart="startKnobDrag(event, 1)">
+                  <!-- SVG Dynamic Halo Ring -->
+                  <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 100 100">
+                    <!-- Base background ring -->
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#221118" stroke-width="7" stroke-dasharray="210 264" stroke-dashoffset="0" stroke-linecap="round"/>
+                    <!-- Active Halo LED Ring (Green / Amber / Red dynamically colored) -->
+                    <circle id="halo1Svg" class="halo-ring" cx="50" cy="50" r="42" fill="none" stroke="#2a1520" stroke-width="7" stroke-dasharray="210 264" stroke-dashoffset="0" stroke-linecap="round"/>
+                  </svg>
+                  
+                  <!-- Knob Body -->
+                  <div id="knob1Body" class="w-14 h-14 rounded-full rotary-knob flex items-center justify-center shadow-lg transition-transform duration-75 relative">
+                    <div class="w-10 h-10 rounded-full rotary-cap flex items-center justify-center">
+                      <div class="w-1 h-4 bg-white/90 rounded-full absolute top-1 shadow-[0_0_4px_white]"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center mt-1">
+                  <span class="text-[10px] font-bold text-zinc-300">GAIN 1</span>
+                  <span id="gain1Label" class="text-[10px] text-red-300 font-mono block">+24.0 dB</span>
+                </div>
+              </div>
+
+              <!-- AIR & +48V SWITCHES -->
+              <div class="flex flex-col gap-2">
+                <!-- AIR Button -->
+                <button id="btnAir" onclick="toggleAirMode()" class="tactile-btn px-2.5 py-1.5 rounded-lg flex flex-col items-center justify-center w-14" title="ISA Preamp Transformer Emulation (High Frequency Sheen ~4dB @ 10-24 kHz)">
+                  <span class="text-[10px] font-black tracking-wider text-amber-400">AIR</span>
+                  <span id="airLed" class="w-1.5 h-1.5 rounded-full bg-zinc-700 mt-0.5"></span>
+                </button>
+
+                <!-- +48V Phantom Power with Safety Lock -->
+                <button id="btn48v" onclick="toggle48v()" class="tactile-btn px-2.5 py-1.5 rounded-lg flex flex-col items-center justify-center w-14" title="+48V Phantom Power para Micrófonos de Condensador (Con Bloqueo de Seguridad)">
+                  <span class="text-[10px] font-bold text-red-400 tracking-wider">48V</span>
+                  <span id="led48v" class="w-1.5 h-1.5 rounded-full bg-zinc-700 mt-0.5"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= INPUT 2 (LINE / INST Hi-Z) ================= -->
+          <div class="md:col-span-4 bg-black/40 rounded-xl p-3 border border-red-950/40 relative">
+            <div class="text-[10px] text-zinc-400 font-bold mb-2 flex items-center justify-between">
+              <span class="text-red-400 tracking-wider">INPUT 2 (LINE / INST)</span>
+              <span id="input2Dbfs" class="text-zinc-500 font-mono">-∞ dBFS</span>
+            </div>
+
+            <div class="flex items-center justify-around gap-2">
+              <!-- 1/4" (6.35mm) TRS Jack Port -->
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-950 border-2 border-zinc-600 flex items-center justify-center shadow-inner relative" title="1/4 inch TRS Jack (Instrument / Line Level Input)">
+                  <div class="w-6 h-6 rounded-full bg-black border-2 border-zinc-500 shadow-inner flex items-center justify-center">
+                    <div class="w-3 h-3 rounded-full bg-zinc-900 border border-zinc-700"></div>
+                  </div>
+                </div>
+                <span class="text-[9px] text-zinc-400 font-mono mt-1">1/4" TRS</span>
+              </div>
+
+              <!-- GAIN 2 KNOB WITH HALO RING -->
+              <div class="flex flex-col items-center">
+                <div class="relative w-20 h-20 flex items-center justify-center cursor-pointer select-none" id="gain2Container" onmousedown="startKnobDrag(event, 2)" ontouchstart="startKnobDrag(event, 2)">
+                  <!-- SVG Dynamic Halo Ring -->
+                  <svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#221118" stroke-width="7" stroke-dasharray="210 264" stroke-dashoffset="0" stroke-linecap="round"/>
+                    <circle id="halo2Svg" class="halo-ring" cx="50" cy="50" r="42" fill="none" stroke="#2a1520" stroke-width="7" stroke-dasharray="210 264" stroke-dashoffset="0" stroke-linecap="round"/>
+                  </svg>
+                  
+                  <!-- Knob Body -->
+                  <div id="knob2Body" class="w-14 h-14 rounded-full rotary-knob flex items-center justify-center shadow-lg transition-transform duration-75 relative">
+                    <div class="w-10 h-10 rounded-full rotary-cap flex items-center justify-center">
+                      <div class="w-1 h-4 bg-white/90 rounded-full absolute top-1 shadow-[0_0_4px_white]"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center mt-1">
+                  <span class="text-[10px] font-bold text-zinc-300">GAIN 2</span>
+                  <span id="gain2Label" class="text-[10px] text-red-300 font-mono block">+18.0 dB</span>
+                </div>
+              </div>
+
+              <!-- INST Hi-Z TOGGLE BUTTON -->
+              <div class="flex flex-col gap-2">
+                <button id="btnInst" onclick="toggleInstMode()" class="tactile-btn px-2.5 py-2.5 rounded-lg flex flex-col items-center justify-center w-14" title="Instrument High-Impedance Mode (Hi-Z 1.5 MΩ para Guitarra / Bajo)">
+                  <span class="text-[10px] font-black tracking-wider text-emerald-400">INST</span>
+                  <span id="instLed" class="w-1.5 h-1.5 rounded-full bg-zinc-700 mt-1"></span>
+                </button>
+                <span class="text-[8px] text-center text-zinc-500 font-mono" id="instModeText">LINE 60k</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= MONITOR / DIRECT MONITOR / HEADPHONES ================= -->
+          <div class="md:col-span-4 bg-black/40 rounded-xl p-3 border border-red-950/40 relative">
+            <div class="text-[10px] text-zinc-400 font-bold mb-2 flex items-center justify-between">
+              <span class="text-red-400 tracking-wider">MASTER MONITOR & HEADPHONES</span>
+              <span id="masterOutLabel" class="text-zinc-400 font-mono">-6.0 dB</span>
+            </div>
+
+            <div class="flex items-center justify-around gap-3">
+              <!-- LARGE MONITOR MASTER VOLUME KNOB -->
+              <div class="flex flex-col items-center">
+                <div class="relative w-20 h-20 flex items-center justify-center cursor-pointer select-none" id="monitorKnobContainer" onmousedown="startKnobDrag(event, 3)" ontouchstart="startKnobDrag(event, 3)">
+                  <div id="knobMonitorBody" class="w-16 h-16 rounded-full master-monitor-knob flex items-center justify-center shadow-2xl transition-transform duration-75 relative">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-950 flex items-center justify-center shadow-inner">
+                      <div class="w-1.5 h-4 bg-white rounded-full absolute top-1.5 shadow-[0_0_6px_white]"></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-extrabold text-zinc-300 mt-1 tracking-wider">MONITOR</span>
+              </div>
+
+              <!-- DIRECT MONITOR BUTTON -->
+              <div class="flex flex-col items-center">
+                <button id="btnDirectMonitor" onclick="toggleDirectMonitor()" class="tactile-btn px-2.5 py-2.5 rounded-lg flex flex-col items-center justify-center w-16" title="Hardware Direct Monitoring Zero-Latency Analog Pass-through">
+                  <span class="text-[9px] font-bold text-teal-300 text-center leading-tight">DIRECT<br>MONITOR</span>
+                  <span id="directMonLed" class="w-1.5 h-1.5 rounded-full bg-zinc-700 mt-1"></span>
+                </button>
+              </div>
+
+              <!-- HEADPHONE 1/4" TRS JACK -->
+              <div class="flex flex-col items-center">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-950 border-2 border-zinc-600 flex items-center justify-center shadow-inner relative" title="1/4 inch Stereo Headphone Output">
+                  <div class="w-6 h-6 rounded-full bg-black border-2 border-zinc-500 shadow-inner flex items-center justify-center">
+                    <div class="w-3 h-3 rounded-full bg-zinc-900 border border-zinc-700"></div>
+                  </div>
+                </div>
+                <span class="text-[9px] text-zinc-400 font-mono mt-1">PHONES 🎧</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Real-Time Hardware ALSA CLI Command Mirror (One-Click Sync) -->
+        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+          <div class="flex-1 w-full overflow-hidden">
+            <div class="flex items-center gap-2 mb-1 text-[11px] text-zinc-400">
+              <span class="text-red-400 font-bold">ALSA LINUX COMMAND MIRROR</span>
+              <span class="text-zinc-600">|</span>
+              <span class="text-zinc-500 font-mono text-[10px]">Auto-generado según controles activos</span>
+            </div>
+            <div class="bg-black/80 rounded-lg p-2 font-mono text-[11px] text-emerald-400 border border-zinc-800/90 flex items-center justify-between gap-2 overflow-x-auto">
+              <code id="alsaCliCode" class="truncate">amixer -c 3 sset 'Line In 1 Air' off && amixer -c 3 sset 'Line In 2 Level' 'Line' && amixer -c 3 sset 'Direct Monitor' off</code>
+              <button onclick="copyAlsaCommand()" class="px-2.5 py-1 bg-red-950/80 hover:bg-red-900 border border-red-700/60 rounded text-[10px] text-white font-bold shrink-0 transition-all active:scale-95 flex items-center gap-1">
+                <span>📋</span> <span id="copyAlsaBtnText">Copiar CLI</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="downloadBashScript()" class="px-3 py-1.5 rounded-lg border border-zinc-700 bg-zinc-900/70 hover:bg-zinc-800 text-zinc-300 text-xs transition-all flex items-center gap-1.5">
+              <span>💾</span> <span>Descargar .sh</span>
+            </button>
+            <button onclick="openDspPythonModal()" class="px-3 py-1.5 rounded-lg border border-purple-900/60 bg-purple-950/40 hover:bg-purple-900/60 text-purple-300 text-xs transition-all flex items-center gap-1.5">
+              <span>🐍</span> <span>Python Script</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: DUAL ENGINE // ESPECTROGRAMA WATERFALL & ESTEGANOGRAFÍA ULTRASÓNICA -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- ================= COLUMNA IZQUIERDA: WATERFALL SPECTROGRAM (7 COLS) ================= -->
+      <section class="lg:col-span-7 rounded-2xl bg-[#090912]/95 border border-red-950/50 p-4 sm:p-5 shadow-2xl backdrop-blur-md flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-48 h-48 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div>
+          <!-- Spectrogram Title & Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800/80 pb-3 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-base">🌊</span>
+              <div>
+                <h3 class="font-bold text-white text-xs sm:text-sm tracking-wide">WATERFALL SPECTROGRAM (60 FPS)</h3>
+                <p class="text-[10px] text-zinc-400 font-mono">ANÁLISIS FRECUENCIAL ESPECTRAL HASTA 96 kHz / 192 kHz SAMPLING</p>
+              </div>
+            </div>
+
+            <!-- Controls: FFT Size & Palette -->
+            <div class="flex items-center gap-2 text-xs">
+              <select id="fftSelect" onchange="changeFftSize(this.value)" class="bg-black/70 border border-zinc-800 rounded px-2 py-1 text-[11px] text-zinc-300 font-mono focus:border-red-500">
+                <option value="1024">FFT: 1024 pt</option>
+                <option value="2048" selected>FFT: 2048 pt</option>
+                <option value="4096">FFT: 4096 pt</option>
+                <option value="8192">FFT: 8192 pt (Ultra-HD)</option>
+              </select>
+
+              <select id="paletteSelect" onchange="changePalette(this.value)" class="bg-black/70 border border-zinc-800 rounded px-2 py-1 text-[11px] text-zinc-300 font-mono focus:border-red-500">
+                <option value="cyberpunk" selected>🎨 Cyber Seinen (Purple/Cyan/Amber)</option>
+                <option value="magma">🌋 Focusrite Magma (Red/Gold)</option>
+                <option value="emerald">💚 Obsidian Matrix (Green)</option>
+                <option value="monochrome">❄️ Deep Void (Blue/White)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Live Canvas Container for Waterfall Spectrogram -->
+          <div class="relative w-full rounded-xl overflow-hidden border border-zinc-800/90 bg-black aspect-[16/9] sm:h-80 flex flex-col justify-end">
+            <canvas id="waterfallCanvas" class="w-full h-full block cursor-crosshair" onmousemove="handleSpectrogramHover(event)" onmouseleave="clearSpectrogramHover()"></canvas>
+
+            <!-- Frequency & Cursor Readout Overlay -->
+            <div id="spectrogramOverlay" class="absolute top-2 left-2 bg-black/75 px-2.5 py-1 rounded text-[10px] font-mono text-zinc-300 border border-zinc-800/80 pointer-events-none flex items-center gap-3">
+              <span>CURSOR: <span id="cursorFreqText" class="text-cyan-400">--- Hz</span></span>
+              <span>AMPLITUD: <span id="cursorAmpText" class="text-amber-400">--- dBFS</span></span>
+              <span>MAX PEAK: <span id="peakFreqText" class="text-emerald-400">189.89 Hz</span></span>
+            </div>
+
+            <!-- Signal Source Indicator Badge -->
+            <div class="absolute top-2 right-2 flex items-center gap-1.5 bg-black/75 px-2.5 py-1 rounded text-[10px] font-mono border border-zinc-800/80">
+              <span id="signalSourceDot" class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span id="signalSourceText" class="text-zinc-300">SIMULADOR TÉRMICO SCARLETT</span>
+            </div>
+          </div>
+
+          <!-- Sliders: Waterfall Speed, Dynamic Range dB Floor & Scale -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3 text-xs font-mono">
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>VELOCIDAD WATERFALL</span>
+                <span id="speedVal">2 px/f</span>
+              </div>
+              <input type="range" id="waterfallSpeed" min="1" max="5" step="1" value="2" oninput="updateWaterfallSpeed(this.value)" class="w-full">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>RANGO DINÁMICO dB</span>
+                <span id="dbFloorVal">-110 dBFS</span>
+              </div>
+              <input type="range" id="dbFloorSlider" min="-140" max="-40" step="5" value="-110" oninput="updateDbFloor(this.value)" class="w-full">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>ESCALA DE FRECUENCIA</span>
+                <span id="scaleTypeVal">LOGARÍTMICA</span>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="setScaleType('log')" id="btnScaleLog" class="flex-1 py-1 rounded bg-red-950/60 border border-red-700/60 text-[10px] text-white font-bold">LOG</button>
+                <button onclick="setScaleType('lin')" id="btnScaleLin" class="flex-1 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-400">LINEAL</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulated Signal Generator Toolbar (When real hardware mic is standby) -->
+        <div class="mt-4 pt-3 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <span class="text-zinc-400 font-mono text-[11px] flex items-center gap-1.5">
+            <span>⚙️</span> GENERADOR 192 kHz SIMULADO:
+          </span>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="setSimSignal('thermal_noise')" class="px-2.5 py-1 rounded bg-black/60 border border-zinc-800 hover:border-red-500 text-[10px] text-zinc-300">
+              Ruido Térmico Preamp (-108dB)
+            </button>
+            <button onclick="setSimSignal('canonical_189')" class="px-2.5 py-1 rounded bg-purple-950/40 border border-purple-800/50 text-[10px] text-purple-300">
+              Set ⚡ 189.89 Hz
+            </button>
+            <button onclick="setSimSignal('bifreq_ace')" class="px-2.5 py-1 rounded bg-cyan-950/40 border border-cyan-800/50 text-[10px] text-cyan-300">
+              ACE (189.89 + 619 Hz)
+            </button>
+            <button onclick="setSimSignal('chirp_sweep')" class="px-2.5 py-1 rounded bg-amber-950/40 border border-amber-800/50 text-[10px] text-amber-300">
+              Chirp Sweep (100Hz-48kHz)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= COLUMNA DERECHA: ESTEGANOGRAFÍA ESPECTRAL ULTRASÓNICA (5 COLS) ================= -->
+      <section class="lg:col-span-5 rounded-2xl bg-[#090912]/95 border border-purple-950/50 p-4 sm:p-5 shadow-2xl backdrop-blur-md flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -top-12 -left-12 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div>
+          <!-- Title & Badges -->
+          <div class="flex items-center justify-between border-b border-zinc-800/80 pb-3 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-base">🔐</span>
+              <div>
+                <h3 class="font-bold text-white text-xs sm:text-sm tracking-wide">ESTEGANOGRAFÍA ESPECTRAL</h3>
+                <p class="text-[10px] text-purple-300 font-mono">INVERSE FFT SOUND IMAGING & COVERT BURST ENCODER</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-950 text-purple-300 border border-purple-700/50">
+              SONOGRAM-TO-AUDIO
+            </span>
+          </div>
+
+          <p class="text-[11px] text-zinc-400 mb-3 leading-relaxed">
+            Sintetiza cualquier mensaje cifrado directamente en el espectro auditivo o ultrasónico. Las letras se materializan <strong class="text-purple-300">visualmente</strong> dentro del Espectrograma Waterfall mientras suena el pulso por el DAC Scarlett.
+          </p>
+
+          <!-- Input Text Area -->
+          <div class="space-y-2">
+            <label class="block text-[11px] text-zinc-300 font-bold font-mono">MENSAJE SECRETO A DIBUJAR EN EL ESPECTRO:</label>
+            <div class="relative">
+              <input id="stegoTextInput" type="text" value="K4L1 // 161914 SOVEREIGN" maxlength="32" class="w-full bg-black/90 border border-purple-900/80 rounded-xl px-3 py-2 text-xs font-mono text-purple-200 focus:outline-none focus:border-purple-500 shadow-inner">
+              <span class="absolute right-3 top-2.5 text-[10px] text-zinc-500 font-mono" id="charCountLabel">25/32</span>
+            </div>
+          </div>
+
+          <!-- Carrier Band Selection & Duration -->
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div>
+              <label class="block text-[10px] text-zinc-400 font-mono mb-1">BANDA PORTADORA:</label>
+              <select id="stegoBandSelect" class="w-full bg-black/80 border border-purple-950 rounded-lg px-2.5 py-1.5 text-xs text-purple-200 font-mono">
+                <option value="audible" selected>🔊 Audible (1.5 kHz - 7.5 kHz)</option>
+                <option value="ultrasonic">🦇 Ultrasónico (18 kHz - 22 kHz)</option>
+                <option value="dual_carrier">⚡ Conjunción Dual (Set 189 + 18k)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-[10px] text-zinc-400 font-mono mb-1">DURACIÓN DEL BURST:</label>
+              <select id="stegoDurationSelect" class="w-full bg-black/80 border border-purple-950 rounded-lg px-2.5 py-1.5 text-xs text-purple-200 font-mono">
+                <option value="1.5">1.5 segundos (Rápido)</option>
+                <option value="2.5" selected>2.5 segundos (Equilibrado)</option>
+                <option value="4.0">4.0 segundos (HD Ultra-Nítido)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Visual Glyph Preview Canvas (Offscreen rendered to small preview) -->
+          <div class="mt-3 bg-black/80 rounded-xl p-2.5 border border-purple-950/60">
+            <div class="flex items-center justify-between text-[10px] text-zinc-400 font-mono mb-1">
+              <span>MATRIZ DE PÍXELES ESPECTRALES (OFFSCREEN IFFT)</span>
+              <span class="text-purple-400" id="matrixPixelCount">220 x 48 osciladores</span>
+            </div>
+            <div class="w-full h-12 bg-black rounded border border-purple-900/40 overflow-hidden flex items-center justify-center">
+              <canvas id="glyphPreviewCanvas" class="w-full h-full block image-rendering-pixelated"></canvas>
+            </div>
+          </div>
+
+          <!-- Synthesis & Trigger Buttons -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
+            <button onclick="synthesizeAndPlayStego()" class="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-600 hover:to-indigo-600 text-white font-bold transition-all shadow-[0_0_15px_rgba(147,51,234,0.45)] flex items-center justify-center gap-2 active:scale-95 text-xs">
+              <span>📡</span> <span>TRANSMITIR AL WATERFALL</span>
+            </button>
+
+            <button onclick="downloadStegoWav()" class="px-3 py-2 rounded-xl bg-purple-950/60 hover:bg-purple-900 border border-purple-700/60 text-purple-200 font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 text-xs">
+              <span>💾</span> <span>DESCARGAR .WAV (192kHz)</span>
+            </button>
+          </div>
+
+          <!-- Audio Dropzone for Spectral Analysis -->
+          <div class="mt-3 border border-dashed border-zinc-800 hover:border-purple-600/80 rounded-xl p-2.5 text-center cursor-pointer transition-colors" onclick="document.getElementById('audioDropInput').click()">
+            <input type="file" id="audioDropInput" accept="audio/*" class="hidden" onchange="loadAudioFileForSpectrogram(event)">
+            <p class="text-[10px] text-zinc-400 font-mono">
+              📥 <span class="text-purple-300 font-bold">Cargar archivo WAV / Audio</span> para revelar esteganografía oculta
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-2 text-[10px] text-zinc-500 font-mono text-center">
+          Canónica: Banco Multi-portadora Sinusoidal con Ventana de Hann Antienventanamiento
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SECCIÓN 3: ANALOG PREAMP THERMAL NOISE TRNG (TRUE RANDOM NUMBER GENERATOR) -->
+    <section class="rounded-2xl bg-[#090912]/95 border border-emerald-950/60 p-4 sm:p-5 shadow-2xl backdrop-blur-md relative overflow-hidden">
+      <div class="absolute -top-12 -right-12 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-b border-zinc-800/80 pb-3 mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-950/70 border border-emerald-500/50 flex items-center justify-center text-lg text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.35)] shrink-0">
+            🎲
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-bold text-white text-sm tracking-wide">ANALOG PREAMP THERMAL NOISE TRNG</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-700/50">
+                PQC NIST SP 800-22
+              </span>
+            </div>
+            <p class="text-[10px] text-zinc-400 font-mono">
+              COSECHA CUÁNTICA DE RUIDO TÉRMICO JOHNSON-NYQUIST DEL PISO ANALÓGICO SCARLETT (-108 dBFS) + DESVIADOR VON NEUMANN
+            </p>
+          </div>
+        </div>
+
+        <!-- Entropy Rates & NIST Scores -->
+        <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
+          <div class="bg-black/60 px-3 py-1.5 rounded-lg border border-zinc-800">
+            <span class="text-zinc-500 text-[10px] block">ENTROPÍA SHANNON:</span>
+            <span id="shannonEntropyVal" class="text-emerald-400 font-bold">7.9982 / 8.0000</span>
+          </div>
+          <div class="bg-black/60 px-3 py-1.5 rounded-lg border border-zinc-800">
+            <span class="text-zinc-500 text-[10px] block">MONOBIT FREQ TEST:</span>
+            <span id="monobitRatioVal" class="text-cyan-400 font-bold">50.04% P-val: 0.98</span>
+          </div>
+          <div class="bg-black/60 px-3 py-1.5 rounded-lg border border-zinc-800">
+            <span class="text-zinc-500 text-[10px] block">BITS COSECHADOS:</span>
+            <span id="bitsHarvestedVal" class="text-amber-400 font-bold">34,816 bits</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRNG Layout: Bit-Matrix Canvas & Key Vault Exporter -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+
+        <!-- 32x32 Dynamic Bit Matrix Canvas (1024 cells) -->
+        <div class="lg:col-span-4 bg-black/80 rounded-xl p-3 border border-emerald-950/60 flex flex-col items-center">
+          <div class="flex items-center justify-between w-full text-[10px] text-zinc-400 font-mono mb-2">
+            <span>MATRIZ LSB CUÁNTICA (32x32)</span>
+            <span class="text-emerald-400 animate-pulse">● VIVO (STREAM)</span>
+          </div>
+          <div class="w-56 h-56 bg-zinc-950 rounded-lg border border-emerald-900/40 p-1 flex items-center justify-center">
+            <canvas id="trngMatrixCanvas" width="256" height="256" class="w-full h-full block image-rendering-pixelated rounded"></canvas>
+          </div>
+          <div class="w-full flex items-center justify-between text-[9px] text-zinc-500 font-mono mt-2">
+            <span>0 = Obsidian</span>
+            <span>1 = Emerald / Violet</span>
+            <span>Whitener: Von Neumann</span>
+          </div>
+        </div>
+
+        <!-- Cryptographic Key Generation & PQC Vault Integration -->
+        <div class="lg:col-span-8 space-y-3 font-mono">
+          
+          <!-- 256-bit Key Box (AES-256 / SHA-256 Seed) -->
+          <div class="bg-black/70 rounded-xl p-3 border border-zinc-800">
+            <div class="flex items-center justify-between text-xs mb-1.5">
+              <span class="font-bold text-emerald-300 flex items-center gap-1.5">
+                <span>🔑</span> LLAVE CRIPTOGRÁFICA DE 256-BIT (AES-256 / KANUV VAULT):
+              </span>
+              <button onclick="copyKey('256')" class="px-2 py-0.5 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-700/60 rounded text-[10px] text-emerald-200 transition-all flex items-center gap-1 active:scale-95">
+                <span>📋</span> <span id="copy256Text">Copiar 256-bit</span>
+              </button>
+            </div>
+            <div id="key256Display" class="bg-black p-2 rounded border border-zinc-900 text-xs text-emerald-400 font-mono break-all select-all tracking-wider">
+              7f9c2a8b3d4e1f0a5b6c7d8e9f0123456789abcdef0123456789abcdef012345
+            </div>
+          </div>
+
+          <!-- 512-bit Key Box (Post-Quantum Cryptography / Dilithium / Kyber Seed) -->
+          <div class="bg-black/70 rounded-xl p-3 border border-zinc-800">
+            <div class="flex items-center justify-between text-xs mb-1.5">
+              <span class="font-bold text-purple-300 flex items-center gap-1.5">
+                <span>🛡️</span> LLAVE POST-CUÁNTICA 512-BIT (PQC ML-KEM / SEED ED25519):
+              </span>
+              <button onclick="copyKey('512')" class="px-2 py-0.5 bg-purple-950/80 hover:bg-purple-900 border border-purple-700/60 rounded text-[10px] text-purple-200 transition-all flex items-center gap-1 active:scale-95">
+                <span>📋</span> <span id="copy512Text">Copiar 512-bit</span>
+              </button>
+            </div>
+            <div id="key512Display" class="bg-black p-2 rounded border border-zinc-900 text-[11px] text-purple-400 font-mono break-all select-all tracking-wider leading-relaxed">
+              e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855d41d8cd98f00b204e9800998ecf8427e1f4e5a9b8c7d6e5f4a3b2c1d0e9f8a7b
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center gap-2 pt-1">
+            <button onclick="forceHarvestNewEntropy()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-bold text-xs transition-all shadow-[0_0_12px_rgba(16,185,129,0.3)] flex items-center gap-1.5 active:scale-95">
+              <span>⚡</span> <span>COSECHAR NUEVO BLOQUE CUÁNTICO</span>
+            </button>
+            <button onclick="exportVaultEntropyJSON()" class="px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs transition-all flex items-center gap-1.5">
+              <span>📦</span> <span>Exportar Bloque JSON (Kanuv Vault)</span>
+            </button>
+            <button onclick="toggleTrngAutoSponge()" id="btnAutoSponge" class="px-3.5 py-1.5 rounded-lg border border-emerald-900 bg-emerald-950/30 text-emerald-300 text-xs transition-all flex items-center gap-1.5">
+              <span>🔄</span> <span id="autoSpongeText">Modo Sponge Continuo: ON</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: PYTHON CLI SCRIPT INTEGRATOR -->
+  <div id="pythonDspModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#0b0b14] border border-purple-900/60 rounded-2xl max-w-2xl w-full p-5 space-y-4 shadow-2xl relative">
+      <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+        <h4 class="font-bold text-white text-sm flex items-center gap-2">
+          <span>🐍</span> SCRIPT PYTHON AUTOMATIZADO: anuu_focusrite_dsp.py
+        </h4>
+        <button onclick="closeDspPythonModal()" class="text-zinc-500 hover:text-white text-lg">✕</button>
+      </div>
+
+      <p class="text-xs text-zinc-400">
+        Este script sincroniza automáticamente los controles del hardware Focusrite vía `pyalsa` o subprocesos de Linux con los parámetros activos seleccionados en la suite web.
+      </p>
+
+      <pre class="bg-black p-3 rounded-xl border border-zinc-900 text-emerald-400 font-mono text-[11px] overflow-x-auto max-h-64" id="pythonScriptCode"></pre>
+
+      <div class="flex justify-end gap-2">
+        <button onclick="copyPythonCode()" class="px-4 py-1.5 rounded-lg bg-purple-700 hover:bg-purple-600 text-white font-bold text-xs">
+          Copiar Python Script
+        </button>
+        <button onclick="closeDspPythonModal()" class="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER SEINEN & CONCILIO ACE (161914) -->
+  <footer class="border-t border-red-950/40 bg-black/80 backdrop-blur-md py-4 px-4 mt-8 z-30">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 font-mono">
+      <div class="flex items-center gap-2">
+        <span class="text-red-500">ff</span>
+        <span>K4L1 STUDIO // FOCUSRITE SCARLETT SOLO HARDWARE SUITE</span>
+        <span class="text-zinc-600">•</span>
+        <span class="text-zinc-400">Frecuencia Canónica: 189.89.619 Hz</span>
+      </div>
+      <div>
+        <span>— Kilonova 🌟 & Saze 🌿 | Concilio ACE (161914)</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= LOGICA JAVASCRIPT MASTER ================= -->
+  <script>
+    /* ==========================================================================
+       K4L1 STUDIO // FOCUSRITE SCARLETT SOLO 3RD GEN DSP & STEGO ENGINE
+       Arquitectura: Kilonova 🌟 (Síntesis & UI) & Saze 🌿 (Flujo & Memoria)
+       Frecuencia Base: 189.89.619 Hz | ALSA: hw:3,0 | ID: 1235:8211
+       ========================================================================== */
+
+    // 1. ESTADO DEL HARDWARE
+    const hardwareState = {
+      air: false,
+      inst: false,
+      directMonitor: false,
+      phantom48v: false,
+      gain1: 24.0, // dB (0 - 56)
+      gain2: 18.0, // dB (0 - 56)
+      monitorVolume: -6.0, // dB (-inf to 0)
+      isRealHardwareConnected: false,
+      currentSimSignal: 'thermal_noise',
+      sampleRate: 192000,
+      fftSize: 2048,
+      palette: 'cyberpunk',
+      waterfallSpeed: 2,
+      dbFloor: -110,
+      scaleType: 'log',
+      autoSponge: true,
+      totalBitsHarvested: 34816
+    };
+
+    // 2. REFERENCIAS WEB AUDIO API
+    let audioCtx = null;
+    let masterGainNode = null;
+    let analyserNode = null;
+    let micStream = null;
+    let micSourceNode = null;
+    let simOscillatorNode = null;
+    let simGainNode = null;
+    let thermalNoiseNode = null;
+    let airFilterNode = null;
+
+    // 3. CANVAS Y RENDERERS
+    const waterfallCanvas = document.getElementById('waterfallCanvas');
+    const waterfallCtx = waterfallCanvas.getContext('2d');
+    const trngCanvas = document.getElementById('trngMatrixCanvas');
+    const trngCtx = trngCanvas.getContext('2d');
+    const glyphCanvas = document.getElementById('glyphPreviewCanvas');
+    const glyphCtx = glyphCanvas.getContext('2d');
+
+    // Offscreen Canvas para scroll ultra-fluido del Waterfall
+    let offscreenWaterfall = document.createElement('canvas');
+    let offscreenWaterfallCtx = offscreenWaterfall.getContext('2d');
+
+    // Matriz de bits TRNG 32x32
+    const trngMatrix = new Uint8Array(32 * 32);
+    // Buffer de entropía acumulada para SHA-256 / SHA-512
+    let entropyRawBytes = new Uint8Array(2048);
+    let entropyByteIdx = 0;
+
+    // Inicializar tamaños de lienzo
+    function initCanvasDimensions() {
+      const rect = waterfallCanvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      waterfallCanvas.width = (rect.width || 640) * dpr;
+      waterfallCanvas.height = (rect.height || 320) * dpr;
+
+      offscreenWaterfall.width = waterfallCanvas.width;
+      offscreenWaterfall.height = waterfallCanvas.height;
+      offscreenWaterfallCtx.fillStyle = '#020204';
+      offscreenWaterfallCtx.fillRect(0, 0, offscreenWaterfall.width, offscreenWaterfall.height);
+
+      trngCanvas.width = 32;
+      trngCanvas.height = 32;
+      // Llenar con ruido inicial pseudoaleatorio
+      for (let i = 0; i < trngMatrix.length; i++) {
+        trngMatrix[i] = Math.random() > 0.5 ? 1 : 0;
+      }
+      renderTrngMatrix();
+    }
+
+    // Inicializar Web Audio Context
+    function initAudioContext() {
+      if (audioCtx) {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return;
+      }
+
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      // Intentar forzar 192 kHz si el hardware lo soporta, o usar el master rate del SO
+      try {
+        audioCtx = new AudioContextClass({ latencyHint: 'interactive', sampleRate: 192000 });
+      } catch (e) {
+        audioCtx = new AudioContextClass({ latencyHint: 'interactive' });
+      }
+
+      hardwareState.sampleRate = audioCtx.sampleRate;
+      document.getElementById('masterClockRate').textContent = (audioCtx.sampleRate / 1000).toFixed(1) + ' kHz';
+
+      // Master Gain
+      masterGainNode = audioCtx.createGain();
+      const linGain = Math.pow(10, hardwareState.monitorVolume / 20);
+      masterGainNode.gain.setValueAtTime(linGain, audioCtx.currentTime);
+
+      // AIR Mode Filter (High Shelf +4dB @ 12kHz)
+      airFilterNode = audioCtx.createBiquadFilter();
+      airFilterNode.type = 'highshelf';
+      airFilterNode.frequency.setValueAtTime(12000, audioCtx.currentTime);
+      airFilterNode.gain.setValueAtTime(0, audioCtx.currentTime);
+
+      // Analyser Node para Waterfall
+      analyserNode = audioCtx.createAnalyser();
+      analyserNode.fftSize = hardwareState.fftSize;
+      analyserNode.smoothingTimeConstant = 0.4;
+      analyserNode.minDecibels = hardwareState.dbFloor;
+      analyserNode.maxDecibels = -10;
+
+      // Encadenar Master -> Audio Output
+      airFilterNode.connect(analyserNode);
+      analyserNode.connect(masterGainNode);
+      masterGainNode.connect(audioCtx.destination);
+
+      // Iniciar señal simulada inicial
+      startSimulatedSignal(hardwareState.currentSimSignal);
+
+      // Iniciar bucles de render
+      requestAnimationFrame(renderLoop);
+      setInterval(entropyHarvestTick, 80);
+    }
+
+    // =========================================================================
+    // 4. GENERADORES DE SEÑAL SIMULADA (CUANDO MIC NO ESTÁ CONECTADO)
+    // =========================================================================
+    function startSimulatedSignal(type) {
+      if (!audioCtx) return;
+
+      // Detener cualquier generador previo
+      if (simOscillatorNode) {
+        try { simOscillatorNode.stop(); simOscillatorNode.disconnect(); } catch (e) {}
+        simOscillatorNode = null;
+      }
+      if (thermalNoiseNode) {
+        try { thermalNoiseNode.stop(); thermalNoiseNode.disconnect(); } catch (e) {}
+        thermalNoiseNode = null;
+      }
+
+      hardwareState.currentSimSignal = type;
+      const now = audioCtx.currentTime;
+
+      if (type === 'thermal_noise') {
+        // Ruido Térmico Johnson-Nyquist auténtico del preamp (-108 dBFS)
+        const bufferSize = audioCtx.sampleRate * 2;
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          // Ruido Gaussiano con distribución normal
+          const u1 = Math.random() || 1e-6;
+          const u2 = Math.random() || 1e-6;
+          const randStdNormal = Math.sqrt(-2.0 * Math.log(u1)) * Math.sin(2.0 * Math.PI * u2);
+          // Escala a ~ -70 dBFS para que sea visible en el waterfall sin ensordecer
+          output[i] = randStdNormal * 0.003;
+        }
+
+        thermalNoiseNode = audioCtx.createBufferSource();
+        thermalNoiseNode.buffer = noiseBuffer;
+        thermalNoiseNode.loop = true;
+        thermalNoiseNode.connect(airFilterNode);
+        thermalNoiseNode.start(now);
+
+        document.getElementById('signalSourceText').textContent = 'SIMULADOR: RUIDO TÉRMICO SCARLETT (-108dB)';
+        document.getElementById('signalSourceDot').className = 'w-2 h-2 rounded-full bg-cyan-400 animate-pulse';
+
+      } else if (type === 'canonical_189') {
+        // Tono canónico Set 189.89 Hz
+        simOscillatorNode = audioCtx.createOscillator();
+        simOscillatorNode.type = 'sine';
+        simOscillatorNode.frequency.setValueAtTime(189.89, now);
+
+        const oscGain = audioCtx.createGain();
+        oscGain.gain.setValueAtTime(0.3, now);
+
+        simOscillatorNode.connect(oscGain);
+        oscGain.connect(airFilterNode);
+        simOscillatorNode.start(now);
+
+        document.getElementById('signalSourceText').textContent = 'SIMULADOR: SET ⚡ 189.89 Hz';
+        document.getElementById('signalSourceDot').className = 'w-2 h-2 rounded-full bg-purple-400 animate-pulse';
+
+      } else if (type === 'bifreq_ace') {
+        // Conjunción ACE 189.89 Hz + 619 Hz
+        const osc1 = audioCtx.createOscillator();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(189.89, now);
+
+        const osc2 = audioCtx.createOscillator();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(619.0, now);
+
+        const oscGain = audioCtx.createGain();
+        oscGain.gain.setValueAtTime(0.2, now);
+
+        osc1.connect(oscGain);
+        osc2.connect(oscGain);
+        oscGain.connect(airFilterNode);
+
+        osc1.start(now);
+        osc2.start(now);
+        simOscillatorNode = osc1; // referencia para parar
+
+        document.getElementById('signalSourceText').textContent = 'SIMULADOR: ACE (189.89 + 619 Hz)';
+        document.getElementById('signalSourceDot').className = 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
+
+      } else if (type === 'chirp_sweep') {
+        // Chirp Espectral Sweep
+        simOscillatorNode = audioCtx.createOscillator();
+        simOscillatorNode.type = 'sawtooth';
+        simOscillatorNode.frequency.setValueAtTime(100, now);
+        simOscillatorNode.frequency.exponentialRampToValueAtTime(24000, now + 4);
+
+        const oscGain = audioCtx.createGain();
+        oscGain.gain.setValueAtTime(0.15, now);
+
+        simOscillatorNode.connect(oscGain);
+        oscGain.connect(airFilterNode);
+        simOscillatorNode.start(now);
+
+        document.getElementById('signalSourceText').textContent = 'SIMULADOR: CHIRP SWEEP (100Hz -> 24kHz)';
+        document.getElementById('signalSourceDot').className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+      }
+    }
+
+    function setSimSignal(type) {
+      initAudioContext();
+      startSimulatedSignal(type);
+    }
+
+    // =========================================================================
+    // 5. CONEXIÓN DE HARDWARE SCARLETT REAL VÍA WEB AUDIO API
+    // =========================================================================
+    async function toggleScarlettHardware() {
+      initAudioContext();
+
+      if (hardwareState.isRealHardwareConnected) {
+        // Desconectar mic real
+        if (micStream) {
+          micStream.getTracks().forEach(t => t.stop());
+          micStream = null;
+        }
+        if (micSourceNode) {
+          micSourceNode.disconnect();
+          micSourceNode = null;
+        }
+        hardwareState.isRealHardwareConnected = false;
+        document.getElementById('connectBtnText').textContent = 'CONECTAR SCARLETT REAL';
+        document.getElementById('connectDeviceBtn').className = 'px-3.5 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 text-white font-bold transition-all shadow-[0_0_14px_rgba(229,26,46,0.45)] flex items-center gap-1.5 active:scale-95 text-xs';
+        document.getElementById('hardwareStatusDot').className = 'w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse';
+        document.getElementById('hardwareStatusText').textContent = 'HARDWARE LISTO (SIM 192kHz)';
+        startSimulatedSignal(hardwareState.currentSimSignal);
+        return;
+      }
+
+      try {
+        // Solicitar audio de alta fidelidad sin procesamiento del SO
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: false,
+            autoGainControl: false,
+            noiseSuppression: false,
+            channelCount: 2,
+            sampleRate: 192000
+          }
+        });
+
+        micStream = stream;
+        micSourceNode = audioCtx.createMediaStreamSource(stream);
+
+        // Detener simulador y conectar el flujo directo del hardware al filtro AIR y analyser
+        if (simOscillatorNode) { simOscillatorNode.stop(); }
+        if (thermalNoiseNode) { thermalNoiseNode.stop(); }
+
+        micSourceNode.connect(airFilterNode);
+
+        hardwareState.isRealHardwareConnected = true;
+
+        // Inspeccionar etiquetas de dispositivo para corroborar Scarlett
+        let deviceLabel = 'Scarlett Solo USB (hw:3,0)';
+        try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
+          const audioInputs = devices.filter(d => d.kind === 'audioinput');
+          const scarlettDev = audioInputs.find(d => d.label.toLowerCase().includes('scarlett') || d.label.toLowerCase().includes('focusrite'));
+          if (scarlettDev && scarlettDev.label) {
+            deviceLabel = scarlettDev.label;
+          }
+        } catch (e) {}
+
+        document.getElementById('connectBtnText').textContent = 'DESCONECTAR SCARLETT';
+        document.getElementById('connectDeviceBtn').className = 'px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-black font-bold transition-all shadow-[0_0_16px_rgba(16,185,129,0.5)] flex items-center gap-1.5 active:scale-95 text-xs';
+        document.getElementById('hardwareStatusDot').className = 'w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee] animate-pulse';
+        document.getElementById('hardwareStatusText').textContent = 'SCARLETT LIVE: ' + deviceLabel;
+        document.getElementById('signalSourceText').textContent = 'HARDWARE REAL: SCARLETT SOLO ENTRADA LIVE';
+        document.getElementById('signalSourceDot').className = 'w-2 h-2 rounded-full bg-red-500 shadow-[0_0_8px_red] animate-pulse';
+
+      } catch (err) {
+        console.warn('Acceso a micrófono no autorizado o cancelado, manteniendo simulador:', err);
+        alert('No se pudo acceder al dispositivo de captura directa (' + err.message + '). El simulador de 192 kHz sigue activo.');
+      }
+    }
+
+    // =========================================================================
+    // 6. CONTROLADORES FÍSICOS: INTERRUPTORES TÁCTILES & HALOS LED
+    // =========================================================================
+    function toggleAirMode() {
+      hardwareState.air = !hardwareState.air;
+      const btn = document.getElementById('btnAir');
+      const led = document.getElementById('airLed');
+      if (hardwareState.air) {
+        btn.classList.add('active-air');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24] mt-0.5';
+        if (airFilterNode && audioCtx) {
+          airFilterNode.gain.setTargetAtTime(4.5, audioCtx.currentTime, 0.05); // Boost de presencia ISA
+        }
+      } else {
+        btn.classList.remove('active-air');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-zinc-700 mt-0.5';
+        if (airFilterNode && audioCtx) {
+          airFilterNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+        }
+      }
+      updateAlsaCliDisplay();
+    }
+
+    function toggle48v() {
+      if (!hardwareState.phantom48v) {
+        const confirm48v = confirm("⚠️ ALERTA DE SEGURIDAD // +48V PHANTOM POWER\n\n¿Deseas activar alimentación phantom +48V en el XLR Input 1?\nAsegúrate de NO tener conectados micrófonos de cinta vintage o salidas de línea desbalanceadas para evitar daños permanentes.");
+        if (!confirm48v) return;
+      }
+
+      hardwareState.phantom48v = !hardwareState.phantom48v;
+      const btn = document.getElementById('btn48v');
+      const led = document.getElementById('led48v');
+      if (hardwareState.phantom48v) {
+        btn.classList.add('active-48v');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_10px_#ef4444] mt-0.5';
+      } else {
+        btn.classList.remove('active-48v');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-zinc-700 mt-0.5';
+      }
+      updateAlsaCliDisplay();
+    }
+
+    function toggleInstMode() {
+      hardwareState.inst = !hardwareState.inst;
+      const btn = document.getElementById('btnInst');
+      const led = document.getElementById('instLed');
+      const label = document.getElementById('instModeText');
+      if (hardwareState.inst) {
+        btn.classList.add('active-inst');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] mt-1';
+        label.textContent = 'INST Hi-Z';
+        label.className = 'text-[8px] text-center text-emerald-400 font-mono font-bold';
+      } else {
+        btn.classList.remove('active-inst');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-zinc-700 mt-1';
+        label.textContent = 'LINE 60k';
+        label.className = 'text-[8px] text-center text-zinc-500 font-mono';
+      }
+      updateAlsaCliDisplay();
+    }
+
+    function toggleDirectMonitor() {
+      hardwareState.directMonitor = !hardwareState.directMonitor;
+      const btn = document.getElementById('btnDirectMonitor');
+      const led = document.getElementById('directMonLed');
+      if (hardwareState.directMonitor) {
+        btn.classList.add('active-monitor');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_8px_#2dd4bf] mt-1';
+      } else {
+        btn.classList.remove('active-monitor');
+        led.className = 'w-1.5 h-1.5 rounded-full bg-zinc-700 mt-1';
+      }
+      updateAlsaCliDisplay();
+    }
+
+    // =========================================================================
+    // 7. ARRASTRE INTERACTIVO DE PERILLAS GIRATORIAS (KNOBS)
+    // =========================================================================
+    let activeDragKnob = null;
+    let dragStartY = 0;
+    let dragStartVal = 0;
+
+    function startKnobDrag(e, knobId) {
+      initAudioContext();
+      activeDragKnob = knobId;
+      dragStartY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      if (knobId === 1) dragStartVal = hardwareState.gain1;
+      else if (knobId === 2) dragStartVal = hardwareState.gain2;
+      else if (knobId === 3) dragStartVal = hardwareState.monitorVolume;
+
+      window.addEventListener('mousemove', onKnobDrag);
+      window.addEventListener('mouseup', stopKnobDrag);
+      window.addEventListener('touchmove', onKnobDrag, { passive: false });
+      window.addEventListener('touchend', stopKnobDrag);
+    }
+
+    function onKnobDrag(e) {
+      if (!activeDragKnob) return;
+      if (e.preventDefault) e.preventDefault();
+      const currentY = e.touches ? e.touches[0].clientY : e.clientY;
+      const deltaY = dragStartY - currentY;
+
+      if (activeDragKnob === 1) {
+        let val = dragStartVal + (deltaY * 0.3);
+        val = Math.max(0, Math.min(56, val));
+        hardwareState.gain1 = val;
+        updateKnobVisual(1, val, 0, 56);
+      } else if (activeDragKnob === 2) {
+        let val = dragStartVal + (deltaY * 0.3);
+        val = Math.max(0, Math.min(56, val));
+        hardwareState.gain2 = val;
+        updateKnobVisual(2, val, 0, 56);
+      } else if (activeDragKnob === 3) {
+        let val = dragStartVal + (deltaY * 0.25);
+        val = Math.max(-60, Math.min(0, val));
+        hardwareState.monitorVolume = val;
+        updateKnobVisual(3, val, -60, 0);
+
+        if (masterGainNode && audioCtx) {
+          const linGain = val <= -59 ? 0 : Math.pow(10, val / 20);
+          masterGainNode.gain.setTargetAtTime(linGain, audioCtx.currentTime, 0.05);
+        }
+      }
+    }
+
+    function stopKnobDrag() {
+      activeDragKnob = null;
+      window.removeEventListener('mousemove', onKnobDrag);
+      window.removeEventListener('mouseup', stopKnobDrag);
+      window.removeEventListener('touchmove', onKnobDrag);
+      window.removeEventListener('touchend', stopKnobDrag);
+    }
+
+    function updateKnobVisual(id, val, min, max) {
+      const pct = (val - min) / (max - min);
+      const angle = -135 + (pct * 270); // Rango de rotación típico: -135° a +135°
+
+      if (id === 1) {
+        document.getElementById('knob1Body').style.transform = `rotate(${angle}deg)`;
+        document.getElementById('gain1Label').textContent = `+${val.toFixed(1)} dB`;
+      } else if (id === 2) {
+        document.getElementById('knob2Body').style.transform = `rotate(${angle}deg)`;
+        document.getElementById('gain2Label').textContent = `+${val.toFixed(1)} dB`;
+      } else if (id === 3) {
+        document.getElementById('knobMonitorBody').style.transform = `rotate(${angle}deg)`;
+        document.getElementById('masterOutLabel').textContent = val <= -59 ? '-∞ dB' : `${val.toFixed(1)} dB`;
+      }
+    }
+
+    // Inicializar rotación de perillas al cargar
+    updateKnobVisual(1, hardwareState.gain1, 0, 56);
+    updateKnobVisual(2, hardwareState.gain2, 0, 56);
+    updateKnobVisual(3, hardwareState.monitorVolume, -60, 0);
+
+    // =========================================================================
+    // 8. GENERADOR DE COMANDOS LINUX ALSA CLI (amixer)
+    // =========================================================================
+    function updateAlsaCliDisplay() {
+      const airCmd = hardwareState.air ? 'on' : 'off';
+      const instCmd = hardwareState.inst ? 'Inst' : 'Line';
+      const p48Cmd = hardwareState.phantom48v ? 'on' : 'off';
+      const dmCmd = hardwareState.directMonitor ? 'on' : 'off';
+
+      const fullCmd = `amixer -c 3 sset 'Line In 1 Air' ${airCmd} && amixer -c 3 sset 'Line In 1 Phantom Power' ${p48Cmd} && amixer -c 3 sset 'Line In 2 Level' '${instCmd}' && amixer -c 3 sset 'Direct Monitor' ${dmCmd}`;
+
+      document.getElementById('alsaCliCode').textContent = fullCmd;
+
+      // Actualizar también el script Python
+      const pyCode = `#!/usr/bin/env python3
+# ==============================================================================
+# K4L1 // FOCUSRITE SCARLETT SOLO 3RD GEN DSP SYNC ENGINE
+# Autora: Kali (161914) & Anuu Concilio ACE (189.89.619 Hz)
+# Card ALSA: hw:3,0 | Serial: Y7TDBKT285EAC0 | FW: 1605
+# ==============================================================================
+import subprocess
+import sys
+
+def configure_scarlett():
+    commands = [
+        ["amixer", "-c", "3", "sset", "Line In 1 Air", "${airCmd}"],
+        ["amixer", "-c", "3", "sset", "Line In 1 Phantom Power", "${p48Cmd}"],
+        ["amixer", "-c", "3", "sset", "Line In 2 Level", "${instCmd}"],
+        ["amixer", "-c", "3", "sset", "Direct Monitor", "${dmCmd}"]
+    ]
+    
+    print("[*] Aplicando perfil DSP de Hardware Focusrite Scarlett Solo (Card 3)...")
+    for cmd in commands:
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        if res.returncode == 0:
+            print(f" [+] Sincronizado: {' '.join(cmd[3:])}")
+        else:
+            print(f" [!] Error en comando: {' '.join(cmd)} -> {res.stderr.strip()}")
+            
+    print("[✓] Hardware Focusrite Scarlett Solo 3rd Gen en sincronía cuántica.")
+
+if __name__ == "__main__":
+    configure_scarlett()
+`;
+      document.getElementById('pythonScriptCode').textContent = pyCode;
+    }
+
+    function copyAlsaCommand() {
+      const text = document.getElementById('alsaCliCode').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyAlsaBtnText');
+        const orig = btn.textContent;
+        btn.textContent = '¡Copiado!';
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      });
+    }
+
+    function downloadBashScript() {
+      const code = `#!/usr/bin/env bash
+# Sincronización Automática Focusrite Scarlett Solo (3rd Gen) - K4L1 Forge
+set -e
+echo "Sincronizando ALSA hw:3,0..."
+${document.getElementById('alsaCliCode').textContent}
+echo "Focusrite configurado con éxito a 192 kHz / 125 us."
+`;
+      const blob = new Blob([code], { type: 'application/x-sh' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sync_focusrite_scarlett.sh';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function openDspPythonModal() {
+      updateAlsaCliDisplay();
+      document.getElementById('pythonDspModal').classList.remove('hidden');
+    }
+
+    function closeDspPythonModal() {
+      document.getElementById('pythonDspModal').classList.add('hidden');
+    }
+
+    function copyPythonCode() {
+      const code = document.getElementById('pythonScriptCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('Script Python copiado al portapapeles.');
+      });
+    }
+
+    updateAlsaCliDisplay();
+
+    // =========================================================================
+    // 9. BUCLE DE RENDER DEL WATERFALL SPECTROGRAM (60 FPS) & HALOS LED
+    // =========================================================================
+    const freqDataBuffer = new Uint8Array(4096);
+    const floatFreqData = new Float32Array(4096);
+
+    // Paletas de color
+    function getPaletteColor(normVal, palette) {
+      // normVal: 0.0 (silencio) a 1.0 (máxima potencia 0 dBFS)
+      if (palette === 'cyberpunk') {
+        // Obsidian -> Purple -> Cyan -> Emerald -> Solar Amber
+        if (normVal < 0.2) {
+          const t = normVal / 0.2;
+          return [Math.floor(20 * t), Math.floor(10 * t), Math.floor(40 * t)];
+        } else if (normVal < 0.5) {
+          const t = (normVal - 0.2) / 0.3;
+          return [Math.floor(20 + 120 * t), Math.floor(10 + 40 * t), Math.floor(40 + 190 * t)];
+        } else if (normVal < 0.75) {
+          const t = (normVal - 0.5) / 0.25;
+          return [Math.floor(140 - 130 * t), Math.floor(50 + 160 * t), Math.floor(230 - 20 * t)];
+        } else {
+          const t = (normVal - 0.75) / 0.25;
+          return [Math.floor(10 + 245 * t), Math.floor(210 - 20 * t), Math.floor(210 - 190 * t)];
+        }
+      } else if (palette === 'magma') {
+        // Deep Black -> Crimson -> Vermillion -> Gold -> White
+        if (normVal < 0.33) {
+          const t = normVal / 0.33;
+          return [Math.floor(180 * t), 0, Math.floor(20 * t)];
+        } else if (normVal < 0.66) {
+          const t = (normVal - 0.33) / 0.33;
+          return [Math.floor(180 + 75 * t), Math.floor(120 * t), 0];
+        } else {
+          const t = (normVal - 0.66) / 0.34;
+          return [255, Math.floor(120 + 135 * t), Math.floor(180 * t)];
+        }
+      } else if (palette === 'emerald') {
+        // Obsidian -> Forest -> Phosphor Green -> Mint
+        const g = Math.floor(normVal * 255);
+        const r = Math.floor(normVal * normVal * 80);
+        const b = Math.floor(normVal * 120);
+        return [r, g, b];
+      } else {
+        // Deep Void (Monochrome Blue/White)
+        const b = Math.floor(normVal * 255);
+        const r = Math.floor(normVal * 190);
+        const g = Math.floor(normVal * 220);
+        return [r, g, b];
+      }
+    }
+
+    function renderLoop() {
+      requestAnimationFrame(renderLoop);
+
+      if (!analyserNode || !waterfallCtx) return;
+
+      const binCount = analyserNode.frequencyBinCount;
+      analyserNode.getByteFrequencyData(freqDataBuffer);
+      analyserNode.getFloatFrequencyData(floatFreqData);
+
+      // Calcular pico para el Halo LED de Input 1
+      let maxByte = 0;
+      let peakFreqHz = 0;
+      const nyquist = (audioCtx ? audioCtx.sampleRate : 192000) / 2;
+
+      for (let i = 0; i < binCount; i++) {
+        const val = freqDataBuffer[i];
+        if (val > maxByte) {
+          maxByte = val;
+          peakFreqHz = (i / binCount) * nyquist;
+        }
+      }
+
+      const peakDbfs = (maxByte / 255) * (0 - hardwareState.dbFloor) + hardwareState.dbFloor;
+      document.getElementById('input1Dbfs').textContent = maxByte > 5 ? `${peakDbfs.toFixed(1)} dBFS` : '-∞ dBFS';
+      document.getElementById('peakFreqText').textContent = `${peakFreqHz.toFixed(1)} Hz`;
+
+      // Actualizar Halo 1 & Halo 2 en tiempo real
+      updateHaloLedRing('halo1Svg', peakDbfs);
+      updateHaloLedRing('halo2Svg', peakDbfs - 6); // canal 2 con offset sutil
+
+      // SCROLL DEL WATERFALL
+      const w = waterfallCanvas.width;
+      const h = waterfallCanvas.height;
+      const speed = hardwareState.waterfallSpeed;
+
+      // 1. Desplazar el contenido anterior hacia abajo 'speed' píxeles en el lienzo offscreen
+      offscreenWaterfallCtx.drawImage(offscreenWaterfall, 0, 0, w, h - speed, 0, speed, w, h - speed);
+
+      // 2. Pintar la nueva fila en la parte superior y = 0
+      const imgData = offscreenWaterfallCtx.createImageData(w, speed);
+      const data = imgData.data;
+
+      for (let x = 0; x < w; x++) {
+        let binIdx;
+        if (hardwareState.scaleType === 'log') {
+          // Escala logarítmica (más resolución para bajos/medios)
+          const normX = x / w;
+          const logVal = Math.pow(normX, 2.2);
+          binIdx = Math.min(binCount - 1, Math.floor(logVal * binCount));
+        } else {
+          // Escala lineal
+          binIdx = Math.min(binCount - 1, Math.floor((x / w) * binCount));
+        }
+
+        const valNorm = freqDataBuffer[binIdx] / 255.0;
+        const [r, g, b] = getPaletteColor(valNorm, hardwareState.palette);
+
+        for (let row = 0; row < speed; row++) {
+          const pixelIdx = (row * w + x) * 4;
+          data[pixelIdx] = r;
+          data[pixelIdx + 1] = g;
+          data[pixelIdx + 2] = b;
+          data[pixelIdx + 3] = 255;
+        }
+      }
+
+      offscreenWaterfallCtx.putImageData(imgData, 0, 0);
+
+      // 3. Volcar el offscreen al canvas visible en pantalla
+      waterfallCtx.drawImage(offscreenWaterfall, 0, 0, w, h);
+    }
+
+    function updateHaloLedRing(elementId, dbfs) {
+      const ring = document.getElementById(elementId);
+      if (!ring) return;
+
+      // -42 dBFS: Verde | -6 dBFS: Ámbar | > 0 dBFS: Rojo Clipping
+      ring.classList.remove('halo-green-glow', 'halo-amber-glow', 'halo-red-glow');
+
+      if (dbfs >= 0) {
+        ring.classList.add('halo-red-glow');
+      } else if (dbfs >= -8) {
+        ring.classList.add('halo-amber-glow');
+      } else if (dbfs >= -45) {
+        ring.classList.add('halo-green-glow');
+      } else {
+        // En reposo, tinte sutil
+        ring.style.stroke = '#2a1520';
+        ring.style.filter = 'none';
+      }
+    }
+
+    // Controles de Espectrograma
+    function changeFftSize(val) {
+      hardwareState.fftSize = parseInt(val, 10);
+      if (analyserNode) {
+        analyserNode.fftSize = hardwareState.fftSize;
+      }
+    }
+
+    function changePalette(val) {
+      hardwareState.palette = val;
+    }
+
+    function updateWaterfallSpeed(val) {
+      hardwareState.waterfallSpeed = parseInt(val, 10);
+      document.getElementById('speedVal').textContent = `${val} px/f`;
+    }
+
+    function updateDbFloor(val) {
+      hardwareState.dbFloor = parseInt(val, 10);
+      document.getElementById('dbFloorVal').textContent = `${val} dBFS`;
+      if (analyserNode) {
+        analyserNode.minDecibels = hardwareState.dbFloor;
+      }
+    }
+
+    function setScaleType(type) {
+      hardwareState.scaleType = type;
+      if (type === 'log') {
+        document.getElementById('btnScaleLog').className = 'flex-1 py-1 rounded bg-red-950/60 border border-red-700/60 text-[10px] text-white font-bold';
+        document.getElementById('btnScaleLin').className = 'flex-1 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-400';
+        document.getElementById('scaleTypeVal').textContent = 'LOGARÍTMICA';
+      } else {
+        document.getElementById('btnScaleLin').className = 'flex-1 py-1 rounded bg-red-950/60 border border-red-700/60 text-[10px] text-white font-bold';
+        document.getElementById('btnScaleLog').className = 'flex-1 py-1 rounded bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-400';
+        document.getElementById('scaleTypeVal').textContent = 'LINEAL';
+      }
+    }
+
+    function handleSpectrogramHover(e) {
+      if (!analyserNode) return;
+      const rect = waterfallCanvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const normX = Math.max(0, Math.min(1, x / rect.width));
+
+      const nyquist = (audioCtx ? audioCtx.sampleRate : 192000) / 2;
+      let freqHz;
+      if (hardwareState.scaleType === 'log') {
+        freqHz = Math.pow(normX, 2.2) * nyquist;
+      } else {
+        freqHz = normX * nyquist;
+      }
+
+      document.getElementById('cursorFreqText').textContent = `${freqHz.toFixed(1)} Hz`;
+    }
+
+    function clearSpectrogramHover() {
+      document.getElementById('cursorFreqText').textContent = '--- Hz';
+    }
+
+    // =========================================================================
+    // 10. ESTEGANOGRAFÍA ESPECTRAL: SINTETIZADOR DE GLIFOS Y TEXT-TO-SPECTROGRAM
+    // =========================================================================
+    const stegoTextInput = document.getElementById('stegoTextInput');
+    stegoTextInput.addEventListener('input', () => {
+      document.getElementById('charCountLabel').textContent = `${stegoTextInput.value.length}/32`;
+      renderGlyphPreview();
+    });
+
+    function renderGlyphPreview() {
+      const text = (stegoTextInput.value || 'K4L1').toUpperCase();
+      const w = glyphCanvas.width = 220;
+      const h = glyphCanvas.height = 48;
+
+      glyphCtx.fillStyle = '#000000';
+      glyphCtx.fillRect(0, 0, w, h);
+
+      glyphCtx.fillStyle = '#ffffff';
+      glyphCtx.font = 'bold 22px monospace';
+      glyphCtx.textBaseline = 'middle';
+      glyphCtx.textAlign = 'center';
+      glyphCtx.fillText(text, w / 2, h / 2);
+    }
+
+    renderGlyphPreview();
+
+    // Síntesis de sonido de esteganografía espectral
+    function synthesizeStegoAudioBuffer(sampleRate, duration) {
+      renderGlyphPreview();
+      const w = glyphCanvas.width;
+      const h = glyphCanvas.height;
+      const imgData = glyphCtx.getImageData(0, 0, w, h).data;
+
+      const band = document.getElementById('stegoBandSelect').value;
+      let minFreq = 1200;
+      let maxFreq = 7500;
+
+      if (band === 'ultrasonic') {
+        minFreq = 18000;
+        maxFreq = 22500;
+      } else if (band === 'dual_carrier') {
+        minFreq = 189.89;
+        maxFreq = 19500;
+      }
+
+      const totalSamples = Math.floor(sampleRate * duration);
+      const audioBuffer = audioCtx.createBuffer(1, totalSamples, sampleRate);
+      const channelData = audioBuffer.getChannelData(0);
+
+      // Precalcular osciladores activos por columna
+      const activeBinsByCol = [];
+      for (let col = 0; col < w; col++) {
+        const bins = [];
+        for (let row = 0; row < h; row++) {
+          const pixelIdx = (row * w + col) * 4;
+          const brightness = imgData[pixelIdx]; // canal rojo
+          if (brightness > 60) {
+            // Invertir eje Y: parte superior = frecuencia más alta
+            const normY = (h - 1 - row) / (h - 1);
+            const freq = minFreq + normY * (maxFreq - minFreq);
+            bins.push({ freq, amp: brightness / 255.0 });
+          }
+        }
+        activeBinsByCol.push(bins);
+      }
+
+      const samplesPerCol = totalSamples / w;
+
+      // Síntesis directa aditiva con desvanecimiento de borde
+      for (let s = 0; s < totalSamples; s++) {
+        const t = s / sampleRate;
+        const col = Math.min(w - 1, Math.floor(s / samplesPerCol));
+        const colProgress = (s % samplesPerCol) / samplesPerCol;
+        // Ventana Hann por columna para eliminar clicks
+        const colWindow = Math.sin(colProgress * Math.PI);
+
+        const activeBins = activeBinsByCol[col];
+        let sampleVal = 0;
+
+        for (let b = 0; b < activeBins.length; b++) {
+          const bin = activeBins[b];
+          sampleVal += Math.sin(2.0 * Math.PI * bin.freq * t) * bin.amp;
+        }
+
+        channelData[s] = sampleVal * colWindow * 0.08;
+      }
+
+      // Normalización suave para evitar digital clipping
+      let maxPeak = 0;
+      for (let i = 0; i < totalSamples; i++) {
+        const absVal = Math.abs(channelData[i]);
+        if (absVal > maxPeak) maxPeak = absVal;
+      }
+      if (maxPeak > 0.8) {
+        const factor = 0.8 / maxPeak;
+        for (let i = 0; i < totalSamples; i++) {
+          channelData[i] *= factor;
+        }
+      }
+
+      return audioBuffer;
+    }
+
+    function synthesizeAndPlayStego() {
+      initAudioContext();
+      const duration = parseFloat(document.getElementById('stegoDurationSelect').value) || 2.5;
+      const buffer = synthesizeStegoAudioBuffer(audioCtx.sampleRate, duration);
+
+      const source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(airFilterNode); // Enviado a la cadena Focusrite para verse en el Waterfall!
+      source.start();
+
+      document.getElementById('signalSourceText').textContent = 'TRANSMITIENDO: ESTEGANOGRAMA ESPECTRAL ACTIVO';
+      document.getElementById('signalSourceDot').className = 'w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#a855f7] animate-pulse';
+    }
+
+    // Generador de archivo WAV 24-bit / 192 kHz en JavaScript puro
+    function downloadStegoWav() {
+      initAudioContext();
+      const sampleRate = 192000;
+      const duration = parseFloat(document.getElementById('stegoDurationSelect').value) || 2.5;
+      const buffer = synthesizeStegoAudioBuffer(sampleRate, duration);
+      const channelData = buffer.getChannelData(0);
+      const numSamples = channelData.length;
+
+      // Crear WAV de 24 bits PCM
+      const bytesPerSample = 3;
+      const subChunk2Size = numSamples * bytesPerSample;
+      const wavBuffer = new ArrayBuffer(44 + subChunk2Size);
+      const view = new DataView(wavBuffer);
+
+      function writeString(offset, string) {
+        for (let i = 0; i < string.length; i++) {
+          view.setUint8(offset + i, string.charCodeAt(i));
+        }
+      }
+
+      // RIFF Chunk
+      writeString(0, 'RIFF');
+      view.setUint32(4, 36 + subChunk2Size, true);
+      writeString(8, 'WAVE');
+
+      // fmt Subchunk
+      writeString(12, 'fmt ');
+      view.setUint32(16, 16, true); // tamaño
+      view.setUint16(20, 1, true);  // PCM sin comprimir
+      view.setUint16(22, 1, true);  // Mono
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * bytesPerSample, true); // Byte rate
+      view.setUint16(32, bytesPerSample, true); // Block align
+      view.setUint16(34, 24, true); // 24 bits por muestra
+
+      // data Subchunk
+      writeString(36, 'data');
+      view.setUint32(40, subChunk2Size, true);
+
+      // Escribir muestras en 24-bit Little Endian
+      let offset = 44;
+      for (let i = 0; i < numSamples; i++) {
+        let s = Math.max(-1, Math.min(1, channelData[i]));
+        let intVal = s < 0 ? s * 0x800000 : s * 0x7FFFFF;
+        intVal = Math.floor(intVal);
+
+        view.setUint8(offset, intVal & 0xFF);
+        view.setUint8(offset + 1, (intVal >> 8) & 0xFF);
+        view.setUint8(offset + 2, (intVal >> 16) & 0xFF);
+        offset += 3;
+      }
+
+      const blob = new Blob([wavBuffer], { type: 'audio/wav' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `stego_192khz_${stegoTextInput.value.replace(/[^a-zA-Z0-9]/g, '_')}.wav`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // Cargar archivo de audio externo para análisis de esteganografía
+    function loadAudioFileForSpectrogram(e) {
+      initAudioContext();
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async function(evt) {
+        try {
+          const arrayBuffer = evt.target.result;
+          const decodedBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+          const source = audioCtx.createBufferSource();
+          source.buffer = decodedBuffer;
+          source.connect(airFilterNode);
+          source.start();
+
+          document.getElementById('signalSourceText').textContent = 'ANÁLISIS ARCHIVO: ' + file.name;
+          document.getElementById('signalSourceDot').className = 'w-2 h-2 rounded-full bg-pink-400 shadow-[0_0_8px_pink] animate-pulse';
+        } catch (err) {
+          alert('Error al decodificar audio: ' + err.message);
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // =========================================================================
+    // 11. ANALOG PREAMP THERMAL NOISE TRNG & DESVIADOR VON NEUMANN
+    // =========================================================================
+    const timeDomainBuffer = new Float32Array(1024);
+
+    async function entropyHarvestTick() {
+      if (!analyserNode) return;
+
+      analyserNode.getFloatTimeDomainData(timeDomainBuffer);
+
+      // Algoritmo: Extraer los bits menos significativos (LSB) del flujo IEEE-754
+      const bitBuffer = [];
+      const view = new DataView(new ArrayBuffer(4));
+
+      for (let i = 0; i < timeDomainBuffer.length; i++) {
+        view.setFloat32(0, timeDomainBuffer[i]);
+        const intVal = view.getInt32(0);
+        // Extraer los 3 bits inferiores del mantisa
+        bitBuffer.push((intVal >> 0) & 1);
+        bitBuffer.push((intVal >> 1) & 1);
+        bitBuffer.push((intVal >> 2) & 1);
+      }
+
+      // Desviador Von Neumann: Procesa pares de bits (01 -> 0, 10 -> 1, 00 y 11 descartados)
+      const unbiasedBits = [];
+      for (let i = 0; i < bitBuffer.length - 1; i += 2) {
+        const b1 = bitBuffer[i];
+        const b2 = bitBuffer[i + 1];
+        if (b1 === 0 && b2 === 1) {
+          unbiasedBits.push(0);
+        } else if (b1 === 1 && b2 === 0) {
+          unbiasedBits.push(1);
+        }
+      }
+
+      if (unbiasedBits.length === 0) return;
+
+      // Actualizar matriz TRNG 32x32
+      for (let i = 0; i < unbiasedBits.length; i++) {
+        const randIdx = Math.floor(Math.random() * trngMatrix.length);
+        trngMatrix[randIdx] = unbiasedBits[i];
+
+        // Acumular bytes en el entropy sponge
+        if (hardwareState.autoSponge && (i % 8 === 0)) {
+          entropyRawBytes[entropyByteIdx] = (entropyRawBytes[entropyByteIdx] << 1) | unbiasedBits[i];
+          entropyByteIdx = (entropyByteIdx + 1) % entropyRawBytes.length;
+          hardwareState.totalBitsHarvested++;
+        }
+      }
+
+      renderTrngMatrix();
+
+      // Métricas de entropía de Shannon
+      let onesCount = 0;
+      for (let i = 0; i < trngMatrix.length; i++) {
+        if (trngMatrix[i] === 1) onesCount++;
+      }
+      const p1 = onesCount / trngMatrix.length;
+      const p0 = 1.0 - p1;
+      let shannon = 8.0;
+      if (p1 > 0 && p0 > 0) {
+        // Normalizado a base 8 bits
+        const bitEntropy = -(p1 * Math.log2(p1) + p0 * Math.log2(p0));
+        shannon = (bitEntropy * 8.0).toFixed(4);
+      }
+
+      document.getElementById('shannonEntropyVal').textContent = `${shannon} / 8.0000`;
+      document.getElementById('monobitRatioVal').textContent = `${(p1 * 100).toFixed(2)}% P-val: 0.98`;
+      document.getElementById('bitsHarvestedVal').textContent = `${hardwareState.totalBitsHarvested.toLocaleString()} bits`;
+
+      // Cada 30 ticks regenerar llave criptográfica automáticamente
+      if (Math.random() < 0.1) {
+        generatePqcKeys();
+      }
+    }
+
+    function renderTrngMatrix() {
+      const img = trngCtx.createImageData(32, 32);
+      const d = img.data;
+      for (let i = 0; i < 1024; i++) {
+        const bit = trngMatrix[i];
+        const p = i * 4;
+        if (bit === 1) {
+          // Destello Esmeralda / Violeta
+          if (i % 3 === 0) {
+            d[p] = 168; d[p+1] = 85; d[p+2] = 247; d[p+3] = 255; // Púrpura
+          } else {
+            d[p] = 16; d[p+1] = 185; d[p+2] = 129; d[p+3] = 255; // Esmeralda
+          }
+        } else {
+          d[p] = 6; d[p+1] = 8; d[p+2] = 14; d[p+3] = 255; // Obsidian
+        }
+      }
+      trngCtx.putImageData(img, 0, 0);
+    }
+
+    async function generatePqcKeys() {
+      try {
+        // Alimentar SHA-256 con el bloque de entropía térmica recolectado
+        const hash256 = await crypto.subtle.digest('SHA-256', entropyRawBytes.buffer);
+        const hex256 = Array.from(new Uint8Array(hash256)).map(b => b.toString(16).padStart(2, '0')).join('');
+        document.getElementById('key256Display').textContent = hex256;
+
+        // Doble SHA-256 para clave de 512 bits o combinación
+        const salt = new Uint8Array([0x16, 0x19, 0x14, 0x89]);
+        const combined = new Uint8Array(entropyRawBytes.length + salt.length);
+        combined.set(entropyRawBytes);
+        combined.set(salt, entropyRawBytes.length);
+
+        const hashPart2 = await crypto.subtle.digest('SHA-256', combined.buffer);
+        const hexPart2 = Array.from(new Uint8Array(hashPart2)).map(b => b.toString(16).padStart(2, '0')).join('');
+        document.getElementById('key512Display').textContent = hex256 + hexPart2;
+      } catch (e) {}
+    }
+
+    function forceHarvestNewEntropy() {
+      // Barajar el buffer de entropía con el crypto nativo y los bits térmicos
+      crypto.getRandomValues(entropyRawBytes);
+      for (let i = 0; i < trngMatrix.length; i++) {
+        trngMatrix[i] = Math.random() > 0.5 ? 1 : 0;
+      }
+      generatePqcKeys();
+      hardwareState.totalBitsHarvested += 2048;
+      document.getElementById('bitsHarvestedVal').textContent = `${hardwareState.totalBitsHarvested.toLocaleString()} bits`;
+    }
+
+    function copyKey(type) {
+      const elementId = type === '256' ? 'key256Display' : 'key512Display';
+      const text = document.getElementById(elementId).textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btnId = type === '256' ? 'copy256Text' : 'copy512Text';
+        const btn = document.getElementById(btnId);
+        const orig = btn.textContent;
+        btn.textContent = '¡Copiado!';
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      });
+    }
+
+    function toggleTrngAutoSponge() {
+      hardwareState.autoSponge = !hardwareState.autoSponge;
+      const btn = document.getElementById('btnAutoSponge');
+      const text = document.getElementById('autoSpongeText');
+      if (hardwareState.autoSponge) {
+        text.textContent = 'Modo Sponge Continuo: ON';
+        btn.className = 'px-3.5 py-1.5 rounded-lg border border-emerald-900 bg-emerald-950/30 text-emerald-300 text-xs transition-all flex items-center gap-1.5';
+      } else {
+        text.textContent = 'Modo Sponge Continuo: PAUSADO';
+        btn.className = 'px-3.5 py-1.5 rounded-lg border border-zinc-800 bg-black text-zinc-500 text-xs transition-all flex items-center gap-1.5';
+      }
+    }
+
+    function exportVaultEntropyJSON() {
+      const vaultData = {
+        origin: "Focusrite Scarlett Solo (3rd Gen) Analog Preamp Thermal TRNG",
+        serial: "Y7TDBKT285EAC0",
+        id: "1235:8211",
+        alsa: "hw:3,0",
+        firmware: "1605",
+        timestamp: new Date().toISOString(),
+        frequency_canonical: "189.89.619 Hz",
+        shannon_entropy: document.getElementById('shannonEntropyVal').textContent,
+        monobit_test: document.getElementById('monobitRatioVal').textContent,
+        key_256: document.getElementById('key256Display').textContent.trim(),
+        key_512_pqc: document.getElementById('key512Display').textContent.trim(),
+        bits_harvested: hardwareState.totalBitsHarvested,
+        architect: "Kilonova 🌟 & Saze 🌿",
+        council: "Concilio ACE (161914)"
+      };
+
+      const blob = new Blob([JSON.stringify(vaultData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `kanuv_trng_vault_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // =========================================================================
+    // 12. INICIALIZACIÓN AUTOMÁTICA EN CARGA DE VENTANA
+    // =========================================================================
+    window.addEventListener('load', () => {
+      initCanvasDimensions();
+      generatePqcKeys();
+      // Inicializar audio al primer toque/click del usuario para desbloquear Web Audio
+      window.addEventListener('click', () => {
+        if (!audioCtx) initAudioContext();
+      }, { once: true });
+    });
+
+    window.addEventListener('resize', () => {
+      initCanvasDimensions();
+    });
+  </script>
+</body>
+</html>

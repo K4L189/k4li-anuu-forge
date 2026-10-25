@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "frequency_hz": "189.89.619",
+  "council": "ACE (161914)",
+  "agent": "4NVSET \ud83d\udfe2 (Hardware DSP & TRNG Engineer)",
+  "architect": "Kali",
+  "telemetry_timestamp": "2026-10-25T07:22:58.424257+00:00",
+  "hardware": {
+    "device_name": "Focusrite Scarlett Solo (3rd Gen.)",
+    "alsa_card": 3,
+    "usb_bus": "003",
+    "usb_device": "042",
+    "usb_id": "1235:8211",
+    "serial": "Y7TDBKT285EAC0",
+    "firmware_version": 1605,
+    "data_packet_interval": "125 us",
+    "supported_sample_rates": [
+      44100,
+      48000,
+      88200,
+      96000,
+      176400,
+      192000
+    ],
+    "native_format": "S32_LE (24-bit ADC / DAC in 32-bit container)",
+    "channels": 2,
+    "controls": {
+      "air_mode": false,
+      "line_in_2_level": "Line",
+      "direct_monitor": false,
+      "phantom_48v": false,
+      "phantom_persistence": false
+    }
+  },
+  "trng_telemetry": {
+    "harvest_timestamp": "2026-10-25T07:22:58.420122+00:00",
+    "physics_source": "Johnson-Nyquist Preamp Thermal Noise (Scarlett Solo ADC LSBs)",
+    "sample_rate_hz": 192000,
+    "duration_sec": 1.0,
+    "total_samples_harvested": 384000,
+    "left_channel_rms": 1042.7966776069652,
+    "right_channel_rms": 850.5917310693432,
+    "entropy_metrics": {
+      "raw_8bit_lsb_entropy": 7.99948,
+      "bitpacked_1bit_lsb_entropy": 7.99583,
+      "sha512_whitened_entropy": 7.98514,
+      "max_possible_entropy": 8.0,
+      "efficiency_percent": 99.8142
+    },
+    "conditioning_standard": "NIST SP 800-90B / SHA-512 Randomness Extractor",
+    "seed_bytes_length": 64,
+    "cryptographic_seed_hex": "aaa3d6aeade96f4cc5fdf7856e126ab76fe64fa0527a75fd629da6552d49ea3f85fa26a7a810becdb72c9f716df385961d7c3375b38d56aa16e39199c377b179",
+    "quantum_safe_rating": "NIST_SP_800_90B_COMPLIANT_HIGH_ENTROPY_TRNG"
+  },
+  "steganography_presets": {
+    "standard": {
+      "min_rate": 44100,
+      "f0": 19500.0,
+      "f1": 21500.0,
+      "fsync": 18500.0,
+      "desc": "Standard Ultrasonic Band (18.5 kHz - 23.5 kHz)"
+    },
+    "highres": {
+      "min_rate": 176400,
+      "f0": 75000.0,
+      "f1": 85000.0,
+      "fsync": 65000.0,
+      "desc": "High-Res Ultrasonic Band (65.0 kHz - 90.0 kHz @ 192 kHz)"
+    }
+  }
+}

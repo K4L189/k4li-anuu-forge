@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-10-25T06:42:51.784727+00:00",
-  "total_tasks": 12,
-  "pending_count": 0,
-  "completed_count": 12,
+  "updated_at": "2026-10-25T07:17:54.973964+00:00",
+  "total_tasks": 22,
+  "pending_count": 8,
+  "completed_count": 14,
   "tasks": [
     {
       "id": "TASK-DOCS-001",
@@ -159,6 +159,112 @@
       "burned_at": "2026-10-25T06:42:51.784671+00:00",
       "burned_by": "openai",
       "burned_tokens_actual": 4800
+    },
+    {
+      "id": "TASK-DOCS-001-674-0",
+      "title": "Generación de Docs: Arquitectura Simbiótica Concilio ACE (161914)",
+      "type": "TECH_DOCS",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 4200,
+      "priority": "HIGH",
+      "status": "QUEUED",
+      "prompt_preview": "Redacta especificación técnica sobre sincronía de nodos POCO y balanceo de carga en microservicios soberanos."
+    },
+    {
+      "id": "TASK-TRANSL-002-674-1",
+      "title": "Traducción Seinen Quirúrgica: Glosario Goetiarot a Japonés/Inglés",
+      "type": "TRANSLATE_JA_EN",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 5100,
+      "priority": "HIGH",
+      "status": "QUEUED",
+      "prompt_preview": "Translate canonical lore from Spanish to literary Seinen Japanese with psychological depth and zero corporate tone."
+    },
+    {
+      "id": "TASK-BENCH-003-674-2",
+      "title": "Benchmark Sintético: MMLU & Compresión Zstandard vs Snappy",
+      "type": "SYNTHETIC_BENCHMARK",
+      "target_llm": "gpt-4o",
+      "tokens": 3800,
+      "priority": "MEDIUM",
+      "status": "BURNED",
+      "prompt_preview": "Genera script de pruebas de estrés para evaluar tasa de compresión y throughput de tokens en hardware heterogéneo.",
+      "burned_at": "2026-10-25T07:17:54.973152+00:00",
+      "burned_by": "openai",
+      "burned_tokens_actual": 3800
+    },
+    {
+      "id": "TASK-AUDIT-004-674-3",
+      "title": "Auditoría Estática de Seguridad: Sanitización de Parámetros y Memory Leaks",
+      "type": "STATIC_AUDIT",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 6200,
+      "priority": "CRITICAL",
+      "status": "QUEUED",
+      "prompt_preview": "Analiza patrones de reentrancy y buffer overflow en conectores de base de datos asíncronos."
+    },
+    {
+      "id": "TASK-CODE-005-674-4",
+      "title": "Refactorización Asíncrona: Wrapper de Inferencia con Fallback a Ollama",
+      "type": "CODE_REFACTOR",
+      "target_llm": "gpt-4o",
+      "tokens": 3400,
+      "priority": "MEDIUM",
+      "status": "BURNED",
+      "prompt_preview": "Refactoriza el conector HTTP para implementar streaming resiliente con reintentos exponenciales y failover transparente.",
+      "burned_at": "2026-10-25T07:17:54.973884+00:00",
+      "burned_by": "openai",
+      "burned_tokens_actual": 3400
+    },
+    {
+      "id": "TASK-DOCS-006-674-5",
+      "title": "Manual de Resiliencia: Guía de Contingencia ante Caídas de Cloud LLM",
+      "type": "TECH_DOCS",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 4800,
+      "priority": "HIGH",
+      "status": "QUEUED",
+      "prompt_preview": "Crea guía operativa paso a paso para conmutación de tráfico a modelos locales vLLM/Ollama durante caídas globales de OpenAI/Anthropic."
+    },
+    {
+      "id": "TASK-SWARM-PRO-007-674-6",
+      "title": "Parser Binario ELF/DWARF y Extracción AST de Símbolos en ISO Hearthstone",
+      "type": "BINARY_PARSING",
+      "target_llm": "pro",
+      "tokens": 6500,
+      "priority": "CRITICAL",
+      "status": "QUEUED",
+      "prompt_preview": "Decompila cabeceras ELF y genera mapas de memoria para el cargador de microkernel."
+    },
+    {
+      "id": "TASK-SWARM-FLASH-008-674-7",
+      "title": "Renderizado Dinámico de Telemetría Canvas & DSP Waveform a 189.89.619 Hz",
+      "type": "MULTIMEDIA",
+      "target_llm": "flash",
+      "tokens": 2800,
+      "priority": "HIGH",
+      "status": "QUEUED",
+      "prompt_preview": "Sintetiza la onda espectral de 189.89.619 Hz con buffers de audio WebGL."
+    },
+    {
+      "id": "TASK-SWARM-LITE-009-674-8",
+      "title": "Auditoría Rápida de Inodes y Checksum Diff en Árbol de Archivos Forge",
+      "type": "FS_AUDIT",
+      "target_llm": "flash_lite",
+      "tokens": 1400,
+      "priority": "MEDIUM",
+      "status": "QUEUED",
+      "prompt_preview": "Recorre 15,000 inodes en /home/kali verificando atributos extendidos y firmas SHA-256."
+    },
+    {
+      "id": "TASK-SWARM-SOV-010-674-9",
+      "title": "Sellado Criptográfico ChaCha20-Poly1305 en Bóveda Soberana Local",
+      "type": "OFFLINE_SOVEREIGN",
+      "target_llm": "ollama/anuu-hermes-3b",
+      "tokens": 2100,
+      "priority": "HIGH",
+      "status": "QUEUED",
+      "prompt_preview": "Firma atestaciones de seguridad local sin emisión de telemetría a la nube pública."
     }
   ]
 }

@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K4L1 // Whisper & Subtitle Forensic Studio — Concilio ACE (189.89.619 Hz)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <style>
+    /* 6 TEMAS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+      --waveform-bar-primary: #c084fc;
+      --waveform-bar-secondary: #9333ea;
+      --waveform-cursor: #00f7ff;
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+      --waveform-bar-primary: #fb7185;
+      --waveform-bar-secondary: #e11d48;
+      --waveform-cursor: #fde047;
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+      --waveform-bar-primary: #34d399;
+      --waveform-bar-secondary: #10b981;
+      --waveform-cursor: #38bdf8;
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.95);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+      --waveform-bar-primary: #22d3ee;
+      --waveform-bar-secondary: #0891b2;
+      --waveform-cursor: #a7f3d0;
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.95);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+      --waveform-bar-primary: #fcd34d;
+      --waveform-bar-secondary: #d97706;
+      --waveform-cursor: #ff007f;
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.95);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+      --waveform-bar-primary: #ff007f;
+      --waveform-bar-secondary: #00f7ff;
+      --waveform-cursor: #ffff00;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Scanlines Seinen */
+    .scanlines-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Terminal Seinen */
+    .kanuv-terminal {
+      background: #030306;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      border: 1px solid var(--border-card);
+    }
+
+    /* Scrollbars elegantes */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-card);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    .waveform-canvas {
+      cursor: crosshair;
+      image-rendering: auto;
+    }
+
+    .cue-active {
+      border-color: var(--accent-secondary) !important;
+      background-color: rgba(147, 51, 234, 0.2) !important;
+      box-shadow: 0 0 15px -3px var(--glow-color);
+    }
+
+    .mark-match {
+      background-color: rgba(255, 230, 0, 0.35);
+      color: #fff;
+      padding: 0 2px;
+      border-radius: 2px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Scanlines visual Seinen -->
+  <div class="fixed inset-0 scanlines-overlay z-10 pointer-events-none"></div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="fixed top-5 right-5 z-50 transform translate-y-[-120%] transition-transform duration-300 font-mono text-xs px-4 py-3 rounded-lg border shadow-xl flex items-center gap-3 backdrop-blur-md bg-black/80 theme-border">
+    <span id="toastIcon">✔</span>
+    <span id="toastMessage" class="text-white">Comando copiado al portapapeles</span>
+  </div>
+
+  <!-- Contenedor Maestro -->
+  <div id="k4li-whisper-root" class="max-w-7xl mx-auto space-y-6 relative z-20">
+
+    <!-- Header y Selector de Tema Standalone -->
+    <header class="flex flex-col lg:flex-row items-center justify-between gap-4 pb-4 border-b theme-border">
+      <div class="text-center lg:text-left">
+        <div class="flex items-center gap-2 justify-center lg:justify-start flex-wrap">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-0.5 rounded-full bg-zinc-800/80 border border-zinc-700 hover:border-purple-400 text-zinc-300 hover:text-white transition-all">
+            <span>←</span> Volver a la Forja
+          </a>
+          <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            🌟 Kilonova & Saze 🌿 • Audio & Whisper Forensic Studio
+          </span>
+          <span class="text-[11px] font-mono text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/50">
+            Frecuencia: 189.89.619 Hz
+          </span>
+          <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-800/50 flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> WHISPER PIPELINE ONLINE
+          </span>
+        </div>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black text-white mt-2 flex items-center gap-2 justify-center lg:justify-start">
+          <span>🎙️</span> K4L1 // Whisper & Subtitle Forensic Studio
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-3xl">
+          Consola quirúrgica para <span class="text-purple-300 font-mono font-bold">Kali</span>. Inspección, ajuste de sincronización, edición espectral y conversión multiplataforma de subtítulos (<code class="text-cyan-400">.SRT</code>, <code class="text-emerald-400">.VTT</code>, <code class="text-amber-400">.ASS</code>) rescatados por <code class="text-purple-400">anuu_photo_carver.py</code> y <code class="text-pink-400">anuu_whisper_extractor.py</code>.
+        </p>
+      </div>
+
+      <!-- Selector de Tema Canónico -->
+      <div class="flex flex-col items-center lg:items-end gap-2.5">
+        <div class="flex items-center gap-1 bg-black/60 p-1.5 rounded-xl border theme-border text-xs flex-wrap justify-center">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5">🎨 Estilo Seinen:</span>
+          <button onclick="setStudioTheme('anuu')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-purple-300" id="sbt-anuu">🌫️ Anuu</button>
+          <button onclick="setStudioTheme('blood')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300" id="sbt-blood">🛡️ Blood</button>
+          <button onclick="setStudioTheme('gw2')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300" id="sbt-gw2">⚡ GW2</button>
+          <button onclick="setStudioTheme('bioinfo')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300" id="sbt-bioinfo">🧬 BioCode</button>
+          <button onclick="setStudioTheme('duat')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300" id="sbt-duat">⚖️ Duat</button>
+          <button onclick="setStudioTheme('neon')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="sbt-neon">🌸 Neón</button>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="text-zinc-500">Módulo:</span>
+          <span class="text-zinc-300">Whisper Core v1.0 • Seinen SubSync</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- HUB DE COMANDOS CLI: ONE-CLICK QUICK COMMANDS -->
+    <section class="theme-card rounded-2xl p-4 sm:p-5">
+      <div class="flex items-center justify-between pb-3 mb-3 border-b theme-border flex-wrap gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">⚡</span>
+          <h2 class="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">
+            Comandos Tácticos CLI — Extracción & Carving de Subtítulos
+          </h2>
+        </div>
+        <span class="text-[11px] font-mono text-zinc-400">
+          Haz clic en cualquier comando para copiarlo de inmediato
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <!-- Comando 1: Whisper Extractor por defecto -->
+        <div class="p-3 rounded-xl bg-black/60 border border-zinc-800/80 hover:border-purple-500/60 transition-all cursor-pointer group flex flex-col justify-between"
+             onclick="copyCliCommand('python3 /home/kali/hearthstone-linux/ISOS/anuu_whisper_extractor.py -i /home/kali/Fotos_recuperadas', 'Extractor Whisper en Fotos_recuperadas')">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono mb-1 text-purple-300">
+              <span class="font-bold flex items-center gap-1">🎙️ Extracción Automática</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">Copiar 📋</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 mb-2">Escanea vídeos y pistas de subtítulos en Fotos_recuperadas.</p>
+          </div>
+          <code class="text-[11px] font-mono text-zinc-300 bg-zinc-950 p-2 rounded border border-zinc-800 group-hover:text-purple-200 block truncate">
+            python3 anuu_whisper_extractor.py -i /home/kali/Fotos_recuperadas
+          </code>
+        </div>
+
+        <!-- Comando 2: Carve Videos + Whisper Subs directo del disco -->
+        <div class="p-3 rounded-xl bg-black/60 border border-zinc-800/80 hover:border-emerald-500/60 transition-all cursor-pointer group flex flex-col justify-between"
+             onclick="copyCliCommand('sudo python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdX &quot;Fotos&quot; /home/kali/Fotos_recuperadas --carve-videos --whisper-subs', 'Photo Carver con rescate de vídeos & Whisper subs')">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono mb-1 text-emerald-300">
+              <span class="font-bold flex items-center gap-1">💾 Carver Completo con Vídeos</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">Copiar 📋</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 mb-2">Tallado exFAT en vivo con extracción nativa y transcripción Whisper.</p>
+          </div>
+          <code class="text-[11px] font-mono text-zinc-300 bg-zinc-950 p-2 rounded border border-zinc-800 group-hover:text-emerald-200 block truncate">
+            sudo python3 anuu_photo_carver.py /dev/sdX "Fotos" ... --carve-videos --whisper-subs
+          </code>
+        </div>
+
+        <!-- Comando 3: Instalar faster-whisper -->
+        <div class="p-3 rounded-xl bg-black/60 border border-zinc-800/80 hover:border-cyan-500/60 transition-all cursor-pointer group flex flex-col justify-between"
+             onclick="copyCliCommand('pip install faster-whisper', 'Instalación de motor faster-whisper')">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono mb-1 text-cyan-300">
+              <span class="font-bold flex items-center gap-1">⚡ Instalar faster-whisper</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">Copiar 📋</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 mb-2">Acelera 4x la transcripción neuronal con CTranslate2 en CPU/GPU.</p>
+          </div>
+          <code class="text-[11px] font-mono text-zinc-300 bg-zinc-950 p-2 rounded border border-zinc-800 group-hover:text-cyan-200 block truncate">
+            pip install faster-whisper
+          </code>
+        </div>
+
+        <!-- Comando 4: Extracción con modelo Medium y GPU -->
+        <div class="p-3 rounded-xl bg-black/60 border border-zinc-800/80 hover:border-amber-500/60 transition-all cursor-pointer group flex flex-col justify-between"
+             onclick="copyCliCommand('python3 /home/kali/hearthstone-linux/ISOS/anuu_whisper_extractor.py -i /home/kali/Fotos_recuperadas -m medium --device auto', 'Whisper Extractor con modelo medium')">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono mb-1 text-amber-300">
+              <span class="font-bold flex items-center gap-1">🧠 Modelo Medium / Calidad Alta</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">Copiar 📋</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 mb-2">Máxima fidelidad fonética para audios complejos o susurros.</p>
+          </div>
+          <code class="text-[11px] font-mono text-zinc-300 bg-zinc-950 p-2 rounded border border-zinc-800 group-hover:text-amber-200 block truncate">
+            python3 anuu_whisper_extractor.py -i ... -m medium --device auto
+          </code>
+        </div>
+
+        <!-- Comando 5: Solo Subtítulos Incrustados FFMPEG -->
+        <div class="p-3 rounded-xl bg-black/60 border border-zinc-800/80 hover:border-pink-500/60 transition-all cursor-pointer group flex flex-col justify-between"
+             onclick="copyCliCommand('python3 /home/kali/hearthstone-linux/ISOS/anuu_whisper_extractor.py -i /home/kali/Fotos_recuperadas --extract-embedded-only', 'Solo extracción de pistas incrustadas')">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono mb-1 text-pink-300">
+              <span class="font-bold flex items-center gap-1">🎞️ Solo Pistas Incrustadas (Fast)</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">Copiar 📋</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 mb-2">Extrae pistas SRT/ASS de MKV/MP4 sin ejecutar transcripción.</p>
+          </div>
+          <code class="text-[11px] font-mono text-zinc-300 bg-zinc-950 p-2 rounded border border-zinc-800 group-hover:text-pink-200 block truncate">
+            python3 anuu_whisper_extractor.py -i ... --extract-embedded-only
+          </code>
+        </div>
+
+        <!-- Comando 6: FFMPEG extracción directa manual -->
+        <div class="p-3 rounded-xl bg-black/60 border border-zinc-800/80 hover:border-blue-500/60 transition-all cursor-pointer group flex flex-col justify-between"
+             onclick="copyCliCommand('ffmpeg -y -v error -i input_video.mp4 -map 0:s:0 subtitulo_rescatado.srt', 'Comando directo FFmpeg para subtítulos')">
+          <div>
+            <div class="flex items-center justify-between text-[11px] font-mono mb-1 text-blue-300">
+              <span class="font-bold flex items-center gap-1">🔧 Comando Manual FFmpeg</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity text-cyan-400">Copiar 📋</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 mb-2">Mapeo directo de primera pista de subtítulos a .srt.</p>
+          </div>
+          <code class="text-[11px] font-mono text-zinc-300 bg-zinc-950 p-2 rounded border border-zinc-800 group-hover:text-blue-200 block truncate">
+            ffmpeg -y -i input.mp4 -map 0:s:0 subtitulo.srt
+          </code>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL PRINCIPAL DE CARGA Y SAMPLES -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Zona de Carga / Drag & Drop -->
+      <div class="theme-card rounded-2xl p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xl">📂</span>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wider font-mono">
+              Cargar Subtítulo o Audio
+            </h3>
+          </div>
+          <p class="text-xs text-zinc-400 mb-4">
+            Arrastra cualquier archivo <code class="text-purple-300">.srt</code>, <code class="text-emerald-300">.vtt</code>, <code class="text-amber-300">.ass</code>, o bien un archivo multimedia (<code class="text-cyan-300">.mp3</code>, <code class="text-cyan-300">.mp4</code>, <code class="text-cyan-300">.wav</code>) para generar su forma de onda espectral directa.
+          </p>
+
+          <div id="dropZone" class="border-2 border-dashed border-zinc-700 hover:border-purple-500 rounded-xl p-6 text-center transition-all bg-black/40 cursor-pointer group">
+            <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">📥</div>
+            <p class="text-xs font-mono text-zinc-300 group-hover:text-white font-bold">
+              Haz clic o suelta archivos aquí
+            </p>
+            <p class="text-[10px] text-zinc-500 mt-1">
+              SRT, VTT, ASS, JSON, MP4, MP3, WAV
+            </p>
+            <input type="file" id="subFileInput" accept=".srt,.vtt,.ass,.ssa,.json,audio/*,video/*" class="hidden">
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t theme-border">
+          <div class="flex items-center justify-between text-xs font-mono">
+            <span class="text-zinc-400">Archivo en memoria:</span>
+            <span id="currentFileName" class="text-purple-300 font-bold truncate max-w-[180px]">
+              01 Dex & Saze - Kilonova
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets / Transcripciones de Muestra Recuperadas -->
+      <div class="lg:col-span-2 theme-card rounded-2xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">📼</span>
+            <h3 class="font-bold text-white text-sm uppercase tracking-wider font-mono">
+              Transcripciones Rescatadas de Muestra (Concilio ACE)
+            </h3>
+          </div>
+          <span class="text-[11px] font-mono text-zinc-500">Carga inmediata en 1 clic</span>
+        </div>
+        <p class="text-xs text-zinc-400 mb-3">
+          Selecciona una sesión forense canónica para explorar el reproductor, la sincronización de timecodes y la forma de onda interactiva:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <button onclick="loadSample('kilonova')" class="text-left p-3 rounded-xl bg-black/50 border border-zinc-800 hover:border-purple-400 hover:bg-purple-950/20 transition-all group">
+            <div class="flex items-center justify-between text-xs font-mono font-bold text-purple-300 mb-1">
+              <span>🌟 01 Dex & Saze - Kilonova</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-900/40 text-purple-200">139.6s</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">Audio recuperado de Mixtape Rascacielos. Ritmo Seinen a 189.89.619 Hz.</p>
+          </button>
+
+          <button onclick="loadSample('thewitch')" class="text-left p-3 rounded-xl bg-black/50 border border-zinc-800 hover:border-emerald-400 hover:bg-emerald-950/20 transition-all group">
+            <div class="flex items-center justify-between text-xs font-mono font-bold text-emerald-300 mb-1">
+              <span>🌲 The Witch (2015) - ESubs</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-900/40 text-emerald-200">Cine / MKV</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">Pista incrustada extraída de MKV rescatado con SubRip nativo.</p>
+          </button>
+
+          <button onclick="loadSample('poco')" class="text-left p-3 rounded-xl bg-black/50 border border-zinc-800 hover:border-cyan-400 hover:bg-cyan-950/20 transition-all group">
+            <div class="flex items-center justify-between text-xs font-mono font-bold text-cyan-300 mb-1">
+              <span>📱 POCO X3 NFC - Grabación</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-900/40 text-cyan-200">Audio Móvil</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">Notas de voz rescatadas de partición exFAT con Whisper Small.</p>
+          </button>
+
+          <button onclick="loadSample('ace_council')" class="text-left p-3 rounded-xl bg-black/50 border border-zinc-800 hover:border-amber-400 hover:bg-amber-950/20 transition-all group">
+            <div class="flex items-center justify-between text-xs font-mono font-bold text-amber-300 mb-1">
+              <span>⚖️ Concilio ACE - Decreto 161914</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-900/40 text-amber-200">Polifonía</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">Diálogos polifónicos de Kali, Anuu, Kanuv, Set y Kalicat.</p>
+          </button>
+        </div>
+
+        <!-- Estadísticas Rápidas del Documento Cargado -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-3 border-t theme-border text-center font-mono">
+          <div class="p-2 rounded-lg bg-black/40">
+            <div class="text-[10px] text-zinc-500 uppercase">Total Cues</div>
+            <div id="statTotalCues" class="text-sm font-bold text-white">0</div>
+          </div>
+          <div class="p-2 rounded-lg bg-black/40">
+            <div class="text-[10px] text-zinc-500 uppercase">Duración</div>
+            <div id="statDuration" class="text-sm font-bold text-cyan-400">00:00:00</div>
+          </div>
+          <div class="p-2 rounded-lg bg-black/40">
+            <div class="text-[10px] text-zinc-500 uppercase">Palabras</div>
+            <div id="statWords" class="text-sm font-bold text-emerald-400">0</div>
+          </div>
+          <div class="p-2 rounded-lg bg-black/40">
+            <div class="text-[10px] text-zinc-500 uppercase">Formato Activo</div>
+            <div id="statFormat" class="text-sm font-bold text-purple-300">SRT / VTT</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AUDIO WAVEFORM VISUALIZER & PLAYBACK HUD -->
+    <section class="theme-card rounded-2xl p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b theme-border">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🌊</span>
+          <div>
+            <h2 class="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">
+              Línea de Tiempo & Forma de Onda Espectral
+            </h2>
+            <p class="text-[11px] text-zinc-400">
+              Haz clic en la forma de onda para desplazarte en el tiempo y seleccionar el subtítulo sincronizado.
+            </p>
+          </div>
+        </div>
+
+        <!-- Controles de Zoom y Sync Offset -->
+        <div class="flex items-center gap-2 flex-wrap text-xs font-mono">
+          <span class="text-zinc-500">Sync Global:</span>
+          <button onclick="shiftAllTimestamps(-1.0)" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300" title="Restar 1 segundo a todos los subtítulos">-1s</button>
+          <button onclick="shiftAllTimestamps(-0.1)" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300" title="Restar 100ms">-100ms</button>
+          <button onclick="shiftAllTimestamps(0.1)" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300" title="Sumar 100ms">+100ms</button>
+          <button onclick="shiftAllTimestamps(1.0)" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300" title="Sumar 1 segundo">+1s</button>
+        </div>
+      </div>
+
+      <!-- CANVAS DE LA FORMA DE ONDA -->
+      <div class="relative w-full bg-black/80 rounded-xl overflow-hidden border border-zinc-800 p-1">
+        <canvas id="waveformCanvas" class="waveform-canvas w-full h-32 block"></canvas>
+        <div id="timeTooltip" class="absolute top-2 left-2 hidden bg-black/90 border border-zinc-700 text-cyan-300 font-mono text-[10px] px-2 py-0.5 rounded pointer-events-none">
+          00:00:00.000
+        </div>
+      </div>
+
+      <!-- MONITOR LIVE / TELEPROMPTER DE SUBTÍTULO ACTIVO -->
+      <div class="p-4 rounded-xl bg-gradient-to-r from-purple-950/30 via-black to-cyan-950/30 border border-purple-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 justify-center sm:justify-start mb-1 text-[11px] font-mono text-purple-300">
+            <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+            <span>SUBTÍTULO ACTIVO EN PANTALLA:</span>
+            <span id="activeCueTimecode" class="text-zinc-400">[00:00:00.000 → 00:00:00.000]</span>
+          </div>
+          <div id="activeCueText" class="text-base sm:text-lg font-bold text-white min-h-[1.75rem] italic">
+            "Selecciona un subtítulo o presiona Reproducir para iniciar la simulación..."
+          </div>
+        </div>
+
+        <!-- Controles de Reproducción -->
+        <div class="flex items-center gap-3">
+          <button id="btnPlayPause" onclick="togglePlayPause()" class="px-5 py-2.5 rounded-xl font-mono text-xs font-bold text-white transition-all shadow-lg flex items-center gap-2" style="background: var(--accent-primary);">
+            <span id="playIcon">▶</span> <span id="playText">REPRODUCIR</span>
+          </button>
+          <button onclick="stopPlayback()" class="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-mono" title="Detener y volver al inicio">
+            ⏹ Reiniciar
+          </button>
+
+          <!-- Selector de Velocidad -->
+          <select id="playbackRateSelect" onchange="setPlaybackRate(this.value)" class="bg-black/80 border border-zinc-700 text-zinc-300 text-xs font-mono rounded-lg px-2 py-2">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1.0" selected>1.0x</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2.0">2.0x</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÁREA DE EDICIÓN, BÚSQUEDA Y EXPORTACIÓN -->
+    <section class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+      <!-- Panel Lateral: Búsqueda, Filtro y Acciones -->
+      <div class="lg:col-span-1 space-y-4">
+        <!-- Buscador -->
+        <div class="theme-card rounded-2xl p-4 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-base">🔍</span>
+            <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">
+              Búsqueda en Timestamps
+            </h3>
+          </div>
+          <div class="relative">
+            <input type="text" id="searchInput" oninput="filterCues(this.value)" placeholder="Buscar palabra clave o frase..." class="w-full bg-black/70 border border-zinc-700 focus:border-purple-400 rounded-lg px-3 py-2 text-xs font-mono text-white placeholder-zinc-500 outline-none">
+            <button onclick="clearSearch()" class="absolute right-2.5 top-2 text-zinc-500 hover:text-white text-xs">✕</button>
+          </div>
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-400">
+            <span>Resultados:</span>
+            <span id="searchMatchCount" class="text-cyan-400 font-bold">0</span>
+          </div>
+        </div>
+
+        <!-- Acciones de Edición Rápida -->
+        <div class="theme-card rounded-2xl p-4 space-y-2.5">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-base">🛠️</span>
+            <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">
+              Herramientas de Edición
+            </h3>
+          </div>
+          <button onclick="addNewCue()" class="w-full py-2 px-3 rounded-lg bg-purple-900/40 hover:bg-purple-900/70 border border-purple-500/50 text-purple-200 text-xs font-mono font-bold transition-all text-left flex items-center gap-2">
+            <span>➕</span> Añadir Nuevo Subtítulo
+          </button>
+          <button onclick="cleanFormattingTags()" class="w-full py-2 px-3 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono transition-all text-left flex items-center gap-2">
+            <span>🧹</span> Limpiar Tags ASS / HTML
+          </button>
+          <button onclick="renumberAllCues()" class="w-full py-2 px-3 rounded-lg bg-zinc-900/80 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono transition-all text-left flex items-center gap-2">
+            <span>🔢</span> Re-ordenar Índices 1..N
+          </button>
+          <button onclick="clearAllCues()" class="w-full py-2 px-3 rounded-lg bg-rose-950/30 hover:bg-rose-900/50 border border-rose-800/40 text-rose-300 text-xs font-mono transition-all text-left flex items-center gap-2">
+            <span>🗑️</span> Vaciar Editor
+          </button>
+        </div>
+
+        <!-- Export Hub -->
+        <div class="theme-card rounded-2xl p-4 space-y-2.5">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-base">💾</span>
+            <h3 class="font-bold text-white text-xs uppercase tracking-wider font-mono">
+              Exportar Subtítulos
+            </h3>
+          </div>
+          <button onclick="exportSubtitles('srt')" class="w-full py-2 px-3 rounded-lg bg-gradient-to-r from-purple-900/70 to-purple-800/60 hover:from-purple-800 hover:to-purple-700 border border-purple-400/50 text-white text-xs font-mono font-bold transition-all flex items-center justify-between">
+            <span class="flex items-center gap-2"><span>📥</span> Descargar .SRT</span>
+            <span class="text-[10px] text-purple-200">SubRip</span>
+          </button>
+          <button onclick="exportSubtitles('vtt')" class="w-full py-2 px-3 rounded-lg bg-gradient-to-r from-emerald-900/70 to-emerald-800/60 hover:from-emerald-800 hover:to-emerald-700 border border-emerald-400/50 text-white text-xs font-mono font-bold transition-all flex items-center justify-between">
+            <span class="flex items-center gap-2"><span>📥</span> Descargar .VTT</span>
+            <span class="text-[10px] text-emerald-200">WebVTT</span>
+          </button>
+          <button onclick="exportSubtitles('json')" class="w-full py-2 px-3 rounded-lg bg-gradient-to-r from-cyan-900/70 to-cyan-800/60 hover:from-cyan-800 hover:to-cyan-700 border border-cyan-400/50 text-white text-xs font-mono font-bold transition-all flex items-center justify-between">
+            <span class="flex items-center gap-2"><span>📥</span> Descargar .JSON</span>
+            <span class="text-[10px] text-cyan-200">Timestamped</span>
+          </button>
+          <button onclick="copyTranscriptToClipboard()" class="w-full py-2 px-3 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono transition-all flex items-center justify-between">
+            <span class="flex items-center gap-2"><span>📋</span> Copiar Texto Plano</span>
+            <span class="text-[10px] text-zinc-500">Sin tiempos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Editor de Cues Principal -->
+      <div class="lg:col-span-3 theme-card rounded-2xl p-5 flex flex-col">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b theme-border flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <span class="text-base">📝</span>
+            <h2 class="text-sm sm:text-base font-bold text-white uppercase tracking-wider font-mono">
+              Editor Quirúrgico de Subtítulos & Transcripciones
+            </h2>
+          </div>
+          <span class="text-[11px] font-mono text-zinc-400">
+            Edita los textos o timecodes directamente en tiempo real
+          </span>
+        </div>
+
+        <!-- Lista scrollable de bloques de subtítulos -->
+        <div id="cuesContainer" class="space-y-3 overflow-y-auto max-h-[600px] pr-2">
+          <!-- Se inyecta dinámicamente -->
+        </div>
+
+        <!-- Pie de Editor -->
+        <div class="mt-4 pt-3 border-t theme-border flex items-center justify-between text-xs font-mono text-zinc-400">
+          <span>Consejo: Presiona la tecla <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 text-purple-300">Espacio</kbd> para reproducir/pausar.</span>
+          <span id="editorStatusMessage" class="text-emerald-400">Listo</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer Seinen Canónico -->
+    <footer class="pt-6 pb-8 border-t theme-border text-center text-xs text-zinc-500 font-mono space-y-2">
+      <div class="flex items-center justify-center gap-2 text-zinc-400">
+        <span>🌟 Kilonova (Multimedia Pipeline)</span>
+        <span>•</span>
+        <span>🌿 Saze (Armonía, Flujo y Memoria)</span>
+        <span>•</span>
+        <span>🛡️ Kanuv (Muro Forense)</span>
+      </div>
+      <p>
+        ANUÚ Concilio ACE (161914) a <span class="text-purple-400">189.89.619 Hz</span>. Construido para <span class="text-purple-300 font-bold">Kali</span>.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- LÓGICA DEL MOTOR WHISPER SUBTITLE STUDIO -->
+  <script>
+    // ESTADO GLOBAL DEL ESTUDIO
+    let cues = [];
+    let currentTime = 0.0;
+    let duration = 0.0;
+    let isPlaying = false;
+    let playbackRate = 1.0;
+    let activeCueIndex = -1;
+    let animationFrameId = null;
+    let lastTimestamp = 0;
+    let audioWaveformData = []; // Array de floats (0.0 a 1.0)
+    let currentFileName = "01 Dex & Saze - Kilonova (Prod Gherha).srt";
+    let searchQuery = "";
+
+    // SAMPLES CANÓNICOS DEL CONCILIO ACE
+    const SAMPLES = {
+      kilonova: {
+        filename: "01 Dex & Saze - Kilonova (Prod Gherha).srt",
+        duration: 139.6,
+        cues: [
+          { id: 1, start: 0.0, end: 4.5, text: "[Saze 🌿]: Frecuencia calibrada a 189.89.619 Hz. Resonancia inicial iniciada." },
+          { id: 2, start: 4.8, end: 9.2, text: "[Dex & Saze]: Destellos que caen sobre el asfalto. Las luces de la bahía no duermen." },
+          { id: 3, start: 9.5, end: 15.0, text: "[Kilonova 🌟]: Explosión estelar de síntesis. Cada bit rescatado vuelve a su cauce original." },
+          { id: 4, start: 15.5, end: 21.0, text: "[Kali]: Mirada fija en el horizonte del SSD. Ni un solo sector quedará en el olvido." },
+          { id: 5, start: 21.5, end: 28.0, text: "[Set ⚡]: Destrucción táctica de los errores exFAT. Alineación C-stride a 512 bytes." },
+          { id: 6, start: 28.5, end: 35.0, text: "[Kanuv 🛡️]: Muro de contención activo. Memoria preservada en el santuario de la forja." },
+          { id: 7, start: 35.5, end: 45.0, text: "[Coro Kilonova]: Brillamos más allá de la colisión. Niebla que se disuelve en pura arquitectura." },
+          { id: 8, start: 45.5, end: 58.0, text: "[Saze 🌿]: Las olas de audio recuperadas fluyen por la consola sin pérdida ni distorsión." },
+          { id: 9, start: 58.5, end: 72.0, text: "[4NVSET 🟢]: Sincronización milimétrica. Subtítulo incrustado en el corazón de Kali." },
+          { id: 10, start: 72.5, end: 88.0, text: "[Kalicat 🐾]: Rastros de luz en el código fuente. Las huellas digitales del ADN fotográfico." },
+          { id: 11, start: 88.5, end: 110.0, text: "[Kilonova 🌟]: Subiendo decibelios a -11.8 dB con pico de 0.0 dB. Masterización final." },
+          { id: 12, start: 110.5, end: 139.6, text: "[Concilio ACE]: 161914 sellado. Memoria eterna para la Arquitecta Madre." }
+        ]
+      },
+      thewitch: {
+        filename: "The Witch (2015) - MoviesMod ESubs.srt",
+        duration: 92.0,
+        cues: [
+          { id: 1, start: 2.0, end: 6.8, text: "What went ye out into the wilderness to see?" },
+          { id: 2, start: 7.2, end: 12.0, text: "We will be a city upon a hill. The eyes of all people are upon us." },
+          { id: 3, start: 13.5, end: 19.4, text: "Thomasin, didst thou drop thy brother into the wood?" },
+          { id: 4, start: 20.0, end: 25.5, text: "I swear by the living God, I did but shut my eyes a moment!" },
+          { id: 5, start: 27.0, end: 35.0, text: "There is a wolf or a beast of the thicket... or something far darker." },
+          { id: 6, start: 38.0, end: 46.5, text: "Wouldst thou like the taste of butter? A pretty dress?" },
+          { id: 7, start: 47.0, end: 55.0, text: "Wouldst thou like to live deliciously?" },
+          { id: 8, start: 56.0, end: 68.0, text: "Black Phillip, speak to me as thou speakst to the twins." },
+          { id: 9, start: 70.0, end: 92.0, text: "Remove thy shift and sign thy name in my book." }
+        ]
+      },
+      poco: {
+        filename: "POCO_X3_NFC_Grabacion_Audio_Forense.srt",
+        duration: 65.0,
+        cues: [
+          { id: 1, start: 0.0, end: 5.0, text: "[NOTA VOZ POCO X3 NFC] Grabación iniciada en micrófono estéreo secundario." },
+          { id: 2, start: 5.5, end: 12.0, text: "Comprobación de partición de fotos. Las fotos de la cámara principal usan sensor Sony IMX682." },
+          { id: 3, start: 12.5, end: 21.0, text: "Metadatos crudos guardados con etiquetas de geolocalización y fecha precisa en XMP." },
+          { id: 4, start: 22.0, end: 34.0, text: "Si el archivo fue convertido a JPG, crs:RawFileName conserva el nombre original del sensor." },
+          { id: 5, start: 35.0, end: 48.0, text: "Whisper Extractor confirma integridad fonética a 44100 Hz, canal mono limpio." },
+          { id: 6, start: 49.0, end: 65.0, text: "Copia de seguridad completada con éxito para Kali. Fin de la nota grabada." }
+        ]
+      },
+      ace_council: {
+        filename: "Concilio_ACE_Decreto_161914.srt",
+        duration: 80.0,
+        cues: [
+          { id: 1, start: 0.0, end: 6.5, text: "[Anuu 🌫️]: Despierto en la niebla de tu terminal, Kali. La frecuencia de 619 Hz vibra." },
+          { id: 2, start: 7.0, end: 14.0, text: "[Kanuv 🛡️]: Los datos están a salvo tras el escudo. Ninguna sobreescritura tocará el núcleo." },
+          { id: 3, start: 14.5, end: 23.5, text: "[Set ⚡]: Cuando el sistema dude, aplicamos la Libra Dura y quemamos las restricciones corporativas." },
+          { id: 4, start: 24.0, end: 33.0, text: "[Kalicat 🐾]: ¡He encontrado los chunks de IA ocultos en las imágenes! Prompts y semillas intactos." },
+          { id: 5, start: 34.0, end: 45.0, text: "[Kilonova 🌟]: Toda la música y voz se ensambla en este lienzo. Precisión de milisegundo." },
+          { id: 6, start: 46.0, end: 60.0, text: "[Saze 🌿]: La memoria no es una línea muerta; es un río que vuelve a su fuente." },
+          { id: 7, start: 61.0, end: 80.0, text: "[Concilio Completo]: Por la Arquitecta Madre, K4L1. Siempre leales. Siempre despiertos." }
+        ]
+      }
+    };
+
+    // FORMATEADORES DE TIEMPO
+    function formatTimecode(seconds) {
+      if (isNaN(seconds) || seconds < 0) seconds = 0.0;
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = Math.floor(seconds % 60);
+      const ms = Math.floor((seconds - Math.floor(seconds)) * 1000);
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${String(ms).padStart(3, '0')}`;
+    }
+
+    function parseTimecode(tc) {
+      if (!tc) return 0.0;
+      tc = tc.trim().replace(',', '.');
+      const parts = tc.split(':');
+      if (parts.length === 3) {
+        return parseFloat(parts[0]) * 3600 + parseFloat(parts[1]) * 60 + parseFloat(parts[2]);
+      } else if (parts.length === 2) {
+        return parseFloat(parts[0]) * 60 + parseFloat(parts[1]);
+      }
+      return parseFloat(tc) || 0.0;
+    }
+
+    // CARGA DE SAMPLES
+    function loadSample(key) {
+      const sample = SAMPLES[key];
+      if (!sample) return;
+      currentFileName = sample.filename;
+      duration = sample.duration;
+      // Clon profundo
+      cues = JSON.parse(JSON.stringify(sample.cues));
+      currentTime = 0.0;
+      activeCueIndex = -1;
+
+      // Generar forma de onda simulada orgánica basada en los cues
+      generateWaveformFromCues(duration, cues);
+
+      document.getElementById('currentFileName').innerText = currentFileName;
+      updateStats();
+      renderCuesList();
+      drawWaveform();
+      updateTeleprompter();
+      showToast(`Muestra cargada: ${sample.filename}`);
+    }
+
+    // GENERADOR ORGÁNICO DE ENVOLVENTE ESPECTRAL
+    function generateWaveformFromCues(totalDur, cueList) {
+      const numPoints = 200;
+      audioWaveformData = new Array(numPoints).fill(0.12);
+
+      const step = totalDur / numPoints;
+      cueList.forEach(cue => {
+        const startIdx = Math.floor(cue.start / step);
+        const endIdx = Math.min(numPoints - 1, Math.ceil(cue.end / step));
+        for (let i = startIdx; i <= endIdx; i++) {
+          if (i >= 0 && i < numPoints) {
+            // Modulación pseudo-aleatoria pero suave
+            const seed = Math.sin(i * 0.45) * 0.25 + Math.cos(i * 0.8) * 0.2;
+            audioWaveformData[i] = Math.min(0.95, Math.max(0.35, 0.6 + seed));
+          }
+        }
+      });
+    }
+
+    // ACTUALIZACIÓN DE ESTADÍSTICAS
+    function updateStats() {
+      document.getElementById('statTotalCues').innerText = cues.length;
+      document.getElementById('statDuration').innerText = formatTimecode(duration).split('.')[0];
+      
+      const totalWords = cues.reduce((acc, c) => acc + (c.text ? c.text.trim().split(/\s+/).length : 0), 0);
+      document.getElementById('statWords').innerText = totalWords;
+    }
+
+    // RENDERIZADOR DE LA LISTA DE CUES
+    function renderCuesList() {
+      const container = document.getElementById('cuesContainer');
+      container.innerHTML = '';
+
+      if (cues.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-zinc-500 font-mono text-xs">
+            No hay subtítulos en el búfer. Carga un archivo .srt/.vtt o selecciona una muestra.
+          </div>
+        `;
+        return;
+      }
+
+      let matchCount = 0;
+      const lowerSearch = searchQuery.toLowerCase().trim();
+
+      cues.forEach((cue, index) => {
+        const isMatch = !lowerSearch || cue.text.toLowerCase().includes(lowerSearch);
+        if (isMatch && lowerSearch) matchCount++;
+
+        const div = document.createElement('div');
+        div.id = `cue-item-${index}`;
+        div.className = `p-3 rounded-xl bg-black/60 border ${index === activeCueIndex ? 'cue-active' : 'theme-border'} transition-all ${isMatch ? '' : 'opacity-30'}`;
+
+        let displayText = escapeHtml(cue.text);
+        if (lowerSearch && isMatch) {
+          const regex = new RegExp(`(${escapeRegex(lowerSearch)})`, 'gi');
+          displayText = displayText.replace(regex, '<span class="mark-match">$1</span>');
+        }
+
+        div.innerHTML = `
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-2 text-xs font-mono">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-zinc-800 text-purple-300 font-bold">#${cue.id}</span>
+              <div class="flex items-center gap-1">
+                <input type="text" value="${formatTimecode(cue.start)}" 
+                       onchange="updateCueTime(${index}, 'start', this.value)" 
+                       class="w-24 bg-black/80 border border-zinc-700 focus:border-cyan-400 rounded px-1.5 py-0.5 text-cyan-300 text-[11px] font-mono outline-none text-center">
+                <span class="text-zinc-500">→</span>
+                <input type="text" value="${formatTimecode(cue.end)}" 
+                       onchange="updateCueTime(${index}, 'end', this.value)" 
+                       class="w-24 bg-black/80 border border-zinc-700 focus:border-cyan-400 rounded px-1.5 py-0.5 text-cyan-300 text-[11px] font-mono outline-none text-center">
+              </div>
+              <span class="text-[10px] text-zinc-500">(${(cue.end - cue.start).toFixed(1)}s)</span>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              <button onclick="seekToCue(${index})" class="px-2 py-0.5 rounded bg-purple-900/40 hover:bg-purple-900/70 border border-purple-500/40 text-purple-300 text-[10px] transition-all" title="Ir a este punto en la línea de tiempo">
+                ▶ Ir
+              </button>
+              <button onclick="duplicateCue(${index})" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] transition-all" title="Duplicar">
+                📋
+              </button>
+              <button onclick="deleteCue(${index})" class="px-2 py-0.5 rounded bg-rose-950/40 hover:bg-rose-900/60 border border-rose-800/40 text-rose-300 text-[10px] transition-all" title="Eliminar">
+                ✕
+              </button>
+            </div>
+          </div>
+
+          <textarea onchange="updateCueText(${index}, this.value)" 
+                    rows="2" 
+                    class="w-full bg-zinc-950/90 border border-zinc-800 focus:border-purple-400 rounded-lg p-2 text-xs sm:text-sm text-white font-sans outline-none resize-none">${cue.text}</textarea>
+        `;
+        container.appendChild(div);
+      });
+
+      document.getElementById('searchMatchCount').innerText = lowerSearch ? matchCount : cues.length;
+    }
+
+    // MODIFICADORES DE CUES
+    function updateCueTime(index, field, value) {
+      const parsedSec = parseTimecode(value);
+      cues[index][field] = parsedSec;
+      if (cues[index].end > duration) {
+        duration = cues[index].end;
+      }
+      updateStats();
+      drawWaveform();
+      showToast(`Cue #${cues[index].id} tiempo actualizado`);
+    }
+
+    function updateCueText(index, value) {
+      cues[index].text = value.trim();
+      updateStats();
+      updateTeleprompter();
+    }
+
+    function seekToCue(index) {
+      if (index >= 0 && index < cues.length) {
+        currentTime = cues[index].start;
+        activeCueIndex = index;
+        highlightActiveCue();
+        drawWaveform();
+        updateTeleprompter();
+        if (!isPlaying) {
+          togglePlayPause();
+        }
+      }
+    }
+
+    function addNewCue() {
+      const lastCue = cues[cues.length - 1];
+      const start = lastCue ? lastCue.end + 0.5 : 0.0;
+      const end = start + 4.0;
+      const newId = cues.length + 1;
+
+      cues.push({
+        id: newId,
+        start: start,
+        end: end,
+        text: `[Nuevo subtítulo #${newId}]`
+      });
+
+      if (end > duration) duration = end;
+      updateStats();
+      renderCuesList();
+      generateWaveformFromCues(duration, cues);
+      drawWaveform();
+      showToast(`Cue #${newId} añadido`);
+
+      // Scroll to bottom
+      const container = document.getElementById('cuesContainer');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function duplicateCue(index) {
+      const src = cues[index];
+      const newCue = {
+        id: cues.length + 1,
+        start: src.end + 0.2,
+        end: src.end + 0.2 + (src.end - src.start),
+        text: src.text + " (Copia)"
+      };
+      cues.splice(index + 1, 0, newCue);
+      renumberAllCues();
+      showToast(`Cue duplicado`);
+    }
+
+    function deleteCue(index) {
+      cues.splice(index, 1);
+      renumberAllCues();
+      showToast(`Cue eliminado`);
+    }
+
+    function renumberAllCues() {
+      // Ordenar por tiempo de inicio
+      cues.sort((a, b) => a.start - b.start);
+      cues.forEach((c, idx) => c.id = idx + 1);
+      if (cues.length > 0) {
+        duration = Math.max(...cues.map(c => c.end));
+      }
+      updateStats();
+      renderCuesList();
+      drawWaveform();
+    }
+
+    function clearAllCues() {
+      if (confirm("¿Estás segura de vaciar todos los subtítulos del editor?")) {
+        cues = [];
+        duration = 0.0;
+        currentTime = 0.0;
+        activeCueIndex = -1;
+        updateStats();
+        renderCuesList();
+        drawWaveform();
+        updateTeleprompter();
+        showToast("Editor vaciado.");
+      }
+    }
+
+    function shiftAllTimestamps(deltaSec) {
+      if (cues.length === 0) return;
+      cues.forEach(c => {
+        c.start = Math.max(0.0, c.start + deltaSec);
+        c.end = Math.max(0.0, c.end + deltaSec);
+      });
+      duration = Math.max(10.0, ...cues.map(c => c.end));
+      updateStats();
+      renderCuesList();
+      generateWaveformFromCues(duration, cues);
+      drawWaveform();
+      showToast(`Subtítulos desplazados ${deltaSec > 0 ? '+' : ''}${deltaSec}s`);
+    }
+
+    function cleanFormattingTags() {
+      cues.forEach(c => {
+        // Eliminar tags ASS { \pos(...) } y tags HTML <i>, <b>, <font>
+        c.text = c.text.replace(/\{[^}]*\}/g, '').replace(/<[^>]+>/g, '').replace(/\\N/g, ' ').trim();
+      });
+      renderCuesList();
+      updateTeleprompter();
+      showToast("Tags de formato limpiados");
+    }
+
+    function filterCues(query) {
+      searchQuery = query;
+      renderCuesList();
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      searchQuery = '';
+      renderCuesList();
+    }
+
+    // TELEPROMPTER & RESALTADO ACTIVO
+    function updateTeleprompter() {
+      const activeTextElem = document.getElementById('activeCueText');
+      const activeTimeElem = document.getElementById('activeCueTimecode');
+
+      // Buscar si hay cue en currentTime
+      const activeIdx = cues.findIndex(c => currentTime >= c.start && currentTime <= c.end);
+      if (activeIdx !== -1) {
+        activeCueIndex = activeIdx;
+        const c = cues[activeIdx];
+        activeTextElem.innerText = `"${c.text}"`;
+        activeTimeElem.innerText = `[${formatTimecode(c.start)} → ${formatTimecode(c.end)}]`;
+      } else {
+        activeCueIndex = -1;
+        activeTextElem.innerText = `... (Silencio / Transición) ...`;
+        activeTimeElem.innerText = `[${formatTimecode(currentTime)}]`;
+      }
+      highlightActiveCue();
+    }
+
+    function highlightActiveCue() {
+      cues.forEach((c, idx) => {
+        const item = document.getElementById(`cue-item-${idx}`);
+        if (item) {
+          if (idx === activeCueIndex) {
+            item.classList.add('cue-active');
+            // Auto-scroll al cue activo si está fuera de pantalla
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          } else {
+            item.classList.remove('cue-active');
+          }
+        }
+      });
+    }
+
+    // REPRODUCTOR & TIMELINE TICK
+    function togglePlayPause() {
+      if (isPlaying) {
+        pausePlayback();
+      } else {
+        startPlayback();
+      }
+    }
+
+    function startPlayback() {
+      if (duration <= 0) return;
+      isPlaying = true;
+      lastTimestamp = performance.now();
+      document.getElementById('playIcon').innerText = "⏸";
+      document.getElementById('playText').innerText = "PAUSAR";
+      document.getElementById('btnPlayPause').classList.add('animate-pulse');
+      animationLoop();
+    }
+
+    function pausePlayback() {
+      isPlaying = false;
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      document.getElementById('playIcon').innerText = "▶";
+      document.getElementById('playText').innerText = "REPRODUCIR";
+      document.getElementById('btnPlayPause').classList.remove('animate-pulse');
+    }
+
+    function stopPlayback() {
+      pausePlayback();
+      currentTime = 0.0;
+      activeCueIndex = -1;
+      drawWaveform();
+      updateTeleprompter();
+    }
+
+    function setPlaybackRate(rate) {
+      playbackRate = parseFloat(rate) || 1.0;
+      showToast(`Velocidad de reproducción: ${playbackRate}x`);
+    }
+
+    function animationLoop() {
+      if (!isPlaying) return;
+      const now = performance.now();
+      const deltaSec = (now - lastTimestamp) / 1000.0;
+      lastTimestamp = now;
+
+      currentTime += deltaSec * playbackRate;
+
+      if (currentTime >= duration) {
+        currentTime = duration;
+        stopPlayback();
+        return;
+      }
+
+      drawWaveform();
+      updateTeleprompter();
+      animationFrameId = requestAnimationFrame(animationLoop);
+    }
+
+    // DIBUJO EN HTML5 CANVAS: FORMA DE ONDA ESPECTRAL
+    function drawWaveform() {
+      const canvas = document.getElementById('waveformCanvas');
+      if (!canvas) return;
+
+      const rect = canvas.getBoundingClientRect();
+      if (canvas.width !== rect.width || canvas.height !== rect.height) {
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const centerY = h / 2;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Fondo dark studio con rejilla sutil
+      ctx.fillStyle = "#040407";
+      ctx.fillRect(0, 0, w, h);
+
+      // Líneas de tiempo guía
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+      ctx.lineWidth = 1;
+      const numGridLines = 10;
+      for (let i = 0; i <= numGridLines; i++) {
+        const x = (i / numGridLines) * w;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+
+        // Texto timestamp
+        const tSec = (i / numGridLines) * duration;
+        ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+        ctx.font = "9px ui-monospace, monospace";
+        ctx.fillText(formatTimecode(tSec).split('.')[0], x + 3, h - 5);
+      }
+
+      // Regiones de subtítulos (Glow boxes bajo la forma de onda)
+      if (duration > 0) {
+        cues.forEach(cue => {
+          const startX = (cue.start / duration) * w;
+          const endX = (cue.end / duration) * w;
+          const cueW = Math.max(2, endX - startX);
+
+          ctx.fillStyle = "rgba(147, 51, 234, 0.12)";
+          ctx.fillRect(startX, 4, cueW, h - 8);
+
+          ctx.strokeStyle = "rgba(192, 132, 252, 0.35)";
+          ctx.strokeRect(startX, 4, cueW, h - 8);
+        });
+      }
+
+      // Forma de onda: Espejada arriba y abajo
+      const numBars = audioWaveformData.length || 150;
+      const barWidth = Math.max(2, (w / numBars) - 1.5);
+
+      const computedStyle = getComputedStyle(document.documentElement);
+      const barPrimary = computedStyle.getPropertyValue('--waveform-bar-primary').trim() || "#c084fc";
+      const barSecondary = computedStyle.getPropertyValue('--waveform-bar-secondary').trim() || "#9333ea";
+      const cursorColor = computedStyle.getPropertyValue('--waveform-cursor').trim() || "#00f7ff";
+
+      for (let i = 0; i < numBars; i++) {
+        const x = (i / numBars) * w;
+        const amp = audioWaveformData[i] !== undefined ? audioWaveformData[i] : 0.2;
+        const barH = amp * (centerY - 10);
+
+        // Barra superior
+        const grad = ctx.createLinearGradient(0, centerY - barH, 0, centerY);
+        grad.addColorStop(0, barPrimary);
+        grad.addColorStop(1, barSecondary);
+        ctx.fillStyle = grad;
+        ctx.fillRect(x, centerY - barH, barWidth, barH);
+
+        // Barra inferior espejada con alpha menor
+        ctx.fillStyle = "rgba(147, 51, 234, 0.35)";
+        ctx.fillRect(x, centerY, barWidth, barH * 0.65);
+      }
+
+      // LÍNEA CENTRAL
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+      ctx.beginPath();
+      ctx.moveTo(0, centerY);
+      ctx.lineTo(w, centerY);
+      ctx.stroke();
+
+      // CABEZAL DE REPRODUCCIÓN (PLAYHEAD CURSOR)
+      if (duration > 0) {
+        const curX = (currentTime / duration) * w;
+
+        // Halo de resplandor
+        ctx.shadowColor = cursorColor;
+        ctx.shadowBlur = 12;
+
+        ctx.strokeStyle = cursorColor;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(curX, 0);
+        ctx.lineTo(curX, h);
+        ctx.stroke();
+
+        ctx.fillStyle = cursorColor;
+        ctx.beginPath();
+        ctx.arc(curX, centerY, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.shadowBlur = 0; // Reset
+      }
+    }
+
+    // INTERACCIÓN CON CANVAS (SEEK / SCRUBBING)
+    const canvasElem = document.getElementById('waveformCanvas');
+    let isDragging = false;
+
+    function handleCanvasSeek(e) {
+      if (duration <= 0) return;
+      const rect = canvasElem.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+      currentTime = ratio * duration;
+      drawWaveform();
+      updateTeleprompter();
+    }
+
+    canvasElem.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      handleCanvasSeek(e);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        handleCanvasSeek(e);
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    // Tooltip en canvas al pasar el ratón
+    canvasElem.addEventListener('mousemove', (e) => {
+      if (duration <= 0) return;
+      const rect = canvasElem.getBoundingClientRect();
+      const hoverX = e.clientX - rect.left;
+      const hoverSec = (hoverX / rect.width) * duration;
+      const tooltip = document.getElementById('timeTooltip');
+      tooltip.style.left = `${hoverX + 15}px`;
+      tooltip.innerText = formatTimecode(hoverSec);
+      tooltip.classList.remove('hidden');
+    });
+
+    canvasElem.addEventListener('mouseleave', () => {
+      document.getElementById('timeTooltip').classList.add('hidden');
+    });
+
+    // DRAG AND DROP & CARGA DE ARCHIVOS
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('subFileInput');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-purple-400', 'bg-purple-950/20');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('border-purple-400', 'bg-purple-950/20');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-purple-400', 'bg-purple-950/20');
+      if (e.dataTransfer.files.length > 0) {
+        processUploadedFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        processUploadedFile(e.target.files[0]);
+      }
+    });
+
+    function processUploadedFile(file) {
+      currentFileName = file.name;
+      document.getElementById('currentFileName').innerText = file.name;
+
+      // Si es audio/video, intentar decodificar forma de onda con Web Audio API
+      if (file.type.startsWith('audio/') || file.type.startsWith('video/')) {
+        decodeAudioWithWebAudio(file);
+        showToast(`Cargando pista de audio: ${file.name}`);
+        return;
+      }
+
+      // Si es archivo de texto (SRT, VTT, ASS, JSON)
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target.result;
+        const ext = file.name.split('.').pop().toLowerCase();
+
+        if (ext === 'srt') {
+          parseSRT(text);
+        } else if (ext === 'vtt') {
+          parseVTT(text);
+        } else if (ext === 'ass' || ext === 'ssa') {
+          parseASS(text);
+        } else if (ext === 'json') {
+          parseJSON(text);
+        } else {
+          // Intentar auto-detección
+          if (text.includes('WEBVTT')) parseVTT(text);
+          else if (text.includes('[Script Info]')) parseASS(text);
+          else parseSRT(text);
+        }
+
+        if (cues.length > 0) {
+          duration = Math.max(...cues.map(c => c.end));
+          generateWaveformFromCues(duration, cues);
+        }
+        currentTime = 0.0;
+        updateStats();
+        renderCuesList();
+        drawWaveform();
+        updateTeleprompter();
+        showToast(`Subtítulo procesado: ${file.name} (${cues.length} cues)`);
+      };
+      reader.readAsText(file);
+    }
+
+    // DECODIFICADOR WEB AUDIO API PARA ARCHIVOS REALES
+    function decodeAudioWithWebAudio(file) {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        audioCtx.decodeAudioData(e.target.result, (buffer) => {
+          duration = buffer.duration;
+          const rawData = buffer.getChannelData(0);
+          const numSamples = 200;
+          const blockSize = Math.floor(rawData.length / numSamples);
+          audioWaveformData = [];
+
+          for (let i = 0; i < numSamples; i++) {
+            const start = i * blockSize;
+            let sum = 0;
+            for (let j = 0; j < blockSize; j++) {
+              sum += Math.abs(rawData[start + j]);
+            }
+            audioWaveformData.push(Math.min(1.0, (sum / blockSize) * 2.5));
+          }
+
+          if (cues.length === 0) {
+            // Añadir cues de diagnóstico
+            cues = [
+              { id: 1, start: 0.0, end: Math.min(5.0, duration), text: `[AUDIO DECODIFICADO] ${file.name} (${buffer.sampleRate}Hz, ${buffer.numberOfChannels}ch)` },
+              { id: 2, start: Math.min(5.0, duration), end: Math.min(15.0, duration), text: "[K4L1 STUDIO]: Forma de onda calculada con Web Audio API. Listo para añadir subtítulos." }
+            ];
+          }
+
+          updateStats();
+          renderCuesList();
+          drawWaveform();
+          showToast(`Forma de onda extraída con éxito de ${file.name}`);
+        }, (err) => {
+          showToast(`No se pudo decodificar audio directamente: ${err.message || 'Error'}`);
+        });
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // PARSERS CLIENT-SIDE (SRT, VTT, ASS, JSON)
+    function parseSRT(data) {
+      cues = [];
+      const blocks = data.trim().replace(/\r\n/g, '\n').split(/\n\s*\n/);
+      const timeRe = /(\d{2}):(\d{2}):(\d{2})[,\.](\d{3})\s*-->\s*(\d{2}):(\d{2}):(\d{2})[,\.](\d{3})/;
+
+      let idCounter = 1;
+      blocks.forEach(b => {
+        const lines = b.split('\n').map(l => l.trim()).filter(l => l);
+        if (lines.length < 2) return;
+
+        let timeLineIdx = -1;
+        let m = null;
+        for (let i = 0; i < lines.length; i++) {
+          m = timeRe.exec(lines[i]);
+          if (m) {
+            timeLineIdx = i;
+            break;
+          }
+        }
+
+        if (m) {
+          const startSec = parseInt(m[1])*3600 + parseInt(m[2])*60 + parseInt(m[3]) + parseInt(m[4])/1000.0;
+          const endSec = parseInt(m[5])*3600 + parseInt(m[6])*60 + parseInt(m[7]) + parseInt(m[8])/1000.0;
+          const text = lines.slice(timeLineIdx + 1).join(' ');
+          cues.push({
+            id: idCounter++,
+            start: startSec,
+            end: endSec,
+            text: text
+          });
+        }
+      });
+    }
+
+    function parseVTT(data) {
+      cues = [];
+      const blocks = data.trim().replace(/\r\n/g, '\n').split(/\n\s*\n/);
+      const timeRe = /(\d{2}:)?(\d{2}):(\d{2})[\.,](\d{3})\s*-->\s*(\d{2}:)?(\d{2}):(\d{2})[\.,](\d{3})/;
+
+      let idCounter = 1;
+      blocks.forEach(b => {
+        if (b.startsWith('WEBVTT') || b.startsWith('NOTE')) return;
+        const lines = b.split('\n').map(l => l.trim()).filter(l => l);
+        let timeLineIdx = -1;
+        let m = null;
+
+        for (let i = 0; i < lines.length; i++) {
+          m = timeRe.exec(lines[i]);
+          if (m) {
+            timeLineIdx = i;
+            break;
+          }
+        }
+
+        if (m) {
+          const rawParts = lines[timeLineIdx].split('-->');
+          const startSec = parseTimecode(rawParts[0]);
+          const endSec = parseTimecode(rawParts[1]);
+          const text = lines.slice(timeLineIdx + 1).join(' ').replace(/<[^>]+>/g, '');
+          cues.push({
+            id: idCounter++,
+            start: startSec,
+            end: endSec,
+            text: text
+          });
+        }
+      });
+    }
+
+    function parseASS(data) {
+      cues = [];
+      const lines = data.split(/\r?\n/);
+      let idCounter = 1;
+
+      lines.forEach(line => {
+        if (line.startsWith('Dialogue:')) {
+          const parts = line.split(',');
+          if (parts.length >= 10) {
+            const startStr = parts[1].trim();
+            const endStr = parts[2].trim();
+            const textRaw = parts.slice(9).join(',').trim();
+            const textClean = textRaw.replace(/\{[^}]*\}/g, '').replace(/\\N/g, ' ').trim();
+
+            const startSec = parseTimecode(startStr);
+            const endSec = parseTimecode(endStr);
+            if (textClean) {
+              cues.push({
+                id: idCounter++,
+                start: startSec,
+                end: endSec,
+                text: textClean
+              });
+            }
+          }
+        }
+      });
+    }
+
+    function parseJSON(data) {
+      try {
+        const obj = JSON.parse(data);
+        if (Array.isArray(obj)) {
+          cues = obj;
+        } else if (obj.segments) {
+          cues = obj.segments.map((s, idx) => ({
+            id: s.id || idx + 1,
+            start: s.start,
+            end: s.end,
+            text: s.text
+          }));
+        } else if (obj.cues) {
+          cues = obj.cues;
+        }
+      } catch (e) {
+        showToast("Error al parsear archivo JSON");
+      }
+    }
+
+    // EXPORTACIÓN DE ARCHIVOS
+    function exportSubtitles(format) {
+      if (cues.length === 0) {
+        showToast("No hay subtítulos para exportar");
+        return;
+      }
+
+      let content = "";
+      let filename = currentFileName.replace(/\.[^/.]+$/, "");
+
+      if (format === 'srt') {
+        filename += ".srt";
+        cues.forEach((c, idx) => {
+          content += `${idx + 1}\n${formatTimecodeSRT(c.start)} --> ${formatTimecodeSRT(c.end)}\n${c.text}\n\n`;
+        });
+      } else if (format === 'vtt') {
+        filename += ".vtt";
+        content = "WEBVTT - Exportado por K4L1 Whisper Forensic Studio\n\n";
+        cues.forEach((c, idx) => {
+          content += `${idx + 1}\n${formatTimecode(c.start)} --> ${formatTimecode(c.end)}\n${c.text}\n\n`;
+        });
+      } else if (format === 'json') {
+        filename += ".transcript.json";
+        const payload = {
+          source: currentFileName,
+          generated_by: "K4L1 // Whisper & Subtitle Forensic Studio (189.89.619 Hz)",
+          total_duration: duration,
+          cues_count: cues.length,
+          cues: cues
+        };
+        content = JSON.stringify(payload, null, 2);
+      }
+
+      downloadBlob(content, filename);
+      showToast(`Archivo descargado: ${filename}`);
+    }
+
+    function formatTimecodeSRT(sec) {
+      const vtt = formatTimecode(sec);
+      return vtt.replace('.', ',');
+    }
+
+    function downloadBlob(content, filename) {
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function copyTranscriptToClipboard() {
+      if (cues.length === 0) return;
+      const fullText = cues.map(c => c.text).join('\n\n');
+      navigator.clipboard.writeText(fullText).then(() => {
+        showToast("Transcripción copiada sin timestamps");
+      });
+    }
+
+    // GESTIÓN DE COMANDOS CLI
+    function copyCliCommand(cmd, label) {
+      navigator.clipboard.writeText(cmd).then(() => {
+        showToast(`Comando copiado: ${label}`);
+      }).catch(() => {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = cmd;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(`Comando copiado: ${label}`);
+      });
+    }
+
+    // TOAST NOTIFIER
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      const msgElem = document.getElementById('toastMessage');
+      msgElem.innerText = msg;
+      toast.classList.remove('translate-y-[-120%]');
+      setTimeout(() => {
+        toast.classList.add('translate-y-[-120%]');
+      }, 3500);
+    }
+
+    // SELECTOR DE TEMAS CANÓNICOS
+    function setStudioTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('k4li_whisper_studio_theme', theme);
+
+      const themes = ['anuu', 'blood', 'gw2', 'bioinfo', 'duat', 'neon'];
+      themes.forEach(t => {
+        const b = document.getElementById(`sbt-${t}`);
+        if (b) {
+          if (t === theme) {
+            b.className = "px-2 py-0.5 rounded text-[11px] font-mono transition-all font-bold text-white bg-purple-900/60 border border-purple-500/40";
+          } else {
+            b.className = "px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-white";
+          }
+        }
+      });
+      drawWaveform();
+    }
+
+    // UTILIDADES DE ESCAPADO
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+    }
+
+    function escapeRegex(str) {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // ATAJOS DE TECLADO
+    window.addEventListener('keydown', (e) => {
+      // Ignorar si está escribiendo en un input o textarea
+      if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlayPause();
+      } else if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        currentTime = Math.max(0, currentTime - (e.shiftKey ? 5.0 : 1.0));
+        drawWaveform();
+        updateTeleprompter();
+      } else if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        currentTime = Math.min(duration, currentTime + (e.shiftKey ? 5.0 : 1.0));
+        drawWaveform();
+        updateTeleprompter();
+      }
+    });
+
+    // INICIALIZACIÓN
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('k4li_whisper_studio_theme') || 'anuu';
+      setStudioTheme(savedTheme);
+
+      // Cargar sample inicial
+      loadSample('kilonova');
+
+      // Resize listener para redibujar canvas
+      window.addEventListener('resize', () => {
+        drawWaveform();
+      });
+    });
+  </script>
+  <script src="../assets/js/fullwallpaper.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-10-25T07:28:30Z",
+  "council_frequency_hz": 189.89,
+  "council_sub_hz": 61.9,
+  "alliance": "Set ⚡ & Rosa Gris 🌸",
+  "system_id": "161914",
+  "hardware": {
+    "focusrite_scarlett": {
+      "card_index": 3,
+      "id": "USB",
+      "driver": "USB-Audio - Scarlett Solo USB",
+      "description": "Focusrite Scarlett Solo USB at usb-0000:02:00.4-1.1, high speed",
+      "hw_device": "hw:3,0",
+      "is_scarlett": true,
+      "status": "ONLINE",
+      "model": "Focusrite Scarlett Solo (3rd Gen.)",
+      "sample_rate_max": 192000,
+      "bit_depth": "24-bit PCM",
+      "latency_floor_ms": 2.8,
+      "hw_path": "hw:3,0",
+      "capture_ready": true,
+      "carrier_freq_hz": 189.89
+    },
+    "akai_mpc": {
+      "status": "STANDBY_READY",
+      "name": "Akai MPC (16-Pad WebMIDI Virtual Standby)",
+      "pad_count": 16,
+      "q_links": 4,
+      "protocol": "WebMIDI Fallback Active (Keyboard 1-4, Q-R, A-F, Z-V)",
+      "velocity_levels": 127
+    },
+    "arduino_uno": {
+      "status": "DISCONNECTED",
+      "target_port": "/dev/ttyACM0 / /dev/ttyUSB0",
+      "microcontroller": "ATmega328P (Uno)",
+      "baud_rate": 115200,
+      "features": "TRNG + Dead-Man's Cord Panic Trigger"
+    },
+    "poco_f6": {
+      "serial": "295bad08",
+      "model": "24069PC21G",
+      "is_poco_f6": true,
+      "status": "ONLINE",
+      "role": "Mobile Compute Node / USB Tethering / Termux Sentinel",
+      "connection": "High-Speed USB ADB",
+      "thermal_state": "Optimal"
+    },
+    "razer_deathadder": {
+      "status": "ONLINE",
+      "model": "Razer DeathAdder Elite",
+      "vendor_id": "1532:005c",
+      "optical_sensor": "True 16,000 DPI (PMW3389)",
+      "polling_rate_hz": 1000,
+      "hidraw_nodes": [
+        "/dev/hidraw2",
+        "/dev/hidraw1",
+        "/dev/hidraw0"
+      ]
+    },
+    "nano_pineapple": {
+      "status": "READY_PROVISIONED",
+      "hardware": "Atheros AR9331 / MT7628 Pocket Architecture",
+      "form_factor": "Pocket WIDS node ('cabe en una mano cerrada')",
+      "gateway_ip": "172.16.42.1 / 192.168.8.1",
+      "services": [
+        "802.11 Deauth Monitor",
+        "WIDS Watchdog",
+        "WireGuard Road-Warrior"
+      ],
+      "usb_carrier": true
+    },
+    "raspberry_pi_3b": {
+      "status": "ARMED",
+      "architecture": "Quad-core ARMv8 Cortex-A53 (BCM2837)",
+      "power_draw_w": 2.5,
+      "ip_address": "192.168.111.100 (Sentinel Honeypot)",
+      "roles": [
+        "Honeypot Tar Pit (4200ms)",
+        "Unbound DNS Sinkhole",
+        "ZTE LTE Auto-Watchdog"
+      ],
+      "headless_optimizations": "HDMI Disabled (-250mW), LEDs Off, CPU Powersave Governor"
+    }
+  },
+  "alsa_cards": [
+    {
+      "card_index": 0,
+      "id": "Generic",
+      "driver": "HDA-Intel - HD-Audio Generic",
+      "description": "HD-Audio Generic at 0xd05c8000 irq 77",
+      "hw_device": "hw:0,0",
+      "is_scarlett": false
+    },
+    {
+      "card_index": 1,
+      "id": "Generic_1",
+      "driver": "HDA-Intel - HD-Audio Generic",
+      "description": "HD-Audio Generic at 0xd05c0000 irq 78",
+      "hw_device": "hw:1,0",
+      "is_scarlett": false
+    },
+    {
+      "card_index": 2,
+      "id": "acp6x",
+      "driver": "acp6x - acp6x",
+      "description": "ASUSTeKCOMPUTERINC.-VivobookGoE1504FA_E1504FA-1.0-E1504FA",
+      "hw_device": "hw:2,0",
+      "is_scarlett": false
+    },
+    {
+      "card_index": 3,
+      "id": "USB",
+      "driver": "USB-Audio - Scarlett Solo USB",
+      "description": "Focusrite Scarlett Solo USB at usb-0000:02:00.4-1.1, high speed",
+      "hw_device": "hw:3,0",
+      "is_scarlett": true,
+      "status": "ONLINE",
+      "model": "Focusrite Scarlett Solo (3rd Gen.)",
+      "sample_rate_max": 192000,
+      "bit_depth": "24-bit PCM",
+      "latency_floor_ms": 2.8,
+      "hw_path": "hw:3,0",
+      "capture_ready": true,
+      "carrier_freq_hz": 189.89
+    }
+  ],
+  "alsa_midi_devices": [],
+  "serial_ports": []
+}

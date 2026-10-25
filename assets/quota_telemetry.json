@@ -1,0 +1,415 @@
+{
+  "version": "2.0.0",
+  "frequency_hz": "189.89.619",
+  "council": "ACE (161914)",
+  "agent": "Nodo POCO 📱⚡ [4NVSET 🟢]",
+  "architect": "Kali",
+  "telemetry_timestamp": "2026-10-25T07:18:25.588967+00:00",
+  "swarm_orchestrator": {
+    "version": "v2.0",
+    "state": "OPERATIONAL_SYNCHRONIZED",
+    "total_worker_capacity": 39,
+    "active_parallel_workers": 13,
+    "offloaded_poco_workers": 2,
+    "allocations": {
+      "pro": {
+        "id": "pro",
+        "model": "gemini-1.5-pro",
+        "display_name": "Google Gemini 1.5 Pro",
+        "role": "heavy architecture & binary parsers",
+        "assigned_domain": "Heavy Architecture & Binary Parsing",
+        "tier": "HEAVYWEIGHT",
+        "concurrency_limit": 4,
+        "active_subagents": 2,
+        "status": "ALLOCATED_ACTIVE",
+        "quota_status": "HEALTHY",
+        "usage_pct": 42.0,
+        "burned_pct": 42.0,
+        "cost_eur_per_1m": 3.5,
+        "circuit_breaker": "GREEN",
+        "allocated_tasks": [
+          "AST Binary Symbol Carver (ISO Kernel ELF/DWARF)",
+          "Goetiarot Ontology Parser & Graph Semantic Analyzer"
+        ]
+      },
+      "flash": {
+        "id": "flash",
+        "model": "gemini-1.5-flash",
+        "display_name": "Google Gemini 1.5 Flash",
+        "role": "multimedia & telemetry studios",
+        "assigned_domain": "Multimedia & Telemetry Studios",
+        "tier": "BALANCED_STREAMING",
+        "concurrency_limit": 8,
+        "active_subagents": 3,
+        "status": "ALLOCATED_ACTIVE",
+        "quota_status": "READY_PRIMARY",
+        "usage_pct": 28.4,
+        "burned_pct": 28.4,
+        "cost_eur_per_1m": 0.35,
+        "circuit_breaker": "GREEN",
+        "allocated_tasks": [
+          "Telemetry HUD Streamer (189.89.619 Hz)",
+          "Audio Waveform DSP Synthesizer",
+          "Canvas Matrix Visualizer Studio"
+        ]
+      },
+      "flash_lite": {
+        "id": "flash_lite",
+        "model": "gemini-2.0-flash-lite",
+        "display_name": "Google Gemini 2.0 Flash Lite",
+        "role": "fast filesystem auditing",
+        "assigned_domain": "Fast Filesystem Auditing",
+        "tier": "HYPER_LIGHTWEIGHT",
+        "concurrency_limit": 16,
+        "active_subagents": 4,
+        "status": "ALLOCATED_ACTIVE",
+        "quota_status": "NOMINAL_FAST",
+        "usage_pct": 14.8,
+        "burned_pct": 14.8,
+        "cost_eur_per_1m": 0.075,
+        "circuit_breaker": "GREEN",
+        "allocated_tasks": [
+          "Rootfs Inode Inspector (/home/kali)",
+          "Assets Diff Scanner & Relic Validator",
+          "Log File Truncation & Telemetry GC",
+          "Config Hash Integrity Auditor"
+        ]
+      },
+      "claude": {
+        "id": "claude",
+        "model": "claude-3-5-sonnet",
+        "display_name": "Anthropic Claude 3.5 Sonnet",
+        "role": "seinen psychological docs & deep reasoning",
+        "assigned_domain": "Seinen Psychological Canon",
+        "tier": "FRONTIER_REASONING",
+        "concurrency_limit": 1,
+        "active_subagents": 1,
+        "status": "THROTTLED_90",
+        "quota_status": "99.9% burned",
+        "usage_pct": 99.9,
+        "burned_pct": 99.9,
+        "limit_tokens": 80000,
+        "used_tokens": 79950,
+        "remaining_tokens": 50,
+        "window_duration_seconds": 18000,
+        "remaining_seconds": 1800,
+        "circuit_breaker": "THROTTLED_90",
+        "allocated_tasks": [
+          "Final Narrative Seal: Escudo Kanuv & Libra Dura"
+        ]
+      },
+      "openai": {
+        "id": "openai",
+        "model": "gpt-4o",
+        "display_name": "OpenAI GPT-4o",
+        "role": "synthetic benchmarks & code refactors",
+        "assigned_domain": "Synthetic Benchmarks & Code Refactoring",
+        "tier": "ENTERPRISE_BENCHMARK",
+        "concurrency_limit": 2,
+        "active_subagents": 1,
+        "status": "BURNING_CONSTRAINED",
+        "quota_status": "88.5% burned",
+        "usage_pct": 88.5,
+        "burned_pct": 88.5,
+        "limit_tpm": 30000,
+        "used_tpm": 26550,
+        "remaining_tpm": 3450,
+        "window_duration_seconds": 60,
+        "remaining_seconds": 45,
+        "circuit_breaker": "BURNING_CONSTRAINED",
+        "allocated_tasks": [
+          "Pre-Reset Synthetic Stress Benchmark: TPM Exhaustion"
+        ]
+      },
+      "ollama": {
+        "id": "ollama",
+        "model": "ollama/anuu-hermes-3b",
+        "display_name": "Anuu Hermes 3B / Qwen 2.5 Local (Ollama)",
+        "role": "infinite local fallback",
+        "assigned_domain": "Sovereign Air-Gapped Ingestion & Fallback",
+        "tier": "LOCAL_SOVEREIGN",
+        "concurrency_limit": 8,
+        "active_subagents": 2,
+        "status": "ONLINE_INFINITE",
+        "quota_status": "infinite local fallback",
+        "usage_pct": 0.0,
+        "burned_pct": 0.0,
+        "cost_eur_per_1m": 0.0,
+        "endpoint": "http://127.0.0.1:11434",
+        "circuit_breaker": "UNLIMITED_GREEN",
+        "allocated_tasks": [
+          "Offline Vault Key Custody & Zero-Leak Sandbox",
+          "Sovereign Heartbeat Ingestion (189.89.619 Hz)"
+        ]
+      }
+    }
+  },
+  "hardware_nodes": {
+    "poco_node": {
+      "device_id": "295bad08",
+      "model": "Xiaomi POCO (24069PC21G)",
+      "architecture": "aarch64 / 8 Cores",
+      "status": "ONLINE_SYNCHRONIZED",
+      "battery": "100%",
+      "temperature": "23.0°C",
+      "role": "AUXILIARY_COMPUTE_OFFLOAD",
+      "active_subagents_offloaded": 2,
+      "offload_tasks": [
+        "Zstandard Parallel Block Compression",
+        "SHA-256 Batch Digest Worker"
+      ]
+    },
+    "local_host": {
+      "hostname": "kali-hearthstone",
+      "ollama_status": "ONLINE_READY",
+      "active_model": "anuu-3b:latest",
+      "available_models": [
+        "anuu-3b:latest",
+        "anuu-1b:latest",
+        "nous-hermes2-mixtral:latest",
+        "anuu-omega:latest",
+        "marduk-omega:latest",
+        "MemoriaAncestral:latest"
+      ]
+    }
+  },
+  "burner_engine": {
+    "active": true,
+    "burn_threshold_minutes": 20,
+    "last_burn_epoch": 1792912674.9746757,
+    "total_tokens_burned": 62200,
+    "burner_log": [
+      {
+        "timestamp": "2026-10-25T07:17:54.974697+00:00",
+        "provider": "openai",
+        "tasks_burned_count": 2,
+        "tokens_burned": 7200,
+        "reason": "PRE_RESET_BURNING",
+        "calibrated_usage_pct": 88.5,
+        "records": [
+          {
+            "task_id": "TASK-BENCH-003-674-2",
+            "title": "Benchmark Sintético: MMLU & Compresión Zstandard vs Snappy",
+            "type": "SYNTHETIC_BENCHMARK",
+            "tokens": 3800,
+            "completed_at": "2026-10-25T07:17:54.973805+00:00"
+          },
+          {
+            "task_id": "TASK-CODE-005-674-4",
+            "title": "Refactorización Asíncrona: Wrapper de Inferencia con Fallback a Ollama",
+            "type": "CODE_REFACTOR",
+            "tokens": 3400,
+            "completed_at": "2026-10-25T07:17:54.974648+00:00"
+          }
+        ]
+      },
+      {
+        "timestamp": "2026-10-25T06:42:51.785089+00:00",
+        "provider": "openai",
+        "tasks_burned_count": 5,
+        "tokens_burned": 23300,
+        "reason": "PRE_RESET_BURNING",
+        "records": [
+          {
+            "task_id": "TASK-TRANSL-002-567-1",
+            "title": "Traducción Seinen Quirúrgica: Glosario Goetiarot a Japonés/Inglés",
+            "type": "TRANSLATE_JA_EN",
+            "tokens": 5100,
+            "completed_at": "2026-10-25T06:42:51.783540+00:00"
+          },
+          {
+            "task_id": "TASK-BENCH-003-567-2",
+            "title": "Benchmark Sintético: MMLU & Compresión Zstandard vs Snappy",
+            "type": "SYNTHETIC_BENCHMARK",
+            "tokens": 3800,
+            "completed_at": "2026-10-25T06:42:51.783892+00:00"
+          },
+          {
+            "task_id": "TASK-AUDIT-004-567-3",
+            "title": "Auditoría Estática de Seguridad: Sanitización de Parámetros y Memory Leaks",
+            "type": "STATIC_AUDIT",
+            "tokens": 6200,
+            "completed_at": "2026-10-25T06:42:51.784257+00:00"
+          },
+          {
+            "task_id": "TASK-CODE-005-567-4",
+            "title": "Refactorización Asíncrona: Wrapper de Inferencia con Fallback a Ollama",
+            "type": "CODE_REFACTOR",
+            "tokens": 3400,
+            "completed_at": "2026-10-25T06:42:51.784631+00:00"
+          },
+          {
+            "task_id": "TASK-DOCS-006-567-5",
+            "title": "Manual de Resiliencia: Guía de Contingencia ante Caídas de Cloud LLM",
+            "type": "TECH_DOCS",
+            "tokens": 4800,
+            "completed_at": "2026-10-25T06:42:51.785058+00:00"
+          }
+        ]
+      },
+      {
+        "timestamp": "2026-10-25T06:42:47.648890+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 1,
+        "tokens_burned": 4200,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": [
+          {
+            "task_id": "TASK-DOCS-001-567-0",
+            "title": "Generación de Docs: Arquitectura Simbiótica Concilio ACE (161914)",
+            "type": "TECH_DOCS",
+            "tokens": 4200,
+            "completed_at": "2026-10-25T06:42:47.648852+00:00"
+          }
+        ]
+      },
+      {
+        "timestamp": "2026-10-25T06:18:30.315145+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 2,
+        "tokens_burned": 7200,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": [
+          {
+            "task_id": "TASK-BENCH-003",
+            "title": "Benchmark Sintético: MMLU & Compresión Zstandard vs Snappy",
+            "type": "SYNTHETIC_BENCHMARK",
+            "tokens": 3800,
+            "completed_at": "2026-10-25T06:18:30.304698+00:00"
+          },
+          {
+            "task_id": "TASK-CODE-005",
+            "title": "Refactorización Asíncrona: Wrapper de Inferencia con Fallback a Ollama",
+            "type": "CODE_REFACTOR",
+            "tokens": 3400,
+            "completed_at": "2026-10-25T06:18:30.315033+00:00"
+          }
+        ]
+      },
+      {
+        "timestamp": "2026-10-25T06:16:39.623826+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 0,
+        "tokens_burned": 0,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": []
+      },
+      {
+        "timestamp": "2026-10-25T06:16:36.669713+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 4,
+        "tokens_burned": 20300,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": [
+          {
+            "task_id": "TASK-DOCS-001",
+            "title": "Generación de Docs: Arquitectura Simbiótica Concilio ACE (161914)",
+            "type": "TECH_DOCS",
+            "tokens": 4200,
+            "completed_at": "2026-10-25T06:16:36.668853+00:00"
+          },
+          {
+            "task_id": "TASK-TRANSL-002",
+            "title": "Traducción Seinen Quirúrgica: Glosario Goetiarot a Japonés/Inglés",
+            "type": "TRANSLATE_JA_EN",
+            "tokens": 5100,
+            "completed_at": "2026-10-25T06:16:36.669172+00:00"
+          },
+          {
+            "task_id": "TASK-AUDIT-004",
+            "title": "Auditoría Estática de Seguridad: Sanitización de Parámetros y Memory Leaks",
+            "type": "STATIC_AUDIT",
+            "tokens": 6200,
+            "completed_at": "2026-10-25T06:16:36.669436+00:00"
+          },
+          {
+            "task_id": "TASK-DOCS-006",
+            "title": "Manual de Resiliencia: Guía de Contingencia ante Caídas de Cloud LLM",
+            "type": "TECH_DOCS",
+            "tokens": 4800,
+            "completed_at": "2026-10-25T06:16:36.669694+00:00"
+          }
+        ]
+      }
+    ]
+  },
+  "circuit_breaker": {
+    "active_failover_count": 2,
+    "last_event": {
+      "timestamp": "2026-10-25T06:16:30.822932+00:00",
+      "original_provider": "claude",
+      "fallback_provider": "local_sovereign",
+      "fallback_display_name": "Anuu 3B / Qwen 2.5 Local (Ollama)",
+      "reason": "Circuit Breaker ACTIVO por 429 Too Many Requests (HTTP 429: Too Many Requests / Rate limit exceeded).",
+      "prompt_snippet": "Auditoría de privacidad y soberanía de datos locales",
+      "zero_blocking_guaranteed": true
+    },
+    "event_history": [
+      {
+        "timestamp": "2026-10-25T06:16:30.822932+00:00",
+        "original_provider": "claude",
+        "fallback_provider": "local_sovereign",
+        "fallback_display_name": "Anuu 3B / Qwen 2.5 Local (Ollama)",
+        "reason": "Circuit Breaker ACTIVO por 429 Too Many Requests (HTTP 429: Too Many Requests / Rate limit exceeded).",
+        "prompt_snippet": "Auditoría de privacidad y soberanía de datos locales",
+        "zero_blocking_guaranteed": true
+      },
+      {
+        "timestamp": "2026-10-25T06:16:27.345059+00:00",
+        "original_provider": "claude",
+        "fallback_provider": "gemini",
+        "fallback_display_name": "Google Gemini 1.5 Flash",
+        "reason": "Circuit Breaker ACTIVO por 429 Too Many Requests (HTTP 429: Too Many Requests / Rate limit exceeded).",
+        "prompt_snippet": "Genera una función Rust para cifrado ChaCha20",
+        "zero_blocking_guaranteed": true
+      }
+    ]
+  },
+  "queue_summary": {
+    "total_tasks": 22,
+    "pending_count": 8,
+    "burned_count": 14,
+    "sample_pending": [
+      {
+        "id": "TASK-DOCS-001-674-0",
+        "title": "Generación de Docs: Arquitectura Simbiótica Concilio ACE (161914)",
+        "type": "TECH_DOCS",
+        "target_llm": "claude-3-5-sonnet",
+        "tokens": 4200,
+        "priority": "HIGH",
+        "status": "QUEUED",
+        "prompt_preview": "Redacta especificación técnica sobre sincronía de nodos POCO y balanceo de carga en microservicios soberanos."
+      },
+      {
+        "id": "TASK-TRANSL-002-674-1",
+        "title": "Traducción Seinen Quirúrgica: Glosario Goetiarot a Japonés/Inglés",
+        "type": "TRANSLATE_JA_EN",
+        "target_llm": "claude-3-5-sonnet",
+        "tokens": 5100,
+        "priority": "HIGH",
+        "status": "QUEUED",
+        "prompt_preview": "Translate canonical lore from Spanish to literary Seinen Japanese with psychological depth and zero corporate tone."
+      },
+      {
+        "id": "TASK-AUDIT-004-674-3",
+        "title": "Auditoría Estática de Seguridad: Sanitización de Parámetros y Memory Leaks",
+        "type": "STATIC_AUDIT",
+        "target_llm": "claude-3-5-sonnet",
+        "tokens": 6200,
+        "priority": "CRITICAL",
+        "status": "QUEUED",
+        "prompt_preview": "Analiza patrones de reentrancy y buffer overflow en conectores de base de datos asíncronos."
+      },
+      {
+        "id": "TASK-DOCS-006-674-5",
+        "title": "Manual de Resiliencia: Guía de Contingencia ante Caídas de Cloud LLM",
+        "type": "TECH_DOCS",
+        "target_llm": "claude-3-5-sonnet",
+        "tokens": 4800,
+        "priority": "HIGH",
+        "status": "QUEUED",
+        "prompt_preview": "Crea guía operativa paso a paso para conmutación de tráfico a modelos locales vLLM/Ollama durante caídas globales de OpenAI/Anthropic."
+      }
+    ]
+  }
+}

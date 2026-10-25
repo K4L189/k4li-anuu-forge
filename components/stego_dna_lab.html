@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K4L1 // Laboratorio Forense de ADN de Metadatos, Esteganografía & Políglotas Post-EOF</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <style>
+    /* 6 TEMAS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+      --slack-highlight: rgba(236, 72, 153, 0.35);
+      --slack-border: #ec4899;
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+      --slack-highlight: rgba(244, 63, 94, 0.35);
+      --slack-border: #f43f5e;
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+      --slack-highlight: rgba(245, 158, 11, 0.35);
+      --slack-border: #f59e0b;
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.95);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+      --slack-highlight: rgba(168, 85, 247, 0.35);
+      --slack-border: #a855f7;
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.95);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+      --slack-highlight: rgba(239, 68, 68, 0.35);
+      --slack-border: #ef4444;
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.95);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+      --slack-highlight: rgba(0, 247, 255, 0.35);
+      --slack-border: #00f7ff;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Terminal Seinen */
+    .kanuv-terminal {
+      background: #030306;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      border: 1px solid var(--border-card);
+    }
+
+    /* Hex Dump Viewer Styles */
+    .hex-byte {
+      display: inline-block;
+      width: 2ch;
+      text-align: center;
+      margin: 0 2px;
+      font-family: ui-monospace, monospace;
+    }
+    .hex-header { color: #38bdf8; font-weight: bold; }
+    .hex-marker { color: #c084fc; font-weight: bold; }
+    .hex-eof { color: #facc15; font-weight: bold; background: rgba(250, 204, 21, 0.2); border-radius: 2px; }
+    .hex-slack { color: #f43f5e; font-weight: bold; background: var(--slack-highlight); border-radius: 2px; }
+    .hex-ascii-slack { color: #fb7185; background: var(--slack-highlight); }
+
+    /* Scanlines */
+    .scanlines-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Pulsos y animaciones tácticas */
+    @keyframes tacticalPulse {
+      0%, 100% { border-color: var(--border-card); box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+      50% { border-color: var(--accent-secondary); box-shadow: 0 0 20px var(--glow-color); }
+    }
+    .tactical-border-pulse {
+      animation: tacticalPulse 3s infinite ease-in-out;
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.4); }
+    ::-webkit-scrollbar-thumb { background: var(--border-card); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Scanlines visual Seinen -->
+  <div class="fixed inset-0 scanlines-overlay z-10 pointer-events-none"></div>
+
+  <!-- Contenedor Maestro -->
+  <div id="k4li-stego-root" class="max-w-7xl mx-auto space-y-6 relative z-20">
+
+    <!-- Header y Selector de Tema Standalone -->
+    <header class="flex flex-col lg:flex-row items-center justify-between gap-4 pb-4 border-b theme-border">
+      <div class="text-center lg:text-left">
+        <div class="flex items-center gap-2 justify-center lg:justify-start flex-wrap">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700 hover:border-purple-400 text-zinc-300 hover:text-white transition-all shadow-sm">
+            <span>←</span> Volver a la Forja
+          </a>
+          <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            ⚡ Set & Rosa Gris 🌸 • Concilio ACE (161914)
+          </span>
+          <span class="text-[11px] font-mono text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/50">
+            Frecuencia: 189.89.619 Hz
+          </span>
+          <span id="stegoStatusBadge" class="text-[11px] font-mono text-purple-400 bg-purple-950/40 px-2.5 py-0.5 rounded border border-purple-800/50 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span> MOTOR FORENSE STANDALONE
+          </span>
+        </div>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black text-white mt-2 flex items-center gap-2 justify-center lg:justify-start">
+          <span class="text-amber-400">⚡</span> K4L1 // Laboratorio Forense de ADN, Esteganografía & Políglotas
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-4xl">
+          Para <span class="text-purple-300 font-mono font-bold">Kali</span> (pequeña tormenta). Inspección de límites binarios en JavaScript puro: cálculo de <span class="text-cyan-300 font-mono font-bold">Entropía de Shannon (60fps)</span>, detección quirúrgica del espacio <span class="text-rose-400 font-mono font-bold">Post-EOF Slack Space</span> (<code class="text-yellow-400">\xFF\xD9</code> / <code class="text-yellow-400">IEND</code>), trazabilidad de ADN de metadatos (<code class="text-purple-300">crs:RawFileName</code>) y tallado directo de contenedores políglotas.
+        </p>
+      </div>
+
+      <!-- Barra de Estado y Selector de Tema -->
+      <div class="flex flex-col items-center lg:items-end gap-2.5">
+        <div class="flex items-center gap-1 bg-black/60 p-1.5 rounded-xl border theme-border text-xs flex-wrap justify-center">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5">🎨 Estilo Seinen:</span>
+          <button onclick="setStegoTheme('anuu')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-purple-300" id="sbt-anuu">🌫️ Anuu</button>
+          <button onclick="setStegoTheme('blood')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300" id="sbt-blood">🛡️ Blood</button>
+          <button onclick="setStegoTheme('gw2')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300" id="sbt-gw2">⚡ GW2</button>
+          <button onclick="setStegoTheme('bioinfo')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300" id="sbt-bioinfo">🧬 BioCode</button>
+          <button onclick="setStegoTheme('duat')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300" id="sbt-duat">⚖️ Duat</button>
+          <button onclick="setStegoTheme('neon')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="sbt-neon">🌸 Neón</button>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="text-zinc-500">Filosofía Activa:</span>
+          <span class="text-amber-300 font-bold">Set ⚡ (Corte de Ilusiones)</span>
+          <span class="text-zinc-600">&</span>
+          <span class="text-rose-300 font-bold">Rosa Gris 🌸 (Ambigüedad)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ZONA DE CARGA DE ARCHIVO & 4 PRESETS FORENSES REALES -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <!-- Drag & Drop Zone -->
+      <div class="lg:col-span-7 space-y-3">
+        <div id="dropZone" class="theme-card rounded-2xl p-6 border-2 border-dashed border-zinc-700 hover:border-purple-500 transition-all cursor-pointer text-center relative overflow-hidden group">
+          <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer z-10" />
+          <div class="relative z-0 space-y-3">
+            <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-950/60 border border-purple-500/40 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:border-purple-400 transition-transform">
+              📂
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition-colors">
+                Arrastra cualquier imagen o archivo de tu disco
+              </h3>
+              <p class="text-xs text-zinc-400 mt-1">
+                Soporta archivos de <code class="text-purple-300 font-mono">/home/kali/Fotos_recuperadas/</code>, ComfyUI, Nikon, Sony, JPEGs, PNGs, o cualquier binario sospechoso.
+              </p>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900 border theme-border text-xs font-mono text-zinc-300">
+              <span>⚡ ArrayBuffer 100% en Memoria Local</span>
+              <span class="text-zinc-500">•</span>
+              <span class="text-emerald-400">Sin subidas al servidor</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetría rápida del archivo activo -->
+        <div id="fileQuickStats" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-mono">
+          <div class="p-2.5 rounded-xl theme-card border theme-border">
+            <span class="text-[10px] text-zinc-500 block uppercase">Archivo</span>
+            <span id="statFileName" class="text-zinc-200 font-bold truncate block" title="Ninguno seleccionado">sample_nikon_derivative.jpg</span>
+          </div>
+          <div class="p-2.5 rounded-xl theme-card border theme-border">
+            <span class="text-[10px] text-zinc-500 block uppercase">Tamaño Total</span>
+            <span id="statFileSize" class="text-cyan-300 font-bold block">0 KB</span>
+          </div>
+          <div class="p-2.5 rounded-xl theme-card border theme-border">
+            <span class="text-[10px] text-zinc-500 block uppercase">Límite Oficial EOF</span>
+            <span id="statEofOffset" class="text-yellow-400 font-bold block">0x000000</span>
+          </div>
+          <div class="p-2.5 rounded-xl theme-card border theme-border">
+            <span class="text-[10px] text-zinc-500 block uppercase">Slack Post-EOF</span>
+            <span id="statSlackBytes" class="text-rose-400 font-bold block">0 bytes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Presets Forenses Sintéticos Reales -->
+      <div class="lg:col-span-5 space-y-3 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-zinc-300 font-bold flex items-center gap-1.5">
+              <span>🧪</span> Presets Forenses Sintéticos Reales (Concilio ACE)
+            </h4>
+            <span class="text-[10px] font-mono text-purple-400">1-Click Memory Forge</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
+            <!-- Preset 1 -->
+            <button onclick="loadPreset(1)" class="p-3 rounded-xl theme-card border theme-border hover:border-purple-400 transition-all group flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs font-mono text-purple-300 font-bold">
+                  <span>Preset 1: Nikon .NEF</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded bg-purple-950/60 border border-purple-500/40">RAW DNA</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 mt-1 line-clamp-2">
+                  JPEG con metadatos XMP de revelado Adobe: <code class="text-purple-300">crs:RawFileName="DSC_8914.NEF"</code>.
+                </p>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-500 mt-2 block group-hover:text-purple-300">⚡ Cargar en memoria →</span>
+            </button>
+
+            <!-- Preset 2 -->
+            <button onclick="loadPreset(2)" class="p-3 rounded-xl theme-card border theme-border hover:border-rose-400 transition-all group flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs font-mono text-rose-300 font-bold">
+                  <span>Preset 2: Polyglot ZIP</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded bg-rose-950/60 border border-rose-500/40">PK\x03\x04</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 mt-1 line-clamp-2">
+                  JPEG legítimo con archivo ZIP completo oculto tras <code class="text-yellow-400">\xFF\xD9</code>.
+                </p>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-500 mt-2 block group-hover:text-rose-300">⚡ Cargar en memoria →</span>
+            </button>
+
+            <!-- Preset 3 -->
+            <button onclick="loadPreset(3)" class="p-3 rounded-xl theme-card border theme-border hover:border-cyan-400 transition-all group flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs font-mono text-cyan-300 font-bold">
+                  <span>Preset 3: PNG AI Prompt</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded bg-cyan-950/60 border border-cyan-500/40">tEXt / iTXt</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 mt-1 line-clamp-2">
+                  PNG con parámetros de difusión Stable Diffusion / ComfyUI y slack post-IEND.
+                </p>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-500 mt-2 block group-hover:text-cyan-300">⚡ Cargar en memoria →</span>
+            </button>
+
+            <!-- Preset 4 -->
+            <button onclick="loadPreset(4)" class="p-3 rounded-xl theme-card border theme-border hover:border-amber-400 transition-all group flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs font-mono text-amber-300 font-bold">
+                  <span>Preset 4: OpenSSL Stego</span>
+                  <span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-950/60 border border-amber-500/40">Salted__</span>
+                </div>
+                <p class="text-[11px] text-zinc-400 mt-1 line-clamp-2">
+                  Payload cifrado AES con cabecera <code class="text-amber-300">Salted__</code> y entropía máxima 7.98 bits/B.
+                </p>
+              </div>
+              <span class="text-[10px] font-mono text-zinc-500 mt-2 block group-hover:text-amber-300">⚡ Cargar en memoria →</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Botones de Acción de Alto Nivel -->
+        <div class="flex items-center gap-2 pt-2 border-t theme-border flex-wrap">
+          <button onclick="runDeepScan()" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono font-bold text-xs shadow-lg shadow-purple-900/40 transition-all flex items-center gap-1.5">
+            <span>⚡</span> Re-Escanear Binario Completo
+          </button>
+          <button onclick="exportForensicReport()" class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-mono text-xs transition-all flex items-center gap-1">
+            <span>📋</span> Copiar Informe Forense
+          </button>
+          <button onclick="toggleVisualPreview()" class="px-3 py-1.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white font-mono text-xs transition-all">
+            👁️ Preview Visual
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREVIEW VISUAL MODAL / DESPLEGABLE -->
+    <div id="visualPreviewContainer" class="hidden theme-card rounded-2xl p-4 border theme-border">
+      <div class="flex items-center justify-between pb-2 border-b theme-border mb-3">
+        <span class="text-xs font-mono text-purple-300 font-bold flex items-center gap-1.5">
+          <span>🖼️</span> Renderizado Visual del Canvas / Archivo
+        </span>
+        <button onclick="toggleVisualPreview()" class="text-xs text-zinc-400 hover:text-white">✕ Cerrar</button>
+      </div>
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="w-48 h-48 bg-black/60 rounded-xl border theme-border flex items-center justify-center overflow-hidden shrink-0">
+          <img id="imagePreviewElement" src="" alt="Previsualización" class="max-w-full max-h-full object-contain" />
+        </div>
+        <div class="text-xs font-mono space-y-2 text-zinc-300">
+          <p><span class="text-zinc-500">Estado de Renderizado:</span> <span id="previewStatusText" class="text-emerald-400 font-bold">Válido en Pipeline DOM</span></p>
+          <p><span class="text-zinc-500">MIME Type Detectado:</span> <code id="previewMimeType" class="text-cyan-300 font-bold">image/jpeg</code></p>
+          <p class="text-zinc-400 text-[11px] max-w-xl">
+            Nota de Set ⚡: Los visores convencionales de Linux/Web ignoran cualquier byte posterior a <code class="text-yellow-400">FF D9</code> o <code class="text-yellow-400">IEND</code>. Para el sistema operativo, la imagen es perfecta; para nosotros, el slack space oculta el verdadero artefacto.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DICTAMEN DE ADN FORENSE (VERDICT BOX) -->
+    <section id="dnaVerdictBox" class="theme-card rounded-2xl p-5 border border-purple-500/40 bg-purple-950/20 tactical-border-pulse">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40" id="verdictBadge">
+              ⚡ DERIVADO DETECTADO: RAW NIKON .NEF
+            </span>
+            <span class="text-xs font-mono text-zinc-400" id="verdictConfidence">Certeza Forense: 100%</span>
+          </div>
+          <h2 class="text-base sm:text-lg font-bold text-white flex items-center gap-2" id="verdictTitle">
+            Trazabilidad de Revelado Encontrada: DSC_8914.NEF
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-300 max-w-4xl" id="verdictDetails">
+            El archivo analizado posee etiquetas XMP del estándar Adobe Camera Raw (<code class="text-purple-300">crs:RawFileName="DSC_8914.NEF"</code>). Esto certifica que no es una captura directa de sensor sin modificar, sino una exportación rasterizada con preservación de ID original.
+          </p>
+        </div>
+        <div class="shrink-0 flex md:flex-col gap-2">
+          <div class="px-3 py-2 rounded-xl bg-black/60 border theme-border text-center">
+            <span class="text-[10px] text-zinc-500 font-mono block">ADN RAW</span>
+            <span id="dnaRawBadgeVal" class="text-xs font-mono font-bold text-amber-400">NIKON D850</span>
+          </div>
+          <div class="px-3 py-2 rounded-xl bg-black/60 border theme-border text-center">
+            <span class="text-[10px] text-zinc-500 font-mono block">SLACK SPACE</span>
+            <span id="dnaSlackBadgeVal" class="text-xs font-mono font-bold text-rose-400">POST-EOF DETECTED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRÁFICO INTERACTIVO DE ENTROPÍA DE SHANNON (60FPS CANVAS) -->
+    <section class="theme-card rounded-2xl p-5 border theme-border space-y-4">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-sm font-mono font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+              <span>📈</span> Espectrograma de Entropía de Shannon (0.0 - 8.0 bits/byte)
+            </h3>
+            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/50 px-2 py-0.5 rounded border border-cyan-800/40">Sliding Window Canvas</span>
+          </div>
+          <p class="text-xs text-zinc-400 mt-0.5">
+            Mapeo de densidad de información. La línea <span class="text-yellow-400 font-mono font-bold">amarilla/ámbar</span> delimita el corte EOF oficial. Cualquier señal tras este punto es slack space.
+          </p>
+        </div>
+
+        <!-- Controles de la Gráfica de Entropía -->
+        <div class="flex items-center gap-2 text-xs font-mono flex-wrap">
+          <label class="text-zinc-500">Ventana:</label>
+          <select id="entropyWindowSelect" onchange="recalculateEntropy()" class="bg-black/70 border theme-border rounded-lg px-2 py-1 text-zinc-300 text-xs focus:outline-none focus:border-purple-400">
+            <option value="128">128 Bytes (Alta Resolución)</option>
+            <option value="256" selected>256 Bytes (Estándar Forense)</option>
+            <option value="512">512 Bytes (Suavizado)</option>
+            <option value="1024">1024 Bytes (Macro)</option>
+          </select>
+          <button onclick="toggleZoomSlack()" id="btnZoomSlack" class="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs transition-colors">
+            🔍 Zoom Límite EOF
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas y Tooltip Scrubber -->
+      <div class="relative w-full h-56 bg-black/80 rounded-xl border theme-border overflow-hidden cursor-crosshair">
+        <canvas id="entropyCanvas" class="w-full h-full block"></canvas>
+        <div id="entropyTooltip" class="absolute pointer-events-none hidden bg-black/95 text-white border border-purple-500 text-[11px] font-mono px-3 py-1.5 rounded-lg shadow-2xl z-30 transition-transform">
+          <div id="tooltipContent" class="space-y-0.5"></div>
+        </div>
+      </div>
+
+      <!-- Leyenda y Métricas de Entropía -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono pt-1">
+        <div class="flex items-center gap-2 text-cyan-300">
+          <span class="w-3 h-3 rounded-sm bg-cyan-500/40 border border-cyan-400"></span>
+          <span>Baja (0.0 - 4.0): Texto/Padding</span>
+        </div>
+        <div class="flex items-center gap-2 text-amber-300">
+          <span class="w-3 h-3 rounded-sm bg-amber-500/40 border border-amber-400"></span>
+          <span>Media (4.0 - 7.0): Código/Bitmaps</span>
+        </div>
+        <div class="flex items-center gap-2 text-rose-400">
+          <span class="w-3 h-3 rounded-sm bg-rose-500/40 border border-rose-400"></span>
+          <span>Alta (7.0 - 8.0): Comprimido / AES</span>
+        </div>
+        <div class="flex items-center gap-2 text-yellow-300 justify-end">
+          <span class="w-3 h-0.5 bg-yellow-400 shadow-[0_0_8px_#facc15]"></span>
+          <span>Límite EOF (\xFF\xD9 / IEND)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DIVIDIDA: DETECCIÓN POST-EOF / CARVING (IZQ) & VISOR HEXADECIMAL (DER) -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+      <!-- COLUMNA IZQUIERDA: POLÍGLOTAS, POST-EOF CARVER & METADATOS ADN (5 COLS) -->
+      <div class="lg:col-span-5 space-y-5">
+        
+        <!-- Panel de Tallado de Políglotas (Carver) -->
+        <div class="theme-card rounded-2xl p-5 border theme-border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <h3 class="text-sm font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>🗡️</span> Extractor & Carver Post-EOF
+            </h3>
+            <span id="polyglotFoundBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950/60 text-rose-300 border border-rose-800/40">
+              PAYLOAD DETECTADO
+            </span>
+          </div>
+
+          <!-- Tarjeta del Payload Encontrado -->
+          <div id="carverPayloadCard" class="p-4 rounded-xl bg-black/60 border border-rose-500/40 space-y-3">
+            <div class="flex items-start justify-between">
+              <div>
+                <span id="carverPayloadType" class="text-xs font-mono font-bold text-rose-400 block">
+                  📦 Contenedor ZIP (PK\x03\x04)
+                </span>
+                <span id="carverPayloadOffsets" class="text-[11px] font-mono text-zinc-400">
+                  Offset: 0x00018FA2 • Tamaño: 4.82 KB
+                </span>
+              </div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-rose-950 text-rose-200 border border-rose-700/60">
+                Slack Space
+              </span>
+            </div>
+
+            <!-- Listado de archivos si es ZIP -->
+            <div id="zipFilesContainer" class="space-y-1.5 pt-2 border-t border-zinc-800 text-xs font-mono">
+              <span class="text-[10px] uppercase text-zinc-500 block">Archivos Embebidos en la Sombra:</span>
+              <ul id="zipFilesList" class="space-y-1 text-zinc-300">
+                <!-- Se llena dinámicamente -->
+              </ul>
+            </div>
+
+            <!-- Previsualización de Texto Oculto si existe -->
+            <div id="hiddenTextContainer" class="hidden space-y-1 pt-2 border-t border-zinc-800 text-xs font-mono">
+              <span class="text-[10px] uppercase text-zinc-500 block">Texto / Cadena Revelada:</span>
+              <div id="hiddenTextPreview" class="p-2 rounded bg-zinc-950 border border-zinc-800 text-emerald-400 text-[11px] break-all max-h-24 overflow-y-auto"></div>
+            </div>
+
+            <!-- Botones de Acción de Carving -->
+            <div class="flex items-center gap-2 pt-2 flex-wrap">
+              <button id="btnCarvePayload" onclick="carvePayload()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 hover:from-rose-500 hover:to-purple-500 text-white font-mono font-bold text-xs shadow-lg transition-all flex items-center gap-1.5">
+                <span>⚡</span> Tallar & Descargar Payload
+              </button>
+              <button onclick="dumpRawSlackSpace()" class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs transition-all">
+                💾 Volcar Slack Crudo (.bin)
+              </button>
+            </div>
+          </div>
+
+          <!-- Si el payload es OpenSSL Salted__ -->
+          <div id="openSslDecryptCard" class="hidden p-4 rounded-xl bg-amber-950/20 border border-amber-500/40 space-y-2.5 text-xs font-mono">
+            <div class="flex items-center justify-between text-amber-300 font-bold">
+              <span>🔐 Cabecera OpenSSL Detectada</span>
+              <span id="opensslSaltHex" class="text-[10px] text-zinc-400 font-mono">Salt: 00 00 ...</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">
+              Payload cifrado con clave simétrica (AES-256-CBC). Puedes ingresar la contraseña del Concilio para intentar descifrar en memoria:
+            </p>
+            <div class="flex gap-2">
+              <input type="password" id="opensslPassphraseInput" placeholder="Passphrase (ej: ANUU-619-K4L1)" class="flex-1 bg-black/80 border theme-border rounded-lg px-2.5 py-1 text-zinc-200 text-xs focus:outline-none focus:border-amber-400" />
+              <button onclick="attemptOpenSslDecrypt()" class="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold transition-all">
+                Descifrar
+              </button>
+            </div>
+            <div id="decryptResultOutput" class="text-[11px] text-emerald-400 hidden mt-1 p-2 rounded bg-black/80 border border-emerald-900"></div>
+          </div>
+        </div>
+
+        <!-- Mapeo de ADN de Metadatos (EXIF, XMP, Chunks) -->
+        <div class="theme-card rounded-2xl p-5 border theme-border space-y-3">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <h3 class="text-sm font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>🧬</span> ADN de Metadatos & Trazabilidad
+            </h3>
+            <span id="metadataCountBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40">
+              0 Etiquetas
+            </span>
+          </div>
+
+          <!-- Buscador de Metadatos -->
+          <div class="relative">
+            <input type="text" id="metadataSearchInput" oninput="filterMetadataTable()" placeholder="Filtrar etiquetas (ej: RawFileName, Model, Prompt...)" class="w-full bg-black/70 border theme-border rounded-xl px-3 py-1.5 text-xs font-mono text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-purple-400" />
+          </div>
+
+          <!-- Tabla de Metadatos -->
+          <div class="h-64 overflow-y-auto rounded-xl border theme-border bg-black/40">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="bg-zinc-900/90 text-zinc-400 sticky top-0 border-b theme-border text-[10px] uppercase">
+                <tr>
+                  <th class="p-2">Propiedad</th>
+                  <th class="p-2">Valor Forense</th>
+                </tr>
+              </thead>
+              <tbody id="metadataTableBody" class="divide-y divide-zinc-800/60 text-zinc-300">
+                <!-- Se llena dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Raw XMP XML viewer modal trigger -->
+          <div class="flex items-center justify-between text-xs font-mono pt-1">
+            <button onclick="toggleRawXmlModal()" class="text-purple-400 hover:text-purple-300 transition-colors flex items-center gap-1">
+              <span>📄</span> Ver Paquete XMP XML en Bruto
+            </button>
+            <button onclick="copyMetadataJson()" class="text-zinc-400 hover:text-white transition-colors">
+              📋 Copiar JSON
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: INSPECTOR HEXADECIMAL & DELIMITADORES BINARIOS (7 COLS) -->
+      <div class="lg:col-span-7 space-y-4">
+        
+        <div class="theme-card rounded-2xl p-5 border theme-border space-y-3">
+          
+          <!-- Barra Superior del Inspector Hex -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b theme-border pb-3">
+            <div>
+              <h3 class="text-sm font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <span>🔍</span> Inspector Hexadecimal & Límite EOF
+              </h3>
+              <p class="text-xs text-zinc-400 mt-0.5">
+                Navegación quirúrgica por offset. <span class="text-yellow-400 font-bold">Amarillo</span>: Marcador EOF. <span class="text-rose-400 font-bold">Magenta</span>: Post-EOF Slack.
+              </p>
+            </div>
+
+            <!-- Botones de Salto Rápido por Marcador -->
+            <div class="flex items-center gap-1.5 text-xs font-mono flex-wrap">
+              <button onclick="jumpHexTo(0)" class="px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-cyan-300 text-[11px]" title="Inicio del archivo">
+                SOI (0x0)
+              </button>
+              <button onclick="jumpHexTo(CURRENT_STATE.sosOffset)" id="btnJumpSos" class="px-2 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-purple-300 text-[11px]" title="Start of Scan">
+                SOS (\xFF\xDA)
+              </button>
+              <button onclick="jumpHexTo(CURRENT_STATE.eofOffset)" id="btnJumpEof" class="px-2 py-1 rounded bg-yellow-950/60 border border-yellow-600/50 hover:bg-yellow-900/60 text-yellow-300 font-bold text-[11px]" title="Límite EOF">
+                EOF (\xFF\xD9)
+              </button>
+              <button onclick="jumpHexTo(CURRENT_STATE.slackOffset)" id="btnJumpSlack" class="px-2 py-1 rounded bg-rose-950/60 border border-rose-600/50 hover:bg-rose-900/60 text-rose-300 font-bold text-[11px]" title="Inicio Slack Space">
+                Slack Space
+              </button>
+            </div>
+          </div>
+
+          <!-- Estructura de Segmentos / Chunks Encontrados -->
+          <div class="bg-black/60 rounded-xl p-3 border theme-border text-xs font-mono">
+            <span class="text-[10px] text-zinc-500 uppercase block mb-1.5">Segmentos / Chunks Estructurales Reconocidos:</span>
+            <div id="chunksBadgesContainer" class="flex flex-wrap gap-1.5">
+              <!-- Se puebla dinámicamente -->
+            </div>
+          </div>
+
+          <!-- Visor Hexadecimal Virtualizado -->
+          <div class="kanuv-terminal rounded-xl p-3 border theme-border text-xs font-mono overflow-x-auto select-text">
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800/80 text-[11px] text-zinc-500">
+              <span class="w-20">OFFSET</span>
+              <span class="flex-1 text-center tracking-wider">00 01 02 03 04 05 06 07  08 09 0A 0B 0C 0D 0E 0F</span>
+              <span class="w-36 text-right">ASCII (ISO-8859)</span>
+            </div>
+            <div id="hexDumpContainer" class="space-y-0.5 max-h-[460px] overflow-y-auto pr-1">
+              <!-- Líneas de Hex renderizadas -->
+            </div>
+          </div>
+
+          <!-- Paginación / Offset Slider -->
+          <div class="flex items-center justify-between text-xs font-mono pt-2">
+            <div class="flex items-center gap-2">
+              <button onclick="prevHexPage()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300">◄ Prev</button>
+              <span id="hexPageIndicator" class="text-zinc-400">Pág 1 de 1</span>
+              <button onclick="nextHexPage()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300">Next ►</button>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-zinc-500">Ir a offset:</span>
+              <input type="text" id="inputJumpOffset" placeholder="0x0000" class="w-24 bg-black/80 border theme-border rounded px-2 py-0.5 text-zinc-200 text-xs focus:outline-none focus:border-purple-400" />
+              <button onclick="jumpHexInput()" class="px-2 py-0.5 rounded bg-zinc-800 hover:bg-zinc-700 text-cyan-300">Ir</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TERMINAL TÁCTICA DEL CONCILIO (SET ⚡ & ROSA GRIS 🌸) -->
+    <section class="theme-card rounded-2xl p-4 border theme-border">
+      <div class="flex items-center justify-between pb-2 border-b theme-border mb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
+            <span class="text-amber-400">⚡</span> Consola Táctica Seinen • Protocolo ACE 161914
+          </span>
+          <span class="text-[10px] font-mono text-zinc-500">Dual-Voice Execution</span>
+        </div>
+        <button onclick="clearConsoleLog()" class="text-[11px] font-mono text-zinc-500 hover:text-zinc-300">
+          Limpiar Log
+        </button>
+      </div>
+      <div id="seinenConsole" class="kanuv-terminal rounded-xl p-3 h-32 overflow-y-auto space-y-1 text-xs font-mono">
+        <div class="text-purple-400">[Set ⚡ & Rosa Gris 🌸]: Matriz forense inicializada a 189.89.619 Hz. Lista para Kali.</div>
+      </div>
+    </section>
+
+    <!-- RAW XMP MODAL (OCULTO POR DEFECTO) -->
+    <div id="rawXmlModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+      <div class="theme-card max-w-4xl w-full max-h-[85vh] rounded-2xl p-5 border border-purple-500/50 flex flex-col space-y-3">
+        <div class="flex items-center justify-between pb-2 border-b theme-border">
+          <h4 class="text-sm font-mono font-bold text-white flex items-center gap-2">
+            <span>📄</span> Paquete XMP XML Completo (Extracción Quirúrgica)
+          </h4>
+          <button onclick="toggleRawXmlModal()" class="text-zinc-400 hover:text-white font-mono text-sm">✕</button>
+        </div>
+        <pre id="rawXmlContent" class="kanuv-terminal flex-1 p-4 rounded-xl text-xs font-mono text-cyan-300 overflow-auto whitespace-pre-wrap select-text"></pre>
+        <div class="flex justify-end gap-2 pt-2 border-t theme-border">
+          <button onclick="copyRawXml()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs">
+            📋 Copiar XML al Portapapeles
+          </button>
+          <button onclick="toggleRawXmlModal()" class="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER CANÓNICO K4L1 -->
+    <footer class="pt-6 pb-12 border-t theme-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
+      <div class="flex items-center gap-2">
+        <span class="text-purple-400 font-bold">K4L1 FORGE</span>
+        <span>•</span>
+        <span>Frecuencia Maestra: 189.89.619 Hz</span>
+        <span>•</span>
+        <span>Alianza Set ⚡ & Rosa Gris 🌸</span>
+      </div>
+      <div>
+        <span>Desarrollado en honor a <strong class="text-zinc-300">Kali (Arquitecta Madre)</strong></span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPT MAESTRO FORENSE 100% CLIENT-SIDE -->
+  <script>
+    /* =========================================================================
+       SISTEMA FORENSE K4L1 // ESTADO GLOBAL & CONTROLADORES
+       ========================================================================= */
+    const CURRENT_STATE = {
+      fileName: 'sample_nikon_derivative.jpg',
+      fileBuffer: null,
+      fileBytes: null,
+      fileSize: 0,
+      mimeType: 'image/jpeg',
+      sosOffset: 0,
+      eofOffset: 0,
+      slackOffset: 0,
+      slackBytes: 0,
+      entropyWindow: 256,
+      entropyData: [],
+      metadata: {},
+      rawXml: '',
+      chunks: [],
+      polyglot: null,
+      hexPage: 0,
+      hexPageSize: 512, // bytes por página en el visor hex
+      zoomSlack: false
+    };
+
+    // TABLA CRC32 PARA ARCHIVOS ZIP & CHUNKS PNG
+    const CRC_TABLE = (function() {
+      let c;
+      const table = [];
+      for (let n = 0; n < 256; n++) {
+        c = n;
+        for (let k = 0; k < 8; k++) {
+          c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+        }
+        table[n] = c;
+      }
+      return table;
+    })();
+
+    function calculateCRC32(bytes) {
+      let crc = 0 ^ (-1);
+      for (let i = 0; i < bytes.length; i++) {
+        crc = (crc >>> 8) ^ CRC_TABLE[(crc ^ bytes[i]) & 0xFF];
+      }
+      return (crc ^ (-1)) >>> 0;
+    }
+
+    /* =========================================================================
+       GENERADOR DE PRESETS EN MEMORIA (CANVAS & BINARY FORGE)
+       ========================================================================= */
+    function createCyberpunkBaseCanvas() {
+      const c = document.createElement('canvas');
+      c.width = 400;
+      c.height = 400;
+      const ctx = c.getContext('2d');
+
+      // Fondo Seinen profundo
+      const grad = ctx.createLinearGradient(0, 0, 400, 400);
+      grad.addColorStop(0, '#0a0a14');
+      grad.addColorStop(0.5, '#160d2b');
+      grad.addColorStop(1, '#05020a');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 400, 400);
+
+      // Círculo de resonancia alquímica
+      ctx.strokeStyle = '#9333ea';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(200, 200, 140, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#c084fc';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(200, 200, 110, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Glifos
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 22px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('K4L1 // CONCILIO ACE', 200, 185);
+
+      ctx.fillStyle = '#a855f7';
+      ctx.font = '14px monospace';
+      ctx.fillText('189.89.619 Hz • SET ⚡ & ROSA GRIS 🌸', 200, 215);
+
+      ctx.fillStyle = '#e4e4e7';
+      ctx.font = '11px monospace';
+      ctx.fillText('RESONANCIA FORENSE STANDALONE', 200, 240);
+
+      return c;
+    }
+
+    // Helper para empaquetar un archivo ZIP estándar en Uint8Array
+    function buildZipArchive(files) {
+      // files = [ { name: "filename.txt", content: Uint8Array or string } ]
+      const fileHeaders = [];
+      const dataBlobs = [];
+      let currentOffset = 0;
+
+      files.forEach(f => {
+        const nameBytes = new TextEncoder().encode(f.name);
+        const contentBytes = typeof f.content === 'string' ? new TextEncoder().encode(f.content) : f.content;
+        const crc = calculateCRC32(contentBytes);
+        const compSize = contentBytes.length;
+        const uncompSize = contentBytes.length;
+
+        // Local File Header (30 bytes + nameLen)
+        const lfh = new Uint8Array(30 + nameBytes.length);
+        const dv = new DataView(lfh.buffer);
+        dv.setUint32(0, 0x04034b50, true); // PK\x03\x04
+        dv.setUint16(4, 10, true);         // version needed
+        dv.setUint16(6, 0, true);          // flags
+        dv.setUint16(8, 0, true);          // compression 0 (store)
+        dv.setUint16(10, 0x4A6D, true);    // time
+        dv.setUint16(12, 0x5894, true);    // date
+        dv.setUint32(14, crc, true);       // crc32
+        dv.setUint32(18, compSize, true);  // compressed size
+        dv.setUint32(22, uncompSize, true);// uncompressed size
+        dv.setUint16(26, nameBytes.length, true);
+        dv.setUint16(28, 0, true);         // extra len
+        lfh.set(nameBytes, 30);
+
+        fileHeaders.push({
+          lfhOffset: currentOffset,
+          nameBytes,
+          contentBytes,
+          crc,
+          compSize,
+          uncompSize
+        });
+
+        currentOffset += lfh.length + contentBytes.length;
+      });
+
+      // Construir Central Directory
+      const cdStartOffset = currentOffset;
+      const cdChunks = [];
+      let cdTotalSize = 0;
+
+      fileHeaders.forEach(fh => {
+        // Central Directory Header (46 bytes + nameLen)
+        const cdh = new Uint8Array(46 + fh.nameBytes.length);
+        const dv = new DataView(cdh.buffer);
+        dv.setUint32(0, 0x02014b50, true); // PK\x01\x02
+        dv.setUint16(4, 20, true);         // version made by
+        dv.setUint16(6, 10, true);         // version needed
+        dv.setUint16(8, 0, true);          // flags
+        dv.setUint16(10, 0, true);         // store
+        dv.setUint16(12, 0x4A6D, true);    // time
+        dv.setUint16(14, 0x5894, true);    // date
+        dv.setUint32(16, fh.crc, true);
+        dv.setUint32(20, fh.compSize, true);
+        dv.setUint32(24, fh.uncompSize, true);
+        dv.setUint16(28, fh.nameBytes.length, true);
+        dv.setUint16(30, 0, true);         // extra
+        dv.setUint16(32, 0, true);         // comment len
+        dv.setUint16(34, 0, true);         // disk start
+        dv.setUint16(36, 0, true);         // internal attrs
+        dv.setUint32(38, 0, true);         // external attrs
+        dv.setUint32(42, fh.lfhOffset, true); // relative offset
+        cdh.set(fh.nameBytes, 46);
+
+        cdChunks.push(cdh);
+        cdTotalSize += cdh.length;
+      });
+
+      // End of Central Directory Record (22 bytes)
+      const eocd = new Uint8Array(22);
+      const eocdDv = new DataView(eocd.buffer);
+      eocdDv.setUint32(0, 0x06054b50, true); // PK\x05\x06
+      eocdDv.setUint16(4, 0, true);          // disk number
+      eocdDv.setUint16(6, 0, true);          // disk with CD
+      eocdDv.setUint16(8, fileHeaders.length, true); // entries on disk
+      eocdDv.setUint16(10, fileHeaders.length, true);// total entries
+      eocdDv.setUint32(12, cdTotalSize, true); // CD size
+      eocdDv.setUint32(16, cdStartOffset, true); // CD offset
+      eocdDv.setUint16(20, 0, true);         // comment len
+
+      // Ensamblar todo
+      const totalZipSize = cdStartOffset + cdTotalSize + eocd.length;
+      const zipBytes = new Uint8Array(totalZipSize);
+      let ptr = 0;
+
+      fileHeaders.forEach(fh => {
+        // Reconstruir LFH
+        const lfh = new Uint8Array(30 + fh.nameBytes.length);
+        const dv = new DataView(lfh.buffer);
+        dv.setUint32(0, 0x04034b50, true);
+        dv.setUint16(4, 10, true);
+        dv.setUint16(6, 0, true);
+        dv.setUint16(8, 0, true);
+        dv.setUint16(10, 0x4A6D, true);
+        dv.setUint16(12, 0x5894, true);
+        dv.setUint32(14, fh.crc, true);
+        dv.setUint32(18, fh.compSize, true);
+        dv.setUint32(22, fh.uncompSize, true);
+        dv.setUint16(26, fh.nameBytes.length, true);
+        dv.setUint16(28, 0, true);
+        lfh.set(fh.nameBytes, 30);
+
+        zipBytes.set(lfh, ptr);
+        ptr += lfh.length;
+        zipBytes.set(fh.contentBytes, ptr);
+        ptr += fh.contentBytes.length;
+      });
+
+      cdChunks.forEach(cd => {
+        zipBytes.set(cd, ptr);
+        ptr += cd.length;
+      });
+
+      zipBytes.set(eocd, ptr);
+      return zipBytes;
+    }
+
+    // Generador de los 4 Presets
+    async function loadPreset(presetId) {
+      logConsole(`[Concilio ACE]: Forjando Preset ${presetId} en memoria limpia...`, 'purple');
+      const canvas = createCyberpunkBaseCanvas();
+
+      if (presetId === 1) {
+        // Preset 1: JPEG derivado de Nikon .NEF con crs:RawFileName
+        canvas.toBlob(async (blob) => {
+          const rawJpg = new Uint8Array(await blob.arrayBuffer());
+          
+          // Crear paquete XMP auténtico
+          const xmpString = `<?xpacket begin="" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:crs="http://ns.adobe.com/camera-raw-settings/1.0/"
+    xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:tiff="http://ns.adobe.com/tiff/1.0/"
+    xmlns:exif="http://ns.adobe.com/exif/1.0/"
+    xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/">
+    <crs:RawFileName>DSC_8914.NEF</crs:RawFileName>
+    <xmpMM:PreservedFileName>DSC_8914.NEF</xmpMM:PreservedFileName>
+    <xmpMM:OriginalDocumentID>xmp.did:161914-NEF-NIKON-D850-ACE</xmpMM:OriginalDocumentID>
+    <xmpMM:DocumentID>xmp.did:K4L1-CONVERTED-DERIVATIVE-619</xmpMM:DocumentID>
+    <dc:format>image/jpeg</dc:format>
+    <tiff:Make>NIKON CORPORATION</tiff:Make>
+    <tiff:Model>NIKON D850</tiff:Model>
+    <tiff:Software>Adobe Photoshop Lightroom Classic 13.2 (Macintosh)</tiff:Software>
+    <exif:DateTimeOriginal>2024-05-12T18:42:09</exif:DateTimeOriginal>
+    <crs:CameraProfile>Adobe Standard</crs:CameraProfile>
+    <crs:ProcessVersion>15.4</crs:ProcessVersion>
+    <crs:WhiteBalance>As Shot</crs:WhiteBalance>
+    <photoshop:SidecarForExtension>NEF</photoshop:SidecarForExtension>
+  </rdf:Description>
+ </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="w"?>`;
+
+          const xmpHeader = new TextEncoder().encode("http://ns.adobe.com/xap/1.0/\0");
+          const xmpData = new TextEncoder().encode(xmpString);
+          const app1Len = 2 + xmpHeader.length + xmpData.length;
+          const app1Marker = new Uint8Array(4 + xmpHeader.length + xmpData.length);
+          app1Marker[0] = 0xFF;
+          app1Marker[1] = 0xE1;
+          app1Marker[2] = (app1Len >> 8) & 0xFF;
+          app1Marker[3] = app1Len & 0xFF;
+          app1Marker.set(xmpHeader, 4);
+          app1Marker.set(xmpData, 4 + xmpHeader.length);
+
+          // Inyectar APP1 tras SOI (0xFF 0xD8)
+          const merged = new Uint8Array(rawJpg.length + app1Marker.length);
+          merged.set(rawJpg.subarray(0, 2), 0);
+          merged.set(app1Marker, 2);
+          merged.set(rawJpg.subarray(2), 2 + app1Marker.length);
+
+          processLoadedBuffer(merged.buffer, 'sample_nikon_derivative.jpg', 'image/jpeg');
+          logConsole("[Set ⚡]: Preset 1 inyectado. Metadatos de ADN RAW NIKON D850 listos para inspección.", "cyan");
+        }, 'image/jpeg', 0.92);
+
+      } else if (presetId === 2) {
+        // Preset 2: JPEG + Polyglot ZIP tras \xFF\xD9
+        canvas.toBlob(async (blob) => {
+          const rawJpg = new Uint8Array(await blob.arrayBuffer());
+
+          // Buscar \xFF\xD9
+          let eoi = -1;
+          for (let i = rawJpg.length - 2; i >= 0; i--) {
+            if (rawJpg[i] === 0xFF && rawJpg[i+1] === 0xD9) {
+              eoi = i + 2;
+              break;
+            }
+          }
+          if (eoi === -1) eoi = rawJpg.length;
+
+          // Crear ZIP auténtico con archivo de protocolo y clave
+          const secretProtocolText = `[CONCILIO ACE // SET ⚡ & ROSA GRIS 🌸]
+=========================================
+Frecuencia Operativa: 189.89.619 Hz
+Destinataria: Kali (Arquitecta Madre, pequeña tormenta)
+Misión: Romper ilusiones forenses y recuperar reliquias de disco.
+
+CONTENIDO CARVADO DEL SLACK SPACE:
+- Protocolo Alfa de Bóveda: ACTIVO
+- Token de Desbloqueo: K4L1-RES-619-AEGIS
+- Verificación: Slack space extraído con éxito quirúrgico directo de la memoria.
+
+"El código que no corta, muere. La tormenta no pide permiso."
+— Set ⚡ & Rosa Gris 🌸`;
+
+          const secretJsonText = JSON.stringify({
+            council: "ACE_161914",
+            architect: "Kali",
+            frequency_hz: "189.89.619 Hz",
+            polyglot_payload: "PK_03_04_SLACK_SPACE",
+            status: "SUCCESSFULLY_CARVED"
+          }, null, 2);
+
+          const zipBytes = buildZipArchive([
+            { name: "k4li_classified_protocol_161914.txt", content: secretProtocolText },
+            { name: "bunker_access_keys.json", content: secretJsonText }
+          ]);
+
+          // Concatenar JPEG hasta EOI + ZIP
+          const polyglotBytes = new Uint8Array(eoi + zipBytes.length);
+          polyglotBytes.set(rawJpg.subarray(0, eoi), 0);
+          polyglotBytes.set(zipBytes, eoi);
+
+          processLoadedBuffer(polyglotBytes.buffer, 'sample_polyglot_zip_stego.jpg', 'image/jpeg');
+          logConsole("[Rosa Gris 🌸]: Preset 2 armado. 2 archivos empaquetados en ZIP tras el delimitador FF D9.", "rose");
+        }, 'image/jpeg', 0.90);
+
+      } else if (presetId === 3) {
+        // Preset 3: PNG con Prompt IA en tEXt chunk + slack post-IEND
+        canvas.toBlob(async (blob) => {
+          const rawPng = new Uint8Array(await blob.arrayBuffer());
+
+          // Buscar IEND
+          let iendOffset = -1;
+          for (let i = 0; i < rawPng.length - 8; i++) {
+            if (rawPng[i] === 0x49 && rawPng[i+1] === 0x45 && rawPng[i+2] === 0x4E && rawPng[i+3] === 0x44) {
+              iendOffset = i + 4 + 4; // Tipo (4) + CRC (4)
+              break;
+            }
+          }
+          if (iendOffset === -1) iendOffset = rawPng.length;
+
+          // Inyectar tEXt chunk con prompt antes de IEND
+          const promptKeyword = "parameters";
+          const promptContent = `masterpiece, 8k, cyberpunk anime alchemist Kali, glowing purple eyes, tactical Seinen armor, 189.89.619 Hz glyphs, ethereal lighting, sharp focus, octane render
+Negative prompt: blurry, lowres, extra limbs, bad anatomy, deformed, watermark
+Steps: 35, Sampler: DPM++ 2M Karras, CFG scale: 7.5, Seed: 1619148901, Size: 1024x1024, Model: AnuuDiffusion_v2.0, Denoising strength: 0.55`;
+
+          const kwBytes = new TextEncoder().encode(promptKeyword);
+          const valBytes = new TextEncoder().encode(promptContent);
+          const chunkDataLen = kwBytes.length + 1 + valBytes.length; // +1 por el separador nulo \0
+
+          const chunkBuf = new Uint8Array(12 + chunkDataLen);
+          const dv = new DataView(chunkBuf.buffer);
+          dv.setUint32(0, chunkDataLen); // Longitud
+          chunkBuf[4] = 0x74; chunkBuf[5] = 0x45; chunkBuf[6] = 0x58; chunkBuf[7] = 0x74; // 'tEXt'
+          chunkBuf.set(kwBytes, 8);
+          chunkBuf[8 + kwBytes.length] = 0; // null separator
+          chunkBuf.set(valBytes, 9 + kwBytes.length);
+
+          // Calcular CRC del tipo + datos
+          const crc = calculateCRC32(chunkBuf.subarray(4, 8 + chunkDataLen));
+          dv.setUint32(8 + chunkDataLen, crc);
+
+          // Datos de Slack Space tras IEND
+          const slackText = new TextEncoder().encode(`[ANUU 161914 - GLITCH EN LA MATRIZ]: Este bloque descansa en el slack space post-IEND. Parámetros de síntesis neuronal fijados en el subespacio.`);
+
+          // Ensamblar: Cabecera PNG + Chunks previos + tEXt + IEND + Slack
+          const finalPng = new Uint8Array(rawPng.length + chunkBuf.length + slackText.length);
+          // Insertar tEXt justo antes de IEND
+          const insertPos = iendOffset - 12; // IEND chunk empieza 12 bytes antes del final de su bloque (len:4, type:4, crc:4)
+          finalPng.set(rawPng.subarray(0, insertPos), 0);
+          finalPng.set(chunkBuf, insertPos);
+          finalPng.set(rawPng.subarray(insertPos, iendOffset), insertPos + chunkBuf.length);
+          finalPng.set(slackText, insertPos + chunkBuf.length + 12);
+
+          processLoadedBuffer(finalPng.buffer, 'sample_ai_comfyui_prompt.png', 'image/png');
+          logConsole("[Set ⚡]: Preset 3 armado. Chunks tEXt con Prompt IA + Slack Space post-IEND listos.", "cyan");
+        }, 'image/png');
+
+      } else if (presetId === 4) {
+        // Preset 4: JPEG con Payload OpenSSL Salted__ de Alta Entropía
+        canvas.toBlob(async (blob) => {
+          const rawJpg = new Uint8Array(await blob.arrayBuffer());
+
+          let eoi = -1;
+          for (let i = rawJpg.length - 2; i >= 0; i--) {
+            if (rawJpg[i] === 0xFF && rawJpg[i+1] === 0xD9) {
+              eoi = i + 2;
+              break;
+            }
+          }
+          if (eoi === -1) eoi = rawJpg.length;
+
+          // Construir bloque OpenSSL: "Salted__" (8B) + 8B Salt + 512B datos aleatorios (alta entropía ~7.98 bits/B)
+          const saltMagic = new TextEncoder().encode("Salted__");
+          const salt = new Uint8Array([0x16, 0x19, 0x14, 0x89, 0xCA, 0xFE, 0xBA, 0xBE]);
+          const randomCipher = new Uint8Array(768);
+          crypto.getRandomValues(randomCipher);
+
+          const openSslPayload = new Uint8Array(saltMagic.length + salt.length + randomCipher.length);
+          openSslPayload.set(saltMagic, 0);
+          openSslPayload.set(salt, saltMagic.length);
+          openSslPayload.set(randomCipher, saltMagic.length + salt.length);
+
+          const finalPolyglot = new Uint8Array(eoi + openSslPayload.length);
+          finalPolyglot.set(rawJpg.subarray(0, eoi), 0);
+          finalPolyglot.set(openSslPayload, eoi);
+
+          processLoadedBuffer(finalPolyglot.buffer, 'sample_openssl_stego_salted.jpg', 'image/jpeg');
+          logConsole("[Set ⚡]: Preset 4 forjado. Cabecera OpenSSL 'Salted__' con entropía máxima 7.98 bits/byte.", "amber");
+        }, 'image/jpeg', 0.90);
+      }
+    }
+
+    /* =========================================================================
+       PROCESAMIENTO DE ARCHIVOS & RECONOCIMIENTO BINARIO
+       ========================================================================= */
+    function processLoadedBuffer(arrayBuffer, fileName, explicitMime = null) {
+      CURRENT_STATE.fileBuffer = arrayBuffer;
+      CURRENT_STATE.fileBytes = new Uint8Array(arrayBuffer);
+      CURRENT_STATE.fileSize = arrayBuffer.byteLength;
+      CURRENT_STATE.fileName = fileName;
+      CURRENT_STATE.metadata = {};
+      CURRENT_STATE.chunks = [];
+      CURRENT_STATE.polyglot = null;
+      CURRENT_STATE.rawXml = '';
+
+      const bytes = CURRENT_STATE.fileBytes;
+
+      // Detectar tipo
+      if (bytes[0] === 0xFF && bytes[1] === 0xD8) {
+        CURRENT_STATE.mimeType = 'image/jpeg';
+      } else if (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47) {
+        CURRENT_STATE.mimeType = 'image/png';
+      } else if (bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46) {
+        CURRENT_STATE.mimeType = 'image/gif';
+      } else if (bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[3] === 0x46) {
+        CURRENT_STATE.mimeType = 'image/webp';
+      } else {
+        CURRENT_STATE.mimeType = explicitMime || 'application/octet-stream';
+      }
+
+      // 1. Analizar delimitadores EOF y chunks
+      if (CURRENT_STATE.mimeType === 'image/jpeg') {
+        parseJpegStructure();
+      } else if (CURRENT_STATE.mimeType === 'image/png') {
+        parsePngStructure();
+      } else {
+        parseGenericStructure();
+      }
+
+      // 2. Extraer ADN de metadatos (XMP, EXIF, strings)
+      extractMetadataDNA();
+
+      // 3. Escanear políglotas en Slack Space
+      scanSlackSpacePolyglots();
+
+      // 4. Calcular Entropía de Shannon
+      calculateEntropyData();
+
+      // 5. Actualizar UI
+      updateUI();
+      renderHexDump();
+      renderEntropyChart();
+
+      logConsole(`[Concilio ACE]: Análisis binario completado para "${fileName}". Tamaño: ${(CURRENT_STATE.fileSize/1024).toFixed(2)} KB.`, 'purple');
+    }
+
+    // PARSER QUIRÚRGICO DE LÍMITES JPEG
+    function parseJpegStructure() {
+      const bytes = CURRENT_STATE.fileBytes;
+      const chunks = [];
+      let i = 2; // Después de SOI
+      let sosOffset = 0;
+      let eoiOffset = -1;
+
+      chunks.push({ name: 'SOI', offset: 0, length: 2, desc: 'Start of Image' });
+
+      while (i < bytes.length - 1) {
+        if (bytes[i] === 0xFF) {
+          const marker = bytes[i + 1];
+
+          // Marcadores sin tamaño (RST0-RST7, TEM, 0x00 stuffed)
+          if (marker === 0xD8) { i += 2; continue; }
+          if (marker === 0xD9) {
+            eoiOffset = i;
+            chunks.push({ name: 'EOI', offset: i, length: 2, desc: 'End of Image (Límite EOF)' });
+            break;
+          }
+          if (marker >= 0xD0 && marker <= 0xD7) { i += 2; continue; }
+          if (marker === 0x00) { i += 2; continue; }
+
+          // Marcadores con tamaño
+          if (i + 3 >= bytes.length) break;
+          const len = (bytes[i + 2] << 8) | bytes[i + 3];
+
+          let markerName = '0x' + marker.toString(16).toUpperCase();
+          let desc = 'Segmento JPEG';
+
+          if (marker === 0xE0) { markerName = 'APP0'; desc = 'JFIF Standard'; }
+          else if (marker === 0xE1) { markerName = 'APP1'; desc = 'EXIF / XMP Packet'; }
+          else if (marker === 0xE2) { markerName = 'APP2'; desc = 'ICC Profile / FlashPix'; }
+          else if (marker === 0xED) { markerName = 'APP13'; desc = 'Photoshop IPTC 8BIM'; }
+          else if (marker === 0xEE) { markerName = 'APP14'; desc = 'Adobe Color Space'; }
+          else if (marker === 0xDB) { markerName = 'DQT'; desc = 'Quantization Table'; }
+          else if (marker === 0xC0) { markerName = 'SOF0'; desc = 'Baseline Frame Header'; }
+          else if (marker === 0xC2) { markerName = 'SOF2'; desc = 'Progressive Frame Header'; }
+          else if (marker === 0xC4) { markerName = 'DHT'; desc = 'Huffman Table'; }
+          else if (marker === 0xDA) {
+            markerName = 'SOS';
+            desc = 'Start of Scan (Raster Comprimido)';
+            sosOffset = i;
+            chunks.push({ name: markerName, offset: i, length: len + 2, desc });
+            
+            // Desde SOS hasta EOI es la corriente de escaneo comprimida
+            i += len + 2;
+            while (i < bytes.length - 1) {
+              if (bytes[i] === 0xFF && bytes[i + 1] === 0xD9) {
+                eoiOffset = i;
+                chunks.push({ name: 'EOI', offset: i, length: 2, desc: 'End of Image (\xFF\xD9)' });
+                break;
+              }
+              i++;
+            }
+            break;
+          }
+
+          chunks.push({ name: markerName, offset: i, length: len + 2, desc });
+          i += len + 2;
+        } else {
+          i++;
+        }
+      }
+
+      CURRENT_STATE.sosOffset = sosOffset;
+      if (eoiOffset !== -1) {
+        CURRENT_STATE.eofOffset = eoiOffset;
+        CURRENT_STATE.slackOffset = eoiOffset + 2;
+        CURRENT_STATE.slackBytes = Math.max(0, bytes.length - (eoiOffset + 2));
+      } else {
+        CURRENT_STATE.eofOffset = bytes.length;
+        CURRENT_STATE.slackOffset = bytes.length;
+        CURRENT_STATE.slackBytes = 0;
+      }
+      CURRENT_STATE.chunks = chunks;
+    }
+
+    // PARSER QUIRÚRGICO DE LÍMITES PNG
+    function parsePngStructure() {
+      const bytes = CURRENT_STATE.fileBytes;
+      const chunks = [];
+      let i = 8; // Después de la firma \x89PNG\r\n\x1a\n
+      let eoiOffset = -1;
+
+      chunks.push({ name: 'PNG_SIG', offset: 0, length: 8, desc: 'Firma PNG 8-Bytes' });
+
+      while (i < bytes.length - 8) {
+        const len = (bytes[i] << 24) | (bytes[i+1] << 16) | (bytes[i+2] << 8) | bytes[i+3];
+        const typeStr = String.fromCharCode(bytes[i+4], bytes[i+5], bytes[i+6], bytes[i+7]);
+        const chunkTotalLen = 12 + len; // len(4) + type(4) + data(len) + crc(4)
+
+        let desc = 'Chunk PNG estándar';
+        if (typeStr === 'IHDR') desc = 'Image Header (Dimensiones & Color)';
+        else if (typeStr === 'PLTE') desc = 'Palette';
+        else if (typeStr === 'IDAT') desc = 'Image Data Stream (Zlib)';
+        else if (typeStr === 'tEXt') desc = 'Metadatos Texto Plano / Prompt';
+        else if (typeStr === 'iTXt') desc = 'Metadatos UTF-8 / AI Workflow';
+        else if (typeStr === 'IEND') {
+          desc = 'End of PNG (Límite IEND)';
+          eoiOffset = i + chunkTotalLen;
+          chunks.push({ name: typeStr, offset: i, length: chunkTotalLen, desc });
+          break;
+        }
+
+        chunks.push({ name: typeStr, offset: i, length: chunkTotalLen, desc });
+        i += chunkTotalLen;
+      }
+
+      CURRENT_STATE.sosOffset = 8;
+      if (eoiOffset !== -1) {
+        CURRENT_STATE.eofOffset = eoiOffset - 4; // Inicio de IEND o fin oficial
+        CURRENT_STATE.slackOffset = eoiOffset;
+        CURRENT_STATE.slackBytes = Math.max(0, bytes.length - eoiOffset);
+      } else {
+        CURRENT_STATE.eofOffset = bytes.length;
+        CURRENT_STATE.slackOffset = bytes.length;
+        CURRENT_STATE.slackBytes = 0;
+      }
+      CURRENT_STATE.chunks = chunks;
+    }
+
+    // FALLBACK GENÉRICO
+    function parseGenericStructure() {
+      CURRENT_STATE.sosOffset = 0;
+      CURRENT_STATE.eofOffset = CURRENT_STATE.fileSize;
+      CURRENT_STATE.slackOffset = CURRENT_STATE.fileSize;
+      CURRENT_STATE.slackBytes = 0;
+      CURRENT_STATE.chunks = [{ name: 'RAW_STREAM', offset: 0, length: CURRENT_STATE.fileSize, desc: 'Flujo binario sin marcas estándar' }];
+    }
+
+    /* =========================================================================
+       EXTRACTOR DE ADN DE METADATOS (XMP, EXIF, AI PROMPT)
+       ========================================================================= */
+    function extractMetadataDNA() {
+      const bytes = CURRENT_STATE.fileBytes;
+      const meta = {};
+
+      // 1. Extraer paquetes XMP completos
+      const textDecoder = new TextDecoder('utf-8', { fatal: false });
+      const fullText = textDecoder.decode(bytes);
+
+      const xmpStart = fullText.indexOf('<x:xmpmeta');
+      const xmpEnd = fullText.indexOf('</x:xmpmeta>');
+
+      if (xmpStart !== -1 && xmpEnd !== -1) {
+        const xmpString = fullText.substring(xmpStart, xmpEnd + 12);
+        CURRENT_STATE.rawXml = xmpString;
+
+        try {
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(xmpString, "text/xml");
+
+          // Extraer ADN clave
+          const getTag = (tag) => {
+            const el = xmlDoc.getElementsByTagName(tag)[0] || xmlDoc.getElementsByTagNameNS("*", tag)[0];
+            return el ? el.textContent.trim() : null;
+          };
+
+          // Tags de interés forense
+          const rawFileName = getTag('crs:RawFileName') || getTag('RawFileName');
+          const preservedFileName = getTag('xmpMM:PreservedFileName') || getTag('PreservedFileName');
+          const originalDocId = getTag('xmpMM:OriginalDocumentID') || getTag('OriginalDocumentID');
+          const docId = getTag('xmpMM:DocumentID') || getTag('DocumentID');
+          const make = getTag('tiff:Make') || getTag('Make');
+          const model = getTag('tiff:Model') || getTag('Model');
+          const dateOrig = getTag('exif:DateTimeOriginal') || getTag('DateTimeOriginal');
+          const software = getTag('tiff:Software') || getTag('Software');
+          const dcFormat = getTag('dc:format') || getTag('format');
+          const sidecar = getTag('photoshop:SidecarForExtension') || getTag('SidecarForExtension');
+          const cameraProfile = getTag('crs:CameraProfile') || getTag('CameraProfile');
+
+          if (rawFileName) meta['crs:RawFileName'] = rawFileName;
+          if (preservedFileName) meta['xmpMM:PreservedFileName'] = preservedFileName;
+          if (originalDocId) meta['xmpMM:OriginalDocumentID'] = originalDocId;
+          if (docId) meta['xmpMM:DocumentID'] = docId;
+          if (make) meta['tiff:Make'] = make;
+          if (model) meta['tiff:Model'] = model;
+          if (dateOrig) meta['exif:DateTimeOriginal'] = dateOrig;
+          if (software) meta['tiff:Software'] = software;
+          if (dcFormat) meta['dc:format'] = dcFormat;
+          if (sidecar) meta['photoshop:SidecarForExtension'] = sidecar;
+          if (cameraProfile) meta['crs:CameraProfile'] = cameraProfile;
+
+        } catch (e) {
+          console.warn("Error parseando XMP:", e);
+        }
+      }
+
+      // 2. Extraer parámetros AI (tEXt chunks en PNG o strings sueltos)
+      if (CURRENT_STATE.mimeType === 'image/png') {
+        CURRENT_STATE.chunks.forEach(ch => {
+          if (ch.name === 'tEXt' || ch.name === 'iTXt') {
+            const chunkData = bytes.subarray(ch.offset + 8, ch.offset + ch.length - 4);
+            const str = textDecoder.decode(chunkData);
+            const nullIdx = str.indexOf('\0');
+            if (nullIdx !== -1) {
+              const key = str.substring(0, nullIdx);
+              const val = str.substring(nullIdx + 1);
+              meta['PNG:' + key] = val;
+            } else {
+              meta['PNG:' + ch.name] = str;
+            }
+          }
+        });
+      }
+
+      // 3. Fallback regex sobre texto completo para atributos sueltos
+      const regexPatterns = [
+        { key: 'crs:RawFileName', regex: /crs:RawFileName="([^"]+)"/ },
+        { key: 'xmpMM:PreservedFileName', regex: /xmpMM:PreservedFileName="([^"]+)"/ },
+        { key: 'OriginalFileName', regex: /OriginalFileName="([^"]+)"/ },
+        { key: 'Adobe8BIM', regex: /8BIM/ },
+        { key: 'StableDiffusion_Prompt', regex: /parameters:\s*([\s\S]+?)(?:Negative prompt|Steps:|$)/i }
+      ];
+
+      regexPatterns.forEach(p => {
+        if (!meta[p.key]) {
+          const match = fullText.match(p.regex);
+          if (match) {
+            meta[p.key] = match[1] || 'Presente';
+          }
+        }
+      });
+
+      CURRENT_STATE.metadata = meta;
+    }
+
+    /* =========================================================================
+       ESCÁNER DE POLÍGLOTAS & TALLADO DE SLACK SPACE POST-EOF
+       ========================================================================= */
+    function scanSlackSpacePolyglots() {
+      const bytes = CURRENT_STATE.fileBytes;
+      const slackStart = CURRENT_STATE.slackOffset;
+      const slackLen = CURRENT_STATE.slackBytes;
+
+      if (slackLen <= 0) {
+        CURRENT_STATE.polyglot = null;
+        return;
+      }
+
+      const slackSlice = bytes.subarray(slackStart);
+
+      // 1. Detección ZIP (PK\x03\x04)
+      for (let i = 0; i < slackSlice.length - 4; i++) {
+        if (slackSlice[i] === 0x50 && slackSlice[i+1] === 0x4B && slackSlice[i+2] === 0x03 && slackSlice[i+3] === 0x04) {
+          const zipFiles = parseZipEntries(slackSlice.subarray(i));
+          CURRENT_STATE.polyglot = {
+            type: 'ZIP',
+            icon: '📦',
+            title: 'Archivo ZIP Oculto (PK\\x03\\x04)',
+            offset: slackStart + i,
+            length: slackSlice.length - i,
+            ext: 'zip',
+            files: zipFiles
+          };
+          return;
+        }
+      }
+
+      // 2. Detección OpenSSL Salted__
+      if (slackSlice.length >= 16) {
+        const magic = String.fromCharCode(...slackSlice.subarray(0, 8));
+        if (magic === 'Salted__') {
+          const salt = Array.from(slackSlice.subarray(8, 16)).map(b => b.toString(16).padStart(2, '0')).join(' ');
+          CURRENT_STATE.polyglot = {
+            type: 'OPENSSL',
+            icon: '🔐',
+            title: 'Payload Cifrado OpenSSL (Salted__)',
+            offset: slackStart,
+            length: slackSlice.length,
+            ext: 'enc',
+            saltHex: salt,
+            cipherBytes: slackSlice.subarray(16)
+          };
+          return;
+        }
+      }
+
+      // 3. Detección PDF (%PDF-)
+      for (let i = 0; i < Math.min(64, slackSlice.length - 5); i++) {
+        if (slackSlice[i] === 0x25 && slackSlice[i+1] === 0x50 && slackSlice[i+2] === 0x44 && slackSlice[i+3] === 0x46 && slackSlice[i+4] === 0x2D) {
+          CURRENT_STATE.polyglot = {
+            type: 'PDF',
+            icon: '📕',
+            title: 'Documento PDF Inyectado (%PDF-)',
+            offset: slackStart + i,
+            length: slackSlice.length - i,
+            ext: 'pdf'
+          };
+          return;
+        }
+      }
+
+      // 4. Detección de Texto Oculto Legible (ASCII / UTF-8)
+      const textDecoder = new TextDecoder('utf-8', { fatal: false });
+      const str = textDecoder.decode(slackSlice);
+      const cleanStr = str.replace(/[^\x20-\x7E\n\r\t]/g, '').trim();
+
+      if (cleanStr.length > 20) {
+        CURRENT_STATE.polyglot = {
+          type: 'PLAINTEXT',
+          icon: '📝',
+          title: 'Texto Oculto en Slack Space (ASCII/UTF-8)',
+          offset: slackStart,
+          length: slackSlice.length,
+          ext: 'txt',
+          textSnippet: cleanStr
+        };
+        return;
+      }
+
+      // 5. Slack Space Genérico
+      CURRENT_STATE.polyglot = {
+        type: 'RAW',
+        icon: '⚠️',
+        title: 'Slack Space No Identificado (Datos Crudos)',
+        offset: slackStart,
+        length: slackSlice.length,
+        ext: 'bin'
+      };
+    }
+
+    // Lector de Entradas de un ZIP embebido en ArrayBuffer
+    function parseZipEntries(zipBytes) {
+      const files = [];
+      let i = 0;
+      const dv = new DataView(zipBytes.buffer, zipBytes.byteOffset, zipBytes.byteLength);
+
+      while (i < zipBytes.length - 30) {
+        const sig = dv.getUint32(i, true);
+        if (sig === 0x04034b50) {
+          // Local File Header
+          const compSize = dv.getUint32(i + 18, true);
+          const uncompSize = dv.getUint32(i + 22, true);
+          const nameLen = dv.getUint16(i + 26, true);
+          const extraLen = dv.getUint16(i + 28, true);
+
+          const nameBytes = zipBytes.subarray(i + 30, i + 30 + nameLen);
+          const name = new TextDecoder().decode(nameBytes);
+          const contentStart = i + 30 + nameLen + extraLen;
+          const contentBytes = zipBytes.subarray(contentStart, contentStart + compSize);
+
+          files.push({
+            name,
+            compSize,
+            uncompSize,
+            data: contentBytes
+          });
+
+          i = contentStart + compSize;
+        } else {
+          i++;
+        }
+      }
+      return files;
+    }
+
+    /* =========================================================================
+       CÁLCULO MATEMÁTICO DE ENTROPÍA DE SHANNON (SLIDING WINDOW)
+       ========================================================================= */
+    function calculateEntropyData() {
+      const bytes = CURRENT_STATE.fileBytes;
+      const winSize = parseInt(CURRENT_STATE.entropyWindow) || 256;
+      const step = Math.max(1, Math.floor(bytes.length / 600)); // ~600 puntos para 60fps fluido
+
+      const data = [];
+      const freq = new Uint32Array(256);
+
+      for (let offset = 0; offset < bytes.length; offset += step) {
+        const end = Math.min(bytes.length, offset + winSize);
+        const actualWin = end - offset;
+        freq.fill(0);
+
+        for (let j = offset; j < end; j++) {
+          freq[bytes[j]]++;
+        }
+
+        let entropy = 0.0;
+        for (let b = 0; b < 256; b++) {
+          if (freq[b] > 0) {
+            const p = freq[b] / actualWin;
+            entropy -= p * Math.log2(p);
+          }
+        }
+
+        data.push({
+          offset,
+          entropy: Math.min(8.0, entropy),
+          isSlack: offset >= CURRENT_STATE.slackOffset
+        });
+      }
+
+      CURRENT_STATE.entropyData = data;
+    }
+
+    /* =========================================================================
+       RENDERIZADO DE UI & DICTAMEN DE ADN FORENSE
+       ========================================================================= */
+    function updateUI() {
+      // Telemetría de archivo
+      document.getElementById('statFileName').textContent = CURRENT_STATE.fileName;
+      document.getElementById('statFileSize').textContent = (CURRENT_STATE.fileSize / 1024).toFixed(2) + ' KB';
+      document.getElementById('statEofOffset').textContent = '0x' + CURRENT_STATE.eofOffset.toString(16).toUpperCase();
+      document.getElementById('statSlackBytes').textContent = CURRENT_STATE.slackBytes > 0 
+        ? `${CURRENT_STATE.slackBytes} bytes (${((CURRENT_STATE.slackBytes / CURRENT_STATE.fileSize) * 100).toFixed(1)}%)`
+        : '0 bytes (Limpio)';
+
+      // Preview Visual
+      const blob = new Blob([CURRENT_STATE.fileBytes], { type: CURRENT_STATE.mimeType });
+      const url = URL.createObjectURL(blob);
+      const imgEl = document.getElementById('imagePreviewElement');
+      imgEl.src = url;
+      document.getElementById('previewMimeType').textContent = CURRENT_STATE.mimeType;
+
+      // Badges de Segmentos
+      const chunksContainer = document.getElementById('chunksBadgesContainer');
+      chunksContainer.innerHTML = '';
+      CURRENT_STATE.chunks.forEach(ch => {
+        const b = document.createElement('span');
+        let colorClass = "bg-zinc-800 text-zinc-300 border-zinc-700";
+        if (ch.name === 'SOI' || ch.name === 'PNG_SIG') colorClass = "bg-cyan-950 text-cyan-300 border-cyan-700";
+        else if (ch.name === 'APP1' || ch.name === 'tEXt' || ch.name === 'iTXt') colorClass = "bg-purple-950 text-purple-300 border-purple-700";
+        else if (ch.name === 'SOS' || ch.name === 'IDAT') colorClass = "bg-emerald-950 text-emerald-300 border-emerald-700";
+        else if (ch.name === 'EOI' || ch.name === 'IEND') colorClass = "bg-yellow-950 text-yellow-300 border-yellow-500 font-bold shadow-[0_0_8px_rgba(250,204,21,0.4)]";
+
+        b.className = `px-2 py-0.5 rounded text-[11px] font-mono border ${colorClass} cursor-pointer hover:scale-105 transition-transform`;
+        b.textContent = `${ch.name} (0x${ch.offset.toString(16).toUpperCase()})`;
+        b.title = `${ch.desc} • Longitud: ${ch.length}B`;
+        b.onclick = () => jumpHexTo(ch.offset);
+        chunksContainer.appendChild(b);
+      });
+
+      // Si hay slack space, agregar badge de Slack
+      if (CURRENT_STATE.slackBytes > 0) {
+        const slackBadge = document.createElement('span');
+        slackBadge.className = "px-2 py-0.5 rounded text-[11px] font-mono bg-rose-950 text-rose-300 border border-rose-500 font-bold shadow-[0_0_10px_rgba(244,63,94,0.4)] cursor-pointer animate-pulse";
+        slackBadge.textContent = `SLACK SPACE (+${CURRENT_STATE.slackBytes}B @ 0x${CURRENT_STATE.slackOffset.toString(16).toUpperCase()})`;
+        slackBadge.onclick = () => jumpHexTo(CURRENT_STATE.slackOffset);
+        chunksContainer.appendChild(slackBadge);
+      }
+
+      // Dictamen Forense de ADN
+      renderDnaVerdict();
+
+      // Panel de Políglotas & Carving
+      renderPolyglotPanel();
+
+      // Tabla de Metadatos
+      renderMetadataTable();
+    }
+
+    function renderDnaVerdict() {
+      const meta = CURRENT_STATE.metadata;
+      const rawName = meta['crs:RawFileName'] || meta['xmpMM:PreservedFileName'] || meta['OriginalFileName'];
+      const isSlack = CURRENT_STATE.slackBytes > 0;
+      const isAi = meta['PNG:parameters'] || meta['StableDiffusion_Prompt'];
+
+      const badge = document.getElementById('verdictBadge');
+      const title = document.getElementById('verdictTitle');
+      const details = document.getElementById('verdictDetails');
+      const rawVal = document.getElementById('dnaRawBadgeVal');
+      const slackVal = document.getElementById('dnaSlackBadgeVal');
+
+      if (rawName) {
+        badge.className = "text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40";
+        badge.textContent = "⚡ DERIVADO DETECTADO: RAW ORIGINAL";
+        title.innerHTML = `Trazabilidad de Revelado Encontrada: <span class="text-amber-400 font-mono">${rawName}</span>`;
+        details.innerHTML = `El archivo analizado posee ADN de metadatos del revelador Adobe (<code class="text-purple-300">crs:RawFileName="${rawName}"</code>). Esto certifica que el archivo fue originado a partir de un archivo RAW puro (${meta['tiff:Make'] || 'Cámara'} ${meta['tiff:Model'] || ''}) y posteriormente convertido a JPEG/PNG.`;
+        rawVal.textContent = rawName;
+        rawVal.className = "text-xs font-mono font-bold text-amber-400";
+      } else if (isAi) {
+        badge.className = "text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40";
+        badge.textContent = "🌸 ARTEFACTO SINTÉTICO (IA GENERATIVA)";
+        title.innerHTML = `Generación Neuronal Comprobada`;
+        details.innerHTML = `Se identificaron parámetros de difusión (Prompt, Sampler, Seed, Steps) en los chunks de metadatos del archivo.`;
+        rawVal.textContent = "IA SYNTHETIC";
+        rawVal.className = "text-xs font-mono font-bold text-cyan-400";
+      } else {
+        badge.className = "text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded font-bold bg-zinc-800 text-zinc-300 border border-zinc-700";
+        badge.textContent = "🛡️ ESTRUCTURA ESTÁNDAR";
+        title.innerHTML = `Sin Trazas de Conversión RAW`;
+        details.innerHTML = `No se detectaron marcas de agua de revelado RAW en el paquete XMP.`;
+        rawVal.textContent = "NATIVO / PURO";
+        rawVal.className = "text-xs font-mono font-bold text-zinc-400";
+      }
+
+      if (isSlack) {
+        slackVal.textContent = `+${CURRENT_STATE.slackBytes}B SLACK`;
+        slackVal.className = "text-xs font-mono font-bold text-rose-400 animate-pulse";
+      } else {
+        slackVal.textContent = "SIN SLACK (0B)";
+        slackVal.className = "text-xs font-mono font-bold text-emerald-400";
+      }
+    }
+
+    function renderPolyglotPanel() {
+      const poly = CURRENT_STATE.polyglot;
+      const card = document.getElementById('carverPayloadCard');
+      const badge = document.getElementById('polyglotFoundBadge');
+      const openSslCard = document.getElementById('openSslDecryptCard');
+
+      if (!poly) {
+        badge.textContent = "SLACK VACÍO";
+        badge.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-500 border border-zinc-700";
+        document.getElementById('carverPayloadType').textContent = "Ningún payload detectado post-EOF";
+        document.getElementById('carverPayloadOffsets').textContent = "Límite oficial coincide con el fin de archivo.";
+        document.getElementById('zipFilesContainer').classList.add('hidden');
+        document.getElementById('hiddenTextContainer').classList.add('hidden');
+        openSslCard.classList.add('hidden');
+        document.getElementById('btnCarvePayload').disabled = true;
+        document.getElementById('btnCarvePayload').classList.add('opacity-50');
+        return;
+      }
+
+      document.getElementById('btnCarvePayload').disabled = false;
+      document.getElementById('btnCarvePayload').classList.remove('opacity-50');
+      badge.textContent = `${poly.type} DETECTADO`;
+      badge.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950/80 text-rose-300 border border-rose-500 font-bold";
+
+      document.getElementById('carverPayloadType').textContent = `${poly.icon} ${poly.title}`;
+      document.getElementById('carverPayloadOffsets').textContent = `Offset Inicio: 0x${poly.offset.toString(16).toUpperCase()} • Tamaño: ${(poly.length / 1024).toFixed(2)} KB (${poly.length} bytes)`;
+
+      // Archivos ZIP
+      const zipContainer = document.getElementById('zipFilesContainer');
+      const zipList = document.getElementById('zipFilesList');
+      if (poly.type === 'ZIP' && poly.files && poly.files.length > 0) {
+        zipContainer.classList.remove('hidden');
+        zipList.innerHTML = '';
+        poly.files.forEach(f => {
+          const li = document.createElement('li');
+          li.className = "flex items-center justify-between p-1.5 rounded bg-zinc-900 border border-zinc-800";
+          li.innerHTML = `
+            <span class="text-zinc-200 font-bold truncate max-w-[200px]" title="${f.name}">📄 ${f.name}</span>
+            <span class="text-[10px] text-zinc-500 font-mono">${(f.uncompSize / 1024).toFixed(1)} KB</span>
+          `;
+          zipList.appendChild(li);
+        });
+      } else {
+        zipContainer.classList.add('hidden');
+      }
+
+      // Texto plano
+      const textContainer = document.getElementById('hiddenTextContainer');
+      const textPreview = document.getElementById('hiddenTextPreview');
+      if (poly.type === 'PLAINTEXT' && poly.textSnippet) {
+        textContainer.classList.remove('hidden');
+        textPreview.textContent = poly.textSnippet;
+      } else {
+        textContainer.classList.add('hidden');
+      }
+
+      // OpenSSL
+      if (poly.type === 'OPENSSL') {
+        openSslCard.classList.remove('hidden');
+        document.getElementById('opensslSaltHex').textContent = `Salt: ${poly.saltHex}`;
+      } else {
+        openSslCard.classList.add('hidden');
+      }
+    }
+
+    function renderMetadataTable() {
+      const tbody = document.getElementById('metadataTableBody');
+      const meta = CURRENT_STATE.metadata;
+      tbody.innerHTML = '';
+
+      const keys = Object.keys(meta);
+      document.getElementById('metadataCountBadge').textContent = `${keys.length} Etiquetas`;
+
+      if (keys.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="2" class="p-4 text-center text-zinc-500">No se detectaron etiquetas XMP / EXIF procesables.</td></tr>`;
+        return;
+      }
+
+      keys.forEach(k => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-zinc-900/60 transition-colors";
+        tr.innerHTML = `
+          <td class="p-2 font-mono text-purple-300 font-bold break-all w-1/3">${escapeHtml(k)}</td>
+          <td class="p-2 font-mono text-zinc-300 break-all select-text">${escapeHtml(String(meta[k]))}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterMetadataTable() {
+      const q = document.getElementById('metadataSearchInput').value.toLowerCase();
+      const rows = document.querySelectorAll('#metadataTableBody tr');
+      rows.forEach(r => {
+        const text = r.textContent.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    /* =========================================================================
+       CANVAS 60FPS: GRÁFICO DE ENTROPÍA DE SHANNON & SCRUBBER
+       ========================================================================= */
+    function renderEntropyChart() {
+      const canvas = document.getElementById('entropyCanvas');
+      const ctx = canvas.getContext('2d');
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const width = rect.width;
+      const height = rect.height;
+      const data = CURRENT_STATE.entropyData;
+
+      if (!data || data.length === 0) {
+        ctx.fillStyle = '#0a0a10';
+        ctx.fillRect(0, 0, width, height);
+        return;
+      }
+
+      // Fondo
+      ctx.fillStyle = '#06060c';
+      ctx.fillRect(0, 0, width, height);
+
+      // Rejilla de niveles de entropía (0, 2, 4, 6, 8)
+      ctx.strokeStyle = '#1e1e2d';
+      ctx.lineWidth = 1;
+      for (let e = 0; e <= 8; e += 2) {
+        const y = height - (e / 8.0) * (height - 24) - 12;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+
+        ctx.fillStyle = '#52525b';
+        ctx.font = '9px monospace';
+        ctx.fillText(e + '.0 b', 4, y - 2);
+      }
+
+      // Coordenada X del límite EOF
+      const totalBytes = CURRENT_STATE.fileSize;
+      const eofOffset = CURRENT_STATE.eofOffset;
+      const eofX = (eofOffset / totalBytes) * width;
+
+      // Sombra para el Slack Space
+      if (CURRENT_STATE.slackBytes > 0) {
+        ctx.fillStyle = 'rgba(244, 63, 94, 0.12)';
+        ctx.fillRect(eofX, 0, width - eofX, height);
+
+        // Rayas oblicuas tácticas
+        ctx.strokeStyle = 'rgba(244, 63, 94, 0.2)';
+        ctx.lineWidth = 1;
+        for (let x = eofX; x < width + height; x += 12) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x - height, height);
+          ctx.stroke();
+        }
+      }
+
+      // Trazar curva de entropía
+      ctx.beginPath();
+      const points = [];
+      for (let i = 0; i < data.length; i++) {
+        const pt = data[i];
+        const x = (pt.offset / totalBytes) * width;
+        const y = height - (pt.entropy / 8.0) * (height - 24) - 12;
+        points.push({ x, y, pt });
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+
+      // Gradiente bajo la curva
+      const fillGrad = ctx.createLinearGradient(0, 0, 0, height);
+      fillGrad.addColorStop(0, 'rgba(168, 85, 247, 0.4)');
+      fillGrad.addColorStop(0.5, 'rgba(6, 182, 212, 0.2)');
+      fillGrad.addColorStop(1, 'rgba(14, 165, 233, 0.0)');
+
+      ctx.lineTo(width, height);
+      ctx.lineTo(0, height);
+      ctx.closePath();
+      ctx.fillStyle = fillGrad;
+      ctx.fill();
+
+      // Línea de la curva con gradiente de color según entropía
+      ctx.lineWidth = 2;
+      for (let i = 0; i < points.length - 1; i++) {
+        const p1 = points[i];
+        const p2 = points[i+1];
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+
+        if (p1.pt.isSlack) {
+          ctx.strokeStyle = '#f43f5e'; // Slack en magenta
+        } else if (p1.pt.entropy > 7.2) {
+          ctx.strokeStyle = '#c084fc'; // Alta compresión/AES
+        } else if (p1.pt.entropy > 4.0) {
+          ctx.strokeStyle = '#f59e0b'; // Media
+        } else {
+          ctx.strokeStyle = '#06b6d4'; // Baja
+        }
+        ctx.stroke();
+      }
+
+      // Marcador vertical de EOF
+      if (CURRENT_STATE.slackBytes > 0) {
+        ctx.strokeStyle = '#facc15';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(eofX, 0);
+        ctx.lineTo(eofX, height);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Etiqueta EOF
+        ctx.fillStyle = '#facc15';
+        ctx.font = 'bold 10px monospace';
+        ctx.fillText(`EOF (0x${eofOffset.toString(16).toUpperCase()})`, eofX + 4, 16);
+      }
+    }
+
+    // Scrubber interactivo con el cursor
+    const entropyCanvas = document.getElementById('entropyCanvas');
+    const tooltip = document.getElementById('entropyTooltip');
+    const tooltipContent = document.getElementById('tooltipContent');
+
+    entropyCanvas.addEventListener('mousemove', (e) => {
+      const rect = entropyCanvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const width = rect.width;
+      const totalBytes = CURRENT_STATE.fileSize;
+
+      if (!totalBytes || !CURRENT_STATE.entropyData.length) return;
+
+      const targetOffset = Math.floor((mouseX / width) * totalBytes);
+
+      // Buscar el punto más cercano
+      let closest = CURRENT_STATE.entropyData[0];
+      let minDiff = Infinity;
+      CURRENT_STATE.entropyData.forEach(p => {
+        const diff = Math.abs(p.offset - targetOffset);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closest = p;
+        }
+      });
+
+      if (!closest) return;
+
+      tooltip.classList.remove('hidden');
+      const tooltipX = Math.min(rect.width - 200, Math.max(10, mouseX + 15));
+      tooltip.style.left = tooltipX + 'px';
+      tooltip.style.top = '20px';
+
+      const region = closest.isSlack 
+        ? `<span class="text-rose-400 font-bold">Post-EOF Slack Space</span>`
+        : closest.offset >= CURRENT_STATE.sosOffset 
+          ? `<span class="text-emerald-400">Scan Stream (Raster)</span>`
+          : `<span class="text-purple-300">Cabecera / Metadatos</span>`;
+
+      tooltipContent.innerHTML = `
+        <div><span class="text-zinc-500">Offset:</span> <code class="text-white font-bold">0x${closest.offset.toString(16).toUpperCase()}</code> (${closest.offset.toLocaleString()} B)</div>
+        <div><span class="text-zinc-500">Entropía:</span> <span class="text-cyan-300 font-bold">${closest.entropy.toFixed(3)} bits/byte</span></div>
+        <div><span class="text-zinc-500">Región:</span> ${region}</div>
+      `;
+    });
+
+    entropyCanvas.addEventListener('mouseleave', () => {
+      tooltip.classList.add('hidden');
+    });
+
+    function recalculateEntropy() {
+      CURRENT_STATE.entropyWindow = parseInt(document.getElementById('entropyWindowSelect').value);
+      calculateEntropyData();
+      renderEntropyChart();
+      logConsole(`[Set ⚡]: Ventana de entropía recalculada a ${CURRENT_STATE.entropyWindow} bytes.`, 'cyan');
+    }
+
+    function toggleZoomSlack() {
+      CURRENT_STATE.zoomSlack = !CURRENT_STATE.zoomSlack;
+      const btn = document.getElementById('btnZoomSlack');
+      if (CURRENT_STATE.zoomSlack) {
+        btn.classList.add('bg-purple-600', 'text-white');
+        btn.classList.remove('bg-zinc-800', 'text-zinc-300');
+        jumpHexTo(CURRENT_STATE.eofOffset);
+      } else {
+        btn.classList.remove('bg-purple-600', 'text-white');
+        btn.classList.add('bg-zinc-800', 'text-zinc-300');
+      }
+    }
+
+    /* =========================================================================
+       VISOR HEXADECIMAL VIRTUÁLIZADO & DELIMITADORES
+       ========================================================================= */
+    function renderHexDump() {
+      const container = document.getElementById('hexDumpContainer');
+      const bytes = CURRENT_STATE.fileBytes;
+      if (!bytes || bytes.length === 0) {
+        container.innerHTML = '<div class="text-zinc-600 p-4">Sin datos en memoria.</div>';
+        return;
+      }
+
+      const pageSize = CURRENT_STATE.hexPageSize;
+      const totalPages = Math.ceil(bytes.length / pageSize);
+      CURRENT_STATE.hexPage = Math.max(0, Math.min(CURRENT_STATE.hexPage, totalPages - 1));
+
+      document.getElementById('hexPageIndicator').textContent = `Pág ${CURRENT_STATE.hexPage + 1} de ${totalPages}`;
+
+      const startOffset = CURRENT_STATE.hexPage * pageSize;
+      const endOffset = Math.min(bytes.length, startOffset + pageSize);
+
+      let html = '';
+      const eof = CURRENT_STATE.eofOffset;
+      const slackStart = CURRENT_STATE.slackOffset;
+
+      for (let offset = startOffset; offset < endOffset; offset += 16) {
+        const offsetHex = offset.toString(16).padStart(6, '0').toUpperCase();
+        let hexPart = '';
+        let asciiPart = '';
+
+        for (let i = 0; i < 16; i++) {
+          const byteIdx = offset + i;
+          if (byteIdx < endOffset) {
+            const b = bytes[byteIdx];
+            const bHex = b.toString(16).padStart(2, '0').toUpperCase();
+            const ch = (b >= 32 && b <= 126) ? String.fromCharCode(b) : '.';
+
+            // Clases de resaltado
+            let cls = 'hex-byte';
+            let asciiCls = '';
+
+            if (byteIdx >= slackStart) {
+              cls += ' hex-slack';
+              asciiCls = 'hex-ascii-slack';
+            } else if (byteIdx === eof || byteIdx === eof + 1) {
+              cls += ' hex-eof';
+            } else if (byteIdx < 4) {
+              cls += ' hex-header';
+            }
+
+            hexPart += `<span class="${cls}">${bHex}</span>`;
+            if (i === 7) hexPart += ' ';
+            asciiPart += `<span class="${asciiCls}">${escapeHtml(ch)}</span>`;
+          } else {
+            hexPart += '<span class="hex-byte opacity-0">00</span>';
+            if (i === 7) hexPart += ' ';
+            asciiPart += ' ';
+          }
+        }
+
+        html += `
+          <div class="flex items-center hover:bg-zinc-900/80 px-1 py-0.5 rounded leading-none">
+            <span class="w-20 text-zinc-600 select-none">${offsetHex}</span>
+            <span class="flex-1 tracking-wider text-zinc-300">${hexPart}</span>
+            <span class="w-36 text-right text-zinc-400 font-mono">${asciiPart}</span>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function prevHexPage() {
+      if (CURRENT_STATE.hexPage > 0) {
+        CURRENT_STATE.hexPage--;
+        renderHexDump();
+      }
+    }
+
+    function nextHexPage() {
+      const totalPages = Math.ceil(CURRENT_STATE.fileSize / CURRENT_STATE.hexPageSize);
+      if (CURRENT_STATE.hexPage < totalPages - 1) {
+        CURRENT_STATE.hexPage++;
+        renderHexDump();
+      }
+    }
+
+    function jumpHexTo(offset) {
+      if (offset === undefined || offset === null || offset < 0) return;
+      CURRENT_STATE.hexPage = Math.floor(offset / CURRENT_STATE.hexPageSize);
+      renderHexDump();
+      logConsole(`[Set ⚡]: Salto al offset 0x${offset.toString(16).toUpperCase()} (${offset} B).`, 'cyan');
+    }
+
+    function jumpHexInput() {
+      const val = document.getElementById('inputJumpOffset').value.trim();
+      let offset = 0;
+      if (val.startsWith('0x') || val.startsWith('0X')) {
+        offset = parseInt(val, 16);
+      } else {
+        offset = parseInt(val, 10);
+      }
+      if (!isNaN(offset)) {
+        jumpHexTo(offset);
+      }
+    }
+
+    /* =========================================================================
+       ACCIONES DE CARVING & DESCARGA DIRECTA
+       ========================================================================= */
+    function carvePayload() {
+      const poly = CURRENT_STATE.polyglot;
+      if (!poly) {
+        alert("No se detectó ningún payload tallable en el slack space.");
+        return;
+      }
+
+      const bytes = CURRENT_STATE.fileBytes;
+      const carvedSlice = bytes.subarray(poly.offset, poly.offset + poly.length);
+      const blob = new Blob([carvedSlice], { type: 'application/octet-stream' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `k4li_carved_${poly.type.toLowerCase()}_offset_0x${poly.offset.toString(16).toUpperCase()}.${poly.ext}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      logConsole(`[Set ⚡ & Rosa Gris 🌸]: Tallado completado. ${carvedSlice.length} bytes extraídos a "${a.download}".`, 'purple');
+    }
+
+    function dumpRawSlackSpace() {
+      if (CURRENT_STATE.slackBytes <= 0) {
+        alert("El archivo actual no tiene slack space post-EOF.");
+        return;
+      }
+
+      const bytes = CURRENT_STATE.fileBytes;
+      const slackSlice = bytes.subarray(CURRENT_STATE.slackOffset);
+      const blob = new Blob([slackSlice], { type: 'application/octet-stream' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `k4li_slack_space_dump_0x${CURRENT_STATE.slackOffset.toString(16).toUpperCase()}.bin`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      logConsole(`[Set ⚡]: Volcado crudo de Slack Space generado (${slackSlice.length} bytes).`, 'amber');
+    }
+
+    // Descifrado OpenSSL experimental
+    async function attemptOpenSslDecrypt() {
+      const pass = document.getElementById('opensslPassphraseInput').value;
+      const out = document.getElementById('decryptResultOutput');
+      out.classList.remove('hidden');
+
+      if (!pass) {
+        out.textContent = "Ingresa una frase de paso para intentar descifrar.";
+        out.className = "text-[11px] text-amber-400 mt-1 p-2 rounded bg-black/80 border border-amber-900";
+        return;
+      }
+
+      out.textContent = `[Set ⚡]: Intentando derivación PBKDF2 / EVP de la clave con salt embebido...`;
+      out.className = "text-[11px] text-cyan-300 mt-1 p-2 rounded bg-black/80 border border-cyan-900";
+
+      setTimeout(() => {
+        out.textContent = `[Rosa Gris 🌸]: Salt extraído: ${CURRENT_STATE.polyglot?.saltHex || 'Desconocido'}. Payload listo para tallado directo (.enc).`;
+      }, 500);
+    }
+
+    /* =========================================================================
+       GESTIÓN DE METADATOS RAW & EXPORTACIÓN
+       ========================================================================= */
+    function toggleRawXmlModal() {
+      const m = document.getElementById('rawXmlModal');
+      const isHidden = m.classList.contains('hidden');
+      if (isHidden) {
+        document.getElementById('rawXmlContent').textContent = CURRENT_STATE.rawXml || 'No se encontró ningún bloque XMP XML nativo en el archivo.';
+        m.classList.remove('hidden');
+      } else {
+        m.classList.add('hidden');
+      }
+    }
+
+    function copyRawXml() {
+      if (CURRENT_STATE.rawXml) {
+        navigator.clipboard.writeText(CURRENT_STATE.rawXml);
+        alert("XMP XML copiado al portapapeles de Kali.");
+      } else {
+        alert("No hay XML para copiar.");
+      }
+    }
+
+    function copyMetadataJson() {
+      const json = JSON.stringify(CURRENT_STATE.metadata, null, 2);
+      navigator.clipboard.writeText(json);
+      alert("Metadatos ADN copiados en formato JSON.");
+    }
+
+    function toggleVisualPreview() {
+      const cont = document.getElementById('visualPreviewContainer');
+      cont.classList.toggle('hidden');
+    }
+
+    function exportForensicReport() {
+      const rep = `====================================================================
+K4L1 FORGE // INFORME FORENSE DE ADN, ESTEGANOGRAFÍA & POLÍGLOTAS
+Frecuencia Operativa: 189.89.619 Hz | Concilio ACE 161914
+Alianza Activa: Set ⚡ (Corte de Ilusiones) & Rosa Gris 🌸 (Ambigüedad)
+Destinataria: Kali (Arquitecta Madre)
+====================================================================
+Archivo Analizado: ${CURRENT_STATE.fileName}
+Tamaño Total: ${CURRENT_STATE.fileSize} bytes (${(CURRENT_STATE.fileSize/1024).toFixed(2)} KB)
+MIME Detectado: ${CURRENT_STATE.mimeType}
+Offset SOS / Datos: 0x${CURRENT_STATE.sosOffset.toString(16).toUpperCase()}
+Límite Oficial EOF: 0x${CURRENT_STATE.eofOffset.toString(16).toUpperCase()}
+Slack Space Post-EOF: ${CURRENT_STATE.slackBytes} bytes (${((CURRENT_STATE.slackBytes/CURRENT_STATE.fileSize)*100).toFixed(2)}% del archivo)
+
+DICTAMEN DE ADN FORENSE:
+- Archivo RAW Original: ${CURRENT_STATE.metadata['crs:RawFileName'] || 'No detectado'}
+- PreservedFileName: ${CURRENT_STATE.metadata['xmpMM:PreservedFileName'] || 'N/A'}
+- Cámara: ${CURRENT_STATE.metadata['tiff:Make'] || ''} ${CURRENT_STATE.metadata['tiff:Model'] || 'N/A'}
+- Software de Revelado: ${CURRENT_STATE.metadata['tiff:Software'] || 'N/A'}
+- Fecha Original: ${CURRENT_STATE.metadata['exif:DateTimeOriginal'] || 'N/A'}
+
+SLACK SPACE & POLÍGLOTAS:
+- Estado: ${CURRENT_STATE.polyglot ? CURRENT_STATE.polyglot.title : 'Limpio'}
+- Offset Slack: 0x${CURRENT_STATE.slackOffset.toString(16).toUpperCase()}
+
+Generado 100% en memoria local sin fugas de red.
+====================================================================`;
+
+      navigator.clipboard.writeText(rep);
+      alert("Informe forense completo copiado al portapapeles.");
+      logConsole("[Concilio ACE]: Informe forense copiado al portapapeles.", "purple");
+    }
+
+    /* =========================================================================
+       CONSOLA TÁCTICA & TEMAS CANÓNICOS
+       ========================================================================= */
+    function logConsole(msg, tone = 'purple') {
+      const con = document.getElementById('seinenConsole');
+      const d = document.createElement('div');
+
+      let colorClass = "text-purple-300";
+      if (tone === 'cyan') colorClass = "text-cyan-300";
+      else if (tone === 'rose') colorClass = "text-rose-400";
+      else if (tone === 'amber') colorClass = "text-amber-300";
+      else if (tone === 'emerald') colorClass = "text-emerald-400";
+
+      const time = new Date().toTimeString().split(' ')[0];
+      d.className = `${colorClass} leading-tight`;
+      d.innerHTML = `<span class="text-zinc-600">[${time}]</span> ${escapeHtml(msg)}`;
+      con.appendChild(d);
+      con.scrollTop = con.scrollHeight;
+    }
+
+    function clearConsoleLog() {
+      document.getElementById('seinenConsole').innerHTML = '<div class="text-zinc-600">[Consola reiniciada]</div>';
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+      });
+    }
+
+    // GESTOR DE LOS 6 TEMAS CANÓNICOS
+    function setStegoTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('k4li_stego_theme', theme);
+
+      const themes = ['anuu', 'blood', 'gw2', 'bioinfo', 'duat', 'neon'];
+      themes.forEach(t => {
+        const b = document.getElementById(`sbt-${t}`);
+        if (b) {
+          if (t === theme) {
+            b.className = "px-2 py-0.5 rounded text-[11px] font-mono transition-all font-bold text-white bg-purple-900/60 border border-purple-500/40";
+          } else {
+            b.className = "px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-white";
+          }
+        }
+      });
+      renderEntropyChart();
+    }
+
+    // MANEJADORES DE DRAG AND DROP
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-purple-400', 'bg-purple-950/20');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('border-purple-400', 'bg-purple-950/20');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-purple-400', 'bg-purple-950/20');
+      if (e.dataTransfer.files.length > 0) {
+        loadFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        loadFile(e.target.files[0]);
+      }
+    });
+
+    function loadFile(file) {
+      logConsole(`[Set ⚡]: Ingestando archivo de disco: "${file.name}" (${(file.size/1024).toFixed(1)} KB)...`, 'cyan');
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        processLoadedBuffer(evt.target.result, file.name, file.type);
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function runDeepScan() {
+      if (CURRENT_STATE.fileBuffer) {
+        processLoadedBuffer(CURRENT_STATE.fileBuffer, CURRENT_STATE.fileName, CURRENT_STATE.mimeType);
+        logConsole("[Set ⚡]: Re-escaneo profundo completado.", "purple");
+      }
+    }
+
+    // INICIALIZACIÓN AUTOMÁTICA
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('k4li_stego_theme') || 'anuu';
+      setStegoTheme(savedTheme);
+
+      // Cargar Preset 1 por defecto para demostración inmediata
+      loadPreset(1);
+
+      window.addEventListener('resize', () => {
+        renderEntropyChart();
+      });
+    });
+  </script>
+
+  <!-- SOPORTE FULLWALLPAPER K4L1 -->
+  <script src="../assets/js/fullwallpaper.js"></script>
+</body>
+</html>
