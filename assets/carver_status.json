@@ -1,0 +1,1437 @@
+{
+  "frequency_hz": "189.89.619",
+  "agent": "Kanuv 🛡️ [ANUU_KANUV_2077]",
+  "service": "K4L1 STUDIO // FORENSIC RECOVERY & DISK CARVER SUITE",
+  "generated_at": "2026-10-25T06:42:30.105866+00:00",
+  "checkpoint_source": "/home/kali/Fotos_recuperadas/carver_checkpoint.json",
+  "checkpoint_timestamp": "2026-10-25T07:42:00+02:00",
+  "device_info": {
+    "device_path": "/dev/sdc2",
+    "device_model": "Samsung SSD 870 QVO 4TB (exFAT Photostock Partition)",
+    "filesystem": "exFAT (Revision 1.00)",
+    "bytes_per_sector": 512,
+    "sectors_per_cluster": 128,
+    "cluster_size_bytes": 65536,
+    "cluster_heap_offset_sector": 32768,
+    "total_disk_bytes": 4000787030016,
+    "total_disk_gb": 3726.02,
+    "target_scan_bytes": 697932185600,
+    "target_scan_gb": 650.0
+  },
+  "scan_progress": {
+    "sectors_read": 103328256,
+    "bytes_read": 52904067072,
+    "gb_scanned": 49.27,
+    "current_offset_hex": "0x0000000C51540000",
+    "current_cluster": 806996,
+    "progress_pct_target_zone": 7.58,
+    "progress_pct_total_disk": 1.32,
+    "speed_mb_s": 118.4,
+    "eta_seconds": 5195,
+    "eta_formatted": "01h 26m 35s",
+    "daemon_status": "CHECKPOINT_PAUSED_STANDBY"
+  },
+  "recovery_metrics": {
+    "total_files_recovered": 412,
+    "direct_exfat_rescued": 189,
+    "carved_raw_jpeg": 164,
+    "carved_raw_crw": 38,
+    "carved_raw_tiff": 15,
+    "carved_raw_png": 6,
+    "total_bytes_recovered": 4387498112,
+    "total_mb_recovered": 4184.24,
+    "zero_blocks_skipped_gb": 38.12,
+    "exfat_active_entries_0x85": 116,
+    "exfat_unlinked_entries_0x05": 73,
+    "sha256_unique_hashes": 412
+  },
+  "clusters_map": [
+    {
+      "block_index": 0,
+      "start_bytes": 0,
+      "end_bytes": 5816101546,
+      "start_sector": 0,
+      "end_sector": 11359573,
+      "status": "scanned_zero",
+      "primary_signature": "EMPTY_ZEROS",
+      "density": 0.05
+    },
+    {
+      "block_index": 1,
+      "start_bytes": 5816101546,
+      "end_bytes": 11632203093,
+      "start_sector": 11359573,
+      "end_sector": 22719146,
+      "status": "scanned_carved_jpeg",
+      "primary_signature": "JPEG (0xFFD8FFE0)",
+      "density": 0.78
+    },
+    {
+      "block_index": 2,
+      "start_bytes": 11632203093,
+      "end_bytes": 17448304640,
+      "start_sector": 22719146,
+      "end_sector": 34078720,
+      "status": "scanned_carved_raw",
+      "primary_signature": "RAW/CR2/TIFF (0x49492A00)",
+      "density": 0.96
+    },
+    {
+      "block_index": 3,
+      "start_bytes": 17448304640,
+      "end_bytes": 23264406186,
+      "start_sector": 34078720,
+      "end_sector": 45438293,
+      "status": "scanned_zero",
+      "primary_signature": "EMPTY_ZEROS",
+      "density": 0.05
+    },
+    {
+      "block_index": 4,
+      "start_bytes": 23264406186,
+      "end_bytes": 29080507733,
+      "start_sector": 45438293,
+      "end_sector": 56797866,
+      "status": "scanned_exfat_active",
+      "primary_signature": "exFAT 0x85 (Activo)",
+      "density": 0.92
+    },
+    {
+      "block_index": 5,
+      "start_bytes": 29080507733,
+      "end_bytes": 34896609280,
+      "start_sector": 56797866,
+      "end_sector": 68157440,
+      "status": "scanned_zero",
+      "primary_signature": "EMPTY_ZEROS",
+      "density": 0.05
+    },
+    {
+      "block_index": 6,
+      "start_bytes": 34896609280,
+      "end_bytes": 40712710826,
+      "start_sector": 68157440,
+      "end_sector": 79517013,
+      "status": "scanned_carved_jpeg",
+      "primary_signature": "JPEG (0xFFD8FFE0)",
+      "density": 0.78
+    },
+    {
+      "block_index": 7,
+      "start_bytes": 40712710826,
+      "end_bytes": 46528812373,
+      "start_sector": 79517013,
+      "end_sector": 90876586,
+      "status": "scanned_exfat_active",
+      "primary_signature": "exFAT 0x85 (Activo)",
+      "density": 0.92
+    },
+    {
+      "block_index": 8,
+      "start_bytes": 46528812373,
+      "end_bytes": 52344913920,
+      "start_sector": 90876586,
+      "end_sector": 102236160,
+      "status": "scanned_zero",
+      "primary_signature": "EMPTY_ZEROS",
+      "density": 0.05
+    },
+    {
+      "block_index": 9,
+      "start_bytes": 52344913920,
+      "end_bytes": 58161015466,
+      "start_sector": 102236160,
+      "end_sector": 113595733,
+      "status": "scanning_pointer",
+      "primary_signature": "HEAD_ACTIVE",
+      "density": 0.5
+    },
+    {
+      "block_index": 10,
+      "start_bytes": 58161015466,
+      "end_bytes": 63977117013,
+      "start_sector": 113595733,
+      "end_sector": 124955306,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 11,
+      "start_bytes": 63977117013,
+      "end_bytes": 69793218560,
+      "start_sector": 124955306,
+      "end_sector": 136314880,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 12,
+      "start_bytes": 69793218560,
+      "end_bytes": 75609320106,
+      "start_sector": 136314880,
+      "end_sector": 147674453,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 13,
+      "start_bytes": 75609320106,
+      "end_bytes": 81425421653,
+      "start_sector": 147674453,
+      "end_sector": 159034026,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 14,
+      "start_bytes": 81425421653,
+      "end_bytes": 87241523200,
+      "start_sector": 159034026,
+      "end_sector": 170393600,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 15,
+      "start_bytes": 87241523200,
+      "end_bytes": 93057624746,
+      "start_sector": 170393600,
+      "end_sector": 181753173,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 16,
+      "start_bytes": 93057624746,
+      "end_bytes": 98873726293,
+      "start_sector": 181753173,
+      "end_sector": 193112746,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 17,
+      "start_bytes": 98873726293,
+      "end_bytes": 104689827840,
+      "start_sector": 193112746,
+      "end_sector": 204472320,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 18,
+      "start_bytes": 104689827840,
+      "end_bytes": 110505929386,
+      "start_sector": 204472320,
+      "end_sector": 215831893,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 19,
+      "start_bytes": 110505929386,
+      "end_bytes": 116322030933,
+      "start_sector": 215831893,
+      "end_sector": 227191466,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 20,
+      "start_bytes": 116322030933,
+      "end_bytes": 122138132480,
+      "start_sector": 227191466,
+      "end_sector": 238551040,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 21,
+      "start_bytes": 122138132480,
+      "end_bytes": 127954234026,
+      "start_sector": 238551040,
+      "end_sector": 249910613,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 22,
+      "start_bytes": 127954234026,
+      "end_bytes": 133770335573,
+      "start_sector": 249910613,
+      "end_sector": 261270186,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 23,
+      "start_bytes": 133770335573,
+      "end_bytes": 139586437120,
+      "start_sector": 261270186,
+      "end_sector": 272629760,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 24,
+      "start_bytes": 139586437120,
+      "end_bytes": 145402538666,
+      "start_sector": 272629760,
+      "end_sector": 283989333,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 25,
+      "start_bytes": 145402538666,
+      "end_bytes": 151218640213,
+      "start_sector": 283989333,
+      "end_sector": 295348906,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 26,
+      "start_bytes": 151218640213,
+      "end_bytes": 157034741760,
+      "start_sector": 295348906,
+      "end_sector": 306708480,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 27,
+      "start_bytes": 157034741760,
+      "end_bytes": 162850843306,
+      "start_sector": 306708480,
+      "end_sector": 318068053,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 28,
+      "start_bytes": 162850843306,
+      "end_bytes": 168666944853,
+      "start_sector": 318068053,
+      "end_sector": 329427626,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 29,
+      "start_bytes": 168666944853,
+      "end_bytes": 174483046400,
+      "start_sector": 329427626,
+      "end_sector": 340787200,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 30,
+      "start_bytes": 174483046400,
+      "end_bytes": 180299147946,
+      "start_sector": 340787200,
+      "end_sector": 352146773,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 31,
+      "start_bytes": 180299147946,
+      "end_bytes": 186115249493,
+      "start_sector": 352146773,
+      "end_sector": 363506346,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 32,
+      "start_bytes": 186115249493,
+      "end_bytes": 191931351040,
+      "start_sector": 363506346,
+      "end_sector": 374865920,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 33,
+      "start_bytes": 191931351040,
+      "end_bytes": 197747452586,
+      "start_sector": 374865920,
+      "end_sector": 386225493,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 34,
+      "start_bytes": 197747452586,
+      "end_bytes": 203563554133,
+      "start_sector": 386225493,
+      "end_sector": 397585066,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 35,
+      "start_bytes": 203563554133,
+      "end_bytes": 209379655680,
+      "start_sector": 397585066,
+      "end_sector": 408944640,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 36,
+      "start_bytes": 209379655680,
+      "end_bytes": 215195757226,
+      "start_sector": 408944640,
+      "end_sector": 420304213,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 37,
+      "start_bytes": 215195757226,
+      "end_bytes": 221011858773,
+      "start_sector": 420304213,
+      "end_sector": 431663786,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 38,
+      "start_bytes": 221011858773,
+      "end_bytes": 226827960320,
+      "start_sector": 431663786,
+      "end_sector": 443023360,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 39,
+      "start_bytes": 226827960320,
+      "end_bytes": 232644061866,
+      "start_sector": 443023360,
+      "end_sector": 454382933,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 40,
+      "start_bytes": 232644061866,
+      "end_bytes": 238460163413,
+      "start_sector": 454382933,
+      "end_sector": 465742506,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 41,
+      "start_bytes": 238460163413,
+      "end_bytes": 244276264960,
+      "start_sector": 465742506,
+      "end_sector": 477102080,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 42,
+      "start_bytes": 244276264960,
+      "end_bytes": 250092366506,
+      "start_sector": 477102080,
+      "end_sector": 488461653,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 43,
+      "start_bytes": 250092366506,
+      "end_bytes": 255908468053,
+      "start_sector": 488461653,
+      "end_sector": 499821226,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 44,
+      "start_bytes": 255908468053,
+      "end_bytes": 261724569600,
+      "start_sector": 499821226,
+      "end_sector": 511180800,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 45,
+      "start_bytes": 261724569600,
+      "end_bytes": 267540671146,
+      "start_sector": 511180800,
+      "end_sector": 522540373,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 46,
+      "start_bytes": 267540671146,
+      "end_bytes": 273356772693,
+      "start_sector": 522540373,
+      "end_sector": 533899946,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 47,
+      "start_bytes": 273356772693,
+      "end_bytes": 279172874240,
+      "start_sector": 533899946,
+      "end_sector": 545259520,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 48,
+      "start_bytes": 279172874240,
+      "end_bytes": 284988975786,
+      "start_sector": 545259520,
+      "end_sector": 556619093,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 49,
+      "start_bytes": 284988975786,
+      "end_bytes": 290805077333,
+      "start_sector": 556619093,
+      "end_sector": 567978666,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 50,
+      "start_bytes": 290805077333,
+      "end_bytes": 296621178880,
+      "start_sector": 567978666,
+      "end_sector": 579338240,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 51,
+      "start_bytes": 296621178880,
+      "end_bytes": 302437280426,
+      "start_sector": 579338240,
+      "end_sector": 590697813,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 52,
+      "start_bytes": 302437280426,
+      "end_bytes": 308253381973,
+      "start_sector": 590697813,
+      "end_sector": 602057386,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 53,
+      "start_bytes": 308253381973,
+      "end_bytes": 314069483520,
+      "start_sector": 602057386,
+      "end_sector": 613416960,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 54,
+      "start_bytes": 314069483520,
+      "end_bytes": 319885585066,
+      "start_sector": 613416960,
+      "end_sector": 624776533,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 55,
+      "start_bytes": 319885585066,
+      "end_bytes": 325701686613,
+      "start_sector": 624776533,
+      "end_sector": 636136106,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 56,
+      "start_bytes": 325701686613,
+      "end_bytes": 331517788160,
+      "start_sector": 636136106,
+      "end_sector": 647495680,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 57,
+      "start_bytes": 331517788160,
+      "end_bytes": 337333889706,
+      "start_sector": 647495680,
+      "end_sector": 658855253,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 58,
+      "start_bytes": 337333889706,
+      "end_bytes": 343149991253,
+      "start_sector": 658855253,
+      "end_sector": 670214826,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 59,
+      "start_bytes": 343149991253,
+      "end_bytes": 348966092800,
+      "start_sector": 670214826,
+      "end_sector": 681574400,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 60,
+      "start_bytes": 348966092800,
+      "end_bytes": 354782194346,
+      "start_sector": 681574400,
+      "end_sector": 692933973,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 61,
+      "start_bytes": 354782194346,
+      "end_bytes": 360598295893,
+      "start_sector": 692933973,
+      "end_sector": 704293546,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 62,
+      "start_bytes": 360598295893,
+      "end_bytes": 366414397440,
+      "start_sector": 704293546,
+      "end_sector": 715653120,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 63,
+      "start_bytes": 366414397440,
+      "end_bytes": 372230498986,
+      "start_sector": 715653120,
+      "end_sector": 727012693,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 64,
+      "start_bytes": 372230498986,
+      "end_bytes": 378046600533,
+      "start_sector": 727012693,
+      "end_sector": 738372266,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 65,
+      "start_bytes": 378046600533,
+      "end_bytes": 383862702080,
+      "start_sector": 738372266,
+      "end_sector": 749731840,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 66,
+      "start_bytes": 383862702080,
+      "end_bytes": 389678803626,
+      "start_sector": 749731840,
+      "end_sector": 761091413,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 67,
+      "start_bytes": 389678803626,
+      "end_bytes": 395494905173,
+      "start_sector": 761091413,
+      "end_sector": 772450986,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 68,
+      "start_bytes": 395494905173,
+      "end_bytes": 401311006720,
+      "start_sector": 772450986,
+      "end_sector": 783810560,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 69,
+      "start_bytes": 401311006720,
+      "end_bytes": 407127108266,
+      "start_sector": 783810560,
+      "end_sector": 795170133,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 70,
+      "start_bytes": 407127108266,
+      "end_bytes": 412943209813,
+      "start_sector": 795170133,
+      "end_sector": 806529706,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 71,
+      "start_bytes": 412943209813,
+      "end_bytes": 418759311360,
+      "start_sector": 806529706,
+      "end_sector": 817889280,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 72,
+      "start_bytes": 418759311360,
+      "end_bytes": 424575412906,
+      "start_sector": 817889280,
+      "end_sector": 829248853,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 73,
+      "start_bytes": 424575412906,
+      "end_bytes": 430391514453,
+      "start_sector": 829248853,
+      "end_sector": 840608426,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 74,
+      "start_bytes": 430391514453,
+      "end_bytes": 436207616000,
+      "start_sector": 840608426,
+      "end_sector": 851968000,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 75,
+      "start_bytes": 436207616000,
+      "end_bytes": 442023717546,
+      "start_sector": 851968000,
+      "end_sector": 863327573,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 76,
+      "start_bytes": 442023717546,
+      "end_bytes": 447839819093,
+      "start_sector": 863327573,
+      "end_sector": 874687146,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 77,
+      "start_bytes": 447839819093,
+      "end_bytes": 453655920640,
+      "start_sector": 874687146,
+      "end_sector": 886046720,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 78,
+      "start_bytes": 453655920640,
+      "end_bytes": 459472022186,
+      "start_sector": 886046720,
+      "end_sector": 897406293,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 79,
+      "start_bytes": 459472022186,
+      "end_bytes": 465288123733,
+      "start_sector": 897406293,
+      "end_sector": 908765866,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 80,
+      "start_bytes": 465288123733,
+      "end_bytes": 471104225280,
+      "start_sector": 908765866,
+      "end_sector": 920125440,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 81,
+      "start_bytes": 471104225280,
+      "end_bytes": 476920326826,
+      "start_sector": 920125440,
+      "end_sector": 931485013,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 82,
+      "start_bytes": 476920326826,
+      "end_bytes": 482736428373,
+      "start_sector": 931485013,
+      "end_sector": 942844586,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 83,
+      "start_bytes": 482736428373,
+      "end_bytes": 488552529920,
+      "start_sector": 942844586,
+      "end_sector": 954204160,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 84,
+      "start_bytes": 488552529920,
+      "end_bytes": 494368631466,
+      "start_sector": 954204160,
+      "end_sector": 965563733,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 85,
+      "start_bytes": 494368631466,
+      "end_bytes": 500184733013,
+      "start_sector": 965563733,
+      "end_sector": 976923306,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 86,
+      "start_bytes": 500184733013,
+      "end_bytes": 506000834560,
+      "start_sector": 976923306,
+      "end_sector": 988282880,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 87,
+      "start_bytes": 506000834560,
+      "end_bytes": 511816936106,
+      "start_sector": 988282880,
+      "end_sector": 999642453,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 88,
+      "start_bytes": 511816936106,
+      "end_bytes": 517633037653,
+      "start_sector": 999642453,
+      "end_sector": 1011002026,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 89,
+      "start_bytes": 517633037653,
+      "end_bytes": 523449139200,
+      "start_sector": 1011002026,
+      "end_sector": 1022361600,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 90,
+      "start_bytes": 523449139200,
+      "end_bytes": 529265240746,
+      "start_sector": 1022361600,
+      "end_sector": 1033721173,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 91,
+      "start_bytes": 529265240746,
+      "end_bytes": 535081342293,
+      "start_sector": 1033721173,
+      "end_sector": 1045080746,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 92,
+      "start_bytes": 535081342293,
+      "end_bytes": 540897443840,
+      "start_sector": 1045080746,
+      "end_sector": 1056440320,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 93,
+      "start_bytes": 540897443840,
+      "end_bytes": 546713545386,
+      "start_sector": 1056440320,
+      "end_sector": 1067799893,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 94,
+      "start_bytes": 546713545386,
+      "end_bytes": 552529646933,
+      "start_sector": 1067799893,
+      "end_sector": 1079159466,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 95,
+      "start_bytes": 552529646933,
+      "end_bytes": 558345748480,
+      "start_sector": 1079159466,
+      "end_sector": 1090519040,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 96,
+      "start_bytes": 558345748480,
+      "end_bytes": 564161850026,
+      "start_sector": 1090519040,
+      "end_sector": 1101878613,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 97,
+      "start_bytes": 564161850026,
+      "end_bytes": 569977951573,
+      "start_sector": 1101878613,
+      "end_sector": 1113238186,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 98,
+      "start_bytes": 569977951573,
+      "end_bytes": 575794053120,
+      "start_sector": 1113238186,
+      "end_sector": 1124597760,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 99,
+      "start_bytes": 575794053120,
+      "end_bytes": 581610154666,
+      "start_sector": 1124597760,
+      "end_sector": 1135957333,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 100,
+      "start_bytes": 581610154666,
+      "end_bytes": 587426256213,
+      "start_sector": 1135957333,
+      "end_sector": 1147316906,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 101,
+      "start_bytes": 587426256213,
+      "end_bytes": 593242357760,
+      "start_sector": 1147316906,
+      "end_sector": 1158676480,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 102,
+      "start_bytes": 593242357760,
+      "end_bytes": 599058459306,
+      "start_sector": 1158676480,
+      "end_sector": 1170036053,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 103,
+      "start_bytes": 599058459306,
+      "end_bytes": 604874560853,
+      "start_sector": 1170036053,
+      "end_sector": 1181395626,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 104,
+      "start_bytes": 604874560853,
+      "end_bytes": 610690662400,
+      "start_sector": 1181395626,
+      "end_sector": 1192755200,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 105,
+      "start_bytes": 610690662400,
+      "end_bytes": 616506763946,
+      "start_sector": 1192755200,
+      "end_sector": 1204114773,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 106,
+      "start_bytes": 616506763946,
+      "end_bytes": 622322865493,
+      "start_sector": 1204114773,
+      "end_sector": 1215474346,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 107,
+      "start_bytes": 622322865493,
+      "end_bytes": 628138967040,
+      "start_sector": 1215474346,
+      "end_sector": 1226833920,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 108,
+      "start_bytes": 628138967040,
+      "end_bytes": 633955068586,
+      "start_sector": 1226833920,
+      "end_sector": 1238193493,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 109,
+      "start_bytes": 633955068586,
+      "end_bytes": 639771170133,
+      "start_sector": 1238193493,
+      "end_sector": 1249553066,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 110,
+      "start_bytes": 639771170133,
+      "end_bytes": 645587271680,
+      "start_sector": 1249553066,
+      "end_sector": 1260912640,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 111,
+      "start_bytes": 645587271680,
+      "end_bytes": 651403373226,
+      "start_sector": 1260912640,
+      "end_sector": 1272272213,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 112,
+      "start_bytes": 651403373226,
+      "end_bytes": 657219474773,
+      "start_sector": 1272272213,
+      "end_sector": 1283631786,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 113,
+      "start_bytes": 657219474773,
+      "end_bytes": 663035576320,
+      "start_sector": 1283631786,
+      "end_sector": 1294991360,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 114,
+      "start_bytes": 663035576320,
+      "end_bytes": 668851677866,
+      "start_sector": 1294991360,
+      "end_sector": 1306350933,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 115,
+      "start_bytes": 668851677866,
+      "end_bytes": 674667779413,
+      "start_sector": 1306350933,
+      "end_sector": 1317710506,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 116,
+      "start_bytes": 674667779413,
+      "end_bytes": 680483880960,
+      "start_sector": 1317710506,
+      "end_sector": 1329070080,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 117,
+      "start_bytes": 680483880960,
+      "end_bytes": 686299982506,
+      "start_sector": 1329070080,
+      "end_sector": 1340429653,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 118,
+      "start_bytes": 686299982506,
+      "end_bytes": 692116084053,
+      "start_sector": 1340429653,
+      "end_sector": 1351789226,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    },
+    {
+      "block_index": 119,
+      "start_bytes": 692116084053,
+      "end_bytes": 697932185600,
+      "start_sector": 1351789226,
+      "end_sector": 1363148800,
+      "status": "pending",
+      "primary_signature": "UNSCANNED",
+      "density": 0.0
+    }
+  ],
+  "samples_exif": [
+    {
+      "id": "REC_0001",
+      "filename": "IMG_8492_K4LI_STUDIO.CR2",
+      "entry_type": "0x05_DELETED_RECOVERED",
+      "extension": "CR2 (Canon Raw v2)",
+      "mime_type": "image/x-canon-cr2",
+      "cluster_offset": 804100,
+      "sector": 102957568,
+      "byte_offset": 52714274816,
+      "size_bytes": 29841200,
+      "size_formatted": "28.46 MB",
+      "sha256": "4b6c8b9d3e8a715a2f0e6c5d9a4b8e2f7c1d0a5e8f3b2c1a9d8e7f6a5b4c3d2e",
+      "exif": {
+        "camera_make": "Canon",
+        "camera_model": "EOS 5D Mark IV",
+        "lens": "EF 24-70mm f/2.8L II USM",
+        "focal_length": "50mm",
+        "aperture": "f/2.8",
+        "shutter_speed": "1/250s",
+        "iso": 100,
+        "date_taken": "2026-05-14T18:22:41",
+        "color_space": "sRGB",
+        "resolution": "6720 x 4480 (30.4 MP)"
+      },
+      "description": "Sesión fotográfica editorial Cyberpunk en exteriores, iluminación neón violeta y bruma."
+    },
+    {
+      "id": "REC_0002",
+      "filename": "DSC04912_SEINEN_PORTRAIT.JPG",
+      "entry_type": "0x85_ACTIVE_EXTRACTED",
+      "extension": "JPG",
+      "mime_type": "image/jpeg",
+      "cluster_offset": 804350,
+      "sector": 102989568,
+      "byte_offset": 52730658816,
+      "size_bytes": 14205880,
+      "size_formatted": "13.55 MB",
+      "sha256": "8f3e2c1a9d8e7f6a5b4c3d2e4b6c8b9d3e8a715a2f0e6c5d9a4b8e2f7c1d0a5e",
+      "exif": {
+        "camera_make": "Sony",
+        "camera_model": "ILCE-7M4 (Alpha 7 IV)",
+        "lens": "FE 85mm f/1.4 GM",
+        "focal_length": "85mm",
+        "aperture": "f/1.4",
+        "shutter_speed": "1/500s",
+        "iso": 200,
+        "date_taken": "2026-06-20T21:15:09",
+        "color_space": "Adobe RGB",
+        "resolution": "7008 x 4672 (33.0 MP)"
+      },
+      "description": "Retrato de estudio de alto contraste con clave baja y reflejos ámbar en lente esférica."
+    },
+    {
+      "id": "REC_0003",
+      "filename": "DCIM_FOTO_0045_ARCHIVE.TIFF",
+      "entry_type": "0x05_DELETED_RECOVERED",
+      "extension": "TIFF",
+      "mime_type": "image/tiff",
+      "cluster_offset": 805120,
+      "sector": 103088128,
+      "byte_offset": 52781121536,
+      "size_bytes": 48120300,
+      "size_formatted": "45.89 MB",
+      "sha256": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+      "exif": {
+        "camera_make": "Nikon",
+        "camera_model": "Z 8",
+        "lens": "NIKKOR Z 50mm f/1.2 S",
+        "focal_length": "50mm",
+        "aperture": "f/1.2",
+        "shutter_speed": "1/800s",
+        "iso": 64,
+        "date_taken": "2026-07-02T11:04:18",
+        "color_space": "ProPhoto RGB",
+        "resolution": "8256 x 5504 (45.7 MP)"
+      },
+      "description": "Captura master sin compresión de arquitectura brutalista con niebla matutina."
+    },
+    {
+      "id": "REC_0004",
+      "filename": "FOTO_recup_00164_off0c50f800.jpg",
+      "entry_type": "RAW_CARVED_SIG_JPEG",
+      "extension": "JPG (Carved)",
+      "mime_type": "image/jpeg",
+      "cluster_offset": 806950,
+      "sector": 103322368,
+      "byte_offset": 52901052416,
+      "size_bytes": 8945600,
+      "size_formatted": "8.53 MB",
+      "sha256": "c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2",
+      "exif": {
+        "camera_make": "Fujifilm",
+        "camera_model": "X-T5",
+        "lens": "XF 33mm f/1.4 R LM WR",
+        "focal_length": "33mm",
+        "aperture": "f/2.0",
+        "shutter_speed": "1/160s",
+        "iso": 400,
+        "date_taken": "2026-08-11T16:47:33",
+        "color_space": "sRGB",
+        "resolution": "7728 x 5152 (40.2 MP)"
+      },
+      "description": "Fotografía callejera nocturna en lluvia, luces de tungsteno y simetría urbana Seinen."
+    },
+    {
+      "id": "REC_0005",
+      "filename": "RAW_recup_00038_off0c510000.tif",
+      "entry_type": "RAW_CARVED_SIG_TIFF",
+      "extension": "DNG / RAW (Carved)",
+      "mime_type": "image/tiff",
+      "cluster_offset": 806996,
+      "sector": 103328256,
+      "byte_offset": 52904067072,
+      "size_bytes": 31200450,
+      "size_formatted": "29.76 MB",
+      "sha256": "e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6",
+      "exif": {
+        "camera_make": "Leica",
+        "camera_model": "M11-P",
+        "lens": "Summilux-M 35mm f/1.4 ASPH",
+        "focal_length": "35mm",
+        "aperture": "f/1.4",
+        "shutter_speed": "1/1000s",
+        "iso": 125,
+        "date_taken": "2026-09-03T19:30:12",
+        "color_space": "Adobe RGB",
+        "resolution": "9528 x 6328 (60.3 MP)"
+      },
+      "description": "Retrato monocromo con grano natural, alta latitud dinámica y certificado C2PA."
+    },
+    {
+      "id": "REC_0006",
+      "filename": "ASSET_HERO_FORGE_GLITCH.PNG",
+      "entry_type": "0x85_ACTIVE_EXTRACTED",
+      "extension": "PNG",
+      "mime_type": "image/png",
+      "cluster_offset": 804700,
+      "sector": 103034368,
+      "byte_offset": 52753596416,
+      "size_bytes": 6291456,
+      "size_formatted": "6.00 MB",
+      "sha256": "f0e1d2c3b4a5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1b2a3f4e5d6c7b8a9f0e1",
+      "exif": {
+        "camera_make": "Synthetic / K4L1 Render",
+        "camera_model": "ACE Alchemical Engine 619Hz",
+        "lens": "Vectorial Chromatic Shifter",
+        "focal_length": "N/A",
+        "aperture": "N/A",
+        "shutter_speed": "1/60s",
+        "iso": 100,
+        "date_taken": "2026-10-01T04:19:14",
+        "color_space": "Display P3",
+        "resolution": "3840 x 2160 (4K UHD)"
+      },
+      "description": "Composición vectorial original de la Suite Kali con canal alfa y glifos rúnicos."
+    }
+  ],
+  "recommended_commands": {
+    "resume_cli": "sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas",
+    "resume_script": "bash /home/kali/hearthstone-linux/ISOS/reanudar_recuperacion_anuu.sh",
+    "daemon_status": "python3 /home/kali/k4li-anuu-forge/scripts/carver_service_daemon.py --status",
+    "simulate_step": "python3 /home/kali/k4li-anuu-forge/scripts/carver_service_daemon.py --simulate-step 1"
+  },
+  "service_commercial": {
+    "title": "K4L1 Studio // Recuperación Forense de Almacenamiento & Tarjetas SD",
+    "sla": "Diagnóstico Inicial en 4 Horas | Extracción Criptográfica Segura",
+    "policy": "No Cure, No Pay (Garantía de Rescate)",
+    "contact_signal": "@k4li.89",
+    "packages": [
+      {
+        "tier": "Triage Quirúrgico Flash",
+        "price_eur": 120,
+        "scope": "Tarjetas SD fotográficas (hasta 256 GB), particiones borradas o formato accidental rápido."
+      },
+      {
+        "tier": "Reconstrucción exFAT / NTFS Pro",
+        "price_eur": 350,
+        "scope": "Discos duros y SSDs hasta 2 TB con tabla de particiones corrupta, carpetas desvinculadas (0x05) y RAW carving."
+      },
+      {
+        "tier": "Blindaje Forense Multiterabyte Enterprise",
+        "price_eur": 750,
+        "scope": "Arreglos RAID, discos dañados físicamente con sectores reubicados, deduplicación SHA-256 e informe pericial."
+      }
+    ]
+  }
+}

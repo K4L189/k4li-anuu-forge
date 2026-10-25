@@ -1,6 +1,6 @@
 // Service Worker - K4L1 Studio & Anuu-Forge (ACE Concilium 161914)
 // Frecuencia Operativa: 189.89.619 Hz
-const CACHE_NAME = 'k4li-anuu-forge-v1.95';
+const CACHE_NAME = 'k4li-anuu-forge-v2.1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -9,6 +9,12 @@ const ASSETS_TO_CACHE = [
   './assets/js/fullwallpaper.js',
   './assets/js/bunker_vault.js',
   './assets/vault_payload.json',
+  './assets/relics_manifest.json',
+  './assets/carver_status.json',
+  './assets/js/vendor/three.min.js',
+  './assets/js/vendor/GLTFLoader.js',
+  './assets/js/vendor/OrbitControls.js',
+  './assets/js/vendor/three-vrm.js',
   './components/internal_crm.html',
   './components/contract_generator.html',
   './components/terminal_hud.html',
@@ -18,6 +24,12 @@ const ASSETS_TO_CACHE = [
   './components/security_audit_tool.html',
   './components/market_arbitrage_engine.html',
   './components/sovereign_sanctuary.html',
+  './components/vrm_avatar_studio.html',
+  './components/resonance_synthesizer.html',
+  './components/forensic_carver_service.html',
+  './components/os_deployment_forge.html',
+  './components/network_diagnostic_studio.html',
+  './components/local_ai_studio.html',
   './assets/wallpapers/anu_banner.png',
   './assets/wallpapers/anuu_core.jpg',
   './assets/wallpapers/anuu_hero.png',

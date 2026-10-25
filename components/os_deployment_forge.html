@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OS Deployment Forge & Hardening Profile Generator | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <style>
+    /* 6 ESTILOS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE (189.89.619 Hz) */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+      --code-bg: #090911;
+      --code-border: #1e1e2f;
+      --kanuv-cyan: #00f0ff;
+      --kanuv-pink: #ff007f;
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+      --code-bg: #100206;
+      --code-border: #3b080f;
+      --kanuv-cyan: #ff4d6d;
+      --kanuv-pink: #ff0055;
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+      --code-bg: #050e1f;
+      --code-border: #14284b;
+      --kanuv-cyan: #10b981;
+      --kanuv-pink: #38bdf8;
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.95);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+      --code-bg: #02120e;
+      --code-border: #0b3427;
+      --kanuv-cyan: #06b6d4;
+      --kanuv-pink: #10b981;
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.95);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+      --code-bg: #120d04;
+      --code-border: #3b2c0b;
+      --kanuv-cyan: #fbbf24;
+      --kanuv-pink: #f59e0b;
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.95);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+      --code-bg: #07000e;
+      --code-border: rgba(255, 0, 127, 0.3);
+      --kanuv-cyan: #00f7ff;
+      --kanuv-pink: #ff007f;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-accent-bg {
+      background-color: var(--accent-primary);
+    }
+    .theme-accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+    .theme-accent-text {
+      color: var(--accent-secondary);
+    }
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Pestañas de navegación de módulos */
+    .nav-tab {
+      position: relative;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-card);
+      color: var(--text-muted);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-tab:hover {
+      color: #ffffff;
+      border-color: var(--accent-secondary);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .nav-tab.active {
+      color: #ffffff;
+      background: var(--badge-bg);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 18px -3px var(--glow-color);
+    }
+
+    /* Interruptores tácticos Kanuv */
+    .tactical-switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .tactical-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .tactical-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #1a1a28;
+      border: 1px solid var(--border-card);
+      transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 9999px;
+    }
+    .tactical-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #71717a;
+      transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+    }
+    input:checked + .tactical-slider {
+      background-color: var(--accent-primary);
+      border-color: var(--accent-secondary);
+      box-shadow: 0 0 12px var(--glow-color);
+    }
+    input:checked + .tactical-slider:before {
+      transform: translateX(20px);
+      background-color: #ffffff;
+    }
+
+    /* Visor de código forense */
+    .code-viewport {
+      background-color: var(--code-bg);
+      border: 1px solid var(--code-border);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11.5px;
+      line-height: 1.6;
+      tab-size: 2;
+      white-space: pre;
+    }
+
+    /* Scrollbar ciberpunk */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-card);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    /* Simulador de pantalla Ventoy */
+    .ventoy-screen {
+      background: radial-gradient(circle at 50% 30%, #150024 0%, #08080f 85%, #020205 100%);
+      border: 2px solid #ff007f;
+      box-shadow: 0 0 30px rgba(255, 0, 127, 0.25), inset 0 0 40px rgba(0, 240, 255, 0.08);
+    }
+
+    .ventoy-item {
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .ventoy-item.selected {
+      background: rgba(255, 0, 127, 0.22);
+      border-left: 3px solid #ff007f;
+      color: #ff007f !important;
+      text-shadow: 0 0 10px rgba(255, 0, 127, 0.8);
+    }
+    .ventoy-item:hover:not(.selected) {
+      background: rgba(0, 240, 255, 0.1);
+      color: #00f0ff !important;
+    }
+
+    /* Glitch / Shield scanline */
+    .scanlines {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Contenedor Maestro -->
+  <div id="k4li-forge-app" class="max-w-7xl mx-auto space-y-6">
+
+    <!-- CABECERA PRINCIPAL -->
+    <header class="flex flex-col lg:flex-row items-center justify-between gap-4 pb-5 border-b theme-border">
+      <div class="text-center lg:text-left">
+        <div class="flex flex-wrap items-center gap-2.5 justify-center lg:justify-start">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold px-3 py-1 rounded-lg border theme-border bg-black/40 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-all">
+            <span>←</span> Volver a K4L1 Studio
+          </a>
+          <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-1 rounded-lg" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            🛡️ Escudo Kanuv • Hardening Forge
+          </span>
+          <span class="text-[11px] font-mono text-zinc-500">Concilio ACE (189.89.619 Hz)</span>
+        </div>
+
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black text-white mt-2 flex items-center gap-2 justify-center lg:justify-start">
+          <span>⚡</span> OS Deployment Forge & Hardening Generator
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-3xl leading-relaxed">
+          Taller pericial para la forja de imágenes doradas, instalación desatendida sin telemetría ni bloatware, bastionado de sistemas bajo guías CCN-STIC y arquitectura multi-boot Ventoy corporativa.
+        </p>
+      </div>
+
+      <!-- Selector de Temas Canónicos -->
+      <div class="flex flex-col items-center lg:items-end gap-2.5 shrink-0">
+        <div class="flex items-center gap-1 bg-black/60 p-1 rounded-xl border theme-border text-xs shadow-inner">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5">🎨 Estilo:</span>
+          <button onclick="setTheme('anuu')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-purple-300" id="btn-theme-anuu">🌫️ Anuu</button>
+          <button onclick="setTheme('blood')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300" id="btn-theme-blood">🛡️ Blood</button>
+          <button onclick="setTheme('gw2')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300" id="btn-theme-gw2">⚡ GW2</button>
+          <button onclick="setTheme('bioinfo')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300" id="btn-theme-bioinfo">🧬 BioCode</button>
+          <button onclick="setTheme('duat')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300" id="btn-theme-duat">⚖️ Duat</button>
+          <button onclick="setTheme('neon')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="btn-theme-neon">🌸 Neón</button>
+        </div>
+
+        <div class="flex items-center gap-2 text-[11px] font-mono text-zinc-400">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>Engine: <b class="text-zinc-200">ANUU_KANUV_2077</b></span>
+          <span class="text-zinc-600">|</span>
+          <span class="text-purple-400 font-bold">CCN-STIC 800+ Ready</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAVEGACIÓN ENTRE LOS 4 MÓDULOS -->
+    <nav class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+      <button onclick="switchTab('autounattend')" id="tab-btn-autounattend" class="nav-tab active p-3 rounded-xl flex items-center gap-2.5 text-xs font-mono font-bold">
+        <span class="text-base">📄</span>
+        <div class="text-left">
+          <div>autounattend.xml</div>
+          <div class="text-[10px] text-zinc-400 font-normal">Windows 11/10 Desatendido</div>
+        </div>
+      </button>
+
+      <button onclick="switchTab('hardening')" id="tab-btn-hardening" class="nav-tab p-3 rounded-xl flex items-center gap-2.5 text-xs font-mono font-bold">
+        <span class="text-base">🛡️</span>
+        <div class="text-left">
+          <div>Hardening Scripts</div>
+          <div class="text-[10px] text-zinc-400 font-normal">PowerShell & Bash Shield</div>
+        </div>
+      </button>
+
+      <button onclick="switchTab('ventoy')" id="tab-btn-ventoy" class="nav-tab p-3 rounded-xl flex items-center gap-2.5 text-xs font-mono font-bold">
+        <span class="text-base">💾</span>
+        <div class="text-left">
+          <div>Ventoy Multi-Boot</div>
+          <div class="text-[10px] text-zinc-400 font-normal">USB Suite & GRUB2 Neon</div>
+        </div>
+      </button>
+
+      <button onclick="switchTab('service')" id="tab-btn-service" class="nav-tab p-3 rounded-xl flex items-center gap-2.5 text-xs font-mono font-bold">
+        <span class="text-base">💼</span>
+        <div class="text-left">
+          <div>Ficha de Servicio</div>
+          <div class="text-[10px] text-zinc-400 font-normal">Presupuestador Sysadmin</div>
+        </div>
+      </button>
+    </nav>
+
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 1: GENERADOR INTERACTIVO DE autounattend.xml                       -->
+    <!-- ========================================================================= -->
+    <section id="module-autounattend" class="space-y-6">
+      <!-- Barra de Presets de Windows -->
+      <div class="theme-card p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="text-zinc-400">⚡ Presets de Despliegue Rápido:</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+          <button onclick="applyUnattendPreset('kanuv_extreme')" class="px-3 py-1 rounded-lg bg-purple-950/60 border border-purple-800/80 text-purple-300 hover:bg-purple-900 transition-all">
+            🛡️ Kanuv Zero-Trust Extremo
+          </button>
+          <button onclick="applyUnattendPreset('gaming_low_latency')" class="px-3 py-1 rounded-lg bg-pink-950/60 border border-pink-800/80 text-pink-300 hover:bg-pink-900 transition-all">
+            🎮 Gaming & Sin Bloatware
+          </button>
+          <button onclick="applyUnattendPreset('legacy_hardware')" class="px-3 py-1 rounded-lg bg-amber-950/60 border border-amber-800/80 text-amber-300 hover:bg-amber-900 transition-all">
+            ⚙️ Rescate Hardware Antiguo (All Bypasses)
+          </button>
+          <button onclick="applyUnattendPreset('corporate_clean')" class="px-3 py-1 rounded-lg bg-emerald-950/60 border border-emerald-800/80 text-emerald-300 hover:bg-emerald-900 transition-all">
+            🏢 Flota Corporativa Limpia
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Panel de Configuración de Opciones (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Identidad y Cuentas -->
+          <div class="theme-card p-4 rounded-2xl space-y-3">
+            <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-purple-400 flex items-center gap-2">
+              <span>👤</span> Identidad de Sistema & Cuenta Local
+            </h3>
+            <div class="grid grid-cols-2 gap-3 text-xs font-mono">
+              <div>
+                <label class="block text-zinc-400 mb-1">Usuario Local:</label>
+                <input type="text" id="u-user" value="k4l1" oninput="generateXml()" class="w-full bg-black/50 border theme-border rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-purple-500">
+              </div>
+              <div>
+                <label class="block text-zinc-400 mb-1">Organización:</label>
+                <input type="text" id="u-org" value="4NVS3T" oninput="generateXml()" class="w-full bg-black/50 border theme-border rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-purple-500">
+              </div>
+              <div>
+                <label class="block text-zinc-400 mb-1">Idioma / UI:</label>
+                <select id="u-lang" onchange="generateXml()" class="w-full bg-black/50 border theme-border rounded-lg px-2 py-1.5 text-white focus:outline-none focus:border-purple-500">
+                  <option value="es-ES" selected>Español (es-ES)</option>
+                  <option value="es-MX">Español Latino (es-MX)</option>
+                  <option value="en-US">English (en-US)</option>
+                  <option value="en-GB">English UK (en-GB)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-zinc-400 mb-1">Arquitectura:</label>
+                <select id="u-arch" onchange="generateXml()" class="w-full bg-black/50 border theme-border rounded-lg px-2 py-1.5 text-white focus:outline-none focus:border-purple-500">
+                  <option value="amd64" selected>x86_64 (amd64)</option>
+                  <option value="arm64">ARM64 (Snapdragon/Apple)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bypasses de Requisitos Windows 11 -->
+          <div class="theme-card p-4 rounded-2xl space-y-3">
+            <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-pink-400 flex items-center gap-2">
+              <span>🛑</span> Bypasses de Requisitos Artificiales (Windows 11)
+            </h3>
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Bypass TPM 2.0 Check</span>
+                  <p class="text-[10px] text-zinc-400">Omite la exigencia de chip criptográfico TPM físico.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-tpm" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Bypass SecureBoot Check</span>
+                  <p class="text-[10px] text-zinc-400">Permite arranque sin llaves de Microsoft en placa base.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-secureboot" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Bypass CPU & RAM Check</span>
+                  <p class="text-[10px] text-zinc-400">Instala en CPUs no soportadas y sistemas con menos de 4GB RAM.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-cpuram" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Bypass Storage & Disk Check</span>
+                  <p class="text-[10px] text-zinc-400">Omite la comprobación obligatoria de 64GB de disco.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-storage" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Privacidad, Telemetría y Cuenta Local OOBE -->
+          <div class="theme-card p-4 rounded-2xl space-y-3">
+            <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
+              <span>🔒</span> Privacidad, Telemetría & Desconexión OOBE
+            </h3>
+            <div class="space-y-2 text-xs">
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">BypassNRO (Cuenta Local Forzada)</span>
+                  <p class="text-[10px] text-zinc-400">Desbloquea el botón "No tengo Internet" durante la instalación.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-bypassnro" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Aislamiento Temporal de Red en OOBE</span>
+                  <p class="text-[10px] text-zinc-400">Apaga adaptadores durante el setup y los reenciende al iniciar sesión.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-netisolate" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Desactivar Telemetría DiagTrack</span>
+                  <p class="text-[10px] text-zinc-400">Inyecta AllowTelemetry=0 en las directivas de Microsoft.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-telemetry" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Activar LSA Protection (RunAsPPL)</span>
+                  <p class="text-[10px] text-zinc-400">Bloquea extracción de credenciales de memoria LSASS (Mimikatz).</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-lsappl" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Desactivar SMBv1 Inseguro</span>
+                  <p class="text-[10px] text-zinc-400">Deshabilita el servicio mrxsmb10 vulnerable a EternalBlue.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-smbv1" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Forzar Tema Oscuro Universal</span>
+                  <p class="text-[10px] text-zinc-400">Aplica AppsUseLightTheme=0 y SystemUsesLightTheme=0.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-darkmode" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer hover:border-zinc-700">
+                <div>
+                  <span class="font-mono text-zinc-200">Desactivar OneDrive & Consumer Bloat</span>
+                  <p class="text-[10px] text-zinc-400">Previene la sincronización forzada y sugerencias publicitarias.</p>
+                </div>
+                <div class="tactical-switch">
+                  <input type="checkbox" id="chk-onedrive" checked onchange="generateXml()">
+                  <span class="tactical-slider"></span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Visor Reactivo de autounattend.xml (7 Cols) -->
+        <div class="lg:col-span-7 space-y-3">
+          <div class="flex items-center justify-between bg-black/40 px-3 py-2 rounded-xl border theme-border">
+            <div class="flex items-center gap-2 text-xs font-mono">
+              <span class="text-purple-400 font-bold">autounattend.xml</span>
+              <span id="xml-stats" class="text-zinc-500 text-[10px]">6,420 bytes • 128 líneas</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="copyXmlCode()" id="btn-copy-xml" class="px-2.5 py-1 rounded bg-black/60 border theme-border hover:border-purple-400 text-xs font-mono text-zinc-300 hover:text-white transition-all flex items-center gap-1.5">
+                <span>📋</span> Copiar XML
+              </button>
+              <button onclick="downloadXmlFile()" class="px-3 py-1 rounded bg-purple-600 hover:bg-purple-500 text-white text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-md">
+                <span>💾</span> Descargar .xml
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Box -->
+          <div class="relative rounded-2xl overflow-hidden border theme-border">
+            <div class="absolute top-2 right-2 text-[10px] font-mono text-zinc-500 uppercase tracking-widest bg-black/60 px-2 py-0.5 rounded border border-zinc-800">
+              XML / WinPE / specialize / oobeSystem
+            </div>
+            <pre class="code-viewport p-4 h-[650px] overflow-auto text-zinc-300" id="xml-code-view"></pre>
+          </div>
+
+          <!-- Instrucciones de Uso -->
+          <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-900/40 text-xs text-zinc-400 space-y-1">
+            <div class="font-mono text-purple-300 font-bold flex items-center gap-1.5">
+              <span>💡</span> ¿Dónde colocar autounattend.xml?
+            </div>
+            <p>
+              1. En la <b>raíz</b> de cualquier memoria USB de instalación de Windows 11/10 (junto a <code class="text-zinc-300">setup.exe</code> y <code class="text-zinc-300">bootmgr</code>).<br>
+              2. O en una unidad <b>Ventoy</b> configurando <code class="text-zinc-300">ventoy.json</code> en <code class="text-zinc-300">/AutoUnattend/autounattend.xml</code> (ver pestaña Ventoy).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 2: GENERADOR DE SCRIPTS DE HARDENING (Linux / Windows)             -->
+    <!-- ========================================================================= -->
+    <section id="module-hardening" class="space-y-6 hidden">
+      <!-- Selector de Sistema Operativo -->
+      <div class="theme-card p-4 rounded-2xl flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono text-zinc-400">Target Hardening Platform:</span>
+          <div class="inline-flex rounded-xl bg-black/60 p-1 border theme-border">
+            <button onclick="setHardeningPlatform('ps1')" id="btn-plat-ps1" class="px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition-all bg-purple-600 text-white shadow">
+              ⚡ PowerShell (Windows 11 / Server)
+            </button>
+            <button onclick="setHardeningPlatform('sh')" id="btn-plat-sh" class="px-4 py-1.5 rounded-lg text-xs font-mono font-bold transition-all text-zinc-400 hover:text-white">
+              🐧 Bash (Linux / Debian / Kali / RHEL)
+            </button>
+          </div>
+        </div>
+
+        <!-- Presets de Bastionado -->
+        <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+          <button onclick="applyHardeningPreset('paranoid')" class="px-3 py-1 rounded-lg bg-rose-950/60 border border-rose-800/80 text-rose-300 hover:bg-rose-900 transition-all">
+            🚨 Paranoico / Zero-Trust
+          </button>
+          <button onclick="applyHardeningPreset('server_prod')" class="px-3 py-1 rounded-lg bg-cyan-950/60 border border-cyan-800/80 text-cyan-300 hover:bg-cyan-900 transition-all">
+            🌐 Servidor Público CCN-STIC
+          </button>
+          <button onclick="applyHardeningPreset('workstation_ssd')" class="px-3 py-1 rounded-lg bg-purple-950/60 border border-purple-800/80 text-purple-300 hover:bg-purple-900 transition-all">
+            🚀 Workstation SSD / Pendrive Flash
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Opciones de Hardening (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4">
+
+          <!-- Controles de Windows (si ps1 activo) -->
+          <div id="controls-win" class="space-y-4">
+            <div class="theme-card p-4 rounded-2xl space-y-3">
+              <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-purple-400 flex items-center gap-2">
+                <span>🛡️</span> Vectores de Fortificación Windows (PowerShell)
+              </h3>
+              <div class="space-y-2 text-xs">
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Cloudflare DoH (1.1.1.2 Anti-Malware)</span>
+                    <p class="text-[10px] text-zinc-400">DNS cifrado sobre HTTPS con bloqueo de phishing y malware.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="w-doh" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Desactivar SMBv1, NTLMv1, LLMNR & NetBIOS</span>
+                    <p class="text-[10px] text-zinc-400">Mitiga envenenamiento de red por Responder y relés NTLM.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="w-netpoison" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">LSA Protection & ScriptBlock Logging</span>
+                    <p class="text-[10px] text-zinc-400">RunAsPPL=1 y auditoría forense completa de scripts PowerShell.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="w-lsa-audit" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Windows Sandbox (Aislamiento de Malware)</span>
+                    <p class="text-[10px] text-zinc-400">Habilita Containers-DisposableClientVM para detonar ejecutables.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="w-sandbox" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">RAMDisk para %TEMP% (Preservar SSD/Flash)</span>
+                    <p class="text-[10px] text-zinc-400">Crea unidad ImDisk de 1GB en R:\ para reducir ciclos de escritura.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="w-ramdisk" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Desactivar SysMain & Windows Search</span>
+                    <p class="text-[10px] text-zinc-400">Elimina el indexado continuo en pendrives y discos extraíbles.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="w-sysmain" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Estética Cyberpunk Neón (Acentos Magenta/Cian)</span>
+                    <p class="text-[10px] text-zinc-400">Aplica paleta oscura de alto contraste estilo Kanuv 2077.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="w-cyberpunk" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles de Linux (si sh activo) -->
+          <div id="controls-linux" class="space-y-4 hidden">
+            <div class="theme-card p-4 rounded-2xl space-y-3">
+              <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+                <span>🐧</span> Vectores de Fortificación Linux (Bash)
+              </h3>
+              <div class="space-y-2 text-xs">
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Hardening de SSH (OpenSSH Server)</span>
+                    <p class="text-[10px] text-zinc-400">PermitRootLogin no, PasswordAuthentication no, MaxAuthTries 3.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="l-ssh" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Cortafuegos UFW Default Deny Incoming</span>
+                    <p class="text-[10px] text-zinc-400">Bloquea todo tráfico entrante salvo puertos explícitos y rate-limiting.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="l-ufw" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Bastionado de Kernel Sysctl</span>
+                    <p class="text-[10px] text-zinc-400">ASLR aleatorio (2), SYN cookies, rp_filter y dmesg restringido.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="l-sysctl" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Restricción de Memoria Yama (ptrace_scope=2)</span>
+                    <p class="text-[10px] text-zinc-400">Impide que procesos de usuario espíen la memoria de otros procesos.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="l-yama" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">Deshabilitar Protocolos Obsoletos (DCCP, SCTP...)</span>
+                    <p class="text-[10px] text-zinc-400">Bloquea en modprobe protocolos de red no utilizados en servidores modernos.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="l-modprobe" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+
+                <label class="flex items-center justify-between p-2 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                  <div>
+                    <span class="font-mono text-zinc-200">DNS Cifrado Cloudflare DoH (systemd-resolved)</span>
+                    <p class="text-[10px] text-zinc-400">Configura DNSSEC y DNSOverTLS en resolved.conf hacia 1.1.1.2.</p>
+                  </div>
+                  <div class="tactical-switch">
+                    <input type="checkbox" id="l-doh" checked onchange="generateHardeningScript()">
+                    <span class="tactical-slider"></span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Visor del Script de Hardening (7 Cols) -->
+        <div class="lg:col-span-7 space-y-3">
+          <div class="flex items-center justify-between bg-black/40 px-3 py-2 rounded-xl border theme-border">
+            <div class="flex items-center gap-2 text-xs font-mono">
+              <span id="script-filename" class="text-cyan-400 font-bold">hardened_blue_purple.ps1</span>
+              <span id="script-stats" class="text-zinc-500 text-[10px]">6,850 bytes</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="copyScriptCode()" id="btn-copy-script" class="px-2.5 py-1 rounded bg-black/60 border theme-border hover:border-cyan-400 text-xs font-mono text-zinc-300 hover:text-white transition-all flex items-center gap-1.5">
+                <span>📋</span> Copiar Script
+              </button>
+              <button onclick="downloadScriptFile()" class="px-3 py-1 rounded bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-md">
+                <span>💾</span> Descargar Script
+              </button>
+            </div>
+          </div>
+
+          <div class="relative rounded-2xl overflow-hidden border theme-border">
+            <div class="absolute top-2 right-2 text-[10px] font-mono text-zinc-500 uppercase tracking-widest bg-black/60 px-2 py-0.5 rounded border border-zinc-800">
+              Zero-Trust Hardening Profile
+            </div>
+            <pre class="code-viewport p-4 h-[650px] overflow-auto text-zinc-300" id="script-code-view"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 3: VENTOY MULTI-BOOT MANAGER                                       -->
+    <!-- ========================================================================= -->
+    <section id="module-ventoy" class="space-y-6 hidden">
+      <!-- Visor de Particionado y Estructura USB -->
+      <div class="theme-card p-5 rounded-2xl space-y-4">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-b theme-border pb-3">
+          <div>
+            <h2 class="text-sm font-mono font-bold text-white flex items-center gap-2">
+              <span>💾</span> Estructura y Esquema de Particionado Ventoy (Anuu Core X5)
+            </h2>
+            <p class="text-xs text-zinc-400 mt-0.5">
+              Arquitectura de almacenamiento híbrido UEFI (GPT/MBR) con inyección automática de <code class="text-purple-300">autounattend.xml</code> y tema Neón Seinen.
+            </p>
+          </div>
+          <span class="text-xs font-mono px-3 py-1 rounded-lg bg-pink-950/60 border border-pink-700/60 text-pink-300">
+            Target: SSD NVMe USB 3.2 / Flash Pendrive
+          </span>
+        </div>
+
+        <!-- Barra visual de particiones -->
+        <div class="space-y-2">
+          <div class="flex h-10 w-full rounded-xl overflow-hidden border border-zinc-700 text-xs font-mono font-bold">
+            <div class="w-[88%] bg-gradient-to-r from-purple-900/80 to-indigo-900/80 flex items-center justify-between px-4 text-purple-200 border-r border-zinc-700">
+              <span>Partición 1: Ventoy (ExFAT / NTFS) — ISOs, Herramientas, AutoUnattend</span>
+              <span class="text-[11px] text-purple-300/80">~120 GB a 2 TB</span>
+            </div>
+            <div class="w-[12%] bg-gradient-to-r from-pink-900/90 to-rose-900/90 flex items-center justify-center text-pink-200 text-center px-1">
+              <span>Partición 2: VTOYEFI (FAT16) [32MB]</span>
+            </div>
+          </div>
+          <div class="flex justify-between text-[11px] font-mono text-zinc-400 px-1">
+            <span>/ISOS (Seguridad, Rescue, Forense, SOs) | /ventoy/theme/cyber_neon | /AutoUnattend</span>
+            <span>Bootloader GRUB2 x86_64 / IA32 / ARM64 Firmado UEFI</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulador de Pantalla Ventoy GRUB2 & Configuración ventoy.json -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Simulador Interactivo de Menú GRUB2 Ventoy (6 Cols) -->
+        <div class="lg:col-span-6 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono font-bold text-pink-400 flex items-center gap-1.5">
+              <span>🖥️</span> Previsualización del Menú Ventoy (Cyberpunk Neón)
+            </span>
+            <span class="text-[10px] font-mono text-zinc-500">1920x1080 GUI Display Mode</span>
+          </div>
+
+          <!-- Monitor Ciberpunk Ventoy -->
+          <div class="ventoy-screen rounded-2xl p-6 relative overflow-hidden font-mono min-h-[440px] flex flex-col justify-between">
+            <div class="scanlines absolute inset-0"></div>
+
+            <!-- Top Header del Menú -->
+            <div class="relative z-10 border-b border-pink-500/40 pb-3 flex items-center justify-between">
+              <div>
+                <div class="text-sm font-black text-pink-500 tracking-wider flex items-center gap-2">
+                  <span>ANUU CORE X5</span>
+                  <span class="text-[11px] text-cyan-400 font-normal">:: WIN11 PRO CYBERPUNK HARDENED</span>
+                </div>
+                <div class="text-[10px] text-zinc-400">Ventoy v1.1.17 • UEFI x86_64 SecureBoot Capable</div>
+              </div>
+              <div class="text-xs text-pink-400 border border-pink-500/50 px-2 py-0.5 rounded bg-black/60">
+                161914 Hz
+              </div>
+            </div>
+
+            <!-- Lista de ISOs Interactiva -->
+            <div class="relative z-10 my-4 space-y-1.5" id="ventoy-menu-items">
+              <div onclick="selectVentoyItem(0)" class="ventoy-item selected p-2 rounded-lg text-xs flex items-center justify-between bg-pink-950/30">
+                <span class="flex items-center gap-2">
+                  <span>▸</span> <b class="text-pink-400">Windows 11 Pro Hardened 25H2 (AutoUnattend)</b>
+                </span>
+                <span class="text-[10px] text-zinc-400">/ISOS/Win11_Hardened.iso</span>
+              </div>
+              <div onclick="selectVentoyItem(1)" class="ventoy-item p-2 rounded-lg text-xs text-cyan-400 flex items-center justify-between">
+                <span class="flex items-center gap-2">
+                  <span>&nbsp;&nbsp;</span> Kali Linux Rolling 2026 Live Forensics
+                </span>
+                <span class="text-[10px] text-zinc-400">/ISOS/kali-linux-live.iso</span>
+              </div>
+              <div onclick="selectVentoyItem(2)" class="ventoy-item p-2 rounded-lg text-xs text-cyan-400 flex items-center justify-between">
+                <span class="flex items-center gap-2">
+                  <span>&nbsp;&nbsp;</span> SystemRescueCD 11.0 Standard Sysadmin
+                </span>
+                <span class="text-[10px] text-zinc-400">/ISOS/systemrescue.iso</span>
+              </div>
+              <div onclick="selectVentoyItem(3)" class="ventoy-item p-2 rounded-lg text-xs text-cyan-400 flex items-center justify-between">
+                <span class="flex items-center gap-2">
+                  <span>&nbsp;&nbsp;</span> SANS SIFT / CAINE Incident Triage Live
+                </span>
+                <span class="text-[10px] text-zinc-400">/ISOS/caine_forensics.iso</span>
+              </div>
+              <div onclick="selectVentoyItem(4)" class="ventoy-item p-2 rounded-lg text-xs text-cyan-400 flex items-center justify-between">
+                <span class="flex items-center gap-2">
+                  <span>&nbsp;&nbsp;</span> Clonezilla Live Disk Imager (GParted)
+                </span>
+                <span class="text-[10px] text-zinc-400">/ISOS/clonezilla-live.iso</span>
+              </div>
+            </div>
+
+            <!-- Bottom Status bar -->
+            <div class="relative z-10 border-t border-cyan-500/30 pt-3 flex items-center justify-between text-[11px] text-cyan-300">
+              <span id="ventoy-item-desc">Inyección activa de autounattend.xml • Bypass TPM/SecureBoot • Local Account</span>
+              <span class="text-pink-400">Timeout: 10s</span>
+            </div>
+          </div>
+
+          <!-- Guía CLI de Instalación Rápida -->
+          <div class="theme-card p-4 rounded-xl space-y-2 text-xs font-mono">
+            <div class="text-zinc-300 font-bold flex items-center gap-1.5">
+              <span>⌨️</span> Despliegue en 1 Comando desde Bash (Kali Linux):
+            </div>
+            <div class="bg-black/70 p-2.5 rounded-lg border theme-border text-pink-300 overflow-x-auto select-all">
+              sudo /home/kali/hearthstone-linux/ISOS/deploy_blue_purple_usb.sh /dev/sdX
+            </div>
+            <p class="text-[10px] text-zinc-400">
+              Sustituir <code class="text-zinc-200">/dev/sdX</code> por el identificador del pendrive o disco SSD externo detectado en <code class="text-zinc-200">lsblk</code>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Generador de Archivos de Ventoy: ventoy.json & theme.txt (6 Cols) -->
+        <div class="lg:col-span-6 space-y-4">
+          <!-- Selector de Archivo de Configuración -->
+          <div class="flex items-center justify-between">
+            <div class="inline-flex rounded-xl bg-black/60 p-1 border theme-border">
+              <button onclick="setVentoyConfigTab('json')" id="btn-vtab-json" class="px-3 py-1 rounded-lg text-xs font-mono font-bold bg-pink-600 text-white">
+                ventoy.json
+              </button>
+              <button onclick="setVentoyConfigTab('theme')" id="btn-vtab-theme" class="px-3 py-1 rounded-lg text-xs font-mono font-bold text-zinc-400 hover:text-white">
+                theme.txt
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="copyVentoyConfig()" id="btn-copy-ventoy" class="px-2.5 py-1 rounded bg-black/60 border theme-border hover:border-pink-400 text-xs font-mono text-zinc-300 hover:text-white transition-all flex items-center gap-1">
+                <span>📋</span> Copiar
+              </button>
+              <button onclick="downloadVentoyConfig()" id="btn-download-ventoy" class="px-3 py-1 rounded bg-pink-600 hover:bg-pink-500 text-white text-xs font-mono font-bold transition-all flex items-center gap-1 shadow">
+                <span>💾</span> Descargar
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Viewport para Ventoy -->
+          <div class="relative rounded-2xl overflow-hidden border theme-border">
+            <pre class="code-viewport p-4 h-[510px] overflow-auto text-zinc-300" id="ventoy-code-view"></pre>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- MÓDULO 4: FICHA DE SERVICIO SYSADMIN & PRESUPUESTADOR                     -->
+    <!-- ========================================================================= -->
+    <section id="module-service" class="space-y-6 hidden">
+      <!-- Tarjeta de Solvencia Técnica / Sysadmin Dossier -->
+      <div class="theme-card p-6 rounded-2xl border relative overflow-hidden">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 border-b theme-border pb-6">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center text-3xl shadow-lg border border-purple-400/50 shrink-0">
+              🛡️
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h2 class="text-lg font-black text-white">Roberto Alaya Mallagray</h2>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-950/80 border border-purple-700/80 text-purple-300">ASIR & SMR</span>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-700/80 text-emerald-300">INCIBE Blue Team 250h</span>
+              </div>
+              <p class="text-xs font-mono text-zinc-400 mt-0.5">
+                Sysadmin Senior • Ingeniera de Hardening CCN-STIC • Virtualización VMware ESXi & Redes Críticas
+              </p>
+              <div class="flex flex-wrap items-center gap-3 mt-2 text-[11px] font-mono text-zinc-400">
+                <span>🏛️ CSIC (ICTAN)</span>
+                <span>•</span>
+                <span>🛡️ Sidertia Solutions CCN-STIC</span>
+                <span>•</span>
+                <span>🚆 SMS Europa (Proyecto ADIF)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2.5">
+            <a href="https://signal.me/#u/k4li.89" target="_blank" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-mono font-bold flex items-center gap-2 shadow-md transition-all">
+              <span>💬</span> Contactar por Signal (@k4li.89)
+            </a>
+            <a href="contract_generator.html" target="_blank" class="px-4 py-2 rounded-xl bg-black/60 border theme-border hover:border-purple-400 text-purple-300 hover:text-white text-xs font-mono font-bold flex items-center gap-2 transition-all">
+              <span>📜</span> Generar SOW Criptográfico
+            </a>
+          </div>
+        </div>
+
+        <!-- Resumen de Competencias Periciales -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6 text-xs font-mono">
+          <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-1.5">
+            <div class="text-purple-300 font-bold flex items-center gap-1.5">
+              <span>🖥️</span> Despliegue Automatizado
+            </div>
+            <p class="text-zinc-400 text-[11px]">
+              Creación de imágenes maestras doradas con sysprep, autounattend.xml sin bloatware y llaves de rescate Ventoy bootable para flotas corporativas.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-1.5">
+            <div class="text-cyan-300 font-bold flex items-center gap-1.5">
+              <span>🛡️</span> Bastionado CCN-STIC
+            </div>
+            <p class="text-zinc-400 text-[11px]">
+              Hardening integral bajo normas del Centro Criptológico Nacional (CCN) en Linux (Debian/RHEL) y Windows Server / Active Directory.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-1.5">
+            <div class="text-emerald-300 font-bold flex items-center gap-1.5">
+              <span>📊</span> Monitorización & SIEM
+            </div>
+            <p class="text-zinc-400 text-[11px]">
+              Implantación de agentes Wazuh, Graylog y Pandora FMS con recolección de eventos Syslog sin saturación de red ni falsos positivos.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-1.5">
+            <div class="text-amber-300 font-bold flex items-center gap-1.5">
+              <span>🔒</span> Redes & VPN Zero-Trust
+            </div>
+            <p class="text-zinc-400 text-[11px]">
+              Segmentación VLAN, túneles WireGuard/OpenVPN, DNS sobre HTTPS (DoH) y bloqueo perimetral de vectores de robo de credenciales.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculadora / Presupuestador Interactivo de Flota -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Parámetros del Proyecto (7 Cols) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="theme-card p-5 rounded-2xl space-y-4">
+            <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
+              <span>⚙️</span> Calculador de Presupuesto & Alcance de Despliegue
+            </h3>
+
+            <!-- Slider: Número de Puestos de Trabajo / Endpoints -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center text-xs font-mono">
+                <span class="text-zinc-300">Puestos de Trabajo (PCs / Laptops):</span>
+                <span id="val-endpoints" class="text-purple-400 font-bold text-sm">10 equipos</span>
+              </div>
+              <input type="range" id="range-endpoints" min="1" max="100" value="10" oninput="calculateQuote()" class="w-full accent-purple-600 bg-zinc-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+                <span>1 equipo (Express)</span>
+                <span>25 equipos</span>
+                <span>50 equipos</span>
+                <span>100+ (Flota)</span>
+              </div>
+            </div>
+
+            <!-- Slider: Servidores Dedicados / VPS -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center text-xs font-mono">
+                <span class="text-zinc-300">Servidores / Nodos de Infraestructura (Linux / Windows Server):</span>
+                <span id="val-servers" class="text-cyan-400 font-bold text-sm">2 servidores</span>
+              </div>
+              <input type="range" id="range-servers" min="0" max="20" value="2" oninput="calculateQuote()" class="w-full accent-cyan-600 bg-zinc-800 rounded-lg cursor-pointer">
+              <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+                <span>0</span>
+                <span>5</span>
+                <span>10</span>
+                <span>20 servidores</span>
+              </div>
+            </div>
+
+            <!-- Servicios Adicionales con Checkbox -->
+            <div class="space-y-2 pt-2 border-t theme-border text-xs font-mono">
+              <span class="text-zinc-400 block mb-2">Módulos Opcionales de Entrega:</span>
+              
+              <label class="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                <div>
+                  <span class="text-zinc-200">Llaves de Rescate USB Ventoy Físicas (x2) Preconfiguradas</span>
+                  <p class="text-[10px] text-zinc-400">Entrega de 2 pendrives 64GB de alta velocidad listos para booteo corporativo.</p>
+                </div>
+                <input type="checkbox" id="svc-usb" checked onchange="calculateQuote()" class="accent-purple-600 w-4 h-4">
+              </label>
+
+              <label class="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                <div>
+                  <span class="text-zinc-200">Implantación de Agente SIEM / Wazuh EDR Centralizado</span>
+                  <p class="text-[10px] text-zinc-400">Monitorización de integridad FIM y detección de anomalías MITRE ATT&CK.</p>
+                </div>
+                <input type="checkbox" id="svc-wazuh" checked onchange="calculateQuote()" class="accent-purple-600 w-4 h-4">
+              </label>
+
+              <label class="flex items-center justify-between p-2.5 rounded-lg bg-black/30 border border-zinc-800/80 cursor-pointer">
+                <div>
+                  <span class="text-zinc-200">Dossier de Auditoría Forense y Cumplimiento CCN-STIC</span>
+                  <p class="text-[10px] text-zinc-400">Documento técnico pericial formal con matrices de controles y firmas criptográficas.</p>
+                </div>
+                <input type="checkbox" id="svc-dossier" checked onchange="calculateQuote()" class="accent-purple-600 w-4 h-4">
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Resumen de Propuesta Presupuestaria (5 Cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="theme-card p-5 rounded-2xl space-y-4 border border-purple-500/30">
+            <div class="flex items-center justify-between border-b theme-border pb-3">
+              <span class="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold">
+                Presupuesto Estimado K4L1 Studio
+              </span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-300">
+                Regla 50/50 Hito Seguro
+              </span>
+            </div>
+
+            <!-- Precios y Desglose -->
+            <div class="space-y-3 font-mono">
+              <div class="text-center py-3 bg-black/60 rounded-xl border theme-border">
+                <div class="text-[10px] text-zinc-400 uppercase tracking-widest">Inversión Total Estimada</div>
+                <div class="text-3xl font-black text-white mt-1" id="total-price">890 €</div>
+                <div class="text-[11px] text-zinc-500 mt-0.5" id="total-hours">Aprox. 16 horas técnicas especializadas</div>
+              </div>
+
+              <div class="space-y-1.5 text-xs text-zinc-300 border-t theme-border pt-3">
+                <div class="flex justify-between">
+                  <span class="text-zinc-400">Despliegue Endpoints:</span>
+                  <span id="cost-endpoints">350 €</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-zinc-400">Hardening Servidores:</span>
+                  <span id="cost-servers">240 €</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-zinc-400">Módulos Opcionales:</span>
+                  <span id="cost-addons">300 €</span>
+                </div>
+                <div class="flex justify-between border-t border-zinc-800 pt-2 text-zinc-400">
+                  <span>Anticipo al Iniciar (50%):</span>
+                  <span class="text-white font-bold" id="cost-deposit">445 €</span>
+                </div>
+                <div class="flex justify-between text-zinc-400">
+                  <span>Liquidación tras Verificación (50%):</span>
+                  <span class="text-emerald-400 font-bold" id="cost-final">445 €</span>
+                </div>
+              </div>
+
+              <!-- Botones de Acción -->
+              <div class="pt-3 space-y-2">
+                <button onclick="copyQuoteProposal()" id="btn-copy-quote" class="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg">
+                  <span>📋</span> Copiar Propuesta para Cliente
+                </button>
+                <a href="https://signal.me/#u/k4li.89" target="_blank" class="w-full py-2 rounded-xl bg-black/60 border theme-border hover:border-purple-400 text-zinc-300 hover:text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
+                  <span>💬</span> Iniciar Contratación vía Signal
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER PERICIAL KANUV -->
+    <footer class="pt-6 pb-4 border-t theme-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-zinc-500">
+      <div class="flex items-center gap-2">
+        <span>🛡️ Kanuv Engine • Concilio ACE (161914)</span>
+        <span>•</span>
+        <span>Frecuencia: 189.89.619 Hz</span>
+      </div>
+      <div>
+        <span>K4L1 STUDIO // Soberanía Tecnológica & Hardening</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Toast de Notificaciones -->
+  <div id="toast" class="fixed bottom-6 right-6 px-4 py-2.5 rounded-xl bg-black/90 border border-purple-500/60 text-white text-xs font-mono shadow-2xl flex items-center gap-2 opacity-0 pointer-events-none transition-all duration-300 z-50">
+    <span class="text-purple-400">✓</span>
+    <span id="toast-msg">Operación completada</span>
+  </div>
+
+  <!-- LOGICA DE GENERACIÓN Y CONTROLADORES JAVASCRIPT -->
+  <script>
+    // ESTADO GLOBAL
+    let currentTheme = localStorage.getItem('k4li_theme') || 'anuu';
+    let currentTab = 'autounattend';
+    let currentHardeningPlat = 'ps1';
+    let currentVentoyConfig = 'json';
+    let selectedVentoyIdx = 0;
+
+    // APLICAR TEMA
+    function setTheme(theme) {
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('k4li_theme', theme);
+      updateThemeButtons();
+    }
+
+    function updateThemeButtons() {
+      const themes = ['anuu', 'blood', 'gw2', 'bioinfo', 'duat', 'neon'];
+      themes.forEach(t => {
+        const btn = document.getElementById('btn-theme-' + t);
+        if (btn) {
+          if (t === currentTheme) {
+            btn.classList.add('bg-zinc-800', 'text-white', 'shadow');
+          } else {
+            btn.classList.remove('bg-zinc-800', 'text-white', 'shadow');
+          }
+        }
+      });
+    }
+
+    // NAVEGACIÓN ENTRE PESTAÑAS
+    function switchTab(tabId) {
+      currentTab = tabId;
+      const tabs = ['autounattend', 'hardening', 'ventoy', 'service'];
+      tabs.forEach(t => {
+        const moduleEl = document.getElementById('module-' + t);
+        const tabBtn = document.getElementById('tab-btn-' + t);
+        if (t === tabId) {
+          if (moduleEl) moduleEl.classList.remove('hidden');
+          if (tabBtn) tabBtn.classList.add('active');
+        } else {
+          if (moduleEl) moduleEl.classList.add('hidden');
+          if (tabBtn) tabBtn.classList.remove('active');
+        }
+      });
+    }
+
+    // MOSTRAR TOAST
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-msg');
+      if (toast && msg) {
+        msg.textContent = message;
+        toast.classList.remove('opacity-0', 'pointer-events-none');
+        toast.classList.add('opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('opacity-100');
+          toast.classList.add('opacity-0', 'pointer-events-none');
+        }, 2600);
+      }
+    }
+
+    // =========================================================================
+    // MÓDULO 1: LÓGICA DE autounattend.xml
+    // =========================================================================
+    function generateXml() {
+      const user = document.getElementById('u-user').value || 'k4l1';
+      const org = document.getElementById('u-org').value || '4NVS3T';
+      const lang = document.getElementById('u-lang').value || 'es-ES';
+      const arch = document.getElementById('u-arch').value || 'amd64';
+
+      const tpm = document.getElementById('chk-tpm').checked;
+      const secureboot = document.getElementById('chk-secureboot').checked;
+      const cpuram = document.getElementById('chk-cpuram').checked;
+      const storage = document.getElementById('chk-storage').checked;
+      const bypassnro = document.getElementById('chk-bypassnro').checked;
+      const netisolate = document.getElementById('chk-netisolate').checked;
+      const telemetry = document.getElementById('chk-telemetry').checked;
+      const lsappl = document.getElementById('chk-lsappl').checked;
+      const smbv1 = document.getElementById('chk-smbv1').checked;
+      const darkmode = document.getElementById('chk-darkmode').checked;
+      const onedrive = document.getElementById('chk-onedrive').checked;
+
+      // Armado de comandos en windowsPE (RunSynchronous)
+      let winpeCommands = [];
+      let order = 1;
+
+      if (tpm) {
+        winpeCommands.push(`        <RunSynchronousCommand wcm:action="add">
+          <Order>${order++}</Order>
+          <Description>Bypass TPM Check</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+      if (secureboot) {
+        winpeCommands.push(`        <RunSynchronousCommand wcm:action="add">
+          <Order>${order++}</Order>
+          <Description>Bypass SecureBoot Check</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+      if (storage) {
+        winpeCommands.push(`        <RunSynchronousCommand wcm:action="add">
+          <Order>${order++}</Order>
+          <Description>Bypass Storage Check</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassStorageCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>${order++}</Order>
+          <Description>Bypass Disk Check</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassDiskCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+      if (cpuram) {
+        winpeCommands.push(`        <RunSynchronousCommand wcm:action="add">
+          <Order>${order++}</Order>
+          <Description>Bypass CPU Check</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassCPUCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>${order++}</Order>
+          <Description>Bypass RAM Check</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\Setup\\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+
+      // Armado de comandos en specialize
+      let specCommands = [];
+      let sOrder = 1;
+
+      if (bypassnro) {
+        specCommands.push(`        <RunSynchronousCommand wcm:action="add">
+          <Order>${sOrder++}</Order>
+          <Description>Registry Entry to Create a Local Account during OOBE</Description>
+          <Path>reg.exe add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+
+      if (netisolate) {
+        specCommands.push(`        <!-- CRITICAL: Disable network adapters to force offline OOBE local account -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>${sOrder++}</Order>
+          <Description>Disable All Network Adapters to Allow Local Account Creation</Description>
+          <Path>powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Get-NetAdapter | Disable-NetAdapter -Confirm:$false"</Path>
+        </RunSynchronousCommand>`);
+      }
+
+      if (telemetry) {
+        specCommands.push(`        <!-- Disable Telemetry DiagTrack -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>${sOrder++}</Order>
+          <Description>Disable Telemetry DataCollection</Description>
+          <Path>reg.exe add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+
+      if (lsappl) {
+        specCommands.push(`        <!-- Enable LSA Protection against Credential Dumping -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>${sOrder++}</Order>
+          <Description>Enable LSA Protection RunAsPPL</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa" /v RunAsPPL /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+
+      if (smbv1) {
+        specCommands.push(`        <!-- Disable Insecure SMBv1 -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>${sOrder++}</Order>
+          <Description>Disable SMBv1 mrxsmb10 Service</Description>
+          <Path>reg.exe add "HKLM\\SYSTEM\\CurrentControlSet\\Services\\mrxsmb10" /v Start /t REG_DWORD /d 4 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+
+      if (onedrive) {
+        specCommands.push(`        <!-- Disable OneDrive Setup and Consumer Suggestions -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>${sOrder++}</Order>
+          <Description>Disable OneDrive In OOBE</Description>
+          <Path>reg.exe add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive" /v DisableFileSyncNGSC /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>`);
+      }
+
+      // FirstLogonCommands en oobeSystem
+      let firstLogonCommands = [];
+      let fOrder = 1;
+
+      if (netisolate) {
+        firstLogonCommands.push(`        <SynchronousCommand wcm:action="add">
+          <Order>${fOrder++}</Order>
+          <Description>Enables Network Adapters After OOBE Completes</Description>
+          <CommandLine>powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Get-NetAdapter | Enable-NetAdapter -Confirm:$false"</CommandLine>
+        </SynchronousCommand>`);
+      }
+
+      if (darkmode) {
+        firstLogonCommands.push(`        <!-- Force Dark Mode for Apps and System -->
+        <SynchronousCommand wcm:action="add">
+          <Order>${fOrder++}</Order>
+          <Description>Set Apps Dark Theme</Description>
+          <CommandLine>reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v AppsUseLightTheme /t REG_DWORD /d 0 /f</CommandLine>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>${fOrder++}</Order>
+          <Description>Set System Dark Theme</Description>
+          <CommandLine>reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize" /v SystemUsesLightTheme /t REG_DWORD /d 0 /f</CommandLine>
+        </SynchronousCommand>`);
+      }
+
+      const xml = `<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+  <!--
+    autounattend.xml para Windows 11 Pro Hardened (${lang})
+    Forjado por: Kanuv 🛡️ (189.89.619 Hz) // Concilio ACE
+    Organización: ${org} / Usuario Local: ${user}
+    Totalmente desatendido, Zero-Telemetry y Bypass de Restricciones.
+  -->
+
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="${arch}" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <SetupUILanguage>
+        <UILanguage>${lang}</UILanguage>
+      </SetupUILanguage>
+      <InputLocale>${lang}</InputLocale>
+      <SystemLocale>${lang}</SystemLocale>
+      <UILanguage>${lang}</UILanguage>
+      <UserLocale>${lang}</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Setup" processorArchitecture="${arch}" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UserData>
+        <AcceptEula>true</AcceptEula>
+        <FullName>${user}</FullName>
+        <Organization>${org}</Organization>
+      </UserData>
+      <RunSynchronous>
+${winpeCommands.join('\n')}
+      </RunSynchronous>
+    </component>
+  </settings>
+
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Deployment" processorArchitecture="${arch}" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <RunSynchronous>
+${specCommands.join('\n')}
+      </RunSynchronous>
+    </component>
+  </settings>
+
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="${arch}" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+        <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+        <NetworkLocation>Work</NetworkLocation>
+        <ProtectYourPC>3</ProtectYourPC>
+      </OOBE>
+      <FirstLogonCommands>
+${firstLogonCommands.join('\n')}
+      </FirstLogonCommands>
+    </component>
+  </settings>
+</unattend>`;
+
+      const codeView = document.getElementById('xml-code-view');
+      if (codeView) {
+        codeView.textContent = xml;
+      }
+
+      // Actualizar stats
+      const lines = xml.split('\n').length;
+      const bytes = new Blob([xml]).size;
+      const stats = document.getElementById('xml-stats');
+      if (stats) {
+        stats.textContent = `${bytes.toLocaleString()} bytes • ${lines} líneas`;
+      }
+    }
+
+    function applyUnattendPreset(preset) {
+      if (preset === 'kanuv_extreme') {
+        document.getElementById('chk-tpm').checked = true;
+        document.getElementById('chk-secureboot').checked = true;
+        document.getElementById('chk-cpuram').checked = true;
+        document.getElementById('chk-storage').checked = true;
+        document.getElementById('chk-bypassnro').checked = true;
+        document.getElementById('chk-netisolate').checked = true;
+        document.getElementById('chk-telemetry').checked = true;
+        document.getElementById('chk-lsappl').checked = true;
+        document.getElementById('chk-smbv1').checked = true;
+        document.getElementById('chk-darkmode').checked = true;
+        document.getElementById('chk-onedrive').checked = true;
+      } else if (preset === 'gaming_low_latency') {
+        document.getElementById('chk-tpm').checked = true;
+        document.getElementById('chk-secureboot').checked = true;
+        document.getElementById('chk-cpuram').checked = true;
+        document.getElementById('chk-storage').checked = false;
+        document.getElementById('chk-bypassnro').checked = true;
+        document.getElementById('chk-netisolate').checked = true;
+        document.getElementById('chk-telemetry').checked = true;
+        document.getElementById('chk-lsappl').checked = false;
+        document.getElementById('chk-smbv1').checked = true;
+        document.getElementById('chk-darkmode').checked = true;
+        document.getElementById('chk-onedrive').checked = true;
+      } else if (preset === 'legacy_hardware') {
+        document.getElementById('chk-tpm').checked = true;
+        document.getElementById('chk-secureboot').checked = true;
+        document.getElementById('chk-cpuram').checked = true;
+        document.getElementById('chk-storage').checked = true;
+        document.getElementById('chk-bypassnro').checked = true;
+        document.getElementById('chk-netisolate').checked = false;
+        document.getElementById('chk-telemetry').checked = true;
+        document.getElementById('chk-lsappl').checked = false;
+        document.getElementById('chk-smbv1').checked = false;
+        document.getElementById('chk-darkmode').checked = true;
+        document.getElementById('chk-onedrive').checked = true;
+      } else if (preset === 'corporate_clean') {
+        document.getElementById('chk-tpm').checked = false;
+        document.getElementById('chk-secureboot').checked = false;
+        document.getElementById('chk-cpuram').checked = false;
+        document.getElementById('chk-storage').checked = false;
+        document.getElementById('chk-bypassnro').checked = true;
+        document.getElementById('chk-netisolate').checked = true;
+        document.getElementById('chk-telemetry').checked = true;
+        document.getElementById('chk-lsappl').checked = true;
+        document.getElementById('chk-smbv1').checked = true;
+        document.getElementById('chk-darkmode').checked = true;
+        document.getElementById('chk-onedrive').checked = false;
+      }
+      generateXml();
+      showToast('Preset "' + preset + '" aplicado');
+    }
+
+    function copyXmlCode() {
+      const code = document.getElementById('xml-code-view').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('autounattend.xml copiado al portapapeles');
+      });
+    }
+
+    function downloadXmlFile() {
+      const code = document.getElementById('xml-code-view').textContent;
+      const blob = new Blob([code], { type: 'text/xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'autounattend.xml';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Descarga iniciada: autounattend.xml');
+    }
+
+    // =========================================================================
+    // MÓDULO 2: LÓGICA DE SCRIPTS DE HARDENING (PowerShell & Bash)
+    // =========================================================================
+    function setHardeningPlatform(plat) {
+      currentHardeningPlat = plat;
+      const btnPs1 = document.getElementById('btn-plat-ps1');
+      const btnSh = document.getElementById('btn-plat-sh');
+      const ctrlWin = document.getElementById('controls-win');
+      const ctrlLinux = document.getElementById('controls-linux');
+      const fnLabel = document.getElementById('script-filename');
+
+      if (plat === 'ps1') {
+        btnPs1.classList.add('bg-purple-600', 'text-white', 'shadow');
+        btnPs1.classList.remove('text-zinc-400');
+        btnSh.classList.remove('bg-purple-600', 'text-white', 'shadow');
+        btnSh.classList.add('text-zinc-400');
+        ctrlWin.classList.remove('hidden');
+        ctrlLinux.classList.add('hidden');
+        fnLabel.textContent = 'hardened_blue_purple.ps1';
+        fnLabel.className = 'text-purple-400 font-bold';
+      } else {
+        btnSh.classList.add('bg-emerald-600', 'text-white', 'shadow');
+        btnSh.classList.remove('text-zinc-400');
+        btnPs1.classList.remove('bg-purple-600', 'text-white', 'shadow');
+        btnPs1.classList.add('text-zinc-400');
+        ctrlWin.classList.add('hidden');
+        ctrlLinux.classList.remove('hidden');
+        fnLabel.textContent = 'hardened_kanuv_shield.sh';
+        fnLabel.className = 'text-emerald-400 font-bold';
+      }
+      generateHardeningScript();
+    }
+
+    function generateHardeningScript() {
+      let script = '';
+
+      if (currentHardeningPlat === 'ps1') {
+        const doh = document.getElementById('w-doh').checked;
+        const netpoison = document.getElementById('w-netpoison').checked;
+        const lsa = document.getElementById('w-lsa-audit').checked;
+        const sandbox = document.getElementById('w-sandbox').checked;
+        const ramdisk = document.getElementById('w-ramdisk').checked;
+        const sysmain = document.getElementById('w-sysmain').checked;
+        const cyberpunk = document.getElementById('w-cyberpunk').checked;
+
+        script = `# =====================================================================
+# HARDENED_BLUE_PURPLE.PS1 — ANUU CORE X5 CYBERPUNK NEON HARDENING
+# =====================================================================
+# Target: Windows 11 / Server Zero-Trust Post-Deployment Fortification
+# Protocolo: Kanuv 🛡️ (189.89.619 Hz) // Concilio ACE
+# =====================================================================
+
+Write-Host "=====================================================" -ForegroundColor Magenta
+Write-Host "   ANUU CORE X5 — CYBERPUNK NEON HARDENING & TWEAKS  " -ForegroundColor Cyan
+Write-Host "=====================================================" -ForegroundColor Magenta
+
+# 1. Comprobación de Privilegios de Administrador
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Error "ERROR: Este script requiere privilegios elevados de Administrador."
+    exit 1
+}
+
+# 2. Bypass Permanente de TPM 2.0 y Compatibilidad
+Write-Host "[+] Verificando bypass permanente de requisitos de hardware..." -ForegroundColor Yellow
+$MoSetupPath = "HKLM:\\SYSTEM\\Setup\\MoSetup"
+if (-not (Test-Path $MoSetupPath)) { New-Item -Path $MoSetupPath -Force | Out-Null }
+Set-ItemProperty -Path $MoSetupPath -Name "AllowUpgradesWithUnsupportedTPMOrCPU" -Value 1 -Type DWord -Force
+`;
+
+        if (doh) {
+          script += `
+# 3. Hardening de Red & Cloudflare DoH (DNS sobre HTTPS 1.1.1.2 Anti-Malware)
+Write-Host "[+] Configurando Cloudflare DoH Seguro (1.1.1.2 / 1.0.0.2)..." -ForegroundColor Yellow
+Get-NetAdapter | Where-Object { $_.Status -eq "Up" } | ForEach-Object {
+    Set-DnsClientServerAddress -InterfaceIndex $_.ifIndex -ServerAddresses ("1.1.1.2", "1.0.0.2") -ErrorAction SilentlyContinue
+}
+$DoHRegPath = "HKLM:\\SYSTEM\\CurrentControlSet\\Services\\Dnscache\\Parameters\\DohWellKnownServers\\1.1.1.2"
+if (-not (Test-Path $DoHRegPath)) { New-Item -Path $DoHRegPath -Force | Out-Null }
+Set-ItemProperty -Path $DoHRegPath -Name "Template" -Value "https://security.cloudflare-dns.com/dns-query" -Type String -Force
+`;
+        }
+
+        if (netpoison) {
+          script += `
+# 4. Mitigación contra Responder / Relé NTLM (Desactivar LLMNR, NetBIOS y SMBv1)
+Write-Host "[+] Desactivando protocolos inseguros de broadcast local..." -ForegroundColor Yellow
+Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient" -Name "EnableMulticast" -Value 0 -Force -ErrorAction SilentlyContinue
+Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object { $_.IPEnabled -eq $true } | ForEach-Object { $_.SetTcpipNetbios(2) | Out-Null }
+Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force -ErrorAction SilentlyContinue
+Disable-WindowsOptionalFeature -Online -FeatureName "SMB1Protocol" -NoRestart -ErrorAction SilentlyContinue
+`;
+        }
+
+        if (lsa) {
+          script += `
+# 5. Kernel Hardening & LSA Protection (Anti Credential Dumping T1003)
+Write-Host "[+] Habilitando LSA Protection (RunAsPPL=1) y ScriptBlock Logging..." -ForegroundColor Yellow
+Set-ItemProperty -Path "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Lsa" -Name "RunAsPPL" -Value 1 -Type DWord -Force
+$PSLogPath = "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptBlockLogging"
+if (-not (Test-Path $PSLogPath)) { New-Item -Path $PSLogPath -Force | Out-Null }
+Set-ItemProperty -Path $PSLogPath -Name "EnableScriptBlockLogging" -Value 1 -Type DWord -Force
+Set-ItemProperty -Path "HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\Audit" -Name "ProcessCreationIncludeCmdLine_Enabled" -Value 1 -Type DWord -Force
+`;
+        }
+
+        if (sandbox) {
+          script += `
+# 6. Windows Sandbox (Entorno de Detonación Aislada de Malware)
+Write-Host "[+] Instalando característica Windows Sandbox (Containers-DisposableClientVM)..." -ForegroundColor Yellow
+Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online -NoRestart -ErrorAction SilentlyContinue
+`;
+        }
+
+        if (ramdisk) {
+          script += `
+# 7. RAMDisk para Archivos Temporales (Protección de Vida Útil de SSD/Flash USB)
+Write-Host "[+] Configurando RAMDisk en memoria volátil (ImDisk Toolkit)..." -ForegroundColor Yellow
+winget install -e --id LTRData.ImDiskToolkit --accept-package-agreements --accept-source-agreements --silent -h | Out-Null
+Start-Sleep -Seconds 5
+if (Get-Command imdisk -ErrorAction SilentlyContinue) {
+    imdisk -a -s 1G -m R: -p "/fs:ntfs /q /y" | Out-Null
+    if (Test-Path "R:\\") {
+        New-Item -ItemType Directory -Force -Path "R:\\Temp" | Out-Null
+        [Environment]::SetEnvironmentVariable("TEMP", "R:\\Temp", "Machine")
+        [Environment]::SetEnvironmentVariable("TMP", "R:\\Temp", "Machine")
+        Write-Host "    -> RAMDisk montado en R: y variables %TEMP% redirigidas." -ForegroundColor Cyan
+    }
+}
+`;
+        }
+
+        if (sysmain) {
+          script += `
+# 8. Optimización I/O: Desactivar SysMain & Windows Search
+Write-Host "[+] Deteniendo indexado continuo y servicios innecesarios..." -ForegroundColor Yellow
+Stop-Service -Name "SysMain" -Force -ErrorAction SilentlyContinue
+Set-Service -Name "SysMain" -StartupType Disabled -ErrorAction SilentlyContinue
+Stop-Service -Name "WSearch" -Force -ErrorAction SilentlyContinue
+Set-Service -Name "WSearch" -StartupType Disabled -ErrorAction SilentlyContinue
+powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c -ErrorAction SilentlyContinue
+`;
+        }
+
+        if (cyberpunk) {
+          script += `
+# 9. Estética Cyberpunk Neón (Alto Contraste Seinen)
+Write-Host "[+] Forzando paleta de tema Cyberpunk Neón..." -ForegroundColor Yellow
+$ThemePath = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"
+Set-ItemProperty -Path $ThemePath -Name "AppsUseLightTheme" -Value 0 -Type DWord -Force
+Set-ItemProperty -Path $ThemePath -Name "SystemUsesLightTheme" -Value 0 -Type DWord -Force
+Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\DWM" -Name "AccentColor" -Value 0xff7f00ff -Type DWord -Force
+Set-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\DWM" -Name "ColorPrevalence" -Value 1 -Type DWord -Force
+`;
+        }
+
+        script += `
+Write-Host "=====================================================" -ForegroundColor Magenta
+Write-Host "   SISTEMA CYBERPUNK NEON BASTIONADO CON ÉXITO       " -ForegroundColor Cyan
+Write-Host "   Auditoría completada por Kanuv 🛡️ (189.89.619 Hz) " -ForegroundColor Magenta
+Write-Host "=====================================================" -ForegroundColor Magenta
+`;
+
+      } else {
+        // Bash Script
+        const ssh = document.getElementById('l-ssh').checked;
+        const ufw = document.getElementById('l-ufw').checked;
+        const sysctl = document.getElementById('l-sysctl').checked;
+        const yama = document.getElementById('l-yama').checked;
+        const modprobe = document.getElementById('l-modprobe').checked;
+        const doh = document.getElementById('l-doh').checked;
+
+        script = `#!/usr/bin/env bash
+# =====================================================================
+# HARDENED_KANUV_SHIELD.SH — BASTIONADO DE LINUX SEGÚN CCN-STIC
+# =====================================================================
+# Target: Debian / Ubuntu / Kali / RHEL Linux Server & Workstation
+# Muro de Contención: Kanuv 🛡️ (189.89.619 Hz) // Concilio ACE
+# =====================================================================
+
+set -euo pipefail
+
+if [ "$(id -u)" -ne 0 ]; then
+    echo -e "\\033[31m[!] Error: Este script debe ser ejecutado como root.\\033[0m" >&2
+    exit 1
+fi
+
+echo -e "\\033[35m=====================================================\\033[0m"
+echo -e "\\033[36m   INICIANDO BASTIONADO DE LINUX (ESCUDO KANUV)      \\033[0m"
+echo -e "\\033[35m=====================================================\\033[0m"
+`;
+
+        if (ssh) {
+          script += `
+# 1. Hardening de OpenSSH Server (/etc/ssh/sshd_config.d/99-kanuv.conf)
+echo -e "\\033[33m[*] Fortificando configuración del servidor SSH...\\033[0m"
+mkdir -p /etc/ssh/sshd_config.d/
+cat << 'EOF' > /etc/ssh/sshd_config.d/99-kanuv.conf
+# Reglas de Bastionado Kanuv 🛡️
+PermitRootLogin no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding no
+MaxAuthTries 3
+ClientAliveInterval 300
+ClientAliveCountMax 2
+EOF
+sshd -t && systemctl reload ssh || systemctl reload sshd || true
+`;
+        }
+
+        if (ufw) {
+          script += `
+# 2. Cortafuegos Perimetral UFW (Default Deny Incoming)
+echo -e "\\033[33m[*] Activando cortafuegos con política restrictiva por defecto...\\033[0m"
+if command -v ufw >/dev/null 2>&1; then
+    ufw --force reset || true
+    ufw default deny incoming
+    ufw default allow outgoing
+    ufw limit 22/tcp comment 'SSH Rate Limiting'
+    ufw --force enable
+fi
+`;
+        }
+
+        if (sysctl) {
+          script += `
+# 3. Hardening de Kernel Sysctl (/etc/sysctl.d/99-kanuv-hardening.conf)
+echo -e "\\033[33m[*] Aplicando parámetros de kernel para mitigación de ataques...\\033[0m"
+cat << 'EOF' > /etc/sysctl.d/99-kanuv-hardening.conf
+# Mitigación contra IP Spoofing
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+
+# Ignorar ICMP Redirects y Broadcast Echo
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+
+# Protección contra SYN Flooding
+net.ipv4.tcp_syncookies = 1
+
+# ASLR Aleatorizado Completo
+kernel.randomize_va_space = 2
+
+# Restricción de logs del kernel (dmesg)
+kernel.dmesg_restrict = 1
+
+# Enlaces simbólicos y duros seguros
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+EOF
+sysctl -p /etc/sysctl.d/99-kanuv-hardening.conf || true
+`;
+        }
+
+        if (yama) {
+          script += `
+# 4. Yama Ptrace Scope (Protección contra Inyección de Memoria entre Procesos)
+echo -e "\\033[33m[*] Restringiendo alcance de ptrace en /etc/sysctl.d/10-ptrace.conf...\\033[0m"
+echo "kernel.yama.ptrace_scope = 2" > /etc/sysctl.d/10-ptrace.conf
+sysctl -w kernel.yama.ptrace_scope=2 || true
+`;
+        }
+
+        if (modprobe) {
+          script += `
+# 5. Inhabilitar Protocolos Obsoletos en Kernel (/etc/modprobe.d/kanuv-blacklist.conf)
+echo -e "\\033[33m[*] Bloqueando carga de protocolos de red obsoletos e inseguros...\\033[0m"
+cat << 'EOF' > /etc/modprobe.d/kanuv-blacklist.conf
+install dccp /bin/true
+install sctp /bin/true
+install rds /bin/true
+install tipc /bin/true
+EOF
+`;
+        }
+
+        if (doh) {
+          script += `
+# 6. DNS Cifrado sobre TLS con Cloudflare 1.1.1.2 Anti-Malware
+echo -e "\\033[33m[*] Configurando DoT / DoH en systemd-resolved...\\033[0m"
+if [ -d /etc/systemd/resolved.conf.d ]; then
+    mkdir -p /etc/systemd/resolved.conf.d
+    cat << 'EOF' > /etc/systemd/resolved.conf.d/dns_over_tls.conf
+[Resolve]
+DNS=1.1.1.2#security.cloudflare-dns.com 1.0.0.2#security.cloudflare-dns.com
+DNSOverTLS=yes
+DNSSEC=yes
+EOF
+    systemctl restart systemd-resolved || true
+fi
+`;
+        }
+
+        script += `
+echo -e "\\033[32m[✓] BASTIONADO LINUX COMPLETADO CON ÉXITO.\\033[0m"
+echo -e "\\033[35m    Muro de contención activo a 189.89.619 Hz — Kanuv 🛡️\\033[0m"
+`;
+      }
+
+      const scriptView = document.getElementById('script-code-view');
+      if (scriptView) {
+        scriptView.textContent = script;
+      }
+
+      const bytes = new Blob([script]).size;
+      const stats = document.getElementById('script-stats');
+      if (stats) {
+        stats.textContent = `${bytes.toLocaleString()} bytes`;
+      }
+    }
+
+    function applyHardeningPreset(preset) {
+      if (currentHardeningPlat === 'ps1') {
+        if (preset === 'paranoid') {
+          document.getElementById('w-doh').checked = true;
+          document.getElementById('w-netpoison').checked = true;
+          document.getElementById('w-lsa-audit').checked = true;
+          document.getElementById('w-sandbox').checked = true;
+          document.getElementById('w-ramdisk').checked = true;
+          document.getElementById('w-sysmain').checked = true;
+          document.getElementById('w-cyberpunk').checked = true;
+        } else if (preset === 'server_prod') {
+          document.getElementById('w-doh').checked = true;
+          document.getElementById('w-netpoison').checked = true;
+          document.getElementById('w-lsa-audit').checked = true;
+          document.getElementById('w-sandbox').checked = false;
+          document.getElementById('w-ramdisk').checked = false;
+          document.getElementById('w-sysmain').checked = true;
+          document.getElementById('w-cyberpunk').checked = false;
+        } else if (preset === 'workstation_ssd') {
+          document.getElementById('w-doh').checked = true;
+          document.getElementById('w-netpoison').checked = true;
+          document.getElementById('w-lsa-audit').checked = true;
+          document.getElementById('w-sandbox').checked = true;
+          document.getElementById('w-ramdisk').checked = true;
+          document.getElementById('w-sysmain').checked = true;
+          document.getElementById('w-cyberpunk').checked = true;
+        }
+      } else {
+        if (preset === 'paranoid') {
+          document.getElementById('l-ssh').checked = true;
+          document.getElementById('l-ufw').checked = true;
+          document.getElementById('l-sysctl').checked = true;
+          document.getElementById('l-yama').checked = true;
+          document.getElementById('l-modprobe').checked = true;
+          document.getElementById('l-doh').checked = true;
+        } else if (preset === 'server_prod') {
+          document.getElementById('l-ssh').checked = true;
+          document.getElementById('l-ufw').checked = true;
+          document.getElementById('l-sysctl').checked = true;
+          document.getElementById('l-yama').checked = false;
+          document.getElementById('l-modprobe').checked = true;
+          document.getElementById('l-doh').checked = true;
+        } else {
+          document.getElementById('l-ssh').checked = true;
+          document.getElementById('l-ufw').checked = true;
+          document.getElementById('l-sysctl').checked = true;
+          document.getElementById('l-yama').checked = true;
+          document.getElementById('l-modprobe').checked = false;
+          document.getElementById('l-doh').checked = true;
+        }
+      }
+      generateHardeningScript();
+      showToast('Preset de fortificación aplicado: ' + preset);
+    }
+
+    function copyScriptCode() {
+      const code = document.getElementById('script-code-view').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Script copiado al portapapeles');
+      });
+    }
+
+    function downloadScriptFile() {
+      const code = document.getElementById('script-code-view').textContent;
+      const ext = currentHardeningPlat === 'ps1' ? '.ps1' : '.sh';
+      const filename = currentHardeningPlat === 'ps1' ? 'hardened_blue_purple.ps1' : 'hardened_kanuv_shield.sh';
+      const mime = currentHardeningPlat === 'ps1' ? 'text/plain;charset=utf-8' : 'application/x-sh;charset=utf-8';
+      const blob = new Blob([code], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Descarga iniciada: ' + filename);
+    }
+
+    // =========================================================================
+    // MÓDULO 3: VENTOY MULTI-BOOT MANAGER
+    // =========================================================================
+    const ventoyISOs = [
+      {
+        title: "Windows 11 Pro Hardened 25H2 (AutoUnattend)",
+        path: "/ISOS/Win11_Hardened.iso",
+        desc: "Inyección activa de autounattend.xml • Bypass TPM/SecureBoot • Local Account",
+        type: "os"
+      },
+      {
+        title: "Kali Linux Rolling 2026 Live Forensics",
+        path: "/ISOS/kali-linux-live.iso",
+        desc: "Entorno ofensivo y forense digital con persistencia cifrada LUKS.",
+        type: "security"
+      },
+      {
+        title: "SystemRescueCD 11.0 Standard Sysadmin",
+        path: "/ISOS/systemrescue.iso",
+        desc: "Kit esencial para rescate de GRUB, reparación de particiones y backup dd/ddrescue.",
+        type: "rescue"
+      },
+      {
+        title: "SANS SIFT / CAINE Incident Triage Live",
+        path: "/ISOS/caine_forensics.iso",
+        desc: "Adquisición de evidencias volátiles, análisis de RAM y líneas temporales de incidentes.",
+        type: "forensics"
+      },
+      {
+        title: "Clonezilla Live Disk Imager (GParted)",
+        path: "/ISOS/clonezilla-live.iso",
+        desc: "Clonación bare-metal bloque a bloque de discos NVMe, SSD y arrays RAID.",
+        type: "rescue"
+      }
+    ];
+
+    function selectVentoyItem(idx) {
+      selectedVentoyIdx = idx;
+      const container = document.getElementById('ventoy-menu-items');
+      const items = container.getElementsByClassName('ventoy-item');
+      for (let i = 0; i < items.length; i++) {
+        if (i === idx) {
+          items[i].className = 'ventoy-item selected p-2 rounded-lg text-xs flex items-center justify-between bg-pink-950/30';
+          items[i].children[0].children[0].innerHTML = '▸';
+        } else {
+          items[i].className = 'ventoy-item p-2 rounded-lg text-xs text-cyan-400 flex items-center justify-between';
+          items[i].children[0].children[0].innerHTML = '&nbsp;&nbsp;';
+        }
+      }
+      document.getElementById('ventoy-item-desc').textContent = ventoyISOs[idx].desc;
+    }
+
+    function setVentoyConfigTab(tab) {
+      currentVentoyConfig = tab;
+      const btnJson = document.getElementById('btn-vtab-json');
+      const btnTheme = document.getElementById('btn-vtab-theme');
+
+      if (tab === 'json') {
+        btnJson.classList.add('bg-pink-600', 'text-white');
+        btnJson.classList.remove('text-zinc-400');
+        btnTheme.classList.remove('bg-pink-600', 'text-white');
+        btnTheme.classList.add('text-zinc-400');
+      } else {
+        btnTheme.classList.add('bg-pink-600', 'text-white');
+        btnTheme.classList.remove('text-zinc-400');
+        btnJson.classList.remove('bg-pink-600', 'text-white');
+        btnJson.classList.add('text-zinc-400');
+      }
+      renderVentoyConfig();
+    }
+
+    function renderVentoyConfig() {
+      const codeView = document.getElementById('ventoy-code-view');
+      if (currentVentoyConfig === 'json') {
+        const json = `{
+  "control": [
+    { "VTOY_DEFAULT_SEARCH_ROOT": "/ISOS" },
+    { "VTOY_MENU_TIMEOUT": "10" },
+    { "VTOY_DEFAULT_IMAGE": "/ISOS/Win11_Hardened.iso" }
+  ],
+  "auto_install": [
+    {
+      "image": "/ISOS/Win11_Hardened.iso",
+      "template": "/AutoUnattend/autounattend.xml"
+    }
+  ],
+  "theme": {
+    "file": "/ventoy/theme/cyber_neon/theme.txt",
+    "gfxmode": "1920x1080",
+    "display_mode": "GUI"
+  },
+  "menu_alias": [
+    {
+      "image": "/ISOS/Win11_Hardened.iso",
+      "alias": "⚡ Windows 11 Pro Cyberpunk Hardened [AutoUnattend]"
+    },
+    {
+      "image": "/ISOS/kali-linux-live.iso",
+      "alias": "🛡️ Kali Linux Rolling 2026 Live Forensics"
+    },
+    {
+      "image": "/ISOS/systemrescue.iso",
+      "alias": "🚑 SystemRescueCD 11.0 (Linux SysAdmin)"
+    }
+  ]
+}`;
+        codeView.textContent = json;
+      } else {
+        const theme = `# =====================================================================
+# ANUU CORE X5 — CYBERPUNK NEON VENTOY THEME (1920x1080)
+# Frecuencia: 189.89.619 Hz // Concilio ACE
+# =====================================================================
+
+title-text: "ANUU CORE X5 :: WIN11 PRO CYBERPUNK NEON HARDENED"
+title-color: "#ff007f"
+desktop-color: "#08080f"
+terminal-box: "styled_box_*.png"
+terminal-font: "Terminus Regular 14"
+
++ boot_menu {
+  left = 15%
+  top = 22%
+  width = 70%
+  height = 55%
+  item_color = "#00f0ff"
+  selected_item_color = "#ff007f"
+  item_height = 36
+  item_padding = 8
+  item_spacing = 4
+}
+
++ progress_bar {
+  id = "__timeout__"
+  left = 15%
+  top = 80%
+  width = 70%
+  height = 8
+  fg_color = "#ff007f"
+  bg_color = "#1f1f2e"
+}
+
++ hbox {
+  left = 15%
+  top = 85%
+  + label { text = "F1: Ayuda  |  F2: Navegador  |  F4: Modo Localboot  |  F5: Ver Hash SHA256" color = "#71717a" }
+}
+`;
+        codeView.textContent = theme;
+      }
+    }
+
+    function copyVentoyConfig() {
+      const code = document.getElementById('ventoy-code-view').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Configuración de Ventoy copiada al portapapeles');
+      });
+    }
+
+    function downloadVentoyConfig() {
+      const code = document.getElementById('ventoy-code-view').textContent;
+      const filename = currentVentoyConfig === 'json' ? 'ventoy.json' : 'theme.txt';
+      const mime = currentVentoyConfig === 'json' ? 'application/json' : 'text/plain';
+      const blob = new Blob([code], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Descarga iniciada: ' + filename);
+    }
+
+    // =========================================================================
+    // MÓDULO 4: FICHA DE SERVICIO & CALCULADOR DE FLOTA
+    // =========================================================================
+    function calculateQuote() {
+      const endpoints = parseInt(document.getElementById('range-endpoints').value);
+      const servers = parseInt(document.getElementById('range-servers').value);
+
+      document.getElementById('val-endpoints').textContent = endpoints + (endpoints === 1 ? ' equipo' : ' equipos');
+      document.getElementById('val-servers').textContent = servers + (servers === 1 ? ' servidor' : ' servidores');
+
+      const svcUsb = document.getElementById('svc-usb').checked;
+      const svcWazuh = document.getElementById('svc-wazuh').checked;
+      const svcDossier = document.getElementById('svc-dossier').checked;
+
+      // Tarifas:
+      // Endpoint: base de 35€ por puesto (escala con descuento a partir de 20)
+      let costEnd = endpoints * 35;
+      if (endpoints > 30) costEnd = costEnd * 0.85;
+
+      // Servidor: 120€ por servidor (Hardening CCN-STIC profundo)
+      let costSrv = servers * 120;
+
+      // Addons:
+      let costAdd = 0;
+      if (svcUsb) costAdd += 70;      // 2 USBs 64GB de alta velocidad configurados
+      if (svcWazuh) costAdd += 150;    // Despliegue de manager y agentes
+      if (svcDossier) costAdd += 80;   // Dossier pericial formal con hash SHA256
+
+      const total = Math.round(costEnd + costSrv + costAdd);
+      const deposit = Math.round(total * 0.5);
+      const finalPay = total - deposit;
+
+      // Horas estimadas
+      const hours = Math.round(4 + (endpoints * 0.7) + (servers * 2.5));
+
+      document.getElementById('cost-endpoints').textContent = Math.round(costEnd) + ' €';
+      document.getElementById('cost-servers').textContent = Math.round(costSrv) + ' €';
+      document.getElementById('cost-addons').textContent = costAdd + ' €';
+      document.getElementById('total-price').textContent = total + ' €';
+      document.getElementById('cost-deposit').textContent = deposit + ' €';
+      document.getElementById('cost-final').textContent = finalPay + ' €';
+      document.getElementById('total-hours').textContent = `Aprox. ${hours} horas técnicas de ejecución pericial`;
+    }
+
+    function copyQuoteProposal() {
+      const endpoints = document.getElementById('val-endpoints').textContent;
+      const servers = document.getElementById('val-servers').textContent;
+      const total = document.getElementById('total-price').textContent;
+      const deposit = document.getElementById('cost-deposit').textContent;
+      const finalPay = document.getElementById('cost-final').textContent;
+      const hours = document.getElementById('total-hours').textContent;
+
+      const proposal = `=====================================================================
+PROPUESTA DE DESPLIEGUE AUTOMATIZADO & HARDENING // K4L1 STUDIO
+Auditoría y Muro de Contención: Roberto Alaya / Kanuv 🛡️ (189.89.619 Hz)
+=====================================================================
+
+ALCANCE DE LA INFRAESTRUCTURA:
+- Puestos de Trabajo / Endpoints: ${endpoints} (Despliegue desatendido sin telemetría)
+- Servidores & Nodos Críticos: ${servers} (Bastionado CCN-STIC & SSH/Sysctl)
+- Entregables: Llaves Ventoy USB, Imagen Dorada sysprep y Dossier de Integridad.
+
+ESTIMACIÓN ECONÓMICA:
+- Inversión Total: ${total}
+- Anticipo Inicio de Trabajos (50%): ${deposit}
+- Liquidación tras Verificación y Pruebas (50%): ${finalPay}
+- Esfuerzo de Ejecución: ${hours}
+
+RESPALDO TÉCNICO:
+- Formación ASIR & SMR | Certificación INCIBE Blue Team (250h)
+- Experiencia en CSIC (ICTAN), Sidertia Solutions CCN-STIC y ADIF (SMS Europa).
+
+Contacto Cifrado: Signal @k4li.89 (https://signal.me/#u/k4li.89)
+=====================================================================`;
+
+      navigator.clipboard.writeText(proposal).then(() => {
+        showToast('Propuesta formal copiada al portapapeles');
+      });
+    }
+
+    // INICIALIZACIÓN
+    window.addEventListener('DOMContentLoaded', () => {
+      setTheme(currentTheme);
+      generateXml();
+      generateHardeningScript();
+      renderVentoyConfig();
+      calculateQuote();
+    });
+  </script>
+
+  <!-- Script de Fondo y Partículas del Forge -->
+  <script src="../assets/js/fullwallpaper.js"></script>
+</body>
+</html>

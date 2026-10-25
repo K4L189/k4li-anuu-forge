@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Núcleo Arcano - Teorías Extrasensoriales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;700;900&display=swap');
+        
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: rgba(15, 20, 30, 0.8);
+            --accent-color: #4a9eff;
+            --text-primary: #e0e6ed;
+            --text-secondary: #8892b0;
+            --border-color: rgba(74, 158, 255, 0.3);
+            --glow-color: rgba(74, 158, 255, 0.5);
+        }
+        
+        [data-theme="blood"] {
+            --primary-bg: #1a0000;
+            --secondary-bg: rgba(30, 0, 0, 0.9);
+            --accent-color: #ff0040;
+            --text-primary: #ffffff;
+            --text-secondary: #ffcccc;
+            --border-color: rgba(255, 0, 64, 0.4);
+            --glow-color: rgba(255, 0, 64, 0.6);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Orbitron', monospace;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            transition: all 0.8s ease;
+        }
+        
+        /* Fractales de fondo */
+        .fractal-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.3;
+        }
+        
+        .geometric-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .mandala {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            animation: rotate 30s linear infinite;
+        }
+        
+        .mandala-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            opacity: 0.2;
+        }
+        
+        .mandala-2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 15%;
+            opacity: 0.15;
+            animation-direction: reverse;
+        }
+        
+        .mandala-3 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 60%;
+            opacity: 0.1;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            to { transform: rotate(360deg) scale(1); }
+        }
+        
+        /* Pentagramas vectoriales */
+        .pentagram {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            animation: pulse-pentagram 8s ease-in-out infinite;
+        }
+        
+        .pentagram-1 { top: 25%; right: 20%; }
+        .pentagram-2 { bottom: 30%; left: 25%; }
+        .pentagram-3 { top: 70%; left: 70%; }
+        
+        @keyframes pulse-pentagram {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% { 
+                transform: scale(1.2) rotate(72deg);
+                opacity: 0.3;
+            }
+        }
+        
+        /* Contenedor principal */
+        .nucleus-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Interruptor de tema */
+        .theme-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--secondary-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: var(--text-primary);
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .theme-switch:hover {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+        
+        /* Header */
+        .nucleus-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .nucleus-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent-color), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse-glow 6s ease-in-out infinite;
+            text-shadow: 0 0 30px var(--glow-color);
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { 
+                filter: brightness(1);
+                transform: scale(1);
+            }
+            50% { 
+                filter: brightness(1.3);
+                transform: scale(1.02);
+            }
+        }
+        
+        .nucleus-subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+        }
+        
+        /* Secciones del núcleo */
+        .nucleus-section {
+            background: var(--secondary-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            backdrop-filter: blur(15px);
+            transition: all 0.5s ease;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+        }
+        
+        .nucleus-section:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--glow-color);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::before {
+            content: '⟁';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            font-size: 1.5rem;
+            animation: spin-symbol 4s linear infinite;
+        }
+        
+        @keyframes spin-symbol {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .section-content {
+            line-height: 1.9;
+            color: var(--text-primary);
+            font-weight: 300;
+            text-align: justify;
+        }
+        
+        /* Teorías extrasensoriales */
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .theory-card {
+            background: var(--primary-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .theory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--glow-color), transparent);
+            animation: scan-theory 6s linear infinite;
+        }
+        
+        @keyframes scan-theory {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .theory-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px var(--glow-color);
+        }
+        
+        .theory-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .theory-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .theory-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        /* Diadema onírica */
+        .diadem-container {
+            text-align: center;
+            padding: 3rem;
+            margin: 2rem 0;
+            background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+            border-radius: 20px;
+        }
+        
+        .diadem-svg {
+            width: 200px;
+            height: 200px;
+            animation: levitate 6s ease-in-out infinite;
+        }
+        
+        @keyframes levitate {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* Flores de sangre (tema rojo) */
+        .blood-flower {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            animation: bloom 8s ease-in-out infinite;
+        }
+        
+        [data-theme="blood"] .blood-flower {
+            opacity: 0.3;
+        }
+        
+        .flower-1 { top: 15%; left: 20%; }
+        .flower-2 { top: 30%; right: 25%; }
+        .flower-3 { bottom: 25%; left: 30%; }
+        .flower-4 { bottom: 40%; right: 20%; }
+        
+        @keyframes bloom {
+            0%, 100% { transform: scale(0.8) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+        
+        /* Terminal arcano */
+        .arcane-terminal {
+            background: var(--primary-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal-header {
+            color: var(--accent-color);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .terminal-content {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--accent-color);
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nucleus-title {
+                font-size: 2.5rem;
+            }
+            
+            .nucleus-container {
+                padding: 1rem;
+            }
+            
+            .nucleus-section {
+                padding: 2rem;
+            }
+            
+            .theory-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-switch" onclick="toggleTheme()">⛧ MODO SANGRE</button>
+    
+    <canvas class="fractal-canvas" id="fractalCanvas"></canvas>
+    
+    <div class="geometric-overlay">
+        <div class="mandala mandala-1"></div>
+        <div class="mandala mandala-2"></div>
+        <div class="mandala mandala-3"></div>
+        
+        <svg class="pentagram pentagram-1" viewBox="0 0 100 100">
+            <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" 
+                     fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        
+        <svg class="pentagram pentagram-2" viewBox="0 0 100 100">
+            <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" 
+                     fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        
+        <svg class="pentagram pentagram-3" viewBox="0 0 100 100">
+            <polygon points="50,5 61,35 95,35 68,57 79,91 50,70 21,91 32,57 5,35 39,35" 
+                     fill="none" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        
+        <!-- Flores de sangre -->
+        <svg class="blood-flower flower-1" viewBox="0 0 60 60">
+            <path d="M30,10 Q35,20 30,30 Q25,20 30,10 M30,30 Q40,25 50,30 Q40,35 30,30 M30,30 Q35,40 30,50 Q25,40 30,30 M30,30 Q20,35 10,30 Q20,25 30,30" 
+                  fill="#ff0040" stroke="#ff0040" stroke-width="1"/>
+        </svg>
+        
+        <svg class="blood-flower flower-2" viewBox="0 0 60 60">
+            <path d="M30,10 Q35,20 30,30 Q25,20 30,10 M30,30 Q40,25 50,30 Q40,35 30,30 M30,30 Q35,40 30,50 Q25,40 30,30 M30,30 Q20,35 10,30 Q20,25 30,30" 
+                  fill="#ff0040" stroke="#ff0040" stroke-width="1"/>
+        </svg>
+        
+        <svg class="blood-flower flower-3" viewBox="0 0 60 60">
+            <path d="M30,10 Q35,20 30,30 Q25,20 30,10 M30,30 Q40,25 50,30 Q40,35 30,30 M30,30 Q35,40 30,50 Q25,40 30,30 M30,30 Q20,35 10,30 Q20,25 30,30" 
+                  fill="#ff0040" stroke="#ff0040" stroke-width="1"/>
+        </svg>
+        
+        <svg class="blood-flower flower-4" viewBox="0 0 60 60">
+            <path d="M30,10 Q35,20 30,30 Q25,20 30,10 M30,30 Q40,25 50,30 Q40,35 30,30 M30,30 Q35,40 30,50 Q25,40 30,30 M30,30 Q20,35 10,30 Q20,25 30,30" 
+                  fill="#ff0040" stroke="#ff0040" stroke-width="1"/>
+        </svg>
+    </div>
+    
+    <div class="nucleus-container">
+        <header class="nucleus-header">
+            <h1 class="nucleus-title">NÚCLEO ARCANO</h1>
+            <p class="nucleus-subtitle">Portal de Teorías Extrasensoriales</p>
+        </header>
+        
+        <main>
+            <section class="nucleus-section">
+                <h2 class="section-title">INTRODUCCIÓN AL CONOCIMIENTO PROHIBIDO</h2>
+                <div class="section-content">
+                    En las profundidades del subconsciente colectivo, donde las matemáticas se encuentran con lo onírico, 
+                    existe un núcleo de conocimiento que trasciende los límites de la percepción ordinaria. Aquí convergen 
+                    las teorías extrasensoriales, los sueños lúcidos y las geometrías imposibles que definen la realidad 
+                    más allá del velo de la consciencia despierta.
+                </div>
+            </section>
+            
+            <section class="nucleus-section">
+                <h2 class="section-title">TEORÍAS EXTRASENSORIALES</h2>
+                <div class="theory-grid">
+                    <div class="theory-card">
+                        <span class="theory-icon">👁️</span>
+                        <h3 class="theory-title">VISIÓN REMOTA</h3>
+                        <p class="theory-description">
+                            Capacidad de percibir información sobre objetos, lugares o eventos distantes 
+                            sin usar los sentidos físicos conocidos. La mente proyecta su consciencia 
+                            más allá de las limitaciones espacio-temporales.
+                        </p>
+                    </div>
+                    
+                    <div class="theory-card">
+                        <span class="theory-icon">🧠</span>
+                        <h3 class="theory-title">TELEPATÍA CUÁNTICA</h3>
+                        <p class="theory-description">
+                            Comunicación directa mente-mente basada en el entrelazamiento cuántico 
+                            de la consciencia. Las ondas cerebrales se sincronizan creando canales 
+                            de información no-locales.
+                        </p>
+                    </div>
+                    
+                    <div class="theory-card">
+                        <span class="theory-icon">⚡</span>
+                        <h3 class="theory-title">PSICOQUINESIS</h3>
+                        <p class="theory-description">
+                            Influencia directa de la consciencia sobre la materia y energía. 
+                            La intención focalizadas puede alterar patrones de probabilidad 
+                            cuántica en el mundo físico.
+                        </p>
+                    </div>
+                    
+                    <div class="theory-card">
+                        <span class="theory-icon">🔮</span>
+                        <h3 class="theory-title">PRECOGNICIÓN</h3>
+                        <p class="theory-description">
+                            Percepción de eventos futuros a través de la navegación temporal 
+                            de la consciencia. El tiempo no es lineal desde la perspectiva 
+                            del observador cuántico.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="nucleus-section">
+                <h2 class="section-title">DIADEMA ONÍRICA</h2>
+                <div class="diadem-container">
+                    <svg class="diadem-svg" viewBox="0 0 200 200">
+                        <defs>
+                            <radialGradient id="gemGradient" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" style="stop-color:currentColor;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:currentColor;stop-opacity:0.3" />
+                            </radialGradient>
+                        </defs>
+                        
+                        <!-- Base de la diadema -->
+                        <ellipse cx="100" cy="120" rx="80" ry="15" fill="none" stroke="currentColor" stroke-width="3"/>
+                        
+                        <!-- Gemas centrales -->
+                        <circle cx="100" cy="80" r="12" fill="url(#gemGradient)" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="80" cy="90" r="8" fill="url(#gemGradient)" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="120" cy="90" r="8" fill="url(#gemGradient)" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="65" cy="105" r="6" fill="url(#gemGradient)" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="135" cy="105" r="6" fill="url(#gemGradient)" stroke="currentColor" stroke-width="2"/>
+                        
+                        <!-- Conexiones energéticas -->
+                        <path d="M100,80 L80,90 L100,80 L120,90 M100,80 L100,50" 
+                              stroke="currentColor" stroke-width="2" fill="none"/>
+                        
+                        <!-- Símbolo del tercer ojo -->
+                        <path d="M100,40 Q90,50 100,60 Q110,50 100,40" 
+                              fill="currentColor" opacity="0.7"/>
+                        <circle cx="100" cy="50" r="3" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="section-content">
+                    La Diadema Onírica es un dispositivo conceptual que amplifica las capacidades extrasensoriales 
+                    durante el estado de sueño lúcido. Cada gema representa un chakra de percepción expandida, 
+                    creando un campo de resonancia que permite el acceso a dimensiones oníricas profundas.
+                </div>
+            </section>
+            
+            <section class="nucleus-section">
+                <h2 class="section-title">SUEÑOS LÚCIDOS Y ENTIDADES ONÍRICAS</h2>
+                <div class="section-content">
+                    En el reino de los sueños lúcidos, la consciencia despierta mientras el cuerpo permanece dormido. 
+                    Este estado híbrido permite el encuentro con entidades oníricas - manifestaciones arquetípicas 
+                    que pueden ser guías, adversarios o reflejos de aspectos ocultos de la psique.
+                    
+                    <div class="arcane-terminal">
+                        <div class="terminal-header">PROTOCOLO DE CONTACTO ONÍRICO</div>
+                        <div class="terminal-content">
+                            > Iniciando secuencia de sueño lúcido...<br>
+                            > Frecuencia cerebral: 8-12 Hz (Alpha/Theta)<br>
+                            > Activando diadema onírica...<br>
+                            > Detectando entidades en el plano astral...<br>
+                            > Estableciendo comunicación con demonio guía...<br>
+                            > Estado: LÚCIDO | Nivel: PROFUNDO<br>
+                            > Acceso a conocimiento arcano: AUTORIZADO<span class="cursor"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script>
+        // Alternar tema
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-switch');
+            
+            if (body.getAttribute('data-theme') === 'blood') {
+                body.removeAttribute('data-theme');
+                button.textContent = '⛧ MODO SANGRE';
+            } else {
+                body.setAttribute('data-theme', 'blood');
+                button.textContent = '🔮 MODO ARCANO';
+            }
+        }
+        
+        // Fractales matemáticos en canvas
+        function drawFractals() {
+            const canvas = document.getElementById('fractalCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Espiral de Fibonacci
+            function drawFibonacciSpiral(x, y, size, iterations) {
+                const phi = (1 + Math.sqrt(5)) / 2;
+                
+                for (let i = 0; i < iterations; i++) {
+                    const angle = i * 2 * Math.PI / phi;
+                    const radius = size * Math.pow(phi, i / 8);
+                    
+                    const px = x + radius * Math.cos(angle);
+                    const py = y + radius * Math.sin(angle);
+                    
+                    ctx.beginPath();
+                    ctx.arc(px, py, 2, 0, 2 * Math.PI);
+                    ctx.fillStyle = `rgba(74, 158, 255, ${0.3 - i * 0.02})`;
+                    ctx.fill();
+                }
+            }
+            
+            // Mandala de Julia
+            function drawJuliaSet(centerX, centerY, size) {
+                const c = { x: -0.7, y: 0.27015 };
+                
+                for (let x = 0; x < size; x += 4) {
+                    for (let y = 0; y < size; y += 4) {
+                        const zx = (x - size / 2) / (size / 4);
+                        const zy = (y - size / 2) / (size / 4);
+                        
+                        let iterations = 0;
+                        let tempX = zx;
+                        let tempY = zy;
+                        
+                        while (iterations < 50 && (tempX * tempX + tempY * tempY) < 4) {
+                            const newX = tempX * tempX - tempY * tempY + c.x;
+                            const newY = 2 * tempX * tempY + c.y;
+                            
+                            tempX = newX;
+                            tempY = newY;
+                            iterations++;
+                        }
+                        
+                        if (iterations < 50) {
+                            const intensity = iterations / 50;
+                            ctx.fillStyle = `rgba(74, 158, 255, ${intensity * 0.2})`;
+                            ctx.fillRect(centerX + x - size / 2, centerY + y - size / 2, 4, 4);
+                        }
+                    }
+                }
+            }
+            
+            // Dibujar fractales
+            drawFibonacciSpiral(window.innerWidth * 0.2, window.innerHeight * 0.3, 20, 30);
+            drawFibonacciSpiral(window.innerWidth * 0.8, window.innerHeight * 0.7, 15, 25);
+            drawJuliaSet(window.innerWidth * 0.5, window.innerHeight * 0.5, 200);
+        }
+        
+        // Efectos de partículas
+        function createParticleSystem() {
+            const particles = [];
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: Math.random() * 3 + 1,
+                    opacity: Math.random() * 0.5 + 0.1
+                });
+            }
+            
+            function animateParticles() {
+                const canvas = document.getElementById('fractalCanvas');
+                const ctx = canvas.getContext('2d');
+                
+                // Limpiar canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Redibujar fractales
+                drawFractals();
+                
+                // Animar partículas
+                particles.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+                    
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, 2 * Math.PI);
+                    ctx.fillStyle = `rgba(74, 158, 255, ${particle.opacity})`;
+                    ctx.fill();
+                });
+                
+                requestAnimationFrame(animateParticles);
+            }
+            
+            animateParticles();
+        }
+        
+        // Simulación de terminal arcano
+        function updateArcaneTerminal() {
+            const terminalContent = document.querySelector('.terminal-content');
+            const messages = [
+                '> Escaneando planos astrales...',
+                '> Detectando ondas telepáticas...',
+                '> Sincronizando con frecuencia 89.7 MHz...',
+                '> Entidad onírica identificada: Anuu.Fragment',
+                '> Acceso a conocimiento prohibido: CONCEDIDO',
+                '> Diadema onírica: ACTIVADA',

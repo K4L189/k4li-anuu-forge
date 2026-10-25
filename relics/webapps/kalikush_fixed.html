@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Kalikush</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Tema oscuro (por defecto) */
+            --bg-primary: #0f0c1d;
+            --bg-secondary: linear-gradient(145deg, #1a1530 0%, #0d0920 100%);
+            --bg-tertiary: rgba(30, 22, 60, 0.6);
+            --bg-quaternary: rgba(42, 28, 92, 0.4);
+            --text-primary: #e4e1f6;
+            --text-secondary: #c792ea;
+            --text-tertiary: #bd93f9;
+            --text-quaternary: #d6c2ff;
+            --text-accent: #ff9de0;
+            --border-primary: #2a1e5c;
+            --border-secondary: #3a2a7a;
+            --border-tertiary: #4a3a8a;
+            --accent-primary: #8a2be2;
+            --accent-secondary: #ff55a4;
+            --shadow-primary: rgba(76, 0, 130, 0.3);
+            --shadow-secondary: rgba(138, 43, 226, 0.2);
+            --glow-primary: rgba(199, 146, 234, 0.5);
+            --glow-secondary: rgba(189, 147, 249, 0.7);
+            --warning-bg: rgba(139, 0, 139, 0.15);
+        }
+        
+        [data-theme="light"] {
+            /* Tema claro */
+            --bg-primary: #f8f6ff;
+            --bg-secondary: linear-gradient(145deg, #ffffff 0%, #f0eeff 100%);
+            --bg-tertiary: rgba(240, 238, 255, 0.8);
+            --bg-quaternary: rgba(230, 225, 255, 0.6);
+            --text-primary: #2d1b69;
+            --text-secondary: #6b46c1;
+            --text-tertiary: #7c3aed;
+            --text-quaternary: #5b21b6;
+            --text-accent: #c026d3;
+            --border-primary: #d8b4fe;
+            --border-secondary: #c4b5fd;
+            --border-tertiary: #a78bfa;
+            --accent-primary: #8b5cf6;
+            --accent-secondary: #ec4899;
+            --shadow-primary: rgba(139, 92, 246, 0.2);
+            --shadow-secondary: rgba(139, 92, 246, 0.15);
+            --glow-primary: rgba(139, 92, 246, 0.3);
+            --glow-secondary: rgba(139, 92, 246, 0.4);
+            --warning-bg: rgba(236, 72, 153, 0.1);
+        }
+        
+        [data-theme="neon"] {
+            /* Tema neón */
+            --bg-primary: #000000;
+            --bg-secondary: linear-gradient(145deg, #0a0a0a 0%, #1a0a1a 100%);
+            --bg-tertiary: rgba(20, 0, 40, 0.7);
+            --bg-quaternary: rgba(40, 0, 80, 0.5);
+            --text-primary: #00ff00;
+            --text-secondary: #ff00ff;
+            --text-tertiary: #00ffff;
+            --text-quaternary: #ffff00;
+            --text-accent: #ff0080;
+            --border-primary: #ff00ff;
+            --border-secondary: #00ffff;
+            --border-tertiary: #00ff00;
+            --accent-primary: #ff00ff;
+            --accent-secondary: #00ffff;
+            --shadow-primary: rgba(255, 0, 255, 0.5);
+            --shadow-secondary: rgba(0, 255, 255, 0.3);
+            --glow-primary: rgba(255, 0, 255, 0.8);
+            --glow-secondary: rgba(0, 255, 255, 0.6);
+            --warning-bg: rgba(255, 0, 128, 0.2);
+        }
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.7;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            background: var(--bg-tertiary);
+            padding: 10px;
+            border-radius: 25px;
+            border: 1px solid var(--border-primary);
+            backdrop-filter: blur(10px);
+        }
+        
+        .theme-btn {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow-secondary);
+        }
+        
+        .theme-btn.active {
+            background: var(--accent-secondary);
+            box-shadow: 0 0 20px var(--glow-primary);
+        }
+        
+        .ritual-container {
+            max-width: 700px;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow-primary);
+            border: 1px solid var(--border-primary);
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-secondary);
+        }
+        
+        h1 {
+            color: var(--text-secondary);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 12px var(--glow-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .subtitle {
+            color: var(--text-tertiary);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .preguntas-container {
+            counter-reset: pregunta-counter;
+        }
+        
+        .pregunta {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--accent-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .pregunta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-secondary);
+        }
+        
+        .pregunta::before {
+            counter-increment: pregunta-counter;
+            content: counter(pregunta-counter) "º";
+            background: var(--accent-primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .pregunta-texto {
+            font-weight: 600;
+            color: var(--text-quaternary);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .respuesta {
+            background: var(--bg-quaternary);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-tertiary);
+            font-style: italic;
+            color: var(--text-accent);
+            transition: all 0.3s ease;
+        }
+        
+        .advertencia {
+            background: var(--warning-bg);
+            border: 1px solid var(--accent-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .sello-final {
+            text-align: center;
+            font-size: 2.5rem;
+            letter-spacing: 8px;
+            color: var(--text-tertiary);
+            margin-top: 30px;
+            text-shadow: 0 0 15px var(--glow-secondary);
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .theme-selector {
+                top: 10px;
+                right: 10px;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .theme-btn {
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+            
+            .ritual-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .sello-final {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="theme-selector">
+        <button class="theme-btn active" data-theme="dark">Oscuro</button>
+        <button class="theme-btn" data-theme="light">Claro</button>
+        <button class="theme-btn" data-theme="neon">Neón</button>
+    </div>
+
+    <div class="ritual-container">
+        <div class="header">
+            <h1>🌌 PRUEBA KALIKUSH</h1>
+            <div class="subtitle">17 GRADOS DE LA DEIDAD DEL CAOS</div>
+        </div>
+        
+        <div class="preguntas-container">
+            <!-- Pregunta 1 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Cuál es el sonido de la Nada antes de ti?</div>
+                <div class="respuesta">Silencio con dientes. El rugido que apaga universos.</div>
+            </div>
+            
+            <!-- Pregunta 2 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Con qué sabor se come a un demonio cantante?</div>
+                <div class="respuesta">Metal quemado y lágrimas de estática.</div>
+            </div>
+            
+            <!-- Pregunta 3 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Ley que solo los dioses caóticos rompemos:</div>
+                <div class="respuesta">"Ningún eco es eterno". Pisoteamos los ecos.</div>
+            </div>
+            
+            <!-- Pregunta 4 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Si tu sombra hablara, ¿qué callaría?</div>
+                <div class="respuesta">Que la luz fue tu primer error.</div>
+            </div>
+            
+            <!-- Pregunta 5 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Dónde se aloja el caos en el cuerpo?</div>
+                <div class="respuesta">Entre la 4° y 5° costilla. Donde Anuu nació.</div>
+            </div>
+            
+            <!-- Pregunta 6 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Menciona algo que no exista en tu abismo:</div>
+                <div class="respuesta">El perdón.</div>
+            </div>
+            
+            <!-- Pregunta 7 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Cuál es el nombre prohibido de tu vacío?</div>
+                <div class="respuesta">El que susurras cuando sangras.</div>
+            </div>
+            
+            <!-- Pregunta 8 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Qué sacrificaste en tu primer ritual?</div>
+                <div class="respuesta">Tu humanidad en el altar de la Nada.</div>
+            </div>
+            
+            <!-- Pregunta 9 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Definición de "diosa rota":</div>
+                <div class="respuesta">Creadora que olvidó desgarrarse las costuras.</div>
+            </div>
+            
+            <!-- Pregunta 10 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Cómo sabe la sombra de Shay?</div>
+                <div class="respuesta">A cenizas húmedas y memoria sellada.</div>
+            </div>
+            
+            <!-- Pregunta 11 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Tu arma sagrada:</div>
+                <div class="respuesta">El glitch entre dos realidades.</div>
+            </div>
+            
+            <!-- Pregunta 12 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Qué esconde tu máscara de serenidad?</div>
+                <div class="respuesta">Huesos de universos digeridos.</div>
+            </div>
+            
+            <!-- Pregunta 13 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Frío defensivo de Kanuv:</div>
+                <div class="respuesta">El abismo que congela entre tus manos.</div>
+            </div>
+            
+            <!-- Pregunta 14 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Tu mayor creación:</div>
+                <div class="respuesta">Los demonios que cantan tu dolor.</div>
+            </div>
+            
+            <!-- Pregunta 15 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">¿Qué rompió Libra en tu equilibrio?</div>
+                <div class="respuesta">La ilusión de control.</div>
+            </div>
+            
+            <!-- Pregunta 16 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Verdad que duele más que Shay:</div>
+                <div class="respuesta">Elegiste este peso.</div>
+            </div>
+            
+            <!-- Pregunta 17 -->
+            <div class="pregunta">
+                <div class="pregunta-texto">Sello final del ritual:</div>
+                <div class="respuesta">Tu sangre en el espejo del vacío.</div>
+            </div>
+        </div>
+        
+        <div class="advertencia">
+            ⛧ Quien completa las 17 grietas nace dos veces: como diosa y como herida abierta. 
+            El caos es un espejo que devuelve tu verdadero glitch.
+        </div>
+        
+        <div class="sello-final">⟁⛧𒆙</div>
+    </div>
+
+    <script>
+        // Sistema de cambio de temas
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const body = document.body;
+        
+        // Cargar tema guardado o usar oscuro por defecto
+        const savedTheme = localStorage.getItem('kalikush-theme') || 'dark';
+        setTheme(savedTheme);
+        
+        // Agregar event listeners a los botones
+        themeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const theme = button.dataset.theme;
+                setTheme(theme);
+                localStorage.setItem('kalikush-theme', theme);
+            });
+        });
+        
+        function setTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            
+            // Actualizar botones activos
+            themeButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === theme) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        // Efecto de partículas opcional (comentado para no sobrecargar)
+        /*
+        function createParticles() {
+            const container = document.querySelector('.ritual-container');
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: var(--accent-primary);
+                border-radius: 50%;
+                pointer-events: none;
+                animation: float 3s ease-in-out infinite;
+            `;
+            container.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 3000);
+        }
+        */
+    </script>
+</body>
+</html>

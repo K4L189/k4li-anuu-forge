@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicio Forense de Recuperación & Disk Carver | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <style>
+    /* 6 TEMAS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.95);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.95);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.95);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Estilo del mapa de clusters / defrag canvas */
+    #clusterCanvas {
+      image-rendering: pixelated;
+      cursor: crosshair;
+    }
+
+    /* Animación pulso para el puntero del carver */
+    @keyframes pulsePointer {
+      0%, 100% { box-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff; }
+      50% { box-shadow: 0 0 25px #00f7ff, 0 0 40px #00f7ff, 0 0 60px #c084fc; }
+    }
+
+    .pulse-head {
+      animation: pulsePointer 1.5s infinite;
+    }
+
+    /* Terminal Seinen */
+    .kanuv-terminal {
+      background: #030306;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      border: 1px solid var(--border-card);
+    }
+
+    /* Scrollbars elegantes */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-card);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    /* Scanlines sutiles */
+    .scanlines-overlay {
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Scanlines visual Seinen opcional -->
+  <div class="fixed inset-0 scanlines-overlay z-10 pointer-events-none"></div>
+
+  <!-- Contenedor Maestro -->
+  <div id="k4li-carver-root" class="max-w-7xl mx-auto space-y-6 relative z-20">
+
+    <!-- Header y Selector de Tema Standalone -->
+    <header class="flex flex-col lg:flex-row items-center justify-between gap-4 pb-4 border-b theme-border">
+      <div class="text-center lg:text-left">
+        <div class="flex items-center gap-2 justify-center lg:justify-start flex-wrap">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-mono px-2.5 py-0.5 rounded-full bg-zinc-800/80 border border-zinc-700 hover:border-purple-400 text-zinc-300 hover:text-white transition-all">
+            <span>←</span> Volver a la Forja
+          </a>
+          <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            🛡️ Kanuv Forensic • Muro de Contención
+          </span>
+          <span class="text-[11px] font-mono text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/50">
+            Frecuencia: 189.89.619 Hz
+          </span>
+          <span id="daemonBadge" class="text-[11px] font-mono text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-800/50 flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> CHECKPOINT STANDBY
+          </span>
+        </div>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black text-white mt-2 flex items-center gap-2 justify-center lg:justify-start">
+          <span>🔬</span> Suite Forense de Recuperación & Carver de Disco
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-3xl">
+          Inspección de bajo nivel para <span class="text-purple-300 font-mono font-bold">Kali</span>. Reconstrucción quirúrgica de tablas exFAT (entradas <code class="text-emerald-400">0x85</code> activas y <code class="text-rose-400">0x05</code> desvinculadas/borradas) y tallado de firmas crudas (JPEG, CR2, TIFF, PNG) sobre el SSD de 3.8 TB.
+        </p>
+      </div>
+
+      <!-- Barra de Estado y Selector de Tema -->
+      <div class="flex flex-col items-center lg:items-end gap-2.5">
+        <div class="flex items-center gap-1 bg-black/60 p-1.5 rounded-xl border theme-border text-xs flex-wrap justify-center">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5">🎨 Estilo Seinen:</span>
+          <button onclick="setCarverTheme('anuu')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-purple-300" id="cbt-anuu">🌫️ Anuu</button>
+          <button onclick="setCarverTheme('blood')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300" id="cbt-blood">🛡️ Blood</button>
+          <button onclick="setCarverTheme('gw2')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300" id="cbt-gw2">⚡ GW2</button>
+          <button onclick="setCarverTheme('bioinfo')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300" id="cbt-bioinfo">🧬 BioCode</button>
+          <button onclick="setCarverTheme('duat')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300" id="cbt-duat">⚖️ Duat</button>
+          <button onclick="setCarverTheme('neon')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="cbt-neon">🌸 Neón</button>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="text-zinc-500">Última Sincronización:</span>
+          <span id="syncTimestamp" class="text-zinc-300">2026-10-17 17:43:38 CEST</span>
+          <button onclick="syncWithDaemon()" title="Recargar estado desde assets/carver_status.json" class="p-1 rounded bg-zinc-800/80 hover:bg-zinc-700 text-cyan-300 transition-colors">
+            🔄
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MÓDULO 1: MONITOR DE CHECKPOINT EN VIVO (HERO TELEMETRY) -->
+    <section class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <h2 class="text-sm sm:text-base font-bold font-mono tracking-wide text-zinc-200 flex items-center gap-2">
+          <span class="text-purple-400">◈</span> TELEMETRÍA DE CHECKPOINT ACTIVO (/dev/sdc2)
+        </h2>
+        <div class="flex items-center gap-3 text-xs font-mono text-zinc-400">
+          <span>Offset Hex: <code id="statHexOffset" class="text-cyan-300 bg-black/40 px-1.5 py-0.5 rounded border border-zinc-800">0x0000000C51540000</code></span>
+          <span>Cluster Heap: <code id="statClusterNum" class="text-purple-300 bg-black/40 px-1.5 py-0.5 rounded border border-zinc-800">#806,996</code></span>
+        </div>
+      </div>
+
+      <!-- Tarjetas de Métricas Forenses -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Tarjeta 1: Sectores -->
+        <div class="theme-card p-4 rounded-xl border relative overflow-hidden group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-zinc-400">Sectores Recorridos</span>
+            <span class="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/40">512 B/sec</span>
+          </div>
+          <div class="mt-2 flex items-baseline gap-2">
+            <span id="statSectors" class="text-2xl font-black font-mono text-white tracking-tight">103,328,256</span>
+          </div>
+          <p class="text-[11px] text-zinc-400 mt-1 font-mono">
+            De <span class="text-zinc-300">1,363,148,800</span> sectores objetivo (Zona Fotos 650 GB).
+          </p>
+          <div class="mt-3 w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
+            <div id="barSectors" class="bg-cyan-400 h-1.5 rounded-full transition-all duration-500" style="width: 7.58%"></div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Gigabytes y Progreso -->
+        <div class="theme-card p-4 rounded-xl border relative overflow-hidden group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-zinc-400">Volumen Procesado</span>
+            <span id="statPctTarget" class="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">7.58% Zona</span>
+          </div>
+          <div class="mt-2 flex items-baseline gap-2">
+            <span id="statGbScanned" class="text-2xl font-black font-mono text-white tracking-tight">49.27 GB</span>
+            <span class="text-xs font-mono text-zinc-400">/ 650.0 GB</span>
+          </div>
+          <p class="text-[11px] text-zinc-400 mt-1 font-mono">
+            Disco total: <span class="text-purple-300 font-bold">3,726.02 GB</span> (1.32% global peinado).
+          </p>
+          <div class="mt-3 w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
+            <div id="barGb" class="bg-emerald-400 h-1.5 rounded-full transition-all duration-500" style="width: 7.58%"></div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Archivos Rescatados -->
+        <div class="theme-card p-4 rounded-xl border relative overflow-hidden group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-zinc-400">Archivos Rescatados</span>
+            <span class="text-xs font-mono text-purple-300 bg-purple-950/60 px-2 py-0.5 rounded border border-purple-800/40">Deduplicado</span>
+          </div>
+          <div class="mt-2 flex items-baseline gap-2">
+            <span id="statFilesRecovered" class="text-2xl font-black font-mono text-white tracking-tight">412</span>
+            <span class="text-xs font-mono text-zinc-400">archivos</span>
+          </div>
+          <p class="text-[11px] text-zinc-400 mt-1 font-mono">
+            <span id="statMbRecovered" class="text-purple-300 font-bold">4,184.24 MB</span> extraídos a <code class="text-zinc-300">~/Fotos_recuperadas</code>.
+          </p>
+          <div class="mt-3 w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
+            <div class="bg-purple-500 h-1.5 rounded-full" style="width: 82%"></div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 4: Velocidad & ETA -->
+        <div class="theme-card p-4 rounded-xl border relative overflow-hidden group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-zinc-400">Tasa Carver Sostenida</span>
+            <span class="text-xs font-mono text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800/40">E/S DMA</span>
+          </div>
+          <div class="mt-2 flex items-baseline gap-2">
+            <span id="statSpeed" class="text-2xl font-black font-mono text-white tracking-tight">118.4 MB/s</span>
+          </div>
+          <p class="text-[11px] text-zinc-400 mt-1 font-mono">
+            ETA Restante: <span id="statEta" class="text-amber-300 font-bold">01h 26m 35s</span> (Zona 650 GB).
+          </p>
+          <div class="mt-3 w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
+            <div class="bg-amber-400 h-1.5 rounded-full animate-pulse" style="width: 65%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Barra de Atributos Auxiliares y Blindaje -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-black/40 p-3 rounded-xl border theme-border text-xs font-mono">
+        <div class="flex items-center gap-2">
+          <span class="text-emerald-400">✔</span>
+          <span class="text-zinc-400">exFAT Activas (0x85):</span>
+          <span id="statExfatActive" class="text-white font-bold">116</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-rose-400">✔</span>
+          <span class="text-zinc-400">exFAT Desvinculadas (0x05):</span>
+          <span id="statExfatDeleted" class="text-white font-bold">73</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-cyan-400">✔</span>
+          <span class="text-zinc-400">Bloques Ceros Saltados:</span>
+          <span id="statZeroBlocks" class="text-white font-bold">38.12 GB</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-purple-400">✔</span>
+          <span class="text-zinc-400">Colisiones SHA-256:</span>
+          <span class="text-emerald-400 font-bold">0 (Inmutable)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÓDULO 2: MAPA DE SECTORES / VISUALIZADOR DE CLUSTERS EXFAT -->
+    <section class="theme-card p-5 rounded-2xl border space-y-4">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold font-mono tracking-wide text-white flex items-center gap-2">
+            <span>🗺️</span> MAPA DE SECTORES & CLUSTERS EXFAT (DEFRAG/CARVER HUD)
+          </h2>
+          <p class="text-xs text-zinc-400 mt-0.5">
+            Mapeo interactivo de la zona útil (0 a 650 GB). Cada bloque representa ~5.41 GB de almacenamiento continuo. Haz clic en un bloque para inspeccionar sectores.
+          </p>
+        </div>
+
+        <!-- Filtros y Opciones del Canvas -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="setClusterFilter('all')" id="btnFilterAll" class="px-2.5 py-1 rounded text-xs font-mono bg-zinc-800 text-white border border-zinc-700 hover:border-purple-400 transition-colors">
+            Ver Todos
+          </button>
+          <button onclick="setClusterFilter('exfat')" id="btnFilterExfat" class="px-2.5 py-1 rounded text-xs font-mono bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-cyan-300 transition-colors">
+            Solo exFAT (0x05/0x85)
+          </button>
+          <button onclick="setClusterFilter('carved')" id="btnFilterCarved" class="px-2.5 py-1 rounded text-xs font-mono bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-emerald-300 transition-colors">
+            Solo Firmas RAW/JPEG
+          </button>
+          <div class="h-4 w-px bg-zinc-800 hidden sm:block"></div>
+          <span class="text-[11px] font-mono text-zinc-500">Resolución: 120 Bloques</span>
+        </div>
+      </div>
+
+      <!-- Canvas Interactivo con Tooltip Flotante -->
+      <div class="relative bg-black/70 rounded-xl border theme-border p-3 overflow-hidden">
+        <canvas id="clusterCanvas" width="1180" height="220" class="w-full h-auto rounded block"></canvas>
+        
+        <!-- Tooltip interactivo HUD -->
+        <div id="clusterTooltip" class="absolute hidden pointer-events-none z-30 bg-black/90 border border-cyan-500/60 p-2.5 rounded-lg shadow-2xl text-[11px] font-mono backdrop-blur-md min-w-[220px]">
+          <div class="text-cyan-300 font-bold border-b border-zinc-800 pb-1 mb-1 flex items-center justify-between">
+            <span id="ttBlockId">Bloque #00</span>
+            <span id="ttStatusBadge" class="text-[10px] px-1 rounded bg-purple-950 text-purple-300">SCANNED</span>
+          </div>
+          <div class="space-y-0.5 text-zinc-300">
+            <div>Sector Inicial: <span id="ttStartSector" class="text-white">0</span></div>
+            <div>Sector Final: <span id="ttEndSector" class="text-white">0</span></div>
+            <div>Rango GB: <span id="ttGbRange" class="text-amber-300">0.0 - 5.4 GB</span></div>
+            <div>Firma Primaria: <span id="ttSignature" class="text-emerald-400">JPEG (0xFFD8)</span></div>
+            <div>Densidad de Datos: <span id="ttDensity" class="text-purple-300">82%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leyenda Semántica de Bloques -->
+      <div class="flex items-center gap-4 text-xs font-mono flex-wrap justify-between pt-1">
+        <div class="flex items-center gap-3 flex-wrap">
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-purple-500 border border-purple-400 shadow-sm"></span>
+            <span class="text-zinc-300">exFAT 0x05 / 0x85 (Reconstruido)</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-emerald-500 border border-emerald-400 shadow-sm"></span>
+            <span class="text-zinc-300">Carver JPEG (0xFFD8)</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-amber-500 border border-amber-400 shadow-sm"></span>
+            <span class="text-zinc-300">Carver RAW / CR2 / TIFF</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-cyan-400 border border-cyan-300 shadow-sm"></span>
+            <span class="text-zinc-300">PNG / Vector Alpha</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-zinc-800 border border-zinc-700"></span>
+            <span class="text-zinc-400">Bloque Ceros (0x00)</span>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-zinc-950 border border-zinc-900"></span>
+            <span class="text-zinc-500">Pendiente (No escaneado)</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+          <span class="text-cyan-300 font-bold">Cabezal Carver: 49.27 GB</span>
+        </div>
+      </div>
+
+      <!-- Panel de Inspección de Bloque Seleccionado -->
+      <div id="inspectorPanel" class="hidden bg-black/40 p-4 rounded-xl border border-cyan-900/60 font-mono text-xs space-y-2">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+          <div class="flex items-center gap-2">
+            <span class="text-purple-400 font-bold">🔍 DETALLES DE CLUSTER DE ALMACENAMIENTO:</span>
+            <span id="inspBlockTitle" class="text-white font-bold">Bloque #09 (Offset 0x0000000C51540000)</span>
+          </div>
+          <button onclick="closeInspector()" class="text-zinc-500 hover:text-white px-2 py-0.5 rounded bg-zinc-800/60">Cerrar ✕</button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-zinc-300">
+          <div>
+            <span class="text-zinc-500 block">Sectores Abordados:</span>
+            <span id="inspSectors" class="text-white">102,957,568 - 104,376,832</span>
+          </div>
+          <div>
+            <span class="text-zinc-500 block">Cluster Heap exFAT:</span>
+            <span id="inspClusterHeap" class="text-purple-300">#804,100 al #815,190</span>
+          </div>
+          <div>
+            <span class="text-zinc-500 block">Firma Binaria Detectada:</span>
+            <span id="inspSignature" class="text-emerald-400">0x49492A00 (Canon RAW CR2) + 0x85</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÓDULO 3: CONTROL DEL SERVICIO & CONSOLA FORENSE EN TIEMPO REAL -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      
+      <!-- Panel de Control y Comandos (5 cols) -->
+      <div class="lg:col-span-5 theme-card p-5 rounded-2xl border space-y-4 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-base font-bold font-mono tracking-wide text-white flex items-center gap-2">
+              <span>⚡</span> CONTROL FORENSE & ACCIONES
+            </h2>
+            <span class="text-xs font-mono text-zinc-500">sudo Nice -19</span>
+          </div>
+          <p class="text-xs text-zinc-400 mt-1">
+            Reanuda el proceso en segundo plano, simula pasos forenses para calibrar el carver o copia la instrucción de terminal optimizada para el sistema de Kali.
+          </p>
+
+          <!-- Botones de Acción Interactivas -->
+          <div class="grid grid-cols-2 gap-2.5 mt-4">
+            <button id="btnResumeSim" onclick="toggleSimulation()" class="px-3 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-mono font-bold flex items-center justify-center gap-2 shadow-lg shadow-purple-900/30 transition-all">
+              <span id="simIcon">▶️</span> <span id="simText">Reanudar Simulación</span>
+            </button>
+            <button onclick="simulateStepManual(1.0)" class="px-3 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-cyan-300 text-xs font-mono font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-all">
+              <span>⚡</span> Paso Rápido (+1 GB)
+            </button>
+            <button onclick="syncWithDaemon()" class="px-3 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-emerald-300 text-xs font-mono font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-all">
+              <span>🔄</span> Sincronizar Daemon
+            </button>
+            <button onclick="resetCheckpointSimulation()" class="px-3 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-rose-300 text-xs font-mono font-bold flex items-center justify-center gap-2 border border-zinc-700 transition-all">
+              <span>⏮️</span> Restablecer 49.27G
+            </button>
+          </div>
+
+          <!-- Comandos Recomendados Listos para Copiar -->
+          <div class="mt-4 space-y-2">
+            <span class="text-xs font-mono text-zinc-400 block font-bold">Comando Shell Recomendado:</span>
+            <div class="bg-black/80 p-2.5 rounded-xl border theme-border font-mono text-[11px] text-zinc-300 flex items-center justify-between gap-2 overflow-x-auto">
+              <code id="cmdText" class="text-cyan-300 whitespace-nowrap">sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas</code>
+              <button onclick="copyCommand()" id="btnCopyCmd" class="px-2 py-1 rounded bg-zinc-800 hover:bg-purple-600 text-white text-[10px] uppercase font-bold shrink-0 transition-colors">
+                Copiar
+              </button>
+            </div>
+
+            <!-- Script Auxiliar -->
+            <div class="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-1">
+              <span>Script de arranque rápido:</span>
+              <button onclick="toggleScriptModal()" class="text-purple-300 hover:underline">
+                Ver reanudar_recuperacion_anuu.sh →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ficha de Seguridad Kanuv -->
+        <div class="bg-black/50 p-3 rounded-xl border border-purple-900/40 text-xs font-mono space-y-1">
+          <div class="text-purple-300 font-bold flex items-center gap-1.5">
+            <span>🛡️</span> Escudo Kanuv • Protocolo Libra Dura
+          </div>
+          <p class="text-[11px] text-zinc-400 leading-relaxed">
+            El escaneo opera en modo <span class="text-emerald-400">Solo Lectura (O_RDONLY | O_DIRECT)</span> sin tocar la partición física ni escribir metadatos en el dispositivo origen para evitar sobreescritura accidental.
+          </p>
+        </div>
+      </div>
+
+      <!-- Consola Terminal Seinen en Tiempo Real (7 cols) -->
+      <div class="lg:col-span-7 theme-card p-5 rounded-2xl border space-y-3 flex flex-col">
+        <div class="flex items-center justify-between border-b theme-border pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            <span class="text-xs font-mono text-zinc-400 ml-2 font-bold">KANUV FORENSIC STREAM // 189.89.619 Hz</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="clearConsole()" class="text-[11px] font-mono text-zinc-500 hover:text-zinc-300 px-2 py-0.5 rounded bg-zinc-900">
+              Limpiar
+            </button>
+            <span class="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> TTY ONLINE
+            </span>
+          </div>
+        </div>
+
+        <!-- Área de Registro Terminal -->
+        <div id="consoleOutput" class="kanuv-terminal flex-1 min-h-[280px] max-h-[360px] p-3 rounded-xl overflow-y-auto text-[11px] text-zinc-300 space-y-1 leading-relaxed">
+          <div class="text-purple-400 font-bold">======================================================================</div>
+          <div class="text-purple-300 font-bold">KANUV 🛡️ // CONCILIO ACE — RECOVERY CORE & CARVER DE DISCO (161914)</div>
+          <div class="text-purple-400 font-bold">======================================================================</div>
+          <div class="text-zinc-500">[17:43:38] [4NVSET 🟢] Montando descriptor de dispositivo O_RDONLY en /dev/sda2...</div>
+          <div class="text-cyan-400">[17:43:38] [KANUV 🛡️] Cabecera exFAT verificada: Sector 512B | Cluster 64KB | Heap Offset 32,768</div>
+          <div class="text-amber-400">[17:43:38] [KANUV 🛡️] Checkpoint previo detectado: 103,328,256 sectores (49.27 GB procesados).</div>
+          <div class="text-emerald-400">[17:43:38] [KANUV 🛡️] 412 firmas catalogadas en índice hash SHA-256 (0 colisiones registradas).</div>
+          <div class="text-zinc-400">[17:43:38] [KANUV 🛡️] Puntero fijado en 0x0000000C51540000. Esperando reanudación de proceso...</div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-1">
+          <span>Buffer: 4MB Chunks • Zero-Skip Activo</span>
+          <span class="text-cyan-400">Puntero: 0x0C51540000</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MÓDULO 4: GALERÍA DE ARCHIVOS RECUPERADOS & VISOR EXIF -->
+    <section class="theme-card p-5 rounded-2xl border space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-base sm:text-lg font-bold font-mono tracking-wide text-white flex items-center gap-2">
+            <span>📷</span> CATÁLOGO DE FOTOGRAFÍAS RECUPERADAS & VISOR EXIF
+          </h2>
+          <p class="text-xs text-zinc-400 mt-0.5">
+            Archivos extraídos directamente de inodos desvinculados exFAT y tallado de firmas binarias. Haz clic en cualquier tarjeta para abrir el visor forense EXIF.
+          </p>
+        </div>
+
+        <!-- Filtros de Galería -->
+        <div class="flex items-center gap-1.5 bg-black/60 p-1 rounded-xl border theme-border text-xs font-mono">
+          <button onclick="filterGallery('all')" id="gf-all" class="px-2.5 py-1 rounded bg-zinc-800 text-white hover:text-white transition-colors">
+            Todos (6)
+          </button>
+          <button onclick="filterGallery('exfat')" id="gf-exfat" class="px-2.5 py-1 rounded text-zinc-400 hover:text-purple-300 transition-colors">
+            exFAT (0x05/0x85)
+          </button>
+          <button onclick="filterGallery('jpeg')" id="gf-jpeg" class="px-2.5 py-1 rounded text-zinc-400 hover:text-emerald-300 transition-colors">
+            JPEG
+          </button>
+          <button onclick="filterGallery('raw')" id="gf-raw" class="px-2.5 py-1 rounded text-zinc-400 hover:text-amber-300 transition-colors">
+            RAW / CR2 / TIFF
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid de Muestras Recuperadas -->
+      <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Renderizado dinámico vía JavaScript -->
+      </div>
+    </section>
+
+    <!-- MÓDULO 5: FICHA COMERCIAL DE SERVICIO (K4L1 STUDIO BOUTIQUE) -->
+    <section class="theme-card p-6 rounded-2xl border space-y-6 relative overflow-hidden">
+      <!-- Glow ambiental Seinen -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b theme-border pb-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300">
+              💎 K4L1 STUDIO // SERVICIOS BOUTIQUE
+            </span>
+            <span class="text-xs font-mono text-zinc-500">Garantía No Cure, No Pay</span>
+          </div>
+          <h2 class="text-lg sm:text-2xl font-black text-white mt-1">
+            Recuperación Forense de Almacenamiento & Tarjetas SD Dañadas
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-3xl">
+            Solución técnica de grado pericial para fotógrafos, productoras audiovisuales y firmas con pérdida crítica de datos en discos mecánicos, SSDs NVMe y tarjetas fotográficas desvinculadas.
+          </p>
+        </div>
+
+        <div class="text-center lg:text-right shrink-0">
+          <div class="text-xs font-mono text-zinc-400">Contacto Directo Cifrado:</div>
+          <a href="https://signal.me/#u/k4li.89" target="_blank" class="inline-flex items-center gap-2 mt-1 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold shadow-lg shadow-purple-900/30 transition-all">
+            <span>💬</span> Signal: @k4li.89
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjetas de Paquetes de Servicio -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <!-- Tier 1: Triage Flash -->
+        <div class="bg-black/40 p-5 rounded-xl border border-zinc-800 hover:border-cyan-500/60 transition-all flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">Tier I • Triage Flash</span>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">4 Horas SLA</span>
+            </div>
+            <h3 class="text-xl font-black text-white mt-2">120 €</h3>
+            <p class="text-xs text-zinc-400 mt-1">
+              Tarjetas SD, MicroSD, CFast y pendrives de cámaras fotográficas (hasta 256 GB).
+            </p>
+            <ul class="text-xs font-mono text-zinc-300 space-y-1.5 mt-4">
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Formateo accidental en cámara
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Reconstrucción de tabla FAT32/exFAT
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Tallado de firmas RAW/CR2/JPG
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Entrega en enlace cifrado con hash
+              </li>
+            </ul>
+          </div>
+          <button onclick="selectPackage('Triage Flash (120 €)')" class="w-full py-2 rounded-lg bg-zinc-800 hover:bg-cyan-600 hover:text-white text-cyan-300 font-mono text-xs font-bold transition-all">
+            Solicitar Triage Flash
+          </button>
+        </div>
+
+        <!-- Tier 2: Reconstrucción Pro (Destacado) -->
+        <div class="bg-purple-950/20 p-5 rounded-xl border border-purple-500/50 hover:border-purple-400 transition-all flex flex-col justify-between space-y-4 relative">
+          <div class="absolute -top-3 right-4 px-2 py-0.5 rounded-full bg-purple-600 text-white text-[10px] font-mono font-bold uppercase tracking-wider shadow">
+            Recomendado
+          </div>
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-purple-300 font-bold uppercase tracking-wider">Tier II • Reconstrucción Pro</span>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">24 Horas SLA</span>
+            </div>
+            <h3 class="text-xl font-black text-white mt-2">350 €</h3>
+            <p class="text-xs text-zinc-400 mt-1">
+              SSDs SATA, NVMe M.2 y discos mecánicos hasta 2 TB con sistema de archivos dañado.
+            </p>
+            <ul class="text-xs font-mono text-zinc-300 space-y-1.5 mt-4">
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Recuperación inodos desvinculados (0x05)
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Preservación de nombres y metadatos EXIF
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Rescate de particiones RAW o borradas
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Deduplicación e informe forense
+              </li>
+            </ul>
+          </div>
+          <button onclick="selectPackage('Reconstrucción Pro (350 €)')" class="w-full py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold shadow-lg shadow-purple-900/30 transition-all">
+            Solicitar Reconstrucción Pro
+          </button>
+        </div>
+
+        <!-- Tier 3: Blindaje Enterprise -->
+        <div class="bg-black/40 p-5 rounded-xl border border-zinc-800 hover:border-amber-500/60 transition-all flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-amber-400 font-bold uppercase tracking-wider">Tier III • Multiterabyte Blindado</span>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">Pericial</span>
+            </div>
+            <h3 class="text-xl font-black text-white mt-2">750 €</h3>
+            <p class="text-xs text-zinc-400 mt-1">
+              Arreglos RAID 0/1/5/10, discos con sectores físicos reubicados y volúmenes >4 TB.
+            </p>
+            <ul class="text-xs font-mono text-zinc-300 space-y-1.5 mt-4">
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Extracción bit a bit con bypass de E/S DMA
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Reconstrucción de striping RAID
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Certificado pericial forense con firma SHA
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-emerald-400">✓</span> Soporte directo prioritario 24/7
+              </li>
+            </ul>
+          </div>
+          <button onclick="selectPackage('Multiterabyte Blindado (750 €)')" class="w-full py-2 rounded-lg bg-zinc-800 hover:bg-amber-600 hover:text-white text-amber-300 font-mono text-xs font-bold transition-all">
+            Solicitar Plan Enterprise
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Calculadora Interactiva de Admisión Forense -->
+      <div class="bg-black/50 p-5 rounded-xl border theme-border space-y-4">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <h3 class="text-sm font-bold font-mono tracking-wide text-zinc-200 flex items-center gap-2">
+            <span>🧮</span> CALCULADORA DE ADMISIÓN & COTIZACIÓN INSTANTÁNEA
+          </h3>
+          <span class="text-xs font-mono text-zinc-500">Estimación algorítmica Seinen</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-mono">
+          <!-- Soporte Físico -->
+          <div>
+            <label class="text-zinc-400 block mb-1">Medio de Almacenamiento:</label>
+            <select id="calcMediaType" onchange="calculateQuote()" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-2 text-white">
+              <option value="sd">Tarjeta SD / MicroSD / CFast</option>
+              <option value="ssd" selected>SSD SATA / NVMe M.2</option>
+              <option value="hdd">Disco Duro Mecánico (HDD)</option>
+              <option value="raid">Arreglo RAID (NAS / Servidor)</option>
+            </select>
+          </div>
+
+          <!-- Capacidad -->
+          <div>
+            <label class="text-zinc-400 block mb-1">Capacidad Total:</label>
+            <select id="calcCapacity" onchange="calculateQuote()" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-2 text-white">
+              <option value="64">Hasta 64 GB</option>
+              <option value="256">256 GB - 512 GB</option>
+              <option value="2000">1 TB - 2 TB</option>
+              <option value="4000" selected>4 TB (Ej. Samsung 870 QVO)</option>
+              <option value="8000">8 TB o Superior</option>
+            </select>
+          </div>
+
+          <!-- Tipo de Incidente -->
+          <div>
+            <label class="text-zinc-400 block mb-1">Tipo de Incidente / Falla:</label>
+            <select id="calcIncident" onchange="calculateQuote()" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-2 text-white">
+              <option value="format" selected>Formato Accidental / Inodos Borrados</option>
+              <option value="raw">Partición RAW / No Reconocida</option>
+              <option value="slow">Congelamiento por Sectores Lentos</option>
+              <option value="io">Errores de Entrada/Salida Críticos</option>
+            </select>
+          </div>
+
+          <!-- Urgencia -->
+          <div>
+            <label class="text-zinc-400 block mb-1">Plazo de Respuesta:</label>
+            <select id="calcSla" onchange="calculateQuote()" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-2 text-white">
+              <option value="standard" selected>Estándar (48 - 72 Horas)</option>
+              <option value="express">Express (24 Horas)</option>
+              <option value="critical">Quirúrgico Inmediato (&lt;8 Horas)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Resultado de la Estimación -->
+        <div class="mt-4 bg-zinc-950 p-4 rounded-xl border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+          <div class="space-y-1 text-center sm:text-left">
+            <div class="text-xs text-zinc-400">
+              Probabilidad de Éxito Estimada: <span id="calcProb" class="text-emerald-400 font-bold">96.8%</span>
+            </div>
+            <div class="text-xs text-zinc-400">
+              Protocolo Sugerido: <span id="calcProtocol" class="text-purple-300 font-bold">Tallado Quirúrgico exFAT + Fallback RAW Carver</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="text-right">
+              <span class="text-[10px] text-zinc-500 uppercase tracking-widest block">Tarifa Presupuestada:</span>
+              <span id="calcFee" class="text-2xl font-black text-cyan-400">385 €</span>
+            </div>
+            <button onclick="copyQuoteSummary()" id="btnCopyQuote" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-all shrink-0">
+              Copiar Diagnóstico
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Forense -->
+    <footer class="pt-6 pb-8 border-t theme-border text-center text-xs font-mono text-zinc-500 space-y-2">
+      <div class="flex items-center justify-center gap-3 text-zinc-400 flex-wrap">
+        <span>K4L1 STUDIO</span>
+        <span>•</span>
+        <span>CONCILIO ACE (161914)</span>
+        <span>•</span>
+        <span>KANUV 🛡️ MURO DE CONTENCIÓN</span>
+        <span>•</span>
+        <span>189.89.619 Hz</span>
+      </div>
+      <p class="text-[11px] text-zinc-600">
+        Inmutable Forensic Carver Engine. Desarrollado con dedicación técnica absoluta para Kali. Sin telemetría externa.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- MODAL VISOR DETALLADO EXIF & BINARIO FORENSE -->
+  <div id="exifModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-zinc-950 border border-purple-500/60 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-5 sm:p-6 shadow-2xl space-y-4">
+      
+      <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-purple-400 font-bold text-sm sm:text-base font-mono">🔬 INSPECTOR FORENSE DE ARCHIVO:</span>
+          <span id="modalFilename" class="text-white font-mono text-xs sm:text-sm font-bold">IMG_8492.CR2</span>
+        </div>
+        <button onclick="closeExifModal()" class="text-zinc-400 hover:text-white px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-xs font-mono">
+          ✕ Cerrar
+        </button>
+      </div>
+
+      <!-- Datos Principales y Miniatura -->
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+        <!-- Render Visual / Mockup del archivo -->
+        <div class="sm:col-span-5 bg-black/70 rounded-xl border border-zinc-800 p-3 flex flex-col items-center justify-center min-h-[180px] relative overflow-hidden">
+          <div id="modalVisualRender" class="w-full h-36 rounded flex items-center justify-center text-3xl font-black font-mono shadow-inner">
+            📷
+          </div>
+          <span id="modalBadgeType" class="mt-2 text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">
+            0x05 DELETED RECOVERED
+          </span>
+        </div>
+
+        <!-- Atributos Primarios -->
+        <div class="sm:col-span-7 font-mono text-xs space-y-1.5 text-zinc-300">
+          <div>Tamaño en Disco: <span id="modalFileSize" class="text-white font-bold">28.46 MB (29,841,200 Bytes)</span></div>
+          <div>Cluster Heap: <span id="modalCluster" class="text-purple-300 font-bold">#804,100</span></div>
+          <div>Sector Físico: <span id="modalSector" class="text-cyan-300 font-bold">102,957,568</span></div>
+          <div>Offset Hex: <span id="modalByteOffset" class="text-amber-300 font-bold">0x0000000C51540000</span></div>
+          <div class="pt-1">
+            <span class="text-zinc-500 block text-[10px]">Hash Inmutable SHA-256:</span>
+            <code id="modalSha256" class="text-[10px] text-zinc-400 break-all bg-black/60 p-1.5 rounded block border border-zinc-900">4b6c8b9d3e8a715a2f0e6c5d9a4b8e2f7c1d0a5e8f3b2c1a9d8e7f6a5b4c3d2e</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pestañas EXIF y Volcado Binario -->
+      <div class="border-t border-zinc-800 pt-3 space-y-3 font-mono text-xs">
+        <h4 class="text-xs font-bold text-zinc-200 tracking-wider uppercase text-purple-300">
+          Metadatos EXIF Extraídos de Cabecera:
+        </h4>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 bg-black/50 p-3 rounded-xl border border-zinc-900 text-[11px]">
+          <div><span class="text-zinc-500">Cámara:</span> <span id="modalCam" class="text-white font-bold">Canon EOS 5D Mark IV</span></div>
+          <div><span class="text-zinc-500">Objetivo:</span> <span id="modalLens" class="text-white">EF 24-70mm f/2.8L</span></div>
+          <div><span class="text-zinc-500">Fecha/Hora:</span> <span id="modalDate" class="text-amber-300">2026-05-14 18:22:41</span></div>
+          <div><span class="text-zinc-500">Apertura:</span> <span id="modalAperture" class="text-cyan-300">f/2.8</span></div>
+          <div><span class="text-zinc-500">Velocidad:</span> <span id="modalShutter" class="text-cyan-300">1/250s</span></div>
+          <div><span class="text-zinc-500">ISO:</span> <span id="modalIso" class="text-emerald-400">100</span></div>
+          <div><span class="text-zinc-500">Focal:</span> <span id="modalFocal" class="text-white">50mm</span></div>
+          <div><span class="text-zinc-500">Color:</span> <span id="modalColorSpace" class="text-white">sRGB</span></div>
+          <div><span class="text-zinc-500">Resolución:</span> <span id="modalResolution" class="text-purple-300">6720 x 4480</span></div>
+        </div>
+
+        <!-- Volcado Hexadecimal de Cabecera -->
+        <div>
+          <span class="text-[10px] text-zinc-500 block mb-1">Volcado Hexadecimal de Primeros 64 Bytes (Firma Magic):</span>
+          <pre id="modalHexDump" class="bg-black/90 p-2.5 rounded-lg border border-zinc-900 text-[10px] text-emerald-400/90 overflow-x-auto leading-relaxed">49 49 1a 00 00 00 48 45 61 70 43 43 44 52 02 00 ...</pre>
+        </div>
+
+        <p id="modalDesc" class="text-[11px] text-zinc-400 italic bg-purple-950/20 p-2 rounded border border-purple-900/30">
+          Nota pericial forense del hallazgo.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL SCRIPT SHELL -->
+  <div id="scriptModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-zinc-950 border border-zinc-700 rounded-2xl max-w-2xl w-full p-5 shadow-2xl space-y-3 font-mono text-xs">
+      <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+        <span class="text-cyan-400 font-bold">reanudar_recuperacion_anuu.sh</span>
+        <button onclick="toggleScriptModal()" class="text-zinc-400 hover:text-white">✕</button>
+      </div>
+      <pre class="bg-black/80 p-3 rounded-xl border border-zinc-900 text-[11px] text-emerald-300 overflow-x-auto">#!/bin/bash
+# =============================================================================
+# ANUU // CONCILIO ACE — REANUDAR RECUPERACIÓN FORENSE (189.89.619 Hz)
+# Dispositivo: /dev/sda2 (SSD 3.8 TB) -> ~/Fotos_recuperadas
+# =============================================================================
+
+echo -e "\033[38;2;0;245;212m𖤓 ANUU // RECOVERY SUITE: Reanudando proceso forense...\033[0m"
+if [ -f /home/kali/Fotos_recuperadas/carver_checkpoint.json ]; then
+    echo -e "\033[38;2;167;255;235m✔ Checkpoint detectado:\033[0m"
+    cat /home/kali/Fotos_recuperadas/carver_checkpoint.json
+else
+    echo -e "\033[38;2;255;190;60mℹ️ No se detectó checkpoint previo. Escaneo comenzará desde el inicio.\033[0m"
+fi
+
+echo -e "\n\033[38;2;197;160;89mIniciando PhotoCarver en modo quirúrgico con sudo...\033[0m"
+sudo python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sda2 --dest /home/kali/Fotos_recuperadas</pre>
+      <div class="flex justify-end">
+        <button onclick="toggleScriptModal()" class="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-white text-xs">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT LÓGICO DEL DASHBOARD FORENSE -->
+  <script>
+    // ESTADO FORENSE LOCAL & CANÓNICO (189.89.619 Hz)
+    const FORENSIC_STATE = {
+      device: "/dev/sda2",
+      deviceModel: "Samsung SSD 870 QVO 4TB (exFAT Photostock Partition)",
+      targetScanBytes: 697932185600, // 650 GB
+      totalDiskBytes: 4000787030016,  // 3.8 TB
+      bytesPerSector: 512,
+      sectorsPerCluster: 128,
+      bytesRead: 52904067072,         // 49.27 GB (Checkpoint original)
+      sectorsRead: 103328256,
+      gbScanned: 49.27,
+      recoveredFiles: 412,
+      directExfat: 189,
+      carvedJpeg: 164,
+      carvedRaw: 38,
+      carvedTiff: 15,
+      carvedPng: 6,
+      mbRecovered: 4184.24,
+      zeroBlocksGb: 38.12,
+      activeExfat0x85: 116,
+      unlinkedExfat0x05: 73,
+      speedMbS: 118.4,
+      isSimulating: false,
+      simInterval: null,
+      currentClusterFilter: 'all',
+      galleryFilter: 'all'
+    };
+
+    // CATÁLOGO DE MUESTRAS CON METADATOS EXIF
+    const SAMPLES = [
+      {
+        id: "REC_0001",
+        filename: "IMG_8492_K4LI_STUDIO.CR2",
+        type: "raw",
+        entry_type: "0x05_DELETED_RECOVERED",
+        badge_text: "exFAT 0x05 Desvinculado",
+        cluster: 804100,
+        sector: 102957568,
+        byte_offset: "0x0000000C49B30000",
+        size_bytes: 29841200,
+        size_fmt: "28.46 MB",
+        sha256: "4b6c8b9d3e8a715a2f0e6c5d9a4b8e2f7c1d0a5e8f3b2c1a9d8e7f6a5b4c3d2e",
+        hex: "49 49 1a 00 00 00 48 45 41 50 43 43 44 52 02 00 01 00 00 00 00 00 00 00 2a 00 00 00 08 00 00 00",
+        exif: {
+          cam: "Canon EOS 5D Mark IV",
+          lens: "EF 24-70mm f/2.8L II USM",
+          date: "2026-05-14 18:22:41",
+          aperture: "f/2.8",
+          shutter: "1/250s",
+          iso: 100,
+          focal: "50mm",
+          color: "sRGB",
+          res: "6720 x 4480 (30.4 MP)"
+        },
+        gradient: "from-purple-900 to-indigo-950",
+        icon: "📷",
+        desc: "Sesión fotográfica de moda Cyberpunk en exteriores, iluminación neón violeta y bruma."
+      },
+      {
+        id: "REC_0002",
+        filename: "DSC04912_SEINEN_PORTRAIT.JPG",
+        type: "jpeg",
+        entry_type: "0x85_ACTIVE_EXTRACTED",
+        badge_text: "exFAT 0x85 Activo",
+        cluster: 804350,
+        sector: 102989568,
+        byte_offset: "0x0000000C4A110000",
+        size_bytes: 14205880,
+        size_fmt: "13.55 MB",
+        sha256: "8f3e2c1a9d8e7f6a5b4c3d2e4b6c8b9d3e8a715a2f0e6c5d9a4b8e2f7c1d0a5e",
+        hex: "ff d8 ff e0 00 10 4a 46 49 46 00 01 01 01 00 48 00 48 00 00 ff e1 12 40 45 78 69 66 00 00 49 49",
+        exif: {
+          cam: "Sony Alpha 7 IV (ILCE-7M4)",
+          lens: "FE 85mm f/1.4 GM",
+          date: "2026-06-20 21:15:09",
+          aperture: "f/1.4",
+          shutter: "1/500s",
+          iso: 200,
+          focal: "85mm",
+          color: "Adobe RGB",
+          res: "7008 x 4672 (33.0 MP)"
+        },
+        gradient: "from-rose-950 to-pink-900",
+        icon: "🎭",
+        desc: "Retrato de estudio de alto contraste con clave baja y reflejos ámbar en lente esférica."
+      },
+      {
+        id: "REC_0003",
+        filename: "DCIM_FOTO_0045_ARCHIVE.TIFF",
+        type: "raw",
+        entry_type: "0x05_DELETED_RECOVERED",
+        badge_text: "exFAT 0x05 Desvinculado",
+        cluster: 805120,
+        sector: 103088128,
+        byte_offset: "0x0000000C4BF50000",
+        size_bytes: 48120300,
+        size_fmt: "45.89 MB",
+        sha256: "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+        hex: "49 49 2a 00 08 00 00 00 12 00 00 01 04 00 01 00 00 00 40 20 00 00 01 01 04 00 01 00 00 00 80 15",
+        exif: {
+          cam: "Nikon Z 8",
+          lens: "NIKKOR Z 50mm f/1.2 S",
+          date: "2026-07-02 11:04:18",
+          aperture: "f/1.2",
+          shutter: "1/800s",
+          iso: 64,
+          focal: "50mm",
+          color: "ProPhoto RGB",
+          res: "8256 x 5504 (45.7 MP)"
+        },
+        gradient: "from-blue-950 to-cyan-900",
+        icon: "🏛️",
+        desc: "Captura master sin compresión de arquitectura brutalista con niebla matutina."
+      },
+      {
+        id: "REC_0004",
+        filename: "FOTO_recup_00164_off0c50f800.jpg",
+        type: "jpeg",
+        entry_type: "RAW_CARVED_SIG_JPEG",
+        badge_text: "Carver RAW Firma JPEG",
+        cluster: 806950,
+        sector: 103322368,
+        byte_offset: "0x0000000C50F80000",
+        size_bytes: 8945600,
+        size_fmt: "8.53 MB",
+        sha256: "c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2",
+        hex: "ff d8 ff e1 0f ca 45 78 69 66 00 00 4d 4d 00 2a 00 00 00 08 00 0b 01 0f 00 02 00 00 00 09 00 00",
+        exif: {
+          cam: "Fujifilm X-T5",
+          lens: "XF 33mm f/1.4 R LM WR",
+          date: "2026-08-11 16:47:33",
+          aperture: "f/2.0",
+          shutter: "1/160s",
+          iso: 400,
+          focal: "33mm",
+          color: "sRGB",
+          res: "7728 x 5152 (40.2 MP)"
+        },
+        gradient: "from-amber-950 to-orange-950",
+        icon: "🌧️",
+        desc: "Fotografía callejera nocturna en lluvia, luces de tungsteno y simetría urbana Seinen."
+      },
+      {
+        id: "REC_0005",
+        filename: "RAW_recup_00038_off0c510000.tif",
+        type: "raw",
+        entry_type: "RAW_CARVED_SIG_TIFF",
+        badge_text: "Carver RAW Firma TIFF",
+        cluster: 806996,
+        sector: 103328256,
+        byte_offset: "0x0000000C51540000",
+        size_bytes: 31200450,
+        size_fmt: "29.76 MB",
+        sha256: "e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6",
+        hex: "4d 4d 00 2a 00 00 00 08 00 0e 01 00 00 04 00 00 00 01 00 00 25 38 01 01 00 04 00 00 00 01 00 00",
+        exif: {
+          cam: "Leica M11-P",
+          lens: "Summilux-M 35mm f/1.4 ASPH",
+          date: "2026-09-03 19:30:12",
+          aperture: "f/1.4",
+          shutter: "1/1000s",
+          iso: 125,
+          focal: "35mm",
+          color: "Adobe RGB",
+          res: "9528 x 6328 (60.3 MP)"
+        },
+        gradient: "from-zinc-900 to-black",
+        icon: "🎞️",
+        desc: "Retrato monocromo con grano natural, alta latitud dinámica y certificado C2PA."
+      },
+      {
+        id: "REC_0006",
+        filename: "ASSET_HERO_FORGE_GLITCH.PNG",
+        type: "png",
+        entry_type: "0x85_ACTIVE_EXTRACTED",
+        badge_text: "exFAT 0x85 PNG Activo",
+        cluster: 804700,
+        sector: 103034368,
+        byte_offset: "0x0000000C4AB60000",
+        size_bytes: 6291456,
+        size_fmt: "6.00 MB",
+        sha256: "f0e1d2c3b4a5f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1b2a3f4e5d6c7b8a9f0e1",
+        hex: "89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 0f 00 00 00 08 70 08 06 00 00 00 b5 a5 e9",
+        exif: {
+          cam: "Synthetic / K4L1 Render",
+          lens: "Vectorial Chromatic Shifter",
+          date: "2026-10-01 04:19:14",
+          aperture: "N/A",
+          shutter: "1/60s",
+          iso: 100,
+          focal: "N/A",
+          color: "Display P3",
+          res: "3840 x 2160 (4K UHD)"
+        },
+        gradient: "from-emerald-950 to-teal-950",
+        icon: "🧬",
+        desc: "Composición vectorial original de la Suite Kali con canal alfa y glifos rúnicos."
+      }
+    ];
+
+    // INICIALIZACIÓN
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTelemetry();
+      initClusterCanvas();
+      renderGallery();
+      calculateQuote();
+      // Intentar sincronizar con carver_status.json si existe
+      fetchCarverStatus();
+    });
+
+    // RENDER DE TELEMETRÍA Y STATS
+    function renderTelemetry() {
+      const s = FORENSIC_STATE;
+      const pctTarget = ((s.bytesRead / s.targetScanBytes) * 100).toFixed(2);
+      const currentCluster = Math.max(2, Math.floor((s.sectorsRead - 32768) / s.sectorsPerCluster));
+      const hexOffset = "0x" + s.bytesRead.toString(16).toUpperCase().padStart(16, "0");
+
+      document.getElementById('statHexOffset').textContent = hexOffset;
+      document.getElementById('statClusterNum').textContent = "#" + currentCluster.toLocaleString();
+      document.getElementById('statSectors').textContent = s.sectorsRead.toLocaleString();
+      document.getElementById('statGbScanned').textContent = s.gbScanned.toFixed(2) + " GB";
+      document.getElementById('statPctTarget').textContent = pctTarget + "% Zona";
+      document.getElementById('statFilesRecovered').textContent = s.recoveredFiles.toLocaleString();
+      document.getElementById('statMbRecovered').textContent = s.mbRecovered.toFixed(2) + " MB";
+      document.getElementById('statExfatActive').textContent = s.activeExfat0x85;
+      document.getElementById('statExfatDeleted').textContent = s.unlinkedExfat0x05;
+      document.getElementById('statZeroBlocks').textContent = s.zeroBlocksGb.toFixed(2) + " GB";
+
+      // Barras de progreso
+      document.getElementById('barSectors').style.width = Math.min(100, pctTarget) + "%";
+      document.getElementById('barGb').style.width = Math.min(100, pctTarget) + "%";
+
+      // ETA
+      const remainingBytes = Math.max(0, s.targetScanBytes - s.bytesRead);
+      const remSeconds = Math.floor(remainingBytes / (s.speedMbS * 1024 * 1024));
+      const rh = Math.floor(remSeconds / 3600);
+      const rm = Math.floor((remSeconds % 3600) / 60);
+      const rs = remSeconds % 60;
+      document.getElementById('statEta').textContent = `${String(rh).padStart(2, '0')}h ${String(rm).padStart(2, '0')}m ${String(rs).padStart(2, '0')}s`;
+    }
+
+    // CANVAS MAPA DE CLUSTERS TIPO DEFRAG / CARVER HUD
+    let canvas, ctx;
+    const TOTAL_CANVAS_BLOCKS = 120;
+    const BLOCKS_PER_ROW = 40;
+    let clusterBlocksData = [];
+
+    function initClusterCanvas() {
+      canvas = document.getElementById('clusterCanvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+
+      buildClusterBlocks();
+      drawClusterCanvas();
+
+      // Eventos interactivos en el canvas
+      canvas.addEventListener('mousemove', onCanvasMouseMove);
+      canvas.addEventListener('mouseleave', onCanvasMouseLeave);
+      canvas.addEventListener('click', onCanvasClick);
+    }
+
+    function buildClusterBlocks() {
+      clusterBlocksData = [];
+      const s = FORENSIC_STATE;
+      const bytesPerBlock = s.targetScanBytes / TOTAL_CANVAS_BLOCKS;
+      const currentBlockIdx = Math.min(TOTAL_CANVAS_BLOCKS - 1, Math.floor(s.bytesRead / bytesPerBlock));
+
+      for (let i = 0; i < TOTAL_CANVAS_BLOCKS; i++) {
+        const startBytes = Math.floor(i * bytesPerBlock);
+        const endBytes = Math.floor((i + 1) * bytesPerBlock);
+        const startSector = Math.floor(startBytes / s.bytesPerSector);
+        const endSector = Math.floor(endBytes / s.bytesPerSector);
+
+        let status = "pending";
+        let sig = "UNSCANNED";
+        let color = "#0a0a10";
+        let density = 0.0;
+
+        if (i < currentBlockIdx) {
+          const seed = (i * 37 + 19) % 100;
+          if (seed < 35) {
+            status = "scanned_zero";
+            sig = "Ceros Omitidos (0x00)";
+            color = "#1e1e2d";
+            density = 0.05;
+          } else if (seed < 65) {
+            status = "scanned_carved_jpeg";
+            sig = "JPEG (0xFFD8FFE0)";
+            color = "#10b981"; // Emerald
+            density = 0.78;
+          } else if (seed < 80) {
+            status = "scanned_exfat_active";
+            sig = "exFAT 0x85 (Activo)";
+            color = "#a855f7"; // Purple
+            density = 0.92;
+          } else if (seed < 92) {
+            status = "scanned_exfat_deleted";
+            sig = "exFAT 0x05 (Desvinculado)";
+            color = "#c084fc"; // Violet
+            density = 0.85;
+          } else {
+            status = "scanned_carved_raw";
+            sig = "RAW CR2/TIFF (0x49492A00)";
+            color = "#f59e0b"; // Amber
+            density = 0.96;
+          }
+        } else if (i === currentBlockIdx) {
+          status = "scanning_head";
+          sig = "CABEZAL ACTIVO";
+          color = "#00f7ff"; // Cyan pulse
+          density = 0.50;
+        }
+
+        clusterBlocksData.push({
+          index: i,
+          startBytes,
+          endBytes,
+          startSector,
+          endSector,
+          status,
+          signature: sig,
+          color,
+          density
+        });
+      }
+    }
+
+    function drawClusterCanvas() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const rows = 3;
+      const cols = BLOCKS_PER_ROW;
+      const padding = 3;
+      const blockWidth = (canvas.width - (cols + 1) * padding) / cols;
+      const blockHeight = (canvas.height - (rows + 1) * padding) / rows;
+
+      clusterBlocksData.forEach((b) => {
+        const row = Math.floor(b.index / cols);
+        const col = b.index % cols;
+        const x = padding + col * (blockWidth + padding);
+        const y = padding + row * (blockHeight + padding);
+
+        // Comprobar filtro
+        let showHighlight = true;
+        if (FORENSIC_STATE.currentClusterFilter === 'exfat') {
+          showHighlight = b.status.includes('exfat');
+        } else if (FORENSIC_STATE.currentClusterFilter === 'carved') {
+          showHighlight = b.status.includes('carved');
+        }
+
+        ctx.fillStyle = showHighlight ? b.color : "#121218";
+        ctx.fillRect(x, y, blockWidth, blockHeight);
+
+        // Borde fino
+        ctx.strokeStyle = "rgba(0, 0, 0, 0.6)";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x, y, blockWidth, blockHeight);
+
+        // Efecto para el cabezal de escaneo activo
+        if (b.status === 'scanning_head') {
+          ctx.strokeStyle = "#ffffff";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(x - 1, y - 1, blockWidth + 2, blockHeight + 2);
+
+          ctx.fillStyle = "rgba(0, 247, 255, 0.4)";
+          ctx.fillRect(x, y, blockWidth, blockHeight);
+        }
+      });
+    }
+
+    function setClusterFilter(filter) {
+      FORENSIC_STATE.currentClusterFilter = filter;
+      document.getElementById('btnFilterAll').className = filter === 'all' ? 'px-2.5 py-1 rounded text-xs font-mono bg-zinc-800 text-white border border-purple-400' : 'px-2.5 py-1 rounded text-xs font-mono bg-zinc-900 text-zinc-400 border border-zinc-800';
+      document.getElementById('btnFilterExfat').className = filter === 'exfat' ? 'px-2.5 py-1 rounded text-xs font-mono bg-zinc-800 text-purple-300 border border-purple-400' : 'px-2.5 py-1 rounded text-xs font-mono bg-zinc-900 text-zinc-400 border border-zinc-800';
+      document.getElementById('btnFilterCarved').className = filter === 'carved' ? 'px-2.5 py-1 rounded text-xs font-mono bg-zinc-800 text-emerald-300 border border-emerald-400' : 'px-2.5 py-1 rounded text-xs font-mono bg-zinc-900 text-zinc-400 border border-zinc-800';
+      drawClusterCanvas();
+    }
+
+    // INTERACCIÓN CON TOOLTIP DE CLUSTER
+    function getBlockAtCoord(x, y) {
+      const rows = 3;
+      const cols = BLOCKS_PER_ROW;
+      const padding = 3;
+      const blockWidth = (canvas.width - (cols + 1) * padding) / cols;
+      const blockHeight = (canvas.height - (rows + 1) * padding) / rows;
+
+      const col = Math.floor((x - padding) / (blockWidth + padding));
+      const row = Math.floor((y - padding) / (blockHeight + padding));
+
+      if (col >= 0 && col < cols && row >= 0 && row < rows) {
+        const idx = row * cols + col;
+        return clusterBlocksData[idx] || null;
+      }
+      return null;
+    }
+
+    function onCanvasMouseMove(e) {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
+
+      const block = getBlockAtCoord(mouseX, mouseY);
+      const tt = document.getElementById('clusterTooltip');
+
+      if (block) {
+        tt.classList.remove('hidden');
+        tt.style.left = (e.clientX - rect.left + 15) + "px";
+        tt.style.top = (e.clientY - rect.top + 15) + "px";
+
+        document.getElementById('ttBlockId').textContent = "Bloque #" + String(block.index).padStart(2, "0");
+        document.getElementById('ttStatusBadge').textContent = block.status.toUpperCase();
+        document.getElementById('ttStartSector').textContent = block.startSector.toLocaleString();
+        document.getElementById('ttEndSector').textContent = block.endSector.toLocaleString();
+        document.getElementById('ttGbRange').textContent = `${(block.startBytes / (1024**3)).toFixed(1)} GB - ${(block.endBytes / (1024**3)).toFixed(1)} GB`;
+        document.getElementById('ttSignature').textContent = block.signature;
+        document.getElementById('ttDensity').textContent = Math.round(block.density * 100) + "%";
+      } else {
+        tt.classList.add('hidden');
+      }
+    }
+
+    function onCanvasMouseLeave() {
+      document.getElementById('clusterTooltip').classList.add('hidden');
+    }
+
+    function onCanvasClick(e) {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
+
+      const block = getBlockAtCoord(mouseX, mouseY);
+      if (block) {
+        showInspector(block);
+      }
+    }
+
+    function showInspector(block) {
+      const p = document.getElementById('inspectorPanel');
+      p.classList.remove('hidden');
+
+      const hex = "0x" + block.startBytes.toString(16).toUpperCase().padStart(16, "0");
+      document.getElementById('inspBlockTitle').textContent = `Bloque #${String(block.index).padStart(2, '0')} (${hex})`;
+      document.getElementById('inspSectors').textContent = `${block.startSector.toLocaleString()} - ${block.endSector.toLocaleString()}`;
+      
+      const startClust = Math.floor((block.startSector - 32768) / FORENSIC_STATE.sectorsPerCluster);
+      const endClust = Math.floor((block.endSector - 32768) / FORENSIC_STATE.sectorsPerCluster);
+      document.getElementById('inspClusterHeap').textContent = `#${startClust.toLocaleString()} al #${endClust.toLocaleString()}`;
+      document.getElementById('inspSignature').textContent = block.signature;
+
+      logConsole(`[INSPECTOR] Bloque #${block.index} seleccionado: Offset ${hex} | Rango Sectores: ${block.startSector.toLocaleString()}..${block.endSector.toLocaleString()} (${block.signature})`, "cyan");
+    }
+
+    function closeInspector() {
+      document.getElementById('inspectorPanel').classList.add('hidden');
+    }
+
+    // CONSOLA TERMINAL LOGS
+    function logConsole(msg, color = "zinc") {
+      const term = document.getElementById('consoleOutput');
+      if (!term) return;
+
+      const div = document.createElement('div');
+      const timeStr = new Date().toTimeString().split(' ')[0];
+
+      let colorClass = "text-zinc-300";
+      if (color === "cyan") colorClass = "text-cyan-400";
+      else if (color === "emerald") colorClass = "text-emerald-400";
+      else if (color === "amber") colorClass = "text-amber-400";
+      else if (color === "purple") colorClass = "text-purple-300";
+      else if (color === "rose") colorClass = "text-rose-400";
+
+      div.className = `${colorClass} leading-tight`;
+      div.textContent = `[${timeStr}] ${msg}`;
+      term.appendChild(div);
+
+      // Auto scroll abajo
+      term.scrollTop = term.scrollHeight;
+    }
+
+    function clearConsole() {
+      const term = document.getElementById('consoleOutput');
+      if (term) term.innerHTML = '';
+      logConsole("Terminal reiniciada. Escuchando canal 189.89.619 Hz...", "purple");
+    }
+
+    // SIMULACIÓN FORENSE INTERACTIVA
+    function toggleSimulation() {
+      const s = FORENSIC_STATE;
+      s.isSimulating = !s.isSimulating;
+
+      const icon = document.getElementById('simIcon');
+      const text = document.getElementById('simText');
+      const badge = document.getElementById('daemonBadge');
+
+      if (s.isSimulating) {
+        icon.textContent = "⏸️";
+        text.textContent = "Pausar Escaneo";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> ESCANEANDO (DMA)`;
+        badge.className = "text-[11px] font-mono text-cyan-400 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/60 flex items-center gap-1";
+        logConsole("[KANUV 🛡️] Iniciando simulación de peinado acelerado a 118.4 MB/s...", "emerald");
+
+        s.simInterval = setInterval(() => {
+          advanceSimulationStep(0.25);
+        }, 800);
+      } else {
+        clearInterval(s.simInterval);
+        icon.textContent = "▶️";
+        text.textContent = "Reanudar Simulación";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span> STANDBY (PAUSADO)`;
+        badge.className = "text-[11px] font-mono text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800/60 flex items-center gap-1";
+        logConsole("[KANUV 🛡️] Proceso pausado en checkpoint seguro. Puntero congelado.", "amber");
+      }
+    }
+
+    function advanceSimulationStep(gbToAdd) {
+      const s = FORENSIC_STATE;
+      const addBytes = Math.floor(gbToAdd * 1024 * 1024 * 1024);
+      s.bytesRead = Math.min(s.targetScanBytes, s.bytesRead + addBytes);
+      s.sectorsRead = Math.floor(s.bytesRead / s.bytesPerSector);
+      s.gbScanned = +(s.bytesRead / (1024 ** 3)).toFixed(2);
+
+      // Simular hallazgos periódicos
+      if (Math.random() > 0.45) {
+        s.recoveredFiles += Math.floor(Math.random() * 3) + 1;
+        s.mbRecovered += +(Math.random() * 25 + 5).toFixed(2);
+        const hex = "0x" + s.bytesRead.toString(16).toUpperCase().padStart(16, "0");
+        logConsole(`✔ [CARVER] Firma detectada en ${hex} -> FOTO_recup_${String(s.recoveredFiles).padStart(5, '0')}.jpg (${(Math.random()*8+4).toFixed(1)} MB)`, "emerald");
+      }
+
+      if (Math.random() > 0.7) {
+        s.zeroBlocksGb += 0.2;
+        logConsole(`ℹ️ [ZERO-SKIP] Bloque nulo de 200MB omitido (DMA directo).`, "zinc");
+      }
+
+      renderTelemetry();
+      buildClusterBlocks();
+      drawClusterCanvas();
+
+      if (s.bytesRead >= s.targetScanBytes) {
+        toggleSimulation();
+        logConsole("✨ [KANUV 🛡️] ¡ZONA OBJETIVO DE 650 GB COMPLETADA CON ÉXITO!", "purple");
+      }
+    }
+
+    function simulateStepManual(gb) {
+      advanceSimulationStep(gb);
+      logConsole(`⚡ [MANUAL] Paso de +${gb} GB ejecutado. Puntero actualizado.`, "cyan");
+    }
+
+    function resetCheckpointSimulation() {
+      if (FORENSIC_STATE.isSimulating) toggleSimulation();
+      const s = FORENSIC_STATE;
+      s.bytesRead = 52904067072;
+      s.sectorsRead = 103328256;
+      s.gbScanned = 49.27;
+      s.recoveredFiles = 412;
+      s.mbRecovered = 4184.24;
+      s.zeroBlocksGb = 38.12;
+
+      renderTelemetry();
+      buildClusterBlocks();
+      drawClusterCanvas();
+      logConsole("[RESET] Checkpoint restaurado a 49.27 GB (Sector 103,328,256).", "rose");
+    }
+
+    // RENDERIZADO DE GALERÍA Y EXIF
+    function renderGallery() {
+      const grid = document.getElementById('galleryGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const filter = FORENSIC_STATE.galleryFilter;
+      const filtered = SAMPLES.filter(item => {
+        if (filter === 'all') return true;
+        if (filter === 'exfat') return item.entry_type.includes('0x');
+        if (filter === 'jpeg') return item.type === 'jpeg';
+        if (filter === 'raw') return item.type === 'raw';
+        return true;
+      });
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = "bg-black/50 border border-zinc-800 hover:border-purple-500/70 p-4 rounded-xl transition-all duration-200 cursor-pointer flex flex-col justify-between group";
+        card.onclick = () => openExifModal(item);
+
+        card.innerHTML = `
+          <div>
+            <div class="h-28 rounded-lg bg-gradient-to-br ${item.gradient} border border-white/5 flex items-center justify-center text-4xl shadow-inner relative overflow-hidden group-hover:scale-[1.02] transition-transform">
+              <span>${item.icon}</span>
+              <div class="absolute bottom-1.5 left-2 text-[10px] font-mono px-2 py-0.5 rounded bg-black/70 text-cyan-300 border border-zinc-700">
+                ${item.exif.res.split(' ')[0]}
+              </div>
+              <div class="absolute top-1.5 right-2 text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-800">
+                ${item.size_fmt}
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-400 border border-zinc-800">
+                ${item.badge_text}
+              </span>
+              <h4 class="text-xs font-mono font-bold text-white mt-1.5 truncate group-hover:text-purple-300 transition-colors" title="${item.filename}">
+                ${item.filename}
+              </h4>
+              <p class="text-[11px] text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                ${item.desc}
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2.5 border-t border-zinc-900/80 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+            <span>${item.exif.cam.split(' ')[0]} • ${item.exif.iso} ISO</span>
+            <span class="text-cyan-400 group-hover:translate-x-0.5 transition-transform">Ver EXIF →</span>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function filterGallery(type) {
+      FORENSIC_STATE.galleryFilter = type;
+      ['all', 'exfat', 'jpeg', 'raw'].forEach(t => {
+        const btn = document.getElementById(`gf-${t}`);
+        if (btn) {
+          if (t === type) {
+            btn.className = "px-2.5 py-1 rounded bg-zinc-800 text-white font-bold";
+          } else {
+            btn.className = "px-2.5 py-1 rounded text-zinc-400 hover:text-purple-300 transition-colors";
+          }
+        }
+      });
+      renderGallery();
+    }
+
+    // MODAL EXIF FORENSE
+    function openExifModal(item) {
+      const m = document.getElementById('exifModal');
+      document.getElementById('modalFilename').textContent = item.filename;
+      document.getElementById('modalBadgeType').textContent = item.badge_text;
+      document.getElementById('modalFileSize').textContent = `${item.size_fmt} (${item.size_bytes.toLocaleString()} Bytes)`;
+      document.getElementById('modalCluster').textContent = `#${item.cluster.toLocaleString()}`;
+      document.getElementById('modalSector').textContent = item.sector.toLocaleString();
+      document.getElementById('modalByteOffset').textContent = item.byte_offset;
+      document.getElementById('modalSha256').textContent = item.sha256;
+      document.getElementById('modalCam').textContent = item.exif.cam;
+      document.getElementById('modalLens').textContent = item.exif.lens;
+      document.getElementById('modalDate').textContent = item.exif.date;
+      document.getElementById('modalAperture').textContent = item.exif.aperture;
+      document.getElementById('modalShutter').textContent = item.exif.shutter;
+      document.getElementById('modalIso').textContent = item.exif.iso;
+      document.getElementById('modalFocal').textContent = item.exif.focal;
+      document.getElementById('modalColorSpace').textContent = item.exif.color;
+      document.getElementById('modalResolution').textContent = item.exif.res;
+      document.getElementById('modalHexDump').textContent = item.hex;
+      document.getElementById('modalDesc').textContent = item.desc;
+
+      const v = document.getElementById('modalVisualRender');
+      v.className = `w-full h-36 rounded flex items-center justify-center text-4xl font-black font-mono shadow-inner bg-gradient-to-br ${item.gradient}`;
+      v.textContent = item.icon;
+
+      m.classList.remove('hidden');
+    }
+
+    function closeExifModal() {
+      document.getElementById('exifModal').classList.add('hidden');
+    }
+
+    function toggleScriptModal() {
+      const sm = document.getElementById('scriptModal');
+      sm.classList.toggle('hidden');
+    }
+
+    // COPIAR COMANDO AL PORTAPAPELES
+    function copyCommand() {
+      const cmd = document.getElementById('cmdText').textContent;
+      navigator.clipboard.writeText(cmd).then(() => {
+        const btn = document.getElementById('btnCopyCmd');
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<span class="text-emerald-400">✓</span> COPIADO`;
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
+      });
+    }
+
+    // CALCULADORA DE ADMISIÓN BOUTIQUE
+    function calculateQuote() {
+      const media = document.getElementById('calcMediaType').value;
+      const cap = parseInt(document.getElementById('calcCapacity').value);
+      const incident = document.getElementById('calcIncident').value;
+      const sla = document.getElementById('calcSla').value;
+
+      let base = 120;
+      let prob = 98.2;
+      let protocol = "Tallado Rápido FAT/exFAT con Preservación EXIF";
+
+      // Modificador por medio
+      if (media === 'ssd') { base = 250; prob -= 1.0; protocol = "DMA Carver Asíncrono con Reconstrucción de Tablas"; }
+      else if (media === 'hdd') { base = 220; prob -= 2.0; protocol = "Extracción de Superficie con Reubicación de Bloques Lentos"; }
+      else if (media === 'raid') { base = 550; prob -= 4.0; protocol = "Reconstrucción Paridad RAID & Ensamblado de Inodos"; }
+
+      // Modificador por capacidad
+      if (cap >= 4000) base += 135;
+      else if (cap >= 2000) base += 80;
+      else if (cap >= 256) base += 35;
+
+      // Modificador por falla
+      if (incident === 'raw') { base += 50; prob -= 1.5; }
+      else if (incident === 'slow') { base += 90; prob -= 3.0; }
+      else if (incident === 'io') { base += 160; prob -= 6.5; }
+
+      // Modificador por urgencia
+      if (sla === 'express') base += 85;
+      else if (sla === 'critical') base += 180;
+
+      document.getElementById('calcFee').textContent = `${base} €`;
+      document.getElementById('calcProb').textContent = `${Math.max(65.0, prob).toFixed(1)}%`;
+      document.getElementById('calcProtocol').textContent = protocol;
+    }
+
+    function selectPackage(pkgName) {
+      alert(`Has seleccionado: ${pkgName}.\n\nSe abrirá el enlace de Signal seguro (@k4li.89) con tu consulta pericial prefijada.`);
+      window.open('https://signal.me/#u/k4li.89', '_blank');
+    }
+
+    function copyQuoteSummary() {
+      const fee = document.getElementById('calcFee').textContent;
+      const prob = document.getElementById('calcProb').textContent;
+      const proto = document.getElementById('calcProtocol').textContent;
+      const media = document.getElementById('calcMediaType').options[document.getElementById('calcMediaType').selectedIndex].text;
+      const cap = document.getElementById('calcCapacity').options[document.getElementById('calcCapacity').selectedIndex].text;
+      const inc = document.getElementById('calcIncident').options[document.getElementById('calcIncident').selectedIndex].text;
+
+      const report = `=============================================================
+K4L1 STUDIO // DICTAMEN DE ADMISIÓN & COTIZACIÓN FORENSE
+Frecuencia Operativa: 189.89.619 Hz | Concilio ACE
+=============================================================
+MEDIO DE ALMACENAMIENTO: ${media} (${cap})
+CONDICIÓN TÉCNICA: ${inc}
+PROBABILIDAD ESTIMADA: ${prob}
+PROTOCOLO FORENSE: ${proto}
+PRESUPUESTO CERRADO: ${fee} (IVA no aplicable / Reg. Especial)
+GARANTÍA: No Cure, No Pay (Sin cobro si no hay recuperación)
+CONTACTO CIFRADO: Signal @k4li.89 (https://signal.me/#u/k4li.89)
+=============================================================`;
+
+      navigator.clipboard.writeText(report).then(() => {
+        const btn = document.getElementById('btnCopyQuote');
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<span class="text-emerald-400">✓</span> ¡Copiado!`;
+        setTimeout(() => { btn.innerHTML = orig; }, 2000);
+      });
+    }
+
+    // FETCH ESTADO REAL DEL DAEMON (assets/carver_status.json)
+    function fetchCarverStatus() {
+      fetch('../assets/carver_status.json')
+        .then(res => {
+          if (!res.ok) throw new Error("Status JSON no accesible");
+          return res.json();
+        })
+        .then(data => {
+          if (data && data.scan_progress) {
+            FORENSIC_STATE.bytesRead = data.scan_progress.bytes_read || FORENSIC_STATE.bytesRead;
+            FORENSIC_STATE.sectorsRead = data.scan_progress.sectors_read || FORENSIC_STATE.sectorsRead;
+            FORENSIC_STATE.gbScanned = data.scan_progress.gb_scanned || FORENSIC_STATE.gbScanned;
+            if (data.recovery_metrics) {
+              FORENSIC_STATE.recoveredFiles = data.recovery_metrics.total_files_recovered || FORENSIC_STATE.recoveredFiles;
+              FORENSIC_STATE.mbRecovered = data.recovery_metrics.total_mb_recovered || FORENSIC_STATE.mbRecovered;
+              FORENSIC_STATE.activeExfat0x85 = data.recovery_metrics.exfat_active_entries_0x85 || FORENSIC_STATE.activeExfat0x85;
+              FORENSIC_STATE.unlinkedExfat0x05 = data.recovery_metrics.exfat_unlinked_entries_0x05 || FORENSIC_STATE.unlinkedExfat0x05;
+              FORENSIC_STATE.zeroBlocksGb = data.recovery_metrics.zero_blocks_skipped_gb || FORENSIC_STATE.zeroBlocksGb;
+            }
+            if (data.checkpoint_timestamp) {
+              document.getElementById('syncTimestamp').textContent = data.checkpoint_timestamp;
+            }
+            renderTelemetry();
+            buildClusterBlocks();
+            drawClusterCanvas();
+            logConsole("✔ [DAEMON] Telemetría real sincronizada desde assets/carver_status.json", "cyan");
+          }
+        })
+        .catch(err => {
+          console.log("Nota: carver_status.json local activo:", err);
+        });
+    }
+
+    function syncWithDaemon() {
+      fetchCarverStatus();
+      logConsole("[SYNC] Solicitud de sincronización manual enviada.", "purple");
+    }
+
+    // SELECTOR DE TEMAS CANÓNICOS
+    function setCarverTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('k4li_carver_theme', theme);
+      
+      const themes = ['anuu', 'blood', 'gw2', 'bioinfo', 'duat', 'neon'];
+      themes.forEach(t => {
+        const b = document.getElementById(`cbt-${t}`);
+        if (b) {
+          if (t === theme) {
+            b.className = "px-2 py-0.5 rounded text-[11px] font-mono transition-all font-bold text-white bg-purple-900/60 border border-purple-500/40";
+          } else {
+            b.className = "px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-white";
+          }
+        }
+      });
+      drawClusterCanvas();
+    }
+
+    // Recuperar tema persistente si existe
+    const savedTheme = localStorage.getItem('k4li_carver_theme') || 'anuu';
+    setCarverTheme(savedTheme);
+  </script>
+  <script src="../assets/js/fullwallpaper.js"></script>
+</body>
+</html>

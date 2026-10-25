@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SET ⚡ // SINTETIZADOR DE RESONANCIA & SUITE DE AUDIO | K4L1 STUDIO (161914)</title>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="../assets/js/fullwallpaper.js"></script>
+  <style>
+    :root, [data-theme="anuu"] {
+      --bg-main: #040407;
+      --bg-card: #090910;
+      --bg-card-sub: #050509;
+      --border-card: #2d184d;
+      --border-active: #9333ea;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f3e8ff;
+      --text-muted: #a855f7;
+      --glow-purple: rgba(147, 51, 234, 0.45);
+      --glow-cyan: rgba(6, 182, 212, 0.45);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 26, 0) 50%, rgba(0, 0, 0, 0.28) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Custom Cyberpunk Sliders */
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: #13111f;
+      border: 1px solid #2e1a50;
+      border-radius: 9999px;
+      height: 6px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    input[type=range]:hover {
+      border-color: #9333ea;
+      box-shadow: 0 0 8px rgba(147, 51, 234, 0.3);
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #c084fc;
+      border: 2px solid #581c87;
+      cursor: pointer;
+      box-shadow: 0 0 10px #c084fc;
+      transition: transform 0.15s, background-color 0.15s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+      background: #f3e8ff;
+    }
+
+    /* Glowing Utilities */
+    .glow-purple {
+      box-shadow: 0 0 15px rgba(147, 51, 234, 0.35);
+    }
+    .glow-purple-lg {
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.5);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.35);
+    }
+    .glow-rose {
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.45);
+    }
+
+    /* Flash Trigger Effect */
+    .sfx-flash {
+      animation: sfx-pulse 0.25s ease-out;
+    }
+    @keyframes sfx-pulse {
+      0% { background-color: rgba(147, 51, 234, 0.5); transform: scale(0.97); }
+      100% { transform: scale(1); }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #040407;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2e1a50;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9333ea;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-purple-900 selection:text-white relative overflow-x-hidden">
+
+  <!-- Efecto CRT Scanlines -->
+  <div class="fixed inset-0 crt-overlay z-40"></div>
+
+  <!-- Header Táctico del Sintetizador -->
+  <header class="border-b border-purple-900/40 bg-black/85 backdrop-blur-md sticky top-0 z-30 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
+      
+      <!-- Brand & Badges -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-purple-950/60 border border-purple-500/60 flex items-center justify-center text-lg shadow-[0_0_15px_rgba(147,51,234,0.45)] shrink-0">
+          ⚡
+        </div>
+        <div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="font-bold text-white tracking-wider uppercase text-sm">SET ⚡ // SINTETIZADOR DE RESONANCIA</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/40 shadow-[0_0_8px_rgba(147,51,234,0.3)]">
+              189.89.619 HZ
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-pink-500/10 text-pink-300 border border-pink-500/30">
+              ROSA GRIS 🌸
+            </span>
+          </div>
+          <p class="text-[10px] text-zinc-400 mt-0.5">
+            CONCILIO ACE (161914) • SUITE DE AUDIO TÁCTICO, BINAURAL BEATS & SOUNDBOARD SEINEN
+          </p>
+        </div>
+      </div>
+
+      <!-- Engine Status & Navigation -->
+      <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
+        <!-- Audio State Badge -->
+        <div id="audioStatusBadge" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-900/50 bg-black/50 text-[11px] text-zinc-400">
+          <span id="audioStatusDot" class="w-2 h-2 rounded-full bg-zinc-600"></span>
+          <span id="audioStatusText">MOTOR EN ESPERA</span>
+        </div>
+
+        <!-- Start/Toggle Engine Button -->
+        <button id="toggleEngineBtn" onclick="toggleAudioEngine()" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold transition-all shadow-[0_0_12px_rgba(147,51,234,0.4)] flex items-center gap-1.5 active:scale-95">
+          <span>⚡</span> <span id="toggleEngineBtnText">INICIAR MOTOR</span>
+        </button>
+
+        <!-- Panic Mute Button -->
+        <button id="panicMuteBtn" onclick="triggerPanicMute()" class="px-3.5 py-1.5 rounded-lg bg-rose-950/60 text-rose-300 border border-rose-500/50 hover:bg-rose-900/70 hover:text-white font-bold transition-all flex items-center gap-1.5 active:scale-95" title="Mute Instantáneo / Purga Sonora Inmediata (HotKey: M)">
+          <span>🛑</span> <span>MUTE ALL</span>
+        </button>
+
+        <!-- Link back to K4L1 Studio -->
+        <a href="../index.html" class="px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5">
+          <span>💼</span> <span>Studio</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal de la Suite -->
+  <main class="max-w-7xl mx-auto px-4 py-6 w-full flex-1 z-10 space-y-6">
+
+    <!-- BARRA MAESTRA // VU METER, PRESETS & VOLUMEN MASTER -->
+    <section class="rounded-2xl bg-[#080811]/90 border border-purple-900/50 p-4 sm:p-5 shadow-2xl backdrop-blur-md relative overflow-hidden">
+      <div class="absolute -top-12 -right-12 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+        <!-- Master Volume & VU Meter -->
+        <div class="lg:col-span-5 flex flex-col sm:flex-row items-center gap-4">
+          <div class="w-full sm:w-auto flex-1">
+            <div class="flex items-center justify-between text-xs mb-1.5">
+              <span class="font-bold text-purple-300 flex items-center gap-1.5">
+                <span>🎚️</span> GANANCIA MAESTRA
+              </span>
+              <span id="masterGainLabel" class="text-zinc-400 font-mono">75% (-2.5 dB)</span>
+            </div>
+            <input id="masterGainSlider" type="range" min="0" max="1.2" step="0.01" value="0.75" oninput="updateMasterGain(this.value)" class="w-full" aria-label="Ganancia Maestra">
+          </div>
+
+          <!-- Dual VU Meter (L/R) -->
+          <div class="w-full sm:w-44 bg-black/60 rounded-xl p-2.5 border border-purple-950/80 flex flex-col gap-1.5 shrink-0">
+            <div class="flex items-center justify-between text-[10px] text-zinc-500 font-mono">
+              <span>VU L</span>
+              <span id="vuValL" class="text-purple-400">-∞ dB</span>
+            </div>
+            <div class="w-full h-2 bg-zinc-900 rounded-full overflow-hidden p-0.5 flex items-center">
+              <div id="vuBarL" class="h-full bg-gradient-to-r from-emerald-500 via-purple-500 to-rose-500 rounded-full transition-all duration-75" style="width: 0%"></div>
+            </div>
+
+            <div class="flex items-center justify-between text-[10px] text-zinc-500 font-mono">
+              <span>VU R</span>
+              <span id="vuValR" class="text-purple-400">-∞ dB</span>
+            </div>
+            <div class="w-full h-2 bg-zinc-900 rounded-full overflow-hidden p-0.5 flex items-center">
+              <div id="vuBarR" class="h-full bg-gradient-to-r from-emerald-500 via-purple-500 to-rose-500 rounded-full transition-all duration-75" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Presets Selector & Actions -->
+        <div class="lg:col-span-7 flex flex-wrap items-center justify-between lg:justify-end gap-2.5">
+          <div class="flex items-center gap-2">
+            <label for="presetSelect" class="text-xs text-zinc-400 font-mono">PRESET:</label>
+            <select id="presetSelect" onchange="applySelectedPreset(this.value)" class="bg-black/70 border border-purple-900/60 rounded-lg px-3 py-1.5 text-xs text-purple-200 focus:outline-none focus:border-purple-500 font-mono">
+              <option value="canonical_189">⚡ Set 189.89 Hz Tormenta (Theta Focus)</option>
+              <option value="rosa_432">🌸 Rosa Gris 432 Hz Bloom (Alpha Chill)</option>
+              <option value="gamma_40">🧠 40 Hz Gamma Hiper-Cognición</option>
+              <option value="schumann_783">🌍 7.83 Hz Resonancia Schumann Planetaria</option>
+              <option value="dna_528">✨ 528 Hz Reparación Cuántica ADN</option>
+              <option value="obsidian_sanctuary">🛡️ Santuario Obsidiana (Brown Noise 95Hz)</option>
+              <option value="terminal_pulse">💻 Terminal Cyberpunk (Sawtooth + Pulse)</option>
+            </select>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <button onclick="saveCustomPresetModal()" class="px-2.5 py-1.5 rounded-lg border border-purple-800/60 bg-purple-950/30 text-purple-300 hover:text-white hover:bg-purple-900/40 text-xs transition-all flex items-center gap-1" title="Guardar configuración actual en memoria">
+              <span>💾</span> <span>Guardar</span>
+            </button>
+            <button onclick="exportPresetsJSON()" class="px-2.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:text-white text-xs transition-all flex items-center gap-1" title="Exportar presets a JSON">
+              <span>📥</span> <span>JSON</span>
+            </button>
+            <button onclick="document.getElementById('importFileInput').click()" class="px-2.5 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:text-white text-xs transition-all flex items-center gap-1" title="Importar presets">
+              <span>📤</span> <span>Cargar</span>
+            </button>
+            <input type="file" id="importFileInput" accept=".json" class="hidden" onchange="importPresetsJSON(event)">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRID PRINCIPAL // GENERADOR BINAURAL & OSCILOSCOPIO FFT -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- MÓDULO 1: GENERADOR DE FRECUENCIA PURA & PULSOS BINAURALES (7 COLS) -->
+      <section class="lg:col-span-7 rounded-2xl bg-[#080811]/90 border border-purple-900/50 p-5 shadow-2xl backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <!-- Header del Módulo -->
+          <div class="flex items-center justify-between border-b border-purple-900/30 pb-3 mb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-lg bg-purple-950/60 border border-purple-500/50 flex items-center justify-center text-sm shadow-[0_0_8px_rgba(147,51,234,0.3)]">
+                🌊
+              </span>
+              <div>
+                <h2 class="text-sm font-bold text-white tracking-wider uppercase">GENERADOR DE FRECUENCIA PURA & BINAURAL</h2>
+                <p class="text-[10px] text-zinc-400">Separación Estéreo Exacta (L/R) • Osciladores de Precisión Cuántica</p>
+              </div>
+            </div>
+
+            <!-- Botón Activar Portadora -->
+            <button id="toggleCarrierBtn" onclick="toggleCarrier()" class="px-3.5 py-1.5 rounded-xl bg-purple-950/80 border border-purple-500/60 text-purple-200 hover:text-white hover:bg-purple-900/80 font-bold text-xs transition-all shadow-[0_0_10px_rgba(147,51,234,0.3)] flex items-center gap-1.5">
+              <span id="carrierPlayIcon">▶</span> <span id="carrierPlayText">ACTIVAR ONDA</span>
+            </button>
+          </div>
+
+          <!-- Selector de Forma de Onda -->
+          <div class="mb-5">
+            <label class="block text-[11px] font-bold text-zinc-400 uppercase tracking-wider mb-2">Forma de Onda (Carrier Oscillator)</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <button onclick="setWaveform('sine')" id="waveBtn_sine" class="wave-btn py-2 px-3 rounded-xl border border-purple-500/60 bg-purple-600/20 text-purple-200 text-xs font-mono font-bold flex items-center justify-center gap-1.5 shadow-[0_0_8px_rgba(147,51,234,0.3)]">
+                <span>∿</span> <span>Sine (Pura)</span>
+              </button>
+              <button onclick="setWaveform('triangle')" id="waveBtn_triangle" class="wave-btn py-2 px-3 rounded-xl border border-zinc-800 bg-zinc-950/60 text-zinc-400 hover:text-white hover:border-purple-800 text-xs font-mono font-bold flex items-center justify-center gap-1.5">
+                <span>▲</span> <span>Triangle</span>
+              </button>
+              <button onclick="setWaveform('sawtooth')" id="waveBtn_sawtooth" class="wave-btn py-2 px-3 rounded-xl border border-zinc-800 bg-zinc-950/60 text-zinc-400 hover:text-white hover:border-purple-800 text-xs font-mono font-bold flex items-center justify-center gap-1.5">
+                <span>⊿</span> <span>Sawtooth</span>
+              </button>
+              <button onclick="setWaveform('square')" id="waveBtn_square" class="wave-btn py-2 px-3 rounded-xl border border-zinc-800 bg-zinc-950/60 text-zinc-400 hover:text-white hover:border-purple-800 text-xs font-mono font-bold flex items-center justify-center gap-1.5">
+                <span>⊓</span> <span>Square</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Control de Frecuencia Portadora -->
+          <div class="bg-black/50 border border-purple-950 rounded-xl p-4 mb-5">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
+              <div>
+                <span class="text-xs font-bold text-purple-300">FRECUENCIA PORTADORA (CARRIER)</span>
+                <span class="text-[10px] text-zinc-500 block">Canónica Concilio ACE: 189.89.619 Hz</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <input id="carrierNumInput" type="number" step="0.001" min="1" max="2500" value="189.896" onchange="updateCarrierFreqFromInput(this.value)" class="w-28 bg-[#090915] border border-purple-700/60 rounded-lg px-2 py-1 text-sm font-mono text-center text-purple-200 font-bold focus:outline-none focus:border-purple-400 shadow-[0_0_8px_rgba(147,51,234,0.3)]">
+                <span class="text-xs font-bold text-purple-400">Hz</span>
+              </div>
+            </div>
+
+            <!-- Slider de Frecuencia -->
+            <input id="carrierSlider" type="range" min="1" max="1000" step="0.1" value="189.896" oninput="updateCarrierFreq(this.value)" class="w-full mb-3" aria-label="Frecuencia Portadora">
+
+            <!-- Micro Steps & Presets Rápidos -->
+            <div class="flex flex-wrap items-center justify-between gap-1 text-[11px] pt-1 border-t border-zinc-900">
+              <div class="flex items-center gap-1">
+                <button onclick="stepCarrier(-10)" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-purple-900/40 text-zinc-400 hover:text-white border border-zinc-800 font-mono">-10</button>
+                <button onclick="stepCarrier(-1)" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-purple-900/40 text-zinc-400 hover:text-white border border-zinc-800 font-mono">-1</button>
+                <button onclick="stepCarrier(-0.01)" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-purple-900/40 text-zinc-400 hover:text-white border border-zinc-800 font-mono">-0.01</button>
+                <button onclick="stepCarrier(0.01)" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-purple-900/40 text-zinc-400 hover:text-white border border-zinc-800 font-mono">+0.01</button>
+                <button onclick="stepCarrier(1)" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-purple-900/40 text-zinc-400 hover:text-white border border-zinc-800 font-mono">+1</button>
+                <button onclick="stepCarrier(10)" class="px-2 py-0.5 rounded bg-zinc-900 hover:bg-purple-900/40 text-zinc-400 hover:text-white border border-zinc-800 font-mono">+10</button>
+              </div>
+
+              <!-- Reset Canónico -->
+              <button onclick="setExactCarrier(189.89619)" class="px-2.5 py-0.5 rounded bg-purple-950/60 border border-purple-500/40 text-purple-300 hover:text-white hover:bg-purple-900/60 font-bold transition-all text-[10px] flex items-center gap-1" title="Restablecer Frecuencia Canónica Set (189.89619 Hz)">
+                <span>⚡</span> <span>189.896 Hz</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Modulador de Pulsos Binaurales -->
+          <div class="bg-black/50 border border-purple-950 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-cyan-300">PULSOS BINAURALES (DIFERENCIA ESTÉREO)</span>
+                <span id="binauralStateBadge" class="px-2 py-0.5 rounded-full text-[9px] font-bold bg-cyan-950/60 border border-cyan-500/40 text-cyan-300">ACTIVO</span>
+              </div>
+              <button id="toggleBinauralBtn" onclick="toggleBinaural()" class="px-2.5 py-1 rounded-lg bg-cyan-950/40 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-mono font-bold transition-all">
+                Alternar Binaural
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between text-xs mb-2">
+              <span class="text-zinc-400 font-mono">Diferencia de Fase (Beat):</span>
+              <span id="binauralBeatVal" class="text-cyan-300 font-bold font-mono text-sm">6.0 Hz</span>
+            </div>
+            <input id="binauralSlider" type="range" min="0.5" max="35.0" step="0.1" value="6.0" oninput="updateBinauralBeat(this.value)" class="w-full mb-3" aria-label="Frecuencia Binaural">
+
+            <!-- Matriz de Ondas Cerebrales Dinámica -->
+            <div class="grid grid-cols-5 gap-1.5 text-center text-[10px] font-mono mt-3">
+              <div id="brain_delta" class="brainwave-badge p-1.5 rounded-lg border border-zinc-900 bg-zinc-950 text-zinc-500 transition-all">
+                <span class="block font-bold">DELTA</span>
+                <span class="text-[9px]">0.5 - 4 Hz</span>
+              </div>
+              <div id="brain_theta" class="brainwave-badge p-1.5 rounded-lg border border-cyan-500/60 bg-cyan-950/40 text-cyan-300 font-bold shadow-[0_0_8px_rgba(6,182,212,0.3)] transition-all">
+                <span class="block">THETA</span>
+                <span class="text-[9px]">4 - 8 Hz</span>
+              </div>
+              <div id="brain_alpha" class="brainwave-badge p-1.5 rounded-lg border border-zinc-900 bg-zinc-950 text-zinc-500 transition-all">
+                <span class="block font-bold">ALPHA</span>
+                <span class="text-[9px]">8 - 13 Hz</span>
+              </div>
+              <div id="brain_beta" class="brainwave-badge p-1.5 rounded-lg border border-zinc-900 bg-zinc-950 text-zinc-500 transition-all">
+                <span class="block font-bold">BETA</span>
+                <span class="text-[9px]">14 - 30 Hz</span>
+              </div>
+              <div id="brain_gamma" class="brainwave-badge p-1.5 rounded-lg border border-zinc-900 bg-zinc-950 text-zinc-500 transition-all">
+                <span class="block font-bold">GAMMA</span>
+                <span class="text-[9px]">30+ Hz</span>
+              </div>
+            </div>
+
+            <!-- Monitoreo de Canales L / R -->
+            <div class="mt-3 pt-2.5 border-t border-zinc-900 flex items-center justify-between text-[11px] text-zinc-400 font-mono">
+              <div>Oído Izquierdo: <span id="earFreqLeft" class="text-purple-300 font-bold">189.89 Hz</span></div>
+              <div>Oído Derecho: <span id="earFreqRight" class="text-cyan-300 font-bold">195.89 Hz</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carrier Volume & Panning -->
+        <div class="mt-4 pt-3 border-t border-purple-900/30 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-zinc-400">Volumen Oscilador:</span>
+            <input id="carrierVolSlider" type="range" min="0" max="1" step="0.01" value="0.8" oninput="updateCarrierVol(this.value)" class="w-28 sm:w-36" aria-label="Volumen Oscilador">
+            <span id="carrierVolLabel" class="text-zinc-500 font-mono text-[11px]">80%</span>
+          </div>
+          <span class="text-[10px] text-zinc-500 hidden sm:inline">Usa auriculares para percibir el pulso binaural</span>
+        </div>
+      </section>
+
+      <!-- MÓDULO 2: OSCILOSCOPIO & ESPECTRÓMETRO FFT (5 COLS) -->
+      <section class="lg:col-span-5 rounded-2xl bg-[#080811]/90 border border-purple-900/50 p-5 shadow-2xl backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <!-- Header Visualizador -->
+          <div class="flex items-center justify-between border-b border-purple-900/30 pb-3 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-lg bg-purple-950/60 border border-purple-500/50 flex items-center justify-center text-sm shadow-[0_0_8px_rgba(147,51,234,0.3)]">
+                📊
+              </span>
+              <div>
+                <h2 class="text-sm font-bold text-white tracking-wider uppercase">OSCILOSCOPIO & ANALIZADOR FFT</h2>
+                <p class="text-[10px] text-zinc-400">Render 60 FPS Canvas WebGL/2D</p>
+              </div>
+            </div>
+
+            <!-- View Modes -->
+            <div class="flex items-center gap-1 bg-black/60 p-1 rounded-lg border border-purple-950">
+              <button onclick="setVisualizerMode('split')" id="visBtn_split" class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-600/30 text-purple-200 border border-purple-500/50">Split</button>
+              <button onclick="setVisualizerMode('wave')" id="visBtn_wave" class="px-2 py-0.5 rounded text-[10px] font-mono text-zinc-400 hover:text-white">Wave</button>
+              <button onclick="setVisualizerMode('fft')" id="visBtn_fft" class="px-2 py-0.5 rounded text-[10px] font-mono text-zinc-400 hover:text-white">FFT</button>
+            </div>
+          </div>
+
+          <!-- Canvas Display -->
+          <div class="relative w-full h-64 bg-black/80 rounded-xl border border-purple-900/60 overflow-hidden shadow-inner flex items-center justify-center">
+            <canvas id="scopeCanvas" class="w-full h-full block"></canvas>
+            
+            <!-- Dynamic HUD Overlay inside Canvas -->
+            <div class="absolute top-2 left-2 pointer-events-none flex flex-col gap-0.5 text-[10px] font-mono bg-black/60 px-2 py-1 rounded border border-purple-900/40 text-purple-300">
+              <div>PICO: <span id="peakFreqDisplay" class="font-bold text-cyan-300">0.0 Hz</span></div>
+              <div>RMS: <span id="rmsDbDisplay" class="text-zinc-400">-∞ dB</span></div>
+            </div>
+
+            <div class="absolute bottom-2 right-2 pointer-events-none text-[9px] font-mono text-zinc-500 bg-black/60 px-1.5 py-0.5 rounded border border-zinc-900">
+              FFT: 2048 | 60 FPS
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles Visualizador & Opciones -->
+        <div class="mt-4 pt-3 border-t border-purple-900/30 grid grid-cols-2 gap-3 text-xs">
+          <div>
+            <label class="block text-[10px] text-zinc-400 font-mono mb-1">RESOLUCIÓN FFT:</label>
+            <select id="fftSizeSelect" onchange="updateFftSize(this.value)" class="w-full bg-black/60 border border-purple-950 rounded px-2 py-1 text-xs text-purple-200 font-mono">
+              <option value="1024">1024 Bins (Rápido)</option>
+              <option value="2048" selected>2048 Bins (Óptimo)</option>
+              <option value="4096">4096 Bins (Ultra Preciso)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[10px] text-zinc-400 font-mono mb-1">PERSISTENCIA FOSFÓRICA:</label>
+            <input id="persistenceSlider" type="range" min="0.05" max="0.6" step="0.05" value="0.25" class="w-full" aria-label="Persistencia Fosfórica">
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FILA SECUNDARIA // RUIDO PARA CONCENTRACIÓN & ENVOLVENTE ADSR -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- MÓDULO 3: GENERADOR DE RUIDO PARA CONCENTRACIÓN (DEEP FOCUS) (6 COLS) -->
+      <section class="lg:col-span-6 rounded-2xl bg-[#080811]/90 border border-purple-900/50 p-5 shadow-2xl backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <!-- Header Ruido -->
+          <div class="flex items-center justify-between border-b border-purple-900/30 pb-3 mb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-lg bg-purple-950/60 border border-purple-500/50 flex items-center justify-center text-sm shadow-[0_0_8px_rgba(147,51,234,0.3)]">
+                🌪️
+              </span>
+              <div>
+                <h2 class="text-sm font-bold text-white tracking-wider uppercase">RUIDO PARA CONCENTRACIÓN PROFUNDA</h2>
+                <p class="text-[10px] text-zinc-400">Browniano, Rosa & Blanco con Filtrado Resonante</p>
+              </div>
+            </div>
+
+            <!-- Botón Activar Ruido -->
+            <button id="toggleNoiseBtn" onclick="toggleNoise()" class="px-3 py-1.5 rounded-xl bg-purple-950/80 border border-purple-500/60 text-purple-200 hover:text-white hover:bg-purple-900/80 font-bold text-xs transition-all shadow-[0_0_8px_rgba(147,51,234,0.3)] flex items-center gap-1.5">
+              <span id="noisePlayIcon">▶</span> <span id="noisePlayText">ACTIVAR RUIDO</span>
+            </button>
+          </div>
+
+          <!-- Tipo de Ruido Selector -->
+          <div class="grid grid-cols-3 gap-2.5 mb-5">
+            <button onclick="setNoiseType('brown')" id="noiseBtn_brown" class="noise-btn p-3 rounded-xl border border-purple-500/70 bg-purple-600/20 text-purple-200 font-mono text-xs font-bold text-left transition-all shadow-[0_0_10px_rgba(147,51,234,0.25)]">
+              <span class="block text-sm font-bold text-amber-300">Marroniano</span>
+              <span class="text-[10px] text-zinc-400">Deep Focus & Calma</span>
+            </button>
+            <button onclick="setNoiseType('pink')" id="noiseBtn_pink" class="noise-btn p-3 rounded-xl border border-zinc-800 bg-zinc-950/50 text-zinc-400 hover:text-white font-mono text-xs font-bold text-left transition-all">
+              <span class="block text-sm font-bold text-pink-300">Ruido Rosa</span>
+              <span class="text-[10px] text-zinc-400">Lectura & Arquitectura</span>
+            </button>
+            <button onclick="setNoiseType('white')" id="noiseBtn_white" class="noise-btn p-3 rounded-xl border border-zinc-800 bg-zinc-950/50 text-zinc-400 hover:text-white font-mono text-xs font-bold text-left transition-all">
+              <span class="block text-sm font-bold text-cyan-300">Ruido Blanco</span>
+              <span class="text-[10px] text-zinc-400">Bloqueo de Ruido</span>
+            </button>
+          </div>
+
+          <!-- Filtro Biquad Resonante -->
+          <div class="bg-black/50 border border-purple-950 rounded-xl p-4 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-300">FILTRO RESONANTE (BIQUAD)</span>
+              <select id="filterTypeSelect" onchange="updateFilterType(this.value)" class="bg-black border border-purple-900 rounded px-2 py-0.5 text-xs text-purple-300 font-mono">
+                <option value="lowpass" selected>Lowpass (Paso Bajo)</option>
+                <option value="bandpass">Bandpass (Paso Banda)</option>
+                <option value="highpass">Highpass (Paso Alto)</option>
+                <option value="notch">Notch (Corte Estrecho)</option>
+              </select>
+            </div>
+
+            <!-- Cutoff Slider -->
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="text-zinc-400 font-mono">Frecuencia de Corte (Cutoff):</span>
+                <span id="cutoffValLabel" class="text-purple-300 font-mono font-bold">450 Hz</span>
+              </div>
+              <input id="cutoffSlider" type="range" min="30" max="12000" step="5" value="450" oninput="updateFilterCutoff(this.value)" class="w-full" aria-label="Frecuencia de Corte">
+            </div>
+
+            <!-- Resonance Q Slider -->
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="text-zinc-400 font-mono">Resonancia (Factor Q):</span>
+                <span id="qValLabel" class="text-purple-300 font-mono font-bold">1.2</span>
+              </div>
+              <input id="qSlider" type="range" min="0.1" max="12.0" step="0.1" value="1.2" oninput="updateFilterQ(this.value)" class="w-full" aria-label="Resonancia Factor Q">
+            </div>
+          </div>
+        </div>
+
+        <!-- Noise Volume & LFO Breathe -->
+        <div class="mt-4 pt-3 border-t border-purple-900/30 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-zinc-400">Volumen Ruido:</span>
+            <input id="noiseVolSlider" type="range" min="0" max="1" step="0.01" value="0.5" oninput="updateNoiseVol(this.value)" class="w-28 sm:w-36" aria-label="Volumen Ruido">
+            <span id="noiseVolLabel" class="text-zinc-500 font-mono text-[11px]">50%</span>
+          </div>
+
+          <!-- LFO Breathe Toggle -->
+          <button id="toggleLfoBtn" onclick="toggleNoiseLfo()" class="px-2.5 py-1 rounded-lg border border-purple-900/50 bg-purple-950/20 text-purple-300 hover:text-white text-[11px] font-mono flex items-center gap-1">
+            <span>💨</span> <span id="lfoBtnText">LFO Breath: OFF</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- MÓDULO 5: ENVOLVENTE ADSR INTERACTIVA & MODELADOR DE VOZ (6 COLS) -->
+      <section class="lg:col-span-6 rounded-2xl bg-[#080811]/90 border border-purple-900/50 p-5 shadow-2xl backdrop-blur-md flex flex-col justify-between">
+        <div>
+          <!-- Header ADSR -->
+          <div class="flex items-center justify-between border-b border-purple-900/30 pb-3 mb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-lg bg-purple-950/60 border border-purple-500/50 flex items-center justify-center text-sm shadow-[0_0_8px_rgba(147,51,234,0.3)]">
+                📈
+              </span>
+              <div>
+                <h2 class="text-sm font-bold text-white tracking-wider uppercase">ENVOLVENTE ADSR & SÍNTESIS DE TONO</h2>
+                <p class="text-[10px] text-zinc-400">Curva de Ataque, Decaimiento, Sostén y Relajación</p>
+              </div>
+            </div>
+
+            <!-- Test Tone Button -->
+            <button onclick="triggerAdsrNote()" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition-all shadow-[0_0_10px_rgba(147,51,234,0.4)] flex items-center gap-1 active:scale-95">
+              <span>🔔</span> <span>DISPARAR NOTA</span>
+            </button>
+          </div>
+
+          <!-- SVG Visualizador Dinámico de la Curva ADSR -->
+          <div class="w-full h-28 bg-black/70 rounded-xl border border-purple-950/80 mb-4 p-2 relative overflow-hidden flex items-center justify-center">
+            <svg id="adsrSvg" class="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+              <!-- Grid background -->
+              <line x1="0" y1="25" x2="400" y2="25" stroke="#1c182b" stroke-width="0.7" stroke-dasharray="2,2"/>
+              <line x1="0" y1="50" x2="400" y2="50" stroke="#1c182b" stroke-width="0.7" stroke-dasharray="2,2"/>
+              <line x1="0" y1="75" x2="400" y2="75" stroke="#1c182b" stroke-width="0.7" stroke-dasharray="2,2"/>
+              <!-- ADSR Dynamic Polygon Fill -->
+              <polygon id="adsrPolyFill" points="20,90 80,15 150,45 270,45 380,90" fill="rgba(147, 51, 234, 0.18)"/>
+              <!-- ADSR Dynamic Path Stroke -->
+              <path id="adsrPath" d="M 20 90 L 80 15 L 150 45 L 270 45 L 380 90" fill="none" stroke="#c084fc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Marker Nodes -->
+              <circle id="nodeA" cx="80" cy="15" r="4" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+              <circle id="nodeD" cx="150" cy="45" r="4" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+              <circle id="nodeS" cx="270" cy="45" r="4" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+              <circle id="nodeR" cx="380" cy="90" r="4" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+            </svg>
+            <div class="absolute bottom-1 right-2 text-[9px] font-mono text-purple-400/70">
+              Curva en Tiempo Real
+            </div>
+          </div>
+
+          <!-- Sliders ADSR en 4 Columnas -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-black/40 p-3 rounded-xl border border-purple-950">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1 font-mono">
+                <span class="text-purple-300 font-bold">A (Attack)</span>
+                <span id="adsr_a_val" class="text-zinc-400">0.05s</span>
+              </div>
+              <input id="adsr_a" type="range" min="0.005" max="1.5" step="0.005" value="0.05" oninput="updateAdsr()" class="w-full" aria-label="Ataque ADSR">
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1 font-mono">
+                <span class="text-purple-300 font-bold">D (Decay)</span>
+                <span id="adsr_d_val" class="text-zinc-400">0.20s</span>
+              </div>
+              <input id="adsr_d" type="range" min="0.01" max="2.0" step="0.01" value="0.20" oninput="updateAdsr()" class="w-full" aria-label="Decaimiento ADSR">
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1 font-mono">
+                <span class="text-purple-300 font-bold">S (Sustain)</span>
+                <span id="adsr_s_val" class="text-zinc-400">60%</span>
+              </div>
+              <input id="adsr_s" type="range" min="0" max="1.0" step="0.01" value="0.60" oninput="updateAdsr()" class="w-full" aria-label="Sostén ADSR">
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1 font-mono">
+                <span class="text-purple-300 font-bold">R (Release)</span>
+                <span id="adsr_r_val" class="text-zinc-400">0.45s</span>
+              </div>
+              <input id="adsr_r" type="range" min="0.01" max="4.0" step="0.01" value="0.45" oninput="updateAdsr()" class="w-full" aria-label="Relajación ADSR">
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-purple-900/30 flex items-center justify-between text-[11px] text-zinc-500 font-mono">
+          <span>Modela pulsos de feedback o alertas para la terminal</span>
+          <span class="text-purple-400">Frecuencia Base: 189.89 Hz</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- MÓDULO 4: SOUNDBOARD TÁCTICO SEINEN (EFECTOS SINTETIZADOS EN CÓDIGO PURO) -->
+    <section class="rounded-2xl bg-[#080811]/90 border border-purple-900/50 p-5 shadow-2xl backdrop-blur-md">
+      <!-- Header Soundboard -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-purple-900/30 pb-4 mb-5">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-purple-950/60 border border-purple-500/50 flex items-center justify-center text-base shadow-[0_0_10px_rgba(147,51,234,0.35)]">
+            🎯
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-sm font-bold text-white tracking-wider uppercase">SOUNDBOARD TÁCTICO SEINEN // SÍNTESIS EN CÓDIGO PURO</h2>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-900/40 text-purple-300 border border-purple-700/40">CERO ARCHIVOS EXTERNOS</span>
+            </div>
+            <p class="text-[10px] text-zinc-400">Feedback acústico inmediato para teclados, terminales y alertas operativas • Teclas rápidas [1 - 8]</p>
+          </div>
+        </div>
+
+        <!-- Latido Auto-Loop Toggle -->
+        <div class="flex items-center gap-2">
+          <button id="heartbeatLoopBtn" onclick="toggleHeartbeatLoop()" class="px-3 py-1.5 rounded-lg border border-purple-900/60 bg-black/60 text-purple-300 hover:text-white text-xs font-mono transition-all flex items-center gap-1.5" title="Activa un latido rítmico canónico de 4.2s en segundo plano">
+            <span>💓</span> <span id="heartbeatLoopText">Auto-Latido 4.2s: OFF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid de Botones SFX Tácticos -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+
+        <!-- SFX 1: Teclado Mecánico Click -->
+        <div id="card_sfx_click" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-purple-300 font-mono font-bold">1</span>
+            <span class="text-[10px] text-zinc-500 font-mono">POP 1.2 kHz</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Teclado Mecánico Click</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Transiente nítido de switch táctil blue.</p>
+          </div>
+          <button onclick="playSfx('click')" class="mt-2 w-full py-2 rounded-lg bg-purple-950/50 hover:bg-purple-600/30 border border-purple-800/40 text-purple-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(147,51,234,0.15)]">
+            <span>⌨️</span> <span>Disparar [1]</span>
+          </button>
+        </div>
+
+        <!-- SFX 2: Terminal Laser Blip -->
+        <div id="card_sfx_blip" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-purple-300 font-mono font-bold">2</span>
+            <span class="text-[10px] text-zinc-500 font-mono">SWEEP 1.8k→180</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Terminal Laser Blip</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Confirmación HUD interactiva cyberpunk.</p>
+          </div>
+          <button onclick="playSfx('blip')" class="mt-2 w-full py-2 rounded-lg bg-purple-950/50 hover:bg-purple-600/30 border border-purple-800/40 text-purple-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(147,51,234,0.15)]">
+            <span>⚡</span> <span>Disparar [2]</span>
+          </button>
+        </div>
+
+        <!-- SFX 3: Quantum Warp Sweep -->
+        <div id="card_sfx_warp" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-purple-300 font-mono font-bold">3</span>
+            <span class="text-[10px] text-zinc-500 font-mono">WARP RESONANT</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Quantum Warp Sweep</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Ascenso de filtro armónico espacial.</p>
+          </div>
+          <button onclick="playSfx('warp')" class="mt-2 w-full py-2 rounded-lg bg-purple-950/50 hover:bg-purple-600/30 border border-purple-800/40 text-purple-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(147,51,234,0.15)]">
+            <span>🌀</span> <span>Disparar [3]</span>
+          </button>
+        </div>
+
+        <!-- SFX 4: Tar Pit Heartbeat -->
+        <div id="card_sfx_heartbeat" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-purple-300 font-mono font-bold">4</span>
+            <span class="text-[10px] text-zinc-500 font-mono">48 Hz SUB-BASS</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Tar Pit Heartbeat</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Doble latido sísmico profundo.</p>
+          </div>
+          <button onclick="playSfx('heartbeat')" class="mt-2 w-full py-2 rounded-lg bg-purple-950/50 hover:bg-purple-600/30 border border-purple-800/40 text-purple-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(147,51,234,0.15)]">
+            <span>💓</span> <span>Disparar [4]</span>
+          </button>
+        </div>
+
+        <!-- SFX 5: Campana de Reliquia Cristalina -->
+        <div id="card_sfx_bell" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-purple-300 font-mono font-bold">5</span>
+            <span class="text-[10px] text-zinc-500 font-mono">7-PARTIAL CHIME</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Reliquia Cristalina</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Campana inarmónica con estela de 4.5s.</p>
+          </div>
+          <button onclick="playSfx('bell')" class="mt-2 w-full py-2 rounded-lg bg-purple-950/50 hover:bg-purple-600/30 border border-purple-800/40 text-purple-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(147,51,234,0.15)]">
+            <span>🔔</span> <span>Disparar [5]</span>
+          </button>
+        </div>
+
+        <!-- SFX 6: Alerta Táctica Wazuh / SIEM -->
+        <div id="card_sfx_alarm" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-purple-300 font-mono font-bold">6</span>
+            <span class="text-[10px] text-rose-400 font-mono">ALERT 920/1720</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-rose-300 transition-colors">Alerta Táctica Wazuh</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Pulso urgente de detección de intrusión.</p>
+          </div>
+          <button onclick="playSfx('alarm')" class="mt-2 w-full py-2 rounded-lg bg-rose-950/40 hover:bg-rose-900/50 border border-rose-800/40 text-rose-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(244,63,94,0.2)]">
+            <span>🚨</span> <span>Disparar [6]</span>
+          </button>
+        </div>
+
+        <!-- SFX 7: Tormenta Eléctrica Set ⚡ -->
+        <div id="card_sfx_storm" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-purple-300 font-mono font-bold">7</span>
+            <span class="text-[10px] text-cyan-400 font-mono">THUNDER & ARC</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Tormenta Set ⚡</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Trueno subsónico y arco voltaico.</p>
+          </div>
+          <button onclick="playSfx('storm')" class="mt-2 w-full py-2 rounded-lg bg-purple-950/50 hover:bg-purple-600/30 border border-purple-800/40 text-purple-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(147,51,234,0.15)]">
+            <span>⚡</span> <span>Disparar [7]</span>
+          </button>
+        </div>
+
+        <!-- SFX 8: Sombra Rosa Gris 🌸 -->
+        <div id="card_sfx_pad" class="p-4 rounded-xl bg-black/60 border border-purple-950 hover:border-purple-600/70 transition-all group relative overflow-hidden flex flex-col justify-between">
+          <div class="flex items-start justify-between mb-2">
+            <span class="w-7 h-7 rounded bg-purple-900/30 border border-purple-500/40 flex items-center justify-center text-xs text-pink-300 font-mono font-bold">8</span>
+            <span class="text-[10px] text-pink-400 font-mono">MIN9 CHORD PAD</span>
+          </div>
+          <div class="my-2">
+            <h3 class="text-xs font-bold text-white group-hover:text-pink-300 transition-colors">Sombra Rosa Gris 🌸</h3>
+            <p class="text-[10px] text-zinc-400 mt-0.5">Acorde menor 9 místico con decay sedoso.</p>
+          </div>
+          <button onclick="playSfx('pad')" class="mt-2 w-full py-2 rounded-lg bg-pink-950/40 hover:bg-pink-900/50 border border-pink-800/40 text-pink-200 text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 active:scale-95 shadow-[0_0_8px_rgba(236,72,153,0.2)]">
+            <span>🌸</span> <span>Disparar [8]</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal para Guardar Presets Personalizados -->
+  <div id="savePresetModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#090915] border border-purple-900/80 rounded-2xl p-6 max-w-md w-full shadow-2xl relative">
+      <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-2 flex items-center gap-2">
+        <span>💾</span> Guardar Preset Personalizado
+      </h3>
+      <p class="text-xs text-zinc-400 mb-4">Introduce un nombre para registrar el estado de los osciladores, ruido y envolvente en tu navegador:</p>
+      
+      <input type="text" id="customPresetNameInput" placeholder="Ej: Mi Resonancia Nocturna 189" class="w-full bg-black/80 border border-purple-800/60 rounded-xl px-3 py-2 text-xs font-mono text-purple-200 focus:outline-none focus:border-purple-400 mb-4">
+      
+      <div class="flex items-center justify-end gap-2">
+        <button onclick="closeSavePresetModal()" class="px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 hover:text-white text-xs">Cancelar</button>
+        <button onclick="confirmSaveCustomPreset()" class="px-4 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition-all shadow-[0_0_10px_rgba(147,51,234,0.4)]">Guardar Preset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Táctico Seinen -->
+  <footer class="border-t border-purple-900/40 bg-black/90 backdrop-blur-md py-4 px-4 text-xs z-30 mt-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-zinc-400">
+      <div class="flex items-center gap-2">
+        <span class="text-purple-400 font-bold">189.89.619 Hz</span>
+        <span class="text-zinc-600">•</span>
+        <span>SUITE DE RESONANCIA & FORJA DE AUDIO TÁCTICO</span>
+        <span class="text-zinc-600">•</span>
+        <span class="text-zinc-500">K4L1 STUDIO</span>
+      </div>
+
+      <div class="flex items-center gap-3 text-[11px] font-mono">
+        <span class="text-purple-300">Hotkeys: [Space] Carrier | [N] Ruido | [M] Mute All | [1-8] SFX</span>
+        <span class="text-zinc-600">|</span>
+        <span class="text-zinc-400">— Set ⚡ &amp; Rosa Gris 🌸</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MOTOR DE AUDIO WEB AUDIO API // SET ⚡ & ROSA GRIS 🌸 (161914)             -->
+  <!-- ========================================================================= -->
+  <script>
+    'use strict';
+
+    // -------------------------------------------------------------
+    // 1. ESTADO GLOBAL & ENRUTAMIENTO DE AUDIO
+    // -------------------------------------------------------------
+    let audioCtx = null;
+    let masterGain = null;
+    let analyser = null;
+
+    // Carrier & Binaural Nodes
+    let isCarrierPlaying = false;
+    let carrierLeftOsc = null;
+    let carrierRightOsc = null;
+    let carrierGain = null;
+    let pannerLeft = null;
+    let pannerRight = null;
+    let carrierFreq = 189.89619;
+    let binauralBeat = 6.0;
+    let isBinauralEnabled = true;
+    let currentWaveform = 'sine';
+    let carrierVol = 0.8;
+
+    // Noise Generator Nodes
+    let isNoisePlaying = false;
+    let noiseSourceNode = null;
+    let noiseGain = null;
+    let noiseFilter = null;
+    let noiseFilterType = 'lowpass';
+    let noiseCutoff = 450;
+    let noiseQ = 1.2;
+    let noiseType = 'brown';
+    let noiseVol = 0.5;
+    let isNoiseLfoActive = false;
+    let noiseLfoOsc = null;
+    let noiseLfoGain = null;
+
+    // ADSR Envelope Parameters
+    let adsr = {
+      attack: 0.05,
+      decay: 0.20,
+      sustain: 0.60,
+      release: 0.45
+    };
+
+    // Auto-Heartbeat Loop State
+    let heartbeatIntervalId = null;
+    let isHeartbeatLoopActive = false;
+
+    // Visualizer State
+    let visualizerMode = 'split'; // 'split', 'wave', 'fft'
+    let scopeCanvas = null;
+    let scopeCtx = null;
+    let animationFrameId = null;
+
+    // -------------------------------------------------------------
+    // 2. INICIALIZACIÓN DEL MOTOR DE AUDIO
+    // -------------------------------------------------------------
+    function initAudioContext() {
+      if (audioCtx) {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        updateEngineUI();
+        return;
+      }
+
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContextClass({ latencyHint: 'interactive' });
+
+      // Master Gain
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.75, audioCtx.currentTime);
+
+      // Analyser Node for FFT and Waveform
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 2048;
+      analyser.smoothingTimeConstant = 0.85;
+
+      // Master Routing: MasterGain -> Analyser -> Destination
+      masterGain.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      // Setup Carrier Sub-bus
+      carrierGain = audioCtx.createGain();
+      carrierGain.gain.setValueAtTime(carrierVol, audioCtx.currentTime);
+      carrierGain.connect(masterGain);
+
+      // Setup Noise Filter and Sub-bus
+      noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = noiseFilterType;
+      noiseFilter.frequency.setValueAtTime(noiseCutoff, audioCtx.currentTime);
+      noiseFilter.Q.setValueAtTime(noiseQ, audioCtx.currentTime);
+
+      noiseGain = audioCtx.createGain();
+      noiseGain.gain.setValueAtTime(0, audioCtx.currentTime);
+      
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(masterGain);
+
+      updateEngineUI();
+      startVisualizer();
+    }
+
+    function toggleAudioEngine() {
+      if (!audioCtx) {
+        initAudioContext();
+      } else if (audioCtx.state === 'running') {
+        audioCtx.suspend().then(updateEngineUI);
+      } else {
+        audioCtx.resume().then(updateEngineUI);
+      }
+    }
+
+    function updateEngineUI() {
+      const dot = document.getElementById('audioStatusDot');
+      const text = document.getElementById('audioStatusText');
+      const btnText = document.getElementById('toggleEngineBtnText');
+
+      if (!audioCtx) {
+        dot.className = 'w-2 h-2 rounded-full bg-zinc-600';
+        text.innerText = 'MOTOR EN ESPERA';
+        btnText.innerText = 'INICIAR MOTOR';
+      } else if (audioCtx.state === 'running') {
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+        text.innerText = `ACTIVO (${audioCtx.sampleRate} Hz)`;
+        btnText.innerText = 'PAUSAR MOTOR';
+      } else {
+        dot.className = 'w-2 h-2 rounded-full bg-amber-400';
+        text.innerText = 'PAUSADO';
+        btnText.innerText = 'REANUDAR';
+      }
+    }
+
+    function ensureAudioRunning() {
+      if (!audioCtx) {
+        initAudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume().then(updateEngineUI);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 3. GENERADOR DE FRECUENCIA PURA & PULSOS BINAURALES
+    // -------------------------------------------------------------
+    function toggleCarrier() {
+      ensureAudioRunning();
+      if (isCarrierPlaying) {
+        stopCarrier();
+      } else {
+        startCarrier();
+      }
+    }
+
+    function startCarrier() {
+      if (isCarrierPlaying) return;
+      ensureAudioRunning();
+
+      const now = audioCtx.currentTime;
+
+      // Panners for True Stereo Separation (Binaural)
+      if (audioCtx.createStereoPanner) {
+        pannerLeft = audioCtx.createStereoPanner();
+        pannerLeft.pan.setValueAtTime(-1.0, now);
+
+        pannerRight = audioCtx.createStereoPanner();
+        pannerRight.pan.setValueAtTime(1.0, now);
+      } else {
+        // Fallback for older browsers
+        pannerLeft = audioCtx.createGain();
+        pannerRight = audioCtx.createGain();
+      }
+
+      // Left Oscillator (Carrier)
+      carrierLeftOsc = audioCtx.createOscillator();
+      carrierLeftOsc.type = currentWaveform;
+      carrierLeftOsc.frequency.setValueAtTime(carrierFreq, now);
+
+      // Right Oscillator (Carrier + Binaural Beat)
+      carrierRightOsc = audioCtx.createOscillator();
+      carrierRightOsc.type = currentWaveform;
+      const rightFreq = isBinauralEnabled ? (carrierFreq + binauralBeat) : carrierFreq;
+      carrierRightOsc.frequency.setValueAtTime(rightFreq, now);
+
+      // Connect
+      carrierLeftOsc.connect(pannerLeft);
+      pannerLeft.connect(carrierGain);
+
+      carrierRightOsc.connect(pannerRight);
+      pannerRight.connect(carrierGain);
+
+      // Smooth Fade-In to eliminate clicks
+      carrierGain.gain.cancelScheduledValues(now);
+      carrierGain.gain.setValueAtTime(0.0001, now);
+      carrierGain.gain.exponentialRampToValueAtTime(carrierVol, now + 0.08);
+
+      carrierLeftOsc.start(now);
+      carrierRightOsc.start(now);
+
+      isCarrierPlaying = true;
+      updateCarrierButtons();
+      updateFrequencyLabels();
+    }
+
+    function stopCarrier() {
+      if (!isCarrierPlaying) return;
+      const now = audioCtx.currentTime;
+
+      // Smooth Fade-Out
+      carrierGain.gain.cancelScheduledValues(now);
+      carrierGain.gain.setValueAtTime(carrierGain.gain.value, now);
+      carrierGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+
+      setTimeout(() => {
+        if (carrierLeftOsc) {
+          try { carrierLeftOsc.stop(); carrierLeftOsc.disconnect(); } catch (e) {}
+          carrierLeftOsc = null;
+        }
+        if (carrierRightOsc) {
+          try { carrierRightOsc.stop(); carrierRightOsc.disconnect(); } catch (e) {}
+          carrierRightOsc = null;
+        }
+        isCarrierPlaying = false;
+        updateCarrierButtons();
+      }, 90);
+    }
+
+    function updateCarrierButtons() {
+      const icon = document.getElementById('carrierPlayIcon');
+      const text = document.getElementById('carrierPlayText');
+      const btn = document.getElementById('toggleCarrierBtn');
+
+      if (isCarrierPlaying) {
+        icon.innerText = '⏸';
+        text.innerText = 'DETENER ONDA';
+        btn.className = 'px-3.5 py-1.5 rounded-xl bg-purple-600 border border-purple-400 text-white font-bold text-xs transition-all shadow-[0_0_15px_rgba(147,51,234,0.6)] flex items-center gap-1.5';
+      } else {
+        icon.innerText = '▶';
+        text.innerText = 'ACTIVAR ONDA';
+        btn.className = 'px-3.5 py-1.5 rounded-xl bg-purple-950/80 border border-purple-500/60 text-purple-200 hover:text-white hover:bg-purple-900/80 font-bold text-xs transition-all shadow-[0_0_10px_rgba(147,51,234,0.3)] flex items-center gap-1.5';
+      }
+    }
+
+    function setWaveform(type) {
+      currentWaveform = type;
+      if (carrierLeftOsc) carrierLeftOsc.type = type;
+      if (carrierRightOsc) carrierRightOsc.type = type;
+
+      ['sine', 'triangle', 'sawtooth', 'square'].forEach(w => {
+        const btn = document.getElementById(`waveBtn_${w}`);
+        if (w === type) {
+          btn.className = 'wave-btn py-2 px-3 rounded-xl border border-purple-500/70 bg-purple-600/30 text-purple-200 text-xs font-mono font-bold flex items-center justify-center gap-1.5 shadow-[0_0_10px_rgba(147,51,234,0.35)]';
+        } else {
+          btn.className = 'wave-btn py-2 px-3 rounded-xl border border-zinc-800 bg-zinc-950/60 text-zinc-400 hover:text-white hover:border-purple-800 text-xs font-mono font-bold flex items-center justify-center gap-1.5';
+        }
+      });
+    }
+
+    function updateCarrierFreq(val) {
+      carrierFreq = parseFloat(val);
+      document.getElementById('carrierNumInput').value = carrierFreq.toFixed(3);
+      applyCarrierFrequency();
+    }
+
+    function updateCarrierFreqFromInput(val) {
+      let parsed = parseFloat(val);
+      if (isNaN(parsed) || parsed < 0.1) parsed = 189.896;
+      carrierFreq = parsed;
+      document.getElementById('carrierSlider').value = Math.min(parsed, 1000);
+      applyCarrierFrequency();
+    }
+
+    function stepCarrier(delta) {
+      carrierFreq = Math.max(0.1, carrierFreq + delta);
+      document.getElementById('carrierNumInput').value = carrierFreq.toFixed(3);
+      document.getElementById('carrierSlider').value = Math.min(carrierFreq, 1000);
+      applyCarrierFrequency();
+    }
+
+    function setExactCarrier(targetHz) {
+      carrierFreq = targetHz;
+      document.getElementById('carrierNumInput').value = carrierFreq.toFixed(3);
+      document.getElementById('carrierSlider').value = Math.min(carrierFreq, 1000);
+      applyCarrierFrequency();
+    }
+
+    function applyCarrierFrequency() {
+      if (audioCtx && carrierLeftOsc && carrierRightOsc) {
+        const now = audioCtx.currentTime;
+        carrierLeftOsc.frequency.setTargetAtTime(carrierFreq, now, 0.03);
+        const rightF = isBinauralEnabled ? (carrierFreq + binauralBeat) : carrierFreq;
+        carrierRightOsc.frequency.setTargetAtTime(rightF, now, 0.03);
+      }
+      updateFrequencyLabels();
+    }
+
+    function updateBinauralBeat(val) {
+      binauralBeat = parseFloat(val);
+      document.getElementById('binauralBeatVal').innerText = `${binauralBeat.toFixed(1)} Hz`;
+      applyCarrierFrequency();
+      highlightBrainwaveBand(binauralBeat);
+    }
+
+    function toggleBinaural() {
+      isBinauralEnabled = !isBinauralEnabled;
+      const badge = document.getElementById('binauralStateBadge');
+      if (isBinauralEnabled) {
+        badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-bold bg-cyan-950/60 border border-cyan-500/40 text-cyan-300';
+        badge.innerText = 'ACTIVO';
+      } else {
+        badge.className = 'px-2 py-0.5 rounded-full text-[9px] font-bold bg-zinc-900 border border-zinc-700 text-zinc-500';
+        badge.innerText = 'DESACTIVADO';
+      }
+      applyCarrierFrequency();
+    }
+
+    function highlightBrainwaveBand(beat) {
+      const bands = [
+        { id: 'brain_delta', min: 0.5, max: 4.0 },
+        { id: 'brain_theta', min: 4.0, max: 8.0 },
+        { id: 'brain_alpha', min: 8.0, max: 13.0 },
+        { id: 'brain_beta', min: 14.0, max: 30.0 },
+        { id: 'brain_gamma', min: 30.0, max: 100.0 }
+      ];
+
+      bands.forEach(b => {
+        const el = document.getElementById(b.id);
+        if (!el) return;
+        if (beat >= b.min && beat < b.max) {
+          el.className = 'brainwave-badge p-1.5 rounded-lg border border-cyan-500/80 bg-cyan-950/50 text-cyan-200 font-bold shadow-[0_0_10px_rgba(6,182,212,0.4)] transition-all';
+        } else {
+          el.className = 'brainwave-badge p-1.5 rounded-lg border border-zinc-900 bg-zinc-950 text-zinc-500 transition-all';
+        }
+      });
+    }
+
+    function updateFrequencyLabels() {
+      const leftEl = document.getElementById('earFreqLeft');
+      const rightEl = document.getElementById('earFreqRight');
+      if (leftEl) leftEl.innerText = `${carrierFreq.toFixed(2)} Hz`;
+      if (rightEl) {
+        const rightF = isBinauralEnabled ? (carrierFreq + binauralBeat) : carrierFreq;
+        rightEl.innerText = `${rightF.toFixed(2)} Hz`;
+      }
+    }
+
+    function updateCarrierVol(val) {
+      carrierVol = parseFloat(val);
+      document.getElementById('carrierVolLabel').innerText = `${Math.round(carrierVol * 100)}%`;
+      if (carrierGain && isCarrierPlaying) {
+        carrierGain.gain.setTargetAtTime(carrierVol, audioCtx.currentTime, 0.03);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 4. GENERADOR DE RUIDO PROCEDURAL (BROWN, PINK, WHITE)
+    // -------------------------------------------------------------
+    function generateNoiseBuffer(type, durationSeconds = 5) {
+      const sampleRate = audioCtx.sampleRate;
+      const bufferSize = sampleRate * durationSeconds;
+      const buffer = audioCtx.createBuffer(2, bufferSize, sampleRate);
+
+      for (let channel = 0; channel < 2; channel++) {
+        const output = buffer.getChannelData(channel);
+
+        if (type === 'white') {
+          for (let i = 0; i < bufferSize; i++) {
+            output[i] = (Math.random() * 2 - 1) * 0.7;
+          }
+        } else if (type === 'pink') {
+          // Paul Kellet's filtered pink noise algorithm
+          let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            b0 = 0.99886 * b0 + white * 0.0555179;
+            b1 = 0.99332 * b1 + white * 0.0750759;
+            b2 = 0.96900 * b2 + white * 0.1538520;
+            b3 = 0.86650 * b3 + white * 0.3104856;
+            b4 = 0.55000 * b4 + white * 0.5329522;
+            b5 = -0.7616 * b5 - white * 0.0168980;
+            output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+            b6 = white * 0.115926;
+          }
+        } else {
+          // Brownian (Brown / Red Noise): integrated white noise
+          let lastOut = 0.0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            lastOut = (lastOut + (0.025 * white)) / 1.025;
+            output[i] = lastOut * 3.5;
+          }
+        }
+      }
+      return buffer;
+    }
+
+    function toggleNoise() {
+      ensureAudioRunning();
+      if (isNoisePlaying) {
+        stopNoise();
+      } else {
+        startNoise();
+      }
+    }
+
+    function startNoise() {
+      if (isNoisePlaying) return;
+      ensureAudioRunning();
+
+      const now = audioCtx.currentTime;
+      const buffer = generateNoiseBuffer(noiseType);
+
+      noiseSourceNode = audioCtx.createBufferSource();
+      noiseSourceNode.buffer = buffer;
+      noiseSourceNode.loop = true;
+
+      noiseSourceNode.connect(noiseFilter);
+
+      // Smooth Fade-In
+      noiseGain.gain.cancelScheduledValues(now);
+      noiseGain.gain.setValueAtTime(0.0001, now);
+      noiseGain.gain.exponentialRampToValueAtTime(noiseVol, now + 0.12);
+
+      noiseSourceNode.start(now);
+      isNoisePlaying = true;
+      updateNoiseUI();
+    }
+
+    function stopNoise() {
+      if (!isNoisePlaying) return;
+      const now = audioCtx.currentTime;
+
+      noiseGain.gain.cancelScheduledValues(now);
+      noiseGain.gain.setValueAtTime(noiseGain.gain.value, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+
+      setTimeout(() => {
+        if (noiseSourceNode) {
+          try { noiseSourceNode.stop(); noiseSourceNode.disconnect(); } catch (e) {}
+          noiseSourceNode = null;
+        }
+        isNoisePlaying = false;
+        updateNoiseUI();
+      }, 110);
+    }
+
+    function setNoiseType(type) {
+      noiseType = type;
+      ['brown', 'pink', 'white'].forEach(t => {
+        const btn = document.getElementById(`noiseBtn_${t}`);
+        if (t === type) {
+          btn.className = 'noise-btn p-3 rounded-xl border border-purple-500/70 bg-purple-600/30 text-purple-200 font-mono text-xs font-bold text-left transition-all shadow-[0_0_12px_rgba(147,51,234,0.35)]';
+        } else {
+          btn.className = 'noise-btn p-3 rounded-xl border border-zinc-800 bg-zinc-950/50 text-zinc-400 hover:text-white font-mono text-xs font-bold text-left transition-all';
+        }
+      });
+
+      if (isNoisePlaying) {
+        stopNoise();
+        setTimeout(startNoise, 120);
+      }
+    }
+
+    function updateNoiseUI() {
+      const icon = document.getElementById('noisePlayIcon');
+      const text = document.getElementById('noisePlayText');
+      const btn = document.getElementById('toggleNoiseBtn');
+
+      if (isNoisePlaying) {
+        icon.innerText = '⏸';
+        text.innerText = 'DETENER RUIDO';
+        btn.className = 'px-3 py-1.5 rounded-xl bg-purple-600 border border-purple-400 text-white font-bold text-xs transition-all shadow-[0_0_12px_rgba(147,51,234,0.5)] flex items-center gap-1.5';
+      } else {
+        icon.innerText = '▶';
+        text.innerText = 'ACTIVAR RUIDO';
+        btn.className = 'px-3 py-1.5 rounded-xl bg-purple-950/80 border border-purple-500/60 text-purple-200 hover:text-white hover:bg-purple-900/80 font-bold text-xs transition-all shadow-[0_0_8px_rgba(147,51,234,0.3)] flex items-center gap-1.5';
+      }
+    }
+
+    function updateFilterCutoff(val) {
+      noiseCutoff = parseFloat(val);
+      document.getElementById('cutoffValLabel').innerText = `${Math.round(noiseCutoff)} Hz`;
+      if (noiseFilter) {
+        noiseFilter.frequency.setTargetAtTime(noiseCutoff, audioCtx.currentTime, 0.03);
+      }
+    }
+
+    function updateFilterQ(val) {
+      noiseQ = parseFloat(val);
+      document.getElementById('qValLabel').innerText = noiseQ.toFixed(1);
+      if (noiseFilter) {
+        noiseFilter.Q.setTargetAtTime(noiseQ, audioCtx.currentTime, 0.03);
+      }
+    }
+
+    function updateFilterType(type) {
+      noiseFilterType = type;
+      if (noiseFilter) {
+        noiseFilter.type = type;
+      }
+    }
+
+    function updateNoiseVol(val) {
+      noiseVol = parseFloat(val);
+      document.getElementById('noiseVolLabel').innerText = `${Math.round(noiseVol * 100)}%`;
+      if (noiseGain && isNoisePlaying) {
+        noiseGain.gain.setTargetAtTime(noiseVol, audioCtx.currentTime, 0.03);
+      }
+    }
+
+    function toggleNoiseLfo() {
+      ensureAudioRunning();
+      isNoiseLfoActive = !isNoiseLfoActive;
+      const btn = document.getElementById('toggleLfoBtn');
+      const text = document.getElementById('lfoBtnText');
+
+      if (isNoiseLfoActive) {
+        text.innerText = 'LFO Breath: 0.08 Hz ON';
+        btn.className = 'px-2.5 py-1 rounded-lg border border-purple-500/70 bg-purple-600/30 text-purple-200 text-[11px] font-mono flex items-center gap-1 shadow-[0_0_8px_rgba(147,51,234,0.3)]';
+
+        // Create slow sine LFO
+        noiseLfoOsc = audioCtx.createOscillator();
+        noiseLfoOsc.frequency.setValueAtTime(0.08, audioCtx.currentTime); // 12.5s cycle
+
+        noiseLfoGain = audioCtx.createGain();
+        noiseLfoGain.gain.setValueAtTime(noiseCutoff * 0.45, audioCtx.currentTime);
+
+        noiseLfoOsc.connect(noiseLfoGain);
+        noiseLfoGain.connect(noiseFilter.frequency);
+        noiseLfoOsc.start();
+      } else {
+        text.innerText = 'LFO Breath: OFF';
+        btn.className = 'px-2.5 py-1 rounded-lg border border-purple-900/50 bg-purple-950/20 text-purple-300 hover:text-white text-[11px] font-mono flex items-center gap-1';
+
+        if (noiseLfoOsc) {
+          try { noiseLfoOsc.stop(); noiseLfoOsc.disconnect(); } catch (e) {}
+          noiseLfoOsc = null;
+        }
+        if (noiseFilter) {
+          noiseFilter.frequency.setTargetAtTime(noiseCutoff, audioCtx.currentTime, 0.03);
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 5. ENVOLVENTE ADSR INTERACTIVA & CURVA SVG
+    // -------------------------------------------------------------
+    function updateAdsr() {
+      adsr.attack = parseFloat(document.getElementById('adsr_a').value);
+      adsr.decay = parseFloat(document.getElementById('adsr_d').value);
+      adsr.sustain = parseFloat(document.getElementById('adsr_s').value);
+      adsr.release = parseFloat(document.getElementById('adsr_r').value);
+
+      document.getElementById('adsr_a_val').innerText = `${adsr.attack.toFixed(2)}s`;
+      document.getElementById('adsr_d_val').innerText = `${adsr.decay.toFixed(2)}s`;
+      document.getElementById('adsr_s_val').innerText = `${Math.round(adsr.sustain * 100)}%`;
+      document.getElementById('adsr_r_val').innerText = `${adsr.release.toFixed(2)}s`;
+
+      drawAdsrSvg();
+    }
+
+    function drawAdsrSvg() {
+      const totalTime = adsr.attack + adsr.decay + 0.6 + adsr.release;
+      const width = 360;
+      const startX = 20;
+      const baseY = 88;
+      const peakY = 12;
+
+      const attackX = startX + (adsr.attack / totalTime) * width;
+      const decayX = attackX + (adsr.decay / totalTime) * width;
+      const sustainY = baseY - adsr.sustain * (baseY - peakY);
+      const sustainX = decayX + (0.6 / totalTime) * width;
+      const releaseX = sustainX + (adsr.release / totalTime) * width;
+
+      // Update Path & Polygon
+      const d = `M ${startX} ${baseY} L ${attackX} ${peakY} L ${decayX} ${sustainY} L ${sustainX} ${sustainY} L ${releaseX} ${baseY}`;
+      document.getElementById('adsrPath').setAttribute('d', d);
+
+      const points = `${startX},${baseY} ${attackX},${peakY} ${decayX},${sustainY} ${sustainX},${sustainY} ${releaseX},${baseY}`;
+      document.getElementById('adsrPolyFill').setAttribute('points', points);
+
+      // Markers
+      const nodeA = document.getElementById('nodeA');
+      const nodeD = document.getElementById('nodeD');
+      const nodeS = document.getElementById('nodeS');
+      const nodeR = document.getElementById('nodeR');
+
+      if (nodeA) { nodeA.setAttribute('cx', attackX); nodeA.setAttribute('cy', peakY); }
+      if (nodeD) { nodeD.setAttribute('cx', decayX); nodeD.setAttribute('cy', sustainY); }
+      if (nodeS) { nodeS.setAttribute('cx', sustainX); nodeS.setAttribute('cy', sustainY); }
+      if (nodeR) { nodeR.setAttribute('cx', releaseX); nodeR.setAttribute('cy', baseY); }
+    }
+
+    function triggerAdsrNote() {
+      ensureAudioRunning();
+      const now = audioCtx.currentTime;
+
+      const osc = audioCtx.createOscillator();
+      const envGain = audioCtx.createGain();
+
+      osc.type = currentWaveform;
+      osc.frequency.setValueAtTime(carrierFreq, now);
+
+      // ADSR Curve execution
+      envGain.gain.setValueAtTime(0.0001, now);
+      // Attack
+      envGain.gain.exponentialRampToValueAtTime(0.8, now + adsr.attack);
+      // Decay to Sustain
+      const sustainLevel = Math.max(0.0001, adsr.sustain * 0.8);
+      envGain.gain.exponentialRampToValueAtTime(sustainLevel, now + adsr.attack + adsr.decay);
+      // Sustain duration (0.4s hold), then Release
+      const sustainEnd = now + adsr.attack + adsr.decay + 0.4;
+      envGain.gain.setValueAtTime(sustainLevel, sustainEnd);
+      envGain.gain.exponentialRampToValueAtTime(0.0001, sustainEnd + adsr.release);
+
+      osc.connect(envGain);
+      envGain.connect(masterGain);
+
+      osc.start(now);
+      osc.stop(sustainEnd + adsr.release + 0.05);
+
+      // Visual pulse on the SVG
+      const path = document.getElementById('adsrPath');
+      path.setAttribute('stroke', '#38bdf8');
+      setTimeout(() => path.setAttribute('stroke', '#c084fc'), 300);
+    }
+
+    // -------------------------------------------------------------
+    // 6. SOUNDBOARD TÁCTICO SEINEN (SÍNTESIS PURA EN CÓDIGO)
+    // -------------------------------------------------------------
+    function playSfx(id) {
+      ensureAudioRunning();
+      triggerVisualFlash(`card_sfx_${id}`);
+
+      const now = audioCtx.currentTime;
+
+      switch(id) {
+        case 'click':
+          // 1. Mechanical Keyboard Click: Sharp pop + spring ping
+          synthMechanicalClick(now);
+          break;
+        case 'blip':
+          // 2. Terminal Laser Blip: Cyberpunk HUD sweep
+          synthLaserBlip(now);
+          break;
+        case 'warp':
+          // 3. Quantum Warp Sweep: Spatial resonant rise
+          synthQuantumWarp(now);
+          break;
+        case 'heartbeat':
+          // 4. Tar Pit Heartbeat: 48 Hz deep double-thud
+          synthTarPitHeartbeat(now);
+          break;
+        case 'bell':
+          // 5. Campana de Reliquia Cristalina: 7 inharmonic partials
+          synthCrystalRelicBell(now);
+          break;
+        case 'alarm':
+          // 6. Alerta Táctica Wazuh / SIEM: Gated dual-tone warble
+          synthWazuhAlarm(now);
+          break;
+        case 'storm':
+          // 7. Tormenta Eléctrica Set ⚡: Sub-bass rumble + lightning discharge
+          synthSetStorm(now);
+          break;
+        case 'pad':
+          // 8. Sombra Rosa Gris 🌸: Minor 9th chord swell
+          synthRosaGrisPad(now);
+          break;
+      }
+    }
+
+    function triggerVisualFlash(elemId) {
+      const el = document.getElementById(elemId);
+      if (el) {
+        el.classList.remove('sfx-flash');
+        void el.offsetWidth; // Force reflow
+        el.classList.add('sfx-flash');
+      }
+    }
+
+    // SFX 1: Mechanical Keyboard Click
+    function synthMechanicalClick(t) {
+      // Noise burst for mechanical transient
+      const noiseBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.015, audioCtx.sampleRate);
+      const data = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / 80);
+
+      const noiseSource = audioCtx.createBufferSource();
+      noiseSource.buffer = noiseBuffer;
+
+      const noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = 'highpass';
+      noiseFilter.frequency.setValueAtTime(2400, t);
+
+      const noiseGain = audioCtx.createGain();
+      noiseGain.gain.setValueAtTime(0.6, t);
+      noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.015);
+
+      noiseSource.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(masterGain);
+      noiseSource.start(t);
+
+      // Body contact pitch (1200Hz sine ping decaying in 25ms)
+      const osc = audioCtx.createOscillator();
+      const oscGain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1400, t);
+      osc.frequency.exponentialRampToValueAtTime(450, t + 0.025);
+
+      oscGain.gain.setValueAtTime(0.7, t);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.025);
+
+      osc.connect(oscGain);
+      oscGain.connect(masterGain);
+      osc.start(t);
+      osc.stop(t + 0.03);
+    }
+
+    // SFX 2: Terminal Laser Blip
+    function synthLaserBlip(t) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+
+      osc.frequency.setValueAtTime(2200, t);
+      osc.frequency.exponentialRampToValueAtTime(180, t + 0.07);
+
+      gain.gain.setValueAtTime(0.5, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(3200, t);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(masterGain);
+
+      osc.start(t);
+      osc.stop(t + 0.075);
+    }
+
+    // SFX 3: Quantum Warp Sweep
+    function synthQuantumWarp(t) {
+      const osc = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(90, t);
+      osc.frequency.exponentialRampToValueAtTime(960, t + 0.45);
+
+      filter.type = 'bandpass';
+      filter.Q.setValueAtTime(6.0, t);
+      filter.frequency.setValueAtTime(180, t);
+      filter.frequency.exponentialRampToValueAtTime(2800, t + 0.45);
+
+      gain.gain.setValueAtTime(0.01, t);
+      gain.gain.linearRampToValueAtTime(0.65, t + 0.25);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(masterGain);
+
+      osc.start(t);
+      osc.stop(t + 0.6);
+    }
+
+    // SFX 4: Tar Pit Heartbeat (Latido Sub-bass)
+    function synthTarPitHeartbeat(t) {
+      // Pulse 1: "Lub"
+      playHeartbeatPulse(t, 55, 38, 0.09, 0.85);
+      // Pulse 2: "Dub" (offset 160ms)
+      playHeartbeatPulse(t + 0.16, 50, 32, 0.12, 0.65);
+    }
+
+    function playHeartbeatPulse(startTime, startFreq, endFreq, duration, volume) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(startFreq, startTime);
+      osc.frequency.exponentialRampToValueAtTime(endFreq, startTime + duration);
+
+      gain.gain.setValueAtTime(0.001, startTime);
+      gain.gain.linearRampToValueAtTime(volume, startTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration + 0.08);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration + 0.1);
+    }
+
+    function toggleHeartbeatLoop() {
+      ensureAudioRunning();
+      isHeartbeatLoopActive = !isHeartbeatLoopActive;
+      const btn = document.getElementById('heartbeatLoopBtn');
+      const text = document.getElementById('heartbeatLoopText');
+
+      if (isHeartbeatLoopActive) {
+        text.innerText = 'Auto-Latido 4.2s: ON';
+        btn.className = 'px-3 py-1.5 rounded-lg border border-purple-500/70 bg-purple-600/30 text-purple-200 text-xs font-mono transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(147,51,234,0.4)]';
+        
+        // Disparar primer latido
+        playSfx('heartbeat');
+        // Repetir exactamente cada 4.2 segundos (Canónico Tar Pit)
+        heartbeatIntervalId = setInterval(() => {
+          playSfx('heartbeat');
+        }, 4200);
+      } else {
+        text.innerText = 'Auto-Latido 4.2s: OFF';
+        btn.className = 'px-3 py-1.5 rounded-lg border border-purple-900/60 bg-black/60 text-purple-300 hover:text-white text-xs font-mono transition-all flex items-center gap-1.5';
+        if (heartbeatIntervalId) {
+          clearInterval(heartbeatIntervalId);
+          heartbeatIntervalId = null;
+        }
+      }
+    }
+
+    // SFX 5: Campana de Reliquia Cristalina (7 Sine inharmonic chimes)
+    function synthCrystalRelicBell(t) {
+      const baseFreq = 587.33; // D5 Cristalina
+      const partials = [
+        { mult: 1.0,  gain: 0.45, decay: 4.2 },
+        { mult: 1.48, gain: 0.28, decay: 3.8 },
+        { mult: 2.02, gain: 0.22, decay: 3.2 },
+        { mult: 2.76, gain: 0.15, decay: 2.5 },
+        { mult: 3.42, gain: 0.10, decay: 2.1 },
+        { mult: 4.21, gain: 0.06, decay: 1.5 },
+        { mult: 5.80, gain: 0.04, decay: 1.0 }
+      ];
+
+      partials.forEach(p => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(baseFreq * p.mult, t);
+
+        gain.gain.setValueAtTime(p.gain, t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + p.decay);
+
+        osc.connect(gain);
+        gain.connect(masterGain);
+
+        osc.start(t);
+        osc.stop(t + p.decay + 0.05);
+      });
+    }
+
+    // SFX 6: Alerta Táctica Wazuh / SIEM (4 pulsos de alerta 920Hz / 1720Hz)
+    function synthWazuhAlarm(t) {
+      const pulses = [
+        { f: 920, offset: 0.0 },
+        { f: 1720, offset: 0.08 },
+        { f: 920, offset: 0.16 },
+        { f: 1720, offset: 0.24 }
+      ];
+
+      pulses.forEach(p => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(p.f, t + p.offset);
+
+        gain.gain.setValueAtTime(0.001, t + p.offset);
+        gain.gain.linearRampToValueAtTime(0.45, t + p.offset + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + p.offset + 0.06);
+
+        osc.connect(gain);
+        gain.connect(masterGain);
+
+        osc.start(t + p.offset);
+        osc.stop(t + p.offset + 0.07);
+      });
+    }
+
+    // SFX 7: Tormenta Eléctrica Set ⚡
+    function synthSetStorm(t) {
+      // Seismic sub-bass thunder rumble
+      const thunderBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 2.8, audioCtx.sampleRate);
+      const data = thunderBuffer.getChannelData(0);
+      let lastOut = 0;
+      for (let i = 0; i < data.length; i++) {
+        const white = Math.random() * 2 - 1;
+        lastOut = (lastOut + 0.02 * white) / 1.02;
+        data[i] = lastOut * 4.0 * Math.exp(-i / (audioCtx.sampleRate * 1.1));
+      }
+
+      const thunderSource = audioCtx.createBufferSource();
+      thunderSource.buffer = thunderBuffer;
+
+      const thunderFilter = audioCtx.createBiquadFilter();
+      thunderFilter.type = 'lowpass';
+      thunderFilter.frequency.setValueAtTime(140, t);
+      thunderFilter.frequency.exponentialRampToValueAtTime(50, t + 2.5);
+
+      const thunderGain = audioCtx.createGain();
+      thunderGain.gain.setValueAtTime(0.9, t);
+      thunderGain.gain.exponentialRampToValueAtTime(0.001, t + 2.8);
+
+      thunderSource.connect(thunderFilter);
+      thunderFilter.connect(thunderGain);
+      thunderGain.connect(masterGain);
+      thunderSource.start(t);
+
+      // Electrical arc sparks (3 micro bursts)
+      [0.0, 0.05, 0.12].forEach(sparkDelay => {
+        const sparkTime = t + sparkDelay;
+        const sparkBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.03, audioCtx.sampleRate);
+        const sdata = sparkBuffer.getChannelData(0);
+        for (let i = 0; i < sdata.length; i++) sdata[i] = (Math.random() * 2 - 1) * (i % 4 === 0 ? 1 : 0);
+
+        const sparkSource = audioCtx.createBufferSource();
+        sparkSource.buffer = sparkBuffer;
+
+        const sparkFilter = audioCtx.createBiquadFilter();
+        sparkFilter.type = 'bandpass';
+        sparkFilter.frequency.setValueAtTime(3500, sparkTime);
+
+        const sparkGain = audioCtx.createGain();
+        sparkGain.gain.setValueAtTime(0.5, sparkTime);
+        sparkGain.gain.exponentialRampToValueAtTime(0.001, sparkTime + 0.03);
+
+        sparkSource.connect(sparkFilter);
+        sparkFilter.connect(sparkGain);
+        sparkGain.connect(masterGain);
+        sparkSource.start(sparkTime);
+      });
+    }
+
+    // SFX 8: Sombra Rosa Gris 🌸 (Minor 9th Chord Swell: D, F, A, C, E)
+    function synthRosaGrisPad(t) {
+      // D minor 9 frequencies (D3, F3, A3, C4, E4)
+      const freqs = [146.83, 174.61, 220.00, 261.63, 329.63];
+
+      freqs.forEach(f => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(f, t);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(600, t);
+        filter.frequency.exponentialRampToValueAtTime(1400, t + 0.8);
+        filter.frequency.exponentialRampToValueAtTime(300, t + 3.2);
+
+        // Soft swell envelope
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.linearRampToValueAtTime(0.18, t + 0.8);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 3.4);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(masterGain);
+
+        osc.start(t);
+        osc.stop(t + 3.5);
+      });
+    }
+
+    // -------------------------------------------------------------
+    // 7. VISUALIZADOR OSCILOSCOPIO & FFT (CANVAS 60 FPS)
+    // -------------------------------------------------------------
+    function setVisualizerMode(mode) {
+      visualizerMode = mode;
+      ['split', 'wave', 'fft'].forEach(m => {
+        const btn = document.getElementById(`visBtn_${m}`);
+        if (m === mode) {
+          btn.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-purple-600/30 text-purple-200 border border-purple-500/50';
+        } else {
+          btn.className = 'px-2 py-0.5 rounded text-[10px] font-mono text-zinc-400 hover:text-white';
+        }
+      });
+    }
+
+    function updateFftSize(val) {
+      if (analyser) {
+        analyser.fftSize = parseInt(val, 10);
+      }
+    }
+
+    function startVisualizer() {
+      scopeCanvas = document.getElementById('scopeCanvas');
+      if (!scopeCanvas) return;
+      scopeCtx = scopeCanvas.getContext('2d');
+
+      function resizeCanvas() {
+        const rect = scopeCanvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+        scopeCanvas.width = rect.width * dpr;
+        scopeCanvas.height = rect.height * dpr;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      const bufferLength = analyser.frequencyBinCount;
+      const timeData = new Uint8Array(bufferLength);
+      const freqData = new Uint8Array(bufferLength);
+
+      function renderFrame() {
+        animationFrameId = requestAnimationFrame(renderFrame);
+        if (!analyser || !scopeCtx) return;
+
+        analyser.getByteTimeDomainData(timeData);
+        analyser.getByteFrequencyData(freqData);
+
+        const width = scopeCanvas.width;
+        const height = scopeCanvas.height;
+
+        // Phosphor Persistence Clear
+        const persistence = parseFloat(document.getElementById('persistenceSlider')?.value || 0.25);
+        scopeCtx.fillStyle = `rgba(4, 4, 10, ${persistence})`;
+        scopeCtx.fillRect(0, 0, width, height);
+
+        // Calculate RMS & Peak Frequency
+        calculateMetrics(timeData, freqData);
+
+        if (visualizerMode === 'split') {
+          drawWaveform(timeData, width, height * 0.48, 0);
+          drawFftBars(freqData, width, height * 0.48, height * 0.52);
+        } else if (visualizerMode === 'wave') {
+          drawWaveform(timeData, width, height, 0);
+        } else if (visualizerMode === 'fft') {
+          drawFftBars(freqData, width, height, 0);
+        }
+      }
+
+      renderFrame();
+    }
+
+    function drawWaveform(data, w, h, offsetY) {
+      scopeCtx.save();
+      scopeCtx.translate(0, offsetY);
+
+      // Grid line
+      scopeCtx.strokeStyle = 'rgba(147, 51, 234, 0.15)';
+      scopeCtx.lineWidth = 1;
+      scopeCtx.beginPath();
+      scopeCtx.moveTo(0, h / 2);
+      scopeCtx.lineTo(w, h / 2);
+      scopeCtx.stroke();
+
+      // Waveform line with neon violet glow
+      scopeCtx.lineWidth = 2.2;
+      scopeCtx.strokeStyle = '#e9d5ff';
+      scopeCtx.shadowBlur = 10;
+      scopeCtx.shadowColor = '#c084fc';
+      scopeCtx.beginPath();
+
+      const sliceWidth = w / data.length;
+      let x = 0;
+
+      for (let i = 0; i < data.length; i++) {
+        const v = data[i] / 128.0; // 0.0 to 2.0
+        const y = (v * h) / 2;
+
+        if (i === 0) scopeCtx.moveTo(x, y);
+        else scopeCtx.lineTo(x, y);
+
+        x += sliceWidth;
+      }
+
+      scopeCtx.stroke();
+      scopeCtx.restore();
+    }
+
+    function drawFftBars(data, w, h, offsetY) {
+      scopeCtx.save();
+      scopeCtx.translate(0, offsetY);
+
+      // Only display the first 35% of spectrum (where human audio lives)
+      const numBars = 64;
+      const barWidth = (w / numBars) - 1.5;
+      const step = Math.floor((data.length * 0.4) / numBars);
+
+      for (let i = 0; i < numBars; i++) {
+        const val = data[i * step] || 0;
+        const barHeight = (val / 255.0) * (h - 8);
+
+        // Gradient: Electric Violet -> Cyan
+        const grad = scopeCtx.createLinearGradient(0, h, 0, h - barHeight);
+        grad.addColorStop(0, '#581c87');
+        grad.addColorStop(0.6, '#9333ea');
+        grad.addColorStop(1, '#06b6d4');
+
+        scopeCtx.fillStyle = grad;
+        scopeCtx.fillRect(i * (barWidth + 1.5), h - barHeight, barWidth, barHeight);
+
+        // Peak dot
+        if (barHeight > 4) {
+          scopeCtx.fillStyle = '#f3e8ff';
+          scopeCtx.fillRect(i * (barWidth + 1.5), h - barHeight - 2, barWidth, 2);
+        }
+      }
+      scopeCtx.restore();
+    }
+
+    function calculateMetrics(timeData, freqData) {
+      // 1. RMS Amplitude
+      let sum = 0;
+      for (let i = 0; i < timeData.length; i++) {
+        const norm = (timeData[i] - 128) / 128.0;
+        sum += norm * norm;
+      }
+      const rms = Math.sqrt(sum / timeData.length);
+      const rmsDb = rms > 0.0001 ? (20 * Math.log10(rms)) : -99;
+
+      const rmsLabel = document.getElementById('rmsDbDisplay');
+      if (rmsLabel) {
+        rmsLabel.innerText = rmsDb > -90 ? `${rmsDb.toFixed(1)} dB` : '-∞ dB';
+      }
+
+      // Update Stereo VU Bars in Header
+      const vuPercent = Math.min(100, Math.max(0, (rms * 160)));
+      const vuBarL = document.getElementById('vuBarL');
+      const vuBarR = document.getElementById('vuBarR');
+      const vuValL = document.getElementById('vuValL');
+      const vuValR = document.getElementById('vuValR');
+
+      if (vuBarL) vuBarL.style.width = `${vuPercent}%`;
+      if (vuBarR) vuBarR.style.width = `${Math.min(100, vuPercent * (isBinauralEnabled ? 0.95 : 1))}%`;
+      if (vuValL) vuValL.innerText = rmsDb > -90 ? `${rmsDb.toFixed(0)} dB` : '-∞ dB';
+      if (vuValR) vuValR.innerText = rmsDb > -90 ? `${rmsDb.toFixed(0)} dB` : '-∞ dB';
+
+      // 2. Peak Frequency Detection
+      let maxVal = -1;
+      let maxIndex = -1;
+      for (let i = 1; i < freqData.length; i++) {
+        if (freqData[i] > maxVal) {
+          maxVal = freqData[i];
+          maxIndex = i;
+        }
+      }
+
+      const peakLabel = document.getElementById('peakFreqDisplay');
+      if (peakLabel && audioCtx) {
+        if (maxVal > 30) {
+          const peakHz = (maxIndex * audioCtx.sampleRate) / analyser.fftSize;
+          peakLabel.innerText = `${peakHz.toFixed(1)} Hz`;
+        } else {
+          peakLabel.innerText = `0.0 Hz`;
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 8. CONTROLES MAESTROS, PANIC MUTE & PRESETS
+    // -------------------------------------------------------------
+    function updateMasterGain(val) {
+      const g = parseFloat(val);
+      if (masterGain && audioCtx) {
+        masterGain.gain.setTargetAtTime(g, audioCtx.currentTime, 0.03);
+      }
+      const db = g > 0.001 ? (20 * Math.log10(g)).toFixed(1) : '-∞';
+      document.getElementById('masterGainLabel').innerText = `${Math.round(g * 100)}% (${db} dB)`;
+    }
+
+    function triggerPanicMute() {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+
+      // Instant exponential ramp down to zero gain
+      masterGain.gain.cancelScheduledValues(now);
+      masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+      masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
+
+      stopCarrier();
+      stopNoise();
+
+      if (isHeartbeatLoopActive) {
+        toggleHeartbeatLoop();
+      }
+
+      document.getElementById('masterGainSlider').value = 0;
+      updateMasterGain(0);
+
+      // Flash panic button
+      const panicBtn = document.getElementById('panicMuteBtn');
+      panicBtn.classList.add('glow-rose');
+      setTimeout(() => panicBtn.classList.remove('glow-rose'), 600);
+    }
+
+    // Built-in Presets Definition
+    const FACTORY_PRESETS = {
+      canonical_189: {
+        name: "⚡ Set 189.89 Hz Tormenta (Theta Focus)",
+        carrier: 189.89619,
+        waveform: "sine",
+        binauralBeat: 6.0,
+        binauralOn: true,
+        noiseOn: true,
+        noiseType: "brown",
+        filterCutoff: 380,
+        filterQ: 1.2
+      },
+      rosa_432: {
+        name: "🌸 Rosa Gris 432 Hz Bloom (Alpha Chill)",
+        carrier: 432.0,
+        waveform: "triangle",
+        binauralBeat: 10.0,
+        binauralOn: true,
+        noiseOn: true,
+        noiseType: "pink",
+        filterCutoff: 650,
+        filterQ: 0.8
+      },
+      gamma_40: {
+        name: "🧠 40 Hz Gamma Hiper-Cognición",
+        carrier: 40.0,
+        waveform: "sine",
+        binauralBeat: 40.0,
+        binauralOn: false,
+        noiseOn: false,
+        noiseType: "white",
+        filterCutoff: 1200,
+        filterQ: 1.0
+      },
+      schumann_783: {
+        name: "🌍 7.83 Hz Resonancia Schumann",
+        carrier: 189.89619,
+        waveform: "sine",
+        binauralBeat: 7.83,
+        binauralOn: true,
+        noiseOn: true,
+        noiseType: "brown",
+        filterCutoff: 220,
+        filterQ: 2.0
+      },
+      dna_528: {
+        name: "✨ 528 Hz Reparación Cuántica ADN",
+        carrier: 528.0,
+        waveform: "triangle",
+        binauralBeat: 8.0,
+        binauralOn: true,
+        noiseOn: false,
+        noiseType: "pink",
+        filterCutoff: 900,
+        filterQ: 1.0
+      },
+      obsidian_sanctuary: {
+        name: "🛡️ Santuario Obsidiana (Brown Noise 95Hz)",
+        carrier: 189.89619,
+        waveform: "sine",
+        binauralBeat: 4.5,
+        binauralOn: true,
+        noiseOn: true,
+        noiseType: "brown",
+        filterCutoff: 95,
+        filterQ: 3.5
+      },
+      terminal_pulse: {
+        name: "💻 Terminal Cyberpunk (Sawtooth + Pulse)",
+        carrier: 220.0,
+        waveform: "sawtooth",
+        binauralBeat: 14.0,
+        binauralOn: true,
+        noiseOn: false,
+        noiseType: "white",
+        filterCutoff: 1800,
+        filterQ: 2.5
+      }
+    };
+
+    function applySelectedPreset(key) {
+      let preset = FACTORY_PRESETS[key];
+      if (!preset) {
+        // Look up in localStorage
+        const custom = JSON.parse(localStorage.getItem('k4li_custom_presets') || '{}');
+        preset = custom[key];
+      }
+      if (!preset) return;
+
+      ensureAudioRunning();
+
+      // Apply Carrier
+      setExactCarrier(preset.carrier);
+      setWaveform(preset.waveform || 'sine');
+      
+      document.getElementById('binauralSlider').value = preset.binauralBeat;
+      updateBinauralBeat(preset.binauralBeat);
+      isBinauralEnabled = preset.binauralOn;
+      const bBadge = document.getElementById('binauralStateBadge');
+      if (bBadge) {
+        bBadge.className = isBinauralEnabled 
+          ? 'px-2 py-0.5 rounded-full text-[9px] font-bold bg-cyan-950/60 border border-cyan-500/40 text-cyan-300' 
+          : 'px-2 py-0.5 rounded-full text-[9px] font-bold bg-zinc-900 border border-zinc-700 text-zinc-500';
+        bBadge.innerText = isBinauralEnabled ? 'ACTIVO' : 'DESACTIVADO';
+      }
+
+      // Apply Noise
+      setNoiseType(preset.noiseType || 'brown');
+      document.getElementById('cutoffSlider').value = preset.filterCutoff || 450;
+      updateFilterCutoff(preset.filterCutoff || 450);
+      document.getElementById('qSlider').value = preset.filterQ || 1.2;
+      updateFilterQ(preset.filterQ || 1.2);
+
+      if (preset.noiseOn && !isNoisePlaying) {
+        startNoise();
+      } else if (!preset.noiseOn && isNoisePlaying) {
+        stopNoise();
+      }
+
+      if (!isCarrierPlaying) {
+        startCarrier();
+      }
+    }
+
+    // Modal para Guardar Presets
+    function saveCustomPresetModal() {
+      document.getElementById('savePresetModal').classList.remove('hidden');
+      document.getElementById('customPresetNameInput').focus();
+    }
+
+    function closeSavePresetModal() {
+      document.getElementById('savePresetModal').classList.add('hidden');
+    }
+
+    function confirmSaveCustomPreset() {
+      const name = document.getElementById('customPresetNameInput').value.trim();
+      if (!name) return;
+
+      const customPresets = JSON.parse(localStorage.getItem('k4li_custom_presets') || '{}');
+      const key = 'custom_' + Date.now();
+
+      customPresets[key] = {
+        name: `⭐ ${name}`,
+        carrier: carrierFreq,
+        waveform: currentWaveform,
+        binauralBeat: binauralBeat,
+        binauralOn: isBinauralEnabled,
+        noiseOn: isNoisePlaying,
+        noiseType: noiseType,
+        filterCutoff: noiseCutoff,
+        filterQ: noiseQ
+      };
+
+      localStorage.setItem('k4li_custom_presets', JSON.stringify(customPresets));
+      populateCustomPresetsInDropdown();
+      closeSavePresetModal();
+      alert(`Preset "${name}" guardado exitosamente en tu navegador.`);
+    }
+
+    function populateCustomPresetsInDropdown() {
+      const select = document.getElementById('presetSelect');
+      const customPresets = JSON.parse(localStorage.getItem('k4li_custom_presets') || '{}');
+
+      // Remove existing custom options
+      Array.from(select.querySelectorAll('option.custom-opt')).forEach(o => o.remove());
+
+      for (const key in customPresets) {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.className = 'custom-opt';
+        opt.innerText = customPresets[key].name;
+        select.appendChild(opt);
+      }
+    }
+
+    function exportPresetsJSON() {
+      const customPresets = localStorage.getItem('k4li_custom_presets') || '{}';
+      const blob = new Blob([customPresets], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'k4li_resonance_presets_161914.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function importPresetsJSON(evt) {
+      const file = evt.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          const current = JSON.parse(localStorage.getItem('k4li_custom_presets') || '{}');
+          const merged = Object.assign({}, current, imported);
+          localStorage.setItem('k4li_custom_presets', JSON.stringify(merged));
+          populateCustomPresetsInDropdown();
+          alert("Presets importados con éxito.");
+        } catch (err) {
+          alert("Error al importar JSON de presets.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // -------------------------------------------------------------
+    // 9. ATAJOS DE TECLADO SEINEN (HOTKEYS)
+    // -------------------------------------------------------------
+    window.addEventListener('keydown', (e) => {
+      // Ignore if focus is in an input or textarea
+      if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        return;
+      }
+
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleCarrier();
+      } else if (e.key === 'n' || e.key === 'N') {
+        e.preventDefault();
+        toggleNoise();
+      } else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        triggerPanicMute();
+      } else if (['1', '2', '3', '4', '5', '6', '7', '8'].includes(e.key)) {
+        e.preventDefault();
+        const map = {
+          '1': 'click',
+          '2': 'blip',
+          '3': 'warp',
+          '4': 'heartbeat',
+          '5': 'bell',
+          '6': 'alarm',
+          '7': 'storm',
+          '8': 'pad'
+        };
+        playSfx(map[e.key]);
+      }
+    });
+
+    // -------------------------------------------------------------
+    // 10. ARRANQUE AL CARGAR DOM
+    // -------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      updateAdsr();
+      highlightBrainwaveBand(binauralBeat);
+      populateCustomPresetsInDropdown();
+      updateEngineUI();
+
+      // Auto initialize audio on first user click anywhere in document
+      const unlockAudio = () => {
+        if (!audioCtx) {
+          initAudioContext();
+        }
+        document.removeEventListener('click', unlockAudio);
+        document.removeEventListener('keydown', unlockAudio);
+      };
+      document.addEventListener('click', unlockAudio);
+      document.addEventListener('keydown', unlockAudio);
+    });
+  </script>
+</body>
+</html>

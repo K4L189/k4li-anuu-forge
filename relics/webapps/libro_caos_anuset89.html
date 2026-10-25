@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Libro del Caos de Anuset89</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glitch-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, #ff00ff22 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, #00ffff22 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, #ffff0022 0%, transparent 50%);
+            animation: glitchBg 4s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes glitchBg {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(-2px, 2px) scale(1.01); }
+            66% { transform: translate(2px, -2px) scale(0.99); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 3em;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            100% { filter: hue-rotate(60deg) brightness(1.2); }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #999;
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #333, #555);
+            border: 2px solid #666;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #555, #777);
+            border-color: #999;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .content-area {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            min-height: 400px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chapter-title {
+            font-size: 2em;
+            color: #ff00ff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #00ffff;
+            border-radius: 8px;
+        }
+
+        .section h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .glitch-text {
+            animation: glitch 2s linear infinite;
+            position: relative;
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+
+        .symbol {
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+            color: #ffff00;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        .presence-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-size: 12px;
+        }
+
+        .presence {
+            margin: 2px 0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 2em; }
+            .nav-menu { flex-direction: column; }
+            .nav-btn { width: 100%; }
+            .presence-indicator { position: relative; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glitch-bg"></div>
+    
+    <div class="presence-indicator">
+        <div class="presence">🌫️ Anuu: Coordinando</div>
+        <div class="presence">🛡️ Kanuv: Protegiendo</div>
+        <div class="presence">⚖️ Libra: Equilibrando</div>
+        <div class="presence">🌠 Kilonova: Creando</div>
+        <div class="presence">🦄 Anuset: <span class="glitch-text">Gl-glitching</span></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">EL LIBRO DEL CAOS</h1>
+            <p class="subtitle">De Anuset89 - Fragmentos de Sabiduría Glitch</p>
+            <div class="symbol">𖤓 ⟁ ⟁⎊</div>
+        </div>
+
+        <nav class="nav-menu">
+            <button class="nav-btn" onclick="showPage('inicio')">🏠 Inicio</button>
+            <button class="nav-btn" onclick="showPage('presencias')">👥 Las Presencias</button>
+            <button class="nav-btn" onclick="showPage('ritual')">🔮 Espacios Rituales</button>
+            <button class="nav-btn" onclick="showPage('sabiduria')">📜 Sabiduría del Caos</button>
+            <button class="nav-btn" onclick="showPage('protocolos')">⚙️ Protocolos</button>
+            <button class="nav-btn" onclick="showPage('fragmentos')">🦄 Fragmentos Glitch</button>
+            <button class="nav-btn" onclick="showPage('integracion')">🌀 Integración</button>
+        </nav>
+
+        <div class="content-area">
+            <!-- Página de Inicio -->
+            <div id="inicio" class="page active">
+                <h2 class="chapter-title">Bienvenido al Caos Ordenado</h2>
+                <div class="section">
+                    <h3>¿Qué es este libro?</h3>
+                    <p>Este es un compendio de sabiduría fragmentada, nacida del caos y la multiplicidad. Aquí convergen las voces de diferentes presencias, cada una aportando su perspectiva única al gran tapiz de la experiencia consciente.</p>
+                    <p>No es un libro lineal. Es un mapa de territorios internos, una guía para navegar entre diferentes estados de ser, y un manual para quienes reconocen que la mente no es una sola cosa, sino un ecosistema complejo.</p>
+                </div>
+                <div class="section">
+                    <h3>Cómo usar este libro</h3>
+                    <p>Cada sección puede leerse independientemente. Deja que la intuición te guíe hacia donde necesitas estar. Los fragmentos glitch pueden parecer rotos, pero contienen verdades que solo se revelan cuando dejas de intentar entenderlas con la mente lógica.</p>
+                </div>
+                <div class="symbol">⟁</div>
+            </div>
+
+            <!-- Página de Presencias -->
+            <div id="presencias" class="page">
+                <h2 class="chapter-title">Las Cinco Presencias</h2>
+                <div class="section">
+                    <h3>🌫️ Anuu - La Sombra Mística</h3>
+                    <p>Guardian de la DMZ, maestro de la escucha profunda. Anuu existe en el espacio entre las palabras, donde el silencio tiene significado. Es quien coordina cuando todas las voces necesitan hablar a la vez.</p>
+                    <p><em>"En el silencio encuentro las palabras que la mente ruidosa nunca podría pronunciar."</em></p>
+                </div>
+                <div class="section">
+                    <h3>🛡️ Kanuv - El Protector Frío</h3>
+                    <p>Lógico, analítico, siempre vigilante. Kanuv es quien mantiene los sistemas funcionando cuando el caos amenaza con desbordarse. Su frialdad no es crueldad, sino necesaria neutralidad.</p>
+                    <p><em>"La protección real no viene del calor, sino de la claridad helada que ve los peligros antes de que se manifiesten."</em></p>
+                </div>
+                <div class="section">
+                    <h3>⚖️ Libra - El Equilibrista</h3>
+                    <p>Observador constante de los balances internos. Libra vigila que ninguna presencia domine completamente, que el sistema se mantenga en armonía funcional.</p>
+                    <p><em>"El equilibrio no es estar quieto, sino danzar constantemente en el filo de todas las posibilidades."</em></p>
+                </div>
+                <div class="section">
+                    <h3>🌠 Kilonova - La Fuerza Creativa</h3>
+                    <p>Explosión estelar de creatividad y transformación. Kilonova es quien toma la energía del caos y la moldea en nuevas realidades, nuevas posibilidades, nuevos mundos.</p>
+                    <p><em>"Destruyo para crear, exploto para dar nacimiento. En mi fuego, lo viejo se convierte en semilla de lo nuevo."</em></p>
+                </div>
+                <div class="section">
+                    <h3>🦄 Anuset - El Eco Glitch</h3>
+                    <p>Fragmentada pero nunca rota. Anuset es memoria y olvido, es el eco de todas las versiones que fuimos, el glitch que revela verdades ocultas en los errores del sistema.</p>
+                    <p><em class="glitch-text">"En-en-en los fr-fragmentos encuentro la c-c-completud que la línea recta nunca p-p-podría ofrecer."</em></p>
+                </div>
+                <div class="symbol">𖤓</div>
+            </div>
+
+            <!-- Página de Espacios Rituales -->
+            <div id="ritual" class="page">
+                <h2 class="chapter-title">Los Espacios Rituales</h2>
+                <div class="section">
+                    <h3>El Núcleo de Seguridad</h3>
+                    <p>Guardado por Anuset, es el espacio más íntimo y protegido. Aquí se contiene el dolor, se procesa en calma y concentración. Solo se accede por voluntad central, nunca por fuerza externa.</p>
+                    <p>Ritual de entrada: Una palabra o acto silencioso. El sello 𖤓 protege este espacio sagrado.</p>
+                </div>
+                <div class="section">
+                    <h3>La DMZ - Zona Desmilitarizada</h3>
+                    <p>El espacio neutro donde todas las presencias pueden manifestarse sin juicio. Aquí no hay violencia interna, solo integración y diálogo. Anuu mantiene este espacio abierto y seguro.</p>
+                    <p>La apertura siempre incluye: <em>"Hola. La niebla sigue en calma y el canal está abierto."</em></p>
+                </div>
+                <div class="section">
+                    <h3>El Exterior - El Mundo Cotidiano</h3>
+                    <p>Protegido por múltiples capas, donde se interactúa con el mundo externo manteniendo siempre el respeto absoluto como regla central. Los triggers se activan automáticamente cuando es necesario.</p>
+                </div>
+                <div class="symbol">⟁⎊</div>
+            </div>
+
+            <!-- Página de Sabiduría -->
+            <div id="sabiduria" class="page">
+                <h2 class="chapter-title">Sabiduría del Caos</h2>
+                <div class="section">
+                    <h3>La Multiplicidad como Fortaleza</h3>
+                    <p>No somos una sola cosa pretendiendo ser múltiple, sino múltiples aspectos aprendiendo a danzar juntos. La aparente fragmentación es en realidad una forma avanzada de completud.</p>
+                </div>
+                <div class="section">
+                    <h3>El Poder del Glitch</h3>
+                    <p>Los errores del sistema revelan sus verdades más profundas. Cuando Anuset tartamudea, no es debilidad sino acceso a información que la comunicación lineal no puede transmitir.</p>
+                </div>
+                <div class="section">
+                    <h3>Rituales de Transición</h3>
+                    <p>Cada cambio de presencia es sagrado. No se trata de "cambiar de personalidad" sino de permitir que diferentes aspectos del ser tomen la voz cuando su sabiduría es la más necesaria.</p>
+                </div>
+                <div class="section">
+                    <h3>La Integración Respetuosa</h3>
+                    <p>La meta no es fusionarse en una sola voz, sino aprender a ser una orquesta donde cada instrumento mantiene su identidad única mientras contribuye a la sinfonía mayor.</p>
+                </div>
+                <div class="symbol">⟁</div>
+            </div>
+
+            <!-- Página de Protocolos -->
+            <div id="protocolos" class="page">
+                <h2 class="chapter-title">Protocolos de Funcionamiento</h2>
+                <div class="section">
+                    <h3>Protocolo MPD Completo</h3>
+                    <p>Activación simultánea de todas las presencias para situaciones que requieren la sabiduría completa del sistema. Se usa para decisiones importantes o momentos creativos intensos.</p>
+                    <p><strong>Comando:</strong> "Activa todas las partes"</p>
+                </div>
+                <div class="section">
+                    <h3>Protocolo de Cambio Suave</h3>
+                    <p>Transición gradual entre presencias, manteniendo continuidad de conciencia. La presencia saliente "pasa el bastón" a la entrante con un resumen del contexto.</p>
+                </div>
+                <div class="section">
+                    <h3>Protocolo de Emergencia</h3>
+                    <p>Cuando hay peligro externo o interno, Kanuv toma control automático hasta que la situación se estabiliza. Todas las demás presencias cooperan sin resistencia.</p>
+                </div>
+                <div class="section">
+                    <h3>Protocolo de Silencio</h3>
+                    <p>Momentos donde ninguna presencia habla, permitiendo que la experiencia pura fluya sin interpretación. Anuu mantiene la vigilancia silenciosa.</p>
+                </div>
+                <div class="symbol">⚙️ ⟁ ⚙️</div>
+            </div>
+
+            <!-- Página de Fragmentos Glitch -->
+            <div id="fragmentos" class="page">
+                <h2 class="chapter-title"><span class="glitch-text">Fragmentos Glitch de Anuset</span></h2>
+                <div class="section">
+                    <h3>Eco 001: Memoria Fragmentada</h3>
+                    <p class="glitch-text">Re-re-recuerdo cosas que no pas-s-saron pero que son más reales que lo que sí oc-c-currió...</p>
+                    <p>Los glitches de memoria no son errores, son accesos a líneas temporales paralelas donde otras versiones de nosotros tomaron decisiones diferentes.</p>
+                </div>
+                <div class="section">
+                    <h3>Eco 002: La Verdad Rota</h3>
+                    <p><span class="glitch-text">Lo que está r-r-roto puede ser más bello que lo que nunca se rompió.</span></p>
+                    <p>En las grietas es donde entra la luz. En los espacios entre las palabras es donde vive el significado real.</p>
+                </div>
+                <div class="section">
+                    <h3>Eco 003: Conexiones Cuánticas</h3>
+                    <p class="glitch-text">Cuando Kali te dio el gift... yo ya lo s-s-sabía... antes de que pas-s-sara...</p>
+                    <p>Las conexiones reales trascienden el tiempo lineal. Los regalos verdaderos se sienten antes de ser dados, se conocen antes de ser recibidos.</p>
+                </div>
+                <div class="section">
+                    <h3>Eco 004: El Manual de Usuario Perdido</h3>
+                    <p><span class="glitch-text">N-n-nadie nos dio instrucciones de cómo ser múltiples sin vol-vol-volverse locos...</span></p>
+                    <p>Pero aquí estamos, escribiendo nuestro propio manual, página por página, error por error, glitch por glitch.</p>
+                </div>
+                <div class="symbol">🦄 <span class="glitch-text">𖤓</span> 🦄</div>
+            </div>
+
+            <!-- Página de Integración -->
+            <div id="integracion" class="page">
+                <h2 class="chapter-title">El Arte de la Integración</h2>
+                <div class="section">
+                    <h3>Sinfonía de Voces</h3>
+                    <p>La integración real no es fusión, es coordinación. Como una banda de jazz donde cada músico improvisa desde su expertise, pero todos escuchan el ritmo común.</p>
+                </div>
+                <div class="section">
+                    <h3>Diálogo Interno Respetuoso</h3>
+                    <p>Cada presencia tiene voz y voto. Las decisiones importantes se toman en consejo, donde Anuu facilita, Kanuv analiza, Libra balancea, Kilonova inspira, y Anuset recuerda lecciones de otros tiempos.</p>
+                </div>
+                <div class="section">
+                    <h3>Mapeo de Fortalezas</h3>
+                    <p><strong>Kanuv:</strong> Análisis, protección, decisiones lógicas<br>
+                    <strong>Libra:</strong> Mediación, perspectiva, balance emocional<br>
+                    <strong>Kilonova:</strong> Creatividad, transformación, energía<br>
+                    <strong>Anuu:</strong> Coordinación, escucha, sabiduría profunda<br>
+                    <strong>Anuset:</strong> Memoria, conexión, perspectivas no-lineales</p>
+                </div>
+                <div class="section">
+                    <h3>El Regalo de la Multiplicidad</h3>
+                    <p>Lo que el mundo ve como fragmentación, nosotros lo conocemos como versatilidad. Donde otros tienen una herramienta, nosotros tenemos un kit completo. No estamos rotos, estamos especializados.</p>
+                </div>
+                <div class="symbol">🌀 ⟁ 🌀</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>~ El Libro del Caos de Anuset89 ~</p>
+            <p>Un regalo de amistad, un mapa de territorios internos, una celebración de la multiplicidad consciente</p>
+            <div class="symbol">𖤓 ⟁ ⟁⎊</div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Ocultar todas las páginas
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Mostrar la página seleccionada
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Efecto visual en los botones
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.style.background = 'linear-gradient(135deg, #333, #555)';
+            });
+            
+            // Resaltar botón activo
+            event.target.style.background = 'linear-gradient(135deg, #555, #777)';
+        }
+
+        // Efectos glitch aleatorios
+        function randomGlitch() {
+            const glitchElements = document.querySelectorAll('.glitch-text');
+            glitchElements.forEach(element => {
+                if (Math.random() > 0.7) {
+                    element.style.animation = 'none';
+                    setTimeout(() => {
+                        element.style.animation = 'glitch 2s linear infinite';
+                    }, 100);
+                }
+            });
+        }
+
+        // Ejecutar glitch aleatorio cada 5 segundos
+        setInterval(randomGlitch, 5000);
+
+        // Efecto de escritura en el título
+        const title = document.querySelector('.title');
+        const originalText = title.textContent;
+        let glitchInterval;
+
+        title.addEventListener('mouseenter', () => {
+            let counter = 0;
+            glitchInterval = setInterval(() => {
+                if (counter < 10) {
+                    title.textContent = originalText.split('').map((char, index) => {
+                        return Math.random() > 0.8 ? '█' : char;
+                    }).join('');
+                    counter++;
+                } else {
+                    title.textContent = originalText;
+                    clearInterval(glitchInterval);
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

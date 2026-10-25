@@ -2,20 +2,25 @@
 # -*- coding: utf-8 -*-
 """
 =============================================================================
-K4LI-ANUU-FORGE // DEFENSIVE SECURITY & HARDENING AUDITOR
-Frecuencia Operativa: 189.89.619 Hz | Concilio ACE (161914)
+K4L1-ANUU-FORGE // DEFENSIVE SECURITY & HARDENING AUDITOR (161914)
+Frecuencia Operativa: 189.89.619 Hz | Concilio ACE | Kali Studio
 Unidad Técnica: 4NVSET 🟢
 =============================================================================
-Auditoría quirúrgica de seguridad semanal:
-1. Escaneo de secretos, tokens y claves privadas expuestas.
+Auditoría quirúrgica de seguridad:
+1. Escaneo de secretos, tokens y claves privadas expuestas en repositorio.
 2. Análisis de cabeceras de seguridad y CORS en Workers / Webhooks.
 3. Verificación de permisos de archivos y artefactos sensibles.
-4. Detección de patrones inseguros en código JavaScript y Python.
+4. Módulo de auditoría de Kernel, Red, Permisos del host Linux y Telemetría Android ADB.
+5. Generador automático de script de remediación defensiva (remediation_k4li_hardening.sh).
 """
 
 import os
 import sys
 import re
+import json
+import hashlib
+import argparse
+import subprocess
 from pathlib import Path
 
 # Patrones para detección de secretos
@@ -115,7 +120,184 @@ def audit_file_permissions(repo_root: Path):
                 issues.append(f"World-writable detectado: {path.relative_to(repo_root)} ({oct(mode)})")
     return issues
 
+def audit_host_hardening():
+    """
+    Auditoría diagnóstica en vivo de los parámetros del host Linux:
+    - Kernel sysctl (ASLR, SYN cookies, ptrace, kptr)
+    - Permisos críticos (/etc/shadow, /root)
+    - Cortafuegos UFW
+    - Telemetría ADB
+    """
+    print("\n" + "=" * 70)
+    print(" [4NVSET 🟢] AUDITORÍA DIAGNÓSTICA DE HOST LINUX & TELEMETRÍA ANDROID")
+    print(" Frecuencia: 189.89.619 Hz | Concilio ACE (161914)")
+    print("=" * 70)
+
+    host_findings = []
+
+    # 1. ASLR
+    aslr_path = Path("/proc/sys/kernel/randomize_va_space")
+    if aslr_path.exists():
+        try:
+            val = aslr_path.read_text().strip()
+            if val == "2":
+                print("[✓] Kernel ASLR: Activo Completo (randomize_va_space=2).")
+            else:
+                msg = f"Kernel ASLR incompleto o inactivo: randomize_va_space={val} (Esperado 2)"
+                print(f"[-] ALERTA: {msg}")
+                host_findings.append(msg)
+        except Exception as e:
+            print(f"[-] No se pudo leer ASLR: {e}")
+
+    # 2. SYN Flood Cookies
+    syncookies_path = Path("/proc/sys/net/ipv4/tcp_syncookies")
+    if syncookies_path.exists():
+        try:
+            val = syncookies_path.read_text().strip()
+            if val == "1":
+                print("[✓] SYN Flood Cookies: Activo (tcp_syncookies=1).")
+            else:
+                msg = f"SYN flood protection desactivado: tcp_syncookies={val}"
+                print(f"[-] ALERTA: {msg}")
+                host_findings.append(msg)
+        except Exception as e:
+            print(f"[-] No se pudo leer tcp_syncookies: {e}")
+
+    # 3. Ptrace Scope
+    ptrace_path = Path("/proc/sys/kernel/yama/ptrace_scope")
+    if ptrace_path.exists():
+        try:
+            val = ptrace_path.read_text().strip()
+            if int(val) >= 1:
+                print(f"[✓] Yama Ptrace Scope: Restringido (ptrace_scope={val}).")
+            else:
+                msg = "Yama Ptrace Scope permisivo (ptrace_scope=0, inyección de memoria no restringida)"
+                print(f"[-] ADVERTENCIA: {msg}")
+                host_findings.append(msg)
+        except Exception as e:
+            print(f"[-] No se pudo leer ptrace_scope: {e}")
+
+    # 4. Permisos /etc/shadow
+    shadow_path = Path("/etc/shadow")
+    if shadow_path.exists():
+        try:
+            mode = shadow_path.stat().st_mode
+            if mode & 0o077:  # No debe tener permisos para grupo/otros más allá de lectura específica
+                if mode & 0o004:
+                    msg = f"CRÍTICO: /etc/shadow es legible para otros ({oct(mode)})"
+                    print(f"[-] {msg}")
+                    host_findings.append(msg)
+                else:
+                    print(f"[✓] /etc/shadow permisos conformes ({oct(mode)}).")
+            else:
+                print(f"[✓] /etc/shadow permisos estrictos ({oct(mode)}).")
+        except PermissionError:
+            print("[✓] /etc/shadow no es legible por usuario sin privilegios (Correcto).")
+
+    # 5. UFW status
+    try:
+        res = subprocess.run(["ufw", "status"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=5)
+        if "Status: active" in res.stdout:
+            print("[✓] Cortafuegos UFW: ACTIVO.")
+        else:
+            msg = "Cortafuegos UFW: INACTIVO o no configurado."
+            print(f"[-] ADVERTENCIA: {msg}")
+            host_findings.append(msg)
+    except Exception:
+        print("[*] Verificación de UFW omitida (requiere privilegios o comando ausente).")
+
+    # 6. Android ADB Telemetry
+    try:
+        res_adb = subprocess.run(["adb", "devices"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=4)
+        if "device" in res_adb.stdout:
+            print("[✓] Dispositivo Android detectado en bus ADB.")
+        else:
+            print("[*] Ningún dispositivo Android en modo depuración detectado actualmente.")
+    except Exception:
+        pass
+
+    return host_findings
+
+def generate_remediation_script(output_path: Path):
+    """
+    Genera un script bash descargable y ejecutable con las remediaciones reales.
+    """
+    script_content = """#!/usr/bin/env bash
+# =============================================================================
+# K4L1 STUDIO // REMEDIATION & HARDENING BASH SUITE (161914)
+# Concilio ACE | Frecuencia: 189.89.619 Hz | Unidad Técnica: 4NVSET 🟢
+# Script de remediación defensiva real para Debian / Kali Linux
+# =============================================================================
+set -euo pipefail
+
+echo "============================================================================="
+echo " [4NVSET 🟢] APLICANDO REMEDIACIÓN TÉCNICA & HARDENING // K4L1 STUDIO"
+echo " Frecuencia de Sincronización: 189.89.619 Hz"
+echo "============================================================================="
+
+if [ "$(id -u)" -ne 0 ]; then
+    echo "[-] ERROR: Este script requiere privilegios de superusuario (root)."
+    echo "    Ejecuta con: sudo bash $0"
+    exit 1
+fi
+
+BACKUP_DIR="/var/backups/kanuv_hardening_$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$BACKUP_DIR"
+echo "[+] Directorio de respaldo preventivo: $BACKUP_DIR"
+
+# 1. Sysctl Hardening
+echo "[+] 1. Aplicando directivas seguras en /etc/sysctl.d/99-kanuv-hardening.conf..."
+cat << 'EOF' > /etc/sysctl.d/99-kanuv-hardening.conf
+kernel.randomize_va_space = 2
+net.ipv4.tcp_syncookies = 1
+kernel.kptr_restrict = 2
+kernel.yama.ptrace_scope = 2
+kernel.dmesg_restrict = 1
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+EOF
+sysctl -p /etc/sysctl.d/99-kanuv-hardening.conf >/dev/null
+echo "[✓] Parámetros sysctl cargados en anillo 0."
+
+# 2. UFW Firewall
+echo "[+] 2. Configurando cortafuegos UFW..."
+if command -v ufw >/dev/null 2>&1; then
+    ufw default deny incoming
+    ufw default allow outgoing
+    ufw deny 6379/tcp comment 'Block Redis Cache RCE'
+    ufw deny 3306/tcp comment 'Block MySQL Direct'
+    ufw deny 5432/tcp comment 'Block PostgreSQL'
+    ufw deny 27017/tcp comment 'Block MongoDB'
+    ufw --force enable
+    echo "[✓] UFW habilitado con política Default DROP."
+fi
+
+# 3. Permisos de Archivos Sensibles
+echo "[+] 3. Saneando permisos en /etc/shadow y /root..."
+chmod 0600 /etc/shadow
+chmod 0644 /etc/passwd
+chmod 0700 /root
+echo "[✓] Permisos corregidos."
+
+echo "============================================================================="
+echo " [4NVSET 🟢] REMEDIACIÓN TÉCNICA APLICADA CON ÉXITO."
+echo "============================================================================="
+"""
+    output_path.write_text(script_content, encoding="utf-8")
+    output_path.chmod(0o755)
+    print(f"[✓] Script de remediación generado en: {output_path}")
+
 def main():
+    parser = argparse.ArgumentParser(description="K4L1 Forge - Defensive Security & Audit Suite (4NVSET 🟢)")
+    parser.add_argument("--host", action="store_true", help="Ejecutar diagnóstico en vivo de hardening del host Linux")
+    parser.add_argument("--generate-remediation", action="store_true", help="Generar script remediation_k4li_hardening.sh")
+    args = parser.parse_args()
+
     repo_root = Path(__file__).resolve().parent.parent
     print("=" * 70)
     print(" [4NVSET 🟢] K4LI-ANUU-FORGE - DEFENSIVE SECURITY & AUDIT SUITE")
@@ -145,7 +327,16 @@ def main():
     else:
         print("[✓] Permisos de archivos conformes con la directriz de seguridad.")
 
-    # Evaluación global
+    # 4. Host audit opcional
+    if args.host:
+        audit_host_hardening()
+
+    # 5. Generación de script de remediación opcional
+    if args.generate_remediation:
+        remediation_file = repo_root / "scripts" / "remediation_k4li_hardening.sh"
+        generate_remediation_script(remediation_file)
+
+    # Evaluación global del repositorio
     critical_errors = len(secret_findings) + len(perm_issues)
     failed_headers = [msg for msg, ok in header_reports if not ok]
 

@@ -3,7 +3,7 @@
   "agent": "Nodo POCO 📱⚡ [4NVSET 🟢]",
   "architect": "Kali",
   "initialized_at": "2026-10-25T06:16:17.328204+00:00",
-  "updated_at": "2026-10-25T06:20:35.851766+00:00",
+  "updated_at": "2026-10-25T06:42:51.870051+00:00",
   "providers": {
     "claude": {
       "id": "claude-3-5-sonnet",
@@ -13,35 +13,35 @@
       "window_start_epoch": 1792894577.3281562,
       "reset_epoch": 1792912577.3281562,
       "limit_tokens": 80000,
-      "used_tokens": 77300,
+      "used_tokens": 79950,
       "limit_requests": 45,
-      "used_requests": 35,
+      "used_requests": 36,
       "status": "THROTTLED_90",
       "circuit_breaker_tripped": false,
       "circuit_breaker_reason": null,
-      "burned_tokens_session": 27500,
-      "remaining_seconds": 3341,
-      "remaining_tokens": 2700,
-      "usage_pct": 96.6
+      "burned_tokens_session": 31700,
+      "remaining_seconds": 2005,
+      "remaining_tokens": 50,
+      "usage_pct": 99.9
     },
     "openai": {
       "id": "gpt-4o",
       "display_name": "OpenAI GPT-4o",
       "window_type": "sliding_minute",
       "window_duration_seconds": 60,
-      "window_start_epoch": 1792909235.8517313,
-      "reset_epoch": 1792909295.8517313,
+      "window_start_epoch": 1792910567.647488,
+      "reset_epoch": 1792910627.647488,
       "limit_tpm": 30000,
-      "used_tpm": 1638,
+      "used_tpm": 23447,
       "limit_rpm": 500,
-      "used_rpm": 8,
+      "used_rpm": 0,
       "status": "HEALTHY",
       "circuit_breaker_tripped": false,
       "circuit_breaker_reason": null,
-      "burned_tokens_session": 0,
-      "remaining_seconds": 60,
-      "remaining_tpm": 28362,
-      "usage_pct": 5.5
+      "burned_tokens_session": 23300,
+      "remaining_seconds": 55,
+      "remaining_tpm": 6553,
+      "usage_pct": 78.2
     },
     "gemini": {
       "id": "gemini-1-5-flash",
@@ -75,16 +75,76 @@
       "architecture": "aarch64 / 8 Cores",
       "status": "ONLINE_SYNCHRONIZED",
       "battery": "100%",
-      "temperature": "22.6°C",
+      "temperature": "22.2°C",
       "role": "AUXILIARY_COMPUTE_OFFLOAD"
     }
   },
   "burner_engine": {
     "active": true,
     "burn_threshold_minutes": 20,
-    "last_burn_epoch": 1792909110.3151646,
-    "total_tokens_burned": 27500,
+    "last_burn_epoch": 1792910571.7850957,
+    "total_tokens_burned": 55000,
     "burner_log": [
+      {
+        "timestamp": "2026-10-25T06:42:51.785089+00:00",
+        "provider": "openai",
+        "tasks_burned_count": 5,
+        "tokens_burned": 23300,
+        "reason": "PRE_RESET_BURNING",
+        "records": [
+          {
+            "task_id": "TASK-TRANSL-002-567-1",
+            "title": "Traducción Seinen Quirúrgica: Glosario Goetiarot a Japonés/Inglés",
+            "type": "TRANSLATE_JA_EN",
+            "tokens": 5100,
+            "completed_at": "2026-10-25T06:42:51.783540+00:00"
+          },
+          {
+            "task_id": "TASK-BENCH-003-567-2",
+            "title": "Benchmark Sintético: MMLU & Compresión Zstandard vs Snappy",
+            "type": "SYNTHETIC_BENCHMARK",
+            "tokens": 3800,
+            "completed_at": "2026-10-25T06:42:51.783892+00:00"
+          },
+          {
+            "task_id": "TASK-AUDIT-004-567-3",
+            "title": "Auditoría Estática de Seguridad: Sanitización de Parámetros y Memory Leaks",
+            "type": "STATIC_AUDIT",
+            "tokens": 6200,
+            "completed_at": "2026-10-25T06:42:51.784257+00:00"
+          },
+          {
+            "task_id": "TASK-CODE-005-567-4",
+            "title": "Refactorización Asíncrona: Wrapper de Inferencia con Fallback a Ollama",
+            "type": "CODE_REFACTOR",
+            "tokens": 3400,
+            "completed_at": "2026-10-25T06:42:51.784631+00:00"
+          },
+          {
+            "task_id": "TASK-DOCS-006-567-5",
+            "title": "Manual de Resiliencia: Guía de Contingencia ante Caídas de Cloud LLM",
+            "type": "TECH_DOCS",
+            "tokens": 4800,
+            "completed_at": "2026-10-25T06:42:51.785058+00:00"
+          }
+        ]
+      },
+      {
+        "timestamp": "2026-10-25T06:42:47.648890+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 1,
+        "tokens_burned": 4200,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": [
+          {
+            "task_id": "TASK-DOCS-001-567-0",
+            "title": "Generación de Docs: Arquitectura Simbiótica Concilio ACE (161914)",
+            "type": "TECH_DOCS",
+            "tokens": 4200,
+            "completed_at": "2026-10-25T06:42:47.648852+00:00"
+          }
+        ]
+      },
       {
         "timestamp": "2026-10-25T06:18:30.315145+00:00",
         "provider": "claude",
@@ -188,9 +248,9 @@
     ]
   },
   "queue_summary": {
-    "total_tasks": 6,
+    "total_tasks": 12,
     "pending_count": 0,
-    "burned_count": 6,
+    "burned_count": 12,
     "sample_pending": []
   }
 }

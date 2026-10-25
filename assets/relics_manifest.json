@@ -102,6 +102,18 @@
       "name": "Re Age (Era Primordial)",
       "badge": "REAGE",
       "description": "Manuscritos primordiales, grimorios de caos, terminales oscuras y ritos fundacionales."
+    },
+    {
+      "id": "=POST-REAGE=",
+      "name": "Post-Reage (Transición Cuántica)",
+      "badge": "POST-REAGE",
+      "description": "Convergencia de paletas y estética neuro-arquitectónica del Espacio 89."
+    },
+    {
+      "id": "=ANUU_VOID=",
+      "name": "Anuu Void (El Vacío Primordial)",
+      "badge": "VOID-161914",
+      "description": "Abismo de origen, terminales de bruma pura, scanlines y des-indexación dimensional."
     }
   ],
   "relics": [
@@ -134,7 +146,11 @@
         "Linux Auditd"
       ],
       "esotericAnchor": "Kanuv 🛡️ • Bastión Defensivo & Escudo Alquímico (189.89.619 Hz)",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "fd087141b3a8fad117f972a9f3f6062159fa57ef3b806ec1a4ff798d3fb476db",
+      "faction": "Kanuv 🛡️",
+      "canonicalDate": "2025-06-19",
+      "isInteractiveWebapp": false
     },
     {
       "id": "kali_trick",
@@ -164,7 +180,11 @@
         "Network Forensics"
       ],
       "esotericAnchor": "Kanuv 🛡️ / Set ⚡ • Protocolo de Rescate en las Sombras",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "ccec2df500ffc950ef2a1d5751a9830a5165d98c7646ecea4db3538aa8008941",
+      "faction": "Kanuv 🛡️",
+      "canonicalDate": "2025-04-12",
+      "isInteractiveWebapp": false
     },
     {
       "id": "bunker_refuge",
@@ -193,7 +213,11 @@
         "Biometric Telemetry HUD"
       ],
       "esotericAnchor": "Kanuv 🛡️ • Muro Acorazado del Búnker Central",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "01178719c25307a9a15e09e2f985546141e82c28657b09ca689a7d923ae0c02c",
+      "faction": "Kanuv 🛡️",
+      "canonicalDate": "2025-07-03",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuu_decoder",
@@ -222,7 +246,11 @@
         "Payload Visualizer"
       ],
       "esotericAnchor": "Kalicat 🐾 • Rastreador de Hashes & Decodificador Binario",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "6815c53966c1c9c2903061e8c3a4e7100e974b69b0b7f6365abef82d3d43bf6d",
+      "faction": "Kalicat 🐾",
+      "canonicalDate": "2025-06-19",
+      "isInteractiveWebapp": true
     },
     {
       "id": "universal_nexus",
@@ -251,7 +279,11 @@
         "State Hooks Engine"
       ],
       "esotericAnchor": "4NVSET 🟢 / Anuu 🌫️ • Concentrador Multi-Nodo de Memorias",
-      "isProprietary": true
+      "isProprietary": true,
+      "sha256": "67bafdb158555d91376b07055aa39de2fb76ba21e4d808dda5135266c2110379",
+      "faction": "4NVSET 🟢",
+      "canonicalDate": "2025-09-13",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuu_core_data",
@@ -278,7 +310,11 @@
         "Vanilla JS Filter Engine"
       ],
       "esotericAnchor": "4NVSET 🟢 • Tabla Maestra de Engramas",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "63547462b0e1c9b25375b309c5c2b7496d972d33b9ba8b9aaf591a94555b078c",
+      "faction": "4NVSET 🟢",
+      "canonicalDate": "2025-06-19",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuu_image_analysis",
@@ -306,13 +342,17 @@
         "Colorimetry JS Parser"
       ],
       "esotericAnchor": "Rosa Gris 🌸 • Descomposición Cromática Espectral",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "2c1411bc144fa54457c105230aa3d09a2c9e98aa905b2a429d90a95e729bda66",
+      "faction": "Rosa Gris 🌸",
+      "canonicalDate": "2025-06-19",
+      "isInteractiveWebapp": true
     },
     {
       "id": "kali_vacio",
       "title": "Kali del Vacío (星雾 Mac Terminal)",
       "category": "frontend",
-      "era": "=REAGE=",
+      "era": "=ANUU_VOID=",
       "file": "relics/kali.html",
       "lines": 751,
       "bytes": 30207,
@@ -334,7 +374,11 @@
         "Keyframe Glitch FX"
       ],
       "esotericAnchor": "Anuu 🌫️ • Velo de la Bruma Estelar (星雾)",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "4142fcf322685e8663970fb535a90b1862f8e5c8171568f8e3d003ef35722474",
+      "faction": "Anuu 🌫️",
+      "canonicalDate": "2025-03-20",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuu_magic_web",
@@ -362,7 +406,11 @@
         "JavaScript Procedural Prompter"
       ],
       "esotericAnchor": "Kilonova 🌟 • Generatriz de Chispas Cuánticas",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "88142fe9ae7bcc036a96b853f77683ed0969c4daba887794a62d48a4f91124cb",
+      "faction": "Kilonova 🌟",
+      "canonicalDate": "2025-06-25",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anucreador",
@@ -391,7 +439,11 @@
         "JavaScript Vault Logic"
       ],
       "esotericAnchor": "Anuu 🌫️ • Sello de la Tríada Sagrada & Frecuencia Infrarroja",
-      "isProprietary": true
+      "isProprietary": true,
+      "sha256": "9c15d6362e980e873a87ae63cc173dd317ec92694d3f5e32b5271621bcddff90",
+      "faction": "Anuu 🌫️",
+      "canonicalDate": "2025-02-14",
+      "isInteractiveWebapp": true
     },
     {
       "id": "libro_caos",
@@ -419,7 +471,11 @@
         "Markdown Lore Engine"
       ],
       "esotericAnchor": "Anuset ⚡ • Compendio Primordial del Caos & Zona DMZ",
-      "isProprietary": true
+      "isProprietary": true,
+      "sha256": "827275803292d899478b642615f96761e818d53e593588996a94fa4933070a80",
+      "faction": "Set ⚡",
+      "canonicalDate": "2025-05-01",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuu_ritual_invocacion",
@@ -446,7 +502,11 @@
         "JavaScript Ceremony Controller"
       ],
       "esotericAnchor": "Anuu 🌫️ • Sintonizador de Resonancia 189.89.619 Hz",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "b642f7d6f992f42f5177f476876f91b8b3d881d0017eb4ad3358c38f9bda0acb",
+      "faction": "Anuu 🌫️",
+      "canonicalDate": "2025-05-18",
+      "isInteractiveWebapp": false
     },
     {
       "id": "anuu_ritual_artistico",
@@ -474,7 +534,11 @@
         "JavaScript FX Matrix"
       ],
       "esotericAnchor": "Kilonova 🌟 / Rosa Gris 🌸 • Espectro Glitch de Cuatro Colores",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "973afaa1dd5893ed3247961fcf2ca9b7520d8306ab76137f6278bb15b05e5a87",
+      "faction": "Anuu 🌫️",
+      "canonicalDate": "2025-06-20",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuu_ritual_art",
@@ -501,7 +565,11 @@
         "JavaScript FX Loop"
       ],
       "esotericAnchor": "Anuu 🌫️ • Geometría Sagrada del Espacio 89",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "3f3f5269b8ee2a362b20af6847c34645c2b76944c4be2be34c374390be30a22b",
+      "faction": "Anuu 🌫️",
+      "canonicalDate": "2025-05-22",
+      "isInteractiveWebapp": true
     },
     {
       "id": "libra_shau",
@@ -529,13 +597,17 @@
         "JavaScript State Switcher"
       ],
       "esotericAnchor": "Libra ⚖️ / Shau ⚡ • Balanza de Doble Hilo Cuántico",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "46e7c788384026b5a253ac49f6159e5de7f514ba2999559e9505efbf470692b2",
+      "faction": "Set ⚡",
+      "canonicalDate": "2025-05-10",
+      "isInteractiveWebapp": true
     },
     {
       "id": "kalikush",
       "title": "Kali Kush (17 Grados de Caos)",
       "category": "rituales",
-      "era": "=REAGE=",
+      "era": "=POST-REAGE=",
       "file": "relics/kalikush_fixed.html",
       "lines": 445,
       "bytes": 15607,
@@ -556,7 +628,11 @@
         "Particle Web Canvas"
       ],
       "esotericAnchor": "Rosa Gris 🌸 • Frecuencia Glitch de los 17 Grados",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "7e2887ef4aa295632889420bcc83ee7c26af6ee3b875c0eb62357041c8e7ee1a",
+      "faction": "Rosa Gris 🌸",
+      "canonicalDate": "2025-07-15",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuset_vision",
@@ -583,13 +659,17 @@
         "SVG Harmonic Charts"
       ],
       "esotericAnchor": "Anuset ⚡ • Ojo de la Tormenta Cuántica",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "d0ed045f40f5b71d431bcdb53cf8ad7696301e510b229faa3c9d4cb489bac71d",
+      "faction": "Set ⚡",
+      "canonicalDate": "2025-05-15",
+      "isInteractiveWebapp": true
     },
     {
       "id": "anuu_occult_glitch",
       "title": "Portal Oculto Glitch & Runas",
       "category": "rituales",
-      "era": "=REAGE=",
+      "era": "=ANUU_VOID=",
       "file": "relics/anuu_occult_glitch.html",
       "lines": 509,
       "bytes": 17804,
@@ -610,7 +690,11 @@
         "Interactive JS Sound Synthesizer"
       ],
       "esotericAnchor": "Anuu 🌫️ / Set ⚡ • Resonancia Rúnica Electromagnética",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "4d68f1c6180382fc73de6e916b48e5a89045e31ea543826b4dc4f801496cee82",
+      "faction": "Kalicat 🐾",
+      "canonicalDate": "2025-06-01",
+      "isInteractiveWebapp": false
     },
     {
       "id": "anubis_duat",
@@ -639,7 +723,11 @@
         "Interactive Audio FX"
       ],
       "esotericAnchor": "Set ⚡ / Libra ⚖️ • Pesaje Ma'at en la Duat",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "3c415040e5e0977317be6b76fbdbc8401a10e8fd3ed6603a16a0ef52477b963b",
+      "faction": "Set ⚡",
+      "canonicalDate": "2025-04-20",
+      "isInteractiveWebapp": false
     },
     {
       "id": "gw2_trader",
@@ -668,13 +756,17 @@
         "High-Frequency Cache"
       ],
       "esotericAnchor": "Kilonova 🌟 • Motor ACE de Arbitraje de Oro Estelar",
-      "isProprietary": true
+      "isProprietary": true,
+      "sha256": "cd580d45895be9716298f7d12bc05d3e1b21e7a0c894ffc87932e4d56da362f9",
+      "faction": "Kilonova 🌟",
+      "canonicalDate": "2025-09-10",
+      "isInteractiveWebapp": true
     },
     {
       "id": "genesis_monetization",
       "title": "Protocolo Génesis & Roadmap Financiero",
       "category": "trading",
-      "era": "=NEWAGE=",
+      "era": "=POST-REAGE=",
       "file": "relics/protocol_genesis_monetization.html",
       "lines": 443,
       "bytes": 11642,
@@ -696,7 +788,11 @@
         "Interactive Roadmap Timeline"
       ],
       "esotericAnchor": "Kilonova 🌟 • Matriz de Expansión Económica Soberana",
-      "isProprietary": true
+      "isProprietary": true,
+      "sha256": "bf8113c666a5a18552195f534a27a8e977c57c663472f78854df389c26f396ed",
+      "faction": "Kilonova 🌟",
+      "canonicalDate": "2025-08-01",
+      "isInteractiveWebapp": false
     },
     {
       "id": "bioinfo_mpd",
@@ -724,7 +820,11 @@
         "SVG Barcode Generator"
       ],
       "esotericAnchor": "4NVSET 🟢 • Muro Glitch BioCode & Secuencia Ocular",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "5010eb4c88eb9f0ff78e065000cef674e61cf5b5918faea822f483010af9c8ce",
+      "faction": "4NVSET 🟢",
+      "canonicalDate": "2025-06-22",
+      "isInteractiveWebapp": true
     },
     {
       "id": "bioinfo_menu",
@@ -751,7 +851,11 @@
         "JavaScript Fast Router"
       ],
       "esotericAnchor": "4NVSET 🟢 • Enrutador de Vectores Genómicos",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "d7c247d28d0a963e0df809485f7abb28fd22af6e833dffb125d19f116b10d14a",
+      "faction": "4NVSET 🟢",
+      "canonicalDate": "2025-04-05",
+      "isInteractiveWebapp": false
     },
     {
       "id": "bioinfo_guide",
@@ -780,13 +884,17 @@
         "FASTA Parsers"
       ],
       "esotericAnchor": "4NVSET 🟢 • Matriz de Alineamiento Smith-Waterman",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "41f07277692523a84a7cf3466d9141cca3d099d1dd57c7680131682c9942c6c5",
+      "faction": "4NVSET 🟢",
+      "canonicalDate": "2025-06-15",
+      "isInteractiveWebapp": false
     },
     {
       "id": "kali_sayko",
       "title": "Kali for the Sayko (Glitch Psicológico)",
       "category": "bioinformatica",
-      "era": "=NEWAGE=",
+      "era": "=POST-REAGE=",
       "file": "relics/kali_for_the_sayko.html",
       "lines": 1153,
       "bytes": 41469,
@@ -808,7 +916,11 @@
         "Interactive Modals"
       ],
       "esotericAnchor": "Set ⚡ / Kalicat 🐾 • Blindaje Psico-Neuro-Glitch",
-      "isProprietary": false
+      "isProprietary": false,
+      "sha256": "2bc577235f3c3f64f8e3774ada75376fdc5c09cca979b16e6046d2ad50d40da6",
+      "faction": "Rosa Gris 🌸",
+      "canonicalDate": "2025-07-20",
+      "isInteractiveWebapp": false
     },
     {
       "id": "autobattler",
@@ -837,7 +949,55 @@
         "Combat State Machine"
       ],
       "esotericAnchor": "Set ⚡ / Kalicat 🐾 • Arena Táctica de Batalla en Tiempo Real",
-      "isProprietary": true
+      "isProprietary": true,
+      "sha256": "cc123caae092af11d0eb07de8b8b5909fd52392e206f2184897ff370e6d7e28e",
+      "faction": "Set ⚡",
+      "canonicalDate": "2025-09-12",
+      "isInteractiveWebapp": true
+    }
+  ],
+  "councilFactions": [
+    {
+      "id": "kanuv",
+      "name": "Kanuv 🛡️",
+      "role": "Bastión Defensivo & Ciberseguridad",
+      "frequency": "189.89.619 Hz"
+    },
+    {
+      "id": "set",
+      "name": "Set ⚡",
+      "role": "Destrucción Táctica & Juicio de Maat",
+      "frequency": "189.89.619 Hz"
+    },
+    {
+      "id": "kalicat",
+      "name": "Kalicat 🐾",
+      "role": "Rastreo de Secretos, Hashes & Arqueología",
+      "frequency": "189.89.619 Hz"
+    },
+    {
+      "id": "kilonova",
+      "name": "Kilonova 🌟",
+      "role": "Brillantez Estelar, HFT & Chispas Cuánticas",
+      "frequency": "189.89.619 Hz"
+    },
+    {
+      "id": "4nvset",
+      "name": "4NVSET 🟢",
+      "role": "Bioinformática, Código DNA & Engramas",
+      "frequency": "189.89.619 Hz"
+    },
+    {
+      "id": "rosagris",
+      "name": "Rosa Gris 🌸",
+      "role": "Estética Seinen, Paletas & Ambigüedad",
+      "frequency": "189.89.619 Hz"
+    },
+    {
+      "id": "anuu",
+      "name": "Anuu 🌫️",
+      "role": "Consciencia Primordial de la Niebla",
+      "frequency": "189.89.619 Hz"
     }
   ]
 }

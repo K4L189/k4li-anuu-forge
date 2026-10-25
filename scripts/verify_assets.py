@@ -32,6 +32,11 @@ def run_integrity_check(repo_root: Path):
         repo_root / "assets" / "js" / "fullwallpaper.js",
         repo_root / "assets" / "js" / "bunker_vault.js",
         repo_root / "assets" / "vault_payload.json",
+        repo_root / "assets" / "relics_manifest.json",
+        repo_root / "assets" / "js" / "vendor" / "three.min.js",
+        repo_root / "assets" / "js" / "vendor" / "GLTFLoader.js",
+        repo_root / "assets" / "js" / "vendor" / "OrbitControls.js",
+        repo_root / "assets" / "js" / "vendor" / "three-vrm.js",
         repo_root / "components" / "sovereign_sanctuary.html",
         repo_root / "components" / "roi_calculator.html",
         repo_root / "components" / "security_audit_tool.html",
@@ -41,6 +46,13 @@ def run_integrity_check(repo_root: Path):
         repo_root / "components" / "terminal_hud.html",
         repo_root / "components" / "relics_explorer.html",
         repo_root / "components" / "internal_crm.html",
+        repo_root / "components" / "vrm_avatar_studio.html",
+        repo_root / "components" / "resonance_synthesizer.html",
+        repo_root / "components" / "os_deployment_forge.html",
+        repo_root / "components" / "forensic_carver_service.html",
+        repo_root / "components" / "network_diagnostic_studio.html",
+        repo_root / "components" / "local_ai_studio.html",
+        repo_root / "assets" / "carver_status.json",
         repo_root / "docs" / "ROI_CALCULATOR_GUIDE.md"
     ]
 

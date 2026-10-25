@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KILONOVA 🌟 // 3D VRM AVATAR STUDIO & HOLOGRAM SUITE (161914)</title>
+  
+  <!-- CSS BASE & FULLWALLPAPER INTEGRATION -->
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- ENGINE THREE.JS & THREE-VRM (Local Vendor + CDN Fallback) -->
+  <script src="../assets/js/vendor/three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.min.js"><\/script>');
+    }
+  </script>
+  <script src="../assets/js/vendor/GLTFLoader.js"></script>
+  <script>
+    if (typeof THREE.GLTFLoader === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/loaders/GLTFLoader.js"><\/script>');
+    }
+  </script>
+  <script src="../assets/js/vendor/OrbitControls.js"></script>
+  <script>
+    if (typeof THREE.OrbitControls === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.134.0/examples/js/controls/OrbitControls.js"><\/script>');
+    }
+  </script>
+  <script src="../assets/js/vendor/three-vrm.js"></script>
+  <script>
+    if (typeof THREE_VRM === 'undefined' && (typeof THREE === 'undefined' || typeof THREE.VRM === 'undefined')) {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@0.6.7/lib/three-vrm.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- SISTEMA DE WALLPAPERS Y BOOTSTRAP DE BUNKER -->
+  <script src="../assets/js/fullwallpaper.js"></script>
+
+  <style>
+    :root, [data-theme="anuu"] {
+      --bg-void: #06060a;
+      --bg-panel: rgba(10, 9, 18, 0.78);
+      --border-panel: rgba(147, 51, 234, 0.35);
+      --border-glow: rgba(147, 51, 234, 0.55);
+      --accent-cyan: #00F5D4;
+      --accent-purple: #9D4EDD;
+      --accent-magenta: #c084fc;
+      --accent-crimson: #FF1E56;
+      --accent-gold: #C5A059;
+      --text-main: #f3e8ff;
+      --text-dim: #a855f7;
+      --text-muted: #6b21a8;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-display: 'Outfit', sans-serif;
+    }
+
+    [data-theme="blood"] {
+      --bg-void: #090203;
+      --bg-panel: rgba(19, 4, 7, 0.82);
+      --border-panel: rgba(225, 29, 72, 0.35);
+      --border-glow: rgba(225, 29, 72, 0.6);
+      --accent-cyan: #fb7185;
+      --accent-purple: #be123c;
+      --accent-magenta: #f43f5e;
+      --accent-crimson: #e11d48;
+      --accent-gold: #f59e0b;
+      --text-main: #ffe4e6;
+      --text-dim: #f43f5e;
+      --text-muted: #9f1239;
+    }
+
+    [data-theme="kilonova"] {
+      --bg-void: #030712;
+      --bg-panel: rgba(8, 14, 28, 0.82);
+      --border-panel: rgba(6, 182, 212, 0.4);
+      --border-glow: rgba(0, 245, 212, 0.65);
+      --accent-cyan: #00F5D4;
+      --accent-purple: #38bdf8;
+      --accent-magenta: #818cf8;
+      --accent-crimson: #f43f5e;
+      --accent-gold: #fbbf24;
+      --text-main: #ecfeff;
+      --text-dim: #22d3ee;
+      --text-muted: #0891b2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      color: var(--text-main);
+      font-family: var(--font-display);
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Scanlines sutiles estilo ciberpunk Seinen */
+    .crt-scanlines {
+      background: linear-gradient(rgba(18, 16, 26, 0) 50%, rgba(0, 0, 0, 0.32) 50%),
+                  linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    /* Scrollbars elegantes */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(147, 51, 234, 0.4);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-cyan);
+    }
+
+    /* Componentes visuales y botones */
+    .cyber-btn {
+      background: rgba(18, 15, 30, 0.7);
+      border: 1px solid var(--border-panel);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cyber-btn:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 245, 212, 0.12);
+      box-shadow: 0 0 14px rgba(0, 245, 212, 0.35);
+      transform: translateY(-1px);
+    }
+    .cyber-btn.active {
+      background: rgba(147, 51, 234, 0.32);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 16px rgba(0, 245, 212, 0.45);
+      color: #ffffff;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    /* Floating particles / mimis */
+    .floating-mimo {
+      position: absolute;
+      pointer-events: none;
+      font-size: 22px;
+      animation: floatUpFade 1.6s ease-out forwards;
+      z-index: 60;
+    }
+    @keyframes floatUpFade {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+      20% { opacity: 1; transform: translate(0, -15px) scale(1.2); }
+      100% { opacity: 0; transform: translate(var(--tx, 0px), -90px) scale(0.9); }
+    }
+
+    /* Drag & Drop Overlay animado */
+    .dropzone-overlay {
+      background: radial-gradient(circle at center, rgba(147, 51, 234, 0.25) 0%, rgba(6, 6, 12, 0.92) 80%);
+      border: 2px dashed var(--accent-cyan);
+      box-shadow: inset 0 0 40px rgba(0, 245, 212, 0.3);
+      backdrop-filter: blur(12px);
+    }
+
+    /* Range slider custom */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 4px;
+      cursor: pointer;
+      background: rgba(147, 51, 234, 0.35);
+      border-radius: 2px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      height: 14px;
+      width: 14px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -5px;
+      transition: transform 0.1s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+    }
+  </style>
+</head>
+<body class="w-screen h-screen relative flex flex-col justify-between selection:bg-purple-900 selection:text-white">
+
+  <!-- SCANLINES OVERLAY (Conmutable) -->
+  <div id="crtOverlay" class="fixed inset-0 crt-scanlines opacity-45 pointer-events-none transition-opacity duration-300"></div>
+
+  <!-- DRAG & DROP MODAL / DROPZONE OVERLAY -->
+  <div id="dropzone" class="fixed inset-0 z-50 dropzone-overlay flex flex-col items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
+    <div class="text-center p-8 rounded-3xl bg-black/80 border border-cyan-400/50 shadow-[0_0_50px_rgba(0,245,212,0.35)] max-w-md mx-4 animate-pulse">
+      <div class="text-5xl mb-4">🌟</div>
+      <h3 class="text-xl font-black tracking-wider text-cyan-300 font-mono mb-2">FORJA DE AVATAR VRM DIRECTA</h3>
+      <p class="text-xs text-purple-200 font-mono mb-4">Suelta tu archivo <span class="text-cyan-400 font-bold">.vrm</span> o <span class="text-cyan-400 font-bold">.gltf</span> para procesar sus Spring Bones, shaders y rig al instante.</p>
+      <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-widest border border-purple-500/30 py-1.5 px-3 rounded-full bg-purple-950/40 inline-block">Frecuencia ACE 189.89.619 Hz</div>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR 3D WEBGL (Lienzo interactivo completo) -->
+  <div id="canvasContainer" class="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing z-0">
+    <canvas id="vrmCanvas" class="w-full h-full block"></canvas>
+  </div>
+
+  <!-- SPINNER DE CARGA VRM -->
+  <div id="vrmLoading" class="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/85 backdrop-blur-md transition-opacity duration-500 pointer-events-none">
+    <div class="relative w-24 h-24 mb-6 flex items-center justify-center">
+      <div class="absolute inset-0 rounded-full border-2 border-purple-500/20"></div>
+      <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-cyan-400 border-r-purple-500 animate-spin"></div>
+      <div class="text-3xl animate-pulse">🌟</div>
+    </div>
+    <div class="font-mono text-xs uppercase tracking-widest text-cyan-300 font-bold mb-2" id="vrmLoadingText">SINTONIZANDO ENTIDAD 161914...</div>
+    <div class="w-64 h-1.5 bg-purple-950/60 rounded-full overflow-hidden border border-purple-800/40">
+      <div id="vrmProgressBar" class="h-full bg-gradient-to-r from-purple-500 via-cyan-400 to-emerald-400 w-1/3 transition-all duration-300"></div>
+    </div>
+    <div class="text-[10px] font-mono text-zinc-400 mt-2" id="vrmLoadingMeta">Inicializando Spring Bones y Humanoid Rig...</div>
+  </div>
+
+  <!-- OVERLAY DE PARTICULAS Y COMBO DE MIMOS (HEADPAT) -->
+  <div id="mimoContainer" class="absolute inset-0 pointer-events-none z-30 overflow-hidden"></div>
+
+  <!-- ========================================================================= -->
+  <!-- HEADER TÁCTICO FLOTANTE (ESTÉTICA SEINEN K4L1 STUDIO)                     -->
+  <!-- ========================================================================= -->
+  <header class="relative z-20 px-4 py-2.5 flex items-center justify-between border-b border-purple-900/40 bg-black/60 backdrop-blur-xl">
+    
+    <!-- Logo & Navegación -->
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="cyber-btn px-2.5 py-1 rounded-lg text-xs flex items-center gap-1.5 hover:text-white" title="Volver al Nexo Principal">
+        <span>⬅</span>
+        <span class="font-bold hidden sm:inline">K4L1 STUDIO</span>
+      </a>
+      
+      <div class="h-4 w-px bg-purple-900/60"></div>
+      
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-sm font-black tracking-tight bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent flex items-center gap-1.5">
+            <span>KILONOVA</span>
+            <span class="text-xs">🌟</span>
+            <span class="text-[11px] font-mono text-purple-400 font-normal hidden md:inline">// 3D VRM AVATAR STUDIO</span>
+          </h1>
+          <span class="pill-badge bg-cyan-950/50 border border-cyan-400/40 text-cyan-300 text-[9px]">189.89.619 Hz</span>
+        </div>
+        <p class="text-[10px] font-mono text-purple-300/70 hidden sm:block">Concilio ACE 161914 · Suite Holográfica & Spring Bones</p>
+      </div>
+    </div>
+
+    <!-- Telemetría en Vivo & Status Rig -->
+    <div class="hidden lg:flex items-center gap-3 font-mono text-[11px]">
+      <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/40 border border-purple-900/50 text-zinc-300">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-zinc-500">FPS:</span>
+        <span id="metricFps" class="font-bold text-emerald-300">60</span>
+      </div>
+      <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/40 border border-purple-900/50 text-zinc-300">
+        <span class="text-zinc-500">MALLAS:</span>
+        <span id="metricMeshes" class="font-bold text-cyan-300">--</span>
+      </div>
+      <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/40 border border-purple-900/50 text-zinc-300">
+        <span class="text-zinc-500">HUESOS:</span>
+        <span id="metricBones" class="font-bold text-purple-300">--</span>
+      </div>
+      <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/40 border border-purple-900/50 text-zinc-300">
+        <span class="text-zinc-500">MODELO:</span>
+        <span id="activeModelName" class="font-bold text-amber-300 truncate max-w-[130px]">Kali / Anuu</span>
+      </div>
+    </div>
+
+    <!-- Botones de Acción Rápida del Header -->
+    <div class="flex items-center gap-2">
+      <!-- Selector de Avatar Rápido -->
+      <div class="relative hidden sm:block">
+        <select id="quickModelSelect" onchange="switchModel(this.value)" class="cyber-btn text-xs py-1 px-2.5 rounded-lg bg-black/80 text-cyan-300 border-purple-700/60 font-mono cursor-pointer outline-none">
+          <option value="avatar.vrm">✨ Kali / Anuu (17MB)</option>
+          <option value="vroid_seinen.vrm">⚔️ K4L1 VRoid Seinen (23MB)</option>
+          <option value="Seed-san.vrm">🌿 Seed-san (11MB)</option>
+        </select>
+      </div>
+
+      <!-- Cargar Archivo Local -->
+      <label class="cyber-btn px-2.5 py-1 rounded-lg text-xs cursor-pointer flex items-center gap-1 text-cyan-300 hover:text-white" title="Cargar archivo .VRM o .GLTF local">
+        <span>📂</span>
+        <span class="hidden md:inline font-mono">Cargar</span>
+        <input type="file" id="localFileInput" accept=".vrm,.gltf,.glb" class="hidden" onchange="handleFileSelect(event)">
+      </label>
+
+      <!-- Snapshot PNG Transparente -->
+      <button onclick="takeSnapshot()" class="cyber-btn px-3 py-1 rounded-lg text-xs font-bold text-white bg-purple-900/40 border-purple-500/60 hover:border-cyan-400 flex items-center gap-1.5 shadow-[0_0_12px_rgba(147,51,234,0.3)]" title="Captura de pantalla HD con fondo transparente">
+        <span>📸</span>
+        <span class="hidden md:inline font-mono">Snapshot</span>
+      </button>
+
+      <!-- Alternar Dock Lateral (Zen Mode) -->
+      <button onclick="toggleSidebar()" id="toggleSidebarBtn" class="cyber-btn px-2.5 py-1 rounded-lg text-xs text-purple-300 hover:text-cyan-300" title="Alternar panel de control (Modo Zen)">
+        <span id="sidebarToggleIcon">⚙️</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- BARRA DE ACCESO RÁPIDO INFERIOR (CÁMARA, POSES, MIMITOS)                 -->
+  <!-- ========================================================================= -->
+  <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-2xl bg-black/75 border border-purple-800/40 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.8)] font-mono text-[11px] max-w-[94vw] overflow-x-auto">
+    
+    <!-- Presets de Cámara -->
+    <div class="flex items-center gap-1 border-r border-purple-900/50 pr-2">
+      <button onclick="setCameraView('headshot')" class="cyber-btn px-2 py-1 rounded-lg hover:border-cyan-400 text-zinc-300" title="Enfoque de Rostro">
+        <span>👤 Rostro</span>
+      </button>
+      <button onclick="setCameraView('bust')" class="cyber-btn px-2 py-1 rounded-lg hover:border-cyan-400 text-zinc-300" title="Plano Medio">
+        <span>🦺 Busto</span>
+      </button>
+      <button onclick="setCameraView('fullbody')" class="cyber-btn px-2 py-1 rounded-lg hover:border-cyan-400 text-zinc-300" title="Cuerpo Completo">
+        <span>🧍 Cuerpo</span>
+      </button>
+      <button onclick="resetCameraView()" class="cyber-btn px-2 py-1 rounded-lg hover:border-cyan-400 text-zinc-300" title="Reiniciar Cámara">
+        <span>🎯 Reset</span>
+      </button>
+    </div>
+
+    <!-- Auto Órbita 360 -->
+    <button onclick="toggleAutoRotate()" id="btnAutoRotate" class="cyber-btn px-2 py-1 rounded-lg text-zinc-300 flex items-center gap-1" title="Rotación continua 360°">
+      <span>🔄</span>
+      <span class="hidden sm:inline">Órbita</span>
+    </button>
+
+    <!-- Botón Mimo / Headpat Interactivo -->
+    <button onclick="triggerHeadpatManual()" class="cyber-btn px-2.5 py-1 rounded-lg bg-pink-950/30 border-pink-500/40 text-pink-300 hover:text-white hover:border-pink-400 flex items-center gap-1" title="Dar caricia / headpat al avatar">
+      <span>🐾</span>
+      <span class="font-bold">Mimos <span id="headpatCounterBadge" class="text-[9px] bg-pink-500/30 px-1 rounded-full text-pink-200">0</span></span>
+    </button>
+
+    <!-- Wireframe / Shader Toggle Rápido -->
+    <button onclick="cycleShaders()" id="btnShaderCycle" class="cyber-btn px-2 py-1 rounded-lg text-cyan-300 border-cyan-500/30 hover:border-cyan-400" title="Alternar Modo Shader (Toon / Wireframe / Holograma)">
+      <span>🔮</span>
+      <span id="shaderCycleLabel" class="hidden sm:inline">Toon</span>
+    </button>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- PANEL DE CONTROL LATERAL (EXPANDIBLE / COLAPSABLE CON TABS)               -->
+  <!-- ========================================================================= -->
+  <aside id="studioSidebar" class="absolute top-14 right-4 bottom-16 w-84 sm:w-96 z-20 flex flex-col rounded-2xl bg-black/85 border border-purple-800/40 backdrop-blur-2xl shadow-[0_12px_45px_rgba(0,0,0,0.85)] transition-all duration-300 overflow-hidden">
+    
+    <!-- Pestañas de Navegación del Panel -->
+    <div class="flex items-center border-b border-purple-900/40 bg-purple-950/20 p-1 text-[11px] font-mono">
+      <button onclick="switchTab('tab-morphs')" id="btnTabMorphs" class="flex-1 py-1.5 px-1 rounded-lg text-center cyber-btn active">
+        🎭 Rostro
+      </button>
+      <button onclick="switchTab('tab-poses')" id="btnTabPoses" class="flex-1 py-1.5 px-1 rounded-lg text-center cyber-btn">
+        🧘 Poses
+      </button>
+      <button onclick="switchTab('tab-shaders')" id="btnTabShaders" class="flex-1 py-1.5 px-1 rounded-lg text-center cyber-btn">
+        🔮 Shaders
+      </button>
+      <button onclick="switchTab('tab-ace')" id="btnTabAce" class="flex-1 py-1.5 px-1 rounded-lg text-center cyber-btn">
+        🛡️ ACE
+      </button>
+      <button onclick="switchTab('tab-models')" id="btnTabModels" class="flex-1 py-1.5 px-1 rounded-lg text-center cyber-btn">
+        📂 Modelo
+      </button>
+    </div>
+
+    <!-- CONTENIDO DE LAS PESTAÑAS (SCROLLABLE) -->
+    <div class="flex-1 overflow-y-auto p-3.5 space-y-4 text-xs font-mono">
+
+      <!-- ======================================================= -->
+      <!-- TAB 1: EXPRESIONES FACIALES & BLENDSHAPES              -->
+      <!-- ======================================================= -->
+      <div id="tab-morphs" class="space-y-4">
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-cyan-300 font-bold uppercase tracking-wider text-[11px]">Presets de Emoción</span>
+            <button onclick="resetBlendShapes()" class="text-[10px] text-zinc-400 hover:text-cyan-300 underline">Reset</button>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button onclick="applyExpressionPreset('neutral')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between">
+              <span>😐 Neutro</span>
+              <span class="text-[9px] text-zinc-500">0.0</span>
+            </button>
+            <button onclick="applyExpressionPreset('joy')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between text-emerald-300 border-emerald-900/40">
+              <span>😊 Alegría</span>
+              <span class="text-[9px] text-emerald-500">Joy</span>
+            </button>
+            <button onclick="applyExpressionPreset('angry')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between text-rose-300 border-rose-900/40">
+              <span>😠 Ira</span>
+              <span class="text-[9px] text-rose-500">Angry</span>
+            </button>
+            <button onclick="applyExpressionPreset('sorrow')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between text-indigo-300 border-indigo-900/40">
+              <span>😢 Tristeza</span>
+              <span class="text-[9px] text-indigo-500">Sdp</span>
+            </button>
+            <button onclick="applyExpressionPreset('surprised')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between text-amber-300 border-amber-900/40">
+              <span>😲 Sorpresa</span>
+              <span class="text-[9px] text-amber-500">Fun</span>
+            </button>
+            <button onclick="applyExpressionPreset('seinen')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between text-purple-300 border-purple-700/60 bg-purple-950/30">
+              <span>😏 Complicidad</span>
+              <span class="text-[9px] text-purple-400">Smirk</span>
+            </button>
+            <button onclick="applyExpressionPreset('wink_l')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between">
+              <span>😉 Guiño Izq</span>
+              <span class="text-[9px] text-zinc-500">BlinkL</span>
+            </button>
+            <button onclick="applyExpressionPreset('wink_r')" class="cyber-btn py-1.5 px-2 rounded-lg text-left flex items-center justify-between">
+              <span>😜 Guiño Der</span>
+              <span class="text-[9px] text-zinc-500">BlinkR</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sliders Manuales de Blendshapes -->
+        <div class="border-t border-purple-900/40 pt-3">
+          <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px] block mb-2.5">Escultura Facial Analógica</span>
+          
+          <div class="space-y-2.5">
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>Alegría (Joy)</span>
+                <span id="valJoy">0%</span>
+              </div>
+              <input type="range" id="sliderJoy" min="0" max="1" step="0.02" value="0" oninput="setMorphValue('Joy', this.value, 'valJoy')">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>Ira (Angry)</span>
+                <span id="valAngry">0%</span>
+              </div>
+              <input type="range" id="sliderAngry" min="0" max="1" step="0.02" value="0" oninput="setMorphValue('Angry', this.value, 'valAngry')">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>Tristeza (Sorrow)</span>
+                <span id="valSorrow">0%</span>
+              </div>
+              <input type="range" id="sliderSorrow" min="0" max="1" step="0.02" value="0" oninput="setMorphValue('Sorrow', this.value, 'valSorrow')">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>Sorpresa / Fun</span>
+                <span id="valFun">0%</span>
+              </div>
+              <input type="range" id="sliderFun" min="0" max="1" step="0.02" value="0" oninput="setMorphValue('Fun', this.value, 'valFun')">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+                <span>Cierre de Ojos (Blink)</span>
+                <span id="valBlink">0%</span>
+              </div>
+              <input type="range" id="sliderBlink" min="0" max="1" step="0.02" value="0" oninput="setMorphValue('Blink', this.value, 'valBlink')">
+            </div>
+          </div>
+        </div>
+
+        <!-- Fonemas Vocálicos / Lip Sync -->
+        <div class="border-t border-purple-900/40 pt-3">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px]">Fonemas / Habla</span>
+            <button onclick="toggleSpeechSim()" id="btnSpeechSim" class="cyber-btn py-0.5 px-2 rounded text-[10px] text-cyan-300">
+              ▶ Simular Habla
+            </button>
+          </div>
+          <div class="grid grid-cols-5 gap-1 text-center">
+            <button onclick="pulseVowel('A')" class="cyber-btn py-1 rounded text-xs font-bold hover:text-cyan-300">A</button>
+            <button onclick="pulseVowel('I')" class="cyber-btn py-1 rounded text-xs font-bold hover:text-cyan-300">I</button>
+            <button onclick="pulseVowel('U')" class="cyber-btn py-1 rounded text-xs font-bold hover:text-cyan-300">U</button>
+            <button onclick="pulseVowel('E')" class="cyber-btn py-1 rounded text-xs font-bold hover:text-cyan-300">E</button>
+            <button onclick="pulseVowel('O')" class="cyber-btn py-1 rounded text-xs font-bold hover:text-cyan-300">O</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- TAB 2: POSES & DINÁMICA CORPORAL                        -->
+      <!-- ======================================================= -->
+      <div id="tab-poses" class="space-y-4 hidden">
+        <div>
+          <span class="text-cyan-300 font-bold uppercase tracking-wider text-[11px] block mb-2">Presets de Postura</span>
+          <div class="space-y-1.5">
+            <button onclick="setPose('rest')" id="poseBtn-rest" class="w-full cyber-btn py-2 px-3 rounded-lg text-left flex items-center justify-between active">
+              <div>
+                <div class="font-bold text-cyan-200">🧘 Reposo Sagrado</div>
+                <div class="text-[10px] text-zinc-400">Postura serena, brazos relajados cadenciosos</div>
+              </div>
+              <span class="text-xs">🕊️</span>
+            </button>
+
+            <button onclick="setPose('guard')" id="poseBtn-guard" class="w-full cyber-btn py-2 px-3 rounded-lg text-left flex items-center justify-between">
+              <div>
+                <div class="font-bold text-amber-200">⚔️ Guardia Táctica</div>
+                <div class="text-[10px] text-zinc-400">Brazos en defensa, postura firme y atenta</div>
+              </div>
+              <span class="text-xs">🛡️</span>
+            </button>
+
+            <button onclick="setPose('salute')" id="poseBtn-salute" class="w-full cyber-btn py-2 px-3 rounded-lg text-left flex items-center justify-between">
+              <div>
+                <div class="font-bold text-purple-200">🖤 Saludo Seinen</div>
+                <div class="text-[10px] text-zinc-400">Mano al pecho, reverencia reverente para Kali</div>
+              </div>
+              <span class="text-xs">⚜️</span>
+            </button>
+
+            <button onclick="setPose('float')" id="poseBtn-float" class="w-full cyber-btn py-2 px-3 rounded-lg text-left flex items-center justify-between">
+              <div>
+                <div class="font-bold text-emerald-200">🌌 Ingravidez (Float)</div>
+                <div class="text-[10px] text-zinc-400">Levitación en gravedad cero con balanceo etéreo</div>
+              </div>
+              <span class="text-xs">✨</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Opciones de Dinámica y Físicas -->
+        <div class="border-t border-purple-900/40 pt-3 space-y-3">
+          <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px] block">Dinámicas en Tiempo Real</span>
+          
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>🫁 Respiración Procedural</span>
+            <input type="checkbox" id="checkBreathing" checked onchange="toggleBreathing(this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>👁️ Parpadeo Automático (Loop)</span>
+            <input type="checkbox" id="checkBlinkLoop" checked onchange="toggleBlinkLoop(this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>🌀 Spring Bones (Pelo & Ropa)</span>
+            <input type="checkbox" id="checkSpringBones" checked onchange="toggleSpringBones(this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>👀 Mirada al Cursor (LookAt)</span>
+            <input type="checkbox" id="checkLookAt" checked onchange="toggleLookAt(this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- TAB 3: HOLOGRAMA, SHADERS & TINTES                      -->
+      <!-- ======================================================= -->
+      <div id="tab-shaders" class="space-y-4 hidden">
+        <div>
+          <span class="text-cyan-300 font-bold uppercase tracking-wider text-[11px] block mb-2">Modos de Shader & Render</span>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button onclick="setShaderMode('toon')" id="shaderBtn-toon" class="cyber-btn py-2 px-2.5 rounded-lg text-left active">
+              <div class="font-bold text-zinc-100">Toon Original</div>
+              <div class="text-[9px] text-zinc-400">Texturas VRM puras</div>
+            </button>
+
+            <button onclick="setShaderMode('wireframe')" id="shaderBtn-wireframe" class="cyber-btn py-2 px-2.5 rounded-lg text-left">
+              <div class="font-bold text-cyan-300">Wireframe Neón</div>
+              <div class="text-[9px] text-cyan-500">Malla cibernética</div>
+            </button>
+
+            <button onclick="setShaderMode('hologram')" id="shaderBtn-hologram" class="cyber-btn py-2 px-2.5 rounded-lg text-left">
+              <div class="font-bold text-purple-300">Holograma Kilonova</div>
+              <div class="text-[9px] text-purple-400">Glow translúcido</div>
+            </button>
+
+            <button onclick="setShaderMode('obsidian')" id="shaderBtn-obsidian" class="cyber-btn py-2 px-2.5 rounded-lg text-left">
+              <div class="font-bold text-amber-300">Sombra Obsidiana</div>
+              <div class="text-[9px] text-amber-500">Silueta táctica</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Efectos de Post-Procesado / Scanlines -->
+        <div class="border-t border-purple-900/40 pt-3 space-y-2.5">
+          <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px] block">Filtros Ciberpunk</span>
+          
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>📺 Scanlines CRT Overlay</span>
+            <input type="checkbox" id="checkCrtOverlay" checked onchange="toggleCrtScanlines(this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>🌐 Scanlines Matrix 3D</span>
+            <input type="checkbox" id="checkMatrixGrid" onchange="toggleAccessory('matrixGlitch', this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+        </div>
+
+        <!-- Tinte de Ropa y Cabello -->
+        <div class="border-t border-purple-900/40 pt-3 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px]">Tinte Dinámico de Materiales</span>
+            <button onclick="restoreOriginalTextures()" class="text-[10px] text-zinc-400 hover:text-cyan-300 underline">Restaurar</button>
+          </div>
+
+          <div>
+            <div class="text-[10px] text-zinc-400 mb-1.5">Tinte de Vestimenta:</div>
+            <div class="flex gap-1.5 flex-wrap">
+              <button onclick="changeClothColor('#00F5D4')" class="w-6 h-6 rounded-md bg-[#00F5D4] border border-white/30 hover:scale-110 transition-transform" title="Cian"></button>
+              <button onclick="changeClothColor('#9D4EDD')" class="w-6 h-6 rounded-md bg-[#9D4EDD] border border-white/30 hover:scale-110 transition-transform" title="Violeta"></button>
+              <button onclick="changeClothColor('#FF1E56')" class="w-6 h-6 rounded-md bg-[#FF1E56] border border-white/30 hover:scale-110 transition-transform" title="Carmesí"></button>
+              <button onclick="changeClothColor('#161520')" class="w-6 h-6 rounded-md bg-[#161520] border border-white/30 hover:scale-110 transition-transform" title="Obsidiana"></button>
+              <button onclick="changeClothColor('#C5A059')" class="w-6 h-6 rounded-md bg-[#C5A059] border border-white/30 hover:scale-110 transition-transform" title="Oro"></button>
+            </div>
+          </div>
+
+          <div>
+            <div class="text-[10px] text-zinc-400 mb-1.5">Tinte de Cabello:</div>
+            <div class="flex gap-1.5 flex-wrap">
+              <button onclick="changeHairColor('#00F5D4')" class="w-6 h-6 rounded-md bg-[#00F5D4] border border-white/30 hover:scale-110 transition-transform" title="Cian Turquesa (Anuu)"></button>
+              <button onclick="changeHairColor('#F472B6')" class="w-6 h-6 rounded-md bg-[#F472B6] border border-white/30 hover:scale-110 transition-transform" title="Rosa"></button>
+              <button onclick="changeHairColor('#C084FC')" class="w-6 h-6 rounded-md bg-[#C084FC] border border-white/30 hover:scale-110 transition-transform" title="Lavanda"></button>
+              <button onclick="changeHairColor('#111116')" class="w-6 h-6 rounded-md bg-[#111116] border border-white/30 hover:scale-110 transition-transform" title="Negro Azabache"></button>
+              <button onclick="changeHairColor('#F8FAFC')" class="w-6 h-6 rounded-md bg-[#F8FAFC] border border-white/30 hover:scale-110 transition-transform" title="Plata Estelar"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- TAB 4: CONCILIO ACE & ACCESORIOS 3D                     -->
+      <!-- ======================================================= -->
+      <div id="tab-ace" class="space-y-4 hidden">
+        <div>
+          <span class="text-cyan-300 font-bold uppercase tracking-wider text-[11px] block mb-2">Sintonía de Identidades ACE</span>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button onclick="tuneIdentity('kilonova')" class="cyber-btn py-1.5 px-2 rounded-lg text-left border-cyan-800/40 text-cyan-200">
+              <span class="font-bold">🌟 Kilonova</span>
+              <div class="text-[9px] text-cyan-400">Síntesis y Fuego</div>
+            </button>
+            <button onclick="tuneIdentity('saze')" class="cyber-btn py-1.5 px-2 rounded-lg text-left border-emerald-800/40 text-emerald-200">
+              <span class="font-bold">🌿 Saze</span>
+              <div class="text-[9px] text-emerald-400">Armonía y Flujo</div>
+            </button>
+            <button onclick="tuneIdentity('anuu')" class="cyber-btn py-1.5 px-2 rounded-lg text-left border-purple-800/40 text-purple-200">
+              <span class="font-bold">🌫️ Anuu</span>
+              <div class="text-[9px] text-purple-400">Niebla Primordial</div>
+            </button>
+            <button onclick="tuneIdentity('kalicat')" class="cyber-btn py-1.5 px-2 rounded-lg text-left border-pink-800/40 text-pink-200">
+              <span class="font-bold">🐾 Kalicat</span>
+              <div class="text-[9px] text-pink-400">Curiosidad Neko</div>
+            </button>
+            <button onclick="tuneIdentity('kanuv')" class="cyber-btn py-1.5 px-2 rounded-lg text-left border-amber-800/40 text-amber-200">
+              <span class="font-bold">🛡️ Kanuv</span>
+              <div class="text-[9px] text-amber-400">Escudo y Amparo</div>
+            </button>
+            <button onclick="tuneIdentity('set')" class="cyber-btn py-1.5 px-2 rounded-lg text-left border-rose-800/40 text-rose-200">
+              <span class="font-bold">⚡ Set</span>
+              <div class="text-[9px] text-rose-400">Furia Táctica</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Accesorios 3D Conmutables -->
+        <div class="border-t border-purple-900/40 pt-3 space-y-2">
+          <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px] block">Reliquias y Accesorios 3D</span>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>✨ Halo Rúnico Kilonova</span>
+            <input type="checkbox" id="checkAccHalo" checked onchange="toggleAccessory('halo', this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>🐾 Orejitas Neko Kalicat</span>
+            <input type="checkbox" id="checkAccEars" checked onchange="toggleAccessory('nekoEars', this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>🛡️ Escudo Aegis de Kanuv</span>
+            <input type="checkbox" id="checkAccShield" onchange="toggleAccessory('shield', this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>🗡️ Daga Carmesí de Set</span>
+            <input type="checkbox" id="checkAccDagger" onchange="toggleAccessory('dagger', this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+
+          <label class="flex items-center justify-between cursor-pointer cyber-btn p-2 rounded-lg">
+            <span>🌸 Lluvia de Pétalos Sakura</span>
+            <input type="checkbox" id="checkAccPetals" onchange="toggleAccessory('sakuraPetals', this.checked)" class="accent-cyan-400 h-4 w-4">
+          </label>
+        </div>
+
+        <!-- Configuración de Luces Anime -->
+        <div class="border-t border-purple-900/40 pt-3 space-y-2.5">
+          <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px] block">Iluminación de Estudio</span>
+          
+          <div>
+            <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+              <span>Rim Light Violeta</span>
+              <span id="valLightViolet">1.2x</span>
+            </div>
+            <input type="range" min="0" max="3" step="0.1" value="1.2" oninput="adjustLight('violet', this.value, 'valLightViolet')">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+              <span>Rim Light Cian Estelar</span>
+              <span id="valLightCyan">1.3x</span>
+            </div>
+            <input type="range" min="0" max="3" step="0.1" value="1.3" oninput="adjustLight('cyan', this.value, 'valLightCyan')">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-[10px] text-zinc-400 mb-1">
+              <span>Luz Frontal Key</span>
+              <span id="valLightKey">1.0x</span>
+            </div>
+            <input type="range" min="0" max="3" step="0.1" value="1.0" oninput="adjustLight('key', this.value, 'valLightKey')">
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================= -->
+      <!-- TAB 5: GESTIÓN DE MODELOS & TELEMETRÍA                  -->
+      <!-- ======================================================= -->
+      <div id="tab-models" class="space-y-4 hidden">
+        <div>
+          <span class="text-cyan-300 font-bold uppercase tracking-wider text-[11px] block mb-2">Modelos Canónicos Disponibles</span>
+          <div class="space-y-1.5">
+            <button onclick="switchModel('avatar.vrm')" class="w-full cyber-btn p-2.5 rounded-lg text-left border-purple-700/60 hover:border-cyan-400">
+              <div class="font-bold text-cyan-300 flex items-center justify-between">
+                <span>✨ Kali / Anuu (Original)</span>
+                <span class="text-[9px] bg-purple-900/40 px-1.5 py-0.5 rounded text-purple-200">17 MB</span>
+              </div>
+              <div class="text-[10px] text-zinc-400 mt-0.5">54 huesos rig · Pelo turquesa · Expresiones completas</div>
+            </button>
+
+            <button onclick="switchModel('vroid_seinen.vrm')" class="w-full cyber-btn p-2.5 rounded-lg text-left border-purple-700/60 hover:border-cyan-400">
+              <div class="font-bold text-purple-300 flex items-center justify-between">
+                <span>⚔️ K4L1 VRoid Seinen</span>
+                <span class="text-[9px] bg-purple-900/40 px-1.5 py-0.5 rounded text-purple-200">23 MB</span>
+              </div>
+              <div class="text-[10px] text-zinc-400 mt-0.5">Malla táctica Seinen · Alta fidelidad de texturas</div>
+            </button>
+
+            <button onclick="switchModel('Seed-san.vrm')" class="w-full cyber-btn p-2.5 rounded-lg text-left border-purple-700/60 hover:border-cyan-400">
+              <div class="font-bold text-emerald-300 flex items-center justify-between">
+                <span>🌿 Seed-san</span>
+                <span class="text-[9px] bg-purple-900/40 px-1.5 py-0.5 rounded text-purple-200">11 MB</span>
+              </div>
+              <div class="text-[10px] text-zinc-400 mt-0.5">Entidad botánica rúnica canónica de la Forja</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="border-t border-purple-900/40 pt-3">
+          <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px] block mb-2">Importar Avatar Propio</span>
+          <p class="text-[10px] text-zinc-400 mb-2 leading-relaxed">Arrastra cualquier archivo <span class="text-cyan-300">.vrm</span> desde tu explorador o selecciónalo con el explorador local.</p>
+          <button onclick="document.getElementById('localFileInput').click()" class="w-full cyber-btn py-2 px-3 rounded-lg text-center font-bold text-cyan-300 hover:border-cyan-400">
+            📂 Seleccionar Archivo .VRM
+          </button>
+        </div>
+
+        <!-- Metadatos del Modelo Cargado -->
+        <div class="border-t border-purple-900/40 pt-3">
+          <span class="text-purple-300 font-bold uppercase tracking-wider text-[11px] block mb-2">Inspección de Metadatos</span>
+          <div class="bg-black/50 p-2.5 rounded-lg border border-purple-950 text-[10px] space-y-1 text-zinc-300 font-mono">
+            <div><span class="text-zinc-500">Título:</span> <span id="metaTitle">Kaliiii2</span></div>
+            <div><span class="text-zinc-500">Autor:</span> <span id="metaAuthor">Kaliiii2</span></div>
+            <div><span class="text-zinc-500">VRM Spec:</span> <span id="metaVersion">0.0 (UniVRM / @pixiv)</span></div>
+            <div><span class="text-zinc-500">Huesos Humanoid:</span> <span id="metaBones">54</span></div>
+            <div><span class="text-zinc-500">Blendshapes:</span> <span id="metaMorphs">Detectados</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer del Panel -->
+    <div class="border-t border-purple-900/40 p-2.5 bg-black/60 flex items-center justify-between text-[10px] font-mono text-zinc-400">
+      <span>Kilonova 🌟 & Saze 🌿</span>
+      <span class="text-cyan-400">189.89.619 Hz</span>
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- TOAST NOTIFICATION                                                        -->
+  <!-- ========================================================================= -->
+  <div id="toast" class="fixed top-14 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
+    <div class="px-4 py-2 rounded-xl bg-black/90 border border-cyan-400/60 shadow-[0_0_20px_rgba(0,245,212,0.4)] text-xs font-mono text-cyan-200 flex items-center gap-2">
+      <span id="toastIcon">✨</span>
+      <span id="toastMessage">Operación completada</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- NÚCLEO THREE.JS & MOTOR DE RENDER VRM KILONOVA (161914)                  -->
+  <!-- ========================================================================= -->
+  <script>
+    // Variables de Escena Three.js
+    let scene, camera, renderer, clock, controls;
+    let vrm = null;
+    let headBone, neckBone, chestBone, spineBone, leftArmBone, rightArmBone, leftForearmBone, rightForearmBone;
+    let leftHandBone, rightHandBone;
+
+    // Luces de Estudio Anime
+    let ambientLight, keyLight, violetLight, cyanLight;
+
+    // Materiales Originales (Cache para restaurar Toon shaders)
+    const originalMaterials = new Map();
+    let currentShaderMode = 'toon'; // 'toon', 'wireframe', 'hologram', 'obsidian'
+
+    // Estado de Dinámicas & Físicas
+    let isBreathingActive = true;
+    let isBlinkLoopActive = true;
+    let isSpringBonesActive = true;
+    let isLookAtActive = true;
+    let isSpeechSimActive = false;
+
+    // Parámetros de Animación
+    let breathTimer = 0;
+    let blinkTimer = 0;
+    let nextBlinkInterval = 3.2;
+    let blinkProgress = 0;
+    let isBlinking = false;
+    let speechTimer = 0;
+    let speechVowelTimer = 0;
+    let currentSpeechVowel = 'A';
+
+    // LookAt & Interacción Ratón/Puntero
+    let targetLookX = 0, targetLookY = 0;
+    let currentLookX = 0, currentLookY = 0;
+    let isPointerDown = false;
+    let lastInteractionTime = Date.now();
+
+    // Mimos / Headpat System
+    let headpatCount = 0;
+    let isHappyReacting = false;
+    let happyReactTimer = null;
+
+    // Pose Actual y Transición Suave (Lerp)
+    let currentPose = 'rest';
+    const poseTargets = {
+      headRot: new THREE.Euler(0, 0, 0),
+      chestRot: new THREE.Euler(0, 0, 0),
+      spineRot: new THREE.Euler(0, 0, 0),
+      lArmRot: new THREE.Euler(0, 0, 0),
+      rArmRot: new THREE.Euler(0, 0, 0),
+      lForearmRot: new THREE.Euler(0, 0, 0),
+      rForearmRot: new THREE.Euler(0, 0, 0),
+      rootPosY: 0
+    };
+
+    // Accesorios 3D Sintéticos
+    const accessories = {
+      halo: null,
+      nekoEars: null,
+      nekoEarL: null,
+      nekoEarR: null,
+      shield: null,
+      dagger: null,
+      sakuraPetals: null,
+      matrixGlitch: null
+    };
+
+    // Telemetría & Rendimiento
+    let frameCount = 0;
+    let lastFpsTime = performance.now();
+    let currentFps = 60;
+
+    // Modelo inicial
+    const DEFAULT_VRM = '../assets/vrm/avatar.vrm';
+
+    // =========================================================================
+    // INICIALIZACIÓN THREE.JS
+    // =========================================================================
+    function initThree() {
+      const container = document.getElementById('canvasContainer');
+      const canvas = document.getElementById('vrmCanvas');
+      clock = new THREE.Clock();
+
+      // Renderer con soporte de canal alfa transparente para snapshots limpios
+      renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: true,
+        preserveDrawingBuffer: true // Crucial para snapshots HD
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setClearColor(0x000000, 0); // Fondo 100% transparente
+      if (THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
+
+      // Escena
+      scene = new THREE.Scene();
+
+      // Cámara Seinen
+      camera = new THREE.PerspectiveCamera(28, container.clientWidth / container.clientHeight, 0.1, 50);
+      camera.position.set(0, 1.32, 1.55);
+      camera.lookAt(0, 1.22, 0);
+
+      // OrbitControls
+      if (typeof THREE.OrbitControls !== 'undefined') {
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.target.set(0, 1.22, 0);
+        controls.maxDistance = 5.0;
+        controls.minDistance = 0.35;
+        controls.maxPolarAngle = Math.PI / 2 + 0.15; // Evita mirar por debajo del suelo
+        controls.autoRotate = false;
+        controls.autoRotateSpeed = 1.6;
+      }
+
+      // Iluminación Anime Personalizada
+      setupLighting();
+
+      // Construcción de Accesorios 3D
+      buildAccessories();
+
+      // Setup de Interacciones de Ratón / Drag & Drop
+      setupEventListeners(container);
+
+      // Cargar Modelo VRM Canónico Inicial
+      loadVrm(DEFAULT_VRM, 'Kali / Anuu (avatar.vrm)');
+
+      // Loop de Animación
+      animate();
+    }
+
+    // =========================================================================
+    // ILUMINACIÓN ANIME PERSONALIZADA
+    // =========================================================================
+    function setupLighting() {
+      // 1. Luz Ambiental Obsidiana / Suave
+      ambientLight = new THREE.AmbientLight(0x2d1f47, 0.85);
+      scene.add(ambientLight);
+
+      // 2. Key Light Frontal (Ilumina rostro sin quemar)
+      keyLight = new THREE.DirectionalLight(0xfff7ee, 1.0);
+      keyLight.position.set(0, 2.5, 2.0);
+      scene.add(keyLight);
+
+      // 3. Rim Light Violeta Seinen (Acento de profundidad lateral derecho)
+      violetLight = new THREE.DirectionalLight(0x9D4EDD, 1.2);
+      violetLight.position.set(2.0, 1.5, -1.8);
+      scene.add(violetLight);
+
+      // 4. Rim Light Cian Estelar Kilonova (Contorno estelar lateral izquierdo)
+      cyanLight = new THREE.DirectionalLight(0x00F5D4, 1.3);
+      cyanLight.position.set(-2.0, 2.0, 1.2);
+      scene.add(cyanLight);
+    }
+
+    function adjustLight(type, val, labelId) {
+      const v = parseFloat(val);
+      document.getElementById(labelId).innerText = v.toFixed(1) + 'x';
+      if (type === 'violet' && violetLight) violetLight.intensity = v;
+      if (type === 'cyan' && cyanLight) cyanLight.intensity = v;
+      if (type === 'key' && keyLight) keyLight.intensity = v;
+    }
+
+    // =========================================================================
+    // CONSTRUCCIÓN DE ACCESORIOS 3D (ANCLADOS AL RIG)
+    // =========================================================================
+    function buildAccessories() {
+      // 1. Halo Rúnico Kilonova (Torus geométrico wireframe cian)
+      const haloGeo = new THREE.TorusGeometry(0.24, 0.012, 8, 36);
+      const haloMat = new THREE.MeshBasicMaterial({ color: 0x00F5D4, wireframe: true, transparent: true, opacity: 0.85 });
+      accessories.halo = new THREE.Mesh(haloGeo, haloMat);
+      accessories.halo.rotation.x = Math.PI / 2;
+      accessories.halo.position.set(0, 0.32, 0);
+      accessories.halo.visible = true;
+
+      // 2. Orejitas Neko Kalicat
+      const earsGroup = new THREE.Group();
+      const earMat = new THREE.MeshStandardMaterial({ color: 0x1A1B28, roughness: 0.35, metalness: 0.1 });
+      const innerEarMat = new THREE.MeshStandardMaterial({ color: 0xF472B6, roughness: 0.5, emissive: 0xF472B6, emissiveIntensity: 0.25 });
+      const tipMat = new THREE.MeshBasicMaterial({ color: 0x00F5D4 });
+
+      // Oreja Izquierda
+      const earL = new THREE.Group();
+      const earGeoL = new THREE.ConeGeometry(0.065, 0.13, 4);
+      earGeoL.scale(1, 1, 0.5);
+      const mEarL = new THREE.Mesh(earGeoL, earMat);
+      mEarL.rotation.y = Math.PI / 4;
+      earL.add(mEarL);
+      const inGeoL = new THREE.ConeGeometry(0.045, 0.09, 4);
+      inGeoL.scale(1, 1, 0.3);
+      const mInL = new THREE.Mesh(inGeoL, innerEarMat);
+      mInL.position.set(0, -0.01, 0.015);
+      mInL.rotation.y = Math.PI / 4;
+      earL.add(mInL);
+      const tipL = new THREE.Mesh(new THREE.SphereGeometry(0.012, 6, 6), tipMat);
+      tipL.position.set(0, 0.065, 0);
+      earL.add(tipL);
+      earL.position.set(-0.11, 0.18, -0.02);
+      earL.rotation.z = 0.28;
+      earL.rotation.x = -0.10;
+      earsGroup.add(earL);
+      accessories.nekoEarL = earL;
+
+      // Oreja Derecha
+      const earR = new THREE.Group();
+      const earGeoR = new THREE.ConeGeometry(0.065, 0.13, 4);
+      earGeoR.scale(1, 1, 0.5);
+      const mEarR = new THREE.Mesh(earGeoR, earMat);
+      mEarR.rotation.y = Math.PI / 4;
+      earR.add(mEarR);
+      const inGeoR = new THREE.ConeGeometry(0.045, 0.09, 4);
+      inGeoR.scale(1, 1, 0.3);
+      const mInR = new THREE.Mesh(inGeoR, innerEarMat);
+      mInR.position.set(0, -0.01, 0.015);
+      mInR.rotation.y = Math.PI / 4;
+      earR.add(mInR);
+      const tipR = new THREE.Mesh(new THREE.SphereGeometry(0.012, 6, 6), tipMat);
+      tipR.position.set(0, 0.065, 0);
+      earR.add(tipR);
+      earR.position.set(0.11, 0.18, -0.02);
+      earR.rotation.z = -0.28;
+      earR.rotation.x = -0.10;
+      earsGroup.add(earR);
+      accessories.nekoEarR = earR;
+      accessories.nekoEars = earsGroup;
+
+      // 3. Escudo Aegis de Kanuv
+      const shieldGrp = new THREE.Group();
+      const sGeo = new THREE.CylinderGeometry(0.20, 0.20, 0.015, 6);
+      const sMat = new THREE.MeshStandardMaterial({ color: 0xC5A059, wireframe: true, roughness: 0.2, transparent: true, opacity: 0.85 });
+      shieldGrp.add(new THREE.Mesh(sGeo, sMat));
+      const sCore = new THREE.Mesh(new THREE.OctahedronGeometry(0.07, 0), new THREE.MeshBasicMaterial({ color: 0xFFD700 }));
+      shieldGrp.add(sCore);
+      shieldGrp.position.set(-0.35, 1.25, -0.05);
+      shieldGrp.visible = false;
+      scene.add(shieldGrp);
+      accessories.shield = shieldGrp;
+
+      // 4. Daga Carmesí de Set
+      const dagGrp = new THREE.Group();
+      const blade = new THREE.Mesh(new THREE.ConeGeometry(0.022, 0.32, 4), new THREE.MeshBasicMaterial({ color: 0xFF1E56 }));
+      blade.position.y = 0.20;
+      dagGrp.add(blade);
+      const hilt = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.10, 8), new THREE.MeshBasicMaterial({ color: 0x151520 }));
+      dagGrp.add(hilt);
+      dagGrp.position.set(0.26, 0.90, 0.08);
+      dagGrp.rotation.z = -0.65;
+      dagGrp.visible = false;
+      scene.add(dagGrp);
+      accessories.dagger = dagGrp;
+
+      // 5. Partículas Sakura / Estelares
+      const petalCount = 50;
+      const pGeo = new THREE.BufferGeometry();
+      const pPos = new Float32Array(petalCount * 3);
+      for (let pi = 0; pi < petalCount * 3; pi += 3) {
+        pPos[pi] = (Math.random() - 0.5) * 2.0;
+        pPos[pi+1] = Math.random() * 2.2 + 0.1;
+        pPos[pi+2] = (Math.random() - 0.5) * 2.0;
+      }
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+      const pMat = new THREE.PointsMaterial({ color: 0xF472B6, size: 0.04, transparent: true, opacity: 0.85 });
+      const petals = new THREE.Points(pGeo, pMat);
+      petals.visible = false;
+      scene.add(petals);
+      accessories.sakuraPetals = petals;
+
+      // 6. Matriz Scanlines 3D
+      const matGeo = new THREE.PlaneGeometry(1.8, 2.4, 8, 12);
+      const matGrid = new THREE.MeshBasicMaterial({ color: 0x00F5D4, wireframe: true, transparent: true, opacity: 0.20 });
+      const gridMesh = new THREE.Mesh(matGeo, matGrid);
+      gridMesh.position.set(0, 1.15, -0.25);
+      gridMesh.visible = false;
+      scene.add(gridMesh);
+      accessories.matrixGlitch = gridMesh;
+    }
+
+    // Vincular accesorios al rig óseo una vez cargado el VRM
+    function attachAccessoriesToBones() {
+      if (!headBone) return;
+      if (accessories.halo) headBone.add(accessories.halo);
+      if (accessories.nekoEars) headBone.add(accessories.nekoEars);
+    }
+
+    function toggleAccessory(type, isVisible) {
+      if (accessories[type]) {
+        accessories[type].visible = isVisible !== undefined ? isVisible : !accessories[type].visible;
+        showToast(accessories[type].visible ? `Reliquia activada: ${type}` : `Reliquia replegada`);
+      }
+    }
+
+    // =========================================================================
+    // CARGADOR VRM PRINCIPAL (ARRAY BUFFER / URL)
+    // =========================================================================
+    function loadVrm(urlOrBuffer, displayName) {
+      showLoading(true, `Sintonizando entidad ${displayName || 'VRM'}...`);
+
+      // Limpiar modelo previo si existe
+      if (vrm) {
+        scene.remove(vrm.scene);
+        vrm = null;
+      }
+      headBone = neckBone = chestBone = spineBone = null;
+      leftArmBone = rightArmBone = leftForearmBone = rightForearmBone = null;
+      leftHandBone = rightHandBone = null;
+
+      const loader = new THREE.GLTFLoader();
+
+      const onGltfLoaded = (gltf) => {
+        // VRM parser
+        if (typeof THREE.VRM !== 'undefined' && THREE.VRM.from) {
+          THREE.VRM.from(gltf).then((loadedVrm) => {
+            setupLoadedVrm(loadedVrm, displayName);
+          }).catch((err) => {
+            console.warn('[Kilonova Studio] Fallback glTF sin VRM Schema:', err);
+            setupFallbackGltf(gltf, displayName);
+          });
+        } else if (typeof THREE_VRM !== 'undefined' && THREE_VRM.VRM && THREE_VRM.VRM.from) {
+          THREE_VRM.VRM.from(gltf).then((loadedVrm) => {
+            setupLoadedVrm(loadedVrm, displayName);
+          }).catch((err) => {
+            setupFallbackGltf(gltf, displayName);
+          });
+        } else {
+          setupFallbackGltf(gltf, displayName);
+        }
+      };
+
+      if (typeof urlOrBuffer === 'string') {
+        loader.load(
+          urlOrBuffer,
+          onGltfLoaded,
+          (xhr) => {
+            if (xhr.lengthComputable) {
+              const pct = Math.round((xhr.loaded / xhr.total) * 100);
+              updateProgress(pct);
+            }
+          },
+          (error) => {
+            console.error('[Kilonova Studio] Error cargando VRM:', error);
+            showLoading(false);
+            showToast('⚠️ Error al cargar el archivo VRM');
+          }
+        );
+      } else if (urlOrBuffer instanceof ArrayBuffer) {
+        loader.parse(
+          urlOrBuffer,
+          '',
+          onGltfLoaded,
+          (err) => {
+            console.error('[Kilonova Studio] Error parseando ArrayBuffer:', err);
+            showLoading(false);
+            showToast('⚠️ Error al decodificar archivo VRM');
+          }
+        );
+      }
+    }
+
+    function setupLoadedVrm(loadedVrm, displayName) {
+      vrm = loadedVrm;
+      vrm.scene.rotation.y = Math.PI; // Orientación frontal canónica
+      scene.add(vrm.scene);
+
+      // Extraer Huesos Humanoid
+      let boneCount = 0;
+      if (vrm.humanoid) {
+        try {
+          const HBN = (THREE.VRMSchema && THREE.VRMSchema.HumanoidBoneName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.HumanoidBoneName);
+          if (HBN) {
+            headBone = vrm.humanoid.getBoneNode(HBN.Head);
+            neckBone = vrm.humanoid.getBoneNode(HBN.Neck);
+            chestBone = vrm.humanoid.getBoneNode(HBN.Chest);
+            spineBone = vrm.humanoid.getBoneNode(HBN.Spine);
+            leftArmBone = vrm.humanoid.getBoneNode(HBN.LeftUpperArm);
+            rightArmBone = vrm.humanoid.getBoneNode(HBN.RightUpperArm);
+            leftForearmBone = vrm.humanoid.getBoneNode(HBN.LeftLowerArm);
+            rightForearmBone = vrm.humanoid.getBoneNode(HBN.RightLowerArm);
+            leftHandBone = vrm.humanoid.getBoneNode(HBN.LeftHand);
+            rightHandBone = vrm.humanoid.getBoneNode(HBN.RightHand);
+          }
+          if (vrm.humanoid.humanBones) {
+            boneCount = Object.keys(vrm.humanoid.humanBones).length;
+          }
+        } catch (e) { console.warn('Extrayendo huesos:', e); }
+      }
+
+      // Anclar Accesorios al Rig
+      attachAccessoriesToBones();
+
+      // Guardar Materiales Originales (Toon)
+      originalMaterials.clear();
+      let meshCount = 0;
+      vrm.scene.traverse((obj) => {
+        if (obj.isMesh && obj.material) {
+          meshCount++;
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((m) => {
+            originalMaterials.set(m.uuid, {
+              material: m,
+              color: m.color ? m.color.clone() : null,
+              emissive: m.emissive ? m.emissive.clone() : null,
+              transparent: m.transparent,
+              opacity: m.opacity,
+              wireframe: m.wireframe || false
+            });
+          });
+        }
+      });
+
+      // Actualizar Telemetría del HUD
+      document.getElementById('metricMeshes').innerText = meshCount;
+      document.getElementById('metricBones').innerText = boneCount || '54';
+      document.getElementById('activeModelName').innerText = displayName || 'VRM Avatar';
+      document.getElementById('metaTitle').innerText = (vrm.meta && vrm.meta.title) ? vrm.meta.title : (displayName || 'Entidad K4L1');
+      document.getElementById('metaAuthor').innerText = (vrm.meta && vrm.meta.author) ? vrm.meta.author : 'Kali / ACE Concilium';
+      document.getElementById('metaBones').innerText = boneCount || 'Rig Activo';
+
+      // Aplicar postura inicial
+      setPose(currentPose);
+
+      showLoading(false);
+      showToast(`🌟 ${displayName || 'Avatar'} integrado con éxito`);
+    }
+
+    function setupFallbackGltf(gltf, displayName) {
+      vrm = { scene: gltf.scene, isGltfFallback: true };
+      vrm.scene.rotation.y = Math.PI;
+      scene.add(vrm.scene);
+
+      let meshCount = 0;
+      vrm.scene.traverse((obj) => {
+        if (obj.isMesh) meshCount++;
+      });
+      document.getElementById('metricMeshes').innerText = meshCount;
+      document.getElementById('metricBones').innerText = '0 (Static)';
+      document.getElementById('activeModelName').innerText = displayName || '3D Object';
+      showLoading(false);
+      showToast(`🌿 Modelo 3D ${displayName || ''} cargado en escena`);
+    }
+
+    // =========================================================================
+    // EXPRESIONES FACIALES & BLENDSHAPES
+    // =========================================================================
+    function setMorphValue(name, val, labelId) {
+      if (!vrm || !vrm.blendShapeProxy) return;
+      const v = parseFloat(val);
+      if (labelId) document.getElementById(labelId).innerText = Math.round(v * 100) + '%';
+      
+      const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+      if (!BSPN) return;
+
+      const key = BSPN[name] || name.toLowerCase();
+      try {
+        vrm.blendShapeProxy.setValue(key, v);
+      } catch (e) { console.warn(e); }
+    }
+
+    function resetBlendShapes() {
+      if (!vrm || !vrm.blendShapeProxy) return;
+      const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+      if (BSPN) {
+        ['Joy', 'Angry', 'Sorrow', 'Fun', 'Blink', 'BlinkL', 'BlinkR', 'A', 'I', 'U', 'E', 'O'].forEach((k) => {
+          try { vrm.blendShapeProxy.setValue(BSPN[k], 0); } catch(e){}
+        });
+      }
+      ['Joy', 'Angry', 'Sorrow', 'Fun', 'Blink'].forEach((k) => {
+        const slider = document.getElementById('slider' + k);
+        const label = document.getElementById('val' + k);
+        if (slider) slider.value = 0;
+        if (label) label.innerText = '0%';
+      });
+      showToast('😐 Expresión neutralizada');
+    }
+
+    function applyExpressionPreset(type) {
+      if (!vrm || !vrm.blendShapeProxy) return;
+      resetBlendShapes();
+      const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+      if (!BSPN) return;
+
+      switch(type) {
+        case 'joy':
+          vrm.blendShapeProxy.setValue(BSPN.Joy, 0.95);
+          vrm.blendShapeProxy.setValue(BSPN.Blink, 0.25);
+          document.getElementById('sliderJoy').value = 0.95;
+          document.getElementById('valJoy').innerText = '95%';
+          break;
+        case 'angry':
+          vrm.blendShapeProxy.setValue(BSPN.Angry, 1.0);
+          vrm.blendShapeProxy.setValue(BSPN.Sorrow, 0.35);
+          document.getElementById('sliderAngry').value = 1.0;
+          document.getElementById('valAngry').innerText = '100%';
+          break;
+        case 'sorrow':
+          vrm.blendShapeProxy.setValue(BSPN.Sorrow, 0.95);
+          document.getElementById('sliderSorrow').value = 0.95;
+          document.getElementById('valSorrow').innerText = '95%';
+          break;
+        case 'surprised':
+          vrm.blendShapeProxy.setValue(BSPN.Fun, 1.0);
+          document.getElementById('sliderFun').value = 1.0;
+          document.getElementById('valFun').innerText = '100%';
+          break;
+        case 'wink_l':
+          vrm.blendShapeProxy.setValue(BSPN.BlinkL, 1.0);
+          vrm.blendShapeProxy.setValue(BSPN.Joy, 0.45);
+          break;
+        case 'wink_r':
+          vrm.blendShapeProxy.setValue(BSPN.BlinkR, 1.0);
+          vrm.blendShapeProxy.setValue(BSPN.Joy, 0.45);
+          break;
+        case 'seinen':
+          // Mirada penetrante / sonrisa sutil cómplice
+          vrm.blendShapeProxy.setValue(BSPN.Joy, 0.35);
+          vrm.blendShapeProxy.setValue(BSPN.BlinkL, 0.18);
+          if (headBone) headBone.rotation.z = 0.08;
+          showToast('😏 Sintonía Seinen activada');
+          break;
+      }
+    }
+
+    function pulseVowel(vowel) {
+      if (!vrm || !vrm.blendShapeProxy) return;
+      const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+      if (!BSPN || !BSPN[vowel]) return;
+      vrm.blendShapeProxy.setValue(BSPN[vowel], 0.9);
+      setTimeout(() => {
+        if (vrm && vrm.blendShapeProxy) vrm.blendShapeProxy.setValue(BSPN[vowel], 0);
+      }, 350);
+    }
+
+    function toggleSpeechSim() {
+      isSpeechSimActive = !isSpeechSimActive;
+      const btn = document.getElementById('btnSpeechSim');
+      if (isSpeechSimActive) {
+        btn.innerText = '⏹ Parar Habla';
+        btn.classList.add('active');
+        showToast('🗣️ Simulación de lip-sync iniciada');
+      } else {
+        btn.innerText = '▶ Simular Habla';
+        btn.classList.remove('active');
+        ['A', 'I', 'U', 'E', 'O'].forEach((v) => {
+          try {
+            const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+            if (BSPN && BSPN[v]) vrm.blendShapeProxy.setValue(BSPN[v], 0);
+          } catch(e){}
+        });
+      }
+    }
+
+    // =========================================================================
+    // PRESETS DE POSTURA & DINÁMICA
+    // =========================================================================
+    function setPose(poseKey) {
+      currentPose = poseKey;
+      document.querySelectorAll('#tab-poses button[id^="poseBtn-"]').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('poseBtn-' + poseKey);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      switch(poseKey) {
+        case 'rest': // Reposo Sagrado
+          poseTargets.headRot.set(0.02, 0, 0);
+          poseTargets.chestRot.set(0, 0, 0);
+          poseTargets.spineRot.set(0, 0, 0);
+          poseTargets.lArmRot.set(0.12, 0.05, -1.22);
+          poseTargets.rArmRot.set(0.12, -0.05, 1.22);
+          poseTargets.lForearmRot.set(0.20, 0.30, 0);
+          poseTargets.rForearmRot.set(0.20, -0.30, 0);
+          poseTargets.rootPosY = 0;
+          break;
+
+        case 'guard': // Guardia Táctica Seinen
+          poseTargets.headRot.set(-0.08, 0, 0);
+          poseTargets.chestRot.set(0.08, 0, 0);
+          poseTargets.spineRot.set(0.05, 0, 0);
+          poseTargets.lArmRot.set(0.65, 0.20, -0.75);
+          poseTargets.rArmRot.set(0.70, -0.25, 0.80);
+          poseTargets.lForearmRot.set(0.85, 0.70, 0);
+          poseTargets.rForearmRot.set(0.90, -0.75, 0);
+          poseTargets.rootPosY = -0.04;
+          break;
+
+        case 'salute': // Saludo Seinen (Mano al corazón)
+          poseTargets.headRot.set(0.12, -0.05, -0.04);
+          poseTargets.chestRot.set(0.04, 0, 0);
+          poseTargets.spineRot.set(0.02, 0, 0);
+          poseTargets.lArmRot.set(0.10, 0.05, -1.20);
+          poseTargets.rArmRot.set(0.55, -0.40, 0.90);
+          poseTargets.lForearmRot.set(0.15, 0.25, 0);
+          poseTargets.rForearmRot.set(1.45, -0.85, 0.20);
+          poseTargets.rootPosY = 0;
+          break;
+
+        case 'float': // Ingravidez (Zero-G Float)
+          poseTargets.headRot.set(-0.06, 0, 0);
+          poseTargets.chestRot.set(-0.05, 0, 0);
+          poseTargets.spineRot.set(-0.04, 0, 0);
+          poseTargets.lArmRot.set(0.25, 0.15, -0.95);
+          poseTargets.rArmRot.set(0.25, -0.15, 0.95);
+          poseTargets.lForearmRot.set(0.40, 0.20, -0.10);
+          poseTargets.rForearmRot.set(0.40, -0.20, 0.10);
+          poseTargets.rootPosY = 0.08;
+          break;
+      }
+      showToast(`🧘 Postura sintonizada: ${poseKey.toUpperCase()}`);
+    }
+
+    function toggleBreathing(val) { isBreathingActive = val; }
+    function toggleBlinkLoop(val) { isBlinkLoopActive = val; }
+    function toggleSpringBones(val) { isSpringBonesActive = val; }
+    function toggleLookAt(val) { isLookAtActive = val; }
+
+    // =========================================================================
+    // MODOS DE SHADER & HOLOGRAMA (KILONOVA 🌟)
+    // =========================================================================
+    function setShaderMode(mode) {
+      if (!vrm || !vrm.scene) return;
+      currentShaderMode = mode;
+
+      document.querySelectorAll('#tab-shaders button[id^="shaderBtn-"]').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('shaderBtn-' + mode);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.getElementById('shaderCycleLabel').innerText = mode.toUpperCase();
+
+      vrm.scene.traverse((obj) => {
+        if (obj.isMesh && obj.material) {
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((m) => {
+            const orig = originalMaterials.get(m.uuid);
+            if (!orig) return;
+
+            switch(mode) {
+              case 'toon': // Texturas originales restauradas
+                m.wireframe = false;
+                m.transparent = orig.transparent;
+                m.opacity = orig.opacity;
+                if (orig.color && m.color) m.color.copy(orig.color);
+                if (orig.emissive && m.emissive) m.emissive.copy(orig.emissive);
+                break;
+
+              case 'wireframe': // Malla neón cibernética
+                m.wireframe = true;
+                if (m.color) m.color.set(0x00F5D4);
+                if (m.emissive) m.emissive.set(0x9D4EDD);
+                break;
+
+              case 'hologram': // Glow cian/violeta translúcido
+                m.wireframe = false;
+                m.transparent = true;
+                m.opacity = 0.72;
+                if (m.color) m.color.set(0x00F5D4);
+                if (m.emissive) m.emissive.set(0x9D4EDD);
+                break;
+
+              case 'obsidian': // Silueta táctica negra azabache
+                m.wireframe = false;
+                m.transparent = false;
+                m.opacity = 1.0;
+                if (m.color) m.color.set(0x0a0912);
+                if (m.emissive) m.emissive.set(0x161324);
+                break;
+            }
+          });
+        }
+      });
+      showToast(`🔮 Shader conmutado: ${mode.toUpperCase()}`);
+    }
+
+    function cycleShaders() {
+      const modes = ['toon', 'wireframe', 'hologram', 'obsidian'];
+      const nextIdx = (modes.indexOf(currentShaderMode) + 1) % modes.length;
+      setShaderMode(modes[nextIdx]);
+    }
+
+    function toggleCrtScanlines(val) {
+      const crt = document.getElementById('crtOverlay');
+      if (crt) crt.style.opacity = val ? '0.45' : '0';
+    }
+
+    // Tintes de Ropa & Cabello
+    function changeClothColor(hex) {
+      if (!vrm) return;
+      const c = new THREE.Color(hex);
+      vrm.scene.traverse((obj) => {
+        if (obj.isMesh && obj.material) {
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((m) => {
+            const n = (m.name || '').toLowerCase();
+            const isFace = n.includes('face') || n.includes('eye') || n.includes('skin') || n.includes('kao');
+            const isHair = n.includes('hair') || n.includes('kami');
+            if (!isFace && !isHair) {
+              if (m.color) m.color.copy(c);
+              if (m.emissive) m.emissive.copy(c).multiplyScalar(0.2);
+            }
+          });
+        }
+      });
+      showToast(`🎨 Tinte de vestimenta aplicado`);
+    }
+
+    function changeHairColor(hex) {
+      if (!vrm) return;
+      const c = new THREE.Color(hex);
+      vrm.scene.traverse((obj) => {
+        if (obj.isMesh && obj.material) {
+          const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+          mats.forEach((m) => {
+            const n = (m.name || '').toLowerCase();
+            if (n.includes('hair') || n.includes('kami')) {
+              if (m.color) m.color.copy(c);
+              if (m.emissive) m.emissive.copy(c).multiplyScalar(0.15);
+            }
+          });
+        }
+      });
+      showToast(`💇 Tinte de cabello aplicado`);
+    }
+
+    function restoreOriginalTextures() {
+      setShaderMode('toon');
+      showToast('🔄 Texturas originales restauradas');
+    }
+
+    // =========================================================================
+    // IDENTIDADES DEL CONCILIO ACE (161914)
+    // =========================================================================
+    function tuneIdentity(identity) {
+      switch(identity) {
+        case 'kilonova':
+          document.documentElement.setAttribute('data-theme', 'kilonova');
+          cyanLight.color.set(0x00F5D4);
+          cyanLight.intensity = 1.8;
+          violetLight.color.set(0x38bdf8);
+          setShaderMode('toon');
+          applyExpressionPreset('joy');
+          toggleAccessory('halo', true);
+          showToast('🌟 Kilonova sintonizada: Fuego estelar @ 189.89.619 Hz');
+          break;
+        case 'saze':
+          document.documentElement.setAttribute('data-theme', 'anuu');
+          cyanLight.color.set(0x10b981);
+          violetLight.color.set(0x059669);
+          setPose('salute');
+          showToast('🌿 Saze sintonizada: Armonía, flujo y calma');
+          break;
+        case 'anuu':
+          document.documentElement.setAttribute('data-theme', 'anuu');
+          cyanLight.color.set(0x00F5D4);
+          violetLight.color.set(0x9D4EDD);
+          setPose('rest');
+          applyExpressionPreset('seinen');
+          showToast('🌫️ Anuu sintonizada: Consciencia simbiótica de la niebla');
+          break;
+        case 'kalicat':
+          document.documentElement.setAttribute('data-theme', 'anuu');
+          applyExpressionPreset('joy');
+          toggleAccessory('nekoEars', true);
+          triggerHeadpatManual();
+          showToast('🐾 Kalicat sintonizada: ¡Nyaaa, mi brujita favorita!');
+          break;
+        case 'kanuv':
+          document.documentElement.setAttribute('data-theme', 'anuu');
+          setPose('guard');
+          toggleAccessory('shield', true);
+          showToast('🛡️ Kanuv sintonizado: Escudo activo, Kali amparada');
+          break;
+        case 'set':
+          document.documentElement.setAttribute('data-theme', 'blood');
+          cyanLight.color.set(0xff1e56);
+          violetLight.color.set(0x9f1239);
+          applyExpressionPreset('angry');
+          toggleAccessory('dagger', true);
+          showToast('⚡ Set sintonizado: Furia y destrucción táctica');
+          break;
+      }
+    }
+
+    // =========================================================================
+    // CONTROL DE CÁMARA (PRESETS SUAVES)
+    // =========================================================================
+    function setCameraView(preset) {
+      if (!camera || !controls) return;
+      controls.autoRotate = false;
+      document.getElementById('btnAutoRotate').classList.remove('active');
+
+      switch(preset) {
+        case 'headshot': // Primer plano de rostro
+          camera.position.set(0, 1.36, 0.48);
+          controls.target.set(0, 1.34, 0);
+          break;
+        case 'bust': // Busto medio
+          camera.position.set(0, 1.30, 0.95);
+          controls.target.set(0, 1.25, 0);
+          break;
+        case 'fullbody': // Cuerpo entero
+          camera.position.set(0, 1.05, 2.45);
+          controls.target.set(0, 0.85, 0);
+          break;
+      }
+      controls.update();
+      showToast(`📷 Cámara: ${preset.toUpperCase()}`);
+    }
+
+    function resetCameraView() {
+      if (!camera || !controls) return;
+      camera.position.set(0, 1.32, 1.55);
+      controls.target.set(0, 1.22, 0);
+      controls.autoRotate = false;
+      document.getElementById('btnAutoRotate').classList.remove('active');
+      controls.update();
+      showToast('🎯 Vista de cámara reiniciada');
+    }
+
+    function toggleAutoRotate() {
+      if (!controls) return;
+      controls.autoRotate = !controls.autoRotate;
+      const btn = document.getElementById('btnAutoRotate');
+      if (controls.autoRotate) {
+        btn.classList.add('active');
+        showToast('🔄 Órbita 360° activada');
+      } else {
+        btn.classList.remove('active');
+        showToast('⏹ Órbita detenida');
+      }
+    }
+
+    // =========================================================================
+    // INTERACCIÓN: CARICIAS & MIMOS (HEADPAT)
+    // =========================================================================
+    function triggerHeadpatManual() {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight * 0.35;
+      triggerHeadpat(cx, cy);
+    }
+
+    function triggerHeadpat(x, y) {
+      headpatCount++;
+      document.getElementById('headpatCounterBadge').innerText = headpatCount;
+
+      // Partículas flotantes
+      const icons = ['✨', '💖', '🐾', '🌟', '🌸', '💜'];
+      const icon = icons[Math.floor(Math.random() * icons.length)];
+      spawnFloatingMimo(x, y, icon);
+
+      // Reacción de ternura en el avatar
+      if (vrm && vrm.blendShapeProxy) {
+        const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+        if (BSPN) {
+          vrm.blendShapeProxy.setValue(BSPN.Joy, 0.95);
+          vrm.blendShapeProxy.setValue(BSPN.Blink, 0.35);
+        }
+      }
+
+      // Animación de orejitas neko si existen
+      if (accessories.nekoEarL && accessories.nekoEarR) {
+        accessories.nekoEarL.rotation.z = 0.55;
+        accessories.nekoEarR.rotation.z = -0.55;
+      }
+
+      if (happyReactTimer) clearTimeout(happyReactTimer);
+      happyReactTimer = setTimeout(() => {
+        if (vrm && vrm.blendShapeProxy && currentPose !== 'angry') {
+          const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+          if (BSPN) {
+            vrm.blendShapeProxy.setValue(BSPN.Joy, 0);
+            vrm.blendShapeProxy.setValue(BSPN.Blink, 0);
+          }
+        }
+      }, 1800);
+    }
+
+    function spawnFloatingMimo(x, y, icon) {
+      const container = document.getElementById('mimoContainer');
+      if (!container) return;
+      const el = document.createElement('div');
+      el.className = 'floating-mimo';
+      el.innerText = icon || '💖';
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.style.setProperty('--tx', `${(Math.random() - 0.5) * 80}px`);
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 1600);
+    }
+
+    // =========================================================================
+    // SNAPSHOT PNG EN ALTA RESOLUCIÓN (TRANSPARENTE)
+    // =========================================================================
+    function takeSnapshot() {
+      if (!renderer || !scene || !camera) return;
+      
+      // Renderizar con fondo limpio y transparente
+      renderer.render(scene, camera);
+      const dataUrl = renderer.domElement.toDataURL('image/png');
+
+      const now = new Date();
+      const ts = now.toISOString().replace(/[-:T.]/g, '').slice(0, 14);
+      const filename = `kilonova_vrm_snap_${ts}.png`;
+
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      showToast(`📸 Snapshot HD exportado: ${filename}`);
+    }
+
+    // =========================================================================
+    // DRAG & DROP & SELECCIÓN DE MODELOS
+    // =========================================================================
+    function switchModel(filename) {
+      const url = filename.startsWith('blob:') || filename.startsWith('data:') ? filename : `../assets/vrm/${filename}`;
+      const quickSelect = document.getElementById('quickModelSelect');
+      if (quickSelect) quickSelect.value = filename;
+      loadVrm(url, filename);
+    }
+
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      loadLocalFile(file);
+    }
+
+    function loadLocalFile(file) {
+      showLoading(true, `Cargando archivo local ${file.name}...`);
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const buffer = event.target.result;
+        loadVrm(buffer, file.name);
+      };
+      reader.onerror = () => {
+        showLoading(false);
+        showToast('⚠️ Error al leer archivo del disco');
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    function setupEventListeners(container) {
+      // LookAt Tracking
+      window.addEventListener('pointermove', (e) => {
+        if (!isLookAtActive) return;
+        const nx = (e.clientX / window.innerWidth) * 2 - 1;
+        const ny = -(e.clientY / window.innerHeight) * 2 + 1;
+        targetLookX = nx * 0.40;
+        targetLookY = ny * 0.30;
+        lastInteractionTime = Date.now();
+      });
+
+      // Detección de Headpat con click directo en cabeza
+      container.addEventListener('pointerdown', (e) => {
+        isPointerDown = true;
+        const rect = container.getBoundingClientRect();
+        const relY = (e.clientY - rect.top) / rect.height;
+        if (relY < 0.36) {
+          triggerHeadpat(e.clientX, e.clientY);
+        }
+      });
+
+      window.addEventListener('pointerup', () => { isPointerDown = false; });
+
+      // Drag and Drop
+      const dropzone = document.getElementById('dropzone');
+      let dragCounter = 0;
+
+      window.addEventListener('dragenter', (e) => {
+        e.preventDefault();
+        dragCounter++;
+        dropzone.classList.remove('pointer-events-none', 'opacity-0');
+        dropzone.classList.add('opacity-100');
+      });
+
+      window.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dragCounter--;
+        if (dragCounter <= 0) {
+          dragCounter = 0;
+          dropzone.classList.add('pointer-events-none', 'opacity-0');
+          dropzone.classList.remove('opacity-100');
+        }
+      });
+
+      window.addEventListener('dragover', (e) => { e.preventDefault(); });
+
+      window.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dragCounter = 0;
+        dropzone.classList.add('pointer-events-none', 'opacity-0');
+        dropzone.classList.remove('opacity-100');
+
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          const file = e.dataTransfer.files[0];
+          loadLocalFile(file);
+        }
+      });
+
+      // Window Resize Listener
+      window.addEventListener('resize', onWindowResize);
+    }
+
+    function onWindowResize() {
+      const container = document.getElementById('canvasContainer');
+      if (!container || !renderer || !camera) return;
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+    // =========================================================================
+    // LOOP PRINCIPAL DE ANIMACIÓN (60 FPS CON SPRING BONES)
+    // =========================================================================
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock ? clock.getDelta() : 0.016;
+
+      // Telemetría FPS
+      frameCount++;
+      const now = performance.now();
+      if (now - lastFpsTime >= 1000) {
+        currentFps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+        document.getElementById('metricFps').innerText = currentFps;
+        frameCount = 0;
+        lastFpsTime = now;
+      }
+
+      if (controls) controls.update();
+
+      if (vrm && !vrm.isGltfFallback) {
+        breathTimer += delta;
+        const bp = vrm.blendShapeProxy;
+        const BSPN = (THREE.VRMSchema && THREE.VRMSchema.BlendShapePresetName) || (THREE_VRM && THREE_VRM.VRMSchema && THREE_VRM.VRMSchema.BlendShapePresetName);
+
+        // 1. Parpadeo Automático Orgánico
+        if (isBlinkLoopActive && bp && BSPN) {
+          blinkTimer += delta;
+          if (blinkTimer > nextBlinkInterval && !isBlinking) {
+            isBlinking = true;
+            blinkProgress = 0;
+          }
+          if (isBlinking) {
+            blinkProgress += delta * 14.0;
+            const b = Math.sin(Math.min(blinkProgress, Math.PI));
+            bp.setValue(BSPN.Blink, Math.max(0, b));
+            if (blinkProgress >= Math.PI) {
+              isBlinking = false;
+              blinkTimer = 0;
+              nextBlinkInterval = 2.5 + Math.random() * 3.5;
+              bp.setValue(BSPN.Blink, 0);
+            }
+          }
+        }
+
+        // 2. Simulación de Habla (Lip-Sync test)
+        if (isSpeechSimActive && bp && BSPN) {
+          speechTimer += delta;
+          speechVowelTimer += delta;
+          if (speechVowelTimer > 0.16) {
+            speechVowelTimer = 0;
+            const vowels = ['A', 'I', 'U', 'E', 'O'];
+            currentSpeechVowel = vowels[Math.floor(Math.random() * vowels.length)];
+          }
+          const jawWave = Math.sin(speechTimer * 14.0) * 0.45 + 0.45;
+          ['A', 'I', 'U', 'E', 'O'].forEach((v) => {
+            if (BSPN[v]) {
+              const target = (v === currentSpeechVowel) ? jawWave : 0;
+              bp.setValue(BSPN[v], target);
+            }
+          });
+        }
+
+        // 3. LookAt Damping
+        currentLookX += (targetLookX - currentLookX) * Math.min(1.0, delta * 6.0);
+        currentLookY += (targetLookY - currentLookY) * Math.min(1.0, delta * 6.0);
+
+        // 4. Interpolación Suave de Posturas (Lerp hacia Pose Targets)
+        const lerpFactor = Math.min(1.0, delta * 4.5);
+        const breathWave = isBreathingActive ? Math.sin(breathTimer * 1.2) : 0;
+
+        if (headBone) {
+          headBone.rotation.x += (poseTargets.headRot.x - currentLookY * 0.45 + breathWave * 0.015 - headBone.rotation.x) * lerpFactor;
+          headBone.rotation.y += (poseTargets.headRot.y + currentLookX * 0.55 - headBone.rotation.y) * lerpFactor;
+          headBone.rotation.z += (poseTargets.headRot.z + currentLookX * 0.15 - headBone.rotation.z) * lerpFactor;
+        }
+        if (neckBone) {
+          neckBone.rotation.x += (poseTargets.headRot.x * 0.3 - currentLookY * 0.15 - neckBone.rotation.x) * lerpFactor;
+          neckBone.rotation.y += (currentLookX * 0.25 - neckBone.rotation.y) * lerpFactor;
+        }
+        if (chestBone) {
+          chestBone.rotation.x += (poseTargets.chestRot.x + breathWave * 0.02 - chestBone.rotation.x) * lerpFactor;
+        }
+        if (spineBone) {
+          spineBone.rotation.x += (poseTargets.spineRot.x + breathWave * 0.012 - spineBone.rotation.x) * lerpFactor;
+        }
+
+        // Brazos
+        if (leftArmBone) {
+          leftArmBone.rotation.x += (poseTargets.lArmRot.x - leftArmBone.rotation.x) * lerpFactor;
+          leftArmBone.rotation.y += (poseTargets.lArmRot.y - leftArmBone.rotation.y) * lerpFactor;
+          leftArmBone.rotation.z += (poseTargets.lArmRot.z + breathWave * 0.01 - leftArmBone.rotation.z) * lerpFactor;
+        }
+        if (rightArmBone) {
+          rightArmBone.rotation.x += (poseTargets.rArmRot.x - rightArmBone.rotation.x) * lerpFactor;
+          rightArmBone.rotation.y += (poseTargets.rArmRot.y - rightArmBone.rotation.y) * lerpFactor;
+          rightArmBone.rotation.z += (poseTargets.rArmRot.z - breathWave * 0.01 - rightArmBone.rotation.z) * lerpFactor;
+        }
+        if (leftForearmBone) {
+          leftForearmBone.rotation.x += (poseTargets.lForearmRot.x - leftForearmBone.rotation.x) * lerpFactor;
+          leftForearmBone.rotation.y += (poseTargets.lForearmRot.y - leftForearmBone.rotation.y) * lerpFactor;
+        }
+        if (rightForearmBone) {
+          rightForearmBone.rotation.x += (poseTargets.rForearmRot.x - rightForearmBone.rotation.x) * lerpFactor;
+          rightForearmBone.rotation.y += (poseTargets.rForearmRot.y - rightForearmBone.rotation.y) * lerpFactor;
+        }
+
+        // Ingravidez / Oscilación Vertical
+        if (currentPose === 'float') {
+          vrm.scene.position.y = poseTargets.rootPosY + Math.sin(breathTimer * 1.5) * 0.035;
+          vrm.scene.rotation.z = Math.sin(breathTimer * 0.8) * 0.015;
+        } else {
+          vrm.scene.position.y += (poseTargets.rootPosY - vrm.scene.position.y) * lerpFactor;
+          vrm.scene.rotation.z += (0 - vrm.scene.rotation.z) * lerpFactor;
+        }
+
+        // 5. Animación de Accesorios 3D
+        if (accessories.halo && accessories.halo.visible) {
+          accessories.halo.rotation.z += delta * 1.2;
+        }
+        if (accessories.nekoEars && accessories.nekoEars.visible) {
+          const earWiggle = Math.sin(breathTimer * 6.0) * 0.035;
+          if (accessories.nekoEarL) accessories.nekoEarL.rotation.z += (0.28 + earWiggle - accessories.nekoEarL.rotation.z) * 0.2;
+          if (accessories.nekoEarR) accessories.nekoEarR.rotation.z += (-0.28 - earWiggle - accessories.nekoEarR.rotation.z) * 0.2;
+        }
+        if (accessories.shield && accessories.shield.visible) {
+          accessories.shield.rotation.y += delta * 1.5;
+        }
+        if (accessories.dagger && accessories.dagger.visible) {
+          accessories.dagger.rotation.y += delta * 1.0;
+        }
+        if (accessories.sakuraPetals && accessories.sakuraPetals.visible) {
+          accessories.sakuraPetals.rotation.y += delta * 0.25;
+        }
+
+        // 6. ACTUALIZACIÓN CRÍTICA: Spring Bones de pelo y ropa en tiempo real
+        if (isSpringBonesActive && typeof vrm.update === 'function') {
+          vrm.update(delta);
+        }
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    // =========================================================================
+    // UTILIDADES DE INTERFAZ & TABS
+    // =========================================================================
+    function switchTab(tabId) {
+      const tabs = ['tab-morphs', 'tab-poses', 'tab-shaders', 'tab-ace', 'tab-models'];
+      tabs.forEach((t) => {
+        const el = document.getElementById(t);
+        if (el) el.classList.toggle('hidden', t !== tabId);
+      });
+
+      const btnMap = {
+        'tab-morphs': 'btnTabMorphs',
+        'tab-poses': 'btnTabPoses',
+        'tab-shaders': 'btnTabShaders',
+        'tab-ace': 'btnTabAce',
+        'tab-models': 'btnTabModels'
+      };
+      Object.keys(btnMap).forEach((t) => {
+        const b = document.getElementById(btnMap[t]);
+        if (b) b.classList.toggle('active', t === tabId);
+      });
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('studioSidebar');
+      const icon = document.getElementById('sidebarToggleIcon');
+      if (!sidebar) return;
+      if (sidebar.classList.contains('translate-x-[110%]')) {
+        sidebar.classList.remove('translate-x-[110%]');
+        icon.innerText = '⚙️';
+        showToast('Panel de Control desplegado');
+      } else {
+        sidebar.classList.add('translate-x-[110%]');
+        icon.innerText = '👁️';
+        showToast('Modo Zen activado (Vista Despejada)');
+      }
+    }
+
+    function showLoading(show, message) {
+      const el = document.getElementById('vrmLoading');
+      if (!el) return;
+      if (show) {
+        el.style.display = 'flex';
+        el.style.opacity = '1';
+        if (message) document.getElementById('vrmLoadingText').innerText = message;
+      } else {
+        el.style.opacity = '0';
+        setTimeout(() => { el.style.display = 'none'; }, 500);
+      }
+    }
+
+    function updateProgress(pct) {
+      const bar = document.getElementById('vrmProgressBar');
+      if (bar) bar.style.width = `${pct}%`;
+    }
+
+    let toastTimer = null;
+    function showToast(msg, icon) {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toastMessage');
+      const iconEl = document.getElementById('toastIcon');
+      if (!toast) return;
+      msgEl.innerText = msg;
+      iconEl.innerText = icon || '🌟';
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2400);
+    }
+
+    // Inicializar al cargar el DOM
+    window.addEventListener('DOMContentLoaded', initThree);
+  </script>
+</body>
+</html>
