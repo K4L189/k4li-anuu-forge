@@ -1,0 +1,88 @@
+/* K4L1 HUD CORE — Telemetry Strip, Command Palette, Scanlines (189.89.619 Hz) */
+:root {
+  --k4-purple: #9333ea;
+  --k4-emerald: #10b981;
+  --k4-amber: #f59e0b;
+  --k4-glass: rgba(10, 8, 18, 0.72);
+  --k4-line: rgba(255, 255, 255, 0.08);
+}
+
+/* Bisel con gradiente sutil: usa una máscara para no alterar el layout de nadie */
+.k4-bevel {
+  position: relative;
+  border-radius: 12px;
+  background: var(--k4-glass);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07), inset 0 -1px 0 rgba(0,0,0,.45);
+}
+.k4-bevel::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+  background: linear-gradient(135deg, var(--k4-purple), transparent 38%, transparent 62%, var(--k4-emerald));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; opacity: .55; pointer-events: none;
+}
+
+/* ---------- Telemetry Strip ---------- */
+#k4-strip {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  font: 600 10px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; color: #a1a1aa;
+  padding: 5px 10px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+#k4-strip.k4-float { position: fixed; left: 10px; bottom: 10px; z-index: 9990; max-width: min(560px, calc(100vw - 20px)); }
+#k4-strip.k4-inline { margin: 0 auto 6px; max-width: 80rem; width: calc(100% - 2rem); }
+#k4-strip .k4-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border-radius: 999px;
+  border: 1px solid var(--k4-line); background: rgba(0,0,0,.35); cursor: pointer; color: inherit;
+  transition: border-color .2s, color .2s;
+}
+#k4-strip .k4-chip:hover { border-color: var(--k4-purple); color: #fff; }
+#k4-strip .k4-dot { width: 7px; height: 7px; border-radius: 50%; background: #52525b; }
+#k4-strip .k4-dot.on { background: var(--k4-emerald); box-shadow: 0 0 8px var(--k4-emerald); }
+#k4-strip .k4-dot.warn { background: var(--k4-amber); box-shadow: 0 0 8px var(--k4-amber); }
+#k4-strip canvas { display: block; border-radius: 3px; background: rgba(0,0,0,.55); }
+#k4-strip .k4-bar { width: 70px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.08); overflow: hidden; }
+#k4-strip .k4-bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--k4-purple), var(--k4-amber)); }
+#k4-strip kbd {
+  padding: 1px 5px; border-radius: 4px; border: 1px solid var(--k4-line); background: rgba(255,255,255,.06); color: #e4e4e7;
+}
+
+/* ---------- Command Palette ---------- */
+#k4-palette {
+  position: fixed; inset: 0; z-index: 99999; display: none; align-items: flex-start; justify-content: center;
+  padding-top: 12vh; background: rgba(4, 3, 9, .55);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+}
+#k4-palette.open { display: flex; }
+#k4-palette .k4-box { width: min(640px, 92vw); overflow: hidden; background: rgba(12, 10, 22, .88); box-shadow: 0 30px 80px rgba(0,0,0,.65); }
+#k4-palette input {
+  width: 100%; padding: 16px 18px; background: transparent; border: 0; outline: 0; color: #fff;
+  font: 500 15px ui-monospace, SFMono-Regular, Menlo, monospace; border-bottom: 1px solid var(--k4-line);
+}
+#k4-palette ul { list-style: none; margin: 0; padding: 6px; max-height: 50vh; overflow-y: auto; }
+#k4-palette li {
+  display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 8px; cursor: pointer;
+  color: #d4d4d8; font: 500 13px ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+#k4-palette li .k4-grp { margin-left: auto; font-size: 10px; color: #71717a; }
+#k4-palette li.sel { background: linear-gradient(90deg, rgba(147,51,234,.28), rgba(16,185,129,.12)); color: #fff; }
+#k4-palette li mark { background: transparent; color: var(--k4-amber); font-weight: 700; }
+#k4-palette .k4-foot { padding: 7px 14px; border-top: 1px solid var(--k4-line); font: 10px ui-monospace, monospace; color: #71717a; display: flex; gap: 14px; }
+
+/* ---------- Toast ---------- */
+#k4-toast {
+  position: fixed; left: 50%; bottom: 56px; transform: translate(-50%, 20px); opacity: 0; z-index: 100000;
+  padding: 8px 14px; border-radius: 10px; pointer-events: none; transition: all .25s;
+  font: 600 12px ui-monospace, monospace; color: #fff;
+}
+#k4-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Scanlines CRT opcionales ---------- */
+body.k4-scanlines::after {
+  content: ""; position: fixed; inset: 0; z-index: 99990; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply; opacity: .55;
+}
+
+/* ---------- Shader de fondo ---------- */
+#k4-shader { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: .22; mix-blend-mode: screen; }
+
+@media (prefers-reduced-motion: reduce) { #k4-shader { display: none; } }

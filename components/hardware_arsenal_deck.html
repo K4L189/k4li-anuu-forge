@@ -232,6 +232,19 @@
       background: var(--accent-primary);
     }
   </style>
+  <link rel="stylesheet" href="../assets/css/hud_core.css">
+  <style>
+    /* Respuesta visual proporcional a la velocidad MIDI (0-127 → --vel 0..1) */
+    .mpc-pad.pad-active {
+      box-shadow: 0 0 calc(8px + 34px * var(--vel, 1)) var(--accent-secondary, #c084fc),
+                  inset 0 0 calc(4px + 14px * var(--vel, 1)) rgba(255,255,255,.25) !important;
+      transform: translateY(1px) scale(.985);
+    }
+    .viz-btn { font: 600 9px ui-monospace, monospace; padding: 2px 7px; border-radius: 6px; cursor: pointer;
+      border: 1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.55); color: #c4b5fd; }
+    .viz-btn:hover { border-color: #9333ea; color: #fff; }
+  </style>
+  <script src="../assets/js/hud_core.js" data-mount="float"></script>
 </head>
 <body class="p-2 sm:p-4 md:p-6 lg:p-8">
 
@@ -405,6 +418,10 @@
               <canvas id="scopeCanvas" width="480" height="112" class="w-full h-full block"></canvas>
               <div class="absolute top-1 left-2 text-[9px] font-mono text-purple-400/80 pointer-events-none">
                 RES-DSP // 189.89 Hz PEAK FILTER
+              </div>
+              <div class="absolute top-1 right-2 flex gap-1.5 z-10">
+                <button type="button" class="viz-btn" id="vizModeBtn" onclick="toggleVizMode()" title="Alternar osciloscopio / barras FFT">SCOPE</button>
+                <button type="button" class="viz-btn" id="vizSrcBtn" onclick="toggleVizSource()" title="Fuente: síntesis interna o entrada de audio real (Focusrite si existe)">SYNTH</button>
               </div>
             </div>
 
@@ -1310,6 +1327,52 @@
     let scopeCanvas = null;
     let sCtx = null;
 
+    let vizMode = 'scope';      // 'scope' | 'fft'
+    let vizSource = 'synth';    // 'synth' (Web Audio interno) | 'input' (entrada real vía K4HUD)
+
+    function toggleVizMode() {
+      vizMode = vizMode === 'scope' ? 'fft' : 'scope';
+      document.getElementById('vizModeBtn').textContent = vizMode === 'scope' ? 'SCOPE' : 'FFT';
+    }
+
+    function toggleVizSource() {
+      if (vizSource === 'synth') {
+        if (!window.K4HUD) return;
+        K4HUD.armAudio().then(() => {
+          vizSource = 'input';
+          document.getElementById('vizSrcBtn').textContent = 'INPUT';
+        }).catch(() => {});
+      } else {
+        vizSource = 'synth';
+        document.getElementById('vizSrcBtn').textContent = 'SYNTH';
+      }
+    }
+
+    function activeAnalyser() {
+      if (vizSource === 'input' && window.K4HUD && K4HUD.audio.armed) return K4HUD.audio.an;
+      return analyser;
+    }
+
+    function drawFftBars(an) {
+      const bins = an.frequencyBinCount, data = new Uint8Array(bins);
+      an.getByteFrequencyData(data);
+      sCtx.fillStyle = 'rgba(7, 5, 13, 0.35)';
+      sCtx.fillRect(0, 0, scopeCanvas.width, scopeCanvas.height);
+      const bars = 56, w = scopeCanvas.width / bars, h = scopeCanvas.height;
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-secondary').trim() || '#c084fc';
+      for (let i = 0; i < bars; i++) {
+        // reparto logarítmico de bins para dar resolución a graves (189.89 Hz vive aquí)
+        const a = Math.floor(Math.pow(i / bars, 2) * bins * 0.6);
+        const b = Math.max(a + 1, Math.floor(Math.pow((i + 1) / bars, 2) * bins * 0.6));
+        let peak = 0; for (let k = a; k < b; k++) if (data[k] > peak) peak = data[k];
+        const bh = (peak / 255) * (h - 4);
+        sCtx.fillStyle = i % 7 === 0 ? '#f59e0b' : accent;
+        sCtx.globalAlpha = 0.35 + 0.65 * (peak / 255);
+        sCtx.fillRect(i * w + 1, h - bh, w - 2, bh);
+      }
+      sCtx.globalAlpha = 1;
+    }
+
     function startOscilloscope() {
       scopeCanvas = document.getElementById("scopeCanvas");
       if (!scopeCanvas) return;
@@ -1317,11 +1380,13 @@
 
       function draw() {
         requestAnimationFrame(draw);
-        if (!analyser) return;
+        const srcAn = activeAnalyser();
+        if (!srcAn) return;
+        if (vizMode === 'fft') { drawFftBars(srcAn); return; }
 
-        const bufferLength = analyser.frequencyBinCount;
+        const bufferLength = srcAn.frequencyBinCount;
         const dataArray = new Uint8Array(bufferLength);
-        analyser.getByteTimeDomainData(dataArray);
+        srcAn.getByteTimeDomainData(dataArray);
 
         sCtx.fillStyle = 'rgba(7, 5, 13, 0.25)';
         sCtx.fillRect(0, 0, scopeCanvas.width, scopeCanvas.height);
@@ -1471,7 +1536,9 @@
       if (velMode === "full127") effVel = 127;
       else if (velMode === "logarithmic") effVel = Math.round(Math.log10(1 + 9 * (velocity / 127)) * 127);
 
-      // Feedback visual
+      // Feedback visual (brillo proporcional a la velocidad) + difusión al bus HUD
+      padElem.style.setProperty("--vel", (effVel / 127).toFixed(2));
+      if (window.K4HUD) K4HUD.emit("pad", { pad: padNum, vel: effVel, mode: currentMode, source });
       padElem.classList.add("pad-active");
       const meter = padElem.querySelector(".pad-meter");
       if (meter) meter.style.width = `${(effVel / 127) * 100}%`;
@@ -1695,6 +1762,11 @@
       if (!dial || !ind || !valLabel) return;
 
       dial.setAttribute("data-val", val);
+      if (window.K4HUD) {
+        K4HUD.emit("knob", { id: knobIndex, value: val });
+        // Q-Link 1 = latencia adaptativa: se comparte con el resto de HUDs (guard anti-bucle por igualdad)
+        if (knobIndex === 1 && K4HUD.getLatency() !== val) K4HUD.setLatency(val, true);
+      }
       const min = parseFloat(dial.getAttribute("data-min"));
       const max = parseFloat(dial.getAttribute("data-max"));
       
@@ -2193,5 +2265,16 @@ echo "[✓] Centinela Raspberry Pi 3B configurado y operando a 2.5W."
       document.body.addEventListener("click", () => initAudio(), { once: true });
     });
   </script>
+<script>
+  /* Sincronización con el bus HUD: la latencia adaptativa es compartida entre páginas */
+  window.addEventListener('load', function () {
+    if (!window.K4HUD) return;
+    K4HUD.on('latency', function (m) {
+      if (qlinkValues.latency !== m.ms && m.ms >= 20 && m.ms <= 7000) updateKnobValue(1, m.ms);
+    });
+    var stored = K4HUD.getLatency();
+    if (stored >= 20 && stored <= 7000) updateKnobValue(1, stored);
+  });
+</script>
 </body>
 </html>

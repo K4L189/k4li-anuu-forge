@@ -285,6 +285,8 @@
       opacity: 0.18;
     }
   </style>
+  <link rel="stylesheet" href="../assets/css/hud_core.css">
+  <script src="../assets/js/hud_core.js" data-mount="float"></script>
 </head>
 <body class="p-2 sm:p-4 flex flex-col justify-between select-none">
 
@@ -371,6 +373,7 @@
         </div>
 
         <div class="flex items-center gap-3 text-[10px] font-mono text-zinc-500">
+          <canvas id="termViz" width="64" height="16" class="hidden sm:inline-block rounded" style="background:rgba(0,0,0,.5)" title="Entrada de audio (comando mic)"></canvas>
           <span class="hidden sm:inline">SET ⚡ & ROSA GRIS 🌸</span>
           <span class="text-zinc-600">|</span>
           <span id="clockDisplay">00:00:00 UTC</span>
@@ -998,7 +1001,8 @@
       "help", "whoami", "skills", "services", "audit", "relics",
       "cat relic ", "open relic ", "theme ", "signal", "clear",
       "council", "matrix", "crt on", "crt off", "sound on", "sound off",
-      "date", "uptime", "history", "echo ", "banner", "set", "rosagris", "anuu", "161914", "sudo"
+      "date", "uptime", "history", "echo ", "banner", "set", "rosagris", "anuu", "161914", "sudo",
+      "mic", "viz on", "viz off", "latency ", "hw"
     ];
 
     function handleTabCompletion() {
@@ -1239,6 +1243,52 @@
           printLine(`<span class="term-dim">Privilegios cuánticos de Root concedidos. El Vacío y la Niebla obedecen tu voluntad.</span>`);
           break;
 
+        case "mic":
+          if (!window.K4HUD) { playErrorBeep(); printLine(`<span class="term-danger">HUD core no cargado.</span>`); break; }
+          printLine(`<span class="term-dim">Solicitando entrada de audio (se preferirá Focusrite/Scarlett si existe)…</span>`);
+          try {
+            const a = await K4HUD.armAudio();
+            playExecuteBeep();
+            printLine(`<span class="term-success">[AUDIO LIVE]</span> ${escapeHtml(a.label)} @ ${(a.ctx.sampleRate / 1000)} kHz — el navegador puede limitar la tasa real respecto a los 192 kHz del hardware.`);
+          } catch (err) {
+            playErrorBeep();
+            printLine(`<span class="term-danger">Entrada no disponible:</span> ${escapeHtml(String((err && err.name) || err))}`);
+          }
+          break;
+
+        case "viz":
+          termVizOn = arg1 === "off" ? false : true;
+          printLine(`<span class="term-success">Visualizador ${termVizOn ? "ON" : "OFF"}.</span> <span class="term-dim">Barras en la cabecera y lluvia Matrix reactivas a la entrada (usa <span class="term-highlight">mic</span> para armarla).</span>`);
+          break;
+
+        case "latency": {
+          if (!window.K4HUD) { playErrorBeep(); break; }
+          const presets = { turbo: 35, sigilo: 850, tarpit: 4200, fortaleza: 6000 };
+          if (!arg1 || arg1 === "status") {
+            printLine(`Latencia adaptativa actual: <span class="term-highlight">${K4HUD.getLatency()} ms</span> <span class="term-dim">(compartida con el resto de HUDs)</span>`);
+          } else {
+            const ms = presets[arg1] ?? parseInt(arg1, 10);
+            if (Number.isFinite(ms) && ms >= 20 && ms <= 7000) {
+              K4HUD.setLatency(ms);
+              playExecuteBeep();
+              printLine(`<span class="term-success">Latencia → ${ms} ms</span>`);
+            } else {
+              playErrorBeep();
+              printLine(`<span class="term-danger">Uso:</span> latency [status|turbo|sigilo|tarpit|fortaleza|20-7000]`);
+            }
+          }
+          break;
+        }
+
+        case "hw":
+          playExecuteBeep();
+          printLine(`<span class="term-dim">Esta terminal vive en el navegador y no ejecuta shell. Copia y pega en tu terminal real:</span>
+<span class="term-highlight">python3 /home/kali/k4li-anuu-forge/scripts/anuu_hardware_bridge.py --scan</span>
+<span class="term-highlight">python3 /home/kali/hearthstone-linux/ISOS/anuu_focusrite_dsp.py --status</span>
+<span class="term-highlight">python3 /home/kali/hearthstone-linux/ISOS/anuu_focusrite_dsp.py --trng-harvest</span>
+<span class="term-highlight">python3 /home/kali/k4li-anuu-forge/scripts/quota_arbiter.py --swarm-status</span>`);
+          break;
+
         case "exit":
           playErrorBeep();
           printLine(`<span class="term-danger">Permiso denegado:</span> No hay salida del Búnker 89. Permanece aquí, pequeña tormenta.`);
@@ -1305,6 +1355,13 @@
   <span class="term-highlight">clear</span>         Limpia el buffer de la pantalla.
   <span class="term-highlight">history</span>       Muestra los comandos ejecutados recientemente.
   <span class="term-highlight">uptime</span> | <span class="term-highlight">date</span>  Métricas de ciclo de vida del nodo.
+
+<span class="term-highlight">🎚️ HARDWARE & AUDIO:</span>
+  <span class="term-highlight">mic</span>           Arma la entrada de audio real (Focusrite si existe) para VU, barras y Matrix.
+  <span class="term-highlight">viz [on|off]</span>  Visualizador de cabecera y lluvia Matrix reactiva al audio.
+  <span class="term-highlight">latency [x]</span>   Latencia adaptativa compartida: status | turbo | sigilo | tarpit | fortaleza | 20-7000.
+  <span class="term-highlight">hw</span>            Muestra los comandos de hardware para copiar a tu terminal real.
+  <span class="term-dim">Atajo global: Ctrl+K abre la paleta de comandos.</span>
 
 <span class="term-highlight">✨ EASTER EGGS:</span>
   <span class="term-dim">set, rosagris, anuu, 161914, sudo, banner</span>
@@ -1599,6 +1656,7 @@ Escribe <span class="term-highlight">signal</span> en esta consola o visita <a h
       if (matrixInterval) clearInterval(matrixInterval);
 
       matrixInterval = setInterval(() => {
+        const lv = (termVizOn && window.K4HUD) ? K4HUD.audioLevel() : 0;
         mCtx.fillStyle = "rgba(0, 0, 0, 0.06)";
         mCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
 
@@ -1612,7 +1670,7 @@ Escribe <span class="term-highlight">signal</span> en esta consola o visita <a h
           if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
             drops[i] = 0;
           }
-          drops[i]++;
+          drops[i] += (lv > 0.12 && Math.random() < lv) ? 3 : 1;
         }
       }, 35);
     }
@@ -1643,5 +1701,29 @@ Escribe <span class="term-highlight">signal</span> en esta consola o visita <a h
     });
   </script>
   <script src="../assets/js/fullwallpaper.js"></script>
+<script>
+  /* Visualizador de cabecera: barras FFT reales de la entrada armada con `mic` (no simula nada si no hay entrada) */
+  var termVizOn = true;
+  (function () {
+    var cv = document.getElementById('termViz'); if (!cv) return;
+    var c = cv.getContext('2d'), bars = 16;
+    (function loop() {
+      requestAnimationFrame(loop);
+      if (document.hidden) return;
+      c.clearRect(0, 0, cv.width, cv.height);
+      var armed = termVizOn && window.K4HUD && K4HUD.audio.armed;
+      if (!armed) { c.fillStyle = 'rgba(255,255,255,.12)'; c.fillRect(0, cv.height - 2, cv.width, 1); return; }
+      var an = K4HUD.audio.an, data = new Uint8Array(an.frequencyBinCount);
+      an.getByteFrequencyData(data);
+      var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-secondary').trim() || '#c084fc';
+      for (var i = 0; i < bars; i++) {
+        var a = Math.floor(Math.pow(i / bars, 2) * data.length * 0.5), b = Math.max(a + 1, Math.floor(Math.pow((i + 1) / bars, 2) * data.length * 0.5));
+        var p = 0; for (var k = a; k < b; k++) if (data[k] > p) p = data[k];
+        var h = Math.max(1, (p / 255) * (cv.height - 2));
+        c.fillStyle = accent; c.fillRect(i * 4, cv.height - h, 3, h);
+      }
+    })();
+  })();
+</script>
 </body>
 </html>
