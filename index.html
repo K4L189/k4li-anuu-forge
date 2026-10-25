@@ -514,10 +514,15 @@
       <!-- Cotizador y Formulario Intake -->
       <section id="cotizador" class="max-w-4xl mx-auto px-4 py-8">
         <div class="p-6 rounded-2xl theme-card border shadow-2xl relative overflow-hidden">
-          <div class="text-left mb-6">
-            <span class="text-xs font-mono theme-accent-text uppercase tracking-widest">Intake de Clientes</span>
-            <h2 class="text-xl font-bold text-white mt-1">Configura tu Encargo Técnico</h2>
-            <p class="text-xs text-zinc-400 mt-0.5">Selecciona el tipo de trabajo para estimar alcance y enviar la petición directa a revisión.</p>
+          <div class="text-left mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span class="text-xs font-mono theme-accent-text uppercase tracking-widest">Intake de Clientes</span>
+              <h2 class="text-xl font-bold text-white mt-1">Configura tu Encargo Técnico</h2>
+              <p class="text-xs text-zinc-400 mt-0.5">Selecciona el tipo de trabajo para estimar alcance y enviar la petición directa a revisión.</p>
+            </div>
+            <a href="components/contract_generator.html" target="_blank" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border theme-border bg-purple-500/10 hover:bg-purple-500/20 text-xs font-mono font-bold text-purple-300 transition-all shadow-md">
+              <span>📜</span> Generador SOW & Firma Digital ↗
+            </a>
           </div>
 
           <form id="quoteForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
@@ -757,6 +762,10 @@
         const aiIframe = document.getElementById("aiBenchmarkFrame");
         if (aiIframe && aiIframe.contentWindow) {
           aiIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
+        }
+        const sowIframe = document.getElementById("contractGeneratorFrame");
+        if (sowIframe && sowIframe.contentWindow) {
+          sowIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
         }
       } catch(e) {}
     }
