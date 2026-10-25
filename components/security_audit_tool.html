@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnosticador Interactivo de Seguridad & Hardening | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* 6 ESTILOS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.95);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.95);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.95);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-accent-bg {
+      background-color: var(--accent-primary);
+    }
+    .theme-accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+    .theme-accent-text {
+      color: var(--accent-secondary);
+    }
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Opciones interactivas de auditoría */
+    .audit-option {
+      background-color: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-card);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .audit-option:hover {
+      border-color: var(--accent-secondary);
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+    .audit-option.selected-safe {
+      border-color: #10b981;
+      background-color: rgba(16, 185, 129, 0.12);
+      box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.25);
+    }
+    .audit-option.selected-warn {
+      border-color: #f59e0b;
+      background-color: rgba(245, 158, 11, 0.12);
+      box-shadow: 0 0 15px -3px rgba(245, 158, 11, 0.25);
+    }
+    .audit-option.selected-crit {
+      border-color: #f43f5e;
+      background-color: rgba(244, 63, 94, 0.15);
+      box-shadow: 0 0 18px -2px rgba(244, 63, 94, 0.3);
+    }
+
+    /* Switch de puerto */
+    .port-btn {
+      transition: all 0.2s ease;
+    }
+    .port-btn.port-open {
+      border-color: #f43f5e;
+      background: rgba(244, 63, 94, 0.18);
+      color: #fda4af;
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.35);
+    }
+    .port-btn.port-closed {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+    }
+
+    /* Aguja del indicador analógico */
+    #gauge-needle {
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: 100px 100px;
+    }
+
+    /* Terminal kanuv */
+    .kanuv-terminal {
+      background: #040407;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      border: 1px solid var(--border-card);
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Contenedor Maestro -->
+  <div id="k4li-sec-audit" class="max-w-5xl mx-auto space-y-6">
+
+    <!-- Header y Selector de Tema Standalone -->
+    <header class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b theme-border">
+      <div class="text-center sm:text-left">
+        <div class="flex items-center gap-2 justify-center sm:justify-start">
+          <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            🛡️ Escudo Kanuv • Auditoría Forense
+          </span>
+          <span class="text-[11px] font-mono text-zinc-500">v3.1 Blue Team</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-black text-white mt-1.5 flex items-center gap-2 justify-center sm:justify-start">
+          <span>🔍</span> Diagnosticador de Seguridad & Hardening Linux
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-2xl">
+          Evalúa la resiliencia técnica de tus servidores e infraestructuras en tiempo real. Responde a la checklist forense para calcular tu puntuación de riesgo y detectar vectores de compromiso antes de una intrusión.
+        </p>
+      </div>
+
+      <!-- Selector de Temas & Presets -->
+      <div class="flex flex-col items-end gap-2 no-print">
+        <div class="flex items-center gap-1 bg-black/50 p-1 rounded-xl border theme-border text-xs">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5">🎨 Estilo:</span>
+          <button onclick="setAuditTheme('anuu')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-purple-300" id="abt-anuu">🌫️ Anuu</button>
+          <button onclick="setAuditTheme('blood')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300" id="abt-blood">🛡️ Blood</button>
+          <button onclick="setAuditTheme('gw2')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300" id="abt-gw2">⚡ GW2</button>
+          <button onclick="setAuditTheme('bioinfo')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300" id="abt-bioinfo">🧬 BioCode</button>
+          <button onclick="setAuditTheme('duat')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300" id="abt-duat">⚖️ Duat</button>
+          <button onclick="setAuditTheme('neon')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="abt-neon">🌸 Neón</button>
+        </div>
+        
+        <!-- Presets Rápidos -->
+        <div class="flex items-center gap-1.5 text-[11px] font-mono">
+          <span class="text-zinc-500">Perfiles Rápidos:</span>
+          <button onclick="loadAuditPreset('fresh_vps')" class="px-2 py-0.5 rounded bg-rose-950/40 border border-rose-900/60 text-rose-300 hover:bg-rose-900/50 transition-all">
+            🚨 VPS Típico (Sin Hardening)
+          </button>
+          <button onclick="loadAuditPreset('semi_hardened')" class="px-2 py-0.5 rounded bg-amber-950/40 border border-amber-900/60 text-amber-300 hover:bg-amber-900/50 transition-all">
+            ⚠️ Pyme Básica
+          </button>
+          <button onclick="loadAuditPreset('bunker')" class="px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-900/60 text-emerald-300 hover:bg-emerald-900/50 transition-all">
+            🛡️ Búnker Kali (Blindado)
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Panel Superior: Métricas de Riesgo y Medidor Visual Forense -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+      
+      <!-- Widget Medidor Analógico de Riesgo (5 cols) -->
+      <div class="lg:col-span-5 theme-card p-5 rounded-2xl border flex flex-col justify-between relative overflow-hidden">
+        <div class="flex items-center justify-between border-b theme-border pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">⚖️</span>
+            <div>
+              <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Índice de Riesgo Forense</h2>
+              <p class="text-[10px] text-zinc-400">Escala MITRE ATT&CK & Exposición</p>
+            </div>
+          </div>
+          <span id="risk-badge-status" class="text-xs font-mono font-bold px-2.5 py-1 rounded-full border bg-rose-500/20 border-rose-500/40 text-rose-300">
+            CRÍTICO (88/100)
+          </span>
+        </div>
+
+        <!-- Gauge SVG Semi-Circular -->
+        <div class="my-4 flex flex-col items-center justify-center relative">
+          <svg viewBox="0 0 200 120" class="w-56 h-36 overflow-visible">
+            <!-- Arco de Fondo con 3 gradientes de riesgo -->
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="45%" stop-color="#f59e0b" />
+                <stop offset="85%" stop-color="#f43f5e" />
+              </linearGradient>
+            </defs>
+
+            <!-- Arco Base -->
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#1f1f2e" stroke-width="14" stroke-linecap="round" />
+            <!-- Arco Activo de Riesgo -->
+            <path id="gauge-active-arc" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="30" />
+
+            <!-- Puntos de referencia -->
+            <text x="18" y="118" fill="#10b981" font-size="8" font-family="monospace" font-weight="bold">0 (SEGURO)</text>
+            <text x="88" y="32" fill="#f59e0b" font-size="8" font-family="monospace">50 (ALERTA)</text>
+            <text x="145" y="118" fill="#f43f5e" font-size="8" font-family="monospace" font-weight="bold">100 (CRÍTICO)</text>
+
+            <!-- Aguja / Indicador rotativo -->
+            <g id="gauge-needle" style="transform: rotate(68deg);">
+              <line x1="100" y1="100" x2="100" y2="30" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+              <circle cx="100" cy="100" r="7" fill="#ffffff" stroke="#9333ea" stroke-width="2" />
+            </g>
+          </svg>
+
+          <!-- Puntuación Numérica Central -->
+          <div class="text-center -mt-4">
+            <span id="score-number" class="text-4xl sm:text-5xl font-black font-mono tracking-tight text-rose-400">88</span>
+            <span class="text-base font-mono text-zinc-500">/ 100</span>
+            <p id="risk-verdict-title" class="text-xs font-bold text-rose-300 mt-1 uppercase tracking-wider">
+              🚨 Vulnerabilidades Severas Detectadas
+            </p>
+          </div>
+        </div>
+
+        <!-- Métricas Rápidas de Impacto -->
+        <div class="grid grid-cols-2 gap-2 pt-3 border-t theme-border text-[11px] font-mono">
+          <div class="p-2 rounded-xl bg-black/40 border theme-border">
+            <span class="text-zinc-500 block">Vectores Abiertos:</span>
+            <span id="stat-crit-count" class="font-bold text-rose-400 text-xs">5 Críticos / 2 Medios</span>
+          </div>
+          <div class="p-2 rounded-xl bg-black/40 border theme-border">
+            <span class="text-zinc-500 block">Coste Medio Brecha:</span>
+            <span class="font-bold text-zinc-200 text-xs">50.000 € - 120.000 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen Ejecutivo & Terminal Kanuv Forense (7 cols) -->
+      <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+        
+        <!-- Banner de Diagnóstico Dinámico -->
+        <div id="risk-banner-card" class="theme-card p-4 rounded-2xl border relative overflow-hidden bg-rose-950/20 border-rose-900/50">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <span id="banner-risk-tag" class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold">
+                ESTADO: ALTO RIESGO DE RANSOMWARE & EXFILTRACIÓN
+              </span>
+              <h3 id="banner-risk-headline" class="text-sm sm:text-base font-bold text-white mt-1.5">
+                Servidor expuesto a fuerza bruta, ejecución RCE y dumping de memoria
+              </h3>
+              <p id="banner-risk-desc" class="text-xs text-zinc-300 mt-1 leading-relaxed">
+                Tu configuración actual permite ataques automatizados de botnets sobre SSH y deja bases de datos accesibles al internet público. La ausencia de reglas Wazuh para MITRE T1003 impide detectar exfiltración de credenciales en tiempo real.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Forense Kanuv en Vivo -->
+        <div class="kanuv-terminal p-3.5 rounded-2xl border text-xs space-y-1.5 shadow-2xl flex-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between border-b border-zinc-800 pb-2 mb-1">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+              <span class="font-mono text-[11px] text-zinc-400 font-bold">KANUV_SEC_AGENT // 189.89.619 Hz</span>
+            </div>
+            <span class="text-[10px] text-zinc-500 font-mono">LIVE_ATTACK_SURFACE_LOG</span>
+          </div>
+
+          <div id="terminal-stream" class="font-mono text-[11px] space-y-1 text-zinc-300 overflow-y-auto max-h-40 sm:max-h-36 pr-1">
+            <div class="text-zinc-500">[INIT]: Inicializando sonda forense de hardening...</div>
+            <div><span class="text-purple-400">[SSH]</span> <span class="text-rose-400">PermitRootLogin activo (CRIT-SSH-01)</span></div>
+            <div><span class="text-purple-400">[NET]</span> <span class="text-rose-400">Puerto 6379/TCP (Redis) expuesto al exterior (CRIT-RCE-REDIS)</span></div>
+            <div><span class="text-purple-400">[SIEM]</span> <span class="text-amber-400">Sin monitorización de volcado LSASS/Shadow (MITRE ATT&CK T1003)</span></div>
+            <div><span class="text-purple-400">[BACKUP]</span> <span class="text-rose-400">Copias mutables en el mismo host (Susceptible a cifrado total)</span></div>
+          </div>
+
+          <div class="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-[10px] font-mono text-zinc-500">
+            <span>SISTEMA: LINUX HOST AUDIT ENGINE</span>
+            <span class="text-emerald-400">● AUDITORÍA ACTIVA</span>
+          </div>
+        </div>
+
+        <!-- Botones de Acción Inmediata (CTA de Remediación) -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-1 no-print">
+          <a id="btn-cta-hardening" href="https://signal.me/#u/k4li.89" target="_blank" class="sm:col-span-8 py-3 px-4 rounded-xl theme-accent-bg text-white font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2 hover:opacity-95 text-center">
+            <span>🛡️</span> Encargar Hardening Completo a K4L1 Studio (450 €) ↗
+          </a>
+          <button onclick="copyForensicReport()" id="btn-copy-report" class="sm:col-span-4 py-3 px-3 rounded-xl border theme-border bg-black/40 hover:bg-zinc-800 text-zinc-300 font-semibold text-xs transition-all flex items-center justify-center gap-1.5">
+            <span>📋</span> Copiar Informe
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- CUERPO DE AUDITORÍA: LOS 4 PILARES CRÍTICOS & MATRIZ DE RED -->
+    <!-- ============================================================ -->
+    <div class="space-y-6 pt-2">
+
+      <!-- PILAR 1: SSH Y ACCESO REMOTO -->
+      <section class="theme-card p-5 rounded-2xl border space-y-4">
+        <div class="flex items-center justify-between border-b theme-border pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-sm font-bold">1</span>
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>🔑</span> Vector SSH & Autenticación de Administración
+              </h3>
+              <p class="text-[11px] text-zinc-400">Mitiga intrusiones directas por fuerza bruta (MITRE ATT&CK T1110) y acceso no autorizado.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-purple-300 px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30">
+            PESO: 30% RIESGO
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Item 1.1: Root Login -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Login directo del usuario 'root':</span>
+              <span class="text-[10px] font-mono text-zinc-500">PermitRootLogin</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+              <div onclick="setCheck('ssh_root', 'yes')" id="opt-ssh_root-yes" class="audit-option p-2.5 rounded-xl border text-center">
+                <span class="block font-bold text-rose-400">Habilitado ('yes')</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Acceso root directo</span>
+              </div>
+              <div onclick="setCheck('ssh_root', 'key')" id="opt-ssh_root-key" class="audit-option p-2.5 rounded-xl border text-center">
+                <span class="block font-bold text-amber-400">Solo con Clave</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">prohibit-password</span>
+              </div>
+              <div onclick="setCheck('ssh_root', 'no')" id="opt-ssh_root-no" class="audit-option p-2.5 rounded-xl border text-center selected-safe">
+                <span class="block font-bold text-emerald-400">Deshabilitado ('no')</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Sudo no privilegiado</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 1.2: Método de Autenticación -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Método de autenticación de credenciales:</span>
+              <span class="text-[10px] font-mono text-zinc-500">PasswordAuthentication</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div onclick="setCheck('ssh_auth', 'passwords')" id="opt-ssh_auth-passwords" class="audit-option p-2.5 rounded-xl border text-center">
+                <span class="block font-bold text-rose-400">Permite Contraseñas</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Vulnerable a diccionario</span>
+              </div>
+              <div onclick="setCheck('ssh_auth', 'keys')" id="opt-ssh_auth-keys" class="audit-option p-2.5 rounded-xl border text-center selected-safe">
+                <span class="block font-bold text-emerald-400">Solo Llaves Criptográficas</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Ed25519 / RSA 4096 bits</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 1.3: Puerto SSH -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Puerto del demonio SSH:</span>
+              <span class="text-[10px] font-mono text-zinc-500">Port Configuration</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div onclick="setCheck('ssh_port', '22')" id="opt-ssh_port-22" class="audit-option p-2.5 rounded-xl border text-center">
+                <span class="block font-bold text-amber-400">Puerto 22 Estándar</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Ruido masivo de bots</span>
+              </div>
+              <div onclick="setCheck('ssh_port', 'custom')" id="opt-ssh_port-custom" class="audit-option p-2.5 rounded-xl border text-center selected-safe">
+                <span class="block font-bold text-emerald-400">Puerto Oculto / VPN</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">No estándar o WireGuard/Tailscale</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 1.4: Protección Fuerza Bruta -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Protección activa contra intentos fallidos:</span>
+              <span class="text-[10px] font-mono text-zinc-500">Fail2ban / CrowdSec</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div onclick="setCheck('ssh_brute', 'none')" id="opt-ssh_brute-none" class="audit-option p-2.5 rounded-xl border text-center">
+                <span class="block font-bold text-rose-400">Sin Protección Activa</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Sin baneos automáticos</span>
+              </div>
+              <div onclick="setCheck('ssh_brute', 'active')" id="opt-ssh_brute-active" class="audit-option p-2.5 rounded-xl border text-center selected-safe">
+                <span class="block font-bold text-emerald-400">Fail2ban / CrowdSec Activo</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Bloqueo IP tras 3 intentos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PILAR 2: FIREWALL & MATRIZ INTERACTIVA DE PUERTOS EXPUESTOS -->
+      <section class="theme-card p-5 rounded-2xl border space-y-4">
+        <div class="flex items-center justify-between border-b theme-border pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-sm font-bold">2</span>
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>🌐</span> Firewall & Analizador de Superficie de Red (Puertos Públicos)
+              </h3>
+              <p class="text-[11px] text-zinc-400">Toca cada puerto para simular si está abierto a internet (`0.0.0.0/0`) o cerrado/filtrado tras firewall.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-300 px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30">
+            PESO: 30% RIESGO
+          </span>
+        </div>
+
+        <!-- Política de Firewall Global -->
+        <div class="space-y-1.5">
+          <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+            <span>Política de Cortafuegos del Host:</span>
+            <span class="text-[10px] font-mono text-zinc-500">UFW / NFTables / Iptables</span>
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            <div onclick="setCheck('firewall_policy', 'inactive')" id="opt-firewall_policy-inactive" class="audit-option p-2.5 rounded-xl border text-center">
+              <span class="block font-bold text-rose-400">Desactivado o Permisivo (ACCEPT All)</span>
+              <span class="block text-[10px] text-zinc-400 mt-0.5">Todo tráfico entrante no filtrado pasa al kernel</span>
+            </div>
+            <div onclick="setCheck('firewall_policy', 'strict')" id="opt-firewall_policy-strict" class="audit-option p-2.5 rounded-xl border text-center selected-safe">
+              <span class="block font-bold text-emerald-400">Activo con Default DROP / DENY</span>
+              <span class="block text-[10px] text-zinc-400 mt-0.5">Solo puertos estrictamente necesarios habilitados</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matriz Interactiva de 6 Puertos Clave -->
+        <div class="space-y-2 pt-2">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-zinc-300">
+              Matriz de Puertos Expuestos a Internet (Haz clic para alternar Abierto / Protegido):
+            </label>
+            <div class="flex items-center gap-2 text-[10px] font-mono">
+              <button onclick="toggleAllPorts(false)" class="text-emerald-400 hover:underline">Cerrar Todos</button>
+              <span class="text-zinc-600">|</span>
+              <button onclick="toggleAllPorts(true)" class="text-rose-400 hover:underline">Abrir Típicos</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+            
+            <!-- Puerto 22 -->
+            <button onclick="togglePort('p22')" id="port-btn-p22" class="port-btn port-open p-3 rounded-xl border text-left flex flex-col justify-between">
+              <div class="flex justify-between items-center w-full">
+                <span class="font-mono font-bold text-xs text-white">22 / TCP</span>
+                <span id="badge-p22" class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">ABIERTO</span>
+              </div>
+              <span class="text-[10px] font-semibold mt-1">SSH</span>
+              <span class="text-[9px] text-zinc-400 mt-0.5">Consola remota</span>
+            </button>
+
+            <!-- Puerto 80 -->
+            <button onclick="togglePort('p80')" id="port-btn-p80" class="port-btn port-open p-3 rounded-xl border text-left flex flex-col justify-between">
+              <div class="flex justify-between items-center w-full">
+                <span class="font-mono font-bold text-xs text-white">80 / TCP</span>
+                <span id="badge-p80" class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">ABIERTO</span>
+              </div>
+              <span class="text-[10px] font-semibold mt-1">HTTP</span>
+              <span class="text-[9px] text-zinc-400 mt-0.5">Tráfico no cifrado</span>
+            </button>
+
+            <!-- Puerto 443 -->
+            <button onclick="togglePort('p443')" id="port-btn-p443" class="port-btn port-closed p-3 rounded-xl border text-left flex flex-col justify-between">
+              <div class="flex justify-between items-center w-full">
+                <span class="font-mono font-bold text-xs text-white">443 / TCP</span>
+                <span id="badge-p443" class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">PROTEGIDO</span>
+              </div>
+              <span class="text-[10px] font-semibold mt-1">HTTPS</span>
+              <span class="text-[9px] text-zinc-400 mt-0.5">TLS / SSL Seguro</span>
+            </button>
+
+            <!-- Puerto 3306 (MySQL) -->
+            <button onclick="togglePort('p3306')" id="port-btn-p3306" class="port-btn port-open p-3 rounded-xl border text-left flex flex-col justify-between">
+              <div class="flex justify-between items-center w-full">
+                <span class="font-mono font-bold text-xs text-white">3306 / TCP</span>
+                <span id="badge-p3306" class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">¡CRÍTICO!</span>
+              </div>
+              <span class="text-[10px] font-semibold mt-1">MySQL</span>
+              <span class="text-[9px] text-rose-300 mt-0.5">BD Expuesta</span>
+            </button>
+
+            <!-- Puerto 5432 (Postgres) -->
+            <button onclick="togglePort('p5432')" id="port-btn-p5432" class="port-btn port-closed p-3 rounded-xl border text-left flex flex-col justify-between">
+              <div class="flex justify-between items-center w-full">
+                <span class="font-mono font-bold text-xs text-white">5432 / TCP</span>
+                <span id="badge-p5432" class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">PROTEGIDO</span>
+              </div>
+              <span class="text-[10px] font-semibold mt-1">PostgreSQL</span>
+              <span class="text-[9px] text-zinc-400 mt-0.5">En localhost / VPN</span>
+            </button>
+
+            <!-- Puerto 6379 (Redis) -->
+            <button onclick="togglePort('p6379')" id="port-btn-p6379" class="port-btn port-open p-3 rounded-xl border text-left flex flex-col justify-between">
+              <div class="flex justify-between items-center w-full">
+                <span class="font-mono font-bold text-xs text-white">6379 / TCP</span>
+                <span id="badge-p6379" class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300">¡PELIGRO RCE!</span>
+              </div>
+              <span class="text-[10px] font-semibold mt-1">Redis Cache</span>
+              <span class="text-[9px] text-rose-300 mt-0.5">Ejecución Remota</span>
+            </button>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- PILAR 3: SIEM, MONITORIZACIÓN & MITRE T1003 -->
+      <section class="theme-card p-5 rounded-2xl border space-y-4">
+        <div class="flex items-center justify-between border-b theme-border pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-sm font-bold">3</span>
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>👁️</span> SIEM, Monitorización Activa & Detección MITRE T1003
+              </h3>
+              <p class="text-[11px] text-zinc-400">Detecta exfiltración de contraseñas de memoria/shadow y manipulación silenciosa de ficheros críticos.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-indigo-300 px-2 py-0.5 rounded bg-indigo-500/15 border border-indigo-500/30">
+            PESO: 20% RIESGO
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Item 3.1: Detección T1003 -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Detección Dumping T1003:</span>
+              <span class="text-[10px] font-mono text-zinc-500">OS Credential Dumping</span>
+            </label>
+            <div class="space-y-2 text-xs">
+              <div onclick="setCheck('siem_t1003', 'none')" id="opt-siem_t1003-none" class="audit-option p-2.5 rounded-xl border">
+                <span class="block font-bold text-rose-400">Sin Detección (Ciego)</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">No se alerta si leen /etc/shadow o dump de procesos</span>
+              </div>
+              <div onclick="setCheck('siem_t1003', 'active')" id="opt-siem_t1003-active" class="audit-option p-2.5 rounded-xl border selected-safe">
+                <span class="block font-bold text-emerald-400">Wazuh SIEM / Auditd</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Alerta inmediata ante accesos a credenciales</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3.2: Alertas en Tiempo Real -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Pipeline de Alertas:</span>
+              <span class="text-[10px] font-mono text-zinc-500">Real-Time Dispatch</span>
+            </label>
+            <div class="space-y-2 text-xs">
+              <div onclick="setCheck('siem_alerts', 'manual')" id="opt-siem_alerts-manual" class="audit-option p-2.5 rounded-xl border">
+                <span class="block font-bold text-amber-400">Revisión Manual / Post-Mortem</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Los logs solo se abren cuando la web ya está caída</span>
+              </div>
+              <div onclick="setCheck('siem_alerts', 'instant')" id="opt-siem_alerts-instant" class="audit-option p-2.5 rounded-xl border selected-safe">
+                <span class="block font-bold text-emerald-400">Alertas Instantáneas Push</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Telegram, Signal o webhook en &lt; 5 segundos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3.3: Integridad de Archivos (FIM) -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Integridad FIM:</span>
+              <span class="text-[10px] font-mono text-zinc-500">/bin /sbin /etc/pam.d</span>
+            </label>
+            <div class="space-y-2 text-xs">
+              <div onclick="setCheck('siem_fim', 'disabled')" id="opt-siem_fim-disabled" class="audit-option p-2.5 rounded-xl border">
+                <span class="block font-bold text-rose-400">Sin Monitorización FIM</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Un atacante puede instalar un rootkit sin rastro</span>
+              </div>
+              <div onclick="setCheck('siem_fim', 'enabled')" id="opt-siem_fim-enabled" class="audit-option p-2.5 rounded-xl border selected-safe">
+                <span class="block font-bold text-emerald-400">FIM Activo (Syscheck / AIDE)</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Auditoría criptográfica de hashes de sistema</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PILAR 4: COPIAS DE SEGURIDAD & AISLAMIENTO ANTI-RANSOMWARE -->
+      <section class="theme-card p-5 rounded-2xl border space-y-4">
+        <div class="flex items-center justify-between border-b theme-border pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-sm font-bold">4</span>
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>💾</span> Copias de Seguridad Inmutables & Resiliencia ante Ransomware
+              </h3>
+              <p class="text-[11px] text-zinc-400">Garantiza que ningún actor malicioso pueda cifrar o borrar tus copias tras ganar root.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-amber-300 px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30">
+            PESO: 20% RIESGO
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Item 4.1: Inmutabilidad -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Tipo de Almacenamiento de Backup:</span>
+              <span class="text-[10px] font-mono text-zinc-500">WORM / Object Lock</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div onclick="setCheck('backup_immutable', 'mutable')" id="opt-backup_immutable-mutable" class="audit-option p-2.5 rounded-xl border text-center">
+                <span class="block font-bold text-rose-400">Mutable en el Mismo Host</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">Si cifran el servidor, cifran el backup</span>
+              </div>
+              <div onclick="setCheck('backup_immutable', 'immutable')" id="opt-backup_immutable-immutable" class="audit-option p-2.5 rounded-xl border text-center selected-safe">
+                <span class="block font-bold text-emerald-400">Inmutable / Air-Gapped</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">S3 Object Lock / Pull aislado sin borrado</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4.2: Prueba de Restauración Drill -->
+          <div class="space-y-1.5">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Simulacro de Restauración en Frío:</span>
+              <span class="text-[10px] font-mono text-zinc-500">Disaster Recovery Drill</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div onclick="setCheck('backup_drill', 'never')" id="opt-backup_drill-never" class="audit-option p-2.5 rounded-xl border text-center">
+                <span class="block font-bold text-amber-400">Nunca o &gt; 6 meses</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">No se sabe si el restore arrancará</span>
+              </div>
+              <div onclick="setCheck('backup_drill', 'tested')" id="opt-backup_drill-tested" class="audit-option p-2.5 rounded-xl border text-center selected-safe">
+                <span class="block font-bold text-emerald-400">Probado en &lt; 90 días</span>
+                <span class="block text-[10px] text-zinc-400 mt-0.5">RTO y RPO documentados y verificados</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- COMPARATIVA DE HARDENING & OFERTA FORMAL K4L1 STUDIO -->
+    <!-- ============================================================ -->
+    <div class="theme-card p-6 rounded-2xl border space-y-5">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b theme-border pb-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold">Solución Defensiva Inmediata</span>
+          <h2 class="text-lg font-bold text-white mt-1">Pack de Fortificación Linux & Despliegue SIEM (450 €)</h2>
+          <p class="text-xs text-zinc-400 mt-0.5">Entrega completa en 48-72h. Tarifa plana cerrada sin sorpresas.</p>
+        </div>
+        <div class="text-right shrink-0">
+          <span class="text-2xl font-black font-mono text-emerald-400">450 €</span>
+          <span class="text-xs text-zinc-400 block font-mono">Pago único • Sin suscripción</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-2">
+          <div class="font-bold text-white flex items-center gap-2">
+            <span class="text-emerald-400">🛡️</span> 1. Hardening Nuclear
+          </div>
+          <p class="text-zinc-400 text-[11px] leading-relaxed">
+            Cierre total de puertos innecesarios con UFW/NFTables, migración a llaves Ed25519, deshabilitación de root login, parámetros sysctl anti-spoofing y rate limiting contra ataques de denegación.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-2">
+          <div class="font-bold text-white flex items-center gap-2">
+            <span class="text-indigo-400">👁️</span> 2. Wazuh SIEM & Reglas T1003
+          </div>
+          <p class="text-zinc-400 text-[11px] leading-relaxed">
+            Instalación del agente de monitorización, reglas de correlación contra MITRE ATT&CK T1003 (Credential Dumping) y canal de alertas en tiempo real directo a tu Telegram, Signal o webhook seguro.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-2">
+          <div class="font-bold text-white flex items-center gap-2">
+            <span class="text-amber-400">📑</span> 3. Informe Forense & SLA
+          </div>
+          <p class="text-zinc-400 text-[11px] leading-relaxed">
+            Documento técnico formal con el antes y después de la auditoría, hashes de verificación, guía de recuperación ante desastres y soporte técnico directo durante 30 días post-despliegue.
+          </p>
+        </div>
+      </div>
+
+      <!-- Banner CTA Final -->
+      <div class="p-4 rounded-xl border theme-border bg-gradient-to-r from-purple-950/30 via-black to-emerald-950/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold text-white block">¿Quieres que Kali blinde tu servidor este mismo fin de semana?</span>
+          <span class="text-[11px] text-zinc-400">Tu diagnóstico actual se enviará cifrado a través de Signal para iniciar la fortificación sin fricción.</span>
+        </div>
+        <a id="btn-cta-hardening-footer" href="https://signal.me/#u/k4li.89" target="_blank" class="py-3 px-6 rounded-xl theme-accent-bg text-white font-bold text-xs shadow-lg transition-all flex items-center gap-2 shrink-0 hover:opacity-95 text-center">
+          <span>📩</span> Solicitar Blindaje Ahora (450 €) ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer Forense Kanuv -->
+    <footer class="pt-4 pb-8 border-t theme-border flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 font-mono">
+      <div class="flex items-center gap-2">
+        <span>🛡️ Escudo Kanuv</span>
+        <span>•</span>
+        <span>Muro de Contención ACE 161914</span>
+        <span>•</span>
+        <span>189.89.619 Hz</span>
+      </div>
+      <div>
+        <span>K4L1 STUDIO // SOBERANÍA TECNOLÓGICA & BLUE TEAM FORENSE</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MOTOR LÓGICO DE AUDITORÍA & GENERACIÓN DE INFORMES           -->
+  <!-- ============================================================ -->
+  <script>
+    // ESTADO GLOBAL DE AUDITORÍA
+    const auditState = {
+      ssh_root: 'yes',          // 'yes', 'key', 'no'
+      ssh_auth: 'passwords',    // 'passwords', 'keys'
+      ssh_port: '22',           // '22', 'custom'
+      ssh_brute: 'none',        // 'none', 'active'
+      firewall_policy: 'inactive', // 'inactive', 'strict'
+      ports: {
+        p22: true,   // SSH
+        p80: true,   // HTTP
+        p443: false, // HTTPS (false = solo HTTPS seguro; true = expuesto)
+        p3306: true, // MySQL expuesto
+        p5432: false,// Postgres protegido
+        p6379: true  // Redis expuesto
+      },
+      siem_t1003: 'none',       // 'none', 'active'
+      siem_alerts: 'manual',    // 'manual', 'instant'
+      siem_fim: 'disabled',     // 'disabled', 'enabled'
+      backup_immutable: 'mutable', // 'mutable', 'immutable'
+      backup_drill: 'never'     // 'never', 'tested'
+    };
+
+    // TEMAS CANÓNICOS
+    const themes = ["anuu", "blood", "gw2", "bioinfo", "duat", "neon"];
+
+    function setAuditTheme(theme) {
+      if (!themes.includes(theme)) theme = "anuu";
+      document.documentElement.setAttribute("data-theme", theme);
+      try {
+        localStorage.setItem("k4li_theme", theme);
+      } catch(e) {}
+
+      // Actualizar botones de estilo
+      document.querySelectorAll("[id^='abt-']").forEach(btn => {
+        btn.classList.remove("font-bold", "text-purple-300", "text-rose-300", "text-emerald-300", "text-cyan-300", "text-amber-300", "text-pink-300");
+        btn.classList.add("text-zinc-400");
+      });
+      const activeBtn = document.getElementById("abt-" + theme);
+      if (activeBtn) {
+        activeBtn.classList.remove("text-zinc-400");
+        activeBtn.classList.add("font-bold");
+        if (theme === 'anuu') activeBtn.classList.add("text-purple-300");
+        if (theme === 'blood') activeBtn.classList.add("text-rose-300");
+        if (theme === 'gw2') activeBtn.classList.add("text-emerald-300");
+        if (theme === 'bioinfo') activeBtn.classList.add("text-cyan-300");
+        if (theme === 'duat') activeBtn.classList.add("text-amber-300");
+        if (theme === 'neon') activeBtn.classList.add("text-pink-300");
+      }
+    }
+
+    // Escuchar mensajes de ventana padre (iframe embedding)
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'SET_THEME') {
+        setAuditTheme(e.data.theme);
+      }
+    });
+
+    // Cargar tema guardado
+    try {
+      const saved = localStorage.getItem("k4li_theme") || "anuu";
+      setAuditTheme(saved);
+    } catch(e) {
+      setAuditTheme("anuu");
+    }
+
+    // ALTERNAR OPCIONES DE CHECKLIST
+    function setCheck(key, val) {
+      auditState[key] = val;
+      updateUISelections();
+      calculateRiskScore();
+    }
+
+    // ALTERNAR PUERTO ESPECÍFICO
+    function togglePort(portKey) {
+      auditState.ports[portKey] = !auditState.ports[portKey];
+      updatePortUI(portKey);
+      calculateRiskScore();
+    }
+
+    function toggleAllPorts(state) {
+      Object.keys(auditState.ports).forEach(k => {
+        // En caso de cerrar todos: dejamos solo 443 como servicio seguro
+        if (!state) {
+          auditState.ports[k] = false;
+        } else {
+          // Abrir puertos típicos peligrosos
+          auditState.ports[k] = (k !== 'p5432');
+        }
+        updatePortUI(k);
+      });
+      calculateRiskScore();
+    }
+
+    function updatePortUI(portKey) {
+      const btn = document.getElementById(`port-btn-${portKey}`);
+      const badge = document.getElementById(`badge-${portKey}`);
+      if (!btn || !badge) return;
+
+      const isOpen = auditState.ports[portKey];
+      btn.classList.remove('port-open', 'port-closed');
+
+      if (isOpen) {
+        btn.classList.add('port-open');
+        badge.className = "text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300";
+        if (portKey === 'p6379') badge.innerText = "¡PELIGRO RCE!";
+        else if (portKey === 'p3306' || portKey === 'p5432') badge.innerText = "¡CRÍTICO!";
+        else badge.innerText = "ABIERTO";
+      } else {
+        btn.classList.add('port-closed');
+        badge.className = "text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300";
+        badge.innerText = "PROTEGIDO";
+      }
+    }
+
+    // ACTUALIZAR ESTILOS DE SELECCIÓN EN CHECKLISTS
+    function updateUISelections() {
+      // Helper para seleccionar la card activa
+      const updateGroup = (key, val, safeVal, critVal) => {
+        document.querySelectorAll(`[id^='opt-${key}-']`).forEach(el => {
+          el.classList.remove('selected-safe', 'selected-warn', 'selected-crit');
+        });
+        const active = document.getElementById(`opt-${key}-${val}`);
+        if (active) {
+          if (val === safeVal) active.classList.add('selected-safe');
+          else if (val === critVal) active.classList.add('selected-crit');
+          else active.classList.add('selected-warn');
+        }
+      };
+
+      updateGroup('ssh_root', auditState.ssh_root, 'no', 'yes');
+      updateGroup('ssh_auth', auditState.ssh_auth, 'keys', 'passwords');
+      updateGroup('ssh_port', auditState.ssh_port, 'custom', '22');
+      updateGroup('ssh_brute', auditState.ssh_brute, 'active', 'none');
+      updateGroup('firewall_policy', auditState.firewall_policy, 'strict', 'inactive');
+      updateGroup('siem_t1003', auditState.siem_t1003, 'active', 'none');
+      updateGroup('siem_alerts', auditState.siem_alerts, 'instant', 'manual');
+      updateGroup('siem_fim', auditState.siem_fim, 'enabled', 'disabled');
+      updateGroup('backup_immutable', auditState.backup_immutable, 'immutable', 'mutable');
+      updateGroup('backup_drill', auditState.backup_drill, 'tested', 'never');
+
+      // Actualizar todos los botones de puertos
+      Object.keys(auditState.ports).forEach(k => updatePortUI(k));
+    }
+
+    // PRESETS FORENSES RÁPIDOS
+    function loadAuditPreset(preset) {
+      if (preset === 'fresh_vps') {
+        auditState.ssh_root = 'yes';
+        auditState.ssh_auth = 'passwords';
+        auditState.ssh_port = '22';
+        auditState.ssh_brute = 'none';
+        auditState.firewall_policy = 'inactive';
+        auditState.ports = { p22: true, p80: true, p443: false, p3306: true, p5432: false, p6379: true };
+        auditState.siem_t1003 = 'none';
+        auditState.siem_alerts = 'manual';
+        auditState.siem_fim = 'disabled';
+        auditState.backup_immutable = 'mutable';
+        auditState.backup_drill = 'never';
+      } else if (preset === 'semi_hardened') {
+        auditState.ssh_root = 'key';
+        auditState.ssh_auth = 'keys';
+        auditState.ssh_port = '22';
+        auditState.ssh_brute = 'active';
+        auditState.firewall_policy = 'strict';
+        auditState.ports = { p22: true, p80: true, p443: false, p3306: false, p5432: false, p6379: false };
+        auditState.siem_t1003 = 'none';
+        auditState.siem_alerts = 'manual';
+        auditState.siem_fim = 'disabled';
+        auditState.backup_immutable = 'mutable';
+        auditState.backup_drill = 'never';
+      } else if (preset === 'bunker') {
+        auditState.ssh_root = 'no';
+        auditState.ssh_auth = 'keys';
+        auditState.ssh_port = 'custom';
+        auditState.ssh_brute = 'active';
+        auditState.firewall_policy = 'strict';
+        auditState.ports = { p22: false, p80: false, p443: false, p3306: false, p5432: false, p6379: false };
+        auditState.siem_t1003 = 'active';
+        auditState.siem_alerts = 'instant';
+        auditState.siem_fim = 'enabled';
+        auditState.backup_immutable = 'immutable';
+        auditState.backup_drill = 'tested';
+      }
+      updateUISelections();
+      calculateRiskScore();
+    }
+
+    // CÁLCULO FORENSE DEL ÍNDICE DE RIESGO (0 - 100)
+    function calculateRiskScore() {
+      let risk = 0;
+      let critCount = 0;
+      let warnCount = 0;
+      const criticalBreaches = [];
+
+      // 1. SSH Checks (Max ~30 pts)
+      if (auditState.ssh_root === 'yes') {
+        risk += 14;
+        critCount++;
+        criticalBreaches.push("SSH PermitRootLogin habilitado ('yes')");
+      } else if (auditState.ssh_root === 'key') {
+        risk += 5;
+        warnCount++;
+      }
+
+      if (auditState.ssh_auth === 'passwords') {
+        risk += 12;
+        critCount++;
+        criticalBreaches.push("Autenticación SSH por contraseña vulnerable a fuerza bruta");
+      }
+
+      if (auditState.ssh_port === '22') {
+        risk += 4;
+        warnCount++;
+      }
+
+      if (auditState.ssh_brute === 'none') {
+        risk += 7;
+        warnCount++;
+        criticalBreaches.push("Sin Fail2ban ni rate limiting en demonio SSH");
+      }
+
+      // 2. Firewall & Ports (Max ~35 pts)
+      if (auditState.firewall_policy === 'inactive') {
+        risk += 15;
+        critCount++;
+        criticalBreaches.push("Cortafuegos UFW/NFTables inactivo o permisivo (ACCEPT all)");
+      }
+
+      if (auditState.ports.p6379) {
+        risk += 15;
+        critCount++;
+        criticalBreaches.push("Puerto Redis (6379) expuesto a internet público (Vector RCE directo)");
+      }
+      if (auditState.ports.p3306) {
+        risk += 10;
+        critCount++;
+        criticalBreaches.push("Puerto MySQL (3306) accesible desde 0.0.0.0/0");
+      }
+      if (auditState.ports.p5432) {
+        risk += 10;
+        critCount++;
+        criticalBreaches.push("Puerto PostgreSQL (5432) accesible sin túnel VPN");
+      }
+      if (auditState.ports.p80) {
+        risk += 3;
+        warnCount++;
+      }
+      if (auditState.ports.p22 && auditState.ssh_port === '22') {
+        risk += 3;
+      }
+
+      // 3. SIEM & MITRE ATT&CK T1003 (Max ~20 pts)
+      if (auditState.siem_t1003 === 'none') {
+        risk += 12;
+        critCount++;
+        criticalBreaches.push("Sin detección activa de volcado de credenciales (MITRE T1003)");
+      }
+      if (auditState.siem_alerts === 'manual') {
+        risk += 6;
+        warnCount++;
+      }
+      if (auditState.siem_fim === 'disabled') {
+        risk += 6;
+        warnCount++;
+        criticalBreaches.push("Integridad de archivos críticos (FIM) desactivada");
+      }
+
+      // 4. Backups & Ransomware Isolation (Max ~20 pts)
+      if (auditState.backup_immutable === 'mutable') {
+        risk += 14;
+        critCount++;
+        criticalBreaches.push("Copias de seguridad mutables en el mismo host (Secuestro total por ransomware)");
+      }
+      if (auditState.backup_drill === 'never') {
+        risk += 6;
+        warnCount++;
+      }
+
+      // Normalizar en rango 0 - 100
+      risk = Math.min(100, Math.max(0, Math.round(risk)));
+
+      // Actualizar UI del Medidor
+      renderRiskScore(risk, critCount, warnCount, criticalBreaches);
+    }
+
+    function renderRiskScore(score, critCount, warnCount, criticalBreaches) {
+      const scoreNumber = document.getElementById("score-number");
+      const riskBadge = document.getElementById("risk-badge-status");
+      const verdictTitle = document.getElementById("risk-verdict-title");
+      const bannerCard = document.getElementById("risk-banner-card");
+      const bannerTag = document.getElementById("banner-risk-tag");
+      const bannerHeadline = document.getElementById("banner-risk-headline");
+      const bannerDesc = document.getElementById("banner-risk-desc");
+      const needle = document.getElementById("gauge-needle");
+      const activeArc = document.getElementById("gauge-active-arc");
+      const statCrit = document.getElementById("stat-crit-count");
+      const terminalStream = document.getElementById("terminal-stream");
+
+      // Actualizar número y estadísticas
+      scoreNumber.innerText = score;
+      statCrit.innerText = `${critCount} Críticos / ${warnCount} Medios`;
+
+      // Calcular ángulo de aguja SVG: de -90deg (0 pts) a +90deg (100 pts)
+      const angle = -90 + (score / 100) * 180;
+      needle.style.transform = `rotate(${angle}deg)`;
+
+      // Dashoffset del arco SVG (longitud total aprox 251.2)
+      const arcLength = 251.2;
+      const offset = arcLength - (score / 100) * arcLength;
+      activeArc.style.strokeDashoffset = offset;
+
+      let statusColor = "rose";
+      let statusText = "CRÍTICO";
+
+      if (score <= 25) {
+        statusColor = "emerald";
+        statusText = "BLINDADO";
+        scoreNumber.className = "text-4xl sm:text-5xl font-black font-mono tracking-tight text-emerald-400";
+        riskBadge.className = "text-xs font-mono font-bold px-2.5 py-1 rounded-full border bg-emerald-500/20 border-emerald-500/40 text-emerald-300";
+        verdictTitle.innerText = "🛡️ Nivel Búnker: Muro Kanuv Activo";
+        verdictTitle.className = "text-xs font-bold text-emerald-300 mt-1 uppercase tracking-wider";
+
+        bannerCard.className = "theme-card p-4 rounded-2xl border relative overflow-hidden bg-emerald-950/20 border-emerald-900/50";
+        bannerTag.className = "text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold";
+        bannerTag.innerText = "ESTADO: INFRAESTRUCTURA FORTIFICADA";
+        bannerHeadline.innerText = "Superficie de ataque reducida al mínimo y SIEM activo";
+        bannerDesc.innerText = "Tus servidores cumplen con las directrices de menor privilegio, llaves criptográficas exclusivas y copias inmutables protegidas ante ransomware.";
+      } 
+      else if (score <= 60) {
+        statusColor = "amber";
+        statusText = "VULNERABLE";
+        scoreNumber.className = "text-4xl sm:text-5xl font-black font-mono tracking-tight text-amber-400";
+        riskBadge.className = "text-xs font-mono font-bold px-2.5 py-1 rounded-full border bg-amber-500/20 border-amber-500/40 text-amber-300";
+        verdictTitle.innerText = "⚠️ Exposición Media: Riesgo Lateral";
+        verdictTitle.className = "text-xs font-bold text-amber-300 mt-1 uppercase tracking-wider";
+
+        bannerCard.className = "theme-card p-4 rounded-2xl border relative overflow-hidden bg-amber-950/20 border-amber-900/50";
+        bannerTag.className = "text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold";
+        bannerTag.innerText = "ESTADO: VULNERABILIDADES INTERMEDIAS DETECTADAS";
+        bannerHeadline.innerText = "Configuraciones inseguras permiten movimientos laterales";
+        bannerDesc.innerText = "Aunque existen medidas de protección básicas, la falta de inmutabilidad en backups o la ausencia de monitorización FIM deja vectores explotables.";
+      } 
+      else {
+        statusColor = "rose";
+        statusText = "CRÍTICO";
+        scoreNumber.className = "text-4xl sm:text-5xl font-black font-mono tracking-tight text-rose-400";
+        riskBadge.className = "text-xs font-mono font-bold px-2.5 py-1 rounded-full border bg-rose-500/20 border-rose-500/40 text-rose-300";
+        verdictTitle.innerText = "🚨 Alerta Máxima: Intrusión Inminente";
+        verdictTitle.className = "text-xs font-bold text-rose-300 mt-1 uppercase tracking-wider";
+
+        bannerCard.className = "theme-card p-4 rounded-2xl border relative overflow-hidden bg-rose-950/20 border-rose-900/50";
+        bannerTag.className = "text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold";
+        bannerTag.innerText = "ESTADO: ALTO RIESGO DE RANSOMWARE & EXFILTRACIÓN";
+        bannerHeadline.innerText = "Servidor expuesto a fuerza bruta, ejecución RCE y dumping de memoria";
+        bannerDesc.innerText = "Tu infraestructura presenta brechas severas accesibles desde internet público. El riesgo de secuestro de ficheros o compromiso total de credenciales es inminente.";
+      }
+
+      riskBadge.innerText = `${statusText} (${score}/100)`;
+
+      // Actualizar Terminal Forense
+      renderTerminalLogs(score, statusText, criticalBreaches);
+
+      // Actualizar enlace CTA con pre-carga de diagnóstico
+      updateCtaLinks(score, statusText, criticalBreaches);
+    }
+
+    function renderTerminalLogs(score, statusText, breaches) {
+      const stream = document.getElementById("terminal-stream");
+      let logsHtml = `
+        <div class="text-zinc-500">[KANUV_AUDIT_STREAM]: Sonda analizando ${Object.keys(auditState).length} vectores...</div>
+        <div><span class="text-purple-400">[SCORE]</span> <span class="${score > 60 ? 'text-rose-400 font-bold' : score > 25 ? 'text-amber-400' : 'text-emerald-400 font-bold'}">Índice Forense: ${score}/100 (${statusText})</span></div>
+      `;
+
+      if (breaches.length === 0) {
+        logsHtml += `
+          <div><span class="text-emerald-400">[ESCUDO_KANUV]</span> Todos los puertos críticos filtrados. Llaves Ed25519 forzadas.</div>
+          <div><span class="text-emerald-400">[SIEM_WAZUH]</span> Monitorización T1003 y Syscheck activos a 189.89.619 Hz.</div>
+          <div class="text-zinc-500">[STATUS]: Sistema en estado BÚNKER RESILIENTE. Cero vectores directos.</div>
+        `;
+      } else {
+        breaches.slice(0, 5).forEach((b, idx) => {
+          logsHtml += `<div><span class="text-purple-400">[BREACH-0${idx+1}]</span> <span class="text-rose-400">${b}</span></div>`;
+        });
+        if (breaches.length > 5) {
+          logsHtml += `<div class="text-zinc-500">+ ${breaches.length - 5} vector(es) adicionales en informe completo...</div>`;
+        }
+      }
+      stream.innerHTML = logsHtml;
+    }
+
+    function updateCtaLinks(score, statusText, breaches) {
+      const topCta = document.getElementById("btn-cta-hardening");
+      const footerCta = document.getElementById("btn-cta-hardening-footer");
+
+      // Construir mensaje detallado para Signal
+      const openPortsList = Object.entries(auditState.ports)
+        .filter(([_, isOpen]) => isOpen)
+        .map(([k, _]) => k.replace('p', ''))
+        .join(', ') || 'Ninguno';
+
+      const briefText = `Diagnóstico de Seguridad K4L1: Riesgo ${score}/100 (${statusText}). Brechas críticas: ${breaches.slice(0, 3).join("; ") || "Ninguna"}. Puertos abiertos: ${openPortsList}. Solicito Hardening Completo (450 €).`;
+      
+      const signalMsg = encodeURIComponent(
+        `Hola Kali, he completado el Test de Hardening de K4L1 Studio:\n` +
+        `• Puntuación de Riesgo: ${score}/100 [${statusText}]\n` +
+        `• Puertos expuestos: [${openPortsList}]\n` +
+        `• Brechas detectadas:\n  - ${breaches.slice(0, 4).join("\n  - ") || "Infraestructura sin fallos críticos"}\n\n` +
+        `Quiero contratar el Pack de Fortificación & SIEM (450 €) para blindar mis servidores.`
+      );
+
+      const signalUrl = `https://signal.me/#u/k4li.89?text=${signalMsg}`;
+      if (topCta) topCta.href = signalUrl;
+      if (footerCta) footerCta.href = signalUrl;
+
+      // Comunicar a la ventana padre si está en iframe para autocompletar cotizador
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'SECURITY_AUDIT_RESULT',
+            score: score,
+            status: statusText,
+            breaches: breaches,
+            openPorts: openPortsList,
+            brief: briefText
+          }, '*');
+        }
+      } catch(e) {}
+    }
+
+    function copyForensicReport() {
+      const score = document.getElementById("score-number").innerText;
+      const status = document.getElementById("risk-badge-status").innerText;
+      const btn = document.getElementById("btn-copy-report");
+
+      const openPortsList = Object.entries(auditState.ports)
+        .filter(([_, isOpen]) => isOpen)
+        .map(([k, _]) => k.replace('p', ''))
+        .join(', ') || 'Ninguno';
+
+      const report = 
+`=============================================================
+  INFORME FORENSE DE SEGURIDAD & HARDENING // K4L1 STUDIO
+  Auditado con: Escudo Kanuv 🛡️ (189.89.619 Hz)
+=============================================================
+ÍNDICE DE RIESGO: ${score}/100 (${status})
+
+ESTADO DE VECTORES CLAVE:
+- SSH PermitRootLogin: ${auditState.ssh_root}
+- Autenticación SSH: ${auditState.ssh_auth}
+- Puerto SSH: ${auditState.ssh_port}
+- Protección Fuerza Bruta: ${auditState.ssh_brute}
+- Cortafuegos Global: ${auditState.firewall_policy}
+- Puertos Expuestos al Exterior: [${openPortsList}]
+- Detección Credential Dumping T1003: ${auditState.siem_t1003}
+- Integridad de Archivos (FIM): ${auditState.siem_fim}
+- Inmutabilidad de Backups: ${auditState.backup_immutable}
+- Simulacro Restore (<90 días): ${auditState.backup_drill}
+
+PLAN DE MITIGACIÓN RECOMENDADO:
+- Servicio: Pack de Hardening Completo & Despliegue SIEM Wazuh
+- Tarifa Cerrada: 450 € (Pago Único)
+- Contacto Cifrado: Signal @k4li.89 (https://signal.me/#u/k4li.89)
+=============================================================`;
+
+      navigator.clipboard.writeText(report).then(() => {
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `<span class="text-emerald-400">✓</span> ¡Copiado!`;
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+        }, 2500);
+      }).catch(() => {
+        alert("Informe generado. Puedes seleccionarlo desde la consola o terminal.");
+      });
+    }
+
+    // Inicializar auditoría por defecto
+    loadAuditPreset('fresh_vps');
+  </script>
+</body>
+</html>

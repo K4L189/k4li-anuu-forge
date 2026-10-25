@@ -190,7 +190,7 @@ Solo cambias:
 ```python
 client = OpenAI(
     base_url="http://internal-llm.vpc:8000/v1",
-    api_key="token-interno-seguro"
+    api_key=os.getenv("LOCAL_VLLM_KEY", "EMPTY")
 )
 ```
 Toda tu lógica de negocio sigue funcionando sin tocar una sola función de parsing.

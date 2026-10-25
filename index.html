@@ -241,6 +241,16 @@
             <button onclick="setTheme('neon')" title="Kali Kush (Ultra-Neon / Relax)" class="theme-btn px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="tbtn-neon">🌸 Neón</button>
           </div>
 
+          <!-- Ciclo de Fondos HD Auto-Rotativos (Estilo GW2Trader) -->
+          <div class="flex items-center gap-1 bg-black/50 p-1 rounded-xl border theme-border text-xs">
+            <button id="autoBgToggleBtn" onclick="toggleAutoBg()" title="Alternar Rotación Automática de Fondos HD (12s)" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all border border-purple-500/40 bg-purple-500/20 text-purple-200 hover:text-white flex items-center gap-1">
+              <span id="autoBgIcon">🖼️</span> <span id="autoBgLabel">Auto-BG: ON</span>
+            </button>
+            <button onclick="nextBackground()" title="Siguiente Fondo HD" class="px-1.5 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-white hover:bg-zinc-800">
+              ⏭️
+            </button>
+          </div>
+
           <!-- Signal E2EE -->
           <a href="https://signal.me/#u/k4li.89" target="_blank" class="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/20 text-xs font-mono">
             <span>💬</span> @k4li.89
@@ -1219,9 +1229,117 @@
         }
       });
 
+    // ==========================================
+    // MOTOR DE FONDOS HD AUTO-ROTATIVOS (GW2TRADER ENGINE)
+    // ==========================================
+    const WALLPAPERS = [
+      { name: "Kilonova Sovereign", url: "assets/wallpapers/kilonova_sovereign.jpg" },
+      { name: "GW2 Nexus Matrix", url: "assets/wallpapers/bg_nexus.png" },
+      { name: "Bruma Ceremonial", url: "assets/wallpapers/anu_banner.png" },
+      { name: "Anuu Cyber-Goth Hero", url: "assets/wallpapers/anuu_hero.png" },
+      { name: "Nexus Stellar Orbit", url: "assets/wallpapers/nexus_stellar.png" },
+      { name: "Anuu Avatar Core", url: "assets/wallpapers/anuu_core.jpg" },
+      { name: "Bruma Mist 189.89.619 Hz", url: "assets/wallpapers/bruma_mist.jpg" }
+    ];
+
+    let currentBgIndex = 0;
+    let activeBgLayer = 'A';
+    let bgIntervalId = null;
+    let autoBgEnabled = localStorage.getItem("k4li_auto_bg") !== "false";
+
+    // Precargar wallpapers para transición fluida sin parpadeo
+    WALLPAPERS.forEach(wp => {
+      const img = new Image();
+      img.src = wp.url;
+    });
+
+    function setBackground(index) {
+      if (index < 0) index = WALLPAPERS.length - 1;
+      currentBgIndex = index % WALLPAPERS.length;
+      const wp = WALLPAPERS[currentBgIndex];
+
+      const layerA = document.getElementById("bgLayerA");
+      const layerB = document.getElementById("bgLayerB");
+      if (!layerA || !layerB) return;
+
+      if (activeBgLayer === 'A') {
+        layerB.style.backgroundImage = `url('${wp.url}')`;
+        layerB.classList.remove("opacity-0");
+        layerB.classList.add("opacity-25");
+        layerA.classList.remove("opacity-25");
+        layerA.classList.add("opacity-0");
+        activeBgLayer = 'B';
+      } else {
+        layerA.style.backgroundImage = `url('${wp.url}')`;
+        layerA.classList.remove("opacity-0");
+        layerA.classList.add("opacity-25");
+        layerB.classList.remove("opacity-25");
+        layerB.classList.add("opacity-0");
+        activeBgLayer = 'A';
+      }
+
+      const btn = document.getElementById("autoBgToggleBtn");
+      if (btn) btn.setAttribute("title", `Fondo activo: ${wp.name} (${currentBgIndex + 1}/${WALLPAPERS.length})`);
+    }
+
+    function nextBackground() {
+      setBackground(currentBgIndex + 1);
+    }
+
+    function toggleAutoBg() {
+      autoBgEnabled = !autoBgEnabled;
+      localStorage.setItem("k4li_auto_bg", autoBgEnabled ? "true" : "false");
+      updateAutoBgUI();
+      if (autoBgEnabled) {
+        startBgRotator();
+      } else {
+        stopBgRotator();
+      }
+    }
+
+    function updateAutoBgUI() {
+      const label = document.getElementById("autoBgLabel");
+      const icon = document.getElementById("autoBgIcon");
+      const btn = document.getElementById("autoBgToggleBtn");
+      if (!label || !icon || !btn) return;
+      if (autoBgEnabled) {
+        label.innerText = "Auto-BG: ON";
+        icon.innerText = "🖼️";
+        btn.classList.add("border-purple-500/40", "bg-purple-500/20", "text-purple-200");
+        btn.classList.remove("border-zinc-700", "bg-zinc-800/40", "text-zinc-400");
+      } else {
+        label.innerText = "Auto-BG: OFF";
+        icon.innerText = "⏸️";
+        btn.classList.remove("border-purple-500/40", "bg-purple-500/20", "text-purple-200");
+        btn.classList.add("border-zinc-700", "bg-zinc-800/40", "text-zinc-400");
+      }
+    }
+
+    function startBgRotator() {
+      stopBgRotator();
+      bgIntervalId = setInterval(() => {
+        nextBackground();
+      }, 12000);
+    }
+
+    function stopBgRotator() {
+      if (bgIntervalId) {
+        clearInterval(bgIntervalId);
+        bgIntervalId = null;
+      }
+    }
+
     // Iniciar con valores por defecto
     updateEstimate();
     selectForgeRelic('blueteam');
+
+    // Inicializar primer fondo y rotador
+    const initialLayer = document.getElementById("bgLayerA");
+    if (initialLayer) initialLayer.style.backgroundImage = `url('${WALLPAPERS[0].url}')`;
+    updateAutoBgUI();
+    if (autoBgEnabled) {
+      startBgRotator();
+    }
   </script>
 </body>
 </html>
