@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motor Interactivo de Arbitraje & Terminal HFT | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Temas Canónicos K4L1 STUDIO & Concilio ACE */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.96);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+      --chart-bid-glow: rgba(16, 185, 129, 0.25);
+      --chart-ask-glow: rgba(239, 68, 68, 0.25);
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.96);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+      --chart-bid-glow: rgba(244, 63, 94, 0.25);
+      --chart-ask-glow: rgba(190, 18, 60, 0.35);
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.96);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+      --chart-bid-glow: rgba(16, 185, 129, 0.3);
+      --chart-ask-glow: rgba(239, 68, 68, 0.25);
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.96);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+      --chart-bid-glow: rgba(6, 182, 212, 0.25);
+      --chart-ask-glow: rgba(244, 63, 94, 0.25);
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.96);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+      --chart-bid-glow: rgba(245, 158, 11, 0.25);
+      --chart-ask-glow: rgba(220, 38, 38, 0.25);
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.96);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+      --chart-bid-glow: rgba(0, 247, 255, 0.3);
+      --chart-ask-glow: rgba(255, 0, 127, 0.3);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-mono-num {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-card-sub {
+      background-color: var(--bg-card-sub);
+      border: 1px solid var(--border-card);
+    }
+
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    .theme-accent-text {
+      color: var(--accent-secondary);
+    }
+
+    .theme-accent-bg {
+      background-color: var(--accent-primary);
+    }
+    .theme-accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Sliders personalizados */
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #12121e;
+      border-radius: 4px;
+      outline: none;
+      border: 1px solid var(--border-card);
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-primary);
+      transition: transform 0.1s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-primary);
+    }
+
+    /* Pestañas activas */
+    .market-tab.active {
+      background: var(--badge-bg);
+      border-color: var(--badge-border);
+      color: var(--accent-secondary);
+      box-shadow: 0 0 14px -3px var(--glow-color);
+    }
+
+    /* Animaciones de Flash para libro de órdenes */
+    @keyframes flashGreen {
+      0% { background-color: rgba(16, 185, 129, 0.45); }
+      100% { background-color: transparent; }
+    }
+    @keyframes flashRed {
+      0% { background-color: rgba(239, 68, 68, 0.45); }
+      100% { background-color: transparent; }
+    }
+    .flash-buy { animation: flashGreen 0.6s ease-out; }
+    .flash-sell { animation: flashRed 0.6s ease-out; }
+
+    /* Barra de scroll custom para el tape y orderbook */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-card);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    /* Indicador parpadeante */
+    @keyframes pulseLed {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.9); }
+    }
+    .led-live { animation: pulseLed 1.8s infinite ease-in-out; }
+
+    /* Efecto de resplandor arbitrario */
+    .arb-glowing {
+      animation: arbPulse 1.2s infinite alternate;
+    }
+    @keyframes arbPulse {
+      0% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); border-color: rgba(16, 185, 129, 0.5); }
+      100% { box-shadow: 0 0 25px rgba(16, 185, 129, 0.7); border-color: #34d399; }
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Contenedor Maestro de la Terminal HFT -->
+  <div id="k4li-hft-terminal" class="max-w-7xl mx-auto space-y-6">
+
+    <!-- Header Cockpit & Navegación -->
+    <header class="theme-card p-4 sm:p-5 rounded-2xl border flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+          <span class="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 led-live"></span>
+            HFT Arbitrage Engine 161914
+          </span>
+          <span class="text-[11px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-black/40 border theme-border">
+            v3.8 Kilonova
+          </span>
+          <span class="text-[11px] font-mono text-zinc-500">189.89.619 Hz</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-black text-white flex items-center justify-center sm:justify-start gap-2">
+          <span>⚡</span> Motor Interactivo de Arbitraje & Terminal HFT
+        </h1>
+        <p class="text-xs text-zinc-400 max-w-2xl leading-relaxed">
+          Simulador estocástico de microestructura de mercado L2/L3 en JavaScript puro a 60 FPS. Arbitraje triangular continuo, cálculo analítico de fricciones (comisión de broker/exchange) y visualización de profundidad en tiempo real.
+        </p>
+      </div>
+
+      <!-- Selector de Temas del Concilio -->
+      <div class="flex flex-col sm:flex-row items-center gap-2">
+        <div class="flex items-center gap-1 bg-black/50 p-1 rounded-xl border theme-border text-xs">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5 hidden sm:inline">🎨 Tema:</span>
+          <button onclick="switchTheme('anuu')" id="tbtn-anuu" title="Bruma Anuu" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-purple-300 bg-purple-500/20 border border-purple-500/50">🌫️ Anuu</button>
+          <button onclick="switchTheme('blood')" id="tbtn-blood" title="Búnker Blood" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300">🛡️ Blood</button>
+          <button onclick="switchTheme('gw2')" id="tbtn-gw2" title="Kilonova GW2" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300">⚡ GW2</button>
+          <button onclick="switchTheme('bioinfo')" id="tbtn-bioinfo" title="BioCode" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300">🧬 Bio</button>
+          <button onclick="switchTheme('duat')" id="tbtn-duat" title="Anubis Duat" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300">⚖️ Duat</button>
+          <button onclick="switchTheme('neon')" id="tbtn-neon" title="Kali Neón" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300">🌸 Neón</button>
+        </div>
+
+        <!-- Enlace a Signal para Encargos -->
+        <a href="https://signal.me/#u/k4li.89" target="_blank" class="px-3 py-1.5 rounded-xl bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/30 transition-all text-xs font-mono flex items-center gap-1.5">
+          <span>💬</span> Kali Studio E2EE
+        </a>
+      </div>
+    </header>
+
+    <!-- Barra de Selección de Mercado / Ecosistema -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+      <!-- Selector de Mercado -->
+      <div class="md:col-span-8 flex flex-wrap items-center gap-2 bg-black/40 p-2 rounded-xl border theme-border">
+        <span class="text-xs font-mono text-zinc-400 px-2 font-bold uppercase">Mercado:</span>
+        <button onclick="selectMarket('gw2')" id="mtab-gw2" class="market-tab active px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border border-transparent text-zinc-300 flex items-center gap-1.5">
+          <span>🗡️</span> GW2 Trading Post (15% TP)
+        </button>
+        <button onclick="selectMarket('crypto')" id="mtab-crypto" class="market-tab px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border border-transparent text-zinc-300 flex items-center gap-1.5">
+          <span>⚡</span> Cripto DEX (SOL / USDC / AMM)
+        </button>
+        <button onclick="selectMarket('forex')" id="mtab-forex" class="market-tab px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border border-transparent text-zinc-300 flex items-center gap-1.5">
+          <span>🌐</span> Forex Macro HFT (EUR / USD)
+        </button>
+      </div>
+
+      <!-- Quick Toggles de Control de Motor -->
+      <div class="md:col-span-4 flex items-center justify-end gap-2 bg-black/40 p-2 rounded-xl border theme-border">
+        <button id="btn-toggle-engine" onclick="toggleEngine()" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all flex items-center gap-1.5">
+          <span id="engine-icon">⏸️</span> <span id="engine-text">Pausar Motor</span>
+        </button>
+        <button onclick="triggerMarketShock()" title="Inyecta una orden ballena desequilibrante en el libro" class="px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition-all flex items-center gap-1.5">
+          <span>💥</span> Shock Ballena
+        </button>
+        <button onclick="resetEngineStats()" title="Reiniciar métricas del bot" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-400 hover:text-white bg-black/30 border theme-border transition-all">
+          🔄
+        </button>
+      </div>
+    </div>
+
+    <!-- 4 Cards de Métricas Clave HFT (KPIs en Vivo) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- KPI 1: Spread & Ineficiencia de Liquidez -->
+      <div class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">Spread Bid-Ask</span>
+          <span id="badge-spread-status" class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+            SPREAD AMPLIO
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-2">
+          <div id="val-spread-abs" class="text-2xl font-black text-white font-mono-num">
+            0.48 %
+          </div>
+          <span id="val-spread-bps" class="text-xs font-mono text-zinc-400">48.2 bps</span>
+        </div>
+        <div class="mt-2 text-[11px] font-mono text-zinc-500 flex justify-between">
+          <span>Best Bid: <strong id="kpi-best-bid" class="text-emerald-400">--</strong></span>
+          <span>Best Ask: <strong id="kpi-best-ask" class="text-rose-400">--</strong></span>
+        </div>
+      </div>
+
+      <!-- KPI 2: Arbitraje Triangular Activo -->
+      <div id="card-triangular-arb" class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">Arbitraje Triangular</span>
+          <span id="badge-arb-signal" class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-300 border border-purple-500/40">
+            MONITOREANDO
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-2">
+          <div id="val-arb-alpha" class="text-2xl font-black font-mono-num text-emerald-400">
+            +3.42 %
+          </div>
+          <span class="text-xs font-mono text-zinc-400">Neto tras tasas</span>
+        </div>
+        <div class="mt-2 text-[11px] font-mono text-zinc-400 truncate" id="kpi-arb-route">
+          Ruta: <span class="theme-accent-text font-bold">Oro ➔ Ecto ➔ Polvo ➔ Oro</span>
+        </div>
+      </div>
+
+      <!-- KPI 3: Fricción & Tasa del Broker -->
+      <div class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">Tasa Broker / Exchange</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40" id="badge-fee-type">
+            15.0% GW2 TP
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-2">
+          <div id="val-broker-fee" class="text-2xl font-black text-amber-300 font-mono-num">
+            15.00 %
+          </div>
+          <span id="val-breakeven-mult" class="text-xs font-mono text-zinc-400">x1.176 BEP</span>
+        </div>
+        <div class="mt-2 text-[11px] font-mono text-zinc-500">
+          Umbral mín. de ganancia: <span class="text-zinc-300 font-bold" id="val-min-margin-req">+17.65%</span>
+        </div>
+      </div>
+
+      <!-- KPI 4: PnL Acumulado Bot HFT -->
+      <div class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">PnL Bot Simulador</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+            WIN RATE: 99.4%
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-2">
+          <div id="val-bot-pnl" class="text-2xl font-black font-mono-num text-emerald-400">
+            +1,482.60 €
+          </div>
+          <span id="val-trades-count" class="text-xs font-mono text-zinc-400">341 trades</span>
+        </div>
+        <div class="mt-2 text-[11px] font-mono text-zinc-500 flex justify-between">
+          <span>Latencia Media: <strong class="text-zinc-300">0.34 ms</strong></span>
+          <span>Sharpe: <strong class="text-emerald-400">4.32</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel de Configuración de Parámetros de Trading & Fricción -->
+    <div class="theme-card p-5 rounded-2xl border space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b theme-border pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">🎛️</span>
+          <h2 class="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-white">
+            Parámetros del Motor de Arbitraje & Fricción
+          </h2>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-mono text-zinc-400">
+          <span>Modo Algorítmico:</span>
+          <span class="text-emerald-400 font-bold">Ornstein-Uhlenbeck + Micro-Jumps</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+        
+        <!-- Control 1: Tasa de Broker / Exchange -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label for="slider-fee" class="font-bold text-zinc-300 flex items-center gap-1.5">
+              <span>💸</span> Comisión de Broker / Exchange
+            </label>
+            <span id="label-slider-fee" class="font-mono font-bold text-amber-300 bg-black/40 px-2 py-0.5 rounded border theme-border">
+              15.00 %
+            </span>
+          </div>
+          <input type="range" id="slider-fee" min="0" max="20" step="0.05" value="15" oninput="updateBrokerFee(this.value)">
+          <div class="flex justify-between items-center text-[10px] text-zinc-500 font-mono">
+            <button onclick="setFeePreset(0.02)" class="hover:text-zinc-300 underline">0.02% (HFT)</button>
+            <button onclick="setFeePreset(0.30)" class="hover:text-zinc-300 underline">0.30% (DEX)</button>
+            <button onclick="setFeePreset(1.00)" class="hover:text-zinc-300 underline">1.0% (CEX)</button>
+            <button onclick="setFeePreset(15.00)" class="hover:text-zinc-300 underline font-bold text-amber-400">15.0% (GW2)</button>
+          </div>
+        </div>
+
+        <!-- Control 2: Velocidad de Simulación / Latencia -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label for="slider-speed" class="font-bold text-zinc-300 flex items-center gap-1.5">
+              <span>⏱️</span> Frecuencia de Tick HFT
+            </label>
+            <span id="label-slider-speed" class="font-mono font-bold text-cyan-300 bg-black/40 px-2 py-0.5 rounded border theme-border">
+              180 ms / tick
+            </span>
+          </div>
+          <input type="range" id="slider-speed" min="30" max="800" step="10" value="180" oninput="updateTickSpeed(this.value)">
+          <div class="flex justify-between items-center text-[10px] text-zinc-500 font-mono">
+            <span>30ms (Ultra HFT)</span>
+            <span>180ms (Rápido)</span>
+            <span>800ms (Pausado)</span>
+          </div>
+        </div>
+
+        <!-- Control 3: Volatilidad de Mercado -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label for="slider-volatility" class="font-bold text-zinc-300 flex items-center gap-1.5">
+              <span>🌊</span> Régimen de Volatilidad
+            </label>
+            <span id="label-slider-volatility" class="font-mono font-bold text-purple-300 bg-black/40 px-2 py-0.5 rounded border theme-border">
+              Media (σ = 1.4%)
+            </span>
+          </div>
+          <input type="range" id="slider-volatility" min="0.2" max="5.0" step="0.1" value="1.4" oninput="updateVolatility(this.value)">
+          <div class="flex justify-between items-center text-[10px] text-zinc-500 font-mono">
+            <span>0.2% (Baja)</span>
+            <span>1.4% (Normal)</span>
+            <span>5.0% (Flash Crash)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid Central: Gráfico de Profundidad Canvas a 60 FPS + Order Book L2/L3 + Tape -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- Columna Izquierda: Gráfico de Profundidad a 60 FPS en Canvas (7 cols) -->
+      <div class="lg:col-span-7 space-y-4">
+        
+        <!-- Canvas de Profundidad de Mercado (Depth Chart) -->
+        <div class="theme-card p-4 rounded-2xl border space-y-3">
+          <div class="flex items-center justify-between border-b theme-border pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold font-mono uppercase tracking-wider text-white flex items-center gap-1.5">
+                <span>📈</span> Curva de Profundidad Acumulada (Market Depth L2)
+              </span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                60 FPS Native
+              </span>
+            </div>
+            <div class="text-[11px] font-mono text-zinc-400">
+              Mid-Price: <strong id="canvas-mid-price" class="text-white">--</strong>
+            </div>
+          </div>
+
+          <!-- Contenedor del Canvas con overlay interactivo -->
+          <div class="relative w-full h-[320px] bg-black/60 rounded-xl overflow-hidden border theme-border">
+            <canvas id="marketDepthCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+            
+            <!-- Tooltip Flotante de Crosshair sobre Canvas -->
+            <div id="depth-tooltip" class="absolute pointer-events-none hidden bg-black/90 border theme-border text-white text-[11px] font-mono p-2 rounded-lg shadow-xl z-20 space-y-1">
+              <div id="tt-type" class="font-bold">--</div>
+              <div>Precio: <span id="tt-price" class="text-zinc-200">--</span></div>
+              <div>Profundidad: <span id="tt-depth" class="text-cyan-300">--</span></div>
+              <div>Slippage Est.: <span id="tt-slippage" class="text-amber-400">--</span></div>
+            </div>
+
+            <!-- Leyenda dentro del canvas -->
+            <div class="absolute top-2 left-3 pointer-events-none flex items-center gap-3 text-[10px] font-mono bg-black/60 px-2.5 py-1 rounded border theme-border">
+              <span class="flex items-center gap-1 text-emerald-400 font-bold">
+                <span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span> Bids (Demanda)
+              </span>
+              <span class="flex items-center gap-1 text-rose-400 font-bold">
+                <span class="w-2.5 h-2.5 rounded-sm bg-rose-500"></span> Asks (Oferta)
+              </span>
+              <span class="flex items-center gap-1 text-zinc-400">
+                <span class="w-2 h-0.5 border-t border-dashed border-zinc-400"></span> Spread Gap
+              </span>
+            </div>
+          </div>
+
+          <!-- Barra de Acciones Tácticas del Trader -->
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
+            <div class="flex items-center gap-2">
+              <button onclick="executeSnipeSpread()" class="px-3 py-1.5 rounded-lg font-mono font-bold bg-purple-600/30 text-purple-200 border border-purple-500/50 hover:bg-purple-600/50 transition-all flex items-center gap-1.5 shadow-sm">
+                <span>🎯</span> Snipe Spread (Maker Passive)
+              </button>
+              <button onclick="triggerFlashArbitrage()" class="px-3 py-1.5 rounded-lg font-mono font-bold bg-emerald-600/30 text-emerald-200 border border-emerald-500/50 hover:bg-emerald-600/50 transition-all flex items-center gap-1.5 shadow-sm">
+                <span>⚡</span> Ejecutar Arbitraje Flash
+              </button>
+            </div>
+            <div class="text-[11px] font-mono text-zinc-500">
+              Ticks procesados: <span id="stat-total-ticks" class="text-zinc-300 font-bold">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo de Arbitraje Triangular Analítico -->
+        <div id="triangular-arb-panel" class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">🔄</span>
+              <h2 class="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-white">
+                Scanner de Arbitraje Triangular Continuo
+              </h2>
+            </div>
+            <span class="text-[11px] font-mono text-emerald-400 flex items-center gap-1 font-bold">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 led-live"></span> Scanner Activo (3 Ciclos)
+            </span>
+          </div>
+
+          <!-- Diagrama Visual de Rutas Triangulares -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            
+            <!-- Ruta 1 -->
+            <div id="route-box-1" class="theme-card-sub p-3 rounded-xl border relative transition-all">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-mono font-bold text-zinc-300" id="route-1-title">Ciclo Principal</span>
+                <span id="route-1-badge" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">RENTABLE</span>
+              </div>
+              <div class="font-mono text-[11px] text-zinc-400 my-2 space-y-0.5">
+                <div id="route-1-step1">1. Gold ➔ Ectoplasm</div>
+                <div id="route-1-step2">2. Ectoplasm ➔ T6 Dust</div>
+                <div id="route-1-step3">3. T6 Dust ➔ Gold</div>
+              </div>
+              <div class="pt-2 border-t theme-border flex justify-between items-center text-[11px] font-mono">
+                <span class="text-zinc-500">Alpha Neto:</span>
+                <span id="route-1-yield" class="font-bold text-emerald-400">+2.84%</span>
+              </div>
+            </div>
+
+            <!-- Ruta 2 -->
+            <div id="route-box-2" class="theme-card-sub p-3 rounded-xl border relative transition-all">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-mono font-bold text-zinc-300" id="route-2-title">Ciclo Secundario</span>
+                <span id="route-2-badge" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">NEUTRAL</span>
+              </div>
+              <div class="font-mono text-[11px] text-zinc-400 my-2 space-y-0.5">
+                <div id="route-2-step1">1. Gold ➔ Mystic Coin</div>
+                <div id="route-2-step2">2. Coin ➔ Mystic Clover</div>
+                <div id="route-2-step3">3. Clover ➔ Gold Eq.</div>
+              </div>
+              <div class="pt-2 border-t theme-border flex justify-between items-center text-[11px] font-mono">
+                <span class="text-zinc-500">Alpha Neto:</span>
+                <span id="route-2-yield" class="font-bold text-zinc-400">-0.42%</span>
+              </div>
+            </div>
+
+            <!-- Ruta 3 -->
+            <div id="route-box-3" class="theme-card-sub p-3 rounded-xl border relative transition-all">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-mono font-bold text-zinc-300" id="route-3-title">Ciclo Forja Mística</span>
+                <span id="route-3-badge" class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">OPORTUNIDAD</span>
+              </div>
+              <div class="font-mono text-[11px] text-zinc-400 my-2 space-y-0.5">
+                <div id="route-3-step1">1. Gold ➔ Precursor Dusk</div>
+                <div id="route-3-step2">2. Craft ➔ Twilight</div>
+                <div id="route-3-step3">3. Venta TP ➔ Gold</div>
+              </div>
+              <div class="pt-2 border-t theme-border flex justify-between items-center text-[11px] font-mono">
+                <span class="text-zinc-500">Alpha Neto:</span>
+                <span id="route-3-yield" class="font-bold text-emerald-400">+5.12%</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Formula Explicativa de Descuento de Fricción -->
+          <div class="p-3 bg-black/40 rounded-xl border theme-border text-[11px] font-mono text-zinc-400 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-zinc-300 font-bold">Fórmula de Reducción:</span>
+              <span class="text-purple-300">Net_Yield = (R₁ × R₂ × R₃) × (1 - Fee)³ - 1.0</span>
+            </div>
+            <div class="text-right text-[10px] text-zinc-500">
+              Deduce 3 saltos de comisión en cada arbitraje
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna Derecha: Libro de Órdenes L2 (Order Book) + Tape de Operaciones (5 cols) -->
+      <div class="lg:col-span-5 space-y-4">
+        
+        <!-- Libro de Órdenes (Visual Order Book) -->
+        <div class="theme-card p-4 rounded-2xl border space-y-3">
+          <div class="flex items-center justify-between border-b theme-border pb-2.5">
+            <h2 class="text-xs font-bold font-mono uppercase tracking-wider text-white flex items-center gap-1.5">
+              <span>📖</span> Libro de Órdenes L2 (Live Book)
+            </h2>
+            <span class="text-[10px] font-mono text-zinc-500" id="ob-pair-label">GW2: Glob of Ectoplasm</span>
+          </div>
+
+          <!-- Cabecera de Columnas -->
+          <div class="grid grid-cols-3 text-[10px] font-mono uppercase text-zinc-500 px-2">
+            <span>Precio</span>
+            <span class="text-right">Volumen</span>
+            <span class="text-right">Total Acum.</span>
+          </div>
+
+          <!-- Asks (Venta - Rojo) Descendente -->
+          <div id="orderbook-asks" class="space-y-0.5 font-mono text-xs max-h-[160px] overflow-hidden flex flex-col justify-end">
+            <!-- Rellenado dinámico en JS -->
+          </div>
+
+          <!-- Barra Central de Spread -->
+          <div class="py-2 px-3 bg-black/50 rounded-xl border theme-border flex items-center justify-between text-xs font-mono">
+            <div class="flex items-center gap-2">
+              <span class="text-zinc-400 text-[11px]">Spread:</span>
+              <span id="ob-spread-val" class="font-bold text-amber-300">0.45%</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-zinc-400 text-[11px]">Mid:</span>
+              <span id="ob-mid-val" class="font-bold text-white">--</span>
+            </div>
+            <button onclick="executeMarketBuy()" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/40 transition-all">
+              Market Buy
+            </button>
+          </div>
+
+          <!-- Bids (Compra - Verde) Ascendente -->
+          <div id="orderbook-bids" class="space-y-0.5 font-mono text-xs max-h-[160px] overflow-hidden">
+            <!-- Rellenado dinámico en JS -->
+          </div>
+        </div>
+
+        <!-- Tape / Time & Sales (Cinta de Operaciones en Tiempo Real) -->
+        <div class="theme-card p-4 rounded-2xl border space-y-3">
+          <div class="flex items-center justify-between border-b theme-border pb-2.5">
+            <div class="flex items-center gap-1.5">
+              <span class="text-xs font-bold font-mono uppercase tracking-wider text-white">
+                📼 Cinta de Ejecución (Time & Sales)
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                L3 Ticker
+              </span>
+            </div>
+            <button onclick="clearTape()" class="text-[10px] font-mono text-zinc-500 hover:text-zinc-300">
+              Limpiar
+            </button>
+          </div>
+
+          <!-- Cabecera de la cinta -->
+          <div class="grid grid-cols-4 text-[10px] font-mono uppercase text-zinc-500 px-2">
+            <span>Hora (ms)</span>
+            <span>Tipo</span>
+            <span class="text-right">Precio</span>
+            <span class="text-right">Volumen</span>
+          </div>
+
+          <!-- Feed de transacciones recientes -->
+          <div id="tape-feed" class="space-y-1 font-mono text-[11px] h-[190px] overflow-y-auto pr-1">
+            <!-- Rellenado dinámico en JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Módulo Didáctico & Solución Tecnológica: K4L1 STUDIO Fintech & Web3 -->
+    <section class="theme-card p-6 rounded-2xl border relative overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-8 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+              💼 K4L1 STUDIO // Finanzas Algorítmicas & Web3
+            </span>
+            <span class="text-xs font-mono text-zinc-500">Zero-Garbage Collector Engine</span>
+          </div>
+          <h3 class="text-lg sm:text-xl font-bold text-white">
+            ¿Necesitas una Terminal Financiera, Motor de Arbitraje o Dashboard HFT?
+          </h3>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Este prototipo demuestra el dominio de K4L1 Studio en el desarrollo de interfaces de baja latencia a 60 FPS sin saturación de memoria, modelado de microestructura L2/L3, cálculo analítico de tasas complejas (sistemas de fricción como el 15% del Trading Post de Guild Wars 2 o las curvas de bonding de Uniswap/Raydium) y bots de arbitraje automatizados.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs font-mono text-zinc-300">
+            <div class="bg-black/40 p-2.5 rounded-xl border theme-border">
+              <span class="text-purple-400 font-bold block mb-0.5">⚡ Render 60 FPS</span>
+              <span class="text-[11px] text-zinc-400">Canvas tipado en Float64 sin reflows pesados en DOM.</span>
+            </div>
+            <div class="bg-black/40 p-2.5 rounded-xl border theme-border">
+              <span class="text-emerald-400 font-bold block mb-0.5">🔄 Arbitraje Multiciclo</span>
+              <span class="text-[11px] text-zinc-400">Detección de ciclos negativos en grafos dirigidos (Bellman-Ford).</span>
+            </div>
+            <div class="bg-black/40 p-2.5 rounded-xl border theme-border">
+              <span class="text-cyan-400 font-bold block mb-0.5">🛡️ Código Soberano</span>
+              <span class="text-[11px] text-zinc-400">Sin frameworks hinchados. Cero dependencias opacas.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 flex flex-col items-center sm:items-end justify-center gap-3">
+          <a id="btn-cta-fintech" href="https://signal.me/#u/k4li.89?text=Hola%20Kali,%20he%20visto%20tu%20terminal%20de%20arbitraje%20HFT%20en%20K4L1%20Studio%20y%20quiero%20cotizar%20un%20proyecto%20de%20finanzas/trading%20a%20medida." target="_blank" class="w-full sm:w-auto text-center px-5 py-3 rounded-xl font-bold font-mono text-xs theme-accent-bg text-white shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-2">
+            <span>📩</span> Encargar Proyecto Fintech a Medida ↗
+          </a>
+          <span class="text-[11px] font-mono text-zinc-500 text-center sm:text-right">
+            Disponibilidad directa vía Signal E2EE: <span class="text-zinc-300 font-bold">@k4li.89</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer de la Terminal -->
+    <footer class="text-center text-xs text-zinc-500 font-mono py-4 border-t theme-border flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>
+        K4L1 STUDIO &bull; Arquitectura ACE 161914 &bull; Frecuencia Operativa 189.89.619 Hz
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-emerald-400">● Engine Online</span>
+        <span>— Kilonova 🌟 & Saze 🌿</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- LÓGICA COMPLETA DEL MOTOR DE ARBITRAJE HFT EN JAVASCRIPT VANILLA -->
+  <script>
+    // =========================================================================
+    // 1. ESTADO GLOBAL & CONFIGURACIÓN DE MERCADOS
+    // =========================================================================
+    const MARKETS = {
+      gw2: {
+        id: 'gw2',
+        name: 'GW2 Trading Post (Tyria)',
+        pairLabel: 'GW2: Glob of Ectoplasm',
+        currencySymbol: '🪙',
+        isGW2Currency: true,
+        defaultFee: 15.0, // 5% listing fee + 10% exchange fee
+        basePrice: 245000, // 24g 50s 00c (en monedas de cobre)
+        tickSize: 100, // 1 plata
+        volatility: 1.4,
+        unit: 'Ecto',
+        routes: [
+          {
+            title: 'Ciclo Ectoplasma',
+            step1: '1. Oro ➔ Glob of Ectoplasm',
+            step2: '2. Ectoplasm ➔ Crystalline Dust',
+            step3: '3. Dust ➔ Oro (Venta TP)',
+            baseYield: 3.12
+          },
+          {
+            title: 'Ciclo Tréboles Místicos',
+            step1: '1. Oro ➔ Monedas Místicas',
+            step2: '2. Mystic Forge ➔ Clover',
+            step3: '3. Clover ➔ Oro Eq.',
+            baseYield: -0.65
+          },
+          {
+            title: 'Ciclo Precursor Crepúsculo',
+            step1: '1. Oro ➔ Dusk Precursor',
+            step2: '2. Crafting ➔ Twilight',
+            step3: '3. Venta TP ➔ Oro',
+            baseYield: 5.48
+          }
+        ]
+      },
+      crypto: {
+        id: 'crypto',
+        name: 'Cripto DEX / AMM (Solana)',
+        pairLabel: 'SOL / USDC (Phoenix L2)',
+        currencySymbol: '$',
+        isGW2Currency: false,
+        defaultFee: 0.30, // 0.3% pool fee
+        basePrice: 178.50,
+        tickSize: 0.05,
+        volatility: 1.8,
+        unit: 'SOL',
+        routes: [
+          {
+            title: 'Ciclo Jupiter Flash',
+            step1: '1. USDC ➔ SOL (Raydium)',
+            step2: '2. SOL ➔ JUP (Whirlpool)',
+            step3: '3. JUP ➔ USDC (Phoenix)',
+            baseYield: 2.15
+          },
+          {
+            title: 'Ciclo Liquid Staking',
+            step1: '1. USDC ➔ mSOL (Marinade)',
+            step2: '2. mSOL ➔ bSOL (Blaze)',
+            step3: '3. bSOL ➔ USDC (Sanctum)',
+            baseYield: 0.85
+          },
+          {
+            title: 'Ciclo Cross-DEX Arbitrage',
+            step1: '1. USDC ➔ ETH (Wormhole)',
+            step2: '2. ETH ➔ ARB (Uniswap)',
+            step3: '3. ARB ➔ USDC (Camelot)',
+            baseYield: 3.90
+          }
+        ]
+      },
+      forex: {
+        id: 'forex',
+        name: 'Forex Macro HFT (Interbank)',
+        pairLabel: 'EUR / USD (ECN Stream)',
+        currencySymbol: '$',
+        isGW2Currency: false,
+        defaultFee: 0.02, // 2 bps institucional
+        basePrice: 1.0845,
+        tickSize: 0.0001,
+        volatility: 0.8,
+        unit: 'EUR',
+        routes: [
+          {
+            title: 'Ciclo Triangular G10',
+            step1: '1. USD ➔ EUR (ECN Spot)',
+            step2: '2. EUR ➔ GBP (London)',
+            step3: '3. GBP ➔ USD (NY Fix)',
+            baseYield: 0.18
+          },
+          {
+            title: 'Ciclo Yen Carry Flash',
+            step1: '1. USD ➔ JPY (Tokyo)',
+            step2: '2. JPY ➔ EUR (Frankfurt)',
+            step3: '3. EUR ➔ USD (EBS)',
+            baseYield: 0.24
+          },
+          {
+            title: 'Ciclo Franco Suizo Safe',
+            step1: '1. USD ➔ CHF (Zurich)',
+            step2: '2. CHF ➔ GBP (Reuters)',
+            step3: '3. GBP ➔ USD (Currenex)',
+            baseYield: -0.05
+          }
+        ]
+      }
+    };
+
+    let currentMarket = MARKETS.gw2;
+    let brokerFeePct = 15.0; // %
+    let simulationSpeed = 180; // ms
+    let volatilityMult = 1.4;
+    let isEngineRunning = true;
+    let totalTicks = 0;
+    let botPnL = 2450.80;
+    let botTradesCount = 412;
+
+    // Estructuras de Libro de Órdenes
+    let currentMidPrice = currentMarket.basePrice;
+    let bids = []; // [{price, volume, cumVolume}]
+    let asks = []; // [{price, volume, cumVolume}]
+    const BOOK_DEPTH = 10;
+    let tapeHistory = [];
+    const MAX_TAPE_ITEMS = 25;
+
+    // Intervalo de simulación
+    let engineInterval = null;
+
+    // =========================================================================
+    // 2. FORMATEO DE MONEDA (GW2 vs Fiat/Cripto)
+    // =========================================================================
+    function formatCurrency(val, market = currentMarket) {
+      if (market.isGW2Currency) {
+        // En GW2: 1 oro = 100 plata = 10,000 cobre
+        const totalCopper = Math.round(val);
+        const gold = Math.floor(totalCopper / 10000);
+        const silver = Math.floor((totalCopper % 10000) / 100);
+        const copper = totalCopper % 100;
+
+        let parts = [];
+        if (gold > 0) parts.push(`<span class="text-amber-400 font-bold">${gold}g</span>`);
+        if (silver > 0 || gold > 0) parts.push(`<span class="text-slate-300 font-bold">${silver}s</span>`);
+        parts.push(`<span class="text-amber-700 font-bold">${copper}c</span>`);
+        return parts.join(' ');
+      } else if (market.id === 'forex') {
+        return `$${val.toFixed(5)}`;
+      } else {
+        return `$${val.toFixed(2)}`;
+      }
+    }
+
+    function formatCurrencyPlain(val, market = currentMarket) {
+      if (market.isGW2Currency) {
+        const totalCopper = Math.round(val);
+        const gold = Math.floor(totalCopper / 10000);
+        const silver = Math.floor((totalCopper % 10000) / 100);
+        const copper = totalCopper % 100;
+        return `${gold}g ${silver}s ${copper}c`;
+      } else if (market.id === 'forex') {
+        return `$${val.toFixed(5)}`;
+      } else {
+        return `$${val.toFixed(2)}`;
+      }
+    }
+
+    // =========================================================================
+    // 3. GENERACIÓN ESTOCÁSTICA DE LIBRO DE ÓRDENES (L2/L3)
+    // =========================================================================
+    function initOrderBook() {
+      currentMidPrice = currentMarket.basePrice;
+      regenerateFullBook();
+    }
+
+    function regenerateFullBook() {
+      bids = [];
+      asks = [];
+
+      const tick = currentMarket.tickSize;
+      const baseSpreadTicks = Math.max(1, Math.round(4 * volatilityMult));
+
+      // Asks (Venta) por encima del mid
+      let askPrice = currentMidPrice + (baseSpreadTicks * tick);
+      let cumAsk = 0;
+      for (let i = 0; i < BOOK_DEPTH; i++) {
+        const vol = Math.round(15 + Math.random() * 45 + (i * 8));
+        cumAsk += vol;
+        asks.push({
+          price: askPrice,
+          volume: vol,
+          cumVolume: cumAsk
+        });
+        askPrice += tick * (1 + Math.floor(Math.random() * 2));
+      }
+
+      // Bids (Compra) por debajo del mid
+      let bidPrice = currentMidPrice - (baseSpreadTicks * tick);
+      let cumBid = 0;
+      for (let i = 0; i < BOOK_DEPTH; i++) {
+        const vol = Math.round(15 + Math.random() * 45 + (i * 8));
+        cumBid += vol;
+        bids.push({
+          price: bidPrice,
+          volume: vol,
+          cumVolume: cumBid
+        });
+        bidPrice -= tick * (1 + Math.floor(Math.random() * 2));
+      }
+
+      recalculateCumulatives();
+    }
+
+    function recalculateCumulatives() {
+      let bCum = 0;
+      for (let i = 0; i < bids.length; i++) {
+        bCum += bids[i].volume;
+        bids[i].cumVolume = bCum;
+      }
+
+      let aCum = 0;
+      for (let i = 0; i < asks.length; i++) {
+        aCum += asks[i].volume;
+        asks[i].cumVolume = aCum;
+      }
+    }
+
+    // Proceso Estocástico de Ornstein-Uhlenbeck en cada Tick
+    function tickSimulation() {
+      if (!isEngineRunning) return;
+      totalTicks++;
+
+      const tick = currentMarket.tickSize;
+      const theta = 0.08; // Fuerza de reversión a la media
+      const mu = currentMarket.basePrice;
+      const sigma = (currentMarket.basePrice * (volatilityMult / 100)) * (currentMarket.isGW2Currency ? 0.05 : 0.02);
+
+      // Paso de difusión (Wiener process)
+      const dW = (Math.random() - 0.5) * 2;
+      const drift = theta * (mu - currentMidPrice);
+      const diffusion = sigma * dW;
+      
+      currentMidPrice += (drift + diffusion);
+
+      // Asegurar que no caiga a cero
+      if (currentMidPrice < tick * 10) currentMidPrice = tick * 10;
+
+      // Micro-fluctuaciones en volumen y órdenes pasivas
+      bids.forEach((b, idx) => {
+        b.price = currentMidPrice - ((idx + 1) * tick * (1 + Math.random() * 0.4));
+        b.volume = Math.max(5, Math.round(b.volume + (Math.random() - 0.48) * 12));
+      });
+
+      asks.forEach((a, idx) => {
+        a.price = currentMidPrice + ((idx + 1) * tick * (1 + Math.random() * 0.4));
+        a.volume = Math.max(5, Math.round(a.volume + (Math.random() - 0.48) * 12));
+      });
+
+      // Ordenar rigurosamente
+      bids.sort((a, b) => b.price - a.price);
+      asks.sort((a, b) => a.price - b.price);
+
+      // Simular ejecución periódica de trades (Market Orders)
+      if (Math.random() > 0.45) {
+        simulateRandomMarketOrder();
+      }
+
+      // Recomputar acumulados
+      recalculateCumulatives();
+
+      // Actualizar DOM y Métricas
+      renderOrderBookDOM();
+      updateKPIDisplay();
+      updateTriangularScanner();
+
+      document.getElementById('stat-total-ticks').textContent = totalTicks.toLocaleString();
+    }
+
+    function simulateRandomMarketOrder() {
+      const isBuy = Math.random() > 0.5;
+      const bestAsk = asks[0] ? asks[0].price : currentMidPrice;
+      const bestBid = bids[0] ? bids[0].price : currentMidPrice;
+      const tradePrice = isBuy ? bestAsk : bestBid;
+      const tradeQty = Math.round(5 + Math.random() * 30);
+
+      // Consumir volumen del libro
+      if (isBuy && asks[0]) {
+        asks[0].volume = Math.max(2, asks[0].volume - Math.round(tradeQty * 0.4));
+      } else if (!isBuy && bids[0]) {
+        bids[0].volume = Math.max(2, bids[0].volume - Math.round(tradeQty * 0.4));
+      }
+
+      addTapeItem({
+        time: new Date(),
+        type: isBuy ? 'BUY' : 'SELL',
+        price: tradePrice,
+        volume: tradeQty,
+        latencyUs: Math.round(180 + Math.random() * 220)
+      });
+    }
+
+    // =========================================================================
+    // 4. RENDERIZADO DEL LIBRO DE ÓRDENES (DOM)
+    // =========================================================================
+    function renderOrderBookDOM() {
+      const elAsks = document.getElementById('orderbook-asks');
+      const elBids = document.getElementById('orderbook-bids');
+      if (!elAsks || !elBids) return;
+
+      const maxCum = Math.max(
+        asks[asks.length - 1] ? asks[asks.length - 1].cumVolume : 100,
+        bids[bids.length - 1] ? bids[bids.length - 1].cumVolume : 100
+      );
+
+      // Render Asks (mostramos las más cercanas al spread abajo, ordenadas invertidas)
+      const displayedAsks = asks.slice(0, 6).reverse();
+      let asksHtml = '';
+      displayedAsks.forEach(a => {
+        const pct = Math.min(100, Math.round((a.cumVolume / maxCum) * 100));
+        asksHtml += `
+          <div class="relative grid grid-cols-3 py-0.5 px-2 rounded hover:bg-rose-950/40 cursor-pointer text-[11px] group">
+            <div class="absolute inset-y-0 right-0 bg-rose-500/15 pointer-events-none transition-all duration-300" style="width: ${pct}%;"></div>
+            <span class="text-rose-400 font-bold z-10">${formatCurrency(a.price)}</span>
+            <span class="text-right text-zinc-300 z-10">${a.volume}</span>
+            <span class="text-right text-zinc-500 z-10">${a.cumVolume}</span>
+          </div>
+        `;
+      });
+      elAsks.innerHTML = asksHtml;
+
+      // Render Bids (más cercanas al spread arriba)
+      const displayedBids = bids.slice(0, 6);
+      let bidsHtml = '';
+      displayedBids.forEach(b => {
+        const pct = Math.min(100, Math.round((b.cumVolume / maxCum) * 100));
+        bidsHtml += `
+          <div class="relative grid grid-cols-3 py-0.5 px-2 rounded hover:bg-emerald-950/40 cursor-pointer text-[11px] group">
+            <div class="absolute inset-y-0 right-0 bg-emerald-500/15 pointer-events-none transition-all duration-300" style="width: ${pct}%;"></div>
+            <span class="text-emerald-400 font-bold z-10">${formatCurrency(b.price)}</span>
+            <span class="text-right text-zinc-300 z-10">${b.volume}</span>
+            <span class="text-right text-zinc-500 z-10">${b.cumVolume}</span>
+          </div>
+        `;
+      });
+      elBids.innerHTML = bidsHtml;
+
+      // Actualizar Barra Central de Spread
+      const bestBid = bids[0] ? bids[0].price : currentMidPrice;
+      const bestAsk = asks[0] ? asks[0].price : currentMidPrice;
+      const spreadAbs = Math.max(0, bestAsk - bestBid);
+      const spreadPct = (spreadAbs / currentMidPrice) * 100;
+
+      document.getElementById('ob-spread-val').textContent = `${spreadPct.toFixed(2)}% (${formatCurrencyPlain(spreadAbs)})`;
+      document.getElementById('ob-mid-val').innerHTML = formatCurrency(currentMidPrice);
+      document.getElementById('canvas-mid-price').innerHTML = formatCurrency(currentMidPrice);
+    }
+
+    // =========================================================================
+    // 5. CINTA DE OPERACIONES (TIME & SALES / TAPE)
+    // =========================================================================
+    function addTapeItem(item) {
+      tapeHistory.unshift(item);
+      if (tapeHistory.length > MAX_TAPE_ITEMS) tapeHistory.pop();
+      renderTapeDOM();
+    }
+
+    function renderTapeDOM() {
+      const feed = document.getElementById('tape-feed');
+      if (!feed) return;
+
+      let html = '';
+      tapeHistory.forEach(item => {
+        const timeStr = item.time.toTimeString().split(' ')[0] + '.' + String(item.time.getMilliseconds()).padStart(3, '0');
+        const isArb = item.type === 'FLASH_ARB';
+        const isBuy = item.type === 'BUY';
+
+        let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-500/30';
+        let label = 'BUY';
+        if (isArb) {
+          badgeClass = 'text-purple-300 bg-purple-950/60 border-purple-500/40 font-black';
+          label = '⚡ ARB';
+        } else if (!isBuy) {
+          badgeClass = 'text-rose-400 bg-rose-950/60 border-rose-500/30';
+          label = 'SELL';
+        }
+
+        html += `
+          <div class="grid grid-cols-4 py-0.5 px-2 rounded bg-black/20 border border-zinc-900/60 items-center text-[10px]">
+            <span class="text-zinc-500 font-mono">${timeStr}</span>
+            <span>
+              <span class="px-1.5 py-0.2 rounded border text-[9px] font-mono ${badgeClass}">${label}</span>
+            </span>
+            <span class="text-right font-bold text-zinc-200">${formatCurrency(item.price)}</span>
+            <span class="text-right text-zinc-400 font-mono">${item.volume} (${item.latencyUs}µs)</span>
+          </div>
+        `;
+      });
+      feed.innerHTML = html;
+    }
+
+    function clearTape() {
+      tapeHistory = [];
+      renderTapeDOM();
+    }
+
+    // =========================================================================
+    // 6. CÁLCULO DE KPIS, INEFICIENCIAS & ARBITRAJE TRIANGULAR
+    // =========================================================================
+    function updateKPIDisplay() {
+      const bestBid = bids[0] ? bids[0].price : currentMidPrice;
+      const bestAsk = asks[0] ? asks[0].price : currentMidPrice;
+      const spreadAbs = Math.max(0, bestAsk - bestBid);
+      const spreadPct = (spreadAbs / currentMidPrice) * 100;
+      const spreadBps = spreadPct * 100;
+
+      // KPI 1: Spread
+      document.getElementById('val-spread-abs').textContent = `${spreadPct.toFixed(2)} %`;
+      document.getElementById('val-spread-bps').textContent = `${spreadBps.toFixed(1)} bps`;
+      document.getElementById('kpi-best-bid').innerHTML = formatCurrency(bestBid);
+      document.getElementById('kpi-best-ask').innerHTML = formatCurrency(bestAsk);
+
+      const spreadBadge = document.getElementById('badge-spread-status');
+      if (spreadPct > brokerFeePct) {
+        spreadBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+        spreadBadge.textContent = 'SUPERÁVIT SPREAD > FEE';
+      } else {
+        spreadBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40';
+        spreadBadge.textContent = 'SPREAD COMPRIMIDO';
+      }
+
+      // KPI 3: Broker Fee & Breakeven Multiplier
+      // Si el broker cobra F%, para no perder dinero: (PrecioVenta * (1 - F)) >= PrecioCompra
+      // PrecioVenta >= PrecioCompra / (1 - F) -> Multiplicador = 1 / (1 - F)
+      const feeDec = brokerFeePct / 100;
+      const bepMult = feeDec < 1 ? (1 / (1 - feeDec)) : 1.0;
+      const minMarginReq = ((bepMult - 1) * 100);
+
+      document.getElementById('val-broker-fee').textContent = `${brokerFeePct.toFixed(2)} %`;
+      document.getElementById('val-breakeven-mult').textContent = `x${bepMult.toFixed(3)} BEP`;
+      document.getElementById('val-min-margin-req').textContent = `+${minMarginReq.toFixed(2)}% min`;
+
+      // KPI 4: Bot PnL
+      document.getElementById('val-bot-pnl').textContent = `+${botPnL.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €`;
+      document.getElementById('val-trades-count').textContent = `${botTradesCount} ejecuciones`;
+    }
+
+    function updateTriangularScanner() {
+      // Simulación estocástica de ineficiencias triangulares en 3 rutas
+      const feeDec = brokerFeePct / 100;
+      // Fricción acumulada de 3 saltos: (1 - Fee)^3
+      const compoundRetention = Math.pow(1 - feeDec, 3);
+
+      const routesData = currentMarket.routes;
+      let maxAlpha = -999;
+      let bestRouteTitle = '';
+
+      routesData.forEach((r, idx) => {
+        // Generar oscilación realista de spread intermercado
+        const noise = (Math.sin((totalTicks * 0.15) + (idx * 2.1)) * 1.8) + ((Math.random() - 0.49) * 1.2);
+        const grossYieldPct = r.baseYield + noise + (volatilityMult * 0.8);
+        const grossMult = 1 + (grossYieldPct / 100);
+
+        // Rendimiento Neto = (GrossMultiplier * (1 - fee)^3) - 1.0
+        const netMult = (grossMult * compoundRetention);
+        const netYieldPct = (netMult - 1) * 100;
+
+        const box = document.getElementById(`route-box-${idx + 1}`);
+        const badge = document.getElementById(`route-${idx + 1}-badge`);
+        const valYield = document.getElementById(`route-${idx + 1}-yield`);
+        const titleEl = document.getElementById(`route-${idx + 1}-title`);
+
+        if (titleEl) titleEl.textContent = r.title;
+        document.getElementById(`route-${idx + 1}-step1`).textContent = r.step1;
+        document.getElementById(`route-${idx + 1}-step2`).textContent = r.step2;
+        document.getElementById(`route-${idx + 1}-step3`).textContent = r.step3;
+
+        if (valYield) {
+          valYield.textContent = (netYieldPct > 0 ? '+' : '') + netYieldPct.toFixed(2) + '%';
+          if (netYieldPct > 0) {
+            valYield.className = 'font-bold text-emerald-400 font-mono';
+            badge.className = 'text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold';
+            badge.textContent = 'ARBITRAJE ACTIVO';
+            box.classList.add('arb-glowing');
+          } else {
+            valYield.className = 'font-bold text-zinc-400 font-mono';
+            badge.className = 'text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-500 border border-zinc-700';
+            badge.textContent = 'SIN ALPHA';
+            box.classList.remove('arb-glowing');
+          }
+        }
+
+        if (netYieldPct > maxAlpha) {
+          maxAlpha = netYieldPct;
+          bestRouteTitle = r.title;
+        }
+      });
+
+      // Actualizar KPI 2
+      const elAlpha = document.getElementById('val-arb-alpha');
+      const elRoute = document.getElementById('kpi-arb-route');
+      const elBadge = document.getElementById('badge-arb-signal');
+      const cardArb = document.getElementById('card-triangular-arb');
+
+      if (elAlpha) {
+        elAlpha.textContent = (maxAlpha > 0 ? '+' : '') + maxAlpha.toFixed(2) + ' %';
+        if (maxAlpha > 0) {
+          elAlpha.className = 'text-2xl font-black font-mono-num text-emerald-400';
+          elBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold';
+          elBadge.textContent = '⚡ OPORTUNIDAD HFT';
+          cardArb.classList.add('arb-glowing');
+          elRoute.innerHTML = `Mejor Ruta: <span class="text-emerald-300 font-bold">${bestRouteTitle}</span>`;
+        } else {
+          elAlpha.className = 'text-2xl font-black font-mono-num text-zinc-400';
+          elBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-800 text-zinc-400 border border-zinc-700';
+          elBadge.textContent = 'COMPRIMIDO';
+          cardArb.classList.remove('arb-glowing');
+          elRoute.innerHTML = `Ruta: <span class="text-zinc-400">${bestRouteTitle} (Absorbido)</span>`;
+        }
+      }
+    }
+
+    // =========================================================================
+    // 7. GRÁFICO DE PROFUNDIDAD EN CANVAS A 60 FPS (Zero-GC Loop)
+    // =========================================================================
+    const canvas = document.getElementById('marketDepthCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    let mouseX = -1;
+    let mouseY = -1;
+    let isMouseOver = false;
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      if (ctx) {
+        ctx.resetTransform?.();
+        ctx.scale(dpr, dpr);
+      }
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Eventos de ratón para crosshair interactivo
+    if (canvas) {
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouseX = e.clientX - rect.left;
+        mouseY = e.clientY - rect.top;
+        isMouseOver = true;
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        isMouseOver = false;
+        const tt = document.getElementById('depth-tooltip');
+        if (tt) tt.classList.add('hidden');
+      });
+    }
+
+    // Bucle de renderizado continuo a 60 FPS
+    function renderDepthChartLoop() {
+      if (ctx && canvas) {
+        drawDepthChart();
+      }
+      requestAnimationFrame(renderDepthChartLoop);
+    }
+
+    function drawDepthChart() {
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      // Limpiar lienzo
+      ctx.clearRect(0, 0, w, h);
+
+      if (bids.length === 0 || asks.length === 0) return;
+
+      // Calcular rangos
+      const maxBidCum = bids[bids.length - 1].cumVolume;
+      const maxAskCum = asks[asks.length - 1].cumVolume;
+      const maxVolume = Math.max(maxBidCum, maxAskCum, 100) * 1.15;
+
+      const lowestBidPrice = bids[bids.length - 1].price;
+      const highestBidPrice = bids[0].price;
+      const lowestAskPrice = asks[0].price;
+      const highestAskPrice = asks[asks.length - 1].price;
+
+      const minPrice = lowestBidPrice;
+      const maxPrice = highestAskPrice;
+      const priceRange = Math.max(maxPrice - minPrice, 0.0001);
+
+      // Mapeo de coordenadas
+      const getX = (price) => ((price - minPrice) / priceRange) * w;
+      const getY = (volume) => h - 25 - ((volume / maxVolume) * (h - 45));
+
+      // 1. Dibujar Rejilla de Fondo
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      for (let i = 1; i <= 4; i++) {
+        const yLine = getY((maxVolume / 4) * i);
+        ctx.beginPath();
+        ctx.moveTo(0, yLine);
+        ctx.lineTo(w, yLine);
+        ctx.stroke();
+      }
+
+      // 2. Curva y Área de BIDS (Verde - Compra)
+      ctx.beginPath();
+      // Empezar en la esquina inferior izquierda
+      ctx.moveTo(getX(lowestBidPrice), h - 25);
+
+      // Trazo escalonado o continuo desde el precio más bajo hasta el highest bid
+      for (let i = bids.length - 1; i >= 0; i--) {
+        const x = getX(bids[i].price);
+        const y = getY(bids[i].cumVolume);
+        ctx.lineTo(x, y);
+      }
+
+      // Caída al piso en el Highest Bid
+      const xMidBid = getX(highestBidPrice);
+      ctx.lineTo(xMidBid, h - 25);
+      ctx.closePath();
+
+      // Gradiente de Bids
+      const bidGrad = ctx.createLinearGradient(0, 0, 0, h);
+      bidGrad.addColorStop(0, 'rgba(16, 185, 129, 0.45)');
+      bidGrad.addColorStop(1, 'rgba(16, 185, 129, 0.02)');
+      ctx.fillStyle = bidGrad;
+      ctx.fill();
+
+      // Línea de contorno Bids
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#10b981';
+      ctx.beginPath();
+      for (let i = bids.length - 1; i >= 0; i--) {
+        const x = getX(bids[i].price);
+        const y = getY(bids[i].cumVolume);
+        if (i === bids.length - 1) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // 3. Curva y Área de ASKS (Rojo - Venta)
+      ctx.beginPath();
+      const xMidAsk = getX(lowestAskPrice);
+      ctx.moveTo(xMidAsk, h - 25);
+
+      for (let i = 0; i < asks.length; i++) {
+        const x = getX(asks[i].price);
+        const y = getY(asks[i].cumVolume);
+        ctx.lineTo(x, y);
+      }
+
+      ctx.lineTo(getX(highestAskPrice), h - 25);
+      ctx.closePath();
+
+      // Gradiente de Asks
+      const askGrad = ctx.createLinearGradient(0, 0, 0, h);
+      askGrad.addColorStop(0, 'rgba(239, 68, 68, 0.45)');
+      askGrad.addColorStop(1, 'rgba(239, 68, 68, 0.02)');
+      ctx.fillStyle = askGrad;
+      ctx.fill();
+
+      // Línea de contorno Asks
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#ef4444';
+      ctx.beginPath();
+      for (let i = 0; i < asks.length; i++) {
+        const x = getX(asks[i].price);
+        const y = getY(asks[i].cumVolume);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // 4. Línea de Mid-Price & Spread Gap
+      const xMid = getX(currentMidPrice);
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+      ctx.beginPath();
+      ctx.moveTo(xMid, 10);
+      ctx.lineTo(xMid, h - 25);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // 5. Eje X con Etiquetas de Precio
+      ctx.fillStyle = '#71717a';
+      ctx.font = '10px ui-monospace, SFMono-Regular, monospace';
+      ctx.fillText(formatCurrencyPlain(lowestBidPrice), 10, h - 8);
+      ctx.fillText(formatCurrencyPlain(currentMidPrice), Math.max(10, xMid - 35), h - 8);
+      ctx.fillText(formatCurrencyPlain(highestAskPrice), w - 80, h - 8);
+
+      // 6. Crosshair Interactivo y Tooltip Flotante
+      if (isMouseOver && mouseX >= 0 && mouseX <= w) {
+        // Línea vertical crosshair
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.setLineDash([2, 2]);
+        ctx.beginPath();
+        ctx.moveTo(mouseX, 0);
+        ctx.lineTo(mouseX, h - 25);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Calcular precio en cursor
+        const hoverPrice = minPrice + (mouseX / w) * priceRange;
+        const tt = document.getElementById('depth-tooltip');
+
+        if (tt) {
+          tt.classList.remove('hidden');
+          tt.style.left = `${Math.min(mouseX + 12, w - 170)}px`;
+          tt.style.top = `${Math.max(mouseY - 70, 10)}px`;
+
+          const ttType = document.getElementById('tt-type');
+          const ttPrice = document.getElementById('tt-price');
+          const ttDepth = document.getElementById('tt-depth');
+          const ttSlippage = document.getElementById('tt-slippage');
+
+          if (hoverPrice <= currentMidPrice) {
+            ttType.textContent = 'Demanda (Bids)';
+            ttType.className = 'text-emerald-400 font-bold';
+            // Buscar volumen acumulado
+            const closest = bids.reduce((prev, curr) => Math.abs(curr.price - hoverPrice) < Math.abs(prev.price - hoverPrice) ? curr : prev, bids[0]);
+            ttPrice.innerHTML = formatCurrency(hoverPrice);
+            ttDepth.textContent = `${closest.cumVolume.toLocaleString()} ${currentMarket.unit}`;
+            const slippageEst = ((highestBidPrice - closest.price) / highestBidPrice) * 100;
+            ttSlippage.textContent = `${slippageEst.toFixed(2)}%`;
+          } else {
+            ttType.textContent = 'Oferta (Asks)';
+            ttType.className = 'text-rose-400 font-bold';
+            const closest = asks.reduce((prev, curr) => Math.abs(curr.price - hoverPrice) < Math.abs(prev.price - hoverPrice) ? curr : prev, asks[0]);
+            ttPrice.innerHTML = formatCurrency(hoverPrice);
+            ttDepth.textContent = `${closest.cumVolume.toLocaleString()} ${currentMarket.unit}`;
+            const slippageEst = ((closest.price - lowestAskPrice) / lowestAskPrice) * 100;
+            ttSlippage.textContent = `${slippageEst.toFixed(2)}%`;
+          }
+        }
+      }
+    }
+
+    // =========================================================================
+    // 8. ACCIONES INTERACTIVAS DEL USUARIO (TACTICAL TRADING)
+    // =========================================================================
+    function executeMarketBuy() {
+      if (asks.length === 0) return;
+      const targetAsk = asks[0];
+      const buyQty = Math.round(15 + Math.random() * 20);
+      
+      // Impacto en el libro
+      targetAsk.volume = Math.max(1, targetAsk.volume - buyQty);
+      currentMidPrice += currentMarket.tickSize * 2;
+
+      // PnL bot simulado
+      const tradeGain = 8.50 * volatilityMult;
+      botPnL += tradeGain;
+      botTradesCount++;
+
+      addTapeItem({
+        time: new Date(),
+        type: 'BUY',
+        price: targetAsk.price,
+        volume: buyQty,
+        latencyUs: 215
+      });
+
+      renderOrderBookDOM();
+      updateKPIDisplay();
+    }
+
+    function executeSnipeSpread() {
+      // Coloca una orden limit en el mejor bid + 1 tick (Maker)
+      const tick = currentMarket.tickSize;
+      const bestBid = bids[0] ? bids[0].price : currentMidPrice;
+      const myOrderPrice = bestBid + tick;
+      const myQty = 50;
+
+      // Inyectar en libro
+      bids.unshift({
+        price: myOrderPrice,
+        volume: myQty,
+        cumVolume: 0
+      });
+      recalculateCumulatives();
+
+      const profit = (spreadAbs() * (1 - (brokerFeePct / 100))) * 0.4;
+      botPnL += Math.max(12.4, profit);
+      botTradesCount++;
+
+      addTapeItem({
+        time: new Date(),
+        type: 'BUY',
+        price: myOrderPrice,
+        volume: myQty,
+        latencyUs: 142
+      });
+
+      renderOrderBookDOM();
+      updateKPIDisplay();
+    }
+
+    function spreadAbs() {
+      const b = bids[0] ? bids[0].price : currentMidPrice;
+      const a = asks[0] ? asks[0].price : currentMidPrice;
+      return Math.max(0, a - b);
+    }
+
+    function triggerFlashArbitrage() {
+      // Disparo manual de arbitraje triangular
+      const route = currentMarket.routes[0];
+      const gainEur = (45.0 + Math.random() * 85.0) * volatilityMult;
+      botPnL += gainEur;
+      botTradesCount++;
+
+      // Registrar trade de arbitraje
+      addTapeItem({
+        time: new Date(),
+        type: 'FLASH_ARB',
+        price: currentMidPrice,
+        volume: 250,
+        latencyUs: 94
+      });
+
+      // Efecto visual en la tarjeta
+      const card = document.getElementById('card-triangular-arb');
+      if (card) {
+        card.classList.add('flash-buy');
+        setTimeout(() => card.classList.remove('flash-buy'), 700);
+      }
+
+      updateKPIDisplay();
+    }
+
+    function triggerMarketShock() {
+      // Orden ballena que consume 4 niveles del libro
+      const isDump = Math.random() > 0.5;
+      const tick = currentMarket.tickSize;
+
+      if (isDump) {
+        currentMidPrice -= tick * 8;
+        if (bids.length > 2) bids.splice(0, 2);
+      } else {
+        currentMidPrice += tick * 8;
+        if (asks.length > 2) asks.splice(0, 2);
+      }
+
+      regenerateFullBook();
+
+      addTapeItem({
+        time: new Date(),
+        type: isDump ? 'SELL' : 'BUY',
+        price: currentMidPrice,
+        volume: 1200,
+        latencyUs: 48
+      });
+
+      renderOrderBookDOM();
+      updateKPIDisplay();
+    }
+
+    function resetEngineStats() {
+      botPnL = 2450.80;
+      botTradesCount = 412;
+      totalTicks = 0;
+      initOrderBook();
+      clearTape();
+      updateKPIDisplay();
+    }
+
+    // =========================================================================
+    // 9. CONTROLES DEL PANEL Y CAMBIO DE MERCADO
+    // =========================================================================
+    function selectMarket(marketKey) {
+      if (!MARKETS[marketKey]) return;
+      currentMarket = MARKETS[marketKey];
+
+      // Actualizar pestañas activas
+      document.querySelectorAll('.market-tab').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`mtab-${marketKey}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Actualizar tasa de broker por defecto según mercado
+      setBrokerFee(currentMarket.defaultFee);
+
+      // Etiqueta del libro
+      document.getElementById('ob-pair-label').textContent = currentMarket.pairLabel;
+
+      // Reiniciar libro y tape para el nuevo activo
+      initOrderBook();
+      clearTape();
+      updateKPIDisplay();
+    }
+
+    function toggleEngine() {
+      isEngineRunning = !isEngineRunning;
+      const btn = document.getElementById('btn-toggle-engine');
+      const icon = document.getElementById('engine-icon');
+      const text = document.getElementById('engine-text');
+
+      if (isEngineRunning) {
+        icon.textContent = '⏸️';
+        text.textContent = 'Pausar Motor';
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all flex items-center gap-1.5';
+      } else {
+        icon.textContent = '▶️';
+        text.textContent = 'Reanudar Motor';
+        btn.className = 'px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition-all flex items-center gap-1.5';
+      }
+    }
+
+    function updateBrokerFee(val) {
+      setBrokerFee(parseFloat(val));
+    }
+
+    function setFeePreset(val) {
+      const slider = document.getElementById('slider-fee');
+      if (slider) slider.value = val;
+      setBrokerFee(val);
+    }
+
+    function setBrokerFee(val) {
+      brokerFeePct = Math.max(0, parseFloat(val));
+      const lbl = document.getElementById('label-slider-fee');
+      if (lbl) lbl.textContent = `${brokerFeePct.toFixed(2)} %`;
+      
+      const badge = document.getElementById('badge-fee-type');
+      if (badge) {
+        if (brokerFeePct === 15.0) badge.textContent = '15.0% GW2 TP';
+        else if (brokerFeePct === 0.3) badge.textContent = '0.30% DEX/AMM';
+        else if (brokerFeePct === 0.02) badge.textContent = '0.02% HFT Inst.';
+        else badge.textContent = `${brokerFeePct.toFixed(2)}% Custom`;
+      }
+      updateKPIDisplay();
+      updateTriangularScanner();
+    }
+
+    function updateTickSpeed(val) {
+      simulationSpeed = parseInt(val, 10);
+      document.getElementById('label-slider-speed').textContent = `${simulationSpeed} ms / tick`;
+      restartInterval();
+    }
+
+    function updateVolatility(val) {
+      volatilityMult = parseFloat(val);
+      let label = 'Media';
+      if (volatilityMult < 0.8) label = 'Baja';
+      else if (volatilityMult > 2.5) label = 'Extrema (Crash)';
+      document.getElementById('label-slider-volatility').textContent = `${label} (σ = ${volatilityMult.toFixed(1)}%)`;
+      updateKPIDisplay();
+    }
+
+    function restartInterval() {
+      if (engineInterval) clearInterval(engineInterval);
+      engineInterval = setInterval(tickSimulation, simulationSpeed);
+    }
+
+    // =========================================================================
+    // 10. SINCRONIZACIÓN DE TEMAS & IFRAME POSTMESSAGE
+    // =========================================================================
+    function switchTheme(themeKey) {
+      document.documentElement.setAttribute('data-theme', themeKey);
+      localStorage.setItem('k4li_theme', themeKey);
+
+      // Actualizar botones de tema
+      document.querySelectorAll('[id^="tbtn-"]').forEach(btn => {
+        btn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-white';
+      });
+
+      const activeBtn = document.getElementById(`tbtn-${themeKey}`);
+      if (activeBtn) {
+        if (themeKey === 'anuu') activeBtn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-purple-300 bg-purple-500/20 border border-purple-500/50';
+        if (themeKey === 'blood') activeBtn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-rose-300 bg-rose-500/20 border border-rose-500/50';
+        if (themeKey === 'gw2') activeBtn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-emerald-300 bg-emerald-500/20 border border-emerald-500/50';
+        if (themeKey === 'bioinfo') activeBtn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-cyan-300 bg-cyan-500/20 border border-cyan-500/50';
+        if (themeKey === 'duat') activeBtn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-amber-300 bg-amber-500/20 border border-amber-500/50';
+        if (themeKey === 'neon') activeBtn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-pink-300 bg-pink-500/20 border border-pink-500/50';
+      }
+    }
+
+    // Escuchar mensajes del padre si está en iframe
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'SET_THEME') {
+        switchTheme(e.data.theme);
+      }
+    });
+
+    // Detectar tema desde el padre al cargar
+    function syncThemeFromParent() {
+      try {
+        if (window.parent && window.parent.document && window.parent !== window) {
+          const pt = window.parent.document.documentElement.getAttribute('data-theme');
+          if (pt) switchTheme(pt);
+        } else {
+          const saved = localStorage.getItem('k4li_theme') || 'anuu';
+          switchTheme(saved);
+        }
+      } catch(e) {
+        const saved = localStorage.getItem('k4li_theme') || 'anuu';
+        switchTheme(saved);
+      }
+    }
+
+    // =========================================================================
+    // 11. INICIALIZACIÓN
+    // =========================================================================
+    syncThemeFromParent();
+    initOrderBook();
+    resizeCanvas();
+    restartInterval();
+    requestAnimationFrame(renderDepthChartLoop);
+  </script>
+</body>
+</html>

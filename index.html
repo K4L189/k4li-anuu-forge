@@ -169,6 +169,11 @@
 </head>
 <body class="selection:bg-purple-600 selection:text-white min-h-screen flex flex-col justify-between relative">
 
+  <!-- Capas Dinámicas de Fondos de Alta Resolución Auto-Rotativas (Estilo GW2Trader) -->
+  <div id="bgLayerA" class="fixed inset-0 z-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-25 filter blur-[0.5px]"></div>
+  <div id="bgLayerB" class="fixed inset-0 z-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0 filter blur-[0.5px]"></div>
+  <div class="fixed inset-0 z-0 bg-gradient-to-b from-[#08080d]/80 via-[#08080d]/90 to-[#08080d] pointer-events-none"></div>
+
   <!-- Lienzo de Partículas Dinámico según Estilo Activo -->
   <canvas id="ambientCanvas"></canvas>
 
@@ -215,6 +220,12 @@
           </button>
           <a href="components/roi_calculator.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-emerald-300 text-xs font-semibold transition-all flex items-center gap-1.5">
             <span>🧮</span> Calculadora ROI
+          </a>
+          <a href="components/security_audit_tool.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-rose-400 text-xs font-semibold transition-all flex items-center gap-1.5">
+            <span>🛡️</span> Test de Hardening
+          </a>
+          <a href="components/market_arbitrage_engine.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-cyan-400 text-xs font-semibold transition-all flex items-center gap-1.5">
+            <span>⚡</span> Terminal HFT / Arbitraje
           </a>
         </div>
 
@@ -319,6 +330,12 @@
               <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Configuración SIEM Wazuh & alertas en tiempo real</li>
               <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Informe ejecutivo formal con evidencias y mitigación</li>
             </ul>
+            <div class="mt-4 pt-3 border-t theme-border flex items-center justify-between">
+              <a href="components/security_audit_tool.html" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-400 hover:text-emerald-300 transition-colors">
+                <span>🔍</span> Abrir Test de Hardening Interactivo ↗
+              </a>
+              <span class="text-[10px] font-mono text-zinc-500">Escudo Kanuv 🛡️</span>
+            </div>
           </div>
 
           <!-- Servicio 2: Dashboards React -->
@@ -376,6 +393,12 @@
               <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Bots integrados con APIs de pagos o alertas</li>
               <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Código limpio, documentado y desplegable en 1 clic</li>
             </ul>
+            <div class="mt-4 pt-3 border-t theme-border flex items-center justify-between">
+              <a href="components/market_arbitrage_engine.html" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                <span>⚡</span> Abrir Terminal HFT / Arbitraje ↗
+              </a>
+              <span class="text-[10px] font-mono text-zinc-500">Kilonova Trader 🌟</span>
+            </div>
           </div>
         </div>
       </section>
@@ -392,6 +415,36 @@
 
         <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
           <iframe id="roiCalculatorFrame" src="components/roi_calculator.html" class="w-full border-0 min-h-[780px] bg-transparent" title="Calculadora de ROI K4L1 STUDIO"></iframe>
+        </div>
+      </section>
+
+      <!-- Sección Interactiva: Diagnosticador de Seguridad & Hardening (Escudo Kanuv) -->
+      <section id="sec-audit-simulador" class="max-w-5xl mx-auto px-4 py-8">
+        <div class="text-center mb-6">
+          <span class="text-xs font-mono text-rose-400 uppercase tracking-widest">Escudo Kanuv 🛡️ • Auditoría Forense</span>
+          <h2 class="text-2xl font-bold text-white mt-1">Diagnosticador Interactivo de Seguridad & Hardening</h2>
+          <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
+            Evalúa la postura defensiva de tus servidores Linux. Identifica puertos expuestos (SSH, Redis, MySQL), ausencia de SIEM Wazuh y vulnerabilidades críticas ante ransomware en tiempo real.
+          </p>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
+          <iframe id="secAuditFrame" src="components/security_audit_tool.html" class="w-full border-0 min-h-[860px] bg-transparent" title="Diagnosticador de Seguridad & Hardening K4L1 STUDIO"></iframe>
+        </div>
+      </section>
+
+      <!-- Sección Interactiva: Motor de Arbitraje & Terminal HFT (Pilar 3: Kilonova 🌟 & Saze 🌿) -->
+      <section id="market-arb-simulador" class="max-w-6xl mx-auto px-4 py-8">
+        <div class="text-center mb-6">
+          <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">Kilonova 🌟 & Saze 🌿 • Finanzas Algorítmicas & HFT</span>
+          <h2 class="text-2xl font-bold text-white mt-1">Motor de Arbitraje de Mercados & Terminal HFT</h2>
+          <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
+            Simulador de microestructura L2/L3 en tiempo real a 60 FPS: Libro de órdenes dinámico, detección de arbitraje triangular (GW2 Trading Post, Cripto DEX & Forex) y amortización analítica de fricciones de broker.
+          </p>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
+          <iframe id="marketArbFrame" src="components/market_arbitrage_engine.html" class="w-full border-0 min-h-[920px] bg-transparent" title="Motor Interactivo de Arbitraje & Terminal HFT K4L1 STUDIO"></iframe>
         </div>
       </section>
 
@@ -621,11 +674,19 @@
       // Re-render del canvas de partículas con el nuevo color del tema
       initParticles();
 
-      // Sincronizar tema con iframe de calculadora ROI si está cargado
+      // Sincronizar tema con iframes interactivos si están cargados
       try {
         const roiIframe = document.getElementById("roiCalculatorFrame");
         if (roiIframe && roiIframe.contentWindow) {
           roiIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
+        }
+        const secIframe = document.getElementById("secAuditFrame");
+        if (secIframe && secIframe.contentWindow) {
+          secIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
+        }
+        const arbIframe = document.getElementById("marketArbFrame");
+        if (arbIframe && arbIframe.contentWindow) {
+          arbIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
         }
       } catch(e) {}
     }
@@ -1142,6 +1203,21 @@
         console.debug("[Forge Intake] Dispatch offline o en espera de Worker:", err);
       }
     }
+
+      // Sincronizar evento de diagnóstico desde el componente de auditoría de seguridad
+      window.addEventListener('message', (e) => {
+        if (e.data && e.data.type === 'SECURITY_AUDIT_RESULT') {
+          const secRadio = document.querySelector('input[name="service"][value="security"]');
+          if (secRadio) {
+            secRadio.checked = true;
+            if (typeof updateEstimate === 'function') updateEstimate();
+          }
+          const briefArea = document.getElementById("brief");
+          if (briefArea && (!briefArea.value || briefArea.value.startsWith("Diagnóstico de Seguridad"))) {
+            briefArea.value = e.data.brief || '';
+          }
+        }
+      });
 
     // Iniciar con valores por defecto
     updateEstimate();
