@@ -1,0 +1,49 @@
+{
+  "name": "K4L1 Studio & Anuu-Forge",
+  "short_name": "K4L1 Studio",
+  "description": "Boutique de Ingeniería Crítica, SIEM Linux Hardening, Dashboards React, IA Local Soberana y Cripto HFT por Kali (161914)",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#08080d",
+  "theme_color": "#9333ea",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "developer", "finance", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Calculadora ROI",
+      "short_name": "ROI",
+      "description": "Calcular ahorro y retorno de inversión técnico",
+      "url": "components/roi_calculator.html",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Test de Hardening",
+      "short_name": "Hardening",
+      "description": "Diagnosticador de seguridad para servidores Linux",
+      "url": "components/security_audit_tool.html",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Terminal HFT",
+      "short_name": "HFT",
+      "description": "Motor interactivo de arbitraje y terminal HFT",
+      "url": "components/market_arbitrage_engine.html",
+      "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

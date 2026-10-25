@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>K4L1 STUDIO + ANUU-FORGE | Ciberseguridad, Interfaces & Gran Nexo Multi-Estilo</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#9333ea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     /* Variables de Temas Dinámicos */
@@ -218,14 +223,38 @@
           <button onclick="switchView('forge')" id="tabBtnForge" class="px-3.5 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-white text-xs font-semibold transition-all flex items-center gap-1.5">
             <span>🌌</span> Anuu-Forge (26 Reliquias)
           </button>
-          <a href="components/roi_calculator.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-emerald-300 text-xs font-semibold transition-all flex items-center gap-1.5">
-            <span>🧮</span> Calculadora ROI
-          </a>
-          <a href="components/security_audit_tool.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-rose-400 text-xs font-semibold transition-all flex items-center gap-1.5">
-            <span>🛡️</span> Test de Hardening
-          </a>
-          <a href="components/market_arbitrage_engine.html" target="_blank" class="px-3 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-cyan-400 text-xs font-semibold transition-all flex items-center gap-1.5">
-            <span>⚡</span> Terminal HFT / Arbitraje
+          <!-- Suite de Herramientas Técnicas Interactivas -->
+          <div class="relative group">
+            <button class="px-3 py-1.5 rounded-lg text-zinc-300 hover:text-white text-xs font-semibold transition-all flex items-center gap-1.5 bg-black/40 border theme-border">
+              <span>⚡</span> Herramientas en Vivo <span class="text-[10px] text-zinc-500 group-hover:text-zinc-300 transition-colors">▼</span>
+            </button>
+            <div class="absolute left-0 mt-1 w-64 rounded-xl theme-card border shadow-2xl p-1.5 hidden group-hover:flex flex-col gap-1 z-50 backdrop-blur-xl">
+              <a href="components/roi_calculator.html" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-300 hover:text-emerald-300 hover:bg-emerald-500/10 transition-all flex items-center gap-2">
+                <span>🧮</span> Calculadora ROI & ROSI
+              </a>
+              <a href="components/security_audit_tool.html" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-300 hover:text-rose-400 hover:bg-rose-500/10 transition-all flex items-center gap-2">
+                <span>🛡️</span> Test de Hardening Linux
+              </a>
+              <a href="components/market_arbitrage_engine.html" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-300 hover:text-cyan-400 hover:bg-cyan-500/10 transition-all flex items-center gap-2">
+                <span>⚡</span> Terminal HFT & Arbitraje 60 FPS
+              </a>
+              <a href="components/ai_benchmark_calculator.html" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-300 hover:text-purple-400 hover:bg-purple-500/10 transition-all flex items-center gap-2">
+                <span>🤖</span> Simulador IA Local vs Cloud
+              </a>
+              <a href="components/contract_generator.html" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-300 hover:text-amber-400 hover:bg-amber-500/10 transition-all flex items-center gap-2">
+                <span>📜</span> Generador SOW & Firma Digital
+              </a>
+              <a href="components/terminal_hud.html" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-300 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-2">
+                <span>💻</span> Consola Cyberpunk HUD
+              </a>
+              <a href="components/relics_explorer.html" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-mono text-zinc-300 hover:text-pink-400 hover:bg-pink-500/10 transition-all flex items-center gap-2">
+                <span>🔍</span> Museo de las 26 Reliquias
+              </a>
+            </div>
+          </div>
+
+          <a href="components/terminal_hud.html" target="_blank" class="hidden md:flex px-2.5 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-emerald-400 text-xs font-mono font-bold transition-all items-center gap-1">
+            <span>💻</span> Terminal
           </a>
         </div>
 
@@ -1339,6 +1368,17 @@
     updateAutoBgUI();
     if (autoBgEnabled) {
       startBgRotator();
+    }
+
+    // Registro de Service Worker PWA para soporte offline
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          console.log('[Anuu PWA] Service Worker activo:', reg.scope);
+        }).catch((err) => {
+          console.debug('[Anuu PWA] SW no registrado en este entorno:', err);
+        });
+      });
     }
   </script>
 </body>
