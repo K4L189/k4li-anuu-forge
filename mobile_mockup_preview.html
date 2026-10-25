@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K4L1 STUDIO // Mobile Mockups & Dossier Showcase</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    body { background-color: #08080d; color: #e4e4e7; font-family: system-ui, sans-serif; }
+    .mockup-card { transition: all 0.3s ease; }
+    .mockup-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px -10px rgba(147, 51, 234, 0.4); }
+  </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8 flex flex-col justify-between">
+  <header class="max-w-6xl mx-auto w-full mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-zinc-800">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-purple-900/60 text-purple-300 font-mono text-xs border border-purple-500/40">161914</span>
+        <h1 class="text-2xl font-bold text-white tracking-wider">K4L1 STUDIO + ANUU-FORGE</h1>
+      </div>
+      <p class="text-xs text-zinc-400 font-mono mt-1">Dossier Visual Móvil • Wireframes de Alta Fidelidad & Secciones SaaS</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="docs/K4L1_STUDIO_SAAS_DOSSIER_MOCKUPS.pdf" download class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-lg">
+        <span>📄</span> Descargar Dossier PDF
+      </a>
+      <a href="https://signal.me/#u/k4li.89" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-600/20 text-emerald-300 hover:bg-emerald-600/30 border border-emerald-500/40 font-mono text-xs font-bold transition-all flex items-center gap-1.5">
+        <span>💬</span> Signal @k4li.89
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Card 1 -->
+    <div class="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mockup-card">
+      <h3 class="text-sm font-bold text-purple-300 font-mono mb-1">01 // Hero & Navegación Tri-Vista</h3>
+      <p class="text-xs text-zinc-400 mb-3">Telemetría 189.89 Hz, métricas de impacto y consola interactiva.</p>
+      <div class="rounded-xl overflow-hidden border border-zinc-800 bg-black/50 p-2">
+        <img src="docs/mockups/mockup_01_hero_architecture.png" alt="Hero Mockup" class="w-full rounded-lg shadow-md">
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mockup-card">
+      <h3 class="text-sm font-bold text-rose-300 font-mono mb-1">02 // 4 Vectores Estratégicos</h3>
+      <p class="text-xs text-zinc-400 mb-3">Escudo Kanuv, Audio Táctico, Búnker NoSQL y Clúster vLLM.</p>
+      <div class="rounded-xl overflow-hidden border border-zinc-800 bg-black/50 p-2">
+        <img src="docs/mockups/mockup_02_cuatro_vectores.png" alt="Vectores Mockup" class="w-full rounded-lg shadow-md">
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mockup-card">
+      <h3 class="text-sm font-bold text-emerald-300 font-mono mb-1">03 // Laboratorio Zero-Zoom</h3>
+      <p class="text-xs text-zinc-400 mb-3">Showcase unificado por pestañas: ROI, Hardening, HFT y TCO de IA.</p>
+      <div class="rounded-xl overflow-hidden border border-zinc-800 bg-black/50 p-2">
+        <img src="docs/mockups/mockup_03_laboratorio_interactivo.png" alt="Lab Mockup" class="w-full rounded-lg shadow-md">
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mockup-card">
+      <h3 class="text-sm font-bold text-cyan-300 font-mono mb-1">04 // Forge (26 Reliquias)</h3>
+      <p class="text-xs text-zinc-400 mb-3">Focusrite DSP, caBX Carver, Soundboard, Roguelike determinista.</p>
+      <div class="rounded-xl overflow-hidden border border-zinc-800 bg-black/50 p-2">
+        <img src="docs/mockups/mockup_04_forge_reliquias.png" alt="Forge Mockup" class="w-full rounded-lg shadow-md">
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mockup-card">
+      <h3 class="text-sm font-bold text-amber-300 font-mono mb-1">05 // Búnker CRM & Bóveda AES</h3>
+      <p class="text-xs text-zinc-400 mb-3">Pipeline comercial cifrado en IndexedDB y 0 rastreo a servidores.</p>
+      <div class="rounded-xl overflow-hidden border border-zinc-800 bg-black/50 p-2">
+        <img src="docs/mockups/mockup_05_bunker_crm.png" alt="Búnker Mockup" class="w-full rounded-lg shadow-md">
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 mockup-card">
+      <h3 class="text-sm font-bold text-purple-300 font-mono mb-1">06 // Tarifas & Contacto Signal</h3>
+      <p class="text-xs text-zinc-400 mb-3">Paquetes comerciales, generador SOW y canal directo @k4li.89.</p>
+      <div class="rounded-xl overflow-hidden border border-zinc-800 bg-black/50 p-2">
+        <img src="docs/mockups/mockup_06_pricing_contacto.png" alt="Pricing Mockup" class="w-full rounded-lg shadow-md">
+      </div>
+    </div>
+  </main>
+
+  <footer class="max-w-6xl mx-auto w-full mt-12 pt-6 border-t border-zinc-800 text-center text-xs font-mono text-zinc-500">
+    K4L1 STUDIO • ANUU // CONCILIO ACE (161914) • FRECUENCIA 189.89.619 HZ • SIGNAL: @k4li.89
+  </footer>
+</body>
+</html>
