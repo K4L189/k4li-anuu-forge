@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANUBIS: THE FEATHER OF MA'AT</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Orbitron:wght@100;400;700;900&family=Courier+Prime:wght@400;700&family=Cinzel:wght@400;600;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold: #d4af37;
+            --blood: #8b0000;
+            --shadow: #1a1a1a;
+            --bone: #f5f5dc;
+            --void: #000000;
+            --divine: rgba(212, 175, 55, 0.6);
+        }
+        
+        body {
+            background: var(--void);
+            color: var(--bone);
+            font-family: 'Cinzel', serif;
+            overflow-x: hidden;
+            cursor: none;
+            line-height: 1.6;
+        }
+        
+        .custom-cursor {
+            position: fixed;
+            width: 3px;
+            height: 30px;
+            background: var(--gold);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+            box-shadow: 0 0 10px var(--gold);
+        }
+        
+        .custom-cursor::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 10px solid var(--gold);
+        }
+        
+        .papyrus-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212,175,55,0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139,0,0,0.05) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(212,175,55,0.01) 100px,
+                    rgba(212,175,55,0.01) 102px
+                ),
+                linear-gradient(180deg, var(--void) 0%, #0a0a0a 50%, var(--void) 100%);
+            animation: ancient-whispers 30s ease-in-out infinite;
+        }
+        
+        @keyframes ancient-whispers {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .hieroglyph-border {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 0.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.7;
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 0 5px var(--gold); }
+            50% { text-shadow: 0 0 15px var(--gold), 0 0 25px var(--divine); }
+        }
+        
+        .main-title {
+            font-size: clamp(2rem, 6vw, 6rem);
+            font-weight: 900;
+            letter-spacing: 0.3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--gold), var(--bone), var(--blood));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: divine-presence 6s ease-in-out infinite;
+        }
+        
+        @keyframes divine-presence {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.02); filter: brightness(1.2); }
+        }
+        
+        .subtitle {
+            font-size: clamp(0.8rem, 2vw, 1.5rem);
+            color: var(--gold);
+            letter-spacing: 0.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .story-section {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--gold);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .section-title::before,
+        .section-title::after {
+            content: '◈';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--blood);
+            font-size: 1rem;
+            animation: rotate-symbol 8s linear infinite;
+        }
+        
+        .section-title::before { left: -3rem; }
+        .section-title::after { right: -3rem; }
+        
+        @keyframes rotate-symbol {
+            0% { transform: translateY(-50%) rotate(0deg); }
+            100% { transform: translateY(-50%) rotate(360deg); }
+        }
+        
+        .story-text {
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+            position: relative;
+        }
+        
+        .story-text::first-letter {
+            font-size: 4rem;
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+            margin-top: 0.2rem;
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .anubis-art {
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: clamp(0.3rem, 0.6vw, 0.5rem);
+            line-height: 0.9;
+            color: var(--gold);
+            margin: 3rem 0;
+            white-space: pre;
+            animation: ancient-breath 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px var(--divine));
+        }
+        
+        @keyframes ancient-breath {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        
+        .feather-art {
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: clamp(0.4rem, 0.8vw, 0.6rem);
+            line-height: 1;
+            color: var(--bone);
+            margin: 2rem 0;
+            white-space: pre;
+            animation: feather-float 6s ease-in-out infinite;
+        }
+        
+        @keyframes feather-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        
+        .scales-art {
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            font-size: clamp(0.3rem, 0.7vw, 0.5rem);
+            line-height: 0.9;
+            color: var(--blood);
+            margin: 2rem 0;
+            white-space: pre;
+            animation: scales-balance 10s ease-in-out infinite;
+        }
+        
+        @keyframes scales-balance {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+        
+        .duat-realm {
+            background: linear-gradient(135deg, rgba(139,0,0,0.1), rgba(26,26,26,0.3));
+            border: 1px solid rgba(212,175,55,0.3);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .duat-realm::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.1), transparent);
+            animation: divine-light 8s ease-in-out infinite;
+        }
+        
+        @keyframes divine-light {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+        
+        .judgment-quote {
+            font-style: italic;
+            text-align: center;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--gold);
+            margin: 3rem 0;
+            padding: 2rem;
+            border-left: 4px solid var(--blood);
+            background: rgba(212,175,55,0.05);
+            position: relative;
+        }
+        
+        .judgment-quote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            color: var(--blood);
+            opacity: 0.5;
+        }
+        
+        .soul-fragments {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .soul-fragment {
+            position: absolute;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.7rem;
+            opacity: 0.2;
+            color: var(--gold);
+            animation: soul-drift 15s linear infinite;
+        }
+        
+        @keyframes soul-drift {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+        
+        .chapter-divider {
+            text-align: center;
+            margin: 4rem 0;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1rem;
+            color: var(--blood);
+            letter-spacing: 1rem;
+            animation: divider-pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes divider-pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .interactive-element:hover {
+            color: var(--blood);
+            text-shadow: 0 0 10px var(--blood);
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .story-container {
+                padding: 1rem;
+            }
+            
+            .story-text {
+                padding: 0 1rem;
+            }
+            
+            .section-title::before,
+            .section-title::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="papyrus-bg"></div>
+    <div class="soul-fragments" id="soulFragments"></div>
+    
+    <div class="story-container">
+        <div class="chapter-header">
+            <div class="hieroglyph-border">𓂀 𓈖 𓃹 𓃠 𓊃 𓊃 𓊃 𓂀</div>
+            <h1 class="main-title">ANUBIS</h1>
+            <div class="subtitle">THE FEATHER OF MA'AT</div>
+            <div class="hieroglyph-border">𓂀 𓈖 𓃹 𓃠 𓊃 𓊃 𓊃 𓂀</div>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="section-title">THE GUARDIAN OF THE THRESHOLD</h2>
+            <div class="story-text">
+                In the liminal space between life and death, where shadows writhe with the weight of unspoken sins, stands <span class="interactive-element">Anubis</span> — the jackal-headed god whose obsidian eyes have witnessed the judgment of ten thousand souls. His form towers above the endless expanse of the <span class="interactive-element">Duat</span>, the Egyptian underworld where reality bends to divine will and mortal comprehension crumbles like ancient papyrus.
+            </div>
+            
+            <div class="anubis-art">
+                      ████████████████████████████████████
+                    ██                                    ██
+                  ██        ████████████████████████        ██
+                ██        ██                      ██        ██
+              ██        ██      ████████████████    ██        ██
+            ██        ██      ██              ██    ██        ██
+          ██        ██        ██    ████████  ██      ██        ██
+        ██        ██          ██    ████████  ██        ██        ██
+      ██        ██            ██      ████    ██          ██        ██
+    ██        ██                ██            ██            ██        ██
+  ████████████                  ██            ██              ████████████
+██████████████                ████          ████            ██████████████
+████████████████            ████████      ████████        ████████████████
+██████████████████        ██████████    ██████████      ██████████████████
+████████████████████    ████████████████████████████  ████████████████████
+██████████████████████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████████████████████
+██████████████████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████████████████
+██████████████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████████████
+██████████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████████
+██████████████████████████████████████████████████████████
+████████████████████████████████████████████████████████
+██████████████████████████████████████████████████████
+████████████████████████████████████████████████████
+██████████████████████████████████████████████████
+████████████████████████████████████████████████
+██████████████████████████████████████████████
+████████████████████████████████████████████
+██████████████████████████████████████████
+████████████████████████████████████████
+██████████████████████████████████████
+████████████████████████████████████
+██████████████████████████████████
+████████████████████████████████
+██████████████████████████████
+████████████████████████████
+██████████████████████████
+████████████████████████
+██████████████████████
+████████████████████
+██████████████████
+████████████████
+██████████████
+████████████
+██████████
+████████
+██████
+████
+██
+            </div>
+            
+            <div class="story-text">
+                The god's mummified hands, wrapped in linen that has absorbed the whispers of millennia, hold the tools of absolute judgment. In his left hand rests the <span class="interactive-element">scales of Ma'at</span>, their golden plates trembling with divine precision. In his right, the <span class="interactive-element">feather of truth</span> — a single plume that weighs heavier than mountains, lighter than breath, and carries within its barbs the concentrated essence of cosmic justice.
+            </div>
+        </div>
+        
+        <div class="chapter-divider">◈ ◈ ◈ ◈ ◈</div>
+        
+        <div class="story-section">
+            <h2 class="section-title">THE REALM OF ETERNAL TWILIGHT</h2>
+            <div class="duat-realm">
+                <div class="story-text">
+                    The <span class="interactive-element">Duat</span> stretches beyond mortal comprehension — a realm where the sun god Ra's barque traverses rivers of liquid starlight, where serpents the size of cities coil around pillars of crystallized time. Here, in this nexus of existence, the dead arrive not as they lived, but as they truly were: stripped of flesh, pretense, and the comfortable lies they told themselves in life.
+                </div>
+                
+                <div class="story-text">
+                    Each soul manifests as a translucent essence, carrying within its ethereal form the accumulated weight of every choice, every moment of cruelty or kindness, every whispered prayer and screamed curse. They come before Anubis not as supplicants, but as books to be read, their pages written in the ink of consequence.
+                </div>
+            </div>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="section-title">THE WEIGHING OF HEARTS</h2>
+            <div class="story-text">
+                The ritual begins in silence. Anubis, his jackal head tilting with predatory grace, extends one clawed finger toward the soul's chest. The heart — not the organ of flesh that once pumped blood, but the spiritual essence that housed love, hate, fear, and hope — materializes as a pulsing orb of memory and emotion.
+            </div>
+            
+            <div class="scales-art">
+                        ╔══════════════════════════╗
+                        ║                          ║
+                        ║    ⚖    JUDGMENT    ⚖    ║
+                        ║                          ║
+                        ╚═══════════════════════════╝
+                             ╱                 ╲
+                           ╱                     ╲
+                         ╱                         ╲
+                       ╱                             ╲
+                     ╱                                 ╲
+                   ╔═════════════╗         ╔═════════════╗
+                   ║   HEART     ║         ║   FEATHER   ║
+                   ║             ║         ║     OF      ║
+                   ║  ♥ SINS ♥   ║    VS   ║   MA'AT     ║
+                   ║             ║         ║      ♦      ║
+                   ║  GUILT      ║         ║   TRUTH     ║
+                   ╚═════════════╝         ╚═════════════╝
+            </div>
+            
+            <div class="story-text">
+                Upon the left plate of the scales, the heart settles with the weight of accumulated karma. Every lie adds mass, every act of violence increases its density, every betrayal compounds its gravitational pull. The heart of the wicked becomes a dense mass of crystallized suffering, while the heart of the pure remains light as morning mist.
+            </div>
+            
+            <div class="feather-art">
+                              ░░░░░░░░░░░░░░░░░░░░░
+                            ░░░░░░░░░░░░░░░░░░░░░░░░
+                          ░░░░░░░░░░░░░░░░░░░░░░░░░░
+                        ░░░░░░░░░░░░│░░░░░░░░░░░░░░░░
+                      ░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░
+                    ░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░
+                  ░░░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░░░
+                ░░░░░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░░░░░
+              ░░░░░░░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░░░░░░░
+            ░░░░░░░░░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+          ░░░░░░░░░░░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                                  │
+                                  │
+                                  │
+                                  │
+                            THE FEATHER OF MA'AT
+                          TRUTH • JUSTICE • BALANCE
+            </div>
+            
+            <div class="story-text">
+                On the right plate rests the <span class="interactive-element">Feather of Ma'at</span>, ostrich plume of the goddess of truth and justice. This is no ordinary feather — it is the materialization of perfect moral balance, the weight against which all souls are measured. It does not judge; it simply is. Pure, incorruptible, eternal.
+            </div>
+        </div>
+        
+        <div class="judgment-quote">
+            "I have not committed sin against men. I have not mistreated cattle. I have not blasphemed a god. I have not done violence to a poor man... Let me not be condemned before the great god."
+        </div>
+        
+        <div class="chapter-divider">◈ ◈ ◈ ◈ ◈</div>
+        
+        <div class="story-section">
+            <h2 class="section-title">THE MOMENT OF TRUTH</h2>
+            <div class="story-text">
+                Time crystallizes as the scales find their balance. Anubis watches with eyes that have seen the rise and fall of empires, the birth and death of stars. His judgment is not mercy nor cruelty — it is the universe itself speaking through him, declaring what simply is.
+            </div>
+            
+            <div class="story-text">
+                If the heart is lighter than the feather, the soul achieves <span class="interactive-element">ma'at</span> — perfect balance. They are granted passage to the <span class="interactive-element">Field of Reeds</span>, the Egyptian paradise where wheat grows as tall as gods and the blessed live in eternal contentment. Their names are written in the book of the living, never to be forgotten.
+            </div>
+            
+            <div class="story-text">
+                But if the heart outweighs the feather... the soul faces a fate worse than simple death. <span class="interactive-element">Ammit</span>, the Devourer of Hearts, emerges from the shadows. Part crocodile, part lion, part hippopotamus — she represents the most feared aspects of the natural world. With jaws that can crush reality itself, she consumes the unworthy soul completely, erasing it from existence. No afterlife, no reincarnation, no memory. True death — the cessation of being itself.
+            </div>
+        </div>
+        
+        <div class="story-section">
+            <h2 class="section-title">THE ETERNAL GUARDIAN</h2>
+            <div class="story-text">
+                And so Anubis continues his vigil, neither sleeping nor resting, for he is bound to this duty by forces older than creation. Each soul that passes before him adds another layer to his understanding of the mortal condition — their desperate hopes, their crushing fears, their capacity for both transcendent love and unspeakable cruelty.
+            </div>
+            
+            <div class="story-text">
+                He is judge, witness, and chronicler of the human soul. In his presence, all pretense falls away. The wealthy merchant and the enslaved laborer stand equal before the scales. The pharaoh and the beggar are weighed by the same measure. Death, as administered by Anubis, is the ultimate democracy — the only judgment that truly matters.
+            </div>
+            
+            <div class="judgment-quote">
+                "The heart that is heavy with sin shall not rise. The soul that has forgotten ma'at shall know only darkness. But those who have lived in truth... they shall walk among the gods forever."
+            </div>
+        </div>
+        
+        <div class="chapter-divider">◈ ◈ ◈ ◈ ◈</div>
+        
+        <div class="story-section">
+            <h2 class="section-title">EPILOGUE: THE WEIGHING CONTINUES</h2>
+            <div class="duat-realm">
+                <div class="story-text">
+                    In the depths of the Duat, where time moves like honey and space folds upon itself, Anubis remains. The scales in his hands never rust, never break, never lose their perfect calibration. The feather of Ma'at never loses a barbule, never fades, never compromises its absolute purity.
+                </div>
+                
+                <div class="story-text">
+                    For as long as conscious beings draw breath, make choices, and face the consequences of their actions, the Guardian of the Threshold will be there. Waiting. Watching. Weighing. His is the final word in the great equation of existence, the ultimate answer to the question that haunts every living soul: "What have I truly done with the gift of life?"
+                </div>
+                
+                <div class="story-text">
+                    And in the silence that follows each judgment, in the moment between the weighing and the verdict, perhaps even Anubis himself wonders: when his own time comes, when the cosmos finally judges its judges... what will his heart weigh against the feather of eternal truth?
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        // Soul fragments
+        const fragmentsContainer = document.getElementById('soulFragments');
+        const soulTexts = [
+            '𓂀 SOUL FRAGMENT',
+            '𓈖 MEMORY SHARD',
+            '𓃹 GUILT ECHO',
+            '𓃠 TRUTH WHISPER',
+            '𓊃 FEAR REMNANT',
+            '𓆣 HOPE VESTIGE',
+            '𓇯 LOVE TRACE',
+            '𓈙 REGRET SHADOW'
+        ];
+        
+        function createSoulFragment() {
+            const fragment = document.createElement('div');
+            fragment.className = 'soul-fragment';
+            fragment.textContent = soulTexts[Math.floor(Math.random() * soulTexts.length)];
+            fragment.style.left = Math.random() * 90 + '%';
+            fragment.style.animationDuration = (12 + Math.random() * 8) + 's';
+            fragment.style.animationDelay = Math.random() * 2 + 's';
+            fragmentsContainer.appendChild(fragment);
+            
+            setTimeout(() => {
+                fragment.remove();
+            }, 20000);
+        }
+        
+        setInterval(createSoulFragment, 3000);
+        
+        // Interactive elements
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('click', () => {
+                element.style.animation = 'divine-presence 1s ease-in-out';
+                setTimeout(() => {
+                    element.style.animation = '';
+                }, 1000);
+            });
+        });
+        
+        // Papyrus effect
+        let papyrusTime = 0;
+        function animatePapyrus() {
+            papyrusTime += 0.01;
+            const bg = document.querySelector('.papyrus-bg');
+            const intensity = 0.03 + Math.sin(papyrusTime) * 0.02;
+            bg.style.filter = `sepia(${intensity}) contrast(${1 + Math.sin(papyrusTime * 0.5) * 0.1})`;
+            requestAnimationFrame(animatePapyrus);
+        }
+        animatePapyrus();
+        
+        // Atmospheric sound visualization
+        setInterval(() => {
+            const intensity = Math.random();
+            document.documentElement.style.setProperty('--divine', `rgba(212, 175, 55, ${0.3 + intensity * 0.3})`);
+        }, 3000);
+        
+        // Reading progress effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const bg = document.querySelector('.papyrus-bg');
+            bg.style.transform = `translateY(${rate}px)`;
+        });
+        
+        // Auto-scroll reading mode (optional)
+        let autoScroll = false;
+        document.

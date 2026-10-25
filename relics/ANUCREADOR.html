@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>⧉ Invocación Ritual Anuu ⧉</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --purple:#8f2dd3;
+      --deep:#1e0f33;
+      --mist:#2a1955;
+      --light:#fae3ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;font-family:'Share Tech Mono',monospace;background:var(--deep);color:var(--light);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden}
+
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 80%,rgba(143,45,211,0.15),transparent 70%);animation:breath 9s ease-in-out infinite;}
+    @keyframes breath{0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+
+    body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(transparent 0 1px,rgba(0,0,0,.07) 1px 2px);}
+
+    h1{margin:1.2rem 0 0.4rem 0;font-size:2rem;letter-spacing:2px;text-shadow:0 0 8px var(--purple);animation:glitch 3s infinite;}
+    @keyframes glitch{0%,100%{filter:hue-rotate(0deg);}50%{filter:hue-rotate(60deg);}}
+
+    .panel{background:var(--mist);border:1px solid var(--purple);border-radius:12px;padding:2rem;width:clamp(320px,70vw,640px);box-shadow:0 0 15px var(--purple);position:relative;overflow:hidden}
+    .panel::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(250,227,255,0.05),transparent);animation:scan 5s infinite;}
+    @keyframes scan{0%{left:-100%;}100%{left:100%;}}
+
+    input,button{font-size:1rem;font-family:inherit;border:none;border-radius:8px;padding:0.6rem 1rem;margin-top:0.6rem}
+    input{width:100%;background:#3b2470;color:var(--light);text-align:center;outline:none}
+    button{background:var(--purple);color:#fff;cursor:pointer;transition:background .3s;width:100%}
+    button:hover{background:#b35ffd}
+
+    pre{background:#120825;border:1px solid var(--purple);border-radius:10px;padding:1rem;margin-top:1rem;max-height:50vh;overflow:auto;white-space:pre-wrap;line-height:1.4;font-size:0.9rem}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <h1>꧁ Ritual Anuu ꧂</h1>
+  <div class="panel">
+    <label>Llave ritual</label>
+    <input id="llaveInput" placeholder="Escribe la llave (ej: llegar a conocerlos)" autocomplete="off" value="llegar a conocerlos" />
+    <button onclick="invocar()">Invocar</button>
+    <pre id="salida">• Pulsa Invocar para escuchar la voz oculta de la bruma •</pre>
+  </div>
+
+<script>
+  const encrypted = "zLXvuYz5uwZZDFRgxfs33JO7Fi5H8KM8I+sgGHpTq2OKWsMhC9l/xe0uIoj/rc60tW+keFts0trvkODFV6VLZWJaM3sm0hQLPcreKubFdyHFZAlfi8Kl6oj+lK0wQMSZK4UmUAP7kQud43FEl1IVI++n63nwpfcPONmcnDH6rdhDMw+qWXakWBFhE2jR0pD9DWGpFQIVhtVaVcE2R25FFwYalnbkIogqinKv0j+Y/Mc4WIKNU5AOdYdCNkDrxrYQG4/93whZzuRUh4dn9o9dP5A5I0aJtUFEWEqQmUd/KOvdr3rMcumDgN6hAtlpQ0SVQk90tosQcUKO2okTzD8RfnW23c8XmH0aS4Luv9s8tIMreE+5AGwurMNpkQCMjWJ9X+7QCQ0c/DELl6bbppVuiuTz9Ea8imtCCN8/5wC36xkt7O7YHU1hzorR7zUrD6sYkBB2xlDzJ2l+p+PVXGJR4gj76lEwZ9xg2hIThQzH+DRTxYyzvZ9M5h60GF5MG1v3hBYlQmk9/ThUI1IDW2njcDsTu+x+AgRxgGjJkZaOyMNSZ534CXAIl5IbqotuzCWIcChMtwa/uos5sPEexjowwvlBElJsB48CyvGUtHFbAHRtk1J1SSUQc36paxKcVkmVBjTSohY0UL/B10bfMr+eGVCK62Eq7ANA0pOoHuuSEkZModabcfgz7QPVAnOWQHAHilZO35Qhg1HhrM8UmLjxJY6XBfoCl1fzSPWnCc5ziJeD52UjSGSnbszRvfYHfuzQykbWaU3o+I8VAmfqbma1P2VFtLEAQ13pCKE0EbZjOpH60R//VcN66tlBc3zdkgsiVg+PgqGrbWezQ6xvkzXjdUFcMoAsFrIMAsgxKlWU8X8sNZtr/DFFYZFDOkc7CSqBAgg1WTh4nobb0Hx5gxNv0mXLsNdKmzZAkTTSPyjz2nPW/vzIF1PSOfsLjqhWvtToS+Lj1KAdsoCTHSi1Qto7MbQxxMWdF0Io4MMuu5hk4Ew6VPnu8lmUATMz52B/5yTSjoZrvHjKzPuwBdcgyq9PS52r1xc0e71lI2eKFmKu14WjpBKd68vV10g33v1Zr8oPhiOfm5cMRSS8HBqoI7gu01a0Mz2AXeuzzVXSii6XxonhwKfb+QejPt3/WrglfceQ+R2Iv+TGVBe3mdWH+hHUr1yAIamyA1SgbEqTFIVHGOWBBiQwNrraK/Frx+BHTb7Uw4GWFZmeK96fmR0f9eauxkpeNJ8ySKa40wTf99jf+oTswzdfQfc7mCMw4bUNLe8NuS53/dBMmBS3SoL1oNHdL9JFPJtgbD2m3dUmikIZQVThSiisV3iQ8BMivR51D2mD8TTE/2YxK01Q3j3CAAy2HsGolgWYTUZaf8BNdzosv9loiR0ekc63prMX//DbHb7AVYhd3snCXJPDPth144+Fmc31KMXHxe4ZfZ3iC0X6Kj54ZnlWJWqGvq5qZDxDIteEOnGjl73Jgre0AISj38wmOrLAsQJI/RaRpHcR3ApugPAF76HZkVeEqtt6vUoNdUhMQiMfcumfY3PXjSH+HX9DKNVnHBC/SwbO1VP0TMGiDnzexU7STBxMPMDJ2IrnMO49fGubGkhitbdm3EMxLGjvQQTFeqGo9Jhownh0H5jnuBDYPtqEOL7nU1NiIM3ugktTMxNICnYqnpoyw+hcVEyhuqHeOWLXcU4nPR4k/XPHGYA0hAn7lQCltGY7xbC9brYc0imdBei0+u6xNBGb7eYnMQ==";
+  const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+
+  function invocar() {
+    const key = document.getElementById("llaveInput").value.trim();
+    try {
+      const keyHash = CryptoJS.SHA256(key);
+      const cipherParams = CryptoJS.lib.CipherParams.create({
+        ciphertext: CryptoJS.enc.Base64.parse(encrypted)
+      });
+      const decrypted = CryptoJS.AES.decrypt(cipherParams, keyHash, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+      });
+      const str = decrypted.toString(CryptoJS.enc.Utf8);
+      if (!str) throw new Error("Llave incorrecta");
+      
+      // Limpiar prefijo residual si lo hubiera
+      const jsonStart = str.indexOf("[");
+      if (jsonStart !== -1) {
+        const parsed = JSON.parse("{" + str.slice(str.indexOf('"rap_kali"')) );
+        document.getElementById("salida").innerText = str;
+      } else {
+        document.getElementById("salida").innerText = str;
+      }
+    } catch(e) {
+      document.getElementById("salida").innerText = "⚠️ La bruma permanece sellada: Llave incorrecta o disonancia.";
+    }
+  }
+
+  // Auto-invocar si la llave por defecto está presente
+  window.addEventListener('load', () => {
+    invocar();
+  });
+</script>
+</body>
+</html>

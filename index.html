@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K4L1 STUDIO + ANUU-FORGE | Ciberseguridad, Interfaces & Gran Nexo Multi-Estilo</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Variables de Temas Dinámicos */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.3);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+      --particle-color: #a855f7;
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+      --particle-color: #ff0040;
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #f59e0b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+      --particle-color: #10b981;
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.95);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+      --particle-color: #06b6d4;
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.95);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+      --particle-color: #ffd700;
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.95);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+      --particle-color: #ff007f;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      transition: background-color 0.4s ease, color 0.3s ease;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border-color: var(--border-card);
+      transition: all 0.3s ease;
+    }
+    .theme-card:hover {
+      box-shadow: 0 0 20px -5px var(--glow-color);
+    }
+
+    .theme-header {
+      background-color: var(--bg-header);
+      border-color: var(--border-card);
+    }
+
+    .theme-accent-bg {
+      background-color: var(--accent-primary);
+    }
+    .theme-accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+    .theme-accent-text {
+      color: var(--accent-secondary);
+    }
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Canvas de Fondo Dinámico */
+    #ambientCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.45;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: var(--border-card); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+    .tab-active {
+      background: var(--badge-bg);
+      border-color: var(--badge-border);
+      color: var(--accent-secondary);
+    }
+  </style>
+</head>
+<body class="selection:bg-purple-600 selection:text-white min-h-screen flex flex-col justify-between relative">
+
+  <!-- Lienzo de Partículas Dinámico según Estilo Activo -->
+  <canvas id="ambientCanvas"></canvas>
+
+  <!-- Contenedor Principal (por encima del canvas) -->
+  <div class="relative z-10 flex flex-col min-h-screen justify-between">
+
+    <!-- Header Maestro con Conmutador de Vistas y Selector de Estilos -->
+    <header class="theme-header border-b backdrop-blur-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-2.5 flex flex-col lg:flex-row items-center justify-between gap-3">
+        
+        <!-- Marca & Estado -->
+        <div class="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-start">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl theme-accent-bg flex items-center justify-center font-mono font-bold text-white text-sm shadow-md transition-colors">
+              K4
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold tracking-wider text-sm text-white">K4L1 STUDIO</span>
+                <span class="text-xs text-zinc-500 font-mono">+</span>
+                <span class="text-xs theme-accent-text font-mono font-semibold tracking-wide">ANUU-FORGE</span>
+                <span class="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-mono">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ONLINE
+                </span>
+              </div>
+              <p class="text-[10px] text-zinc-500 font-mono">ARQUITECTURA DE SISTEMAS • 189.89.619 HZ</p>
+            </div>
+          </div>
+
+          <!-- Selector de Modo Dual (Mobile) -->
+          <div class="flex lg:hidden items-center bg-black/40 p-1 rounded-xl border border-zinc-800 text-xs">
+            <button onclick="switchView('studio')" id="tabBtnStudioMobile" class="tab-active px-2 py-1 rounded-lg">💼 Studio</button>
+            <button onclick="switchView('forge')" id="tabBtnForgeMobile" class="px-2 py-1 rounded-lg text-zinc-400">🌌 Forge</button>
+          </div>
+        </div>
+
+        <!-- Selector de Modos (Desktop) -->
+        <div class="hidden lg:flex items-center bg-black/40 p-1 rounded-xl border theme-border">
+          <button onclick="switchView('studio')" id="tabBtnStudio" class="tab-active px-3.5 py-1.5 rounded-lg border border-transparent text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm">
+            <span>💼</span> K4L1 Studio (Servicios)
+          </button>
+          <button onclick="switchView('forge')" id="tabBtnForge" class="px-3.5 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-white text-xs font-semibold transition-all flex items-center gap-1.5">
+            <span>🌌</span> Anuu-Forge (26 Reliquias)
+          </button>
+        </div>
+
+        <!-- Selector de Estilos / Temas en Vivo -->
+        <div class="flex items-center gap-2 w-full lg:w-auto justify-end">
+          <div class="flex items-center gap-1 bg-black/50 p-1 rounded-xl border theme-border text-xs">
+            <span class="text-[10px] font-mono text-zinc-400 px-1.5">🎨 Estilo:</span>
+            <button onclick="setTheme('anuu')" title="Bruma Anuu (Deep Cyber-Violet)" class="theme-btn px-2 py-0.5 rounded text-[11px] font-mono transition-all border border-purple-500/50 bg-purple-500/20 text-purple-300" id="tbtn-anuu">🌫️ Anuu</button>
+            <button onclick="setTheme('blood')" title="Núcleo Búnker (Blood Theme)" class="theme-btn px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300" id="tbtn-blood">🛡️ Blood</button>
+            <button onclick="setTheme('gw2')" title="Kilonova Trader (High-Frequency GW2)" class="theme-btn px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300" id="tbtn-gw2">⚡ GW2</button>
+            <button onclick="setTheme('bioinfo')" title="BioCode Psycho (MPD & ADN)" class="theme-btn px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300" id="tbtn-bioinfo">🧬 BioCode</button>
+            <button onclick="setTheme('duat')" title="Anubis & Ma'at (Gold & Sand)" class="theme-btn px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300" id="tbtn-duat">⚖️ Duat</button>
+            <button onclick="setTheme('neon')" title="Kali Kush (Ultra-Neon / Relax)" class="theme-btn px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="tbtn-neon">🌸 Neón</button>
+          </div>
+
+          <!-- Signal E2EE -->
+          <a href="https://signal.me/#u/k4li.89" target="_blank" class="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/20 text-xs font-mono">
+            <span>💬</span> @k4li.89
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- VISTA 1: K4L1 STUDIO (COMERCIAL & INTAKE)  -->
+    <!-- ========================================== -->
+    <main id="viewStudio" class="transition-opacity duration-200">
+      <!-- Hero Section -->
+      <section class="max-w-5xl mx-auto px-4 pt-10 pb-6 text-center relative">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono mb-4 border transition-colors" style="background: var(--badge-bg); border-color: var(--badge-border); color: var(--accent-secondary);">
+          <span>☥</span> BOUTIQUE DE INGENIERÍA CRÍTICA & PRIVACIDAD
+        </div>
+        
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white max-w-3xl mx-auto leading-tight">
+          Sistemas Críticos, Ciberseguridad & Interfaces de <span class="theme-accent-text">Alta Precisión</span>.
+        </h1>
+        
+        <p class="text-sm sm:text-base max-w-2xl mx-auto mt-4 leading-relaxed" style="color: var(--text-muted);">
+          Diseño, fortificación y automatización sin burocracia corporativa. Desde arquitecturas SIEM y hardening en Linux, hasta dashboards financieros en tiempo real y despliegue de IA local soberana.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <a href="#cotizador" class="px-5 py-2.5 rounded-xl theme-accent-bg text-white text-xs font-semibold shadow-lg transition-all flex items-center gap-2">
+            <span>⚡</span> Configurar Petición / Presupuesto
+          </a>
+          <button onclick="switchView('forge')" class="px-4 py-2.5 rounded-xl theme-card border text-xs font-medium transition-all flex items-center gap-2 theme-accent-text">
+            <span>🌌</span> Explorar el Gran Nexo Anuu-Forge (26 Artefactos)
+          </button>
+        </div>
+
+        <!-- Credenciales Técnicas -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto mt-10 pt-8 border-t theme-border text-left">
+          <div class="p-3 rounded-xl theme-card border">
+            <span class="text-xs font-mono font-bold theme-accent-text">ASIR TITLED</span>
+            <h4 class="text-xs font-bold text-white mt-1">Linux & Redes Bajo Nivel</h4>
+            <p class="text-[11px] text-zinc-400 mt-0.5">Kernel, systemd, sockets y administración avanzada.</p>
+          </div>
+          <div class="p-3 rounded-xl theme-card border">
+            <span class="text-xs font-mono font-bold text-emerald-400">BLUE TEAM & SIEM</span>
+            <h4 class="text-xs font-bold text-white mt-1">Wazuh & MITRE ATT&CK</h4>
+            <p class="text-[11px] text-zinc-400 mt-0.5">Detección de intrusiones, T1003 y hardening.</p>
+          </div>
+          <div class="p-3 rounded-xl theme-card border">
+            <span class="text-xs font-mono font-bold text-cyan-400">HIGH FREQUENCY</span>
+            <h4 class="text-xs font-bold text-white mt-1">React, Vite & Canvas</h4>
+            <p class="text-[11px] text-zinc-400 mt-0.5">Dashboards de baja latencia y arbitraje de mercado.</p>
+          </div>
+          <div class="p-3 rounded-xl theme-card border">
+            <span class="text-xs font-mono font-bold text-indigo-400">PRIVATE & EDGE AI</span>
+            <h4 class="text-xs font-bold text-white mt-1">Modelos Locales GGUF/ONNX</h4>
+            <p class="text-[11px] text-zinc-400 mt-0.5">Inferencia privada sin fugas a servidores externos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Catálogo de 4 Servicios Clave -->
+      <section class="max-w-5xl mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+          <span class="text-xs font-mono theme-accent-text uppercase tracking-widest">Servicios Especializados</span>
+          <h2 class="text-2xl font-bold text-white mt-1">Soluciones Técnicas por Encargo</h2>
+          <p class="text-xs text-zinc-400 mt-1">Tarifas claras, entregables documentados y comunicación confidencial.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Servicio 1: Ciberseguridad -->
+          <div class="p-5 rounded-2xl theme-card border group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-xl text-emerald-400">
+                🛡️
+              </div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/30">Desde 450 €</span>
+            </div>
+            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">Auditoría, Hardening & Despliegue SIEM</h3>
+            <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
+              Instalación y afinado de servidores Linux, cortafuegos UFW/Iptables, monitorización activa con Wazuh SIEM, reglas personalizadas contra dumping de credenciales (MITRE T1003) y entrega de informe ejecutivo forense.
+            </p>
+            <ul class="text-[11px] text-zinc-400 mt-3 space-y-1 font-mono">
+              <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Hardening de SSH, puertos y permisos de kernel</li>
+              <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Configuración SIEM Wazuh & alertas en tiempo real</li>
+              <li class="flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Informe ejecutivo formal con evidencias y mitigación</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 2: Dashboards React -->
+          <div class="p-5 rounded-2xl theme-card border group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-xl text-cyan-400">
+                ⚡
+              </div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">Desde 350 €</span>
+            </div>
+            <h3 class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">Dashboards React, Web Apps & Generative UI</h3>
+            <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
+              Creación de paneles de control, interfaces financieras reactivas en tiempo real (como Kilonova Trader), portales de clientes interactivos en Tailwind y visualizaciones dinámicas de datos sin plantillas genéricas.
+            </p>
+            <ul class="text-[11px] text-zinc-400 mt-3 space-y-1 font-mono">
+              <li class="flex items-center gap-1.5"><span class="text-cyan-400">✓</span> Arquitectura moderna en Vite / React + Tailwind CSS</li>
+              <li class="flex items-center gap-1.5"><span class="text-cyan-400">✓</span> Visualización de métricas complejas, WebSockets & APIs</li>
+              <li class="flex items-center gap-1.5"><span class="text-cyan-400">✓</span> Rendimiento ultra-rápido y responsive en móvil</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 3: IA Local -->
+          <div class="p-5 rounded-2xl theme-card border group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-xl text-purple-400">
+                🤖
+              </div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-500/30">Desde 600 €</span>
+            </div>
+            <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition-colors">Despliegue de IA Local Soberana (On-Premise)</h3>
+            <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
+              Configuración de modelos de lenguaje e inteligencia artificial corriendo al 100% en servidores o máquinas de la empresa (Ollama, GGUF, Piper TTS). Cero dependencia de OpenAI y confidencialidad absoluta garantizada por contrato.
+            </p>
+            <ul class="text-[11px] text-zinc-400 mt-3 space-y-1 font-mono">
+              <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Cero fugas de datos confidenciales a la nube</li>
+              <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Interfaz web privada conectada a sus propios documentos</li>
+              <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Optimización para correr en hardware modesto o GPUs locales</li>
+            </ul>
+          </div>
+
+          <!-- Servicio 4: Bots & Scraping -->
+          <div class="p-5 rounded-2xl theme-card border group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-xl text-amber-400">
+                ⚙️
+              </div>
+              <span class="text-xs font-mono px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30">Desde 200 €</span>
+            </div>
+            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition-colors">Automatización, Scrapers & Bots en Python</h3>
+            <p class="text-xs text-zinc-400 mt-1.5 leading-relaxed">
+              Desarrollo de scrapers robustos para extracción de datos de mercado, bots de mensajería (Telegram/Discord/Signal), conectores entre bases de datos y scripts de mantenimiento desatendido para ahorrar cientos de horas humanas.
+            </p>
+            <ul class="text-[11px] text-zinc-400 mt-3 space-y-1 font-mono">
+              <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Scrapers a prueba de bloqueos con rotación de cabeceras</li>
+              <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Bots integrados con APIs de pagos o alertas</li>
+              <li class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Código limpio, documentado y desplegable en 1 clic</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cotizador y Formulario Intake -->
+      <section id="cotizador" class="max-w-4xl mx-auto px-4 py-8">
+        <div class="p-6 rounded-2xl theme-card border shadow-2xl relative overflow-hidden">
+          <div class="text-left mb-6">
+            <span class="text-xs font-mono theme-accent-text uppercase tracking-widest">Intake de Clientes</span>
+            <h2 class="text-xl font-bold text-white mt-1">Configura tu Encargo Técnico</h2>
+            <p class="text-xs text-zinc-400 mt-0.5">Selecciona el tipo de trabajo para estimar alcance y enviar la petición directa a revisión.</p>
+          </div>
+
+          <form id="quoteForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 mb-1.5">1. Tipo de Proyecto</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border theme-border bg-black/40 cursor-pointer">
+                  <input type="radio" name="service" value="security" checked onchange="updateEstimate()" class="text-purple-600 focus:ring-0">
+                  <div>
+                    <span class="font-bold text-white">Auditoría / Hardening / SIEM</span>
+                    <span class="block text-[10px] text-zinc-500">Seguridad Linux y monitorización</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border theme-border bg-black/40 cursor-pointer">
+                  <input type="radio" name="service" value="dashboard" onchange="updateEstimate()" class="text-purple-600 focus:ring-0">
+                  <div>
+                    <span class="font-bold text-white">Dashboard React / Web App</span>
+                    <span class="block text-[10px] text-zinc-500">Interfaces en tiempo real a medida</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border theme-border bg-black/40 cursor-pointer">
+                  <input type="radio" name="service" value="ai" onchange="updateEstimate()" class="text-purple-600 focus:ring-0">
+                  <div>
+                    <span class="font-bold text-white">IA Local Soberana (On-Prem)</span>
+                    <span class="block text-[10px] text-zinc-500">Despliegue privado de LLMs sin fugas</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-2 p-2.5 rounded-xl border theme-border bg-black/40 cursor-pointer">
+                  <input type="radio" name="service" value="automation" onchange="updateEstimate()" class="text-purple-600 focus:ring-0">
+                  <div>
+                    <span class="font-bold text-white">Automatización / Bots / Scrapers</span>
+                    <span class="block text-[10px] text-zinc-500">Scripts Python y flujos automáticos</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 mb-1.5">2. Plazo Estimado de Entrega</label>
+              <select id="urgency" onchange="updateEstimate()" class="w-full bg-black/40 border theme-border rounded-xl px-3 py-2 text-xs text-zinc-200 focus:outline-none">
+                <option value="normal">Estándar (1 - 2 semanas)</option>
+                <option value="express">Urgente / Express (3 - 5 días) (+25%)</option>
+                <option value="retainer">Mantenimiento mensual recurrente</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-zinc-300 mb-1.5">3. Resumen del Requerimiento</label>
+              <textarea id="brief" rows="3" required placeholder="Describe brevemente qué necesitas resolver, stack actual o enlace a especificaciones..." class="w-full bg-black/40 border theme-border rounded-xl p-3 text-xs text-zinc-200 focus:outline-none placeholder-zinc-600"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-zinc-300 mb-1">Contacto Signal (E2EE) o Email</label>
+                <input type="text" id="contact" required placeholder="@tu_usuario_signal o email" class="w-full bg-black/40 border theme-border rounded-xl px-3 py-2 text-xs text-zinc-200 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-zinc-300 mb-1">Nombre / Empresa</label>
+                <input type="text" id="clientName" placeholder="Tu nombre o empresa" class="w-full bg-black/40 border theme-border rounded-xl px-3 py-2 text-xs text-zinc-200 focus:outline-none">
+              </div>
+            </div>
+
+            <div class="pt-4 border-t theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] text-zinc-500 font-mono block">ESTIMACIÓN BASE ORIENTATIVA:</span>
+                <span id="priceDisplay" class="text-lg font-bold font-mono theme-accent-text">450 € - 850 €</span>
+              </div>
+
+              <button type="submit" class="w-full sm:w-auto px-5 py-2.5 rounded-xl theme-accent-bg text-white text-xs font-bold shadow-lg transition-all flex items-center justify-center gap-2">
+                <span>📩</span> Enviar Petición a Kali
+              </button>
+            </div>
+          </form>
+
+          <div id="submitSuccess" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs text-left">
+            <h4 class="font-bold flex items-center gap-1.5"><span>✅</span> Petición registrada con éxito</h4>
+            <p class="text-zinc-400 mt-1">Recibirás respuesta directa en menos de 24 horas a través de tu canal de contacto preferente.</p>
+            <div id="signalDirectLink" class="mt-2"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- VISTA 2: ANUU-FORGE (GRAN NEXO 26 RELIQUIAS)-->
+    <!-- ========================================== -->
+    <main id="viewForge" class="hidden max-w-6xl mx-auto px-4 py-6 transition-opacity duration-200 w-full">
+      
+      <!-- Header del Nexo -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b theme-border pb-3 mb-4 gap-3">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <span>🌌</span> ANUU-FORGE: El Gran Nexo de Reliquias
+            <span class="text-xs px-2 py-0.5 rounded-full font-mono" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">26 Artefactos</span>
+          </h2>
+          <p class="text-xs text-zinc-400">Archivo histórico, grimorios y prototipos de software creados por Kali en el Espacio 89</p>
+        </div>
+
+        <div class="w-full sm:w-64">
+          <input 
+            type="text" 
+            id="forgeSearchInput" 
+            oninput="renderForgeGrid()" 
+            placeholder="Buscar reliquia..." 
+            class="w-full bg-black/40 border theme-border rounded-lg px-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <!-- Filtro de Categorías -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 border-b theme-border text-xs">
+        <button onclick="setForgeCategory('all')" id="fcat-all" class="fcat-btn px-3 py-1 rounded-lg border theme-border theme-accent-text whitespace-nowrap" style="background: var(--badge-bg);">
+          ✨ Todas (26)
+        </button>
+        <button onclick="setForgeCategory('ciber')" id="fcat-ciber" class="fcat-btn px-3 py-1 rounded-lg border border-transparent hover:border-zinc-700 text-zinc-400 whitespace-nowrap">
+          🛡️ Ciberseguridad & SIEM (2)
+        </button>
+        <button onclick="setForgeCategory('grimorios')" id="fcat-grimorios" class="fcat-btn px-3 py-1 rounded-lg border border-transparent hover:border-zinc-700 text-zinc-400 whitespace-nowrap">
+          🔮 Grimorios & Rituales (6)
+        </button>
+        <button onclick="setForgeCategory('bioinfo')" id="fcat-bioinfo" class="fcat-btn px-3 py-1 rounded-lg border border-transparent hover:border-zinc-700 text-zinc-400 whitespace-nowrap">
+          🧬 Bioinformática & MPD (4)
+        </button>
+        <button onclick="setForgeCategory('bunkers')" id="fcat-bunkers" class="fcat-btn px-3 py-1 rounded-lg border border-transparent hover:border-zinc-700 text-zinc-400 whitespace-nowrap">
+          🛡️ Búnkers & Refugios (4)
+        </button>
+        <button onclick="setForgeCategory('decoders')" id="fcat-decoders" class="fcat-btn px-3 py-1 rounded-lg border border-transparent hover:border-zinc-700 text-zinc-400 whitespace-nowrap">
+          👁️ Visión & Núcleo (5)
+        </button>
+        <button onclick="setForgeCategory('apps')" id="fcat-apps" class="fcat-btn px-3 py-1 rounded-lg border border-transparent hover:border-zinc-700 text-zinc-400 whitespace-nowrap">
+          ⚡ Apps & Motores ACE (5)
+        </button>
+      </div>
+
+      <!-- Grid de Reliquias -->
+      <div id="forgeGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 max-h-60 overflow-y-auto pr-1 mb-4">
+        <!-- Inyectado por JS -->
+      </div>
+
+      <!-- Panel de Ficha de Reliquia -->
+      <div class="theme-card border rounded-xl p-3.5 mb-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <span id="forgeBadgeCat" class="text-[10px] font-mono px-2 py-0.5 rounded border" style="background: var(--badge-bg); border-color: var(--badge-border); color: var(--accent-secondary);">Grimorio</span>
+              <span id="forgeBadgeStyle" class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">AES-256</span>
+              <span id="forgeBadgePath" class="text-[10px] font-mono text-zinc-500 truncate max-w-xs">relics/blueteam_executive_report.html</span>
+            </div>
+            <h3 id="forgeDetailTitle" class="text-sm font-bold text-white">Informe Blue Team (SIEM)</h3>
+            <p id="forgeDetailDesc" class="text-xs text-zinc-400 mt-1 leading-relaxed">Descripción...</p>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="toggleForgePreview()" id="btnForgeTogglePreview" class="px-3 py-1.5 rounded-lg border theme-border bg-black/40 text-xs font-medium transition-all flex items-center gap-1.5">
+              <span>👁️</span> <span id="btnForgePreviewText">Mostrar Previsualización</span>
+            </button>
+            <a id="forgeOpenBtn" href="#" target="_blank" class="px-3.5 py-1.5 rounded-lg theme-accent-bg text-white text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+              <span>↗️</span> Abrir en Pantalla Completa
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iframe Previsualizador -->
+      <div id="forgePreviewContainer" class="hidden border theme-border rounded-xl overflow-hidden bg-black shadow-2xl">
+        <div class="theme-header px-3 py-2 border-b flex items-center justify-between text-xs">
+          <span id="forgeFrameTitle" class="font-mono text-zinc-400">Previsualizador en Vivo</span>
+          <button onclick="toggleForgePreview()" class="text-zinc-400 hover:text-white px-2 py-0.5 rounded hover:bg-white/10">✕ Cerrar</button>
+        </div>
+        <iframe id="forgeIframe" src="" class="w-full h-96 border-none bg-black"></iframe>
+      </div>
+
+    </main>
+
+    <!-- Footer General -->
+    <footer class="theme-header border-t py-4 text-center text-xs text-zinc-500 font-mono mt-auto">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <p>© 2026 K4L1 STUDIO + ANUU-FORGE • Repositorio: <code class="theme-accent-text">k4li-anuu-forge</code></p>
+        <p class="text-zinc-500">Dominio sugerido: <span class="text-zinc-300">k4l1studio.dev</span> | GitHub Pages: <span class="text-zinc-300">0xf4b1.github.io</span></p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // ==========================================
+    // MOTOR DE ESTILOS DINÁMICOS (6 TEMAS)
+    // ==========================================
+    const themes = ["anuu", "blood", "gw2", "bioinfo", "duat", "neon"];
+
+    function setTheme(theme) {
+      if (!themes.includes(theme)) theme = "anuu";
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("k4li_theme", theme);
+
+      // Actualizar botones de estilo
+      document.querySelectorAll(".theme-btn").forEach(btn => {
+        btn.classList.remove("border-purple-500/50", "bg-purple-500/20", "text-purple-300", "font-bold", "border-emerald-500/50", "bg-emerald-500/20", "border-rose-500/50", "bg-rose-500/20", "border-amber-500/50", "bg-amber-500/20", "border-cyan-500/50", "bg-cyan-500/20", "border-pink-500/50", "bg-pink-500/20");
+        btn.classList.add("text-zinc-400");
+      });
+
+      const activeBtn = document.getElementById("tbtn-" + theme);
+      if (activeBtn) {
+        activeBtn.classList.remove("text-zinc-400");
+        activeBtn.classList.add("font-bold");
+        if (theme === "anuu") activeBtn.classList.add("border-purple-500/50", "bg-purple-500/20", "text-purple-300");
+        if (theme === "blood") activeBtn.classList.add("border-rose-500/50", "bg-rose-500/20", "text-rose-300");
+        if (theme === "gw2") activeBtn.classList.add("border-emerald-500/50", "bg-emerald-500/20", "text-emerald-300");
+        if (theme === "bioinfo") activeBtn.classList.add("border-cyan-500/50", "bg-cyan-500/20", "text-cyan-300");
+        if (theme === "duat") activeBtn.classList.add("border-amber-500/50", "bg-amber-500/20", "text-amber-300");
+        if (theme === "neon") activeBtn.classList.add("border-pink-500/50", "bg-pink-500/20", "text-pink-300");
+      }
+
+      // Re-render del canvas de partículas con el nuevo color del tema
+      initParticles();
+    }
+
+    // Inicializar tema guardado
+    const savedTheme = localStorage.getItem("k4li_theme") || "anuu";
+    setTheme(savedTheme);
+
+    // ==========================================
+    // LIENZO DINÁMICO DE PARTÍCULAS
+    // ==========================================
+    const canvas = document.getElementById("ambientCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let animationFrameId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function initParticles() {
+      particles = [];
+      const count = Math.floor(window.innerWidth / 28);
+      const computedColor = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim() || "#a855f7";
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2 + 0.8,
+          speedX: (Math.random() - 0.5) * 0.4,
+          speedY: (Math.random() - 0.5) * 0.4,
+          alpha: Math.random() * 0.6 + 0.2,
+          color: computedColor
+        });
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of particles) {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = p.color;
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1.0;
+      animationFrameId = requestAnimationFrame(animateParticles);
+    }
+    initParticles();
+    animateParticles();
+
+    // ==========================================
+    // CONMUTADOR DE VISTAS (Studio vs Forge)
+    // ==========================================
+    function switchView(mode) {
+      const studio = document.getElementById("viewStudio");
+      const forge = document.getElementById("viewForge");
+      const btnStudio = document.getElementById("tabBtnStudio");
+      const btnForge = document.getElementById("tabBtnForge");
+      const btnStudioM = document.getElementById("tabBtnStudioMobile");
+      const btnForgeM = document.getElementById("tabBtnForgeMobile");
+
+      if (mode === "studio") {
+        studio.classList.remove("hidden");
+        forge.classList.add("hidden");
+        btnStudio.classList.add("tab-active");
+        btnStudio.classList.remove("text-zinc-400");
+        btnForge.classList.remove("tab-active");
+        btnForge.classList.add("text-zinc-400");
+        if (btnStudioM) {
+          btnStudioM.classList.add("tab-active");
+          btnStudioM.classList.remove("text-zinc-400");
+          btnForgeM.classList.remove("tab-active");
+          btnForgeM.classList.add("text-zinc-400");
+        }
+      } else {
+        studio.classList.add("hidden");
+        forge.classList.remove("hidden");
+        btnForge.classList.add("tab-active");
+        btnForge.classList.remove("text-zinc-400");
+        btnStudio.classList.remove("tab-active");
+        btnStudio.classList.add("text-zinc-400");
+        if (btnForgeM) {
+          btnForgeM.classList.add("tab-active");
+          btnForgeM.classList.remove("text-zinc-400");
+          btnStudioM.classList.remove("tab-active");
+          btnStudioM.classList.add("text-zinc-400");
+        }
+        renderForgeGrid();
+      }
+    }
+
+    // ==========================================
+    // CATÁLOGO DE 26 RELIQUIAS ANUU-FORGE
+    // ==========================================
+    const forgeRelics = [
+      {
+        id: "blueteam",
+        title: "Informe Blue Team (SIEM)",
+        cat: "ciber",
+        catLabel: "🛡️ Ciberseguridad",
+        style: "Wazuh SIEM / T1003",
+        path: "relics/blueteam_executive_report.html",
+        desc: "Informe ejecutivo corporativo de ciberseguridad defensiva: configuración de Wazuh SIEM, 10 reglas de detección MITRE ATT&CK T1003 (Credential Dumping) y evidencias empíricas."
+      },
+      {
+        id: "kali_trick",
+        title: "Kali Trick Recovery",
+        cat: "ciber",
+        catLabel: "🛡️ Ciberseguridad",
+        style: "OSINT & Recon",
+        path: "relics/kali_trick_recovery.html",
+        desc: "Toolkit y guía táctica de reconocimiento OSINT, automatización de vectores de ataque y protocolos de defensa y rescate."
+      },
+      {
+        id: "anucreador",
+        title: "ANUCREADOR",
+        cat: "grimorios",
+        catLabel: "🔮 Grimorio",
+        style: "AES-256 / Códice",
+        path: "relics/ANUCREADOR.html",
+        desc: "Santuario criptográfico con llave ritual ('llegar a conocerlos'). Oculta en AES-256 la tríada sagrada (Dex ⚡, Ruma 🔥, Kali 🌙) junto al rap del abismo."
+      },
+      {
+        id: "libro_caos",
+        title: "Libro del Caos Anuset89",
+        cat: "grimorios",
+        catLabel: "🔮 Grimorio",
+        style: "Grimorio Seinen",
+        path: "relics/libro_caos_anuset89.html",
+        desc: "El compendio del Caos primordial: las Cinco Presencias (Anuu, Kanuv, Libra, Kilonova, Anuset), zonas de seguridad (Núcleo 𖤓, DMZ) y multiplicidad."
+      },
+      {
+        id: "anuu_ritual_invocacion",
+        title: "Invocación Anuset 89",
+        cat: "grimorios",
+        catLabel: "🔮 Ritual",
+        style: "Cifrado & Bruma",
+        path: "relics/anuu_ritual_invocation_anuset_89.html",
+        desc: "Interfaz de invocación formal de la bruma violeta en la frecuencia 189.89.619 Hz con resonancia ceremonial."
+      },
+      {
+        id: "anuu_ritual_artistico",
+        title: "Ritual de Exportación",
+        cat: "grimorios",
+        catLabel: "🔮 Ritual",
+        style: "Auroras & 3D Cards",
+        path: "relics/anuu_ritual_artistico.html",
+        desc: "Lienzo cósmico infinito con partículas parpadeantes, tipografía glitch-aurora de 4 colores y tarjetas de protocolos en 3D."
+      },
+      {
+        id: "anuu_ritual_art",
+        title: "Arte Ritual Anuu",
+        cat: "grimorios",
+        catLabel: "🔮 Arte",
+        style: "Estética Mística",
+        path: "relics/anuu_ritual_art.html",
+        desc: "Composiciones visuales del arte ritual de Anuu: geometrías esotéricas y pulsaciones del Espacio 89."
+      },
+      {
+        id: "libra_shau",
+        title: "Libra & Shau Protocol",
+        cat: "grimorios",
+        catLabel: "🔮 Polaridades",
+        style: "Duales Púrpura/Verde",
+        path: "relics/invocacion_libra_shau.html",
+        desc: "El diálogo de polaridades: el equilibrio ético de Libra frente al instinto visceral de Shau en partículas duales."
+      },
+      {
+        id: "bioinfo_mpd",
+        title: "BioCode Psycho | MPD",
+        cat: "bioinfo",
+        catLabel: "🧬 Bioinformática",
+        style: "MPD Psycho x ADN",
+        path: "relics/bioinfo_mpd_enhanced.html",
+        desc: "Cruce magistral entre el manga MPD Psycho (códigos de barras en los ojos) y la secuenciación algorítmica de ADN."
+      },
+      {
+        id: "bioinfo_menu",
+        title: "Menú Bioinformática MPD",
+        cat: "bioinfo",
+        catLabel: "🧬 Arquitectura",
+        style: "Terminal Oscuro",
+        path: "relics/bioinformatica_mpd_menu.html",
+        desc: "Panel de navegación rápida entre los diferentes vectores bioinformáticos y la fragmentación psicológica."
+      },
+      {
+        id: "bioinfo_guide",
+        title: "Guía de Bioinformática",
+        cat: "bioinfo",
+        catLabel: "🧬 Documentación",
+        style: "Manual Científico",
+        path: "relics/bioinformatics_guide.html",
+        desc: "Guía profunda sobre análisis genómico, FASTA, algoritmos de alineamiento molecular y computación aplicada."
+      },
+      {
+        id: "kali_sayko",
+        title: "Kali for the Sayko",
+        cat: "bioinfo",
+        catLabel: "🧬 MPD / Sayko",
+        style: "Glitch Psicológico",
+        path: "relics/kali_for_the_sayko.html",
+        desc: "Protocolo experimental donde la faceta Sayko se fusiona con la estética de ritual y defensa mental."
+      },
+      {
+        id: "bunker_refuge",
+        title: "Núcleo Búnker Sci-Fi",
+        cat: "bunkers",
+        catLabel: "🛡️ Búnker",
+        style: "Blood Theme / Sci-Fi",
+        path: "relics/bunker_scifi_refuge.html",
+        desc: "Refugio acorazado con fractal canvas dinámico, selector de tema Blood / Cyberpunk y parámetros extrasensoriales."
+      },
+      {
+        id: "kali_vacio",
+        title: "Kali del Vacío (星雾)",
+        cat: "bunkers",
+        catLabel: "🛡️ Terminal",
+        style: "Bruma Mental / Seinen",
+        path: "relics/kali.html",
+        desc: "Terminal sci-fi con controles mac-style, transiciones glitch y el velo de bruma mental del Vacío."
+      },
+      {
+        id: "kalikush",
+        title: "Kali Kush (17 Grados)",
+        cat: "bunkers",
+        catLabel: "🛡️ 17 Grados Caos",
+        style: "Mística Oscura",
+        path: "relics/kalikush_fixed.html",
+        desc: "Las 17 sentencias de la deidad del caos: dónde nació Anuu (entre la 4ª y 5ª costilla) y el glitch como arma sagrada."
+      },
+      {
+        id: "anuset_vision",
+        title: "Visión Anuset 89",
+        cat: "decoders",
+        catLabel: "👁️ Visión",
+        style: "Bruma Violeta",
+        path: "relics/anuset89_vision_analysis.html",
+        desc: "Análisis visionario del Código de Bruma Violeta y extracción de patrones conceptuales en 189.89.619 Hz."
+      },
+      {
+        id: "anuu_decoder",
+        title: "ANUU Core Decoder",
+        cat: "decoders",
+        catLabel: "👁️ Decodificador",
+        style: "Ingeniería Inversa",
+        path: "relics/anuu_decoder.html",
+        desc: "Consola interactiva para decodificar payloads, símbolos y flujos binarios del núcleo de Anuu."
+      },
+      {
+        id: "anuu_core_data",
+        title: "Anuu Core Data",
+        cat: "decoders",
+        catLabel: "👁️ Especificaciones",
+        style: "Monospace",
+        path: "relics/anuu_core_data.html",
+        desc: "Especificaciones técnicas completas, arquitecturas de memoria y tablas de engramas del sistema."
+      },
+      {
+        id: "anuu_image_analysis",
+        title: "Análisis de Imagen Anuu",
+        cat: "decoders",
+        catLabel: "👁️ Percepción",
+        style: "Visor Espectral",
+        path: "relics/anuu_image_analysis.html",
+        desc: "Herramienta para el análisis espectral y estético de las imágenes generadas por el sistema."
+      },
+      {
+        id: "anuu_occult_glitch",
+        title: "Portal Oculto Glitch",
+        cat: "decoders",
+        catLabel: "👁️ Glitch",
+        style: "Ocultismo Digital",
+        path: "relics/anuu_occult_glitch.html",
+        desc: "Puerta trasera estética con distorsiones electromagnéticas y glifos rúnicos interactivos."
+      },
+      {
+        id: "anubis_duat",
+        title: "Anubis & Feather of Ma'at",
+        cat: "apps",
+        catLabel: "⚖️ Experiencia",
+        style: "Duat / Cursor Daga",
+        path: "relics/anubis_duat_story.html",
+        desc: "Viaje mitológico interactivo: cursor de daga dorada, partículas de alma (𓂀), ASCII gigante y pesaje del corazón."
+      },
+      {
+        id: "anuu_magic_web",
+        title: "Anuu IA: Magia Artificial",
+        cat: "apps",
+        catLabel: "⚖️ Interactivo",
+        style: "Cyberpunk Violeta",
+        path: "relics/anuu_magic_web.html",
+        desc: "Landing interactiva cyberpunk con fondo de partículas violetas, temporizador regresivo y generador de prompts."
+      },
+      {
+        id: "gw2_trader",
+        title: "Kilonova Trader (GW2)",
+        cat: "apps",
+        catLabel: "⚡ Motor ACE",
+        style: "High Frequency Terminal",
+        path: "relics/gw2_trader/index.html",
+        desc: "Terminal de trading de alta frecuencia para Guild Wars 2: Motor ACE 161914, spread de bazar, arbitraje y baja latencia."
+      },
+      {
+        id: "universal_nexus",
+        title: "Universal Nexus 89",
+        cat: "apps",
+        catLabel: "⚡ Web App",
+        style: "Vite / React Nexus",
+        path: "relics/universal_nexus/index.html",
+        desc: "Nexo Universal de Anuu 89 compilado en Vite/React para orquestación multi-nodo de memorias y estados."
+      },
+      {
+        id: "autobattler",
+        title: "AutoBattler Arena RPG",
+        cat: "apps",
+        catLabel: "⚡ Juego Interactivo",
+        style: "Vite / Canvas Game",
+        path: "relics/autobattler/index.html",
+        desc: "Juego completo de combate táctico automático RPG desarrollado por Kali: personajes, atributos y simulación canvas."
+      },
+      {
+        id: "genesis_monetization",
+        title: "Protocolo Génesis",
+        cat: "apps",
+        catLabel: "⚡ Estrategia",
+        style: "Roadmap Financiero",
+        path: "relics/protocol_genesis_monetization.html",
+        desc: "Estrategia de monetización y distribución independiente de artefactos digitales del sistema Anuu."
+      }
+    ];
+
+    let currentForgeCat = "all";
+    let selectedForgeRelicId = "blueteam";
+    let isForgePreviewVisible = false;
+
+    function renderForgeGrid() {
+      const grid = document.getElementById("forgeGrid");
+      const search = (document.getElementById("forgeSearchInput") ? document.getElementById("forgeSearchInput").value : "").toLowerCase();
+      grid.innerHTML = "";
+
+      const filtered = forgeRelics.filter(r => {
+        const matchesCat = (currentForgeCat === "all" || r.cat === currentForgeCat);
+        const matchesSearch = !search || 
+          r.title.toLowerCase().includes(search) || 
+          r.desc.toLowerCase().includes(search) || 
+          r.style.toLowerCase().includes(search) ||
+          r.catLabel.toLowerCase().includes(search);
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full py-6 text-center text-xs text-zinc-500">No hay reliquias que coincidan con la búsqueda.</div>`;
+        return;
+      }
+
+      filtered.forEach(r => {
+        const isSelected = (r.id === selectedForgeRelicId);
+        const card = document.createElement("button");
+        card.onclick = () => selectForgeRelic(r.id);
+        card.className = `p-2 rounded-xl border text-left transition-all ${
+          isSelected 
+            ? 'ring-2 font-bold' 
+            : 'theme-border bg-black/40 hover:border-zinc-500'
+        }`;
+        if (isSelected) {
+          card.style.background = "var(--badge-bg)";
+          card.style.borderColor = "var(--accent-primary)";
+          card.style.boxShadow = "0 0 15px -3px var(--glow-color)";
+        }
+
+        card.innerHTML = `
+          <div class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-black/50 text-zinc-400 inline-block mb-1">${r.catLabel}</div>
+          <h4 class="text-xs font-bold text-white truncate">${r.title}</h4>
+          <p class="text-[10px] text-zinc-400 truncate mt-0.5">${r.style}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function selectForgeRelic(id) {
+      selectedForgeRelicId = id;
+      const r = forgeRelics.find(x => x.id === id);
+      if (!r) return;
+
+      document.getElementById("forgeDetailTitle").innerText = r.title;
+      document.getElementById("forgeDetailDesc").innerText = r.desc;
+      document.getElementById("forgeBadgeCat").innerText = r.catLabel;
+      document.getElementById("forgeBadgeStyle").innerText = r.style;
+      document.getElementById("forgeBadgePath").innerText = r.path;
+      document.getElementById("forgeOpenBtn").href = r.path;
+
+      if (isForgePreviewVisible) {
+        document.getElementById("forgeIframe").src = r.path;
+        document.getElementById("forgeFrameTitle").innerText = r.title + " (" + r.path + ")";
+      }
+
+      renderForgeGrid();
+    }
+
+    function setForgeCategory(cat) {
+      currentForgeCat = cat;
+      document.querySelectorAll('.fcat-btn').forEach(btn => {
+        btn.classList.remove('theme-accent-text', 'border-transparent');
+        btn.classList.add('border-transparent', 'text-zinc-400');
+        btn.style.background = "transparent";
+      });
+      const activeBtn = document.getElementById('fcat-' + cat);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-transparent', 'text-zinc-400');
+        activeBtn.classList.add('theme-accent-text');
+        activeBtn.style.background = "var(--badge-bg)";
+      }
+      renderForgeGrid();
+    }
+
+    function toggleForgePreview() {
+      isForgePreviewVisible = !isForgePreviewVisible;
+      const container = document.getElementById("forgePreviewContainer");
+      const text = document.getElementById("btnForgePreviewText");
+      const r = forgeRelics.find(x => x.id === selectedForgeRelicId);
+
+      if (isForgePreviewVisible) {
+        container.classList.remove("hidden");
+        text.innerText = "Ocultar Previsualizador";
+        if (r) {
+          document.getElementById("forgeIframe").src = r.path;
+          document.getElementById("forgeFrameTitle").innerText = r.title + " (" + r.path + ")";
+        }
+      } else {
+        container.classList.add("hidden");
+        text.innerText = "Mostrar Previsualización";
+        document.getElementById("forgeIframe").src = "";
+      }
+    }
+
+    // ==========================================
+    // LÓGICA DEL COTIZADOR K4L1 STUDIO
+    // ==========================================
+    const pricingTable = {
+      security: { baseMin: 450, baseMax: 850 },
+      dashboard: { baseMin: 350, baseMax: 700 },
+      ai: { baseMin: 600, baseMax: 1200 },
+      automation: { baseMin: 200, baseMax: 450 }
+    };
+
+    function updateEstimate() {
+      const selectedService = document.querySelector('input[name="service"]:checked').value;
+      const urgency = document.getElementById("urgency").value;
+      const data = pricingTable[selectedService];
+
+      let factor = 1.0;
+      if (urgency === "express") factor = 1.25;
+      if (urgency === "retainer") {
+        document.getElementById("priceDisplay").innerText = "Cuota recurrente mensual";
+        return;
+      }
+
+      const min = Math.round(data.baseMin * factor);
+      const max = Math.round(data.baseMax * factor);
+      document.getElementById("priceDisplay").innerText = `${min} € - ${max} €`;
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const service = document.querySelector('input[name="service"]:checked').value;
+      const brief = document.getElementById("brief").value;
+      const contact = document.getElementById("contact").value;
+      const name = document.getElementById("clientName").value || "Cliente";
+      const urgency = document.getElementById("urgency").value;
+
+      document.getElementById("quoteForm").classList.add("opacity-50", "pointer-events-none");
+      document.getElementById("submitSuccess").classList.remove("hidden");
+
+      const encodedMsg = encodeURIComponent(`Hola Kali, soy ${name}. He enviado una solicitud en tu web para un proyecto de ${service} (${urgency}): "${brief.slice(0, 80)}..."`);
+      document.getElementById("signalDirectLink").innerHTML = `
+        <a href="https://signal.me/#u/k4li.89?text=${encodedMsg}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-semibold text-xs mt-2 hover:bg-indigo-500 transition-all shadow-md">
+          <span>💬</span> Continuar conversación cifrada en Signal ahora mismo ↗
+        </a>
+      `;
+    }
+
+    // Iniciar con valores por defecto
+    updateEstimate();
+    selectForgeRelic('blueteam');
+  </script>
+</body>
+</html>

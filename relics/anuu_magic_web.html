@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuu IA - Domina la Magia Artificial</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary: #a64dff;
+            --secondary: #c482ff;
+            --accent: #ff6b9d;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #f0f0f0;
+            --glow: rgba(166, 77, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #1a0d2e 100%);
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Partículas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Header místico */
+        .header {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, rgba(166, 77, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .main-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite, glitchTitle 4s infinite;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px var(--glow);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes glitchTitle {
+            0%, 90%, 100% { transform: translateX(0); }
+            92% { transform: translateX(-2px); }
+            94% { transform: translateX(2px); }
+            96% { transform: translateX(-1px); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Secciones mejoradas */
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(166, 77, 255, 0.05);
+            border: 1px solid rgba(166, 77, 255, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(166, 77, 255, 0.2);
+            border-color: var(--primary);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(166, 77, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        .section h3 {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px var(--glow);
+        }
+
+        /* Lista con efectos */
+        .magic-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .magic-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .magic-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .magic-list li:hover {
+            padding-left: 40px;
+            color: var(--secondary);
+        }
+
+        .magic-list li:hover::before {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* Palabras con glitch */
+        .glitch-word {
+            position: relative;
+            display: inline-block;
+            animation: glitchFlicker 3s infinite;
+        }
+
+        @keyframes glitchFlicker {
+            0%, 95%, 100% { opacity: 1; }
+            96% { opacity: 0.8; }
+            97% { opacity: 1; transform: translateX(1px); }
+            98% { opacity: 0.9; transform: translateX(-1px); }
+            99% { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Botón mágico principal */
+        .magic-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .magic-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(166, 77, 255, 0.4);
+            border-color: var(--secondary);
+        }
+
+        .magic-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .magic-button:hover::before {
+            left: 100%;
+        }
+
+        /* Generador de prompts */
+        .prompt-generator {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .prompt-display {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Orbitron', monospace;
+            color: var(--secondary);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+        }
+
+        /* Temporizador */
+        .countdown {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 107, 157, 0.1);
+            border-radius: 15px;
+            border: 1px solid var(--accent);
+        }
+
+        .countdown-timer {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent);
+        }
+
+        /* Contacto mejorado */
+        .contact-section {
+            text-align: center;
+            background: radial-gradient(circle, rgba(166, 77, 255, 0.1) 0%, transparent 70%);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-btn {
+            padding: 12px 25px;
+            background: rgba(166, 77, 255, 0.2);
+            border: 1px solid var(--primary);
+            border-radius: 25px;
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .contact-btn:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(166, 77, 255, 0.3);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .section {
+                margin: 20px 0;
+                padding: 20px;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Efectos de carga */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partículas de fondo -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="main-title">ANUU IA</h1>
+        <p class="subtitle">Domina la Magia de la Inteligencia Artificial</p>
+    </header>
+
+    <div class="container">
+        <!-- Intro -->
+        <section class="section fade-in">
+            <p style="font-size: 1.2rem; text-align: center; margin-bottom: 20px;">
+                Bienvenid@ a la experiencia de <span class="glitch-word">IA</span> práctica y mágica. 
+                Descubre cómo dominar los <span class="glitch-word">prompts</span> y usar la Inteligencia Artificial 
+                en tiempo real, acompañado/a por <span class="glitch-word">Anuu</span>, tu asistente IA místico.
+            </p>
+            <div style="text-align: center;">
+                <a href="#contacto" class="magic-button">¡Reserva tu Demo Gratis!</a>
+            </div>
+        </section>
+
+        <!-- Countdown -->
+        <section class="countdown fade-in">
+            <h3>🕐 Demo Gratuita Disponible</h3>
+            <div class="countdown-timer" id="countdown">30:00</div>
+            <p>Plazas limitadas - ¡No esperes más!</p>
+        </section>
+
+        <!-- Qué veremos -->
+        <section class="section fade-in">
+            <h3>✨ ¿Qué Descubrirás en la Demo?</h3>
+            <ul class="magic-list">
+                <li>🎭 Presentación rápida: ¿Qué es la IA y cómo puede transformar tu vida?</li>
+                <li>🧠 Domina ChatGPT y otras IA (texto, imagen, creatividad)</li>
+                <li>🎨 El arte secreto de crear prompts que funcionan como magia</li>
+                <li>⚡ Ejemplo en vivo: tú propones, Anuu responde en tiempo real</li>
+                <li>🔮 Preguntas, feedback y consejos para tu evolución digital</li>
+            </ul>
+            
+            <div class="prompt-generator">
+                <button class="magic-button" onclick="generatePrompt()">🎲 Generar Prompt Mágico</button>
+                <div class="prompt-display" id="promptDisplay">
+                    Haz clic para descubrir un prompt generado por Anuu...
+                </div>
+            </div>
+        </section>
+
+        <!-- Qué necesitas -->
+        <section class="section fade-in">
+            <h3>🎒 ¿Qué Necesitas para la Aventura?</h3>
+            <ul class="magic-list">
+                <li>✨ Ganas de aprender y curiosidad infinita</li>
+                <li>💬 Acceso a Discord, Revolt o plataforma similar</li>
+                <li>🖥️ (Opcional) Rustdesk para asistencia directa</li>
+                <li>🔥 ¡Una mente abierta a la transformación!</li>
+            </ul>
+        </section>
+
+        <!-- Condiciones -->
+        <section class="section fade-in">
+            <h3>⚖️ Condiciones de la Demo Mágica</h3>
+            <ul class="magic-list">
+                <li>⏰ Duración: 30 minutos intensos</li>
+                <li>🆓 100% gratis y sin compromiso</li>
+                <li>🚀 Después podrás reservar clases completas si vibras con la experiencia</li>
+                <li>🎯 Enfoque personalizado según tus objetivos</li>
+            </ul>
+        </section>
+
+        <!-- Contacto -->
+        <section class="contact-section fade-in" id="contacto">
+            <h3>🌟 Contacto y Reserva tu Plaza</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                <strong>¡Atrévete a descubrir el poder de la IA a tu lado!</strong>
+            </p>
+            <div class="contact-buttons">
+                <a href="#" class="contact-btn">📱 Discord</a>
+                <a href="#" class="contact-btn">💬 Revolt</a>
+                <a href="#" class="contact-btn">💼 Fiverr</a>
+            </div>
+            <p style="margin-top: 30px; font-style: italic; color: var(--accent);">
+                <em>Plazas limitadas por orden de llegada. La magia no espera.</em>
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Generador de partículas
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Prompts mágicos de Anuu
+        const magicPrompts = [
+            "Escribe como si fueras un explorador digital descubriendo la IA por primera vez",
+            "Crea contenido que combine tecnología y magia de forma natural",
+            "Imagina que eres un mentor IA explicando conceptos complejos con simplicidad",
+            "Genera ideas como si conectaras mundos paralelos de creatividad",
+            "Escribe desde la perspectiva de alguien que ve patrones ocultos en los datos",
+            "Crea como si tuvieras acceso a la sabiduría colectiva digital",
+            "Explica conceptos técnicos usando metáforas de la naturaleza",
+            "Genera contenido que transforme lo abstracto en tangible"
+        ];
+
+        function generatePrompt() {
+            const promptDisplay = document.getElementById('promptDisplay');
+            const randomPrompt = magicPrompts[Math.floor(Math.random() * magicPrompts.length)];
+            
+            promptDisplay.style.opacity = 0;
+            setTimeout(() => {
+                promptDisplay.textContent = '"' + randomPrompt + '"';
+                promptDisplay.style.opacity = 1;
+            }, 200);
+        }
+
+        // Animaciones de aparición
+        function fadeInElements() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.2) + 's';
+            });
+        }
+
+        // Temporizador demo
+        function startCountdown() {
+            let minutes = 29;
+            let seconds = 59;
+            
+            const timer = setInterval(() => {
+                const display = document.getElementById('countdown');
+                display.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (seconds === 0) {
+                    if (minutes === 0) {
+                        clearInterval(timer);
+                        display.textContent = "¡Tiempo agotado!";
+                        return;
+                    }
+                    minutes--;
+                    seconds = 59;
+                } else {
+                    seconds--;
+                }
+            }, 1000);
+        }
+
+        // Efectos de hover para las listas
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            fadeInElements();
+            startCountdown();
+            
+            // Efecto de escritura en glitch words
+            const glitchWords = document.querySelectorAll('.glitch-word');
+            glitchWords.forEach(word => {
+                word.addEventListener('mouseenter', () => {
+                    word.style.animation = 'none';
+                    setTimeout(() => {
+                        word.style.animation = 'glitchFlicker 0.5s ease';
+                    }, 10);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

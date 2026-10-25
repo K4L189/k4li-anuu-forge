@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Hat Recovery Protocol - Anuu Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: linear-gradient(90deg, 
+                rgba(0, 255, 65, 0.1) 1px, 
+                transparent 1px
+            );
+            background-size: 20px 20px;
+            animation: matrixScroll 20s linear infinite;
+        }
+        
+        @keyframes matrixScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
+        }
+        
+        .hacker-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .line {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                transparent, 
+                #00ff41, 
+                transparent
+            );
+            animation: hackerScan 3s linear infinite;
+        }
+        
+        @keyframes hackerScan {
+            0% { left: -2px; opacity: 0; }
+            50% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: hackIn 1.5s ease-out 0.5s both;
+        }
+        
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #00ff41;
+            text-shadow: 0 0 20px #00ff41;
+            margin-bottom: 0.5rem;
+            animation: glitchText 4s ease-in-out infinite;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #40ff80;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+        
+        .anuu-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #00ff41, #40ff80);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes glitchText {
+            0%, 90%, 100% { transform: translate(0); }
+            95% { transform: translate(-2px, 2px); }
+            97% { transform: translate(2px, -2px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .terminal {
+            background: rgba(0, 20, 0, 0.9);
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+            opacity: 0;
+            animation: hackIn 1s ease-out both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal:nth-child(2) { animation-delay: 1s; }
+        .terminal:nth-child(3) { animation-delay: 1.3s; }
+        .terminal:nth-child(4) { animation-delay: 1.6s; }
+        .terminal:nth-child(5) { animation-delay: 1.9s; }
+        .terminal:nth-child(6) { animation-delay: 2.2s; }
+        
+        .terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 255, 65, 0.1), 
+                transparent
+            );
+            animation: terminalSweep 6s ease-in-out infinite;
+        }
+        
+        @keyframes terminalSweep {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+        
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 0.5rem;
+        }
+        
+        .terminal-icon {
+            color: #00ff41;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .terminal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            color: #40ff80;
+            font-weight: 700;
+        }
+        
+        .command-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .command-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: rgba(0, 255, 65, 0.05);
+            border-left: 3px solid #00ff41;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .command-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+        
+        .command-prompt {
+            color: #00ff41;
+            font-weight: 600;
+            margin-right: 0.8rem;
+            font-size: 1rem;
+            min-width: 30px;
+        }
+        
+        .command-text {
+            color: #40ff80;
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #00ff41;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .code-block::before {
+            content: '> EJECUTANDO...';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: rgba(0, 20, 0, 1);
+            padding: 0 10px;
+            font-size: 0.8rem;
+            color: #40ff80;
+        }
+        
+        .highlight {
+            color: #ffff00;
+            background: rgba(255, 255, 0, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .warning {
+            background: rgba(255, 100, 0, 0.1);
+            border: 1px solid #ff6400;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            color: #ff9640;
+        }
+        
+        .warning::before {
+            content: '⚠️ PRECAUCIÓN: ';
+            font-weight: 600;
+            color: #ff6400;
+        }
+        
+        .success {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            color: #40ff80;
+        }
+        
+        .success::before {
+            content: '✅ ÉXITO: ';
+            font-weight: 600;
+            color: #00ff41;
+        }
+        
+        .anuu-signature {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(0, 255, 65, 0.05);
+            border: 2px dashed #00ff41;
+            border-radius: 15px;
+            opacity: 0;
+            animation: hackIn 1s ease-out 3s both;
+        }
+        
+        .signature-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            color: #00ff41;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00ff41;
+        }
+        
+        .signature-text {
+            color: #40ff80;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .glitch-text {
+            font-style: italic;
+            color: #80ff80;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes hackIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 255, 65, 0.2);
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #00ff41, #40ff80);
+            width: 0%;
+            animation: progressLoad 3s ease-out infinite;
+        }
+        
+        @keyframes progressLoad {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    <div class="hacker-lines">
+        <div class="line" style="animation-delay: 0s;"></div>
+        <div class="line" style="animation-delay: 1s;"></div>
+        <div class="line" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">WHITE HAT RECOVERY</h1>
+            <p class="subtitle">— ETHICAL HACKING PROTOCOL —</p>
+            <div class="anuu-badge">ANUU CORE ACTIVATED</div>
+        </div>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-icon">🔍</div>
+                <h2 class="terminal-title">RECONNAISSANCE PHASE</h2>
+            </div>
+            
+            <ul class="command-list">
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Analizar <span class="highlight">metadatos</span> de la cuenta comprometida @nooa.ldw.6296</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Verificar <span class="highlight">timestamps</span> de cambios recientes en el perfil</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Documentar <span class="highlight">evidencia forense</span> con capturas y hasheo SHA-256</span>
+                </li>
+            </ul>
+            
+            <div class="code-block">
+# Documentación forense
+echo "Cuenta original: @nnooaahh.__" >> evidence.log
+echo "Cuenta comprometida: @nooa.ldw.6296" >> evidence.log
+echo "Timestamp: $(date)" >> evidence.log
+echo "Hash de evidencia: $(sha256sum screenshots/*.png)" >> evidence.log
+            </div>
+        </div>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-icon">🔒</div>
+                <h2 class="terminal-title">OSINT INTELLIGENCE</h2>
+            </div>
+            
+            <ul class="command-list">
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Rastrear <span class="highlight">conexiones cruzadas</span> entre cuentas (Instagram linkado)</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Analizar <span class="highlight">patrones de comportamiento</span> del atacante</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Crear <span class="highlight">fingerprint digital</span> de la cuenta legítima</span>
+                </li>
+            </ul>
+            
+            <div class="success">
+                Ventaja encontrada: El atacante mantiene el Instagram original vinculado, esto es evidencia crucial de legitimidad.
+            </div>
+        </div>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-icon">⚡</div>
+                <h2 class="terminal-title">ATTACK VECTOR AUTOMATION</h2>
+            </div>
+            
+            <ul class="command-list">
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Script de <span class="highlight">reportes coordinados</span> desde múltiples IPs</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Automatizar <span class="highlight">envío de evidencia</span> a diferentes canales de soporte</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Crear <span class="highlight">red distribuida</span> de reportes del clan Kilonova</span>
+                </li>
+            </ul>
+            
+            <div class="code-block">
+# Automatización de reportes éticos
+for ip in $(cat proxy_list.txt); do
+    curl -X POST \
+    -H "User-Agent: KilonovaBot/1.0" \
+    -d "report_type=identity_theft" \
+    -d "target_account=@nooa.ldw.6296" \
+    -d "original_account=@nnooaahh.__" \
+    --proxy $ip \
+    "https://tiktok.com/api/report"
+    sleep $((RANDOM % 30 + 60))  # Random delay 1-1.5 min
+done
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-icon">🛡️</div>
+                <h2 class="terminal-title">SOCIAL ENGINEERING DEFENSE</h2>
+            </div>
+            
+            <ul class="command-list">
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Crear <span class="highlight">narrativa convincente</span> con evidencia técnica sólida</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Contactar <span class="highlight">influencers verificados</span> para amplificación</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Activar <span class="highlight">red de contactos</span> en diferentes plataformas</span>
+                </li>
+            </ul>
+            
+            <div class="warning">
+                Usar solo técnicas éticas. No intentar acceder a sistemas sin autorización. Mantener todo dentro del marco legal.
+            </div>
+        </div>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-icon">📡</div>
+                <h2 class="terminal-title">ESCALATION PROTOCOL</h2>
+            </div>
+            
+            <ul class="command-list">
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Contactar <span class="highlight">prensa especializada</span> en ciberseguridad</span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Notificar a <span class="highlight">organizaciones de protección digital</span></span>
+                </li>
+                <li class="command-item">
+                    <span class="command-prompt">$></span>
+                    <span class="command-text">Preparar <span class="highlight">reporte técnico</span> para autoridades competentes</span>
+                </li>
+            </ul>
+            
+            <div class="success">
+                Persistencia + Evidencia + Coordinación = Recuperación exitosa
+            </div>
+        </div>
+        
+        <div class="anuu-signature">
+            <h3 class="signature-title">PROTOCOLO ANUU COMPLETADO</h3>
+            <div class="signature-text">
+                <strong>White hat hacking aplicado con éxito.</strong><br>
+                Técnicas éticas para maximizar probabilidad de recuperación.<br>
+                La persistencia coordinada siempre vence al caos individual.
+            </div>
+            <div class="glitch-text">
+                "sana el mundo anuu" - glitch mágico áureo activado 🐱✨
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Efecto Matrix dinámico
+        function createMatrixEffect() {
+            const chars = '01アヌーカリノア♎🌿💫';
+            const matrixContainer = document.querySelector('.matrix-bg');
+            
+            for (let i = 0; i < 50; i++) {
+                const span = document.createElement('span');
+                span.textContent = chars[Math.floor(Math.random() * chars.length)];
+                span.style.position = 'absolute';
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.color = `rgba(0, 255, 65, ${Math.random() * 0.5 + 0.1})`;
+                span.style.fontSize = Math.random() * 14 + 8 + 'px';
+                span.style.animation = `matrixDrop ${Math.random() * 3 + 2}s linear infinite`;
+                span.style.animationDelay = Math.random() * 2 + 's';
+                matrixContainer.appendChild(span);
+            }
+        }
+        
+        // Efecto de typing en código
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+        
+        // Efectos de hover en terminales
+        document.querySelectorAll('.terminal').forEach(terminal => {
+            terminal.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 0 40px rgba(0, 255, 65, 0.5)';
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            terminal.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 0 30px rgba(0, 255, 65, 0.3)';
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // Glitch aleatorio en el título
+        setInterval(() => {
+            const title = document.querySelector('.title');
+            const originalText = title.textContent;
+            const glitchChars = 'ⱧⱠƗŦɆ ⱨⱥŧ ɍɇȼøvɇɍɏ';
+            
+            if (Math.random() < 0.1) {
+                title.textContent = glitchChars;
+                setTimeout(() => {
+                    title.textContent = originalText;
+                }, 100);
+            }
+        }, 2000);
+        
+        // Inicializar efectos
+        createMatrixEffect();
+        
+        // Agregar CSS dinámico para efecto Matrix
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes matrixDrop {
+                0% { transform: translateY(-100vh); opacity: 1; }
+                100% { transform: translateY(100vh); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

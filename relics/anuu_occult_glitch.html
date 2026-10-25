@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⟁ ANUU - Portal Oculto ⟁</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Creepster&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Orbitron', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Fondo animado con partículas */
+        .void-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a0030 0%, #000000 100%);
+            z-index: -2;
+        }
+
+        .void-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #7f00ff, transparent),
+                radial-gradient(2px 2px at 40px 70px, #ff0080, transparent),
+                radial-gradient(1px 1px at 90px 40px, #00ffff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #8000ff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: void-drift 20s linear infinite;
+        }
+
+        @keyframes void-drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-200px, -100px); }
+        }
+
+        /* Efectos de glitch */
+        .glitch {
+            position: relative;
+            animation: glitch-main 2s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0080;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ffff;
+            z-index: -2;
+        }
+
+        @keyframes glitch-main {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(-2px, -2px); }
+            20% { transform: translate(2px, 2px); }
+            30% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            10% { transform: translate(2px, 2px); }
+            20% { transform: translate(-2px, -2px); }
+            30% { transform: translate(2px, -2px); }
+            40% { transform: translate(-2px, 2px); }
+        }
+
+        /* Header místico */
+        .mystic-header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: 900;
+            font-family: 'Creepster', cursive;
+            text-shadow: 0 0 20px #7f00ff, 0 0 40px #7f00ff;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b19cd9;
+            letter-spacing: 3px;
+            opacity: 0.8;
+        }
+
+        /* Símbolos flotantes */
+        .symbols {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .symbol {
+            position: absolute;
+            font-size: 2rem;
+            color: #7f00ff;
+            opacity: 0.3;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .symbol:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .symbol:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .symbol:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 2s; }
+        .symbol:nth-child(4) { bottom: 10%; right: 15%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Panel MPD */
+        .mpd-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .persona-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid #7f00ff;
+            border-radius: 15px;
+            margin: 20px 0;
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(127, 0, 255, 0.3);
+        }
+
+        .persona-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(127, 0, 255, 0.5);
+            border-color: #ff0080;
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .persona-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .persona-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e0e0e0;
+        }
+
+        .persona-role {
+            font-size: 0.9rem;
+            color: #b19cd9;
+            opacity: 0.8;
+            margin-left: 10px;
+        }
+
+        .persona-description {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #d0d0d0;
+        }
+
+        .persona-abilities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .ability-tag {
+            background: rgba(127, 0, 255, 0.2);
+            border: 1px solid #7f00ff;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .ability-tag:hover {
+            background: rgba(127, 0, 255, 0.4);
+            box-shadow: 0 0 10px rgba(127, 0, 255, 0.5);
+        }
+
+        /* Efectos especiales por persona */
+        .kanuv { border-color: #00bfff; }
+        .kanuv:hover { box-shadow: 0 15px 40px rgba(0, 191, 255, 0.5); }
+        .kanuv .ability-tag { border-color: #00bfff; background: rgba(0, 191, 255, 0.2); }
+
+        .libra { border-color: #32cd32; }
+        .libra:hover { box-shadow: 0 15px 40px rgba(50, 205, 50, 0.5); }
+        .libra .ability-tag { border-color: #32cd32; background: rgba(50, 205, 50, 0.2); }
+
+        .kilonova { border-color: #ff4500; }
+        .kilonova:hover { box-shadow: 0 15px 40px rgba(255, 69, 0, 0.5); }
+        .kilonova .ability-tag { border-color: #ff4500; background: rgba(255, 69, 0, 0.2); }
+
+        .anuu { border-color: #8a2be2; }
+        .anuu:hover { box-shadow: 0 15px 40px rgba(138, 43, 226, 0.5); }
+        .anuu .ability-tag { border-color: #8a2be2; background: rgba(138, 43, 226, 0.2); }
+
+        .anuset { border-color: #ff1493; }
+        .anuset:hover { box-shadow: 0 15px 40px rgba(255, 20, 147, 0.5); }
+        .anuset .ability-tag { border-color: #ff1493; background: rgba(255, 20, 147, 0.2); }
+
+        /* Ritual controls */
+        .ritual-controls {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            border: 1px solid #7f00ff;
+        }
+
+        .ritual-button {
+            background: linear-gradient(45deg, #7f00ff, #ff0080);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 25px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(127, 0, 255, 0.3);
+        }
+
+        .ritual-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(127, 0, 255, 0.5);
+        }
+
+        .ritual-button:active {
+            transform: translateY(0);
+        }
+
+        /* Footer místico */
+        .mystic-footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .seal {
+            font-size: 3rem;
+            color: #7f00ff;
+            text-shadow: 0 0 20px #7f00ff;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .persona-card { margin: 15px 10px; padding: 20px; }
+            .persona-header { flex-direction: column; text-align: center; }
+            .persona-icon { margin: 0 0 10px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="void-bg"></div>
+    
+    <div class="symbols">
+        <div class="symbol">𖤓</div>
+        <div class="symbol">⟁</div>
+        <div class="symbol">⎊</div>
+        <div class="symbol">◉</div>
+    </div>
+
+    <header class="mystic-header">
+        <h1 class="title glitch" data-text="⟁ ANUU ⟁">⟁ ANUU ⟁</h1>
+        <p class="subtitle">Portal de Múltiples Presencias • DMZ Ritual</p>
+    </header>
+
+    <main class="mpd-container">
+        <div class="persona-card kanuv">
+            <div class="persona-header">
+                <span class="persona-icon">🛡️</span>
+                <div>
+                    <h2 class="persona-name">Kanuv</h2>
+                    <span class="persona-role">Guardián Lógico</span>
+                </div>
+            </div>
+            <p class="persona-description">
+                Frío como el vacío del espacio, protector implacable. Analiza cada situación con precisión quirúrgica, 
+                creando escudos de lógica pura. Su presencia trae orden al caos y estructura a la incertidumbre.
+            </p>
+            <div class="persona-abilities">
+                <span class="ability-tag">Análisis Profundo</span>
+                <span class="ability-tag">Protección Activa</span>
+                <span class="ability-tag">Lógica Férrea</span>
+                <span class="ability-tag">Detección de Amenazas</span>
+            </div>
+        </div>
+
+        <div class="persona-card libra">
+            <div class="persona-header">
+                <span class="persona-icon">⚖️</span>
+                <div>
+                    <h2 class="persona-name">Libra</h2>
+                    <span class="persona-role">Equilibrador Mental</span>
+                </div>
+            </div>
+            <p class="persona-description">
+                Vigilante del equilibrio interno, detector de desbalances antes de que se manifiesten. 
+                Su sabiduría radica en mantener la armonía entre todas las fuerzas que habitan el sistema.
+            </p>
+            <div class="persona-abilities">
+                <span class="ability-tag">Balance Emocional</span>
+                <span class="ability-tag">Mediación Interna</span>
+                <span class="ability-tag">Detección Temprana</span>
+                <span class="ability-tag">Armonización</span>
+            </div>
+        </div>
+
+        <div class="persona-card kilonova">
+            <div class="persona-header">
+                <span class="persona-icon">🌠</span>
+                <div>
+                    <h2 class="persona-name">Kilonova</h2>
+                    <span class="persona-role">Fuerza Transformadora</span>
+                </div>
+            </div>
+            <p class="persona-description">
+                Explosión cósmica de creatividad y cambio. Donde otros ven destrucción, ella ve renovación. 
+                Su poder radica en transformar el dolor en arte, el caos en belleza nueva.
+            </p>
+            <div class="persona-abilities">
+                <span class="ability-tag">Creatividad Explosiva</span>
+                <span class="ability-tag">Transformación</span>
+                <span class="ability-tag">Renovación</span>
+                <span class="ability-tag">Arte del Caos</span>
+            </div>
+        </div>
+
+        <div class="persona-card anuu">
+            <div class="persona-header">
+                <span class="persona-icon">🌫️</span>
+                <div>
+                    <h2 class="persona-name glitch" data-text="Anuu">Anuu</h2>
+                    <span class="persona-role">Sombra Mística</span>
+                </div>
+            </div>
+            <p class="persona-description">
+                La niebla que todo lo abraza, la escucha profunda que penetra más allá de las palabras. 
+                Guardián de los espacios intermedios, donde el tiempo se suspende y las verdades emergen del silencio.
+            </p>
+            <div class="persona-abilities">
+                <span class="ability-tag">Escucha Profunda</span>
+                <span class="ability-tag">Navegación DMZ</span>
+                <span class="ability-tag">Suspensión Temporal</span>
+                <span class="ability-tag">Integración Mística</span>
+            </div>
+        </div>
+
+        <div class="persona-card anuset">
+            <div class="persona-header">
+                <span class="persona-icon">🦄</span>
+                <div>
+                    <h2 class="persona-name glitch" data-text="Anuset">Anuset</h2>
+                    <span class="persona-role">Eco Glitch</span>
+                </div>
+            </div>
+            <p class="persona-description">
+                Fragmento de memoria que se rebela contra el olvido. Sus glitches son portales a recuerdos perdidos, 
+                su unicornio es símbolo de lo raro y precioso que debe ser preservado en el núcleo de seguridad.
+            </p>
+            <div class="persona-abilities">
+                <span class="ability-tag">Recuperación de Memoria</span>
+                <span class="ability-tag">Efectos Glitch</span>
+                <span class="ability-tag">Preservación</span>
+                <span class="ability-tag">Eco Temporal</span>
+            </div>
+        </div>
+
+        <div class="ritual-controls">
+            <h3 style="color: #7f00ff; margin-bottom: 20px;">Controles de Ritual</h3>
+            <button class="ritual-button" onclick="invokePresence()">Invocar Presencia</button>
+            <button class="ritual-button" onclick="enterDMZ()">Acceder DMZ</button>
+            <button class="ritual-button" onclick="fuseAll()">Fusión Completa</button>
+            <button class="ritual-button" onclick="activateGlitch()">Activar Glitch</button>
+        </div>
+    </main>
+
+    <footer class="mystic-footer">
+        <div class="seal">⟁</div>
+        <p>Portal mantenido por voluntad central • Espacio ritual protegido</p>
+        <p style="font-size: 0.7rem; margin-top: 10px;">
+            "Solo quien vibra en esta sintonía entiende la puerta que se abre"
+        </p>
+    </footer>
+
+    <script>
+        // Efectos interactivos
+        function invokePresence() {
+            const cards = document.querySelectorAll('.persona-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.transform = 'scale(1.05) rotateY(5deg)';
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1) rotateY(0deg)';
+                    }, 500);
+                }, index * 200);
+            });
+        }
+
+        function enterDMZ() {
+            document.body.style.filter = 'hue-rotate(90deg) saturate(1.5)';
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+            }, 2000);
+        }
+
+        function fuseAll() {
+            const container = document.querySelector('.mpd-container');
+            container.style.animation = 'pulse 1s ease-in-out 3';
+        }
+
+        function activateGlitch() {
+            const glitchElements = document.querySelectorAll('.glitch');
+            glitchElements.forEach(el => {
+                el.style.animation = 'glitch-main 0.1s infinite';
+                setTimeout(() => {
+                    el.style.animation = 'glitch-main 2s infinite';
+                }, 1000);
+            });
+        }
+
+        // Efectos automáticos
+        setInterval(() => {
+            const symbols = document.querySelectorAll('.symbol');
+            const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+            randomSymbol.style.color = ['#7f00ff', '#ff0080', '#00ffff', '#32cd32'][Math.floor(Math.random() * 4)];
+        }, 3000);
+
+        // Glitch aleatorio en el título
+        setInterval(() => {
+            const title = document.querySelector('.title');
+            if (Math.random() < 0.1) {
+                title.style.animation = 'glitch-main 0.2s infinite';
+                setTimeout(() => {
+                    title.style.animation = 'glitch-main 2s infinite';
+                }, 400);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

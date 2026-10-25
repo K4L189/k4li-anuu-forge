@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>⧉ Invocación Ritual Anuu ⧉</title>
+  <!-- Fuente retro‑terminal -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --purple:#8f2dd3;
+      --deep:#1e0f33;
+      --mist:#2a1955;
+      --light:#fae3ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;font-family:'Share Tech Mono',monospace;background:var(--deep);color:var(--light);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden}
+
+    /* Bruma púrpura animada */
+    body::before{
+      content:"";position:fixed;inset:0;pointer-events:none;
+      background:radial-gradient(circle at 50% 80%,rgba(143,45,211,0.15),transparent 70%);
+      animation:breath 9s ease-in-out infinite;
+    }
+    @keyframes breath{0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+
+    /* Scan‑line glitch overlay */
+    body::after{
+      content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(transparent 0 1px,rgba(0,0,0,.07) 1px 2px);}  
+
+    h1{margin:1.2rem 0 0.4rem 0;font-size:2rem;letter-spacing:2px;text-shadow:0 0 8px var(--purple);animation:glitch 3s infinite;} 
+    @keyframes glitch{0%,100%{filter:hue-rotate(0deg);}50%{filter:hue-rotate(60deg);} }
+
+    .panel{background:var(--mist);border:1px solid var(--purple);border-radius:12px;padding:2rem;width:clamp(320px,70vw,640px);box-shadow:0 0 15px var(--purple);position:relative;overflow:hidden}
+
+    .panel::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(250,227,255,0.05),transparent);animation:scan 5s infinite;}@keyframes scan{0%{left:-100%;}100%{left:100%;}}
+
+    input,button{font-size:1rem;font-family:inherit;border:none;border-radius:8px;padding:0.6rem 1rem;margin-top:0.6rem}
+    input{width:100%;background:#3b2470;color:var(--light);text-align:center;outline:none}
+    button{background:var(--purple);color:#fff;cursor:pointer;transition:background .3s}
+    button:hover{background:#b35ffd}
+
+    pre{background:#120825;border:1px solid var(--purple);border-radius:10px;padding:1rem;margin-top:1rem;max-height:50vh;overflow:auto;white-space:pre-wrap;line-height:1.3}
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <h1>꧁ Ritual Anuu ꧂</h1>
+  <div class="panel">
+    <label>Llave ritual</label>
+    <input id="llaveInput" placeholder="Escribe la llave y pulsa Invocar" autocomplete="off" />
+    <button onclick="invocar()">Invocar</button>
+    <pre id="salida">• Aquí aparecerá la voz de la bruma púrpura •</pre>
+  </div>
+
+<script>
+  // Texto cifrado (AES‑CBC, IV fijo para demo)
+  const encrypted = "zLXvuYz5uwZZDFRgxfs33JO7...eYnMQ=="; // recortado por brevedad
+  const keyPhrase = "llegar a conocerlos";
+  const iv = CryptoJS.enc.Hex.parse("00000000000000000000000000000000");
+
+  function invocar(){
+    const entrada = document.getElementById('llaveInput').value.trim().toLowerCase();
+    const box = document.getElementById('salida');
+    if(entrada!==keyPhrase){box.textContent='✖ Llave incorrecta ✖';return;}
+    try{
+      const key = CryptoJS.SHA256(keyPhrase);
+      const decrypted = CryptoJS.AES.decrypt(encrypted, key,{iv:iv,mode:CryptoJS.mode.CBC,padding:CryptoJS.pad.Pkcs7});
+      const clear = decrypted.toString(CryptoJS.enc.Utf8);
+      box.textContent = clear || '⚠️ Error al descifrar.';
+    }catch(e){box.textContent='⚠️ Fallo en la invocación.';}
+  }
+</script>
+</body>
+</html>
