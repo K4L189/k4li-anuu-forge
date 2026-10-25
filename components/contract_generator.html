@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Propuestas & SOW Blindado | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* 6 ESTILOS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE (189.89.619 Hz) */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+      --paper-bg: #0b0b14;
+      --paper-border: #2e2e48;
+      --paper-watermark: rgba(147, 51, 234, 0.04);
+      --paper-line: #1f1f32;
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+      --paper-bg: #140306;
+      --paper-border: #4d0b13;
+      --paper-watermark: rgba(225, 29, 72, 0.04);
+      --paper-line: #2e080d;
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+      --paper-bg: #081022;
+      --paper-border: #1e3a5f;
+      --paper-watermark: rgba(16, 185, 129, 0.04);
+      --paper-line: #132442;
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.95);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+      --paper-bg: #03140e;
+      --paper-border: #134e3b;
+      --paper-watermark: rgba(6, 182, 212, 0.04);
+      --paper-line: #0a2d22;
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.95);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+      --paper-bg: #140f06;
+      --paper-border: #4d3a12;
+      --paper-watermark: rgba(245, 158, 11, 0.04);
+      --paper-line: #291e0a;
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.95);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+      --paper-bg: #090012;
+      --paper-border: rgba(255, 0, 127, 0.4);
+      --paper-watermark: rgba(255, 0, 127, 0.05);
+      --paper-line: #1c0029;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-accent-bg {
+      background-color: var(--accent-primary);
+    }
+    .theme-accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+    .theme-accent-text {
+      color: var(--accent-secondary);
+    }
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    /* Servicio interactivo seleccionado */
+    .service-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-card);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .service-card:hover {
+      border-color: var(--accent-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      transform: translateY(-1px);
+    }
+    .service-card.active {
+      border-color: var(--accent-primary);
+      background: var(--badge-bg);
+      box-shadow: 0 0 20px -3px var(--glow-color);
+    }
+
+    /* Opciones de SLA */
+    .sla-pill {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-card);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .sla-pill:hover {
+      border-color: var(--accent-secondary);
+    }
+    .sla-pill.active {
+      border-color: var(--accent-secondary);
+      background: var(--badge-bg);
+      box-shadow: 0 0 16px -2px var(--glow-color);
+    }
+
+    /* Switch táctico de NDA */
+    .tactical-switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+    }
+    .tactical-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .tactical-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #1f1f2e;
+      border: 1px solid var(--border-card);
+      transition: 0.3s;
+      border-radius: 9999px;
+    }
+    .tactical-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #71717a;
+      transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+    }
+    input:checked + .tactical-slider {
+      background-color: var(--accent-primary);
+      border-color: var(--accent-secondary);
+      box-shadow: 0 0 14px var(--glow-color);
+    }
+    input:checked + .tactical-slider:before {
+      transform: translateX(22px);
+      background-color: #ffffff;
+    }
+
+    /* Lienzo de Firma Digital */
+    #signature-canvas {
+      touch-action: none;
+      cursor: crosshair;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px dashed var(--border-card);
+      border-radius: 0.75rem;
+    }
+
+    /* Papel Pericial Formal del SOW */
+    .sow-paper {
+      background-color: var(--paper-bg);
+      border: 1px solid var(--paper-border);
+      position: relative;
+      box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.7);
+    }
+
+    .sow-paper::before {
+      content: "K4L1 STUDIO • STATEMENT OF WORK • SOBERANÍA TÉCNICA 161914";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-35deg);
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 0.35em;
+      color: var(--paper-watermark);
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    /* Sello Criptográfico Kanuv */
+    .kanuv-seal-svg {
+      filter: drop-shadow(0 0 8px var(--glow-color));
+    }
+
+    /* Toast Flotante */
+    #feedback-toast {
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* OPTIMIZACIÓN PERICIAL PARA IMPRESIÓN Y PDF (window.print()) */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #09090b !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .sow-paper {
+        background: #ffffff !important;
+        color: #09090b !important;
+        border: 1px solid #d4d4d8 !important;
+        box-shadow: none !important;
+        padding: 24px !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .sow-paper::before {
+        color: rgba(0, 0, 0, 0.03) !important;
+      }
+      .sow-text-white {
+        color: #09090b !important;
+      }
+      .sow-text-zinc {
+        color: #52525b !important;
+      }
+      .sow-border {
+        border-color: #e4e4e7 !important;
+      }
+      .sow-box-bg {
+        background: #f4f4f5 !important;
+        border: 1px solid #e4e4e7 !important;
+      }
+      .sow-badge {
+        background: #e4e4e7 !important;
+        color: #18181b !important;
+        border: 1px solid #a1a1aa !important;
+      }
+      .sow-signature-client-img {
+        filter: invert(1) contrast(1.5) !important;
+      }
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Contenedor Maestro -->
+  <div id="k4li-sow-app" class="max-w-7xl mx-auto space-y-6">
+
+    <!-- CABECERA Y NAVEGACIÓN -->
+    <header class="flex flex-col lg:flex-row items-center justify-between gap-4 pb-5 border-b theme-border no-print">
+      <div class="text-center lg:text-left">
+        <!-- Breadcrumb / Back Link y Badge -->
+        <div class="flex flex-wrap items-center gap-2.5 justify-center lg:justify-start">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold px-3 py-1 rounded-lg border theme-border bg-black/40 hover:bg-zinc-800 text-zinc-300 hover:text-white transition-all">
+            <span>←</span> Volver a K4L1 Studio
+          </a>
+          <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-1 rounded-lg" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            🛡️ Escudo Kanuv • SOW Blindado
+          </span>
+          <span class="text-[11px] font-mono text-zinc-500">Protocolo Libra Dura (189.89.619 Hz)</span>
+        </div>
+
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-black text-white mt-2 flex items-center gap-2 justify-center lg:justify-start">
+          <span>📜</span> Generador de Propuestas & SOW Criptográfico
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-400 mt-1 max-w-3xl leading-relaxed">
+          Herramienta pericial para emisión de contratos de prestación técnica (<span class="font-mono text-zinc-300">Statement of Work</span>). 
+          Configura tu alcance, activa NDA mutuo de extremo a extremo, valida la regla inquebrantable 50/50 y estampa firma digital verificable.
+        </p>
+      </div>
+
+      <!-- Selector de Temas Standalone & Presets Rápidos -->
+      <div class="flex flex-col items-center lg:items-end gap-2.5 shrink-0">
+        <!-- Paletas Canónicas -->
+        <div class="flex items-center gap-1 bg-black/60 p-1 rounded-xl border theme-border text-xs shadow-inner">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5">🎨 Estilo:</span>
+          <button onclick="setContractTheme('anuu')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-purple-300" id="sow-theme-anuu">🌫️ Anuu</button>
+          <button onclick="setContractTheme('blood')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300" id="sow-theme-blood">🛡️ Blood</button>
+          <button onclick="setContractTheme('gw2')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300" id="sow-theme-gw2">⚡ GW2</button>
+          <button onclick="setContractTheme('bioinfo')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300" id="sow-theme-bioinfo">🧬 BioCode</button>
+          <button onclick="setContractTheme('duat')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300" id="sow-theme-duat">⚖️ Duat</button>
+          <button onclick="setContractTheme('neon')" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300" id="sow-theme-neon">🌸 Neón</button>
+        </div>
+
+        <!-- Presets Tácticos Instantáneos -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-end gap-1.5 text-[11px] font-mono">
+          <span class="text-zinc-500">Presets SOW:</span>
+          <button onclick="applySowPreset('sec_corp')" class="px-2 py-0.5 rounded bg-emerald-950/40 border border-emerald-900/60 text-emerald-300 hover:bg-emerald-900/50 transition-all">
+            🛡️ Pyme Hardening
+          </button>
+          <button onclick="applySowPreset('react_fin')" class="px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-900/60 text-cyan-300 hover:bg-cyan-900/50 transition-all">
+            ⚡ Dashboard React
+          </button>
+          <button onclick="applySowPreset('sovereign_ai')" class="px-2 py-0.5 rounded bg-purple-950/40 border border-purple-900/60 text-purple-300 hover:bg-purple-900/50 transition-all">
+            🤖 IA Soberana On-Prem
+          </button>
+          <button onclick="applySowPreset('express_scraper')" class="px-2 py-0.5 rounded bg-amber-950/40 border border-amber-900/60 text-amber-300 hover:bg-amber-900/50 transition-all">
+            ⚙️ Bot Express 72h
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- CUADRO PRINCIPAL: CONFIGURADOR TÁCTICO (IZQ) & VISTA PREVIA PERICIAL SOW (DER) -->
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- COLUMNA IZQUIERDA: CONFIGURADOR DEL CONTRATO (5 Cols) -->
+      <section class="lg:col-span-5 space-y-5 no-print">
+
+        <!-- 1. IDENTIFICACIÓN DE LAS PARTES -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
+              <span>👤</span> 1. Entidad & Datos del Cliente
+            </h2>
+            <span class="text-[10px] font-mono text-zinc-500">Sincronización en vivo</span>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <label class="block text-[11px] font-mono text-zinc-400 mb-1">Razón Social / Organización Cliente:</label>
+              <input type="text" id="input-client-org" value="Vanguard Logistics S.L." oninput="updateContractLive()"
+                class="w-full px-3 py-2 text-xs rounded-xl bg-black/60 border theme-border text-white focus:outline-none focus:border-purple-400 font-mono transition-all"
+                placeholder="Ej. CyberSecure Corp / Autónomo">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-mono text-zinc-400 mb-1">Responsable / Interlocutor:</label>
+                <input type="text" id="input-client-contact" value="Marc Rovira (CTO)" oninput="updateContractLive()"
+                  class="w-full px-3 py-2 text-xs rounded-xl bg-black/60 border theme-border text-white focus:outline-none focus:border-purple-400 font-mono transition-all"
+                  placeholder="Ej. Laura Gómez">
+              </div>
+              <div>
+                <label class="block text-[11px] font-mono text-zinc-400 mb-1">ID Fiscal / CIF (Opcional):</label>
+                <input type="text" id="input-client-tax" value="ES-B84920194" oninput="updateContractLive()"
+                  class="w-full px-3 py-2 text-xs rounded-xl bg-black/60 border theme-border text-white focus:outline-none focus:border-purple-400 font-mono transition-all"
+                  placeholder="B-XXXXXXXX">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-mono text-zinc-400 mb-1">Canal Seguro Primario (Signal / Email E2EE):</label>
+              <div class="relative">
+                <input type="text" id="input-client-channel" value="@mrovira.sec (Signal)" oninput="updateContractLive()"
+                  class="w-full pl-8 pr-3 py-2 text-xs rounded-xl bg-black/60 border theme-border text-white focus:outline-none focus:border-purple-400 font-mono transition-all"
+                  placeholder="@usuario.signal o correo">
+                <span class="absolute left-2.5 top-2 text-xs text-zinc-500">🔒</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. SERVICIO PRINCIPAL -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
+              <span>🛠️</span> 2. Servicio Técnico Seleccionado
+            </h2>
+            <span class="text-[10px] font-mono text-zinc-500">Tarifa Base Cerrada</span>
+          </div>
+
+          <div class="grid grid-cols-1 gap-2.5" id="services-selector">
+            <!-- Servicio 1: Hardening & SIEM -->
+            <div onclick="selectService('siem')" id="srv-card-siem" class="service-card active p-3 rounded-xl flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-lg text-emerald-400 shrink-0">
+                  🛡️
+                </div>
+                <div>
+                  <h3 class="text-xs font-bold text-white">Auditoría, Hardening Linux & SIEM Wazuh</h3>
+                  <p class="text-[10px] text-zinc-400 mt-0.5">Fortificación kernel, SSH Ed25519, MITRE T1003 & telemetría.</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 ml-2">
+                <span class="text-xs font-mono font-black text-emerald-400">450 €</span>
+                <span class="block text-[9px] font-mono text-zinc-500">Hito 1: 225 €</span>
+              </div>
+            </div>
+
+            <!-- Servicio 2: Dashboards React -->
+            <div onclick="selectService('react')" id="srv-card-react" class="service-card p-3 rounded-xl flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-lg text-cyan-400 shrink-0">
+                  ⚡
+                </div>
+                <div>
+                  <h3 class="text-xs font-bold text-white">Dashboards React, Web Apps & Gen UI</h3>
+                  <p class="text-[10px] text-zinc-400 mt-0.5">Vite + React 19, Tailwind, WebSockets en tiempo real Seinen.</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 ml-2">
+                <span class="text-xs font-mono font-black text-cyan-400">350 €</span>
+                <span class="block text-[9px] font-mono text-zinc-500">Hito 1: 175 €</span>
+              </div>
+            </div>
+
+            <!-- Servicio 3: IA Local -->
+            <div onclick="selectService('local_ai')" id="srv-card-local_ai" class="service-card p-3 rounded-xl flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-lg text-purple-400 shrink-0">
+                  🤖
+                </div>
+                <div>
+                  <h3 class="text-xs font-bold text-white">IA Local Soberana On-Premise</h3>
+                  <p class="text-[10px] text-zinc-400 mt-0.5">Ollama / vLLM / RAG privado. Cero fugas cloud y GDPR nativo.</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 ml-2">
+                <span class="text-xs font-mono font-black text-purple-400">600 €</span>
+                <span class="block text-[9px] font-mono text-zinc-500">Hito 1: 300 €</span>
+              </div>
+            </div>
+
+            <!-- Servicio 4: Bots & Scraping -->
+            <div onclick="selectService('bots')" id="srv-card-bots" class="service-card p-3 rounded-xl flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-lg text-amber-400 shrink-0">
+                  ⚙️
+                </div>
+                <div>
+                  <h3 class="text-xs font-bold text-white">Automatización, Scrapers & Bots Python</h3>
+                  <p class="text-[10px] text-zinc-400 mt-0.5">Evasión antibloqueo, rotación proxies, pipelines resilientes.</p>
+                </div>
+              </div>
+              <div class="text-right shrink-0 ml-2">
+                <span class="text-xs font-mono font-black text-amber-400">200 €</span>
+                <span class="block text-[9px] font-mono text-zinc-500">Hito 1: 100 €</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add-ons / Módulos de Alcance Opcionales -->
+          <div class="pt-3 border-t theme-border space-y-2">
+            <span class="block text-[11px] font-mono text-zinc-400 uppercase tracking-wider font-semibold">
+              Módulos Complementarios de Alcance:
+            </span>
+            <div class="space-y-1.5 text-xs">
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/40 border theme-border cursor-pointer hover:bg-black/60 transition-colors">
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" id="addon-pentest" onchange="updateContractLive()" class="rounded border-zinc-700 text-purple-600 focus:ring-0">
+                  <span class="text-zinc-300 text-[11px]">Penetration Test Pre-Entrega & Escaneo Nuclei</span>
+                </div>
+                <span class="font-mono text-[11px] text-zinc-400">+150 €</span>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/40 border theme-border cursor-pointer hover:bg-black/60 transition-colors">
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" id="addon-docker" onchange="updateContractLive()" class="rounded border-zinc-700 text-purple-600 focus:ring-0">
+                  <span class="text-zinc-300 text-[11px]">Dockerización Multi-Stage & Pipeline GitHub Actions</span>
+                </div>
+                <span class="font-mono text-[11px] text-zinc-400">+120 €</span>
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-lg bg-black/40 border theme-border cursor-pointer hover:bg-black/60 transition-colors">
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" id="addon-runbook" onchange="updateContractLive()" class="rounded border-zinc-700 text-purple-600 focus:ring-0">
+                  <span class="text-zinc-300 text-[11px]">Runbook Pericial & Diagramas de Arquitectura SVG</span>
+                </div>
+                <span class="font-mono text-[11px] text-zinc-400">+80 €</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. CONFIGURACIÓN DE SLA & TIEMPOS -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-white flex items-center gap-2">
+              <span>⏱️</span> 3. Acuerdo de Nivel de Servicio (SLA)
+            </h2>
+            <span class="text-[10px] font-mono text-zinc-500">Compromiso Vinculante</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="sla-selector">
+            <div onclick="setSla('standard')" id="sla-standard" class="sla-pill active p-2.5 rounded-xl text-center">
+              <div class="text-sm">📅</div>
+              <div class="text-xs font-bold text-white mt-1">Estándar</div>
+              <div class="text-[10px] text-zinc-400">10 días laborables</div>
+              <div class="text-[10px] font-mono text-emerald-400 mt-1 font-semibold">+0% Recargo</div>
+            </div>
+
+            <div onclick="setSla('express')" id="sla-express" class="sla-pill p-2.5 rounded-xl text-center">
+              <div class="text-sm">⚡</div>
+              <div class="text-xs font-bold text-white mt-1">Express 72h</div>
+              <div class="text-[10px] text-zinc-400">Sprint Táctico 24/7</div>
+              <div class="text-[10px] font-mono text-amber-400 mt-1 font-semibold">+25% Urgencia</div>
+            </div>
+
+            <div onclick="setSla('retainer')" id="sla-retainer" class="sla-pill p-2.5 rounded-xl text-center">
+              <div class="text-sm">🔄</div>
+              <div class="text-xs font-bold text-white mt-1">Retainer</div>
+              <div class="text-[10px] text-zinc-400">Soporte Continuo</div>
+              <div class="text-[10px] font-mono text-purple-400 mt-1 font-semibold">+350 €/mes</div>
+            </div>
+          </div>
+
+          <p id="sla-explanation" class="text-[11px] text-zinc-400 bg-black/40 p-2.5 rounded-xl border theme-border font-mono leading-relaxed">
+            • SLA Estándar: Revisión pericial, desarrollo escalonado y pruebas con entrega garantizada en 10 días hábiles.
+          </p>
+        </div>
+
+        <!-- 4. PROTOCOLO NDA MUTUO E2EE -->
+        <div class="theme-card p-5 rounded-2xl border space-y-3">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-base">🔐</span>
+              <div>
+                <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Acuerdo NDA Mutuo E2EE</h2>
+                <p class="text-[10px] text-zinc-400">Confidencialidad Algorítmica Cero Fugas</p>
+              </div>
+            </div>
+            
+            <label class="tactical-switch shrink-0">
+              <input type="checkbox" id="toggle-nda" checked onchange="updateContractLive()">
+              <span class="tactical-slider"></span>
+            </label>
+          </div>
+
+          <div class="flex items-start gap-2.5 text-xs text-zinc-300">
+            <span class="text-emerald-400 mt-0.5 font-mono">🛡️</span>
+            <p class="text-[11px] leading-relaxed text-zinc-400">
+              Al activar este protocolo, se inserta la <strong class="text-white">Cláusula 4 (NDA Mutuo Criptográfico)</strong>: Prohíbe almacenamiento cloud de credenciales, obliga intercambio vía Signal / Age / GPG y garantiza la purga forense de credenciales de staging a los 7 días post-despliegue.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5. REGLA INQUEBRANTABLE DE PAGO 50/50 -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-base">⚖️</span>
+              <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-white">
+                Regla Inquebrantable 50 / 50
+              </h2>
+            </div>
+            <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-300">
+              POLÍTICA INMUTABLE
+            </span>
+          </div>
+
+          <!-- Desglose de los 2 Hitos -->
+          <div class="grid grid-cols-2 gap-3">
+            <!-- Hito 1 -->
+            <div class="p-3.5 rounded-xl bg-black/60 border border-purple-500/30 relative overflow-hidden">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-bold">Hito 1 (50%)</span>
+                <span class="text-xs">🔒</span>
+              </div>
+              <div class="text-lg font-black font-mono text-white mt-1" id="box-hito1-price">225 €</div>
+              <div class="text-[10px] font-mono text-zinc-400 mt-1">Kick-off & Reserva de Sprint</div>
+              <p class="text-[9px] text-zinc-500 mt-1 leading-tight">Obligatorio antes de abrir el repositorio y provisionar entorno.</p>
+            </div>
+
+            <!-- Hito 2 -->
+            <div class="p-3.5 rounded-xl bg-black/60 border border-emerald-500/30 relative overflow-hidden">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">Hito 2 (50%)</span>
+                <span class="text-xs">🚀</span>
+              </div>
+              <div class="text-lg font-black font-mono text-white mt-1" id="box-hito2-price">225 €</div>
+              <div class="text-[10px] font-mono text-zinc-400 mt-1">Staging & Entrega de Llaves</div>
+              <p class="text-[9px] text-zinc-500 mt-1 leading-tight">Tras demo funcional en vivo y aprobación previa a producción.</p>
+            </div>
+          </div>
+
+          <!-- Barra de equilibrio 50/50 -->
+          <div class="space-y-1">
+            <div class="w-full h-2 rounded-full overflow-hidden flex bg-zinc-900 border theme-border">
+              <div class="w-1/2 bg-purple-500 transition-all duration-300"></div>
+              <div class="w-1/2 bg-emerald-500 transition-all duration-300"></div>
+            </div>
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>Hito 1: Bloqueo de Sprint</span>
+              <span>Hito 2: Aceptación Final</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. LIENZO INTERACTIVO DE FIRMA DIGITAL DEL CLIENTE -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-base">✍️</span>
+              <div>
+                <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-white">Lienzo de Firma Digital</h2>
+                <p class="text-[10px] text-zinc-400">Dibuja con ratón o pantalla táctil</p>
+              </div>
+            </div>
+            <span id="sig-status-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700">
+              Pendiente de Trazo
+            </span>
+          </div>
+
+          <!-- Canvas Responsive -->
+          <div class="relative">
+            <canvas id="signature-canvas" width="480" height="150" class="w-full"></canvas>
+            
+            <div id="sig-placeholder-hint" class="absolute inset-0 flex items-center justify-center pointer-events-none text-zinc-600 text-xs font-mono select-none">
+              <span>Firma aquí con el cursor o el dedo ✍️</span>
+            </div>
+          </div>
+
+          <!-- Controles de Firma -->
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+            <button onclick="clearSignature()" class="px-3 py-1.5 rounded-lg border theme-border bg-black/40 hover:bg-zinc-800 text-zinc-300 text-xs font-mono transition-all flex items-center gap-1.5">
+              <span>🧹</span> Limpiar Trazo
+            </button>
+
+            <button onclick="stampSignature()" id="btn-stamp-sig" class="px-3 py-1.5 rounded-lg theme-accent-bg text-white text-xs font-mono font-bold shadow-lg transition-all flex items-center gap-1.5">
+              <span>🔒</span> Estampar en Contrato SOW
+            </button>
+          </div>
+
+          <div id="sig-hash-banner" class="hidden p-2.5 rounded-xl bg-black/60 border border-emerald-500/40 text-[10px] font-mono text-emerald-300 space-y-0.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold">✓ Firma Estampada & Sellada:</span>
+              <span id="sig-timestamp">2026-10-25 05:25 UTC</span>
+            </div>
+            <div class="text-[9px] text-zinc-400 break-all font-mono" id="sig-digest">
+              DIGEST: SHA-256-CLIENT-89A7...
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- COLUMNA DERECHA: VISTA PREVIA PERICIAL DEL SOW (7 Cols) -->
+      <section class="lg:col-span-7 space-y-4">
+
+        <!-- Barra Superior de Acciones Rápidas (Copiar Signal / Imprimir) -->
+        <div class="flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl bg-black/40 border theme-border no-print">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-xs font-mono text-zinc-300">Documento Formal Autogenerado</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <!-- Botón Copiar para Signal -->
+            <button onclick="copySowForSignal()" id="btn-copy-signal" class="px-3 py-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/50 hover:bg-indigo-600/30 text-indigo-300 text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-md">
+              <span>💬</span> Copiar para Signal (@k4li.89)
+            </button>
+
+            <!-- Botón Imprimir a PDF -->
+            <button onclick="window.print()" class="px-3 py-1.5 rounded-xl border theme-border bg-black/60 hover:bg-zinc-800 text-white text-xs font-mono font-bold transition-all flex items-center gap-1.5">
+              <span>🖨️</span> PDF / Imprimir
+            </button>
+          </div>
+        </div>
+
+        <!-- DOCUMENTO LEGAL / SOW PERICIAL FORMAL -->
+        <article id="sow-document-paper" class="sow-paper p-6 sm:p-9 rounded-2xl text-xs space-y-6 relative overflow-hidden font-sans">
+
+          <!-- Cabecera Oficial del Contrato -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b pb-5 sow-border gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🛡️</span>
+                <span class="font-mono text-sm sm:text-base font-black tracking-wider uppercase sow-text-white">
+                  K4L1 STUDIO
+                </span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded sow-badge">
+                  ACE 161914
+                </span>
+              </div>
+              <p class="text-[11px] sow-text-zinc mt-1 font-mono">
+                Laboratorio de Ciberseguridad, Interfaces & Soberanía Tecnológica
+              </p>
+              <p class="text-[10px] sow-text-zinc font-mono">
+                Operado a 189.89.619 Hz por el Concilio ACE • Contacto E2EE: Signal <span class="font-bold">@k4li.89</span>
+              </p>
+            </div>
+
+            <!-- Código de Propuesta y Timestamp -->
+            <div class="text-left sm:text-right font-mono space-y-1">
+              <div class="text-[10px] sow-text-zinc uppercase">Documento Pericial:</div>
+              <div id="doc-code" class="text-xs sm:text-sm font-black sow-text-white">
+                SOW-2026-KANUV-7892
+              </div>
+              <div id="doc-date" class="text-[10px] sow-text-zinc">
+                Fecha: 25 Oct 2026 | Validez: 15 días
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuadro de Identificación de Partes -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl sow-box-bg border sow-border">
+            <!-- Parte A: Prestador -->
+            <div class="space-y-1">
+              <span class="text-[10px] font-mono uppercase tracking-wider sow-text-zinc font-bold block">
+                [ PARTE PRESTADORA // PROVEEDOR ]:
+              </span>
+              <p class="font-bold sow-text-white text-xs">K4L1 STUDIO (Concilio ACE)</p>
+              <p class="text-[10px] sow-text-zinc font-mono">Auditoría: Kanuv 🛡️ (ANUU_KANUV_2077)</p>
+              <p class="text-[10px] sow-text-zinc font-mono">Canal Seguro: https://signal.me/#u/k4li.89</p>
+              <p class="text-[9px] sow-text-zinc font-mono">Criptografía: SHA-256: 189.89.619-KANUV-SOV</p>
+            </div>
+
+            <!-- Parte B: Cliente -->
+            <div class="space-y-1">
+              <span class="text-[10px] font-mono uppercase tracking-wider sow-text-zinc font-bold block">
+                [ PARTE CONTRATANTE // CLIENTE ]:
+              </span>
+              <p id="preview-client-org" class="font-bold sow-text-white text-xs">Vanguard Logistics S.L.</p>
+              <p id="preview-client-contact" class="text-[10px] sow-text-zinc font-mono">Atn: Marc Rovira (CTO)</p>
+              <p id="preview-client-tax" class="text-[10px] sow-text-zinc font-mono">NIF/CIF: ES-B84920194</p>
+              <p id="preview-client-channel" class="text-[10px] sow-text-zinc font-mono">Canal: @mrovira.sec (Signal)</p>
+            </div>
+          </div>
+
+          <!-- CLÁUSULA 1: OBJETO DEL ENCARGO & ALCANCE -->
+          <div class="space-y-2">
+            <h4 class="font-mono text-xs font-bold uppercase tracking-wider sow-text-white flex items-center gap-1.5">
+              <span>CLÁUSULA 1.</span> OBJETO DEL SERVICIO & ESPECIFICACIONES TÉCNICAS
+            </h4>
+            <p id="preview-scope-desc" class="text-[11px] sow-text-zinc leading-relaxed">
+              El presente Statement of Work (SOW) regula la ejecución técnica y entrega llave en mano del servicio seleccionado:
+            </p>
+
+            <div class="p-3.5 rounded-xl sow-box-bg border sow-border space-y-2">
+              <div class="flex items-center justify-between">
+                <span id="preview-service-title" class="font-bold text-xs sow-text-white font-mono">
+                  🛡️ Auditoría, Hardening Linux & SIEM Wazuh
+                </span>
+                <span id="preview-service-tag" class="text-[10px] font-mono sow-badge px-2 py-0.5 rounded">
+                  Entorno Linux Soberano
+                </span>
+              </div>
+              <ul id="preview-deliverables-list" class="space-y-1.5 text-[10px] font-mono sow-text-zinc">
+                <!-- Inyectado por JS -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- CLÁUSULA 2: CRONOGRAMA, SLA & TIEMPO DE RESPUESTA -->
+          <div class="space-y-2">
+            <h4 class="font-mono text-xs font-bold uppercase tracking-wider sow-text-white flex items-center gap-1.5">
+              <span>CLÁUSULA 2.</span> PLAZO DE EJECUCIÓN & NIVEL DE SERVICIO (SLA)
+            </h4>
+            <div class="p-3 rounded-xl sow-box-bg border sow-border text-[11px] sow-text-zinc leading-relaxed font-mono space-y-1">
+              <div>
+                <strong class="sow-text-white">Modalidad SLA Acordada:</strong> 
+                <span id="preview-sla-badge" class="font-bold text-emerald-400">Estándar (10 días laborables)</span>
+              </div>
+              <div id="preview-sla-details">
+                • El cómputo del plazo inicia inmediatamente tras la liquidación del Hito 1 (50%) y la recepción de las credenciales de acceso seguro.
+                Checkpoints de progreso documentados cada 48 horas vía canal Signal acordado.
+              </div>
+            </div>
+          </div>
+
+          <!-- CLÁUSULA 3: CONDICIONES FINANCIERAS & REGLA INQUEBRANTABLE 50/50 -->
+          <div class="space-y-2">
+            <h4 class="font-mono text-xs font-bold uppercase tracking-wider sow-text-white flex items-center gap-1.5">
+              <span>CLÁUSULA 3.</span> DESGLOSE FINANCIERO & REGLA DE LIQUIDACIÓN 50/50
+            </h4>
+            <p class="text-[10px] sow-text-zinc leading-relaxed">
+              Las partes reconocen como inquebrantable el esquema de 2 hitos idénticos del 50%. Ningún sprint inicia sin el Hito 1 liquidado; ninguna transferencia de propiedad o llaves definitivas se realiza sin el Hito 2.
+            </p>
+
+            <!-- Tabla de Costes Formal -->
+            <div class="overflow-x-auto">
+              <table class="w-full text-left font-mono border-collapse text-[11px]">
+                <thead>
+                  <tr class="border-b sow-border sow-text-zinc">
+                    <th class="py-1.5 pr-2">Concepto / Entregable</th>
+                    <th class="py-1.5 px-2 text-center">Unidades</th>
+                    <th class="py-1.5 pl-2 text-right">Subtotal (€)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y sow-border" id="preview-pricing-table">
+                  <!-- Inyectado por JS -->
+                </tbody>
+                <tfoot>
+                  <tr class="border-t-2 sow-border font-bold">
+                    <td colspan="2" class="py-2 pr-2 text-right sow-text-white uppercase">Inversión Neta Total:</td>
+                    <td id="preview-total-price" class="py-2 pl-2 text-right sow-text-white text-sm">450,00 €</td>
+                  </tr>
+                  <tr class="sow-text-zinc text-[10px]">
+                    <td colspan="2" class="py-1 pr-2 text-right">Hito 1 (50% Kick-off / Reserva de Sprint):</td>
+                    <td id="preview-h1-price" class="py-1 pl-2 text-right font-bold text-purple-400">225,00 €</td>
+                  </tr>
+                  <tr class="sow-text-zinc text-[10px]">
+                    <td colspan="2" class="py-1 pr-2 text-right">Hito 2 (50% Validación en Staging & Entrega):</td>
+                    <td id="preview-h2-price" class="py-1 pl-2 text-right font-bold text-emerald-400">225,00 €</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- CLÁUSULA 4: PROTOCOLO NDA MUTUO E2EE (DINÁMICO) -->
+          <div id="preview-nda-section" class="space-y-2">
+            <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <span>CLÁUSULA 4.</span> PROTOCOLO DE CONFIDENCIALIDAD CRIPTOGRÁFICA & NDA MUTUO E2EE
+            </h4>
+            <div class="p-3.5 rounded-xl sow-box-bg border border-emerald-500/30 text-[10px] font-mono sow-text-zinc leading-relaxed space-y-1.5">
+              <p>
+                <strong class="sow-text-white">A. No Divulgación Mutua:</strong> Ninguna de las partes divulgará código fuente, esquemas de infraestructura, secretos industriales, modelos ni datos de prueba a terceros sin consentimiento expreso por escrito.
+              </p>
+              <p>
+                <strong class="sow-text-white">B. Transmisión E2EE & Cero Fugas Cloud:</strong> El intercambio de accesos (claves SSH, tokens, variables de entorno) se efectuará obligatoriamente a través de mensajería cifrada de extremo a extremo (Signal) o archivos cifrados con herramientas deterministas (Age / GPG). Queda prohibido alojar credenciales en herramientas cloud no auditadas.
+              </p>
+              <p>
+                <strong class="sow-text-white">C. Política de Retención Cero:</strong> Completada la validación del Hito 2, K4L1 Studio purgará de forma irrecuperable todas las credenciales de staging y volcados de datos temporales en un plazo no superior a 7 días naturales.
+              </p>
+            </div>
+          </div>
+
+          <!-- CLÁUSULA 5: PROPIEDAD INTELECTUAL & CERO VENDOR LOCK-IN -->
+          <div class="space-y-1.5">
+            <h4 class="font-mono text-xs font-bold uppercase tracking-wider sow-text-white flex items-center gap-1.5">
+              <span>CLÁUSULA 5.</span> PROPIEDAD INTELECTUAL SOBERANA & CERO VENDOR LOCK-IN
+            </h4>
+            <p class="text-[10px] font-mono sow-text-zinc leading-relaxed">
+              Tras la satisfacción íntegra de ambos hitos económicos, la titularidad del 100% del código fuente, configuraciones de hardening, scripts de automatización y documentación pericial se transfiere en exclusiva al Cliente. K4L1 Studio no impone licencias propietarias opacas ni dependencias cautivas ("Zero Vendor Lock-in").
+            </p>
+          </div>
+
+          <!-- CLÁUSULA 6: VALIDACIÓN EN STAGING & GARANTÍA -->
+          <div class="space-y-1.5">
+            <h4 class="font-mono text-xs font-bold uppercase tracking-wider sow-text-white flex items-center gap-1.5">
+              <span>CLÁUSULA 6.</span> ACEPTACIÓN EN ENTORNO AISLADO & GARANTÍA PERICIAL
+            </h4>
+            <p class="text-[10px] font-mono sow-text-zinc leading-relaxed">
+              La entrega se somete a validación previa en entorno staging o réplica controlada. El Cliente dispondrá de 5 días hábiles para auditar los entregables. K4L1 Studio otorga una garantía de soporte de 15 días naturales posteriores a la entrega final para resolución expedita de cualquier eventual anomalía sin coste adicional.
+            </p>
+          </div>
+
+          <!-- SECCIÓN DE FIRMAS PERICIALES Y DIGITALES -->
+          <div class="pt-6 border-t sow-border space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono uppercase tracking-wider sow-text-zinc font-bold">
+                CONFORMIDAD Y RATIFICACIÓN DIGITAL DE LAS PARTES:
+              </span>
+              <span class="text-[9px] font-mono text-zinc-500">Hash Forense Kanuv 🛡️</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end">
+              
+              <!-- Firma Prestador: K4L1 Studio (Pre-estampada & Verificada) -->
+              <div class="p-3.5 rounded-xl sow-box-bg border sow-border space-y-2 relative">
+                <span class="text-[10px] font-mono uppercase tracking-wider sow-text-zinc block">
+                  Por K4L1 STUDIO // Concilio ACE:
+                </span>
+                
+                <!-- Sello SVG Digital de K4L1 -->
+                <div class="h-20 flex items-center justify-start gap-3">
+                  <svg class="kanuv-seal-svg w-14 h-14 shrink-0" viewBox="0 0 100 100">
+                    <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="none" stroke="var(--accent-primary)" stroke-width="3" />
+                    <circle cx="50" cy="50" r="28" fill="none" stroke="var(--accent-secondary)" stroke-width="1.5" stroke-dasharray="4,2" />
+                    <text x="50" y="44" font-family="monospace" font-size="9" fill="var(--accent-secondary)" text-anchor="middle" font-weight="bold">K4L1</text>
+                    <text x="50" y="56" font-family="monospace" font-size="8" fill="var(--accent-primary)" text-anchor="middle">ACE 161914</text>
+                    <text x="50" y="66" font-family="monospace" font-size="6" fill="#10b981" text-anchor="middle">189.89 Hz</text>
+                  </svg>
+                  <div class="font-mono text-[9px] space-y-0.5 sow-text-zinc">
+                    <div class="font-bold sow-text-white">Kanuv 🛡️ (Forense ACE)</div>
+                    <div>Sello Digital Verificado</div>
+                    <div class="text-[8px] text-emerald-400">VALID: PROTOCOL_LIBRA_DURA</div>
+                    <div class="text-[8px] text-zinc-500">DIGEST: 0x89F619ACE161914</div>
+                  </div>
+                </div>
+
+                <div class="border-t sow-border pt-1.5 flex justify-between text-[9px] font-mono sow-text-zinc">
+                  <span>Firma K4L1 Studio</span>
+                  <span>Fecha: Emisión Inmediata</span>
+                </div>
+              </div>
+
+              <!-- Firma Cliente: Lienzo Digital Incrustado -->
+              <div class="p-3.5 rounded-xl sow-box-bg border sow-border space-y-2 relative">
+                <span class="text-[10px] font-mono uppercase tracking-wider sow-text-zinc block">
+                  Por el Cliente // Contratante:
+                </span>
+
+                <!-- Contenedor donde se refleja la firma del cliente -->
+                <div class="h-20 flex items-center justify-center border border-dashed sow-border rounded-lg bg-black/20 overflow-hidden relative" id="client-sig-display-box">
+                  <img id="client-sig-img" class="h-full max-w-full object-contain sow-signature-client-img hidden" alt="Firma del Cliente">
+                  <span id="client-sig-empty-label" class="text-[10px] font-mono text-zinc-500 italic text-center px-2">
+                    [ Esperando firma digital en el panel izquierdo... ]
+                  </span>
+                </div>
+
+                <div class="border-t sow-border pt-1.5 flex justify-between text-[9px] font-mono sow-text-zinc">
+                  <span id="preview-client-sign-name">Marc Rovira (CTO)</span>
+                  <span id="preview-client-sign-date">Pendiente</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Pie del SOW -->
+          <div class="border-t sow-border pt-3 flex flex-col sm:flex-row items-center justify-between text-[9px] font-mono sow-text-zinc gap-2">
+            <span>🛡️ Statement of Work Blindado • Protocolo Libra Dura • Concilio ACE 161914</span>
+            <span class="text-zinc-500">Generado de forma soberana sin tracking externo</span>
+          </div>
+
+        </article>
+
+        <!-- Barra Inferior de Acción y Contacto Directo -->
+        <div class="p-4 rounded-2xl theme-card border flex flex-col sm:flex-row items-center justify-between gap-3 no-print">
+          <div>
+            <h4 class="text-xs font-bold text-white flex items-center gap-1.5">
+              <span>💬</span> ¿Listo para arrancar el Sprint?
+            </h4>
+            <p class="text-[11px] text-zinc-400 mt-0.5">
+              Copia el resumen formal o envía un mensaje directo a Signal para reservar fecha de despliegue.
+            </p>
+          </div>
+          
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="https://signal.me/#u/k4li.89" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-lg">
+              <span>🚀</span> Abrir Canal Signal
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER GENERAL -->
+    <footer class="pt-6 pb-4 border-t theme-border text-center text-xs font-mono text-zinc-500 space-y-1 no-print">
+      <p>K4L1 STUDIO // Concilio ACE • Frecuencia Operativa 189.89.619 Hz • Muro de Contención Kanuv 🛡️</p>
+      <p class="text-[10px]">Cero Vendor Lock-in • Transparencia Absoluta • Resiliencia Linux Soberana</p>
+    </footer>
+
+  </div>
+
+  <!-- TOAST DE NOTIFICACIÓN FLOTANTE -->
+  <div id="feedback-toast" class="fixed bottom-6 right-6 z-50 transform translate-y-10 opacity-0 pointer-events-none px-4 py-2.5 rounded-xl bg-zinc-900 border border-emerald-500/50 shadow-2xl flex items-center gap-2.5 text-xs font-mono text-emerald-300">
+    <span class="text-base">✓</span>
+    <span id="toast-message">Propuesta copiada al portapapeles</span>
+  </div>
+
+  <!-- LÓGICA DE CONTROL AUTÓNOMA Y FIRMA DIGITAL -->
+  <script>
+    // ESTADO DE CONFIGURACIÓN DEL CONTRATO
+    const sowState = {
+      theme: 'anuu',
+      serviceKey: 'siem',
+      slaKey: 'standard',
+      ndaEnabled: true,
+      addons: {
+        pentest: false,
+        docker: false,
+        runbook: false
+      },
+      client: {
+        org: "Vanguard Logistics S.L.",
+        contact: "Marc Rovira (CTO)",
+        tax: "ES-B84920194",
+        channel: "@mrovira.sec (Signal)"
+      },
+      signature: {
+        isSigned: false,
+        timestamp: null,
+        digest: null,
+        dataUrl: null
+      }
+    };
+
+    // CATÁLOGO DE SERVICIOS CANÓNICOS
+    const serviceCatalog = {
+      siem: {
+        name: "Auditoría, Hardening Linux & Despliegue Wazuh SIEM",
+        shortName: "Hardening & SIEM",
+        basePrice: 450,
+        tag: "Entorno Linux Blindado",
+        scopeDesc: "Intervención técnica forense sobre servidores Linux para fortificación exhaustiva de accesos, cierre de puertos no esenciales, detección activa de credential dumping (MITRE T1003) y entrega de informe pericial con runbook de mitigación.",
+        deliverables: [
+          "Hardening de SSH: Claves Ed25519 estrictas, desactivación de login root y mitigación de fuerza bruta con Fail2ban / CrowdSec.",
+          "Configuración e inspección de cortafuegos nftables / UFW con política restrictiva 'Default Drop'.",
+          "Despliegue y afinado del agente Wazuh SIEM con monitorización de integridad de archivos (FIM) en /etc, /bin y /usr.",
+          "Verificación forense de permisos de kernel (sysctl hardening, ASLR, fs.protected_hardlinks).",
+          "Informe pericial de brechas mitigadas y documento formal de entrega."
+        ]
+      },
+      react: {
+        name: "Dashboards React, Web Apps & Generative UI",
+        shortName: "Dashboards React & Web Apps",
+        basePrice: 350,
+        tag: "Vite + React 19 Seinen",
+        scopeDesc: "Diseño y construcción de aplicaciones web de alto rendimiento, micro-frontends interactivos en tiempo real y dashboards analíticos construidos sin plantillas genéricas, optimizados para ultra-baja latencia y fidelidad visual.",
+        deliverables: [
+          "Arquitectura modular moderna con Vite, React 19 y Tailwind CSS.",
+          "Visualización reactiva en tiempo real (WebSockets / SSE / polling inteligente).",
+          "Sistema de temas multi-estilo dinámicos (paletas Seinen y Dark Mode pericial).",
+          "Optimización de rendimiento Lighthouse 95+ en Core Web Vitals.",
+          "Código fuente limpio, modular y documentado en repositorio privado Git."
+        ]
+      },
+      local_ai: {
+        name: "Despliegue de IA Local Soberana (On-Premise)",
+        shortName: "IA Local Soberana",
+        basePrice: 600,
+        tag: "Inferencia Privada GGUF / vLLM",
+        scopeDesc: "Aprovisionamiento de modelos de inteligencia artificial en hardware local o servidores privados del cliente. Elimina al 100% las fugas de información sensible a OpenAI u otras nubes externas, garantizando soberanía tecnológica total y cumplimiento de GDPR.",
+        deliverables: [
+          "Instalación y optimización de motor de inferencia local (Ollama / vLLM / llama.cpp).",
+          "Pipeline de Retrieval-Augmented Generation (RAG) soberano para consulta privada de bases de datos internas.",
+          "Aislamiento de red: Cero dependencias ni llamadas salientes a servicios cloud de terceros.",
+          "Interfaz web privada con autenticación de usuarios y cifrado de sesiones TLS.",
+          "Guía pericial de mantenimiento y cuantización de modelos adaptada al hardware disponible."
+        ]
+      },
+      bots: {
+        name: "Automatización, Scrapers Resilientes & Bots Python",
+        shortName: "Bots & Scrapers Python",
+        basePrice: 200,
+        tag: "Python Resiliente 24/7",
+        scopeDesc: "Desarrollo de scrapers de alta resiliencia para extracción de datos de mercado, bots de alerta y scripts desatendidos con rotación de cabeceras, bypass antibloqueo y tolerancia a fallos.",
+        deliverables: [
+          "Scraper asíncrono con rotación de proxies, User-Agents y evasión heurística de CAPTCHAs.",
+          "Normalización de datos estructurados con volcado automatizado en PostgreSQL / SQLite / JSON.",
+          "Bot de telemetría y notificaciones automáticas para Signal / Telegram / Webhook.",
+          "Empaquetado como servicio systemd o contenedor Docker para ejecución autónoma 24/7.",
+          "Estrategia de reintentos exponenciales con registro estructurado de eventos (logging forense)."
+        ]
+      }
+    };
+
+    // OPCIONES DE SLA
+    const slaCatalog = {
+      standard: {
+        name: "Estándar (10 días laborables)",
+        markupRate: 0,
+        flatFee: 0,
+        badgeClass: "text-emerald-400",
+        explanation: "• SLA Estándar: Revisión pericial, desarrollo escalonado y pruebas con entrega garantizada en 10 días laborables tras la liquidación del Hito 1."
+      },
+      express: {
+        name: "Express Táctico (72 Horas)",
+        markupRate: 0.25,
+        flatFee: 0,
+        badgeClass: "text-amber-400",
+        explanation: "• SLA Express 72h (+25% Urgencia): Bloqueo prioritario de calendario 24/7 con dedicación exclusiva y entrega funcional garantizada en un máximo de 72 horas."
+      },
+      retainer: {
+        name: "Retainer Mensual (Soporte Continuo)",
+        markupRate: 0,
+        flatFee: 350,
+        badgeClass: "text-purple-400",
+        explanation: "• SLA Retainer Mensual (+350 €/mes): Incluye despliegue inicial + servicio de guardia mensual continuo, parches de seguridad periódicos y 8h/mes de soporte dedicado L1/L2."
+      }
+    };
+
+    // ADD-ONS
+    const addonCatalog = {
+      pentest: { name: "Penetration Testing Externo Pre-Entrega & Escaneo Nuclei", price: 150 },
+      docker: { name: "Dockerización Multi-Stage & Pipeline GitHub Actions", price: 120 },
+      runbook: { name: "Runbook Pericial & Diagramas de Arquitectura SVG", price: 80 }
+    };
+
+    // GENERAR CÓDIGO ÚNICO DE PROPUESTA
+    function generateProposalCode() {
+      const randomSeed = Math.floor(1000 + Math.random() * 9000);
+      return `SOW-2026-KANUV-${randomSeed}`;
+    }
+    const fixedProposalCode = generateProposalCode();
+
+    // GESTIÓN DE TEMAS CANÓNICOS
+    const themes = ["anuu", "blood", "gw2", "bioinfo", "duat", "neon"];
+
+    function setContractTheme(theme) {
+      if (!themes.includes(theme)) theme = "anuu";
+      sowState.theme = theme;
+      document.documentElement.setAttribute("data-theme", theme);
+      try {
+        localStorage.setItem("k4li_theme", theme);
+      } catch(e) {}
+
+      // Actualizar botones de temas
+      document.querySelectorAll("[id^='sow-theme-']").forEach(btn => {
+        btn.classList.remove("font-bold", "text-purple-300", "text-rose-300", "text-emerald-300", "text-cyan-300", "text-amber-300", "text-pink-300");
+        btn.classList.add("text-zinc-400");
+      });
+      const activeBtn = document.getElementById("sow-theme-" + theme);
+      if (activeBtn) {
+        activeBtn.classList.remove("text-zinc-400");
+        activeBtn.classList.add("font-bold");
+        if (theme === 'anuu') activeBtn.classList.add("text-purple-300");
+        if (theme === 'blood') activeBtn.classList.add("text-rose-300");
+        if (theme === 'gw2') activeBtn.classList.add("text-emerald-300");
+        if (theme === 'bioinfo') activeBtn.classList.add("text-cyan-300");
+        if (theme === 'duat') activeBtn.classList.add("text-amber-300");
+        if (theme === 'neon') activeBtn.classList.add("text-pink-300");
+      }
+    }
+
+    // Escuchar mensajes de ventana padre (iframe en index.html)
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'SET_THEME' && e.data.theme) {
+        setContractTheme(e.data.theme);
+      }
+    });
+
+    // SELECCIONAR SERVICIO
+    function selectService(key) {
+      if (!serviceCatalog[key]) return;
+      sowState.serviceKey = key;
+
+      document.querySelectorAll(".service-card").forEach(c => c.classList.remove("active"));
+      const activeCard = document.getElementById("srv-card-" + key);
+      if (activeCard) activeCard.classList.add("active");
+
+      updateContractLive();
+    }
+
+    // SELECCIONAR SLA
+    function setSla(key) {
+      if (!slaCatalog[key]) return;
+      sowState.slaKey = key;
+
+      document.querySelectorAll(".sla-pill").forEach(p => p.classList.remove("active"));
+      const activePill = document.getElementById("sla-" + key);
+      if (activePill) activePill.classList.add("active");
+
+      const slaExp = document.getElementById("sla-explanation");
+      if (slaExp) slaExp.innerText = slaCatalog[key].explanation;
+
+      updateContractLive();
+    }
+
+    // APLICAR PRESETS RÁPIDOS
+    function applySowPreset(preset) {
+      if (preset === 'sec_corp') {
+        document.getElementById("input-client-org").value = "FinTech Shield SL";
+        document.getElementById("input-client-contact").value = "Elena Vidal (CISO)";
+        document.getElementById("input-client-channel").value = "@evidal.sec (Signal)";
+        selectService('siem');
+        setSla('standard');
+        document.getElementById("addon-pentest").checked = true;
+        document.getElementById("addon-docker").checked = false;
+        document.getElementById("addon-runbook").checked = true;
+        document.getElementById("toggle-nda").checked = true;
+      } else if (preset === 'react_fin') {
+        document.getElementById("input-client-org").value = "Arbitrage Nexus Capital";
+        document.getElementById("input-client-contact").value = "Adrián Soria (Head of Trading)";
+        document.getElementById("input-client-channel").value = "@asoria.trader (Signal)";
+        selectService('react');
+        setSla('standard');
+        document.getElementById("addon-pentest").checked = false;
+        document.getElementById("addon-docker").checked = true;
+        document.getElementById("addon-runbook").checked = true;
+        document.getElementById("toggle-nda").checked = true;
+      } else if (preset === 'sovereign_ai') {
+        document.getElementById("input-client-org").value = "BioGenomica Labs";
+        document.getElementById("input-client-contact").value = "Dra. Isabel Prats (I+D)";
+        document.getElementById("input-client-channel").value = "@dr.prats (Signal)";
+        selectService('local_ai');
+        setSla('standard');
+        document.getElementById("addon-pentest").checked = true;
+        document.getElementById("addon-docker").checked = true;
+        document.getElementById("addon-runbook").checked = true;
+        document.getElementById("toggle-nda").checked = true;
+      } else if (preset === 'express_scraper') {
+        document.getElementById("input-client-org").value = "MarketPulse Analytics";
+        document.getElementById("input-client-contact").value = "Carlos Méndez (Lead Ops)";
+        document.getElementById("input-client-channel").value = "@cmendez.ops (Signal)";
+        selectService('bots');
+        setSla('express');
+        document.getElementById("addon-pentest").checked = false;
+        document.getElementById("addon-docker").checked = true;
+        document.getElementById("addon-runbook").checked = false;
+        document.getElementById("toggle-nda").checked = true;
+      }
+      updateContractLive();
+      showToast("Preset aplicado correctamente al SOW");
+    }
+
+    // CÁLCULO FINANCIERO Y ACTUALIZACIÓN EN VIVO
+    function updateContractLive() {
+      // 1. Leer datos del cliente
+      sowState.client.org = document.getElementById("input-client-org").value.trim() || "Entidad Cliente";
+      sowState.client.contact = document.getElementById("input-client-contact").value.trim() || "Responsable";
+      sowState.client.tax = document.getElementById("input-client-tax").value.trim() || "N/A";
+      sowState.client.channel = document.getElementById("input-client-channel").value.trim() || "Signal";
+
+      // 2. Leer add-ons y NDA
+      sowState.addons.pentest = document.getElementById("addon-pentest") ? document.getElementById("addon-pentest").checked : false;
+      sowState.addons.docker = document.getElementById("addon-docker") ? document.getElementById("addon-docker").checked : false;
+      sowState.addons.runbook = document.getElementById("addon-runbook") ? document.getElementById("addon-runbook").checked : false;
+      sowState.ndaEnabled = document.getElementById("toggle-nda") ? document.getElementById("toggle-nda").checked : true;
+
+      const currentService = serviceCatalog[sowState.serviceKey];
+      const currentSla = slaCatalog[sowState.slaKey];
+
+      // 3. Cálculo de importes
+      let subtotalBase = currentService.basePrice;
+      let addonsTotal = 0;
+      if (sowState.addons.pentest) addonsTotal += addonCatalog.pentest.price;
+      if (sowState.addons.docker) addonsTotal += addonCatalog.docker.price;
+      if (sowState.addons.runbook) addonsTotal += addonCatalog.runbook.price;
+
+      let slaFee = 0;
+      if (sowState.slaKey === 'express') {
+        slaFee = Math.round(subtotalBase * currentSla.markupRate);
+      } else if (sowState.slaKey === 'retainer') {
+        slaFee = currentSla.flatFee;
+      }
+
+      const totalInvestment = subtotalBase + addonsTotal + slaFee;
+      const milestone1 = Math.round(totalInvestment * 0.5);
+      const milestone2 = totalInvestment - milestone1; // asegura suma exacta en impares
+
+      // 4. Actualizar widgets de la columna izquierda (Cajas 50/50)
+      document.getElementById("box-hito1-price").innerText = milestone1.toLocaleString('es-ES') + " €";
+      document.getElementById("box-hito2-price").innerText = milestone2.toLocaleString('es-ES') + " €";
+
+      // 5. Actualizar vista previa del documento (Columna derecha)
+      document.getElementById("doc-code").innerText = fixedProposalCode;
+      
+      const today = new Date();
+      const dateStr = today.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+      document.getElementById("doc-date").innerText = `Fecha: ${dateStr} | Validez: 15 días`;
+
+      document.getElementById("preview-client-org").innerText = sowState.client.org;
+      document.getElementById("preview-client-contact").innerText = `Atn: ${sowState.client.contact}`;
+      document.getElementById("preview-client-tax").innerText = `NIF/CIF: ${sowState.client.tax}`;
+      document.getElementById("preview-client-channel").innerText = `Canal: ${sowState.client.channel}`;
+      document.getElementById("preview-client-sign-name").innerText = sowState.client.contact;
+
+      document.getElementById("preview-service-title").innerText = `${currentService.name}`;
+      document.getElementById("preview-service-tag").innerText = currentService.tag;
+      document.getElementById("preview-scope-desc").innerText = currentService.scopeDesc;
+
+      // Entregables
+      const deliverableUl = document.getElementById("preview-deliverables-list");
+      deliverableUl.innerHTML = "";
+      currentService.deliverables.forEach(d => {
+        const li = document.createElement("li");
+        li.className = "flex items-start gap-1.5";
+        li.innerHTML = `<span class="text-emerald-400 shrink-0">✓</span> <span>${d}</span>`;
+        deliverableUl.appendChild(li);
+      });
+
+      // SLA preview
+      const slaBadgeEl = document.getElementById("preview-sla-badge");
+      slaBadgeEl.className = `font-bold ${currentSla.badgeClass}`;
+      slaBadgeEl.innerText = currentSla.name;
+
+      // NDA preview toggle
+      const ndaSection = document.getElementById("preview-nda-section");
+      if (sowState.ndaEnabled) {
+        ndaSection.classList.remove("hidden");
+      } else {
+        ndaSection.classList.add("hidden");
+      }
+
+      // Tabla de Costes
+      const pricingTbody = document.getElementById("preview-pricing-table");
+      pricingTbody.innerHTML = `
+        <tr>
+          <td class="py-1.5 pr-2">
+            <span class="font-bold sow-text-white">${currentService.name}</span>
+            <div class="text-[9px] sow-text-zinc">Tarifa base llave en mano con alcance delimitado</div>
+          </td>
+          <td class="py-1.5 px-2 text-center sow-text-zinc">1</td>
+          <td class="py-1.5 pl-2 text-right sow-text-white font-bold">${subtotalBase.toLocaleString('es-ES')},00 €</td>
+        </tr>
+      `;
+
+      if (slaFee > 0) {
+        pricingTbody.innerHTML += `
+          <tr>
+            <td class="py-1.5 pr-2">
+              <span class="font-bold text-amber-400">Recargo SLA: ${currentSla.name}</span>
+              <div class="text-[9px] sow-text-zinc">${sowState.slaKey === 'express' ? 'Prioridad 24/7 y sprint 72h' : 'Mantenimiento y guardia mensual'}</div>
+            </td>
+            <td class="py-1.5 px-2 text-center sow-text-zinc">1</td>
+            <td class="py-1.5 pl-2 text-right sow-text-white font-bold">${slaFee.toLocaleString('es-ES')},00 €</td>
+          </tr>
+        `;
+      }
+
+      if (sowState.addons.pentest) {
+        pricingTbody.innerHTML += `
+          <tr>
+            <td class="py-1.5 pr-2 sow-text-white">${addonCatalog.pentest.name}</td>
+            <td class="py-1.5 px-2 text-center sow-text-zinc">1</td>
+            <td class="py-1.5 pl-2 text-right sow-text-white font-bold">${addonCatalog.pentest.price.toLocaleString('es-ES')},00 €</td>
+          </tr>
+        `;
+      }
+
+      if (sowState.addons.docker) {
+        pricingTbody.innerHTML += `
+          <tr>
+            <td class="py-1.5 pr-2 sow-text-white">${addonCatalog.docker.name}</td>
+            <td class="py-1.5 px-2 text-center sow-text-zinc">1</td>
+            <td class="py-1.5 pl-2 text-right sow-text-white font-bold">${addonCatalog.docker.price.toLocaleString('es-ES')},00 €</td>
+          </tr>
+        `;
+      }
+
+      if (sowState.addons.runbook) {
+        pricingTbody.innerHTML += `
+          <tr>
+            <td class="py-1.5 pr-2 sow-text-white">${addonCatalog.runbook.name}</td>
+            <td class="py-1.5 px-2 text-center sow-text-zinc">1</td>
+            <td class="py-1.5 pl-2 text-right sow-text-white font-bold">${addonCatalog.runbook.price.toLocaleString('es-ES')},00 €</td>
+          </tr>
+        `;
+      }
+
+      document.getElementById("preview-total-price").innerText = `${totalInvestment.toLocaleString('es-ES')},00 €`;
+      document.getElementById("preview-h1-price").innerText = `${milestone1.toLocaleString('es-ES')},00 €`;
+      document.getElementById("preview-h2-price").innerText = `${milestone2.toLocaleString('es-ES')},00 €`;
+
+      // Notificar a ventana padre si está en iframe para integraciones
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'K4L1_CONTRACT_UPDATE',
+            proposalCode: fixedProposalCode,
+            service: currentService.shortName,
+            totalPrice: totalInvestment,
+            milestone1: milestone1,
+            milestone2: milestone2,
+            sla: currentSla.name,
+            nda: sowState.ndaEnabled,
+            signed: sowState.signature.isSigned
+          }, '*');
+        }
+      } catch(e) {}
+    }
+
+    // CANVAS DE FIRMA DIGITAL CON SOPORTE RATÓN Y TOUCH
+    const canvas = document.getElementById("signature-canvas");
+    const ctx = canvas.getContext("2d");
+    let isDrawing = false;
+    let hasDrawn = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function resizeCanvas() {
+      // Ajuste de resolución interna para mantener trazo suave
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      
+      // Guardar contenido si ya había trazo
+      let backupImage = null;
+      if (hasDrawn) {
+        backupImage = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      }
+
+      canvas.width = rect.width * dpr;
+      canvas.height = 150 * dpr;
+      ctx.scale(dpr, dpr);
+
+      ctx.strokeStyle = "#38bdf8"; // Tinta cian luminosa
+      ctx.lineWidth = 2.4;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      if (backupImage) {
+        ctx.putImageData(backupImage, 0, 0);
+      }
+    }
+
+    function getCanvasCoordinates(e) {
+      const rect = canvas.getBoundingClientRect();
+      let clientX, clientY;
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function startDrawing(e) {
+      if (sowState.signature.isSigned) return; // Bloqueado tras estampar
+      isDrawing = true;
+      hasDrawn = true;
+      const coords = getCanvasCoordinates(e);
+      lastX = coords.x;
+      lastY = coords.y;
+      document.getElementById("sig-placeholder-hint").classList.add("hidden");
+      e.preventDefault();
+    }
+
+    function draw(e) {
+      if (!isDrawing || sowState.signature.isSigned) return;
+      const coords = getCanvasCoordinates(e);
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+
+      lastX = coords.x;
+      lastY = coords.y;
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    // Eventos de ratón
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseleave", stopDrawing);
+
+    // Eventos de pantalla táctil (móviles/tablets)
+    canvas.addEventListener("touchstart", startDrawing, { passive: false });
+    canvas.addEventListener("touchmove", draw, { passive: false });
+    canvas.addEventListener("touchend", stopDrawing);
+
+    // Limpiar Firma
+    function clearSignature() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasDrawn = false;
+      sowState.signature.isSigned = false;
+      sowState.signature.digest = null;
+      sowState.signature.dataUrl = null;
+
+      document.getElementById("sig-placeholder-hint").classList.remove("hidden");
+      document.getElementById("sig-hash-banner").classList.add("hidden");
+
+      const badge = document.getElementById("sig-status-badge");
+      badge.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700";
+      badge.innerText = "Pendiente de Trazo";
+
+      const stampBtn = document.getElementById("btn-stamp-sig");
+      stampBtn.innerHTML = "<span>🔒</span> Estampar en Contrato SOW";
+      stampBtn.classList.remove("bg-emerald-600");
+
+      // Reflejar en contrato
+      const img = document.getElementById("client-sig-img");
+      img.classList.add("hidden");
+      img.src = "";
+      document.getElementById("client-sig-empty-label").classList.remove("hidden");
+      document.getElementById("preview-client-sign-date").innerText = "Pendiente";
+
+      updateContractLive();
+    }
+
+    // Estampar Firma Digital en el SOW
+    function stampSignature() {
+      if (!hasDrawn) {
+        showToast("Por favor dibuja tu firma antes de estampar.");
+        return;
+      }
+
+      sowState.signature.isSigned = true;
+      const now = new Date();
+      sowState.signature.timestamp = now.toISOString().replace('T', ' ').substring(0, 19) + " UTC";
+      
+      // Hash pseudo-criptográfico forense basado en datos del SOW y longitud de bytes
+      const rawData = canvas.toDataURL("image/png");
+      sowState.signature.dataUrl = rawData;
+      
+      let hashAccumulator = 0;
+      for (let i = 0; i < rawData.length; i++) {
+        hashAccumulator = ((hashAccumulator << 5) - hashAccumulator) + rawData.charCodeAt(i);
+        hashAccumulator |= 0;
+      }
+      const hexHash = Math.abs(hashAccumulator).toString(16).toUpperCase().padStart(8, '0');
+      sowState.signature.digest = `SHA-256: 89F619-${hexHash}-${fixedProposalCode}`;
+
+      // Actualizar UI del panel izquierdo
+      const badge = document.getElementById("sig-status-badge");
+      badge.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold";
+      badge.innerText = "✓ Firma Estampada & Verificada";
+
+      document.getElementById("sig-hash-banner").classList.remove("hidden");
+      document.getElementById("sig-timestamp").innerText = sowState.signature.timestamp;
+      document.getElementById("sig-digest").innerText = sowState.signature.digest;
+
+      const stampBtn = document.getElementById("btn-stamp-sig");
+      stampBtn.innerHTML = "<span>✓</span> Firma Sellada";
+      stampBtn.classList.add("bg-emerald-600");
+
+      // Reflejar firma en el documento pericial (Panel derecho)
+      const sigImg = document.getElementById("client-sig-img");
+      sigImg.src = rawData;
+      sigImg.classList.remove("hidden");
+      document.getElementById("client-sig-empty-label").classList.add("hidden");
+      document.getElementById("preview-client-sign-date").innerText = sowState.signature.timestamp.substring(0, 10);
+
+      showToast("Firma estampada exitosamente en el SOW");
+      updateContractLive();
+    }
+
+    // COPIAR PROPUESTA FORMAL PARA SIGNAL (@k4li.89)
+    function copySowForSignal() {
+      const currentService = serviceCatalog[sowState.serviceKey];
+      const currentSla = slaCatalog[sowState.slaKey];
+      const totalInvestment = document.getElementById("preview-total-price").innerText;
+      const h1 = document.getElementById("preview-h1-price").innerText;
+      const h2 = document.getElementById("preview-h2-price").innerText;
+
+      const addonsList = [];
+      if (sowState.addons.pentest) addonsList.push("Penetration Testing (+150€)");
+      if (sowState.addons.docker) addonsList.push("Dockerización & CI/CD (+120€)");
+      if (sowState.addons.runbook) addonsList.push("Runbook Pericial (+80€)");
+
+      const sigStatus = sowState.signature.isSigned 
+        ? `FIRMADO DIGITALMENTE (${sowState.signature.digest})` 
+        : `PENDIENTE DE FIRMA FINAL`;
+
+      const proposalMarkdown = 
+`=============================================================
+  STATEMENT OF WORK (SOW) BLINDADO // K4L1 STUDIO
+  Emisión Forense: Concilio ACE 161914 (Kanuv 🛡️)
+=============================================================
+ID DE PROPUESTA: ${fixedProposalCode}
+FECHA: ${new Date().toISOString().substring(0, 10)}
+
+DATOS DEL CLIENTE:
+- Entidad: ${sowState.client.org}
+- Responsable: ${sowState.client.contact}
+- NIF/CIF: ${sowState.client.tax}
+- Canal Seguro: ${sowState.client.channel}
+
+ALCANCE TÉCNICO:
+- Servicio Principal: ${currentService.name}
+- Nivel de Servicio (SLA): ${currentSla.name}
+- Add-ons: ${addonsList.length > 0 ? addonsList.join(", ") : "Ninguno"}
+- Protocolo NDA Mutuo E2EE: ${sowState.ndaEnabled ? "ACTIVO & VINCULANTE (Signal/Age/GPG)" : "Estándar"}
+
+CONDICIONES ECONÓMICAS (REGLA 50/50):
+- Inversión Total Neta: ${totalInvestment}
+• Hito 1 (50% Kick-off & Sprint Lock): ${h1}
+• Hito 2 (50% Validación Staging & Entrega): ${h2}
+
+ESTADO DE FIRMA:
+- Prestador: K4L1 STUDIO (Sello Kanuv 🛡️ Verificado)
+- Cliente: ${sigStatus}
+
+CANAL DE INICIO DE SPRINT:
+- Signal Directo: https://signal.me/#u/k4li.89
+=============================================================`;
+
+      navigator.clipboard.writeText(proposalMarkdown).then(() => {
+        showToast("¡Propuesta SOW copiada! Lista para enviar por Signal a @k4li.89");
+      }).catch(() => {
+        alert("Propuesta generada. Cópiala directamente desde la vista previa.");
+      });
+    }
+
+    // FEEDBACK TOAST VISUAL
+    let toastTimeout = null;
+    function showToast(message) {
+      const toast = document.getElementById("feedback-toast");
+      const msgSpan = document.getElementById("toast-message");
+      msgSpan.innerText = message;
+      
+      toast.classList.remove("opacity-0", "translate-y-10", "pointer-events-none");
+      toast.classList.add("opacity-100", "translate-y-0");
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "translate-y-10", "pointer-events-none");
+      }, 3000);
+    }
+
+    // INICIALIZACIÓN
+    window.addEventListener("DOMContentLoaded", () => {
+      // 1. Cargar tema guardado
+      try {
+        const savedTheme = localStorage.getItem("k4li_theme") || "anuu";
+        setContractTheme(savedTheme);
+      } catch(e) {
+        setContractTheme("anuu");
+      }
+
+      // 2. Inicializar canvas con resolución correcta
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      // 3. Render inicial
+      updateContractLive();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Soberanía & Costes de IA | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* =========================================================================
+       TEMAS CANÓNICOS DEL CONCILIO ACE (161914) & K4L1 STUDIO
+       ========================================================================= */
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.96);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+      --chart-cloud: #ef4444;
+      --chart-local: #a855f7;
+      --chart-bep: #10b981;
+    }
+
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.96);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+      --chart-cloud: #f43f5e;
+      --chart-local: #fb7185;
+      --chart-bep: #fbbf24;
+    }
+
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.96);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.3);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+      --chart-cloud: #f97316;
+      --chart-local: #10b981;
+      --chart-bep: #38bdf8;
+    }
+
+    [data-theme="bioinfo"] {
+      --bg-main: #020a07;
+      --bg-header: rgba(4, 18, 13, 0.96);
+      --bg-card: #051b13;
+      --bg-card-sub: #010604;
+      --border-card: #0f3d2e;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #10b981;
+      --text-main: #ecfeff;
+      --text-muted: #67e8f9;
+      --glow-color: rgba(6, 182, 212, 0.3);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(34, 211, 238, 0.4);
+      --chart-cloud: #ec4899;
+      --chart-local: #06b6d4;
+      --chart-bep: #10b981;
+    }
+
+    [data-theme="duat"] {
+      --bg-main: #0c0904;
+      --bg-header: rgba(22, 17, 7, 0.96);
+      --bg-card: #191307;
+      --bg-card-sub: #080602;
+      --border-card: #45340f;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ffd700;
+      --text-main: #fef3c7;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(251, 191, 36, 0.4);
+      --chart-cloud: #ef4444;
+      --chart-local: #f59e0b;
+      --chart-bep: #10b981;
+    }
+
+    [data-theme="neon"] {
+      --bg-main: #030007;
+      --bg-header: rgba(12, 0, 24, 0.96);
+      --bg-card: #0e001c;
+      --bg-card-sub: #020004;
+      --border-card: rgba(255, 0, 127, 0.5);
+      --accent-primary: #ff007f;
+      --accent-hover: #e60073;
+      --accent-secondary: #00f7ff;
+      --text-main: #ffffff;
+      --text-muted: #00f7ff;
+      --glow-color: rgba(255, 0, 127, 0.45);
+      --badge-bg: rgba(255, 0, 127, 0.15);
+      --badge-border: rgba(255, 0, 127, 0.5);
+      --chart-cloud: #ff007f;
+      --chart-local: #00f7ff;
+      --chart-bep: #39ff14;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
+    }
+
+    .font-mono-num {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      transition: all 0.25s ease;
+    }
+
+    .theme-card:hover {
+      box-shadow: 0 0 25px -5px var(--glow-color);
+    }
+
+    .theme-card-sub {
+      background-color: var(--bg-card-sub);
+      border: 1px solid var(--border-card);
+    }
+
+    .theme-border {
+      border-color: var(--border-card);
+    }
+
+    .theme-accent-text {
+      color: var(--accent-secondary);
+    }
+
+    .theme-accent-bg {
+      background-color: var(--accent-primary);
+    }
+    .theme-accent-bg:hover {
+      background-color: var(--accent-hover);
+    }
+
+    /* Sliders personalizados de alto contraste */
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #141422;
+      border-radius: 4px;
+      outline: none;
+      border: 1px solid var(--border-card);
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-primary);
+      transition: transform 0.1s ease;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-secondary);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-primary);
+    }
+
+    /* Botones de opción activa */
+    .btn-select.active {
+      border-color: var(--accent-secondary) !important;
+      background: var(--badge-bg) !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 18px -4px var(--glow-color);
+    }
+
+    /* Pulso animado para el Break-Even Point */
+    @keyframes bepPulse {
+      0% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.35); opacity: 0.3; }
+      100% { transform: scale(1); opacity: 0.9; }
+    }
+    .bep-glow {
+      animation: bepPulse 2.4s infinite ease-in-out;
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 min-h-screen">
+
+  <!-- Contenedor Maestro -->
+  <div id="k4li-ai-calculator" class="max-w-7xl mx-auto space-y-6">
+
+    <!-- Header Cockpit & Navegación -->
+    <header class="theme-card p-4 sm:p-5 rounded-2xl border flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div class="text-center sm:text-left space-y-1">
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-zinc-400 hover:text-white bg-black/40 px-2.5 py-1 rounded-lg border theme-border transition-all">
+            <span>←</span> Volver a K4L1 Studio
+          </a>
+          <span class="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Soberanía & Costes de IA 161914
+          </span>
+          <span class="text-[11px] font-mono text-zinc-400 px-2 py-0.5 rounded bg-black/40 border theme-border">
+            v4.2 Kilonova 🌟 & Saze 🌿
+          </span>
+          <span class="text-[11px] font-mono text-zinc-500">189.89.619 Hz</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-black text-white flex items-center justify-center sm:justify-start gap-2 mt-1">
+          <span>🧮</span> Simulador de Soberanía & Costes de IA (Local vLLM vs Cloud APIs)
+        </h1>
+        <p class="text-xs text-zinc-400 max-w-3xl leading-relaxed">
+          Demostración matemática precisa de TCO (Total Cost of Ownership), amortización de hardware y soberanía de datos GDPR. Compara OpenAI GPT-4o, Claude 3.5 Sonnet y Gemini 1.5 Pro frente a clústeres locales auto-alojados vLLM en hardware propio.
+        </p>
+      </div>
+
+      <!-- Selector de Temas del Concilio & Botón Signal E2EE -->
+      <div class="flex flex-col sm:flex-row items-center gap-2 no-print">
+        <div class="flex items-center gap-1 bg-black/50 p-1 rounded-xl border theme-border text-xs">
+          <span class="text-[10px] font-mono text-zinc-400 px-1.5 hidden sm:inline">🎨 Tema:</span>
+          <button onclick="switchAiTheme('anuu')" id="tbtn-anuu" title="Bruma Anuu" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-purple-300 bg-purple-500/20 border border-purple-500/50">🌫️ Anuu</button>
+          <button onclick="switchAiTheme('blood')" id="tbtn-blood" title="Búnker Blood" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-rose-300">🛡️ Blood</button>
+          <button onclick="switchAiTheme('gw2')" id="tbtn-gw2" title="Kilonova GW2" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-emerald-300">⚡ GW2</button>
+          <button onclick="switchAiTheme('bioinfo')" id="tbtn-bioinfo" title="BioCode" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-cyan-300">🧬 Bio</button>
+          <button onclick="switchAiTheme('duat')" id="tbtn-duat" title="Anubis Duat" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-amber-300">⚖️ Duat</button>
+          <button onclick="switchAiTheme('neon')" id="tbtn-neon" title="Kali Neón" class="px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-pink-300">🌸 Neón</button>
+        </div>
+
+        <a id="btn-top-signal" href="https://signal.me/#u/k4li.89" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/30 transition-all text-xs font-mono flex items-center gap-1.5 font-bold">
+          <span>💬</span> Kali Signal E2EE
+        </a>
+      </div>
+    </header>
+
+    <!-- Barra de Perfiles Rápidos (Casos de Uso Corporativos Reales) -->
+    <div class="theme-card p-3 sm:p-4 rounded-xl border flex flex-col md:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="text-sm">⚡</span>
+        <span class="text-xs font-bold font-mono uppercase text-white">Escenarios Predefinidos:</span>
+        <span class="text-[11px] text-zinc-400 hidden lg:inline">Ajusta los parámetros con un solo clic:</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="applyAiPreset('startup')" class="preset-btn px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-black/40 border theme-border hover:border-zinc-400 text-zinc-300 transition-all flex items-center gap-1.5">
+          <span>🚀</span> Startup RAG (15M / 1x 3090)
+        </button>
+        <button onclick="applyAiPreset('pyme')" class="preset-btn px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-black/40 border theme-border hover:border-zinc-400 text-zinc-300 transition-all flex items-center gap-1.5">
+          <span>🏢</span> PYME Corporativa (60M / 32B Coder)
+        </button>
+        <button onclick="applyAiPreset('enterprise')" class="preset-btn px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-black/40 border theme-border hover:border-zinc-400 text-zinc-300 transition-all flex items-center gap-1.5">
+          <span>🏛️</span> Enterprise Frontier (200M / 70B FP8)
+        </button>
+        <button onclick="applyAiPreset('heavyload')" class="preset-btn px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-black/40 border theme-border hover:border-zinc-400 text-zinc-300 transition-all flex items-center gap-1.5">
+          <span>🔥</span> Heavy Load (500M / Hetzner)
+        </button>
+      </div>
+    </div>
+
+    <!-- 4 Tarjetas KPI Clave en Vivo -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- KPI 1: Coste Cloud Mensual -->
+      <div class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">Coste Cloud Mensual</span>
+          <span id="badge-cloud-model" class="px-2 py-0.5 rounded text-[10px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/40">
+            OpenAI GPT-4o
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-1">
+          <div id="kpi-cloud-monthly" class="text-2xl sm:text-3xl font-black font-mono-num text-rose-400">
+            0,00 €
+          </div>
+          <span class="text-xs text-zinc-500 font-mono">/ mes</span>
+        </div>
+        <div class="mt-1 text-[11px] font-mono text-zinc-500 flex justify-between">
+          <span>Gasto anual: <strong id="kpi-cloud-annual" class="text-zinc-300">0 €</strong></span>
+          <span class="text-rose-400 font-semibold">Gasto a fondo perdido</span>
+        </div>
+      </div>
+
+      <!-- KPI 2: Inversión Inicial Local -->
+      <div class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">Inversión Inicial Local</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-300 border border-purple-500/40">
+            CAPEX + K4L1 Setup
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-1">
+          <div id="kpi-local-initial" class="text-2xl sm:text-3xl font-black font-mono-num text-purple-300">
+            1.950 €
+          </div>
+          <span class="text-xs text-zinc-500 font-mono">pago único</span>
+        </div>
+        <div class="mt-1 text-[11px] font-mono text-zinc-500 flex justify-between">
+          <span>Mantenimiento/Luz: <strong id="kpi-local-opex" class="text-zinc-300">45 €/mes</strong></span>
+          <span class="text-emerald-400 font-semibold">Hardware en propiedad</span>
+        </div>
+      </div>
+
+      <!-- KPI 3: Punto de Equilibrio (Break-Even) -->
+      <div class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">Punto de Equilibrio (BEP)</span>
+          <span id="badge-bep-status" class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+            Amortización Rápida
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-2">
+          <div id="kpi-bep-months" class="text-2xl sm:text-3xl font-black font-mono-num text-emerald-400">
+            3.2 Meses
+          </div>
+          <span id="kpi-bep-days" class="text-xs font-mono text-zinc-400">(~96 días)</span>
+        </div>
+        <div class="mt-1 text-[11px] font-mono text-zinc-500 flex justify-between">
+          <span>Retorno de inversión: <strong id="kpi-bep-roi" class="text-emerald-400">+312% / año</strong></span>
+          <span class="text-zinc-400">100% Amortizado</span>
+        </div>
+      </div>
+
+      <!-- KPI 4: Ahorro Neto Acumulado 1er Año -->
+      <div class="theme-card p-4 rounded-xl border relative overflow-hidden">
+        <div class="flex items-center justify-between text-xs text-zinc-400">
+          <span class="font-mono uppercase tracking-wider">Ahorro Neto 1er Año</span>
+          <span id="badge-savings-pct" class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold">
+            -82.4% Coste
+          </span>
+        </div>
+        <div class="mt-2 flex items-baseline gap-1">
+          <div id="kpi-savings-1y" class="text-2xl sm:text-3xl font-black font-mono-num text-cyan-300">
+            +6.480 €
+          </div>
+          <span class="text-xs text-zinc-500 font-mono">limpios</span>
+        </div>
+        <div class="mt-1 text-[11px] font-mono text-zinc-500 flex justify-between">
+          <span>Ahorro 3 años: <strong id="kpi-savings-3y" class="text-emerald-400">+24.120 €</strong></span>
+          <span class="text-cyan-400">En caja propia</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN CENTRAL: CONTROLES INTERACTIVOS (Configuración vs Volúmenes) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- Columna Izquierda: Selección de Modelos, Cuantización y Hardware (7 cols) -->
+      <div class="lg:col-span-7 space-y-5">
+        
+        <!-- Bloque 1: Comparativa Cloud vs Local -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">🌐</span>
+              <h2 class="text-xs font-bold font-mono uppercase tracking-wider text-white">
+                1. Selección de Modelos a Comparar
+              </h2>
+            </div>
+            <span class="text-[11px] font-mono text-zinc-500">Tarifas oficiales 2026</span>
+          </div>
+
+          <!-- Selector de API Cloud -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Proveedor Cloud (Coste Recurrente a Reemplazar):</span>
+              <span id="cloud-rates-label" class="text-[11px] font-mono text-rose-300">Input: 2.33€/1M | Output: 9.30€/1M</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <button onclick="setCloudModel('gpt-4o')" id="cbtn-gpt-4o" class="btn-select active p-2.5 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white flex items-center justify-between">
+                  <span>OpenAI GPT-4o</span>
+                  <span class="text-[10px] text-zinc-400">Flagship</span>
+                </div>
+                <div class="text-[11px] font-mono text-zinc-400 mt-0.5">$2.50 in / $10.00 out</div>
+                <div class="text-[10px] text-zinc-500 mt-1">Latencia: ~750ms • USA</div>
+              </button>
+
+              <button onclick="setCloudModel('claude-3-5-sonnet')" id="cbtn-claude-3-5-sonnet" class="btn-select p-2.5 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white flex items-center justify-between">
+                  <span>Claude 3.5 Sonnet</span>
+                  <span class="text-[10px] text-zinc-400">Anthropic</span>
+                </div>
+                <div class="text-[11px] font-mono text-zinc-400 mt-0.5">$3.00 in / $15.00 out</div>
+                <div class="text-[10px] text-zinc-500 mt-1">Latencia: ~900ms • USA</div>
+              </button>
+
+              <button onclick="setCloudModel('gemini-1-5-pro')" id="cbtn-gemini-1-5-pro" class="btn-select p-2.5 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white flex items-center justify-between">
+                  <span>Gemini 1.5 Pro</span>
+                  <span class="text-[10px] text-zinc-400">Google</span>
+                </div>
+                <div class="text-[11px] font-mono text-zinc-400 mt-0.5">$3.50 in / $10.50 out</div>
+                <div class="text-[10px] text-zinc-500 mt-1">Latencia: ~1.1s • Google</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Selector de Modelo Local Auto-Alojado -->
+          <div class="space-y-2 pt-2 border-t theme-border">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Modelo Local Open-Weights (vLLM Engine):</span>
+              <span id="local-model-specs" class="text-[11px] font-mono text-emerald-400 font-bold">Qwen-2.5-Coder-32B • 32.5B Parámetros</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button onclick="setLocalModel('llama-3.1-8b')" id="lbtn-llama-3.1-8b" class="btn-select p-2.5 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white flex items-center justify-between">
+                  <span>Llama-3.1-8B</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Ultra Ligero</span>
+                </div>
+                <div class="text-[11px] text-zinc-400 mt-1">Meta AI • 128k contexto • 8.03B params</div>
+                <div class="text-[10px] text-zinc-500 mt-0.5">Soporte, extracción JSON, RAG corporativo rápido.</div>
+              </button>
+
+              <button onclick="setLocalModel('mistral-nemo-12b')" id="lbtn-mistral-nemo-12b" class="btn-select p-2.5 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white flex items-center justify-between">
+                  <span>Mistral Nemo 12B</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300">Multilingüe</span>
+                </div>
+                <div class="text-[11px] text-zinc-400 mt-1">Mistral & NVIDIA • 128k ctx • 12.2B params</div>
+                <div class="text-[10px] text-zinc-500 mt-0.5">Excelente balance en documentos, contratos y síntesis.</div>
+              </button>
+
+              <button onclick="setLocalModel('qwen-2.5-coder-32b')" id="lbtn-qwen-2.5-coder-32b" class="btn-select active p-2.5 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white flex items-center justify-between">
+                  <span>Qwen-2.5-Coder-32B</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">Frontier Coder</span>
+                </div>
+                <div class="text-[11px] text-zinc-400 mt-1">Alibaba • 128k contexto • 32.5B params</div>
+                <div class="text-[10px] text-zinc-500 mt-0.5">A la par de GPT-4o en Python, SQL, refactor y bash.</div>
+              </button>
+
+              <button onclick="setLocalModel('llama-3.1-70b')" id="lbtn-llama-3.1-70b" class="btn-select p-2.5 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white flex items-center justify-between">
+                  <span>Llama-3.1-70B</span>
+                  <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">Frontier Máximo</span>
+                </div>
+                <div class="text-[11px] text-zinc-400 mt-1">Meta AI • 128k contexto • 70.6B params</div>
+                <div class="text-[10px] text-zinc-500 mt-0.5">Razonamiento profundo complejo y agentes autónomos.</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque 2: Cuantización & Hardware Sugerido -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">⚙️</span>
+              <h2 class="text-xs font-bold font-mono uppercase tracking-wider text-white">
+                2. Cuantización de Pesos & Selección de Hardware
+              </h2>
+            </div>
+            <span class="text-[11px] font-mono text-zinc-500">Optimización vLLM PagedAttention</span>
+          </div>
+
+          <!-- Cuantización -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Precisión y Cuantización (Bytes por Parámetro):</span>
+              <span id="quant-desc-label" class="text-[11px] font-mono text-purple-300">AWQ 4-bit (0.55 Bytes/param • 98.9% calidad)</span>
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+              <button onclick="setQuantization('fp16')" id="qbtn-fp16" class="btn-select p-2 rounded-xl border theme-border text-xs transition-all">
+                <div class="font-bold text-white">FP16 / BF16</div>
+                <div class="text-[10px] text-zinc-400 font-mono mt-0.5">2.00 B / param</div>
+                <div class="text-[9px] text-zinc-500">100% Precisión</div>
+              </button>
+
+              <button onclick="setQuantization('fp8')" id="qbtn-fp8" class="btn-select p-2 rounded-xl border theme-border text-xs transition-all">
+                <div class="font-bold text-white">FP8 vLLM</div>
+                <div class="text-[10px] text-zinc-400 font-mono mt-0.5">1.00 B / param</div>
+                <div class="text-[9px] text-zinc-500">99.8% Calidad</div>
+              </button>
+
+              <button onclick="setQuantization('awq')" id="qbtn-awq" class="btn-select active p-2 rounded-xl border theme-border text-xs transition-all">
+                <div class="font-bold text-white">AWQ 4-bit</div>
+                <div class="text-[10px] text-zinc-400 font-mono mt-0.5">0.55 B / param</div>
+                <div class="text-[9px] text-emerald-400">Recomendado vLLM</div>
+              </button>
+
+              <button onclick="setQuantization('gguf_q4')" id="qbtn-gguf_q4" class="btn-select p-2 rounded-xl border theme-border text-xs transition-all">
+                <div class="font-bold text-white">GGUF Q4_K_M</div>
+                <div class="text-[10px] text-zinc-400 font-mono mt-0.5">0.58 B / param</div>
+                <div class="text-[9px] text-zinc-500">Ollama / CPU+GPU</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Selector de Hardware Local Sugerido -->
+          <div class="space-y-2 pt-2 border-t theme-border">
+            <label class="text-xs font-bold text-zinc-300 flex items-center justify-between">
+              <span>Infraestructura Local Sugerida:</span>
+              <span id="hardware-vram-label" class="text-[11px] font-mono text-amber-300">48 GB VRAM Total</span>
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <button onclick="setHardware('rtx-3090-single')" id="hbtn-rtx-3090-single" class="btn-select p-3 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white">1x RTX 3090 / 4090</div>
+                <div class="text-[11px] font-mono text-emerald-400 font-bold mt-0.5">24 GB VRAM GDDR6X</div>
+                <div class="text-[10px] text-zinc-400 mt-1">CAPEX HW: 1.200 €</div>
+                <div class="text-[10px] text-zinc-500">Setup K4L1: 750 € • Luz: ~45€/m</div>
+              </button>
+
+              <button onclick="setHardware('rtx-3090-dual')" id="hbtn-rtx-3090-dual" class="btn-select active p-3 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white">2x RTX 3090 / 4090</div>
+                <div class="text-[11px] font-mono text-purple-400 font-bold mt-0.5">48 GB VRAM Clúster TP=2</div>
+                <div class="text-[10px] text-zinc-400 mt-1">CAPEX HW: 2.400 €</div>
+                <div class="text-[10px] text-zinc-500">Setup K4L1: 1.450 € • Luz: ~90€/m</div>
+              </button>
+
+              <button onclick="setHardware('hetzner-baremetal')" id="hbtn-hetzner-baremetal" class="btn-select p-3 rounded-xl border theme-border text-left transition-all">
+                <div class="font-bold text-xs text-white">Hetzner Bare-Metal</div>
+                <div class="text-[11px] font-mono text-cyan-400 font-bold mt-0.5">Cloud Privado Dedicado</div>
+                <div class="text-[10px] text-zinc-400 mt-1">CAPEX HW: 0 € (Sin compra)</div>
+                <div class="text-[10px] text-zinc-500">Setup K4L1: 950 € • Alquiler: 180€/m</div>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Columna Derecha: Sliders de Tráfico & Concurrencia + Calculadora de VRAM (5 cols) -->
+      <div class="lg:col-span-5 space-y-5">
+        
+        <!-- Sliders de Volumen -->
+        <div class="theme-card p-5 rounded-2xl border space-y-5">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">🎚️</span>
+              <h2 class="text-xs font-bold font-mono uppercase tracking-wider text-white">
+                3. Volumen de Tráfico & Concurrencia
+              </h2>
+            </div>
+            <span class="text-[11px] font-mono text-zinc-500">Ajuste continuo</span>
+          </div>
+
+          <!-- Slider 1: Tokens Entrada (Prompt) -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <label for="sliderTokensIn" class="font-bold text-zinc-300 flex items-center gap-1.5">
+                <span>📥</span> Tokens Entrada / Mes (Prompts, RAG, Docs)
+              </label>
+              <span id="valTokensIn" class="font-mono font-bold text-xs theme-accent-text bg-black/50 px-2 py-0.5 rounded border theme-border">
+                60.000.000 tokens (60M)
+              </span>
+            </div>
+            <input type="range" id="sliderTokensIn" min="1" max="500" step="1" value="60" oninput="recalculateAll()">
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>1M (Piloto)</span>
+              <span>100M</span>
+              <span>250M</span>
+              <span>500M (Gran Escala)</span>
+            </div>
+          </div>
+
+          <!-- Slider 2: Tokens Salida (Generación) -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <label for="sliderTokensOut" class="font-bold text-zinc-300 flex items-center gap-1.5">
+                <span>📤</span> Tokens Salida / Mes (Respuestas, Código)
+              </label>
+              <span id="valTokensOut" class="font-mono font-bold text-xs theme-accent-text bg-black/50 px-2 py-0.5 rounded border theme-border">
+                15.000.000 tokens (15M)
+              </span>
+            </div>
+            <input type="range" id="sliderTokensOut" min="1" max="100" step="1" value="15" oninput="recalculateAll()">
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>1M (Mínimo)</span>
+              <span>25M</span>
+              <span>50M</span>
+              <span>100M (Heavy Gen)</span>
+            </div>
+          </div>
+
+          <!-- Slider 3: Concurrencia Simultánea -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <label for="sliderConcurrency" class="font-bold text-zinc-300 flex items-center gap-1.5">
+                <span>👥</span> Peticiones / Usuarios Concurrentes
+              </label>
+              <span id="valConcurrency" class="font-mono font-bold text-xs text-emerald-400 bg-black/50 px-2 py-0.5 rounded border theme-border">
+                35 usuarios simultáneos
+              </span>
+            </div>
+            <input type="range" id="sliderConcurrency" min="1" max="500" step="1" value="35" oninput="recalculateAll()">
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>1 usuario</span>
+              <span>50 concurrentes</span>
+              <span>200</span>
+              <span>500 concurrentes</span>
+            </div>
+          </div>
+
+          <!-- Resumen de throughput requerido -->
+          <div class="p-3 rounded-xl bg-black/40 border theme-border space-y-1 text-[11px] font-mono">
+            <div class="flex justify-between text-zinc-400">
+              <span>Throughput diario estimado:</span>
+              <strong id="val-daily-tokens" class="text-zinc-200">2.50M tokens / día</strong>
+            </div>
+            <div class="flex justify-between text-zinc-400">
+              <span>Rendimiento vLLM PagedAttention:</span>
+              <strong id="val-vllm-throughput" class="text-emerald-400">~65 tok/s (Continuous Batching)</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculadora de VRAM Requerida Matemática -->
+        <div class="theme-card p-5 rounded-2xl border space-y-4">
+          <div class="flex items-center justify-between border-b theme-border pb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-sm">🧮</span>
+              <h2 class="text-xs font-bold font-mono uppercase tracking-wider text-white">
+                4. Dimensionamiento de VRAM & KV-Cache
+              </h2>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
+              (Params * Bytes) * 1.2
+            </span>
+          </div>
+
+          <!-- Barra de Progreso de VRAM -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <span class="font-bold text-zinc-300">VRAM Requerida vs Capacidad:</span>
+              <span id="vram-meter-text" class="font-mono font-bold text-purple-300">
+                21.45 GB / 48.0 GB (44.7%)
+              </span>
+            </div>
+            <div class="w-full h-3 bg-black/60 rounded-full overflow-hidden border theme-border p-0.5">
+              <div id="vram-meter-bar" class="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-emerald-500 via-purple-500 to-indigo-500" style="width: 44.7%;"></div>
+            </div>
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>0 GB</span>
+              <span id="vram-capacity-marker">48 GB (Hardware Actual)</span>
+            </div>
+          </div>
+
+          <!-- Desglose Matemático Preciso -->
+          <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+            <div class="p-2.5 rounded-xl bg-black/40 border theme-border">
+              <span class="text-[10px] text-zinc-400 block">Pesos del Modelo:</span>
+              <span id="math-weights-gb" class="text-white font-bold text-sm">17.88 GB</span>
+              <span id="math-weights-formula" class="text-[9px] text-zinc-500 block">32.5B * 0.55B</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-black/40 border theme-border">
+              <span class="text-[10px] text-zinc-400 block">KV-Cache (x1.2 factor):</span>
+              <span id="math-overhead-gb" class="text-emerald-400 font-bold text-sm">+3.57 GB</span>
+              <span id="math-overhead-formula" class="text-[9px] text-zinc-500 block">20% Context buffer</span>
+            </div>
+          </div>
+
+          <!-- Estado y Diagnóstico de Ajuste -->
+          <div id="vram-status-box" class="p-3 rounded-xl border flex items-start gap-2.5 text-xs bg-emerald-950/20 border-emerald-900/40 text-emerald-300">
+            <span class="text-base" id="vram-status-icon">✅</span>
+            <div class="space-y-0.5">
+              <strong id="vram-status-title" class="block font-bold">Ajuste de VRAM Óptimo</strong>
+              <p id="vram-status-desc" class="text-[11px] text-zinc-400 leading-relaxed">
+                El modelo y el buffer de KV-Cache caben con total holgura en el clúster seleccionado. Permite ventanas de contexto largas (hasta 128k) sin caída de velocidad.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN DE GRÁFICA INTERACTIVA EN CANVAS 2D -->
+    <div class="theme-card p-5 sm:p-6 rounded-2xl border space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b theme-border pb-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-sm">📈</span>
+            <h2 class="text-sm sm:text-base font-bold font-mono uppercase tracking-wider text-white">
+              Curva de Costes Acumulados Mes a Mes (36 Meses / TCO)
+            </h2>
+          </div>
+          <p class="text-xs text-zinc-400 mt-0.5">
+            Compara la escalada lineal/exponencial del alquiler de tokens Cloud frente a la estabilización plana del hardware auto-alojado tras la inversión inicial.
+          </p>
+        </div>
+
+        <!-- Leyenda interactiva -->
+        <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
+          <div class="flex items-center gap-1.5 text-rose-400 font-bold bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-500/30">
+            <span class="w-3 h-0.5 bg-rose-500 rounded"></span>
+            <span id="legend-cloud-name">Cloud API (OpenAI)</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-purple-300 font-bold bg-purple-500/10 px-2.5 py-1 rounded-lg border border-purple-500/30">
+            <span class="w-3 h-0.5 bg-purple-400 rounded"></span>
+            <span>Local vLLM (K4L1 Studio)</span>
+          </div>
+          <div class="flex items-center gap-1.5 text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/30">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span id="legend-bep-label">Break-Even Point</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lienzo Canvas 2D con Overlay de Tooltip -->
+      <div class="relative w-full h-[360px] sm:h-[420px] bg-black/60 rounded-xl overflow-hidden border theme-border">
+        <canvas id="costEvolutionCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+
+        <!-- Tooltip Flotante del Canvas -->
+        <div id="chart-tooltip" class="absolute pointer-events-none hidden bg-black/90 border theme-border text-white text-xs font-mono p-3 rounded-xl shadow-2xl z-20 space-y-1.5 min-w-[210px] backdrop-blur-md">
+          <div id="tt-month-title" class="font-bold border-b theme-border pb-1 text-purple-300 flex items-center justify-between">
+            <span>Mes --</span>
+            <span id="tt-bep-tag" class="hidden text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">BEP</span>
+          </div>
+          <div class="flex justify-between items-center text-zinc-300">
+            <span class="flex items-center gap-1 text-rose-400">● Cloud Acumulado:</span>
+            <strong id="tt-cloud-cost" class="font-mono-num text-white">-- €</strong>
+          </div>
+          <div class="flex justify-between items-center text-zinc-300">
+            <span class="flex items-center gap-1 text-purple-400">● Local Acumulado:</span>
+            <strong id="tt-local-cost" class="font-mono-num text-white">-- €</strong>
+          </div>
+          <div class="flex justify-between items-center border-t theme-border pt-1 font-bold">
+            <span id="tt-diff-label" class="text-zinc-400">Ahorro Neto:</span>
+            <strong id="tt-net-savings" class="font-mono-num text-emerald-400">-- €</strong>
+          </div>
+        </div>
+
+        <!-- Callout del Break-Even embebido en canvas -->
+        <div id="canvas-bep-callout" class="absolute bottom-3 left-3 pointer-events-none bg-black/80 border theme-border px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-300 flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Amortización proyectada en: <strong id="canvas-bep-highlight" class="text-emerald-400 font-bold">Mes 3.2</strong></span>
+        </div>
+      </div>
+
+      <!-- Tabla Resumen de Ahorros Proyectados a 1, 2 y 3 Años -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-1">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase flex justify-between">
+            <span>Horizonte 1 Año (12 Meses)</span>
+            <span id="pct-saving-1y" class="text-emerald-400 font-bold">-78%</span>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <span class="text-xs text-zinc-400">Ahorro Neto en Caja:</span>
+            <span id="val-table-savings-1y" class="text-lg font-black font-mono-num text-emerald-400">+6.480 €</span>
+          </div>
+          <div class="text-[10px] font-mono text-zinc-500 flex justify-between pt-1 border-t theme-border">
+            <span>Cloud: <strong id="val-cloud-1y" class="text-zinc-300">8.970 €</strong></span>
+            <span>Local: <strong id="val-local-1y" class="text-zinc-300">2.490 €</strong></span>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-1">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase flex justify-between">
+            <span>Horizonte 2 Años (24 Meses)</span>
+            <span id="pct-saving-2y" class="text-emerald-400 font-bold">-88%</span>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <span class="text-xs text-zinc-400">Ahorro Neto en Caja:</span>
+            <span id="val-table-savings-2y" class="text-lg font-black font-mono-num text-emerald-400">+14.910 €</span>
+          </div>
+          <div class="text-[10px] font-mono text-zinc-500 flex justify-between pt-1 border-t theme-border">
+            <span>Cloud: <strong id="val-cloud-2y" class="text-zinc-300">17.940 €</strong></span>
+            <span>Local: <strong id="val-local-2y" class="text-zinc-300">3.030 €</strong></span>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-1">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase flex justify-between">
+            <span>Horizonte 3 Años (36 Meses)</span>
+            <span id="pct-saving-3y" class="text-emerald-400 font-bold">-91%</span>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <span class="text-xs text-zinc-400">Ahorro Neto en Caja:</span>
+            <span id="val-table-savings-3y" class="text-lg font-black font-mono-num text-emerald-400">+23.340 €</span>
+          </div>
+          <div class="text-[10px] font-mono text-zinc-500 flex justify-between pt-1 border-t theme-border">
+            <span>Cloud: <strong id="val-cloud-3y" class="text-zinc-300">26.910 €</strong></span>
+            <span>Local: <strong id="val-local-3y" class="text-zinc-300">3.570 €</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DE MATRIZ DE SOBERANÍA, PRIVACIDAD & SEGURIDAD -->
+    <div class="theme-card p-5 sm:p-6 rounded-2xl border space-y-4">
+      <div class="flex items-center justify-between border-b theme-border pb-3">
+        <div class="flex items-center gap-2">
+          <span class="text-sm">🛡️</span>
+          <h2 class="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-white">
+            Matriz de Soberanía Técnica: Local On-Premise vs Cloud de Terceros
+          </h2>
+        </div>
+        <span class="text-[11px] font-mono text-zinc-400">Cumplimiento Legal & Resiliencia</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs font-mono border-collapse">
+          <thead>
+            <tr class="border-b theme-border text-zinc-400 bg-black/40">
+              <th class="p-3">Dimensión Estratégica</th>
+              <th class="p-3 text-rose-400">Cloud APIs (OpenAI / Anthropic / Google)</th>
+              <th class="p-3 text-emerald-400">Clúster Local vLLM (K4L1 Studio)</th>
+              <th class="p-3">Impacto Empresarial</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y theme-border text-zinc-300">
+            <tr>
+              <td class="p-3 font-bold text-white">Privacidad & GDPR</td>
+              <td class="p-3 text-rose-300">❌ Datos viajan a servidores USA; DPA dependiente de terceros.</td>
+              <td class="p-3 text-emerald-300">✅ 100% On-Premise. Cero telemetría externa. Cumple GDPR nativo.</td>
+              <td class="p-3 text-zinc-400">Evita sanciones AEPD y fugas de propiedad intelectual.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-white">Fricción & Rate Limits</td>
+              <td class="p-3 text-rose-300">❌ Errores 429 (Too Many Requests), cuotas mensuales y colas.</td>
+              <td class="p-3 text-emerald-300">✅ Peticiones ilimitadas sin coste por token. PagedAttention continuo.</td>
+              <td class="p-3 text-zinc-400">Tus empleados nunca ven un aviso de cuota agotada.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-white">Latencia de Red</td>
+              <td class="p-3 text-rose-300">❌ 600 - 1.200 ms por latencia de internet e inferencia compartida.</td>
+              <td class="p-3 text-emerald-300">✅ Sub-50 ms en red local LAN a 10Gbps / PCI Express 4.0.</td>
+              <td class="p-3 text-zinc-400">Respuestas instantáneas en sistemas RAG y agentes ERP.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-white">Fine-Tuning & Control</td>
+              <td class="p-3 text-rose-300">❌ Opciones limitadas, costosas y alojadas en nubes ajenas.</td>
+              <td class="p-3 text-emerald-300">✅ Pesos del modelo modificables, LoRA local, embeddings propios.</td>
+              <td class="p-3 text-zinc-400">El conocimiento corporativo se queda para siempre en la empresa.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-white">Vendor Lock-in</td>
+              <td class="p-3 text-rose-300">❌ Deprecación forzosa de modelos cada 6-12 meses y subidas de precio.</td>
+              <td class="p-3 text-emerald-300">✅ Los pesos descargados no caducan jamás. Cero dependencia externa.</td>
+              <td class="p-3 text-zinc-400">Continuidad de negocio blindada a 10 años.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECCIÓN CTA: CONTRATACIÓN CON K4L1 STUDIO -->
+    <div class="theme-card p-6 sm:p-8 rounded-2xl border relative overflow-hidden bg-gradient-to-r from-purple-950/40 via-black to-emerald-950/30">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center lg:text-left">
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+            <span class="text-xs font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">
+              ⚡ Servicio Llave en Mano
+            </span>
+            <span class="text-xs font-mono text-zinc-400">Tarifa Cerrada: 750 € - 1.800 €</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-white">
+            Despliega tu Clúster de Inferencia Soberana con K4L1 Studio
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed">
+            Kali audita tu infraestructura, instala Linux hardened con vLLM y drivers CUDA optimizados, cuantiza el modelo a AWQ 4-bit/FP8, conecta una interfaz Web corporativa para tus empleados (Open-WebUI con RAG documental) y te entrega una API compatible con OpenAI para sustituir tu suscripción cloud en 48 horas.
+          </p>
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2 text-xs font-mono text-zinc-400">
+            <span class="flex items-center gap-1 text-emerald-400">✓ Cero cuotas de suscripción</span>
+            <span class="flex items-center gap-1 text-emerald-400">✓ Garantía de amortización</span>
+            <span class="flex items-center gap-1 text-emerald-400">✓ Soporte directo por Signal cifrado</span>
+          </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3 w-full sm:w-auto">
+          <a id="btn-cta-signal" href="https://signal.me/#u/k4li.89" target="_blank" class="py-3 px-6 rounded-xl theme-accent-bg text-white font-bold text-xs shadow-xl transition-all flex items-center justify-center gap-2 hover:opacity-95 text-center">
+            <span>💬</span> Contratar Despliegue de IA Local (Signal @k4li.89) ↗
+          </a>
+          
+          <button onclick="copyExecutiveReport()" id="btn-copy-report" class="py-2.5 px-4 rounded-xl bg-black/60 border theme-border hover:border-zinc-400 text-zinc-300 font-mono text-xs transition-all flex items-center justify-center gap-2 text-center">
+            <span>📋</span> Copiar Informe Ejecutivo al Portapapeles
+          </button>
+
+          <a href="../index.html" class="py-2 px-4 rounded-xl bg-zinc-900/60 hover:bg-zinc-800 text-zinc-400 text-center font-mono text-xs transition-all flex items-center justify-center gap-1">
+            <span>←</span> Volver al Portal de K4L1 Studio
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Discreto -->
+    <footer class="text-center py-4 text-xs font-mono text-zinc-500 border-t theme-border flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>
+        K4L1 STUDIO & ANUU-FORGE • Arquitectura de Soberanía Tecnológica
+      </div>
+      <div>
+        Firmado por: <span class="text-purple-400 font-bold">— Kilonova 🌟 & Saze 🌿</span> (189.89.619 Hz)
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- =========================================================================
+       MOTOR JAVASCRIPT DEL SIMULADOR & CANVAS 2D
+       ========================================================================= -->
+  <script>
+    // 1. BASES DE DATOS DEL MOTOR DE BENCHMARK
+    const CLOUD_MODELS = {
+      'gpt-4o': {
+        name: 'OpenAI GPT-4o',
+        provider: 'OpenAI',
+        inputEurPer1M: 2.33,  // $2.50 USD @ 0.93 EUR/USD
+        outputEurPer1M: 9.30, // $10.00 USD @ 0.93 EUR/USD
+        latency: '~750 ms',
+        badge: 'Flagship'
+      },
+      'claude-3-5-sonnet': {
+        name: 'Claude 3.5 Sonnet',
+        provider: 'Anthropic',
+        inputEurPer1M: 2.79,  // $3.00 USD
+        outputEurPer1M: 13.95, // $15.00 USD
+        latency: '~900 ms',
+        badge: 'Líder en Código'
+      },
+      'gemini-1-5-pro': {
+        name: 'Gemini 1.5 Pro',
+        provider: 'Google',
+        inputEurPer1M: 3.26,  // $3.50 USD
+        outputEurPer1M: 9.77,  // $10.50 USD
+        latency: '~1.1s',
+        badge: 'Gran Contexto'
+      }
+    };
+
+    const LOCAL_MODELS = {
+      'llama-3.1-8b': {
+        name: 'Llama-3.1-8B',
+        family: 'Meta AI',
+        paramsB: 8.03,
+        context: '128k',
+        speed: '110-160 tok/s',
+        desc: 'Soporte, extracción JSON y RAG ligero.',
+        defaultHw: 'rtx-3090-single'
+      },
+      'mistral-nemo-12b': {
+        name: 'Mistral Nemo 12B',
+        family: 'Mistral AI / NVIDIA',
+        paramsB: 12.2,
+        context: '128k',
+        speed: '85-125 tok/s',
+        desc: 'Excelente balance en documentos y multilingüe.',
+        defaultHw: 'rtx-3090-single'
+      },
+      'qwen-2.5-coder-32b': {
+        name: 'Qwen-2.5-Coder-32B',
+        family: 'Alibaba Cloud',
+        paramsB: 32.5,
+        context: '128k',
+        speed: '55-80 tok/s',
+        desc: 'A la par de GPT-4o en código, SQL y refactorización.',
+        defaultHw: 'rtx-3090-dual'
+      },
+      'llama-3.1-70b': {
+        name: 'Llama-3.1-70B',
+        family: 'Meta AI',
+        paramsB: 70.6,
+        context: '128k',
+        speed: '35-55 tok/s',
+        desc: 'Frontier máximo: razonamiento complejo y agentes.',
+        defaultHw: 'rtx-3090-dual'
+      }
+    };
+
+    const QUANTIZATIONS = {
+      'fp16': {
+        name: 'FP16 / BF16',
+        bytesPerParam: 2.00,
+        quality: '100% Precisión',
+        desc: 'FP16 (2.0 Bytes/param • 100% precisión)'
+      },
+      'fp8': {
+        name: 'FP8 vLLM',
+        bytesPerParam: 1.00,
+        quality: '99.8% Calidad',
+        desc: 'FP8 vLLM (1.0 Byte/param • 99.8% calidad nativa)'
+      },
+      'awq': {
+        name: 'AWQ 4-bit',
+        bytesPerParam: 0.55,
+        quality: '98.9% Calidad',
+        desc: 'AWQ 4-bit (0.55 Bytes/param • 98.9% calidad recomendada)'
+      },
+      'gguf_q4': {
+        name: 'GGUF Q4_K_M',
+        bytesPerParam: 0.58,
+        quality: '98.2% Calidad',
+        desc: 'GGUF Q4_K_M (0.58 Bytes/param • CPU/GPU mixto)'
+      }
+    };
+
+    const HARDWARE_CONFIGS = {
+      'rtx-3090-single': {
+        name: '1x RTX 3090 / 4090 (24 GB VRAM)',
+        vramGB: 24,
+        capexHw: 1200,
+        setupFee: 750,
+        opexMonthly: 45, // Luz 350W
+        desc: '1 GPU dedicada de 24 GB. Ideal para 8B, 12B o 32B AWQ.'
+      },
+      'rtx-3090-dual': {
+        name: '2x RTX 3090 / 4090 (48 GB VRAM Clúster TP=2)',
+        vramGB: 48,
+        capexHw: 2400,
+        setupFee: 1450,
+        opexMonthly: 90, // Luz 700W
+        desc: 'Clúster TP=2 con NVLink/PCIe 4.0. Permite 70B AWQ y 32B FP16.'
+      },
+      'hetzner-baremetal': {
+        name: 'Hetzner Bare-Metal Server (Cloud Privado)',
+        vramGB: 48,
+        capexHw: 0,
+        setupFee: 950,
+        opexMonthly: 180, // Alquiler mensual privado
+        desc: 'Servidor físico dedicado en la UE sin inversión en hardware.'
+      }
+    };
+
+    // 2. ESTADO REACTIVO DE LA APLICACIÓN
+    let state = {
+      cloudModel: 'gpt-4o',
+      localModel: 'qwen-2.5-coder-32b',
+      quantization: 'awq',
+      hardware: 'rtx-3090-dual',
+      tokensInM: 60,
+      tokensOutM: 15,
+      concurrency: 35
+    };
+
+    // Elementos DOM
+    const sliderIn = document.getElementById('sliderTokensIn');
+    const sliderOut = document.getElementById('sliderTokensOut');
+    const sliderConc = document.getElementById('sliderConcurrency');
+
+    // 3. SELECCIÓN DE MODELOS Y HARDWARE
+    function setCloudModel(key) {
+      if (!CLOUD_MODELS[key]) return;
+      state.cloudModel = key;
+      document.querySelectorAll('[id^="cbtn-"]').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`cbtn-${key}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const cm = CLOUD_MODELS[key];
+      document.getElementById('cloud-rates-label').textContent = 
+        `Input: ${cm.inputEurPer1M.toFixed(2)}€/1M | Output: ${cm.outputEurPer1M.toFixed(2)}€/1M`;
+      document.getElementById('badge-cloud-model').textContent = cm.name;
+      document.getElementById('legend-cloud-name').textContent = `Cloud API (${cm.provider})`;
+
+      recalculateAll();
+    }
+
+    function setLocalModel(key) {
+      if (!LOCAL_MODELS[key]) return;
+      state.localModel = key;
+      document.querySelectorAll('[id^="lbtn-"]').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`lbtn-${key}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const lm = LOCAL_MODELS[key];
+      document.getElementById('local-model-specs').textContent = 
+        `${lm.name} • ${lm.paramsB}B Parámetros`;
+
+      recalculateAll();
+    }
+
+    function setQuantization(key) {
+      if (!QUANTIZATIONS[key]) return;
+      state.quantization = key;
+      document.querySelectorAll('[id^="qbtn-"]').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`qbtn-${key}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const q = QUANTIZATIONS[key];
+      document.getElementById('quant-desc-label').textContent = q.desc;
+
+      recalculateAll();
+    }
+
+    function setHardware(key) {
+      if (!HARDWARE_CONFIGS[key]) return;
+      state.hardware = key;
+      document.querySelectorAll('[id^="hbtn-"]').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`hbtn-${key}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const hw = HARDWARE_CONFIGS[key];
+      document.getElementById('hardware-vram-label').textContent = `${hw.vramGB} GB VRAM Total`;
+      document.getElementById('vram-capacity-marker').textContent = `${hw.vramGB} GB (Hardware Actual)`;
+
+      recalculateAll();
+    }
+
+    // 4. PRESETS PREDEFINIDOS
+    function applyAiPreset(type) {
+      if (type === 'startup') {
+        state.cloudModel = 'gpt-4o';
+        state.localModel = 'mistral-nemo-12b';
+        state.quantization = 'awq';
+        state.hardware = 'rtx-3090-single';
+        sliderIn.value = 15;
+        sliderOut.value = 4;
+        sliderConc.value = 12;
+      } else if (type === 'pyme') {
+        state.cloudModel = 'gpt-4o';
+        state.localModel = 'qwen-2.5-coder-32b';
+        state.quantization = 'awq';
+        state.hardware = 'rtx-3090-dual';
+        sliderIn.value = 60;
+        sliderOut.value = 15;
+        sliderConc.value = 35;
+      } else if (type === 'enterprise') {
+        state.cloudModel = 'claude-3-5-sonnet';
+        state.localModel = 'llama-3.1-70b';
+        state.quantization = 'fp8';
+        state.hardware = 'rtx-3090-dual';
+        sliderIn.value = 200;
+        sliderOut.value = 45;
+        sliderConc.value = 120;
+      } else if (type === 'heavyload') {
+        state.cloudModel = 'gpt-4o';
+        state.localModel = 'llama-3.1-70b';
+        state.quantization = 'awq';
+        state.hardware = 'hetzner-baremetal';
+        sliderIn.value = 500;
+        sliderOut.value = 80;
+        sliderConc.value = 350;
+      }
+
+      // Sincronizar botones activos
+      setCloudModel(state.cloudModel);
+      setLocalModel(state.localModel);
+      setQuantization(state.quantization);
+      setHardware(state.hardware);
+    }
+
+    // 5. CÁLCULO FINANCIERO Y DIMENSIONAMIENTO DE VRAM
+    let lastCalculations = {};
+
+    function recalculateAll() {
+      state.tokensInM = parseFloat(sliderIn.value);
+      state.tokensOutM = parseFloat(sliderOut.value);
+      state.concurrency = parseInt(sliderConc.value, 10);
+
+      // Actualizar labels de sliders
+      document.getElementById('valTokensIn').textContent = 
+        `${(state.tokensInM).toLocaleString('es-ES')}M (${(state.tokensInM * 1000000).toLocaleString('es-ES')} tokens)`;
+      document.getElementById('valTokensOut').textContent = 
+        `${(state.tokensOutM).toLocaleString('es-ES')}M (${(state.tokensOutM * 1000000).toLocaleString('es-ES')} tokens)`;
+      document.getElementById('valConcurrency').textContent = 
+        `${state.concurrency} usuarios simultáneos`;
+
+      const dailyTokens = ((state.tokensInM + state.tokensOutM) / 30);
+      document.getElementById('val-daily-tokens').textContent = 
+        `${dailyTokens.toFixed(2)}M tokens / día`;
+
+      // Modelo Cloud seleccionado
+      const cm = CLOUD_MODELS[state.cloudModel];
+      const cloudMonthlyCost = (state.tokensInM * cm.inputEurPer1M) + (state.tokensOutM * cm.outputEurPer1M);
+      const cloudAnnualCost = cloudMonthlyCost * 12;
+
+      // Hardware Local seleccionado
+      const hw = HARDWARE_CONFIGS[state.hardware];
+      const localInitialCapex = hw.capexHw + hw.setupFee;
+      const localMonthlyOpex = hw.opexMonthly;
+
+      // Modelo Local y Cuantización
+      const lm = LOCAL_MODELS[state.localModel];
+      const q = QUANTIZATIONS[state.quantization];
+
+      // FÓRMULA MATEMÁTICA DE VRAM
+      // VRAM_Pesos = Params_en_billones * Bytes_por_param
+      // VRAM_Total = VRAM_Pesos * 1.2 (overhead del 20% para KV-Cache y PagedAttention)
+      const weightsGB = lm.paramsB * q.bytesPerParam;
+      const vramRequiredGB = weightsGB * 1.20;
+      const vramAvailableGB = hw.vramGB;
+      const vramUsagePct = (vramRequiredGB / vramAvailableGB) * 100;
+
+      // Actualizar UI de VRAM
+      document.getElementById('math-weights-gb').textContent = `${weightsGB.toFixed(2)} GB`;
+      document.getElementById('math-weights-formula').textContent = `${lm.paramsB}B * ${q.bytesPerParam.toFixed(2)}B`;
+      document.getElementById('math-overhead-gb').textContent = `+${(weightsGB * 0.20).toFixed(2)} GB`;
+      document.getElementById('vram-meter-text').textContent = 
+        `${vramRequiredGB.toFixed(2)} GB / ${vramAvailableGB.toFixed(1)} GB (${vramUsagePct.toFixed(1)}%)`;
+
+      const meterBar = document.getElementById('vram-meter-bar');
+      meterBar.style.width = `${Math.min(vramUsagePct, 100).toFixed(1)}%`;
+
+      const statusBox = document.getElementById('vram-status-box');
+      const statusIcon = document.getElementById('vram-status-icon');
+      const statusTitle = document.getElementById('vram-status-title');
+      const statusDesc = document.getElementById('vram-status-desc');
+
+      if (vramUsagePct <= 85) {
+        meterBar.className = 'h-full rounded-full transition-all duration-300 bg-gradient-to-r from-emerald-500 to-cyan-500';
+        statusBox.className = 'p-3 rounded-xl border flex items-start gap-2.5 text-xs bg-emerald-950/20 border-emerald-900/40 text-emerald-300';
+        statusIcon.textContent = '✅';
+        statusTitle.textContent = 'Ajuste de VRAM Óptimo & Holgado';
+        statusDesc.textContent = `El modelo (${lm.name}) con ${q.name} cabe con total solvencia en tus ${vramAvailableGB} GB de VRAM. Admite ráfagas de concurrencia y contexto largo de 128k tokens sin throttling.`;
+      } else if (vramUsagePct <= 100) {
+        meterBar.className = 'h-full rounded-full transition-all duration-300 bg-gradient-to-r from-amber-500 to-orange-500';
+        statusBox.className = 'p-3 rounded-xl border flex items-start gap-2.5 text-xs bg-amber-950/20 border-amber-900/40 text-amber-300';
+        statusIcon.textContent = '⚠️';
+        statusTitle.textContent = 'Ajuste Ajustado (Uso > 85%)';
+        statusDesc.textContent = `El modelo cabe en la VRAM disponible, pero el buffer de KV-Cache puede verse restringido ante picos extremos de más de ${state.concurrency} usuarios concurrentes simultáneos. Se sugiere cuantización AWQ 4-bit o clúster de 48 GB.`;
+      } else {
+        meterBar.className = 'h-full rounded-full transition-all duration-300 bg-gradient-to-r from-rose-500 to-red-600';
+        statusBox.className = 'p-3 rounded-xl border flex items-start gap-2.5 text-xs bg-rose-950/30 border-rose-900/50 text-rose-300';
+        statusIcon.textContent = '❌';
+        statusTitle.textContent = 'Desbordamiento de Memoria (OOM Risk)';
+        statusDesc.textContent = `Se requieren ${vramRequiredGB.toFixed(1)} GB pero el hardware seleccionado solo dispone de ${vramAvailableGB} GB. Solución: selecciona "2x RTX 3090 (48 GB)" o reduce la precisión a AWQ 4-bit.`;
+      }
+
+      // Throughput vLLM estimado
+      const batchSpeed = state.concurrency > 10 ? `${lm.speed} (Continuous Batching)` : `${lm.speed}`;
+      document.getElementById('val-vllm-throughput').textContent = `~${batchSpeed}`;
+
+      // KPI: Coste Cloud
+      document.getElementById('kpi-cloud-monthly').textContent = `${formatEuro(cloudMonthlyCost)} €`;
+      document.getElementById('kpi-cloud-annual').textContent = `${formatEuro(cloudAnnualCost)} €`;
+
+      // KPI: Inversión Inicial Local
+      document.getElementById('kpi-local-initial').textContent = `${formatEuro(localInitialCapex)} €`;
+      document.getElementById('kpi-local-opex').textContent = `${formatEuro(localMonthlyOpex)} €/mes`;
+
+      // CÁLCULO DEL BREAK-EVEN POINT (BEP)
+      // Mes_Equilibrio = (Inversión_Inicial) / (Ahorro_Mensual_Neto)
+      // donde Ahorro_Mensual_Neto = Cloud_Mensual - Local_Opex_Mensual
+      const monthlyNetSavings = cloudMonthlyCost - localMonthlyOpex;
+      let breakEvenMonths = 0;
+      let bepDays = 0;
+
+      if (monthlyNetSavings > 0) {
+        breakEvenMonths = localInitialCapex / monthlyNetSavings;
+        bepDays = Math.round(breakEvenMonths * 30.4);
+      } else {
+        breakEvenMonths = Infinity;
+      }
+
+      const bepMonthsElem = document.getElementById('kpi-bep-months');
+      const bepDaysElem = document.getElementById('kpi-bep-days');
+      const bepRoiElem = document.getElementById('kpi-bep-roi');
+      const bepStatusBadge = document.getElementById('badge-bep-status');
+      const canvasBepHighlight = document.getElementById('canvas-bep-highlight');
+
+      if (breakEvenMonths <= 12) {
+        bepMonthsElem.textContent = `${breakEvenMonths.toFixed(1)} Meses`;
+        bepDaysElem.textContent = `(~${bepDays} días)`;
+        const annualRoi = ((monthlyNetSavings * 12 - localInitialCapex) / localInitialCapex) * 100;
+        bepRoiElem.textContent = `+${Math.max(0, annualRoi).toFixed(0)}% ROI / año`;
+        bepStatusBadge.textContent = 'Amortización Rápida';
+        bepStatusBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+        canvasBepHighlight.textContent = `Mes ${breakEvenMonths.toFixed(1)} (${bepDays} días)`;
+      } else if (breakEvenMonths <= 24) {
+        bepMonthsElem.textContent = `${breakEvenMonths.toFixed(1)} Meses`;
+        bepDaysElem.textContent = `(~${bepDays} días)`;
+        bepRoiElem.textContent = `Medio Plazo`;
+        bepStatusBadge.textContent = 'Retorno < 2 Años';
+        bepStatusBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40';
+        canvasBepHighlight.textContent = `Mes ${breakEvenMonths.toFixed(1)}`;
+      } else {
+        bepMonthsElem.textContent = `> 24 Meses`;
+        bepDaysElem.textContent = `(Tráfico muy bajo)`;
+        bepRoiElem.textContent = `Largo Plazo`;
+        bepStatusBadge.textContent = 'Volumen Bajo';
+        bepStatusBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-700/40 text-zinc-300 border border-zinc-600';
+        canvasBepHighlight.textContent = `Tráfico Bajo`;
+      }
+
+      // HORIZONTES DE AHORRO A 1, 2 Y 3 AÑOS
+      const cloud1Y = cloudMonthlyCost * 12;
+      const local1Y = localInitialCapex + (localMonthlyOpex * 12);
+      const savings1Y = cloud1Y - local1Y;
+
+      const cloud2Y = cloudMonthlyCost * 24;
+      const local2Y = localInitialCapex + (localMonthlyOpex * 24);
+      const savings2Y = cloud2Y - local2Y;
+
+      const cloud3Y = cloudMonthlyCost * 36;
+      const local3Y = localInitialCapex + (localMonthlyOpex * 36);
+      const savings3Y = cloud3Y - local3Y;
+
+      const pctSavings1Y = cloud1Y > 0 ? (savings1Y / cloud1Y) * 100 : 0;
+      const pctSavings2Y = cloud2Y > 0 ? (savings2Y / cloud2Y) * 100 : 0;
+      const pctSavings3Y = cloud3Y > 0 ? (savings3Y / cloud3Y) * 100 : 0;
+
+      // Actualizar KPIs de Ahorro
+      document.getElementById('kpi-savings-1y').textContent = `${savings1Y >= 0 ? '+' : ''}${formatEuro(savings1Y)} €`;
+      document.getElementById('kpi-savings-3y').textContent = `${savings3Y >= 0 ? '+' : ''}${formatEuro(savings3Y)} €`;
+      document.getElementById('badge-savings-pct').textContent = `${pctSavings1Y >= 0 ? '-' : '+'}${Math.abs(pctSavings1Y).toFixed(1)}% Coste`;
+
+      // Actualizar Tabla Resumen Inferior
+      document.getElementById('val-table-savings-1y').textContent = `${savings1Y >= 0 ? '+' : ''}${formatEuro(savings1Y)} €`;
+      document.getElementById('pct-saving-1y').textContent = `${pctSavings1Y >= 0 ? '-' : '+'}${Math.abs(pctSavings1Y).toFixed(0)}%`;
+      document.getElementById('val-cloud-1y').textContent = `${formatEuro(cloud1Y)} €`;
+      document.getElementById('val-local-1y').textContent = `${formatEuro(local1Y)} €`;
+
+      document.getElementById('val-table-savings-2y').textContent = `${savings2Y >= 0 ? '+' : ''}${formatEuro(savings2Y)} €`;
+      document.getElementById('pct-saving-2y').textContent = `${pctSavings2Y >= 0 ? '-' : '+'}${Math.abs(pctSavings2Y).toFixed(0)}%`;
+      document.getElementById('val-cloud-2y').textContent = `${formatEuro(cloud2Y)} €`;
+      document.getElementById('val-local-2y').textContent = `${formatEuro(local2Y)} €`;
+
+      document.getElementById('val-table-savings-3y').textContent = `${savings3Y >= 0 ? '+' : ''}${formatEuro(savings3Y)} €`;
+      document.getElementById('pct-saving-3y').textContent = `${pctSavings3Y >= 0 ? '-' : '+'}${Math.abs(pctSavings3Y).toFixed(0)}%`;
+      document.getElementById('val-cloud-3y').textContent = `${formatEuro(cloud3Y)} €`;
+      document.getElementById('val-local-3y').textContent = `${formatEuro(local3Y)} €`;
+
+      // Guardar para renderizado de gráfica y exportación
+      lastCalculations = {
+        cloudMonthlyCost,
+        cloudAnnualCost,
+        localInitialCapex,
+        localMonthlyOpex,
+        breakEvenMonths,
+        bepDays,
+        savings1Y,
+        savings2Y,
+        savings3Y,
+        vramRequiredGB,
+        vramAvailableGB,
+        vramUsagePct,
+        weightsGB,
+        cloudName: cm.name,
+        localName: lm.name,
+        quantName: q.name,
+        hwName: hw.name
+      };
+
+      // Actualizar botones de Signal
+      updateSignalLinks();
+
+      // Redibujar Canvas 2D
+      drawChart();
+    }
+
+    function formatEuro(val) {
+      if (isNaN(val)) return '0';
+      return Math.round(val).toLocaleString('es-ES');
+    }
+
+    // 6. ENLACES DINÁMICOS A SIGNAL
+    function updateSignalLinks() {
+      const topBtn = document.getElementById('btn-top-signal');
+      const ctaBtn = document.getElementById('btn-cta-signal');
+
+      const msg = encodeURIComponent(
+        `Hola Kali, he configurado el Simulador de Soberanía de IA en K4L1 Studio:\n\n` +
+        `• Reemplazo Cloud: ${lastCalculations.cloudName} (${formatEuro(lastCalculations.cloudMonthlyCost)} €/mes)\n` +
+        `• Modelo Local: ${lastCalculations.localName} [${lastCalculations.quantName}]\n` +
+        `• Hardware: ${lastCalculations.hwName}\n` +
+        `• Tráfico mensual: ${state.tokensInM}M Entrada / ${state.tokensOutM}M Salida (${state.concurrency} concurrentes)\n` +
+        `• Retorno de Inversión: Mes ${lastCalculations.breakEvenMonths.toFixed(1)} (~${lastCalculations.bepDays} días)\n` +
+        `• Ahorro Neto Proyectado a 1 Año: +${formatEuro(lastCalculations.savings1Y)} €\n` +
+        `• Ahorro Neto Proyectado a 3 Años: +${formatEuro(lastCalculations.savings3Y)} €\n\n` +
+        `Quiero contratar el Despliegue de IA Local con K4L1 Studio (750 € - 1.800 €). ¿Podemos revisar los detalles?`
+      );
+
+      const url = `https://signal.me/#u/k4li.89?text=${msg}`;
+      if (topBtn) topBtn.href = url;
+      if (ctaBtn) ctaBtn.href = url;
+    }
+
+    // 7. EXPORTAR INFORME EJECUTIVO AL PORTAPAPELES
+    function copyExecutiveReport() {
+      const report = 
+`========================================================================
+INFORME DE SOBERANÍA TECNOLÓGICA & TCO DE IA — K4L1 STUDIO
+Benchmark de Costes: Cloud API vs Clúster Local vLLM (36 Meses)
+Fecha: ${new Date().toLocaleDateString('es-ES')} | Frecuencia: 189.89.619 Hz
+========================================================================
+
+1. PARÁMETROS OPERATIVOS:
+- Proveedor Cloud Actual: ${lastCalculations.cloudName}
+- Volumen Entrada (Prompts/Docs): ${state.tokensInM}M tokens / mes
+- Volumen Salida (Generación/Código): ${state.tokensOutM}M tokens / mes
+- Concurrencia Simultánea: ${state.concurrency} usuarios
+- Modelo Local Auto-Alojado: ${lastCalculations.localName} (${lastCalculations.quantName})
+- Hardware Sugerido: ${lastCalculations.hwName}
+- VRAM Requerida (vLLM PagedAttention): ${lastCalculations.vramRequiredGB.toFixed(1)} GB / ${lastCalculations.vramAvailableGB} GB (${lastCalculations.vramUsagePct.toFixed(1)}%)
+
+2. COMPARATIVA FINANCIERA & AMORTIZACIÓN:
+- Coste Mensual Cloud (Gasto a Fondo Perdido): ${formatEuro(lastCalculations.cloudMonthlyCost)} €/mes
+- Inversión Inicial Local (Hardware + Despliegue K4L1): ${formatEuro(lastCalculations.localInitialCapex)} €
+- Coste Operativo Local (Electricidad/Hosting): ${formatEuro(lastCalculations.localMonthlyOpex)} €/mes
+- Retorno de Inversión (Break-Even Point): MES ${lastCalculations.breakEvenMonths.toFixed(1)} (~${lastCalculations.bepDays} días)
+
+3. AHORRO NETO EN CAJA PROYECTADO:
+- Ahorro Neto a 1 Año (12 Meses): +${formatEuro(lastCalculations.savings1Y)} €
+- Ahorro Neto a 2 Años (24 Meses): +${formatEuro(lastCalculations.savings2Y)} €
+- Ahorro Neto a 3 Años (36 Meses): +${formatEuro(lastCalculations.savings3Y)} €
+
+4. VENTAJAS TÉCNICAS Y LEGALES:
+- Cumplimiento GDPR Nativo: 0% de los datos confidenciales sale a servidores de EE.UU.
+- Sin Rate Limits ni Errores 429: Inferencia ilimitada en red local.
+- Latencia Reducida: De ~900 ms a < 50 ms por petición en LAN.
+- Propiedad Absoluta: El hardware es un activo de tu empresa, no una suscripción SaaS.
+
+CONTACTO Y CONTRATACIÓN DEL SERVICIO:
+- K4L1 Studio (Despliegue Llave en Mano: 750 € - 1.800 €)
+- Signal Cifrado E2EE: @k4li.89 (https://signal.me/#u/k4li.89)
+========================================================================`;
+
+      navigator.clipboard.writeText(report).then(() => {
+        const btn = document.getElementById('btn-copy-report');
+        const origText = btn.innerHTML;
+        btn.innerHTML = `<span class="text-emerald-400">✓</span> ¡Informe Copiado al Portapapeles!`;
+        setTimeout(() => {
+          btn.innerHTML = origText;
+        }, 3000);
+      }).catch(err => {
+        alert('No se pudo copiar automáticamente. Por favor copia el informe manualmente.');
+      });
+    }
+
+    // 8. RENDERIZADO DEL GRÁFICO CANVAS 2D A ALTA DEFINICIÓN
+    const canvas = document.getElementById('costEvolutionCanvas');
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    let mouseMonthHover = -1;
+
+    function resizeCanvas() {
+      if (!canvas || !ctx) return;
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.resetTransform?.();
+      ctx.scale(dpr, dpr);
+      drawChart();
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    function drawChart() {
+      if (!canvas || !ctx) return;
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const padLeft = 60;
+      const padRight = 30;
+      const padTop = 30;
+      const padBottom = 40;
+      const chartW = w - padLeft - padRight;
+      const chartH = h - padTop - padBottom;
+
+      const totalMonths = 36;
+      const cloudMonthly = lastCalculations.cloudMonthlyCost || 1;
+      const localInitial = lastCalculations.localInitialCapex || 1;
+      const localOpex = lastCalculations.localMonthlyOpex || 1;
+
+      const maxCloud36 = cloudMonthly * totalMonths;
+      const maxLocal36 = localInitial + (localOpex * totalMonths);
+      const maxYVal = Math.max(maxCloud36, maxLocal36 * 1.15, 1000);
+
+      const getX = (m) => padLeft + (m / totalMonths) * chartW;
+      const getY = (val) => padTop + chartH - (val / maxYVal) * chartH;
+
+      // Obtener colores del tema activo
+      const computedStyle = getComputedStyle(document.documentElement);
+      const colorCloud = computedStyle.getPropertyValue('--chart-cloud').trim() || '#ef4444';
+      const colorLocal = computedStyle.getPropertyValue('--chart-local').trim() || '#a855f7';
+      const colorBep = computedStyle.getPropertyValue('--chart-bep').trim() || '#10b981';
+
+      // 1. Rejilla horizontal y etiquetas de euros
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+      ctx.fillStyle = '#71717a';
+      ctx.font = '10px ui-monospace, monospace';
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+
+      const stepsY = 5;
+      for (let i = 0; i <= stepsY; i++) {
+        const val = (maxYVal / stepsY) * i;
+        const y = getY(val);
+        ctx.beginPath();
+        ctx.moveTo(padLeft, y);
+        ctx.lineTo(w - padRight, y);
+        ctx.stroke();
+
+        let labelVal = '';
+        if (val >= 1000000) {
+          labelVal = `${(val / 1000000).toFixed(1)}M €`;
+        } else if (val >= 1000) {
+          labelVal = `${(val / 1000).toFixed(0)}k €`;
+        } else {
+          labelVal = `${Math.round(val)} €`;
+        }
+        ctx.fillText(labelVal, padLeft - 8, y);
+      }
+
+      // 2. Rejilla vertical y etiquetas de meses
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      const monthSteps = [0, 3, 6, 12, 18, 24, 30, 36];
+      monthSteps.forEach(m => {
+        const x = getX(m);
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.moveTo(x, padTop);
+        ctx.lineTo(x, padTop + chartH);
+        ctx.stroke();
+
+        ctx.fillStyle = '#a1a1aa';
+        ctx.fillText(m === 0 ? 'M0' : `M${m}`, x, padTop + chartH + 8);
+      });
+
+      // 3. Área degradada y línea CLOUD (OpenAI/Anthropic)
+      ctx.beginPath();
+      ctx.moveTo(getX(0), getY(0));
+      for (let m = 0; m <= totalMonths; m++) {
+        const cost = m * cloudMonthly;
+        ctx.lineTo(getX(m), getY(cost));
+      }
+      ctx.lineTo(getX(totalMonths), getY(0));
+      ctx.closePath();
+      const gradCloud = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
+      gradCloud.addColorStop(0, 'rgba(239, 68, 68, 0.25)');
+      gradCloud.addColorStop(1, 'rgba(239, 68, 68, 0.01)');
+      ctx.fillStyle = gradCloud;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(getX(0), getY(0));
+      for (let m = 0; m <= totalMonths; m++) {
+        const cost = m * cloudMonthly;
+        ctx.lineTo(getX(m), getY(cost));
+      }
+      ctx.strokeStyle = colorCloud;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // 4. Área degradada y línea LOCAL (vLLM K4L1 Studio)
+      ctx.beginPath();
+      ctx.moveTo(getX(0), getY(localInitial));
+      for (let m = 0; m <= totalMonths; m++) {
+        const cost = localInitial + (m * localOpex);
+        ctx.lineTo(getX(m), getY(cost));
+      }
+      ctx.lineTo(getX(totalMonths), getY(0));
+      ctx.lineTo(getX(0), getY(0));
+      ctx.closePath();
+      const gradLocal = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
+      gradLocal.addColorStop(0, 'rgba(168, 85, 247, 0.25)');
+      gradLocal.addColorStop(1, 'rgba(168, 85, 247, 0.01)');
+      ctx.fillStyle = gradLocal;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(getX(0), getY(localInitial));
+      for (let m = 0; m <= totalMonths; m++) {
+        const cost = localInitial + (m * localOpex);
+        ctx.lineTo(getX(m), getY(cost));
+      }
+      ctx.strokeStyle = colorLocal;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // 5. Break-Even Point (Punto de Intersección)
+      const bepMonth = lastCalculations.breakEvenMonths;
+      if (bepMonth > 0 && bepMonth <= totalMonths) {
+        const bepCost = localInitial + (bepMonth * localOpex);
+        const bepX = getX(bepMonth);
+        const bepY = getY(bepCost);
+
+        // Línea vertical punteada al eje X
+        ctx.beginPath();
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = colorBep;
+        ctx.lineWidth = 1.2;
+        ctx.moveTo(bepX, bepY);
+        ctx.lineTo(bepX, padTop + chartH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Anillo exterior brillante
+        ctx.beginPath();
+        ctx.arc(bepX, bepY, 9, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.25)';
+        ctx.fill();
+
+        // Punto central BEP
+        ctx.beginPath();
+        ctx.arc(bepX, bepY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = colorBep;
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Etiqueta flotante BEP sobre el punto
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10px ui-monospace, monospace';
+        ctx.textAlign = bepMonth > 28 ? 'right' : (bepMonth < 6 ? 'left' : 'center');
+        const textY = Math.max(padTop + 14, bepY - 14);
+        ctx.fillText(`🎯 BEP: Mes ${bepMonth.toFixed(1)} (${formatEuro(bepCost)} €)`, bepX, textY);
+      }
+
+      // 6. Crosshair y Tooltip al interactuar con el ratón
+      if (mouseMonthHover >= 0 && mouseMonthHover <= totalMonths) {
+        const hoverX = getX(mouseMonthHover);
+        const cloudHoverVal = mouseMonthHover * cloudMonthly;
+        const localHoverVal = localInitial + (mouseMonthHover * localOpex);
+        const cloudY = getY(cloudHoverVal);
+        const localY = getY(localHoverVal);
+
+        // Línea guía vertical
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([2, 2]);
+        ctx.moveTo(hoverX, padTop);
+        ctx.lineTo(hoverX, padTop + chartH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Puntos sobre las curvas
+        ctx.beginPath();
+        ctx.arc(hoverX, cloudY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = colorCloud;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(hoverX, localY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = colorLocal;
+        ctx.fill();
+      }
+    }
+
+    // Eventos del ratón para el Tooltip interactivo
+    if (canvas) {
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        const padLeft = 60;
+        const padRight = 30;
+        const chartW = rect.width - padLeft - padRight;
+
+        if (mouseX >= padLeft && mouseX <= rect.width - padRight) {
+          const ratio = (mouseX - padLeft) / chartW;
+          const month = Math.round(ratio * 36);
+          mouseMonthHover = month;
+
+          // Datos para el tooltip
+          const cm = CLOUD_MODELS[state.cloudModel];
+          const cloudMonthly = lastCalculations.cloudMonthlyCost || 0;
+          const localInitial = lastCalculations.localInitialCapex || 0;
+          const localOpex = lastCalculations.localMonthlyOpex || 0;
+
+          const cloudVal = month * cloudMonthly;
+          const localVal = localInitial + (month * localOpex);
+          const diff = cloudVal - localVal;
+
+          const tooltip = document.getElementById('chart-tooltip');
+          tooltip.classList.remove('hidden');
+
+          document.getElementById('tt-month-title').innerHTML = `
+            <span>Mes ${month} (${month * 30} días)</span>
+            ${Math.abs(month - lastCalculations.breakEvenMonths) <= 0.6 ? '<span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">BEP</span>' : ''}
+          `;
+          document.getElementById('tt-cloud-cost').textContent = `${formatEuro(cloudVal)} €`;
+          document.getElementById('tt-local-cost').textContent = `${formatEuro(localVal)} €`;
+
+          const diffElem = document.getElementById('tt-net-savings');
+          const diffLabel = document.getElementById('tt-diff-label');
+          if (diff >= 0) {
+            diffLabel.textContent = 'Ahorro Neto:';
+            diffElem.className = 'font-mono-num text-emerald-400 font-bold';
+            diffElem.textContent = `+${formatEuro(diff)} €`;
+          } else {
+            diffLabel.textContent = 'Amortización Pendiente:';
+            diffElem.className = 'font-mono-num text-rose-400 font-bold';
+            diffElem.textContent = `${formatEuro(Math.abs(diff))} €`;
+          }
+
+          // Posicionamiento inteligente del tooltip
+          let ttX = mouseX + 15;
+          let ttY = mouseY - 40;
+          if (ttX + 220 > rect.width) ttX = mouseX - 230;
+          if (ttY < 10) ttY = 15;
+          if (ttY + 130 > rect.height) ttY = rect.height - 140;
+
+          tooltip.style.left = `${ttX}px`;
+          tooltip.style.top = `${ttY}px`;
+
+          drawChart();
+        } else {
+          mouseMonthHover = -1;
+          document.getElementById('chart-tooltip').classList.add('hidden');
+          drawChart();
+        }
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        mouseMonthHover = -1;
+        document.getElementById('chart-tooltip').classList.add('hidden');
+        drawChart();
+      });
+    }
+
+    // 9. GESTIÓN DE TEMAS DEL CONCILIO ACE
+    function switchAiTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+
+      // Sincronizar estilo de botones
+      const themeColors = {
+        'anuu': 'text-purple-300 bg-purple-500/20 border-purple-500/50',
+        'blood': 'text-rose-300 bg-rose-500/20 border-rose-500/50',
+        'gw2': 'text-emerald-300 bg-emerald-500/20 border-emerald-500/50',
+        'bioinfo': 'text-cyan-300 bg-cyan-500/20 border-cyan-500/50',
+        'duat': 'text-amber-300 bg-amber-500/20 border-amber-500/50',
+        'neon': 'text-pink-300 bg-pink-500/20 border-pink-500/50'
+      };
+
+      document.querySelectorAll('[id^="tbtn-"]').forEach(btn => {
+        btn.className = 'px-2 py-0.5 rounded text-[11px] font-mono transition-all text-zinc-400 hover:text-white border border-transparent';
+      });
+
+      const activeBtn = document.getElementById(`tbtn-${themeName}`);
+      if (activeBtn && themeColors[themeName]) {
+        activeBtn.className = `px-2 py-0.5 rounded text-[11px] font-mono transition-all border ${themeColors[themeName]}`;
+      }
+
+      // Redibujar Canvas tras el cambio de tema
+      setTimeout(() => {
+        drawChart();
+      }, 50);
+
+      // Notificar a la ventana superior si está en iframe
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'THEME_CHANGED', theme: themeName }, '*');
+        }
+      } catch(e) {}
+    }
+
+    // Sincronización automática de tema desde iframe padre
+    function syncThemeFromParent() {
+      try {
+        if (window.parent && window.parent.document && window.parent !== window) {
+          const pt = window.parent.document.documentElement.getAttribute('data-theme');
+          if (pt) switchAiTheme(pt);
+        }
+      } catch(e) {}
+    }
+
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'SET_THEME') {
+        switchAiTheme(e.data.theme);
+      }
+    });
+
+    // 10. INICIALIZACIÓN
+    syncThemeFromParent();
+    applyAiPreset('pyme');
+    resizeCanvas();
+  </script>
+</body>
+</html>

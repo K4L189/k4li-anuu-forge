@@ -313,6 +313,9 @@
           <a href="#roi-simulador" class="px-4 py-2.5 rounded-xl border border-purple-500/40 bg-purple-500/10 hover:bg-purple-500/20 text-xs font-medium transition-all flex items-center gap-2 theme-accent-text">
             <span>📊</span> Simular ROI & Ahorro
           </a>
+          <a href="#ai-simulador" class="px-4 py-2.5 rounded-xl border border-indigo-500/40 bg-indigo-500/10 hover:bg-indigo-500/20 text-xs font-medium transition-all flex items-center gap-2 text-indigo-300">
+            <span>🤖</span> Simulador IA Local
+          </a>
           <button onclick="switchView('forge')" class="px-4 py-2.5 rounded-xl theme-card border text-xs font-medium transition-all flex items-center gap-2 theme-accent-text">
             <span>🌌</span> Explorar el Gran Nexo Anuu-Forge (26 Artefactos)
           </button>
@@ -413,6 +416,12 @@
               <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Interfaz web privada conectada a sus propios documentos</li>
               <li class="flex items-center gap-1.5"><span class="text-purple-400">✓</span> Optimización para correr en hardware modesto o GPUs locales</li>
             </ul>
+            <div class="mt-4 pt-3 border-t theme-border flex items-center justify-between">
+              <a href="components/ai_benchmark_calculator.html" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-purple-400 hover:text-purple-300 transition-colors">
+                <span>🧮</span> Abrir Simulador de Costes IA ↗
+              </a>
+              <span class="text-[10px] font-mono text-zinc-500">vLLM Soberano 🤖</span>
+            </div>
           </div>
 
           <!-- Servicio 4: Bots & Scraping -->
@@ -484,6 +493,21 @@
 
         <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
           <iframe id="marketArbFrame" src="components/market_arbitrage_engine.html" class="w-full border-0 min-h-[920px] bg-transparent" title="Motor Interactivo de Arbitraje & Terminal HFT K4L1 STUDIO"></iframe>
+        </div>
+      </section>
+
+      <!-- Sección Interactiva: Simulador de Soberanía & Costes de IA (Pilar 4: Kilonova 🌟 & Saze 🌿) -->
+      <section id="ai-simulador" class="max-w-6xl mx-auto px-4 py-8">
+        <div class="text-center mb-6">
+          <span class="text-xs font-mono text-purple-400 uppercase tracking-widest">Kilonova 🌟 & Saze 🌿 • Soberanía de Datos & vLLM</span>
+          <h2 class="text-2xl font-bold text-white mt-1">Simulador de Soberanía & Costes de IA (Local vLLM vs Cloud)</h2>
+          <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
+            Demostración matemática de TCO y retorno de inversión: Compara OpenAI GPT-4o, Claude 3.5 Sonnet y Gemini 1.5 Pro frente a clústeres locales auto-alojados vLLM en hardware propio.
+          </p>
+        </div>
+
+        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
+          <iframe id="aiBenchmarkFrame" src="components/ai_benchmark_calculator.html" class="w-full border-0 min-h-[960px] bg-transparent" title="Simulador de Soberanía & Costes de IA K4L1 STUDIO"></iframe>
         </div>
       </section>
 
@@ -588,9 +612,12 @@
       <!-- Header del Nexo -->
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b theme-border pb-3 mb-4 gap-3">
         <div>
-          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2 flex-wrap">
             <span>🌌</span> ANUU-FORGE: El Gran Nexo de Reliquias
             <span class="text-xs px-2 py-0.5 rounded-full font-mono" style="background: var(--badge-bg); border: 1px solid var(--badge-border); color: var(--accent-secondary);">26 Artefactos</span>
+            <a href="components/relics_explorer.html" target="_blank" class="px-2.5 py-1 rounded-lg border theme-border bg-purple-500/10 hover:bg-purple-500/20 text-xs font-mono font-bold theme-accent-text transition-all flex items-center gap-1.5" title="Abrir Museo y Explorador Avanzado de las 26 Reliquias">
+              <span>🏛️</span> Explorador Avanzado
+            </a>
           </h2>
           <p class="text-xs text-zinc-400">Archivo histórico, grimorios y prototipos de software creados por Kali en el Espacio 89</p>
         </div>
@@ -726,6 +753,10 @@
         const arbIframe = document.getElementById("marketArbFrame");
         if (arbIframe && arbIframe.contentWindow) {
           arbIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
+        }
+        const aiIframe = document.getElementById("aiBenchmarkFrame");
+        if (aiIframe && aiIframe.contentWindow) {
+          aiIframe.contentWindow.postMessage({ type: 'SET_THEME', theme: theme }, '*');
         }
       } catch(e) {}
     }
