@@ -5,9 +5,10 @@
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Servicio Forense de Recuperación & Disk Carver v3.0 | K4L1 STUDIO</title>
+  <title>Servicio Forense de Recuperación & Disk Carver v4.0 | K4L1 STUDIO</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <link rel="stylesheet" href="../assets/css/hud_core.css">
   <style>
     /* 6 TEMAS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE */
     :root, [data-theme="anuu"] {
@@ -1058,6 +1059,175 @@ La niebla se disipa sobre el puerto de Kali.
             </button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- NUEVO MÓDULO v4.0: CASO REAL NAND-FTL, 4 ESTRATOS & MULTI-SO LEGACY       -->
+    <!-- ========================================================================= -->
+    <section id="v4RegenSection" class="theme-card rounded-2xl p-5 sm:p-6 border border-purple-500/40 space-y-6 shadow-2xl">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-800 pb-4">
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-950 text-purple-300 border border-purple-500/50">
+              BREAKTHROUGH v4.0 // 189.89.619 Hz
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-500/50">
+              CHIPS-BANK CBM2199 (048d:1234) AUDIT
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-500/50">
+              MULTI-OS LEGACY ARCHAEOLOGY
+            </span>
+          </div>
+          <h2 class="text-lg sm:text-xl font-black text-white mt-2 font-mono">
+            🧬 Regeneración en Memoria a Bajo Nivel &amp; Arqueología Multi-SO Legacy
+          </h2>
+          <p class="text-xs text-zinc-400 mt-1">
+            Por qué PhotoRec, Recuva y TestDisk fracasan ante controladores NAND-FTL falsificados y cómo K4L1 Carver v4.0 regenera imágenes desde chunks binarios <code class="text-cyan-300">caBX</code>, grafos <code class="text-purple-300">LiteDB/Flux</code>, bitstreams sin cabecera y contenedores históricos (<code class="text-amber-300">Thumbs.db OLE2</code> de Windows XP, <code class="text-emerald-300">.DS_Store</code>, <code class="text-pink-300">thumbcache CMMM</code>).
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="runV4StratumSim('cabx')" class="px-3 py-1.5 rounded-xl bg-purple-900/60 hover:bg-purple-800 text-purple-200 border border-purple-500/50 text-xs font-mono font-bold transition-all">
+            ⚡ Simular Rescate v4.0
+          </button>
+        </div>
+      </div>
+
+      <!-- 1. Radiografía Hardware NAND-FTL (/dev/sdc2) + Brecha Virgen 1.21 GB -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 font-mono text-xs">
+        <div class="bg-black/60 p-4 rounded-xl border border-red-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-red-400 font-bold">🚨 DIAGNÓSTICO SILICIO (/dev/sdc2)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-red-950 text-red-300 border border-red-800">USB ID 048d:1234</span>
+          </div>
+          <p class="text-zinc-300 text-[11px] leading-relaxed">
+            El controlador <strong class="text-white">Chipsbank CBM2199</strong> reporta <strong class="text-amber-300">3.8 TB exFAT</strong> virtuales sobre una ventana física NAND menor. Cuando el sistema operativo consulta clusters fuera de ventana, el FTL devuelve páginas de <code class="text-red-300">0x00</code> (por eso <code class="text-cyan-300">Fotos</code> muestra 0 archivos aunque su índice mide <strong class="text-emerald-300">2,097,152 B = 2 MB</strong>).
+          </p>
+        </div>
+
+        <div class="bg-black/60 p-4 rounded-xl border border-amber-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-amber-400 font-bold">🎯 LA BRECHA VIRGEN (1.21 GB → 49.27 GB)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">--scan-gap-from-1gb</span>
+          </div>
+          <p class="text-zinc-300 text-[11px] leading-relaxed">
+            Como <strong class="text-white">Fotos</strong> fue la <strong class="text-emerald-300">última carpeta movida al SSD (17 oct 14:15)</strong>, sus bloques fueron los últimos en grabarse en las celdas NAND físicas. El primer escaneo paró en <strong class="text-amber-300">1.21 GB (offset 1,304,428,544)</strong> y el segundo saltó a <strong class="text-amber-300">49.27 GB</strong>: ¡la franja de 1.21 GB en adelante permanecía virgen!
+          </p>
+        </div>
+
+        <div class="bg-black/60 p-4 rounded-xl border border-emerald-500/30 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-emerald-400 font-bold">🏛️ FILTRO LEGACY WIN-XP (&ge; 3 KB / 64px)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">--legacy-os ON</span>
+          </div>
+          <p class="text-zinc-300 text-[11px] leading-relaxed">
+            Las fotos de la era <strong class="text-white">Windows XP (2001–2008)</strong> (cámaras VGA <code class="text-cyan-300">640x480</code>, móviles Nokia/Sony Ericsson, webcams MSN, GIFs y BMPs) pesan entre <strong class="text-emerald-300">3 KB y 22 KB</strong>. Los carvers modernos con corte en 24 KB las descartan por error; el modo <code class="text-emerald-300">--legacy-os</code> las rescata íntegras junto con sus <code class="text-amber-300">Thumbs.db</code>.
+          </p>
+        </div>
+      </div>
+
+      <!-- 2. Matriz Interactiva de Arqueología Multi-SO (6 Eras de Sistemas Operativos) -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <h3 class="text-sm font-bold font-mono text-purple-300 uppercase tracking-wider">
+            🏛️ Matriz de Soporte Forense Multi-SO Legacy (6 Ecosistemas)
+          </h3>
+          <span class="text-[11px] font-mono text-zinc-400">Haz clic en cualquier SO para simular su tallado a nivel de sector:</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 font-mono text-xs">
+          <!-- OS 1: Windows 95/98/2000/XP -->
+          <div onclick="runV4StratumSim('winxp')" class="cursor-pointer bg-zinc-950/90 hover:bg-zinc-900 p-3.5 rounded-xl border border-amber-500/40 transition-all space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-amber-300">🪟 Windows 95 / 98 / 2000 / XP</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-950 text-amber-300">D0 CF 11 E0</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">
+              Tallado de contenedores <strong class="text-white">Thumbs.db (OLE2)</strong>: extrae el stream <code class="text-amber-300">Catalog</code> con nombres originales en UTF-16LE + flujos JPEG internos, índice <code class="text-amber-300">INFO2</code> de Papelera y fotos VGA/BMP/GIF desde 3 KB.
+            </p>
+          </div>
+
+          <!-- OS 2: Windows Vista / 7 / 8 / 10 / 11 -->
+          <div onclick="runV4StratumSim('thumbcache')" class="cursor-pointer bg-zinc-950/90 hover:bg-zinc-900 p-3.5 rounded-xl border border-cyan-500/40 transition-all space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-cyan-300">💠 Windows Vista / 7 / 10 / 11</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300">43 4D 4D 4D</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">
+              Extracción de cachés centralizadas <strong class="text-white">thumbcache_*.db (CMMM)</strong>, cabeceras <code class="text-cyan-300">$Ixxxxxx</code> de Papelera de Reciclaje v1/v2 y reconstrucción de rutas históricas desde accesos directos <code class="text-cyan-300">.lnk</code>.
+            </p>
+          </div>
+
+          <!-- OS 3: macOS / OS X / iOS -->
+          <div onclick="runV4StratumSim('macos')" class="cursor-pointer bg-zinc-950/90 hover:bg-zinc-900 p-3.5 rounded-xl border border-purple-500/40 transition-all space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-purple-300">🍎 macOS / Classic Mac / iOS</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-950 text-purple-300">00 00 00 01 Bud1</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">
+              Árboles B <strong class="text-white">.DS_Store (Bud1)</strong> con nombres de archivos borrados en UTF-16BE, forks <strong class="text-white">AppleDouble (._*)</strong> con URLs <code class="text-purple-300">kMDItemWhereFroms</code> y contenedores <code class="text-purple-300">HEIC / Live Photos</code>.
+            </p>
+          </div>
+
+          <!-- OS 4: Linux / FreeDesktop XDG -->
+          <div onclick="runV4StratumSim('linux')" class="cursor-pointer bg-zinc-950/90 hover:bg-zinc-900 p-3.5 rounded-xl border border-emerald-500/40 transition-all space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-emerald-300">🐧 Linux / FreeDesktop XDG</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300">Thumb::URI</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">
+              Cachés <strong class="text-white">~/.cache/thumbnails</strong> con chunks PNG <code class="text-emerald-300">tEXt::Thumb::URI</code> (<code class="text-zinc-300">file:///home/...</code>) y <code class="text-emerald-300">Thumb::MTime</code>, además de registros <code class="text-emerald-300">.trashinfo</code>.
+            </p>
+          </div>
+
+          <!-- OS 5: Android / Symbian / Mobile -->
+          <div onclick="runV4StratumSim('android')" class="cursor-pointer bg-zinc-950/90 hover:bg-zinc-900 p-3.5 rounded-xl border border-pink-500/40 transition-all space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-pink-300">🤖 Android / Symbian / Mobile</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-pink-950 text-pink-300">MicroVideo MP4</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">
+              Desacoplado de <strong class="text-white">Motion Photos (MVIMG)</strong> extrayendo el vídeo <code class="text-pink-300">.mp4</code> oculto tras el fin de archivo JPEG (<code class="text-pink-300">FF D9</code>) y tallado masivo de <code class="text-pink-300">.thumbdata3/4</code>.
+            </p>
+          </div>
+
+          <!-- OS 6: Retro / AmigaOS / MS-DOS -->
+          <div onclick="runV4StratumSim('retro')" class="cursor-pointer bg-zinc-950/90 hover:bg-zinc-900 p-3.5 rounded-xl border border-indigo-500/40 transition-all space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-indigo-300">🕹️ MS-DOS / AmigaOS / Retro</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-indigo-950 text-indigo-300">FORM....ILBM</span>
+            </div>
+            <p class="text-[11px] text-zinc-400">
+              Soporte nativo para bitmaps planares <strong class="text-white">IFF-ILBM / PBM (Deluxe Paint)</strong>, <code class="text-indigo-300">.PCX</code> (ZSoft Paintbrush), <code class="text-indigo-300">.TGA</code> y <code class="text-indigo-300">GIF87a / GIF89a</code> clásicos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Simulador Interactivo de los 4 Estratos de Regeneración a Bajo Nivel -->
+      <div class="bg-black/80 rounded-xl border border-zinc-800 p-4 font-mono text-xs space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-3">
+          <span class="text-cyan-400 font-bold">🔬 CONSOLA DE REGENERACIÓN A BAJO NIVEL (4 ESTRATOS REALES EN /dev/sdc2)</span>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="runV4StratumSim('cabx')" class="px-2.5 py-1 rounded bg-purple-950 hover:bg-purple-900 text-purple-200 border border-purple-700 text-[11px]">
+              Estrato 1: caBX C2PA (25 JPEGs)
+            </button>
+            <button onclick="runV4StratumSim('flux')" class="px-2.5 py-1 rounded bg-cyan-950 hover:bg-cyan-900 text-cyan-200 border border-cyan-700 text-[11px]">
+              Estrato 2: Receta Flux + LiteDB
+            </button>
+            <button onclick="runV4StratumSim('synth')" class="px-2.5 py-1 rounded bg-emerald-950 hover:bg-emerald-900 text-emerald-200 border border-emerald-700 text-[11px]">
+              Estrato 3: Síntesis IHDR/SOI
+            </button>
+            <button onclick="runV4StratumSim('winxp')" class="px-2.5 py-1 rounded bg-amber-950 hover:bg-amber-900 text-amber-200 border border-amber-700 text-[11px]">
+              Estrato 4: WinXP Thumbs.db OLE2
+            </button>
+          </div>
+        </div>
+        <pre id="v4RegenOutput" class="text-[11px] text-emerald-300 overflow-x-auto leading-relaxed whitespace-pre-wrap">[READY // 189.89.619 Hz] Selecciona un estrato o sistema operativo arriba para inspeccionar la regeneración binaria real ejecutada sobre /dev/sdc2:
+  • 25 JPEGs (17 KB - 44 KB) extraídos desde el offset +14,357 de los chunks caBX (JUMBF/C2PA) en /home/kali/Fotos_recuperadas/regeneradas_bajo_nivel_cabx/
+  • Grafo completo ComfyUI/Flux de FOTO_recup_00024 (Seed: 544138144389245, flux1-dev-fp8 + 2 LoRAs) + 3,572 referencias en StabilityMatrix.db (LiteDB 27.5 MB)
+  • Comando para barrer la brecha virgen de 1.21 GB (donde se movió 'Fotos' con soporte Windows XP):
+    sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas --scan-gap-from-1gb --legacy-os --regenerate-broken</pre>
       </div>
     </section>
 
@@ -2280,7 +2450,51 @@ CONTACTO CIFRADO: Signal @k4li.89 (https://signal.me/#u/k4li.89)
 
     const savedTheme = localStorage.getItem('k4li_carver_theme') || 'anuu';
     setCarverTheme(savedTheme);
+
+    function runV4StratumSim(mode) {
+      const out = document.getElementById('v4RegenOutput');
+      if (!out) return;
+      const payloads = {
+        cabx: `[ESTRATO 1 // C2PA JUMBF caBX CARVER — CASO REAL EJECUTADO]
+• Portador analizado : FOTO_recup_00011_off000012c00000.png (Chunk 'caBX' de 111,831 bytes)
+• Firma JUMBF        : 6A 75 6D 62 (c2pa.assertions / GPT-4o OpenAI API)
+• Hallazgo interno   : En el offset +14,357 del chunk binario vive un flujo JPEG íntegro (FF D8 FF E0 ... FF D9)
+• Resultado real     : 25 de 25 miniaturas de alta calidad (17 KB a 44 KB) extraídas en:
+  /home/kali/Fotos_recuperadas/regeneradas_bajo_nivel_cabx/REGEN_CABX_01_FOTO_recup_00002...jpg`,
+        flux: `[ESTRATO 2 // RECETAS DETERMINISTAS IA (PNG tEXt + StabilityMatrix.db LiteDB)]
+• Portador analizado : FOTO_recup_00024_off000013c00000.png (tEXt:prompt 3,239 B + tEXt:workflow 8,204 B)
+• Semilla recuperada : 544138144389245 (Sampler: euler / simple, Steps: 20, CFG: 1.0)
+• Checkpoint & LoRAs : flux1-dev-fp8.safetensors + CharacterDesign-FluxV2 (0.60) + FluxMythG0thicL1nes (0.50)
+• Base LiteDB BSON   : 3,572 modelos/LoRAs y 288 bloques de prompts rescatados de StabilityMatrix.db (27.5 MB)`,
+        synth: `[ESTRATO 3 // SÍNTESIS DE CABECERAS BITSTREAM (--regenerate-broken)]
+• Problema físico    : El ring-buffer del controlador CBM2199 pisa el sector 0 (SOI FF D8 o PNG IHDR), dejando huérfano el flujo IDAT->IEND o SOS->EOI.
+• Regeneración K4L1  : Cálculo de estructura IHDR canónica + polinomio CRC-32 IEEE 802.3 (zlib.crc32) e inyección de tablas Huffman/Quantization (DQT+DHT+SOF0).
+• Resultado          : El visor decodifica los bloques de píxeles supervivientes en lugar de abortar por "Invalid Header".`,
+        winxp: `[ESTRATO 4 // ARQUEOLOGÍA WINDOWS 95/98/2000/XP (Thumbs.db OLE2 + Fotos < 24 KB)]
+• Firma detectada    : D0 CF 11 E0 A1 B1 1A E1 (Microsoft OLE2 Compound Document 'Thumbs.db')
+• Stream 'Catalog'   : Extracción de nombres originales en UTF-16LE (ej. 'DSC00142.JPG', 'Imagen019.jpg', 'avatar_msn.bmp')
+• Flujos internos    : Tallado de cada segmento FF D8 FF E0 ... FF D9 empaquetado dentro del contenedor Thumbs.db
+• Filtro Legacy XP   : Umbral rebajado a 3 KB (3,072 B) y 64x64 px para conservar fotos VGA 640x480 / 320x240, GIF87a/89a y BMP.`,
+        thumbcache: `[ARQUEOLOGÍA WINDOWS VISTA / 7 / 8 / 10 / 11 (thumbcache_*.db & $I Recycle Bin)]
+• Firma detectada    : 43 4D 4D 4D ('CMMM' Windows Explorer Centralized Thumbnail Cache)
+• Extracción         : Barrido de entradas CMMM rescatando vistas previas BMP/JPEG/PNG huérfanas + decodificación de rutas UTF-16LE en archivos $Ixxxxxx (62-544 B).`,
+        macos: `[ARQUEOLOGÍA macOS / OS X / iOS (.DS_Store Bud1 & AppleDouble ._*)]
+• Firma detectada    : 00 00 00 01 42 75 64 31 ('Bud1' B-Tree Allocator) & 00 05 16 07 00 02 00 00 (AppleDouble)
+• Extracción         : Recuperación de nombres de archivos borrados en el árbol B de Finder, URLs originales (kMDItemWhereFroms) y contenedores HEIC/Live Photos.`,
+        linux: `[ARQUEOLOGÍA LINUX / FREEDESKTOP XDG (~/.cache/thumbnails & .Trash-1000)]
+• Firma detectada    : PNG con chunks tEXt::Thumb::URI y Thumb::MTime
+• Extracción         : Reconstrucción de la ruta exacta en el sistema de archivos original (file:///home/...) asociada a cada miniatura rescatada.`,
+        android: `[ARQUEOLOGÍA ANDROID / SYMBIAN / MOBILE (Motion Photos & .thumbdata3/4)]
+• Firma detectada    : GCamera:MicroVideo / contenedor ISO-BMFF 'ftypmp42' oculto tras el marcador EOI (FF D9) del JPEG
+• Extracción         : Separación limpia de la fotografía JPEG y extracción del vídeo MP4 en vivo adjunto en el slack post-EOF.`,
+        retro: `[ARQUEOLOGÍA RETRO / MS-DOS / AMIGA-OS (IFF-ILBM, PCX, TGA)]
+• Firma detectada    : 46 4F 52 4D .... 49 4C 42 4D ('FORM....ILBM' / 'PBM ' Deluxe Paint)
+• Extracción         : Reconstrucción de bitmaps planares e imágenes indexadas clásicas con preservación de paleta CMAP.`
+      };
+      out.textContent = payloads[mode] || payloads.cabx;
+    }
   </script>
   <script src="../assets/js/fullwallpaper.js"></script>
+  <script src="../assets/js/hud_core.js" defer></script>
 </body>
 </html>
