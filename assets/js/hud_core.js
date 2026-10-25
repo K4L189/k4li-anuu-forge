@@ -37,8 +37,14 @@
   ];
 
   var COMMANDS = [
+    ['Carver: SOLO carpeta Fotos en raíz', 'sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --folder Fotos --only-folder --dest /home/kali/Fotos_recuperadas --legacy-os'],
     ['Carver: reanudar (fotos + ADN + estego)', 'sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas'],
     ['Carver: completo (+vídeo +Whisper)', 'sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas --carve-videos --whisper-subs'],
+    ['Carver: barrer brecha 1.21 GB virgen', 'sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas --scan-gap-from-1gb --legacy-os --regenerate-broken'],
+    ['Docs: abrir Wiki & Lore (Espacio 89)', 'javascript:window.openK4L1Doc && window.openK4L1Doc("espacio89")'],
+    ['Docs: abrir Tarifario de Servicios', 'javascript:window.openK4L1Doc && window.openK4L1Doc("tarifario")'],
+    ['Docs: abrir Contrato NDA E2EE', 'javascript:window.openK4L1Doc && window.openK4L1Doc("nda")'],
+    ['Docs: abrir Atlas de Estilos (6 Temas)', 'javascript:window.openK4L1Doc && window.openK4L1Doc("atlas")'],
     ['Focusrite: cosechar TRNG', 'python3 /home/kali/hearthstone-linux/ISOS/anuu_focusrite_dsp.py --trng-harvest'],
     ['Focusrite: estado', 'python3 /home/kali/hearthstone-linux/ISOS/anuu_focusrite_dsp.py --status'],
     ['Hardware: escanear bus', 'python3 /home/kali/k4li-anuu-forge/scripts/anuu_hardware_bridge.py --scan'],

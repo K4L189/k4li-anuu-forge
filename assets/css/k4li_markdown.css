@@ -1,0 +1,604 @@
+/* =============================================================================
+   K4L1 FORGE // MARKDOWN & TACTICAL DOC VIEWER STYLES v1.0 (189.89.619 Hz)
+   Estética Seinen / Concilio ACE (161914) — Tablas, Alertas, Código & Tipografía
+   ============================================================================= */
+
+/* Modal Base & Backdrop */
+#k4-doc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(4, 4, 8, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#k4-doc-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal Frame */
+.k4-doc-frame {
+  width: 100%;
+  max-width: 1140px;
+  height: 90vh;
+  max-height: 860px;
+  background: var(--bg-card, #0e0e17);
+  border: 1px solid var(--border-card, #27273a);
+  border-radius: 1.25rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 40px -10px var(--glow-color, rgba(147, 51, 234, 0.25));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-main, #e4e4e7);
+  transform: scale(0.96);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#k4-doc-modal.active .k4-doc-frame {
+  transform: scale(1);
+}
+
+/* Header */
+.k4-doc-header {
+  padding: 0.875rem 1.25rem;
+  background: rgba(10, 10, 16, 0.95);
+  border-bottom: 1px solid var(--border-card, #27273a);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.k4-doc-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.k4-doc-glyph {
+  font-size: 1.25rem;
+  color: var(--accent-secondary, #c084fc);
+  filter: drop-shadow(0 0 8px var(--glow-color, rgba(147, 51, 234, 0.5)));
+}
+
+.k4-doc-title {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-weight: 800;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.k4-doc-badge {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  background: var(--badge-bg, rgba(147, 51, 234, 0.15));
+  border: 1px solid var(--badge-border, rgba(168, 85, 247, 0.4));
+  color: var(--accent-secondary, #c084fc);
+}
+
+.k4-doc-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.k4-doc-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-card, #27273a);
+  background: rgba(20, 20, 30, 0.8);
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.k4-doc-btn:hover {
+  color: #ffffff;
+  border-color: var(--accent-primary, #9333ea);
+  background: rgba(147, 51, 234, 0.15);
+}
+
+.k4-doc-btn.active {
+  color: #ffffff;
+  border-color: var(--accent-secondary, #c084fc);
+  background: var(--accent-primary, #9333ea);
+  font-weight: bold;
+}
+
+.k4-doc-close {
+  background: none;
+  border: none;
+  color: #71717a;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  transition: color 0.15s, background 0.15s;
+}
+
+.k4-doc-close:hover {
+  color: #f43f5e;
+  background: rgba(244, 63, 94, 0.1);
+}
+
+/* Body Split View */
+.k4-doc-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Sidebar Document Index */
+.k4-doc-sidebar {
+  width: 280px;
+  background: rgba(8, 8, 13, 0.9);
+  border-right: 1px solid var(--border-card, #27273a);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, width 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .k4-doc-sidebar {
+    position: absolute;
+    top: 53px;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    width: 260px;
+    transform: translateX(-100%);
+    box-shadow: 10px 0 25px rgba(0,0,0,0.5);
+  }
+  .k4-doc-sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+.k4-doc-search-box {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-card, #27273a);
+}
+
+.k4-doc-search-input {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-card, #27273a);
+  color: #ffffff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.k4-doc-search-input:focus {
+  border-color: var(--accent-secondary, #c084fc);
+}
+
+.k4-doc-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.k4-doc-group-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71717a;
+  padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+}
+
+.k4-doc-item {
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-family: "JetBrains Mono", monospace;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  border: 1px solid transparent;
+}
+
+.k4-doc-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.k4-doc-item.active {
+  background: var(--badge-bg, rgba(147, 51, 234, 0.15));
+  border-color: var(--badge-border, rgba(168, 85, 247, 0.4));
+  color: var(--accent-secondary, #c084fc);
+  font-weight: 600;
+}
+
+/* Content Area */
+.k4-doc-content-pane {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card, #0e0e17);
+}
+
+.k4-doc-scroll-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 2.5rem;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 640px) {
+  .k4-doc-scroll-wrap {
+    padding: 1.25rem 1rem;
+  }
+}
+
+/* Live Editor Pane */
+.k4-doc-editor-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 0.75rem;
+}
+
+.k4-doc-editor-textarea {
+  flex: 1;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-card, #27273a);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: #e4e4e7;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+}
+
+.k4-doc-editor-textarea:focus {
+  border-color: var(--accent-secondary, #c084fc);
+}
+
+/* =============================================================================
+   TIPOGRAFÍA Y ESTILOS MARKDOWN RENDERIZADO
+   ============================================================================= */
+.k4-markdown-body {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-main, #e4e4e7);
+  word-break: break-word;
+}
+
+.k4-markdown-body h1,
+.k4-markdown-body h2,
+.k4-markdown-body h3,
+.k4-markdown-body h4,
+.k4-markdown-body h5,
+.k4-markdown-body h6 {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-top: 1.75em;
+  margin-bottom: 0.75em;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.k4-markdown-body h1 {
+  font-size: 1.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-card, #27273a);
+  color: #ffffff;
+  margin-top: 0.5em;
+}
+
+.k4-markdown-body h2 {
+  font-size: 1.35rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--accent-secondary, #c084fc);
+}
+
+.k4-markdown-body h3 {
+  font-size: 1.15rem;
+  color: #38bdf8;
+}
+
+.k4-markdown-body h4 {
+  font-size: 1rem;
+  color: #34d399;
+}
+
+.k4-markdown-body p {
+  margin-top: 0;
+  margin-bottom: 1.15em;
+}
+
+.k4-markdown-body strong {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.k4-markdown-body em {
+  font-style: italic;
+  color: #e4e4e7;
+}
+
+.k4-markdown-body a {
+  color: var(--accent-secondary, #c084fc);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+
+.k4-markdown-body a:hover {
+  color: #ffffff;
+}
+
+.k4-markdown-body hr {
+  border: 0;
+  height: 1px;
+  background: var(--border-card, #27273a);
+  margin: 2em 0;
+}
+
+/* Listas */
+.k4-markdown-body ul,
+.k4-markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 1.15em;
+  padding-left: 1.5em;
+}
+
+.k4-markdown-body ul {
+  list-style-type: disc;
+}
+
+.k4-markdown-body ol {
+  list-style-type: decimal;
+}
+
+.k4-markdown-body li {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+/* Checkboxes de Tareas */
+.k4-markdown-body .task-list-item {
+  list-style-type: none;
+  margin-left: -1.25em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.k4-markdown-body .task-list-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid var(--accent-secondary, #c084fc);
+  background: rgba(0, 0, 0, 0.4);
+  cursor: default;
+  position: relative;
+}
+
+.k4-markdown-body .task-list-item input[type="checkbox"]:checked {
+  background: var(--accent-primary, #9333ea);
+}
+
+.k4-markdown-body .task-list-item input[type="checkbox"]:checked::after {
+  content: "✔";
+  position: absolute;
+  font-size: 10px;
+  color: #ffffff;
+  top: -1px;
+  left: 1.5px;
+}
+
+/* Bloques de Código Fenced */
+.k4-code-block-wrap {
+  position: relative;
+  margin: 1.5em 0;
+  border-radius: 0.75rem;
+  background: #06060a;
+  border: 1px solid var(--border-card, #27273a);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.k4-code-header {
+  padding: 0.4rem 0.85rem;
+  background: rgba(18, 18, 28, 0.9);
+  border-bottom: 1px solid var(--border-card, #27273a);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  color: #a1a1aa;
+}
+
+.k4-code-lang {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-secondary, #c084fc);
+}
+
+.k4-code-copy-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+  color: #a1a1aa;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.k4-code-copy-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent-secondary, #c084fc);
+}
+
+.k4-markdown-body pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: #34d399;
+}
+
+.k4-markdown-body code:not(pre code) {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 0.85em;
+  padding: 0.2em 0.45em;
+  border-radius: 0.375rem;
+  background: rgba(147, 51, 234, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: var(--accent-secondary, #c084fc);
+}
+
+/* Tablas */
+.k4-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.5em 0;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-card, #27273a);
+}
+
+.k4-markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.k4-markdown-body th,
+.k4-markdown-body td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--border-card, #27273a);
+  text-align: left;
+}
+
+.k4-markdown-body th {
+  background: rgba(18, 18, 28, 0.85);
+  font-weight: 700;
+  color: #ffffff;
+  border-bottom: 2px solid var(--border-card, #27273a);
+}
+
+.k4-markdown-body tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.k4-markdown-body tr:hover td {
+  background: rgba(147, 51, 234, 0.06);
+}
+
+/* Blockquotes & GitHub Alerts */
+.k4-markdown-body blockquote {
+  margin: 1.5em 0;
+  padding: 0.75rem 1.25rem;
+  background: rgba(20, 20, 32, 0.5);
+  border-left: 4px solid var(--accent-primary, #9333ea);
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: #d4d4d8;
+}
+
+.k4-alert {
+  margin: 1.5em 0;
+  padding: 0.875rem 1.15rem;
+  border-radius: 0.75rem;
+  border-left: 4px solid;
+  background: rgba(10, 10, 16, 0.8);
+  font-size: 0.875rem;
+}
+
+.k4-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.k4-alert-note {
+  border-left-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.06);
+}
+.k4-alert-note .k4-alert-title { color: #38bdf8; }
+
+.k4-alert-tip {
+  border-left-color: #34d399;
+  background: rgba(52, 211, 153, 0.06);
+}
+.k4-alert-tip .k4-alert-title { color: #34d399; }
+
+.k4-alert-important {
+  border-left-color: #a855f7;
+  background: rgba(168, 85, 247, 0.06);
+}
+.k4-alert-important .k4-alert-title { color: #c084fc; }
+
+.k4-alert-warning {
+  border-left-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.06);
+}
+.k4-alert-warning .k4-alert-title { color: #f59e0b; }
+
+.k4-alert-caution {
+  border-left-color: #f43f5e;
+  background: rgba(244, 63, 94, 0.06);
+}
+.k4-alert-caution .k4-alert-title { color: #f43f5e; }

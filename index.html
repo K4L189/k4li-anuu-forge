@@ -16,6 +16,7 @@
   <script src="assets/js/fullwallpaper.js"></script>
   <script src="assets/js/bunker_vault.js"></script>
   <link rel="stylesheet" href="assets/css/hud_core.css">
+  <link rel="stylesheet" href="assets/css/k4li_markdown.css">
   <script src="assets/js/hud_core.js" data-mount="header" data-shader="1"></script>
   <style>
     /* Variables de Temas Dinámicos */
@@ -300,6 +301,9 @@
           <a href="components/terminal_hud.html" target="_blank" class="hidden md:flex px-2.5 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-emerald-400 text-xs font-mono font-bold transition-all items-center gap-1">
             <span>💻</span> Terminal
           </a>
+          <button onclick="window.toggleK4L1DocModal()" title="Lector Táctico de Documentación & Wiki Markdown (Ctrl+M)" class="hidden md:flex px-2.5 py-1.5 rounded-lg border theme-border text-zinc-300 hover:text-white bg-black/40 text-xs font-mono font-bold transition-all items-center gap-1.5 hover:border-purple-500/50">
+            <span>📖</span> Docs &amp; Wiki <kbd class="text-[9px] text-zinc-500 bg-zinc-900 px-1 py-0.5 rounded border border-zinc-800">Ctrl+M</kbd>
+          </button>
         </div>
 
         <!-- Selector de Estilos / Temas en Vivo -->
@@ -2465,5 +2469,6 @@
       badge.addEventListener("touchcancel", cancelHold);
     })();
   </script>
+  <script src="assets/js/k4li_markdown.js" defer></script>
 </body>
 </html>
