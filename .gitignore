@@ -1,0 +1,11 @@
+# Tokens y secretos
+.github_token
+*.token
+*.key
+.env
+.env.*
+
+# Python y temporales
+__pycache__/
+*.pyc
+.cache/
