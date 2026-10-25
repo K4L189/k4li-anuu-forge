@@ -7,12 +7,13 @@ Frecuencia Operativa: 189.89.619 Hz | Concilio ACE (161914)
 Unidad Técnica: 4NVSET 🟢
 =============================================================================
 Verifica la integridad de referencias locales (src/href), archivos estáticos
-vitales y estructura para el despliegue en GitHub Pages.
+vitales, estructura PWA, búnker criptográfico y despliegue para GitHub Pages.
 """
 
 import os
 import sys
 import re
+import json
 from pathlib import Path
 
 def run_integrity_check(repo_root: Path):
@@ -21,28 +22,132 @@ def run_integrity_check(repo_root: Path):
     print(f" Root Directory: {repo_root}")
     print("=" * 70)
 
-    # 1. Verificar archivos esenciales del despliegue
+    # 1. Verificar archivos esenciales de infraestructura y componentes
     critical_files = [
         repo_root / "index.html",
         repo_root / ".nojekyll",
+        repo_root / "manifest.json",
+        repo_root / "sw.js",
+        repo_root / "assets" / "css" / "fullwallpaper.css",
+        repo_root / "assets" / "js" / "fullwallpaper.js",
+        repo_root / "assets" / "js" / "bunker_vault.js",
+        repo_root / "assets" / "vault_payload.json",
+        repo_root / "components" / "sovereign_sanctuary.html",
         repo_root / "components" / "roi_calculator.html",
+        repo_root / "components" / "security_audit_tool.html",
+        repo_root / "components" / "market_arbitrage_engine.html",
+        repo_root / "components" / "ai_benchmark_calculator.html",
+        repo_root / "components" / "contract_generator.html",
+        repo_root / "components" / "terminal_hud.html",
+        repo_root / "components" / "relics_explorer.html",
+        repo_root / "components" / "internal_crm.html",
         repo_root / "docs" / "ROI_CALCULATOR_GUIDE.md"
     ]
 
     missing_critical = []
+    print("\n[+] 1. Verificando archivos críticos de infraestructura:")
     for cf in critical_files:
+        rel = cf.relative_to(repo_root)
         if not cf.exists():
-            missing_critical.append(str(cf.relative_to(repo_root)))
-            print(f"[-] CRITICAL MISSING: {cf.relative_to(repo_root)}")
+            missing_critical.append(str(rel))
+            print(f"[-] CRITICAL MISSING: {rel}")
         else:
-            print(f"[+] FOUND: {cf.relative_to(repo_root)} ({cf.stat().st_size} bytes)")
+            print(f"[✓] FOUND: {rel} ({cf.stat().st_size} bytes)")
 
     if missing_critical:
         print(f"\n[FAIL] Archivos esenciales faltantes: {missing_critical}")
         return False, len(missing_critical), 0
 
-    # 2. Escanear enlaces y recursos locales en páginas principales
-    core_html_files = [repo_root / "index.html"] + list((repo_root / "components").glob("*.html"))
+    # 2. Verificar catálogo canónico de los 7 fondos de pantalla y assets de marca
+    wallpapers = [
+        "anu_banner.png",
+        "anuu_core.jpg",
+        "anuu_hero.png",
+        "bg_nexus.png",
+        "bruma_mist.jpg",
+        "kilonova_sovereign.jpg",
+        "nexus_stellar.png"
+    ]
+    brand_assets = [
+        repo_root / "assets" / "icon-192.png",
+        repo_root / "assets" / "icon-512.png"
+    ]
+
+    print("\n[+] 2. Verificando catálogo de fondos HD y assets PWA:")
+    missing_assets = []
+    for wp in wallpapers:
+        wp_path = repo_root / "assets" / "wallpapers" / wp
+        if not wp_path.exists():
+            missing_assets.append(f"assets/wallpapers/{wp}")
+            print(f"[-] MISSING WALLPAPER: assets/wallpapers/{wp}")
+        else:
+            print(f"[✓] WALLPAPER OK: assets/wallpapers/{wp} ({wp_path.stat().st_size} bytes)")
+
+    for ba in brand_assets:
+        rel = ba.relative_to(repo_root)
+        if not ba.exists():
+            missing_assets.append(str(rel))
+            print(f"[-] MISSING BRAND ASSET: {rel}")
+        else:
+            print(f"[✓] BRAND ASSET OK: {rel} ({ba.stat().st_size} bytes)")
+
+    if missing_assets:
+        print(f"\n[FAIL] Activos gráficos faltantes: {missing_assets}")
+        return False, len(missing_assets), 0
+
+    # 3. Validar integridad de JSON y Búnker Criptográfico
+    print("\n[+] 3. Auditando integridad de esquemas JSON y Búnker Criptográfico:")
+    json_files_to_check = [
+        repo_root / "manifest.json",
+        repo_root / "assets" / "vault_payload.json",
+        repo_root / "assets" / "relics_manifest.json"
+    ]
+    for jf in json_files_to_check:
+        if jf.exists():
+            try:
+                data = json.loads(jf.read_text(encoding="utf-8"))
+                if jf.name == "vault_payload.json":
+                    for req_field in ["salt", "iv", "ciphertext", "version"]:
+                        if req_field not in data:
+                            raise ValueError(f"Falta campo requerido '{req_field}' en vault_payload.json")
+                print(f"[✓] JSON VALID: {jf.relative_to(repo_root)} (OK)")
+            except Exception as e:
+                print(f"[-] JSON CORRUPT: {jf.relative_to(repo_root)} -> {e}")
+                return False, 1, 0
+
+    # 4. Validar Service Worker PWA (Versión de Caché y Cobertura de Activos)
+    print("\n[+] 4. Auditando Service Worker PWA (sw.js):")
+    sw_file = repo_root / "sw.js"
+    if sw_file.exists():
+        sw_content = sw_file.read_text(encoding="utf-8")
+        version_match = re.search(r"CACHE_NAME\s*=\s*['\"]([^'\"]+)['\"]", sw_content)
+        cache_version = version_match.group(1) if version_match else "DESCONOCIDO"
+        print(f"    - Versión de caché detectada: '{cache_version}'")
+        
+        # Extraer lista ASSETS_TO_CACHE
+        assets_match = re.search(r"ASSETS_TO_CACHE\s*=\s*\[(.*?)\];", sw_content, re.DOTALL)
+        if assets_match:
+            cached_entries = re.findall(r"['\"]([^'\"]+)['\"]", assets_match.group(1))
+            missing_cached = []
+            for entry in cached_entries:
+                if entry in ("./", "/"):
+                    continue
+                clean_entry = entry.lstrip("./")
+                entry_path = repo_root / clean_entry
+                if not entry_path.exists():
+                    missing_cached.append(entry)
+                    print(f"[-] ERROR: Recurso en sw.js ASSETS_TO_CACHE no existe en disco: {entry}")
+                else:
+                    print(f"[✓] SW ASSET DISK OK: {entry}")
+
+            if missing_cached:
+                print(f"[FAIL] El Service Worker lista recursos inexistentes: {missing_cached}")
+                return False, len(missing_cached), 0
+        else:
+            print("[-] ALERTA: No se encontró array ASSETS_TO_CACHE en sw.js")
+
+    # 5. Escanear enlaces y recursos locales en páginas principales
+    core_html_files = [repo_root / "index.html"] + sorted(list((repo_root / "components").glob("*.html")))
     
     broken_links = []
     checked_count = 0
@@ -51,7 +156,7 @@ def run_integrity_check(repo_root: Path):
         "http://", "https://", "mailto:", "tel:", "javascript:", "data:", "#", "file://", "blob:"
     )
 
-    print("\n[+] Auditando referencias locales en componentes de producción:")
+    print("\n[+] 5. Auditando referencias locales en componentes de producción:")
     for doc in core_html_files:
         content = doc.read_text(encoding="utf-8", errors="ignore")
         matches = re.findall(r'(?:src|href)=["\']([^"\']+)["\']', content)
@@ -87,7 +192,8 @@ def run_integrity_check(repo_root: Path):
         print("[FAIL] Se detectaron hipervínculos o recursos locales inexistentes.")
         return False, len(missing_critical), len(broken_links)
 
-    print("[SUCCESS] Integridad de activos y estructura 100% verificada.")
+    print("\n [4NVSET 🟢] AUDITORÍA DE INTEGRIDAD DE ACTIVOS COMPLETADA EXITOSAMENTE: PASSED")
+    print("=" * 70)
     return True, 0, 0
 
 if __name__ == "__main__":

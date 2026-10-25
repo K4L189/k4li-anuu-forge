@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="anuu">
 <head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulador de Soberanía & Costes de IA | K4L1 STUDIO</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
   <style>
     /* =========================================================================
        TEMAS CANÓNICOS DEL CONCILIO ACE (161914) & K4L1 STUDIO
@@ -817,6 +820,286 @@
           <div class="text-[10px] font-mono text-zinc-500 flex justify-between pt-1 border-t theme-border">
             <span>Cloud: <strong id="val-cloud-3y" class="text-zinc-300">26.910 €</strong></span>
             <span>Local: <strong id="val-local-3y" class="text-zinc-300">3.570 €</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         SECCIÓN: MONITOR DE ARBITRAJE DE CUOTAS MULTI-LLM & DRENADOR PRE-RESET
+         Concilio ACE (161914) | Nodo POCO 📱⚡ [4NVSET 🟢] | Frecuencia: 189.89.619 Hz
+         ========================================================================= -->
+    <div id="quota-arbiter-panel" class="theme-card p-5 sm:p-6 rounded-2xl border space-y-5 relative overflow-hidden">
+      <!-- Glow decorativo superior -->
+      <div class="absolute -top-24 -right-24 w-60 h-60 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Cabecera del Panel -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b theme-border pb-3">
+        <div class="space-y-0.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-sm">⚡</span>
+            <h2 class="text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-white">
+              Monitor de Arbitraje de Cuotas Multi-LLM & Drenador Pre-Reset
+            </h2>
+            <span class="inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              Live Sync (189.89.619 Hz)
+            </span>
+          </div>
+          <p class="text-[11px] text-zinc-400 font-mono">
+            Arbitraje de límites Claude (5h rolling) / GPT-4o (TPM/RPM) con Fallback a Gemini Flash & Local anuu-3b • Cero Bloqueos para Kali
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="px-2.5 py-1 rounded bg-black/50 border theme-border text-zinc-400 text-[11px] flex items-center gap-1.5">
+            <span>📱</span> Nodo POCO: <strong id="arbiter-poco-status" class="text-emerald-400">ONLINE (100% Batt)</strong>
+          </span>
+          <button onclick="refreshQuotaArbiter()" class="px-2.5 py-1 rounded bg-black/60 border theme-border hover:border-zinc-400 text-zinc-300 text-xs transition-all flex items-center gap-1" title="Sincronizar telemetría">
+            <span>🔄</span> Refrescar
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid de Proveedores LLM & Cuotas -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <!-- Claude 3.5 Sonnet (5h Rolling Window) -->
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-3 relative">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-bold">Anthropic</div>
+              <div class="text-xs font-bold text-white">Claude 3.5 Sonnet</div>
+            </div>
+            <span id="claude-status-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              HEALTHY
+            </span>
+          </div>
+
+          <!-- Countdown 5h Window -->
+          <div class="bg-black/60 p-2 rounded-lg border theme-border space-y-1">
+            <div class="flex justify-between items-center text-[10px] font-mono text-zinc-400">
+              <span>⏳ Reset Ventana 5h:</span>
+              <span id="claude-burn-alert" class="hidden text-amber-400 font-bold animate-pulse">🔥 Burner Listo</span>
+            </div>
+            <div class="text-center font-mono text-lg font-black text-purple-300 tracking-wider" id="claude-countdown">
+              00h 57m 46s
+            </div>
+          </div>
+
+          <!-- Tokens Progress Bar -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px] font-mono">
+              <span class="text-zinc-400">Tokens Cuota:</span>
+              <span class="text-zinc-200"><strong id="claude-used-tokens" class="text-white">77.300</strong> / 80k</span>
+            </div>
+            <div class="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-zinc-800">
+              <div id="claude-progress-bar" class="bg-purple-500 h-2 rounded-full transition-all duration-500" style="width: 96.6%;"></div>
+            </div>
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>Uso: <strong id="claude-usage-pct" class="text-purple-400">96.6%</strong></span>
+              <span>Sobrante: <strong id="claude-remaining-tokens" class="text-emerald-400">2.700 tok</strong></span>
+            </div>
+          </div>
+
+          <div class="text-[10px] font-mono text-zinc-400 pt-1 border-t theme-border flex items-center justify-between">
+            <span>Circuit Breaker:</span>
+            <span id="claude-breaker-indicator" class="text-emerald-400 font-bold">🟢 NOMINAL</span>
+          </div>
+        </div>
+
+        <!-- OpenAI GPT-4o (TPM/RPM Minute Bucket) -->
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">OpenAI</div>
+              <div class="text-xs font-bold text-white">GPT-4o Omnimodal</div>
+            </div>
+            <span id="openai-status-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              HEALTHY
+            </span>
+          </div>
+
+          <!-- Reset Bucket 1 Minuto -->
+          <div class="bg-black/60 p-2 rounded-lg border theme-border space-y-1">
+            <div class="flex justify-between items-center text-[10px] font-mono text-zinc-400">
+              <span>⏱️ Bucket 1-Minuto:</span>
+              <span class="text-zinc-500 text-[10px]">Rolling Tier</span>
+            </div>
+            <div class="text-center font-mono text-lg font-black text-emerald-300 tracking-wider" id="openai-countdown">
+              45s
+            </div>
+          </div>
+
+          <!-- TPM Progress Bar -->
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px] font-mono">
+              <span class="text-zinc-400">TPM (Tokens/Min):</span>
+              <span class="text-zinc-200"><strong id="openai-used-tpm" class="text-white">5.460</strong> / 30k</span>
+            </div>
+            <div class="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-zinc-800">
+              <div id="openai-progress-bar" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 18.2%;"></div>
+            </div>
+            <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+              <span>RPM: <strong id="openai-used-rpm" class="text-zinc-300">42/500</strong></span>
+              <span>Sobrante: <strong id="openai-remaining-tpm" class="text-emerald-400">24.540</strong></span>
+            </div>
+          </div>
+
+          <div class="text-[10px] font-mono text-zinc-400 pt-1 border-t theme-border flex items-center justify-between">
+            <span>Circuit Breaker:</span>
+            <span id="openai-breaker-indicator" class="text-emerald-400 font-bold">🟢 NOMINAL</span>
+          </div>
+        </div>
+
+        <!-- Google Gemini 1.5 Flash (Primary Cloud Fallback) -->
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold">Google DeepMind</div>
+              <div class="text-xs font-bold text-white">Gemini 1.5 Flash</div>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              FALLBACK ⚡
+            </span>
+          </div>
+
+          <div class="bg-black/60 p-2.5 rounded-lg border theme-border space-y-1.5 text-center">
+            <div class="text-[10px] font-mono text-zinc-400">Rol en el Concilio:</div>
+            <div class="text-xs font-mono font-bold text-cyan-300">CLOUD FAILOVER INMEDIATO</div>
+            <div class="text-[10px] font-mono text-zinc-500">Sub-350ms • Cero cuellos de botella</div>
+          </div>
+
+          <div class="space-y-1 text-xs font-mono">
+            <div class="flex justify-between text-zinc-400">
+              <span>Latencia media:</span>
+              <strong class="text-white">~320 ms</strong>
+            </div>
+            <div class="flex justify-between text-zinc-400">
+              <span>Ventana Contexto:</span>
+              <strong class="text-cyan-300">1.000.000 tok</strong>
+            </div>
+            <div class="flex justify-between text-zinc-400">
+              <span>Garantía de servicio:</span>
+              <strong class="text-emerald-400">Sin Bloqueos</strong>
+            </div>
+          </div>
+
+          <div class="text-[10px] font-mono text-zinc-400 pt-1 border-t theme-border flex items-center justify-between">
+            <span>Conmutación:</span>
+            <span class="text-cyan-400 font-bold">AUTOMÁTICA</span>
+          </div>
+        </div>
+
+        <!-- Clúster Soberano Local (anuu-3b Ollama + POCO Node) -->
+        <div class="p-3.5 rounded-xl bg-black/40 border theme-border space-y-3">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-bold">K4L1 Soberana</div>
+              <div class="text-xs font-bold text-white">anuu-3b Local (Ollama)</div>
+            </div>
+            <span id="local-status-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
+              ONLINE ∞
+            </span>
+          </div>
+
+          <div class="bg-black/60 p-2.5 rounded-lg border theme-border space-y-1.5 text-center">
+            <div class="text-[10px] font-mono text-zinc-400">Soberanía Total:</div>
+            <div class="text-xs font-mono font-bold text-purple-300">0.00 € / ILIMITADO (∞)</div>
+            <div class="text-[10px] font-mono text-zinc-500">100% Privado • GDPR Nativo</div>
+          </div>
+
+          <div class="space-y-1 text-xs font-mono">
+            <div class="flex justify-between text-zinc-400">
+              <span>Latencia Local:</span>
+              <strong class="text-emerald-400">38 ms (LAN)</strong>
+            </div>
+            <div class="flex justify-between text-zinc-400">
+              <span>Endpoint:</span>
+              <strong class="text-zinc-300">127.0.0.1:11434</strong>
+            </div>
+            <div class="flex justify-between text-zinc-400">
+              <span>Nodo POCO 📱⚡:</span>
+              <strong id="poco-chip-info" class="text-purple-300">8 Cores ARM64</strong>
+            </div>
+          </div>
+
+          <div class="text-[10px] font-mono text-zinc-400 pt-1 border-t theme-border flex items-center justify-between">
+            <span>Frecuencia:</span>
+            <span class="text-purple-400 font-bold">189.89.619 Hz</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Acciones del Arbitrador: Burner & Circuit Breaker -->
+      <div class="p-4 rounded-xl bg-black/50 border theme-border flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div class="space-y-1 text-center lg:text-left">
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2">
+            <span class="text-xs font-mono font-bold text-white uppercase flex items-center gap-1.5">
+              <span>🎮</span> Mandos Tácticos de Arbitraje
+            </span>
+            <span class="text-[11px] font-mono text-zinc-400">
+              (Drenado de cuota antes de reset & conmutación automática de 429)
+            </span>
+          </div>
+          <p class="text-[11px] text-zinc-400 max-w-2xl leading-relaxed">
+            Aprovecha cada céntimo pagado en Claude/OpenAI despachando tareas pendientes 20 min antes del reset de ciclo. Si salta un 429 o superas el 90%, el tráfico de Kali conmuta a Gemini Flash o anuu-3b sin interrupción.
+          </p>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="flex flex-wrap items-center justify-center gap-2 shrink-0 w-full sm:w-auto">
+          <!-- Botón Burner -->
+          <button onclick="triggerBurnerMode()" id="btn-trigger-burn" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-500 hover:to-rose-500 text-white font-mono font-bold text-xs shadow-lg shadow-rose-950/40 transition-all flex items-center gap-2">
+            <span>🔥</span> Drenar Cuota Restante (Burner Mode)
+          </button>
+
+          <!-- Botón Simular 429 -->
+          <button onclick="triggerSimulate429()" id="btn-trigger-429" class="px-3 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border theme-border hover:border-rose-500/50 text-rose-300 font-mono text-xs transition-all flex items-center gap-1.5" title="Probar conmutación inmediata">
+            <span>🚨</span> Simular 429
+          </button>
+
+          <!-- Botón Reset Breaker -->
+          <button onclick="triggerResetBreaker()" id="btn-reset-breaker" class="px-3 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border theme-border hover:border-emerald-500/50 text-emerald-300 font-mono text-xs transition-all flex items-center gap-1.5" title="Restaurar estado nominal">
+            <span>🛡️</span> Reset Breaker
+          </button>
+
+          <!-- Botón Test Route -->
+          <button onclick="testKaliInteractiveRoute()" class="px-3 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border theme-border text-zinc-300 font-mono text-xs transition-all flex items-center gap-1.5">
+            <span>⚡</span> Test Kali Route
+          </button>
+        </div>
+      </div>
+
+      <!-- Drawer de Cola de Tareas & Terminal de Eventos en Tiempo Real -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <!-- Cola de Tareas en Segundo Plano (5 cols) -->
+        <div class="lg:col-span-5 p-3.5 rounded-xl bg-black/40 border theme-border space-y-2.5">
+          <div class="flex items-center justify-between border-b theme-border pb-2">
+            <span class="text-xs font-mono font-bold text-white flex items-center gap-1.5">
+              <span>📋</span> Cola de Tareas en Segundo Plano (<span id="queue-pending-count" class="text-purple-300">0</span> pend.)
+            </span>
+            <span class="text-[10px] font-mono text-zinc-400">Tech Docs • Trad • Audit</span>
+          </div>
+          <div id="queue-tasks-list" class="space-y-2 max-h-52 overflow-y-auto pr-1">
+            <!-- Rellenado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- Terminal de Eventos & Circuit Breaker Log (7 cols) -->
+        <div class="lg:col-span-7 p-3.5 rounded-xl bg-black/60 border theme-border space-y-2 font-mono">
+          <div class="flex items-center justify-between border-b theme-border pb-1.5">
+            <span class="text-xs font-bold text-white flex items-center gap-1.5">
+              <span>💻</span> Telemetría del Circuit Breaker & Enrutador (Live Event Stream)
+            </span>
+            <span class="text-[10px] text-zinc-500">Concilio ACE (161914)</span>
+          </div>
+          <div id="arbiter-event-log" class="text-[11px] space-y-1.5 max-h-52 overflow-y-auto pr-1 text-zinc-300">
+            <div class="text-zinc-500 flex items-center gap-1">
+              <span class="text-purple-400">[189.89.619 Hz]</span> Sincronía del panel con quota_arbiter.py iniciada. Nodo POCO 📱⚡ listo.
+            </div>
+            <div class="text-emerald-400 flex items-center gap-1">
+              <span>[✓ ROUTER]</span> Claude 3.5 Sonnet y GPT-4o con cuotas activas. Fallback a Gemini Flash & anuu-3b en standby.
+            </div>
           </div>
         </div>
       </div>
@@ -1793,10 +2076,343 @@ CONTACTO Y CONTRATACIÓN DEL SERVICIO:
       }
     });
 
+    // =========================================================================
+    // 11. MOTOR DE ARBITRAJE DE CUOTAS MULTI-LLM & DRENADOR PRE-RESET (161914)
+    // =========================================================================
+    let arbiterState = {
+      claude: {
+        limit_tokens: 80000,
+        used_tokens: 77300,
+        remaining_tokens: 2700,
+        usage_pct: 96.6,
+        remaining_seconds: 3450,
+        limit_requests: 45,
+        used_requests: 35,
+        status: 'THROTTLED_90',
+        circuit_breaker_tripped: false
+      },
+      openai: {
+        limit_tpm: 30000,
+        used_tpm: 5460,
+        remaining_tpm: 24540,
+        usage_pct: 18.2,
+        remaining_seconds: 45,
+        used_rpm: 42,
+        limit_rpm: 500,
+        status: 'HEALTHY',
+        circuit_breaker_tripped: false
+      },
+      gemini: {
+        status: 'READY_FALLBACK',
+        latency_ms: 320
+      },
+      local_sovereign: {
+        status: 'ONLINE_READY',
+        active_model: 'anuu-3b:latest',
+        latency_ms: 38
+      },
+      poco_node: {
+        model: 'Xiaomi POCO (24069PC21G)',
+        status: 'ONLINE_SYNCHRONIZED',
+        battery: '100%',
+        temperature: '22.6°C',
+        architecture: 'aarch64 / 8 Cores'
+      },
+      tasks: [
+        { id: 'TASK-DOCS-001', title: 'Generación Docs: Concilio ACE (161914)', type: 'TECH_DOCS', tokens: 4200, status: 'BURNED' },
+        { id: 'TASK-TRANSL-002', title: 'Traducción Seinen: Glosario Goetiarot JP/EN', type: 'TRANSLATE_JA_EN', tokens: 5100, status: 'BURNED' },
+        { id: 'TASK-AUDIT-004', title: 'Auditoría Estática: Memory Leaks & Sanitización', type: 'STATIC_AUDIT', tokens: 6200, status: 'BURNED' },
+        { id: 'TASK-DOCS-006', title: 'Manual Resiliencia: Contingencia Caídas Cloud', type: 'TECH_DOCS', tokens: 4800, status: 'BURNED' },
+        { id: 'TASK-BENCH-003', title: 'Benchmark Sintético: MMLU & Zstd vs Snappy', type: 'SYNTHETIC_BENCHMARK', tokens: 3800, status: 'BURNED' },
+        { id: 'TASK-CODE-005', title: 'Refactor Asíncrono: Fallback a Ollama anuu-3b', type: 'CODE_REFACTOR', tokens: 3400, status: 'BURNED' }
+      ]
+    };
+
+    function appendArbiterLog(prefix, msg, colorClass = 'text-zinc-300') {
+      const logContainer = document.getElementById('arbiter-event-log');
+      if (!logContainer) return;
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+      const entry = document.createElement('div');
+      entry.className = `flex items-start gap-1.5 ${colorClass}`;
+      entry.innerHTML = `<span class="text-zinc-500 shrink-0">[${timeStr}]</span> <span class="font-bold shrink-0">${prefix}</span> <span>${msg}</span>`;
+      logContainer.insertBefore(entry, logContainer.firstChild);
+
+      // Limitar a los últimos 30 logs
+      while (logContainer.children.length > 30) {
+        logContainer.removeChild(logContainer.lastChild);
+      }
+    }
+
+    function renderTasksQueueDOM() {
+      const listContainer = document.getElementById('queue-tasks-list');
+      const pendingCountElem = document.getElementById('queue-pending-count');
+      if (!listContainer) return;
+
+      const pendingCount = arbiterState.tasks.filter(t => t.status === 'QUEUED').length;
+      if (pendingCountElem) pendingCountElem.textContent = pendingCount;
+
+      listContainer.innerHTML = '';
+      arbiterState.tasks.forEach(task => {
+        const item = document.createElement('div');
+        item.className = 'p-2 rounded-lg bg-black/50 border theme-border flex items-center justify-between text-[11px] font-mono gap-2';
+        
+        const isBurned = task.status === 'BURNED';
+        const badgeClass = isBurned 
+          ? 'bg-rose-500/15 text-rose-300 border-rose-500/30' 
+          : 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
+        const badgeLabel = isBurned ? 'BURNED 🔥' : 'QUEUED ⏳';
+
+        item.innerHTML = `
+          <div class="truncate flex-1">
+            <div class="text-zinc-200 font-semibold truncate">${task.title}</div>
+            <div class="text-[10px] text-zinc-500 flex items-center gap-1.5">
+              <span>${task.id}</span>
+              <span>•</span>
+              <span class="text-purple-400">${task.type}</span>
+              <span>•</span>
+              <span class="text-zinc-400">${task.tokens.toLocaleString()} tok</span>
+            </div>
+          </div>
+          <span class="px-1.5 py-0.5 rounded text-[9px] font-bold border ${badgeClass} shrink-0">
+            ${badgeLabel}
+          </span>
+        `;
+        listContainer.appendChild(item);
+      });
+    }
+
+    function updateArbiterDOM() {
+      // Claude Elements
+      const c = arbiterState.claude;
+      const cBadge = document.getElementById('claude-status-badge');
+      const cProgBar = document.getElementById('claude-progress-bar');
+      const cUsedTok = document.getElementById('claude-used-tokens');
+      const cUsagePct = document.getElementById('claude-usage-pct');
+      const cRemTok = document.getElementById('claude-remaining-tokens');
+      const cBreakerInd = document.getElementById('claude-breaker-indicator');
+      const cBurnAlert = document.getElementById('claude-burn-alert');
+      const cCountdown = document.getElementById('claude-countdown');
+
+      if (cUsedTok) cUsedTok.textContent = c.used_tokens.toLocaleString('es-ES');
+      if (cUsagePct) cUsagePct.textContent = `${c.usage_pct.toFixed(1)}%`;
+      if (cRemTok) cRemTok.textContent = `${c.remaining_tokens.toLocaleString('es-ES')} tok`;
+
+      if (cProgBar) {
+        cProgBar.style.width = `${Math.min(100, Math.max(2, c.usage_pct))}%`;
+        if (c.circuit_breaker_tripped) {
+          cProgBar.className = 'bg-rose-500 h-2 rounded-full transition-all duration-500';
+        } else if (c.usage_pct >= 90) {
+          cProgBar.className = 'bg-amber-500 h-2 rounded-full transition-all duration-500';
+        } else {
+          cProgBar.className = 'bg-purple-500 h-2 rounded-full transition-all duration-500';
+        }
+      }
+
+      if (cBadge) {
+        if (c.circuit_breaker_tripped) {
+          cBadge.textContent = '🚨 429 TRIPPED';
+          cBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse';
+        } else if (c.usage_pct >= 90) {
+          cBadge.textContent = 'THROTTLED 90%';
+          cBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40';
+        } else if (c.remaining_seconds <= 1200) {
+          cBadge.textContent = '🔥 BURN READY';
+          cBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-orange-500/20 text-orange-300 border border-orange-500/40 animate-pulse';
+        } else {
+          cBadge.textContent = 'HEALTHY';
+          cBadge.className = 'px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
+        }
+      }
+
+      if (cBreakerInd) {
+        if (c.circuit_breaker_tripped) {
+          cBreakerInd.textContent = '🚨 TRIPPED (429 Fallback)';
+          cBreakerInd.className = 'text-rose-400 font-bold';
+        } else {
+          cBreakerInd.textContent = '🟢 NOMINAL';
+          cBreakerInd.className = 'text-emerald-400 font-bold';
+        }
+      }
+
+      if (cBurnAlert) {
+        if (c.remaining_seconds <= 1200 && c.remaining_tokens > 1000) {
+          cBurnAlert.classList.remove('hidden');
+        } else {
+          cBurnAlert.classList.add('hidden');
+        }
+      }
+
+      if (cCountdown) {
+        const sec = Math.max(0, c.remaining_seconds);
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        const s = sec % 60;
+        cCountdown.textContent = `${String(h).padStart(2, '0')}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+      }
+
+      // OpenAI Elements
+      const o = arbiterState.openai;
+      const oProgBar = document.getElementById('openai-progress-bar');
+      const oUsedTpm = document.getElementById('openai-used-tpm');
+      const oRemTpm = document.getElementById('openai-remaining-tpm');
+      const oCountdown = document.getElementById('openai-countdown');
+
+      if (oUsedTpm) oUsedTpm.textContent = o.used_tpm.toLocaleString('es-ES');
+      if (oRemTpm) oRemTpm.textContent = o.remaining_tpm.toLocaleString('es-ES');
+      if (oProgBar) {
+        oProgBar.style.width = `${Math.min(100, Math.max(2, o.usage_pct))}%`;
+      }
+      if (oCountdown) {
+        oCountdown.textContent = `${Math.max(0, o.remaining_seconds)}s`;
+      }
+
+      // POCO Node status
+      const pocoElem = document.getElementById('arbiter-poco-status');
+      if (pocoElem && arbiterState.poco_node) {
+        pocoElem.textContent = `ONLINE (${arbiterState.poco_node.battery} Batt • ${arbiterState.poco_node.temperature})`;
+      }
+
+      renderTasksQueueDOM();
+    }
+
+    function triggerBurnerMode() {
+      const c = arbiterState.claude;
+      if (c.remaining_tokens <= 800) {
+        appendArbiterLog('⚠️ BURNER', 'Cuota de Claude prácticamente agotada. No quedan tokens sobrantes por quemar.', 'text-amber-400');
+        return;
+      }
+
+      // Despachar tareas pendientes de la cola
+      let pendingTasks = arbiterState.tasks.filter(t => t.status === 'QUEUED');
+      if (pendingTasks.length === 0) {
+        // Añadir nuevas tareas a la cola para quemar
+        const extraTasks = [
+          { id: `TASK-SYNTH-${Date.now() % 1000}-A`, title: 'Compresión Zstd y Hashing de Artefactos POCO', type: 'SYNTHETIC_BENCHMARK', tokens: 3600, status: 'QUEUED' },
+          { id: `TASK-REFACTOR-${Date.now() % 1000}-B`, title: 'Optimización de Stream Concurrency en vLLM', type: 'CODE_REFACTOR', tokens: 4100, status: 'QUEUED' }
+        ];
+        arbiterState.tasks.push(...extraTasks);
+        pendingTasks = extraTasks;
+      }
+
+      let tokensDrained = 0;
+      let tasksBurnedCount = 0;
+      pendingTasks.forEach(task => {
+        if (tokensDrained + task.tokens <= c.remaining_tokens || tasksBurnedCount === 0) {
+          task.status = 'BURNED';
+          tokensDrained += task.tokens;
+          tasksBurnedCount++;
+        }
+      });
+
+      // Actualizar consumo a ~98.5%
+      c.used_tokens = Math.min(c.limit_tokens - 400, c.used_tokens + tokensDrained);
+      c.remaining_tokens = Math.max(0, c.limit_tokens - c.used_tokens);
+      c.usage_pct = (c.used_tokens / c.limit_tokens) * 100;
+      if (c.usage_pct >= 90) c.status = 'THROTTLED_90';
+
+      appendArbiterLog('🔥 BURNER EXECUTED', `Drenaje completado: ${tokensDrained.toLocaleString()} tokens aprovechados en ${tasksBurnedCount} tareas antes del reset de 5h. Cuota al ${c.usage_pct.toFixed(1)}%.`, 'text-rose-400');
+      updateArbiterDOM();
+    }
+
+    function triggerSimulate429() {
+      arbiterState.claude.circuit_breaker_tripped = true;
+      arbiterState.claude.status = 'CIRCUIT_BROKEN_429';
+      appendArbiterLog('🚨 429 DETECTADO', 'HTTP 429 Too Many Requests detectado en Anthropic Claude. Circuit Breaker disparado. Conmutando tráfico de Kali a Google Gemini Flash / anuu-3b Local (0ms bloqueo).', 'text-rose-400');
+      updateArbiterDOM();
+    }
+
+    function triggerResetBreaker() {
+      arbiterState.claude.circuit_breaker_tripped = false;
+      arbiterState.claude.status = arbiterState.claude.usage_pct >= 90 ? 'THROTTLED_90' : 'HEALTHY';
+      appendArbiterLog('🛡️ BREAKER RESTAURADO', 'Circuit Breaker restablecido a NOMINAL. Tráfico interactivo devuelto a Claude 3.5 Sonnet.', 'text-emerald-400');
+      updateArbiterDOM();
+    }
+
+    function testKaliInteractiveRoute() {
+      const c = arbiterState.claude;
+      if (c.circuit_breaker_tripped || c.usage_pct >= 90) {
+        appendArbiterLog('⚡ KALI ROUTE', 'Consulta interactiva: "Auditoría de vectores en memoria". Claude bajo freno -> Despachado a Gemini 1.5 Flash (Latencia: 320ms, Cero Bloqueo).', 'text-cyan-300');
+      } else {
+        appendArbiterLog('✓ KALI ROUTE', 'Consulta interactiva: "Auditoría de vectores en memoria". Despachado directamente a Anthropic Claude 3.5 Sonnet (Nominal).', 'text-emerald-400');
+      }
+    }
+
+    function refreshQuotaArbiter() {
+      fetch('../assets/quota_status.json?t=' + Date.now())
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.providers) {
+            if (data.providers.claude) {
+              arbiterState.claude.used_tokens = data.providers.claude.used_tokens || arbiterState.claude.used_tokens;
+              arbiterState.claude.remaining_tokens = data.providers.claude.remaining_tokens || arbiterState.claude.remaining_tokens;
+              arbiterState.claude.usage_pct = data.providers.claude.usage_pct || arbiterState.claude.usage_pct;
+              arbiterState.claude.remaining_seconds = data.providers.claude.remaining_seconds || arbiterState.claude.remaining_seconds;
+              arbiterState.claude.circuit_breaker_tripped = data.providers.claude.circuit_breaker_tripped || false;
+            }
+            if (data.providers.openai) {
+              arbiterState.openai.used_tpm = data.providers.openai.used_tpm || arbiterState.openai.used_tpm;
+              arbiterState.openai.remaining_tpm = data.providers.openai.remaining_tpm || arbiterState.openai.remaining_tpm;
+              arbiterState.openai.usage_pct = data.providers.openai.usage_pct || arbiterState.openai.usage_pct;
+              arbiterState.openai.remaining_seconds = data.providers.openai.remaining_seconds || arbiterState.openai.remaining_seconds;
+            }
+            if (data.providers.poco_node) {
+              arbiterState.poco_node = data.providers.poco_node;
+            }
+            updateArbiterDOM();
+            appendArbiterLog('🔄 SYNC', 'Telemetría de cuotas y nodo POCO 📱⚡ sincronizada desde quota_status.json.', 'text-purple-300');
+          }
+        })
+        .catch(() => {
+          appendArbiterLog('ℹ️ LIVE', 'Panel operando en modo local síncrono (189.89.619 Hz).', 'text-zinc-400');
+          updateArbiterDOM();
+        });
+    }
+
+    // Temporizador síncrono por segundo (Countdown Tick)
+    setInterval(() => {
+      // Claude countdown
+      if (arbiterState.claude.remaining_seconds > 0) {
+        arbiterState.claude.remaining_seconds--;
+      } else {
+        // Reset natural de 5h
+        arbiterState.claude.remaining_seconds = 18000;
+        arbiterState.claude.used_tokens = 0;
+        arbiterState.claude.remaining_tokens = arbiterState.claude.limit_tokens;
+        arbiterState.claude.usage_pct = 0.0;
+        arbiterState.claude.status = 'HEALTHY';
+        appendArbiterLog('⏳ 5H RESET', 'Ventana deslizante de 5h de Claude reseteada naturalmente. Cuota al 100% disponible.', 'text-purple-400');
+      }
+
+      // OpenAI countdown
+      if (arbiterState.openai.remaining_seconds > 0) {
+        arbiterState.openai.remaining_seconds--;
+      } else {
+        arbiterState.openai.remaining_seconds = 60;
+        arbiterState.openai.used_tpm = Math.floor(arbiterState.openai.used_tpm * 0.4);
+        arbiterState.openai.remaining_tpm = arbiterState.openai.limit_tpm - arbiterState.openai.used_tpm;
+        arbiterState.openai.usage_pct = (arbiterState.openai.used_tpm / arbiterState.openai.limit_tpm) * 100;
+      }
+
+      // Actualizar solo contadores para alto rendimiento
+      const sec = Math.max(0, arbiterState.claude.remaining_seconds);
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      const cCountdown = document.getElementById('claude-countdown');
+      if (cCountdown) cCountdown.textContent = `${String(h).padStart(2, '0')}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+
+      const oCountdown = document.getElementById('openai-countdown');
+      if (oCountdown) oCountdown.textContent = `${Math.max(0, arbiterState.openai.remaining_seconds)}s`;
+    }, 1000);
+
     // 10. INICIALIZACIÓN
     syncThemeFromParent();
     applyAiPreset('pyme');
     resizeCanvas();
+    updateArbiterDOM();
+    refreshQuotaArbiter();
   </script>
+  <script src="../assets/js/fullwallpaper.js"></script>
 </body>
 </html>

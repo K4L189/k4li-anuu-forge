@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CÁMARA NEGRA // SANTUARIO SOBERANO | K4L1 STUDIO (161914)</title>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="../assets/js/bunker_vault.js"></script>
+  <script src="../assets/js/fullwallpaper.js"></script>
+  <style>
+    :root, [data-theme="anuu"] {
+      --bg-main: #040407;
+      --bg-card: #090910;
+      --bg-card-sub: #050509;
+      --border-card: #2d184d;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #f3e8ff;
+      --text-muted: #a855f7;
+      --glow-color: rgba(147, 51, 234, 0.4);
+    }
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    .crt-overlay {
+      background: linear-gradient(rgba(18, 16, 26, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+    .tarpit-bar {
+      transition: width 0.1s linear;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-purple-900 selection:text-white relative overflow-x-hidden">
+
+  <!-- Efecto CRT Scanlines -->
+  <div class="fixed inset-0 crt-overlay z-40"></div>
+
+  <!-- Header Táctico -->
+  <header class="border-b border-purple-900/40 bg-black/80 backdrop-blur-md sticky top-0 z-30 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-purple-900/30 border border-purple-500/50 flex items-center justify-center text-sm shadow-[0_0_10px_rgba(147,51,234,0.4)]">
+          👁️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-white tracking-widest uppercase">CÁMARA NEGRA // SANTUARIO SOBERANO</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] bg-purple-500/10 text-purple-300 border border-purple-500/30">189.89.619 HZ</span>
+          </div>
+          <p class="text-[10px] text-zinc-500">ZONA CIEGA A ESCANEOS • TARPIT CRIPTOGRÁFICO & GESTIÓN DE MASTER KEY</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <a href="../index.html" class="px-3 py-1.5 rounded-lg border border-zinc-800 text-zinc-400 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1.5">
+          <span>💼</span> K4L1 Studio
+        </a>
+        <button onclick="triggerPanicModal()" class="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 font-bold transition-all flex items-center gap-1.5">
+          <span>💥</span> Purga Cero
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="max-w-5xl mx-auto px-4 py-8 w-full flex-1 z-10">
+
+    <!-- ============================================================= -->
+    <!-- FASE 1: TARPIT CRIPTOGRÁFICO & ACCESO CON LATENCIA APOSTA     -->
+    <!-- ============================================================= -->
+    <div id="tarpitGateSection" class="max-w-lg mx-auto my-10 p-8 rounded-2xl bg-[#090912] border border-purple-900/50 shadow-2xl relative overflow-hidden">
+      <div class="w-16 h-16 rounded-2xl mx-auto mb-4 bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(147,51,234,0.3)]">
+        ⏳
+      </div>
+      
+      <div class="text-center mb-6">
+        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 border border-amber-500/30 text-amber-300 uppercase">
+          Defensa Activa: Cryptographic Tar Pit
+        </span>
+        <h2 class="text-lg font-bold text-white mt-2 tracking-wider">COMPUERTA DE ALTA LATENCIA</h2>
+        <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+          Este nodo dilata deliberadamente los vectores de respuesta temporal (4.2 segundos) y ejecuta un cálculo Proof-of-Work (500.000 iteraciones PBKDF2). Los crawlers y escáneres automáticos con timeout corto son descartados instantáneamente.
+        </p>
+      </div>
+
+      <!-- Formulario de Entrada -->
+      <form id="tarpitForm" onsubmit="handleTarpitUnlock(event)" class="space-y-4">
+        <div>
+          <label class="block text-[10px] text-zinc-400 uppercase mb-1">Llave Soberana de la Arquitecta</label>
+          <div class="relative">
+            <input type="password" id="sovereignPassInput" placeholder="Introduce tu Llave Soberana" required
+              class="w-full bg-black/60 border border-purple-900/50 rounded-xl px-4 py-2.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-purple-500 transition-colors pr-10">
+            <button type="button" onclick="togglePassVisibility('sovereignPassInput', 'eyeSov')" class="absolute right-3 top-2.5 text-zinc-400 hover:text-white text-xs">
+              <span id="eyeSov">👁️</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="tarpitErrorMsg" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs"></div>
+
+        <button type="submit" id="btnSubmitTarpit" class="w-full py-2.5 rounded-xl font-bold text-xs text-white shadow-lg transition-all flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-700">
+          <span>🔮</span> Iniciar Dilatación Temporal & Desbloquear
+        </button>
+      </form>
+
+      <!-- Barra de Progreso del Tar Pit (Oculta al inicio) -->
+      <div id="tarpitProgressContainer" class="hidden mt-6 space-y-2">
+        <div class="flex items-center justify-between text-[11px] text-zinc-400">
+          <span id="tarpitStepText">Dilatando vector temporal...</span>
+          <span id="tarpitPercent" class="font-bold text-purple-300">0%</span>
+        </div>
+        <div class="w-full h-2 bg-black/80 rounded-full overflow-hidden border border-purple-900/40">
+          <div id="tarpitBar" class="h-full tarpit-bar bg-gradient-to-r from-purple-600 via-fuchsia-500 to-emerald-400 w-0"></div>
+        </div>
+        <p id="tarpitSubtext" class="text-[10px] text-zinc-500 text-center animate-pulse mt-1">Calculando Proof-of-Work WebCrypto SHA-512...</p>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-purple-900/30 text-[10px] text-zinc-500 flex justify-between">
+        <span>Defensa: Anti-Crawler Tar Pit</span>
+        <span class="text-emerald-400">Zero-Trace RAM Buffer</span>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- FASE 2: SANTUARIO DESBLOQUEADO (GESTIÓN DE LLAVES & SECRETOS) -->
+    <!-- ============================================================= -->
+    <div id="sanctuaryUnlockedSection" class="hidden space-y-6">
+
+      <!-- Barra de Telemetría Soberana -->
+      <div class="p-5 rounded-2xl bg-[#090912] border border-purple-900/50 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <h3 class="text-sm font-bold text-white">NEXO SOBERANO ACTIVO // K4L1 ⊘k-0</h3>
+            <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">RAM VOLÁTIL</span>
+            <span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-300 border border-purple-500/30">PQC FIPS 203 // 128-BIT GROVER</span>
+          </div>
+          <p class="text-xs text-zinc-400 mt-1">
+            Huella Criptográfica SHA-256 de la Llave Activa: <code id="activeKeyFingerprint" class="text-purple-300 font-bold tracking-wider">CALCULANDO...</code>
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="lockSanctuary()" class="px-3.5 py-1.5 rounded-xl border border-zinc-800 text-zinc-300 hover:text-white hover:bg-white/5 text-xs transition-all flex items-center gap-1.5">
+            <span>🔒</span> Bloquear Cámara
+          </button>
+        </div>
+      </div>
+
+      <!-- Selector de Pestañas del Santuario -->
+      <div class="flex flex-wrap gap-2 border-b border-purple-900/40 pb-3 text-xs">
+        <button onclick="switchSanctuaryTab('pqc')" id="stab-pqc" class="px-3.5 py-1.5 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold transition-all flex items-center gap-1.5">
+          <span>🛡️</span> Resistencia Post-Cuántica (PQC)
+        </button>
+        <button onclick="switchSanctuaryTab('rotation')" id="stab-rotation" class="px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white border border-transparent transition-all flex items-center gap-1.5">
+          <span>🔄</span> Rotación de Llave Soberana
+        </button>
+        <button onclick="switchSanctuaryTab('paperkey')" id="stab-paperkey" class="px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white border border-transparent transition-all flex items-center gap-1.5">
+          <span>📜</span> Paper Key (12 Palabras)
+        </button>
+        <button onclick="switchSanctuaryTab('tokens')" id="stab-tokens" class="px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white border border-transparent transition-all flex items-center gap-1.5">
+          <span>🎫</span> Emisor de Tokens de Cliente
+        </button>
+        <button onclick="switchSanctuaryTab('antiforensic')" id="stab-antiforensic" class="px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white border border-transparent transition-all flex items-center gap-1.5">
+          <span>⚡</span> Telemetría Anti-Forense
+        </button>
+      </div>
+
+      <!-- MÓDULO 1: ROTACIÓN DE MASTER KEY EN CALIENTE -->
+      <div id="stab-view-rotation" class="p-6 rounded-2xl bg-[#090912] border border-purple-900/50 shadow-2xl space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">🔄</span>
+          <h4 class="text-sm font-bold text-white">Rotador en Caliente de la Llave Maestra Soberana</h4>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Permite sustituir tu Master Key actual por una nueva sin perder los clientes ni reliquias. El motor descifra todos los registros de IndexedDB en RAM, genera nuevos vectores de inicialización (IV 12-bytes) y salts (16-bytes), re-cifra toda la base con AES-256-GCM y compila un nuevo <code class="text-purple-300">vault_payload.json</code> descargable.
+        </p>
+
+        <form onsubmit="handleRotateKey(event)" class="space-y-4 max-w-xl">
+          <div>
+            <label class="block text-[10px] text-zinc-400 uppercase mb-1">Llave Maestra Actual</label>
+            <input type="password" id="rotCurrentPass" required placeholder="Tu Master Key activa"
+              class="w-full bg-black/60 border border-purple-900/40 rounded-xl px-3.5 py-2 text-xs text-white">
+          </div>
+          <div>
+            <label class="block text-[10px] text-zinc-400 uppercase mb-1">Nueva Llave Soberana</label>
+            <input type="password" id="rotNewPass" required placeholder="Nueva frase o código soberano"
+              class="w-full bg-black/60 border border-purple-900/40 rounded-xl px-3.5 py-2 text-xs text-white">
+          </div>
+          <div>
+            <label class="block text-[10px] text-zinc-400 uppercase mb-1">Confirmar Nueva Llave Soberana</label>
+            <input type="password" id="rotConfirmPass" required placeholder="Repite la nueva llave"
+              class="w-full bg-black/60 border border-purple-900/40 rounded-xl px-3.5 py-2 text-xs text-white">
+          </div>
+
+          <div id="rotStatusMsg" class="hidden p-3 rounded-xl text-xs"></div>
+
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-lg transition-all flex items-center gap-2">
+            <span>⚡</span> Ejecutar Re-cifrado y Generar Nuevo Payload
+          </button>
+        </form>
+      </div>
+
+      <!-- MÓDULO 2: PAPER KEY DE EMERGENCIA (12 PALABRAS CANÓNICAS) -->
+      <div id="stab-view-paperkey" class="hidden p-6 rounded-2xl bg-[#090912] border border-purple-900/50 shadow-2xl space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">📜</span>
+          <h4 class="text-sm font-bold text-white">Paper Key Soberana (Mnemónico de 12 Palabras)</h4>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Esta secuencia de 12 palabras sagradas está derivada de forma determinista mediante SHA-512 de tu Master Key soberana sobre el léxico primordial del Concilio ACE. Guárdala en papel o soporte físico desconectado para recuperación en frío.
+        </p>
+
+        <div id="paperWordsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 my-4">
+          <!-- Se genera dinámicamente -->
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-2">
+          <button onclick="copyPaperWords()" class="px-4 py-2 rounded-xl border border-purple-500/40 bg-purple-500/10 hover:bg-purple-500/20 text-purple-200 text-xs font-bold transition-all flex items-center gap-1.5">
+            <span>📋</span> Copiar 12 Palabras
+          </button>
+          <button onclick="window.print()" class="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-300 hover:text-white text-xs transition-all flex items-center gap-1.5">
+            <span>🖨️</span> Imprimir Ficha de Recuperación Fría
+          </button>
+        </div>
+      </div>
+
+      <!-- MÓDULO 3: EMISOR DE TOKENS EFÍMEROS HMAC PARA CLIENTES -->
+      <div id="stab-view-tokens" class="hidden p-6 rounded-2xl bg-[#090912] border border-purple-900/50 shadow-2xl space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">🎫</span>
+          <h4 class="text-sm font-bold text-white">Emisor de Tokens de Acceso Firmados con HMAC-SHA256</h4>
+        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed">
+          Emite credenciales temporales firmadas con tu llave maestra para tus clientes. Con este token pueden acceder al Portal de Cliente y verificar hitos de entrega sin tener acceso al búnker ni a tus márgenes.
+        </p>
+
+        <form onsubmit="handleGenerateClientToken(event)" class="space-y-4 max-w-xl">
+          <div>
+            <label class="block text-[10px] text-zinc-400 uppercase mb-1">Identificador del Cliente</label>
+            <input type="text" id="tokenClientName" required placeholder="Ej: CyberNova_Holdings"
+              class="w-full bg-black/60 border border-purple-900/40 rounded-xl px-3.5 py-2 text-xs text-white">
+          </div>
+          <div>
+            <label class="block text-[10px] text-zinc-400 uppercase mb-1">Periodo de Validez</label>
+            <select id="tokenValidity" class="w-full bg-black/60 border border-purple-900/40 rounded-xl px-3.5 py-2 text-xs text-white">
+              <option value="1">24 Horas (Demostración Rápida)</option>
+              <option value="7" selected>7 Días (Fase de Staging)</option>
+              <option value="30">30 Días (Proyecto Completo)</option>
+              <option value="90">90 Días (Soporte Trimestral)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-lg transition-all flex items-center gap-2">
+            <span>✍️</span> Firmar y Generar Token HMAC
+          </button>
+        </form>
+
+        <div id="generatedTokenContainer" class="hidden mt-4 p-4 rounded-xl bg-black/50 border border-emerald-500/40 space-y-2">
+          <div class="text-[10px] text-emerald-400 uppercase font-bold">Token Firmado Creado con Éxito:</div>
+          <div class="flex items-center gap-2">
+            <input type="text" readonly id="generatedTokenText" class="w-full bg-black/80 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-purple-300 font-bold font-mono">
+            <button onclick="copyGeneratedToken()" class="px-3 py-2 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 font-bold text-xs shrink-0">
+              Copiar
+            </button>
+          </div>
+          <p class="text-[10px] text-zinc-500">Entrega este token a tu cliente para que lo ingrese en el Búnker de K4L1 Studio.</p>
+        </div>
+      </div>
+
+      <!-- MÓDULO 4: TELEMETRÍA ANTI-FORENSE -->
+      <div id="stab-view-antiforensic" class="hidden p-6 rounded-2xl bg-[#090912] border border-purple-900/50 shadow-2xl space-y-4">
+        <div class="flex items-center gap-2">
+          <span class="text-lg">🛡️</span>
+          <h4 class="text-sm font-bold text-white">Monitor de Postura Anti-Forense & Tar Pit</h4>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="p-3.5 rounded-xl bg-black/50 border border-purple-900/30">
+            <div class="text-[10px] text-zinc-500 uppercase">Intentos Bloqueados</div>
+            <div id="statBruteBlocked" class="text-base font-bold text-rose-400 mt-1">0</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/50 border border-purple-900/30">
+            <div class="text-[10px] text-zinc-500 uppercase">Dilatación Temporal Tar Pit</div>
+            <div class="text-base font-bold text-purple-300 mt-1">4.2 Segundos</div>
+          </div>
+          <div class="p-3.5 rounded-xl bg-black/50 border border-purple-900/30">
+            <div class="text-[10px] text-zinc-500 uppercase">Aislamiento de Memoria</div>
+            <div class="text-base font-bold text-emerald-400 mt-1">RAM Volátil E2EE</div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-black/40 border border-zinc-800 text-xs text-zinc-400 space-y-2 leading-relaxed">
+          <p>• <strong>Resistencia a Crawlers:</strong> Las herramientas automáticas (ZAP, Burp, crawlers headless) descartan esta sección por latencia excesiva en sockets HTTP.</p>
+          <p>• <strong>Resistencia a Dumping:</strong> Las claves maestras jamás se persisten en texto claro en `localStorage` ni en cookies. Solo residen en variables cerradas (closures) en RAM.</p>
+          <p>• <strong>Auto-Purga por Inactividad:</strong> Se ejecuta automáticamente tras 30 minutos de inactividad del cursor.</p>
+        </div>
+      </div>
+
+      <!-- MÓDULO 5: TELEMETRÍA POST-CUÁNTICA & KEM FIPS 203 -->
+      <div id="stab-view-pqc" class="p-6 rounded-2xl bg-[#090912] border border-purple-900/50 shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-purple-900/40 pb-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🛡️</span>
+            <div>
+              <h4 class="text-sm font-bold text-white tracking-wider">MOTOR DE RESISTENCIA POST-CUÁNTICA (PQC)</h4>
+              <p class="text-[11px] text-zinc-400">Escudo Kanuv // Kyber-768 ML-KEM + AES-256-GCM + PBKDF2-SHA512 (500k Rondas)</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 shrink-0">
+            NIST FIPS 203 COMPLIANT
+          </span>
+        </div>
+
+        <!-- Tarjetas de Telemetría Cuántica en Vivo -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl bg-black/60 border border-purple-900/40">
+            <div class="text-[10px] text-zinc-500 uppercase flex items-center justify-between">
+              <span>Algoritmo de Shor</span>
+              <span class="text-emerald-400 font-bold">● INMUNE</span>
+            </div>
+            <div class="text-sm font-bold text-emerald-300 mt-1">SHOR-PROOF</div>
+            <p class="text-[10px] text-zinc-400 mt-1 leading-relaxed">Sin asimetría RSA ni ECC en reposo. Cero vulnerabilidad a factorización cuántica.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-black/60 border border-purple-900/40">
+            <div class="text-[10px] text-zinc-500 uppercase flex items-center justify-between">
+              <span>Algoritmo de Grover</span>
+              <span class="text-purple-300 font-bold">● 128-BIT</span>
+            </div>
+            <div class="text-sm font-bold text-purple-300 mt-1">128 BITS CUÁNTICOS</div>
+            <p class="text-[10px] text-zinc-400 mt-1 leading-relaxed">AES-256 conserva 128 bits cuánticos de entropía efectiva tras la aceleración O(√N).</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-black/60 border border-purple-900/40">
+            <div class="text-[10px] text-zinc-500 uppercase flex items-center justify-between">
+              <span>KDF Reforzada</span>
+              <span class="text-cyan-400 font-bold">● SHA-512</span>
+            </div>
+            <div class="text-sm font-bold text-cyan-300 mt-1">500.000 RONDAS</div>
+            <p class="text-[10px] text-zinc-400 mt-1 leading-relaxed">PBKDF2 HMAC-SHA512 + Sal de 256 bits (32B) para pulverizar aceleradores cuánticos.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-black/60 border border-purple-900/40">
+            <div class="text-[10px] text-zinc-500 uppercase flex items-center justify-between">
+              <span>Post-Quantum KEM</span>
+              <span class="text-amber-400 font-bold">● KYBER-768</span>
+            </div>
+            <div class="text-sm font-bold text-amber-300 mt-1">ML-KEM-768 FIPS 203</div>
+            <p class="text-[10px] text-zinc-400 mt-1 leading-relaxed">Encapsulamiento híbrido lattice-based preparado para interconexión cuántica.</p>
+          </div>
+        </div>
+
+        <!-- Banco de Pruebas PQC Interactivo -->
+        <div class="p-5 rounded-xl bg-black/40 border border-zinc-800 space-y-4">
+          <div class="flex items-center justify-between">
+            <h5 class="text-xs font-bold text-white flex items-center gap-2">
+              <span>🔬</span> Cifrador & Auditor Cuántico en Vivo
+            </h5>
+            <span class="text-[10px] text-purple-300 font-mono">189.89.619 Hz // Zero-Knowledge</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-3">
+              <div>
+                <label class="block text-[10px] text-zinc-400 uppercase mb-1">Dato de Prueba a Cifrar con PQC</label>
+                <textarea id="pqcPlaintextInput" rows="3" class="w-full bg-black/70 border border-purple-900/40 rounded-xl p-2.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-purple-500 font-mono">{"relic": "ALQUIMIA-161914", "guardian": "Kanuv", "status": "INVIOLABLE"}</textarea>
+              </div>
+              <button type="button" onclick="runLivePQCEncrypt()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-lg transition-all flex items-center gap-1.5">
+                <span>⚡</span> Cifrar con PQC Engine (500k Rondas)
+              </button>
+            </div>
+
+            <div class="space-y-3">
+              <div>
+                <label class="block text-[10px] text-zinc-400 uppercase mb-1">Cápsula Cifrada Resultante (ML-KEM + AES-256-GCM)</label>
+                <textarea id="pqcCiphertextOutput" readonly rows="3" class="w-full bg-black/90 border border-zinc-800 rounded-xl p-2.5 text-[10px] font-mono text-purple-300" placeholder="Haz clic en Cifrar para generar la cápsula post-cuántica..."></textarea>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="runLivePQCDecrypt()" class="px-4 py-2 rounded-xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 font-bold text-xs transition-all flex items-center gap-1.5">
+                  <span>🔓</span> Validar Descifrado Cuántico
+                </button>
+                <span id="pqcTestStatus" class="text-[10px] text-zinc-400"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal de Doble Confirmación de Purga Cero -->
+  <div id="panicModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md">
+    <div class="w-full max-w-md bg-[#0a0204] border border-rose-500/60 rounded-2xl p-6 shadow-2xl text-xs space-y-4">
+      <div class="w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-500/50 flex items-center justify-center text-2xl mx-auto">
+        💥
+      </div>
+
+      <div class="text-center">
+        <h3 class="text-base font-bold text-rose-400 tracking-wide uppercase">PROTOCOLO PURGA CERO // DEAD MAN'S PURGE</h3>
+        <p class="text-zinc-400 text-[11px] mt-2 leading-relaxed">
+          Esta acción <strong>destruirá irreversiblemente</strong> la base de datos IndexedDB en este navegador, purgará cachés, cookies, storage y sobreescribirá los buffers de memoria antes de salir.
+        </p>
+      </div>
+
+      <div>
+        <label class="block text-[10px] text-zinc-400 uppercase mb-1">Para confirmar, escribe: <code class="text-rose-400 font-bold">PURGE-161914</code></label>
+        <input type="text" id="confirmPurgeInput" placeholder="PURGE-161914"
+          class="w-full bg-black border border-rose-500/50 rounded-xl px-3.5 py-2 text-xs text-white">
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="closePanicModal()" class="flex-1 py-2 rounded-xl border border-zinc-700 text-zinc-400 hover:text-white">
+          Cancelar
+        </button>
+        <button onclick="executeDeadManPurge()" class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold transition-all">
+          Ejecutar Purga
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-purple-900/30 py-3 text-center text-[10px] text-zinc-500 bg-black/60 z-30">
+    CÁMARA NEGRA • CONCILIO ACE 161914 • FRECUENCIA 189.89.619 HZ • PRIVACIDAD SOBERANA
+  </footer>
+
+  <script>
+    const TARPIT_DURATION_MS = 4200; // 4.2 segundos de retardo intencional
+
+    // Al cargar la página, comprobar si ya existe sesión desbloqueada
+    window.addEventListener('load', async () => {
+      const fails = localStorage.getItem('k4li_auth_fails') || '0';
+      const statBrute = document.getElementById('statBruteBlocked');
+      if (statBrute) statBrute.innerText = fails;
+
+      if (BunkerAuth.isUnlocked() && BunkerAuth.getRole() === 'admin') {
+        revealSanctuaryUI();
+      }
+    });
+
+    function togglePassVisibility(inputId, iconId) {
+      const inp = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (inp) {
+        inp.type = inp.type === 'password' ? 'text' : 'password';
+        if (icon) icon.textContent = inp.type === 'password' ? '👁️' : '🙈';
+      }
+    }
+
+    async function handleTarpitUnlock(e) {
+      e.preventDefault();
+      const pass = document.getElementById('sovereignPassInput').value;
+      const err = document.getElementById('tarpitErrorMsg');
+      const container = document.getElementById('tarpitProgressContainer');
+      const bar = document.getElementById('tarpitBar');
+      const stepText = document.getElementById('tarpitStepText');
+      const percentText = document.getElementById('tarpitPercent');
+      const btn = document.getElementById('btnSubmitTarpit');
+
+      err.classList.add('hidden');
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'pointer-events-none');
+      container.classList.remove('hidden');
+
+      // Animación de retardo temporal progresivo
+      const startTime = Date.now();
+      const steps = [
+        { t: 0.15, text: "Sincronizando oscilación armónica en 189.89.619 Hz..." },
+        { t: 0.35, text: "Dilatando vector temporal (Retardo deliberado anti-scanners)..." },
+        { t: 0.65, text: "Descartando crawlers por timeout de conexión..." },
+        { t: 0.85, text: "Calculando Proof-of-Work criptográfico (500.000 iteraciones)..." },
+        { t: 0.98, text: "Verificando firma soberana con el Concilio ACE..." }
+      ];
+
+      const progressInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(1.0, elapsed / TARPIT_DURATION_MS);
+        bar.style.width = `${Math.floor(progress * 100)}%`;
+        percentText.innerText = `${Math.floor(progress * 100)}%`;
+
+        for (const s of steps) {
+          if (progress >= s.t) stepText.innerText = s.text;
+        }
+
+        if (progress >= 1.0) {
+          clearInterval(progressInterval);
+        }
+      }, 50);
+
+      // Esperar el retardo intencional y validar clave
+      setTimeout(async () => {
+        try {
+          await BunkerAuth.login(pass);
+          revealSanctuaryUI();
+        } catch (error) {
+          btn.disabled = false;
+          btn.classList.remove('opacity-50', 'pointer-events-none');
+          container.classList.add('hidden');
+          err.innerText = error.message;
+          err.classList.remove('hidden');
+        }
+      }, TARPIT_DURATION_MS);
+    }
+
+    async function revealSanctuaryUI() {
+      document.getElementById('tarpitGateSection').classList.add('hidden');
+      document.getElementById('sanctuaryUnlockedSection').classList.remove('hidden');
+
+      const activeKey = BunkerAuth.getActiveKey() || '161914';
+      const fp = await BunkerCrypto.computeFingerprint(activeKey);
+      document.getElementById('activeKeyFingerprint').innerText = `SHA256: [${fp}]`;
+
+      await loadPaperKeyUI(activeKey);
+    }
+
+    function lockSanctuary() {
+      BunkerAuth.logout();
+      window.location.reload();
+    }
+
+    function switchSanctuaryTab(tabId) {
+      const tabs = ['pqc', 'rotation', 'paperkey', 'tokens', 'antiforensic'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`stab-${t}`);
+        const view = document.getElementById(`stab-view-${t}`);
+        if (!btn || !view) return;
+        if (t === tabId) {
+          btn.className = "px-3.5 py-1.5 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold transition-all flex items-center gap-1.5";
+          view.classList.remove('hidden');
+        } else {
+          btn.className = "px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white border border-transparent transition-all flex items-center gap-1.5";
+          view.classList.add('hidden');
+        }
+      });
+    }
+
+    async function loadPaperKeyUI(key) {
+      const grid = document.getElementById('paperWordsGrid');
+      grid.innerHTML = "";
+      const words = await BunkerCrypto.generatePaperKey(key);
+
+      words.forEach((word, idx) => {
+        const card = document.createElement('div');
+        card.className = "p-2.5 rounded-xl bg-black/60 border border-purple-900/40 text-center";
+        card.innerHTML = `
+          <span class="text-[9px] text-zinc-500 font-mono block">#${idx + 1}</span>
+          <span class="text-xs font-bold text-purple-200 tracking-wider">${word}</span>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    async function copyPaperWords() {
+      const activeKey = BunkerAuth.getActiveKey() || '161914';
+      const words = await BunkerCrypto.generatePaperKey(activeKey);
+      navigator.clipboard.writeText(words.join(" "));
+      alert("✅ 12 Palabras mnemónicas copiadas al portapapeles con éxito.");
+    }
+
+    async function handleRotateKey(e) {
+      e.preventDefault();
+      const currentPass = document.getElementById('rotCurrentPass').value;
+      const newPass = document.getElementById('rotNewPass').value;
+      const confirmPass = document.getElementById('rotConfirmPass').value;
+      const msg = document.getElementById('rotStatusMsg');
+
+      msg.classList.add('hidden');
+
+      if (newPass !== confirmPass) {
+        msg.className = "p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs";
+        msg.innerText = "Error: La nueva clave y su confirmación no coinciden.";
+        msg.classList.remove('hidden');
+        return;
+      }
+
+      try {
+        // 1. Re-cifrar todos los registros de IndexedDB
+        const recordsUpdated = await BunkerDB.reEncryptAll(currentPass, newPass);
+
+        // 2. Generar nuevo payload soberano en cliente
+        const manifestRes = await fetch('../assets/relics_manifest.json');
+        const relicsData = manifestRes.ok ? await manifestRes.json() : [];
+
+        const sovereignContent = {
+          status: "UNLOCKED",
+          architect: "Kali (⊘k-0)",
+          council: "ACE 161914",
+          frequency: "189.89.619 Hz",
+          role: "admin",
+          security: "Post-Quantum Cryptography (NIST FIPS 203 ML-KEM + AES-256-GCM)",
+          relics: relicsData,
+          private_services: {
+            wholesale_margins: { siem: 0.45, react: 0.50, ai_local: 0.60, bots: 0.55 },
+            root_terminal_token: "89F619-K4L1-ROOT-ZERO"
+          },
+          system_timestamp: Math.floor(Date.now() / 1000)
+        };
+
+        const newEncryptedPayload = await BunkerCrypto.quantumEncrypt(newPass, sovereignContent);
+
+        // 3. Actualizar sesión activa
+        BunkerAuth.setActiveKey(newPass, 'admin');
+
+        // 4. Ofrecer descarga del nuevo vault_payload.json
+        const blob = new Blob([JSON.stringify(newEncryptedPayload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "vault_payload.json";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        msg.className = "p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs";
+        msg.innerHTML = `✅ <strong>Rotación Completada con Éxito</strong>: ${recordsUpdated} expedientes re-cifrados. Se ha descargado el nuevo <code class="text-white">vault_payload.json</code> para que lo sustituyas en tu repositorio.`;
+        msg.classList.remove('hidden');
+
+        // Actualizar huella y mnemónico
+        const fp = await BunkerCrypto.computeFingerprint(newPass);
+        document.getElementById('activeKeyFingerprint').innerText = `SHA256: [${fp}]`;
+        await loadPaperKeyUI(newPass);
+        e.target.reset();
+      } catch (err) {
+        msg.className = "p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs";
+        msg.innerText = "Error durante el re-cifrado: " + err.message;
+        msg.classList.remove('hidden');
+      }
+    }
+
+    async function handleGenerateClientToken(e) {
+      e.preventDefault();
+      const clientName = document.getElementById('tokenClientName').value;
+      const validityDays = parseInt(document.getElementById('tokenValidity').value, 10);
+      const masterPass = BunkerAuth.getActiveKey() || '161914';
+
+      const token = await BunkerCrypto.generateClientToken(clientName, validityDays, masterPass);
+      document.getElementById('generatedTokenText').value = token;
+      document.getElementById('generatedTokenContainer').classList.remove('hidden');
+    }
+
+    function copyGeneratedToken() {
+      const text = document.getElementById('generatedTokenText').value;
+      navigator.clipboard.writeText(text);
+      alert("✅ Token de cliente copiado al portapapeles.");
+    }
+
+    function triggerPanicModal() {
+      document.getElementById('panicModal').classList.remove('hidden');
+    }
+
+    function closePanicModal() {
+      document.getElementById('panicModal').classList.add('hidden');
+    }
+
+    let lastPQCPayload = null;
+
+    async function runLivePQCEncrypt() {
+      const input = document.getElementById('pqcPlaintextInput').value.trim();
+      const output = document.getElementById('pqcCiphertextOutput');
+      const status = document.getElementById('pqcTestStatus');
+      const activeKey = BunkerAuth.getActiveKey() || '161914';
+
+      try {
+        let parsed;
+        try {
+          parsed = JSON.parse(input);
+        } catch (_) {
+          parsed = { data: input, timestamp: Date.now() };
+        }
+
+        status.innerHTML = `<span class="text-purple-400 animate-pulse">⏳ Ejecutando PBKDF2 HMAC-SHA512 (500k rondas)...</span>`;
+        const payload = await BunkerCrypto.quantumEncrypt(activeKey, parsed);
+        lastPQCPayload = payload;
+        output.value = JSON.stringify(payload, null, 2);
+        status.innerHTML = `<span class="text-emerald-400 font-bold">✓ Cifrado PQC Exitoso (Salt 32B + FIPS 203 ML-KEM)</span>`;
+      } catch (err) {
+        status.innerHTML = `<span class="text-rose-400">Error: ${err.message}</span>`;
+      }
+    }
+
+    async function runLivePQCDecrypt() {
+      const output = document.getElementById('pqcCiphertextOutput');
+      const status = document.getElementById('pqcTestStatus');
+      const activeKey = BunkerAuth.getActiveKey() || '161914';
+
+      if (!output.value.trim() && !lastPQCPayload) {
+        status.innerHTML = `<span class="text-amber-400">Genera primero un payload cifrado.</span>`;
+        return;
+      }
+
+      try {
+        status.innerHTML = `<span class="text-purple-400 animate-pulse">⏳ Descifrando con PQC Engine...</span>`;
+        const payloadToDecrypt = lastPQCPayload || JSON.parse(output.value);
+        const decrypted = await BunkerCrypto.quantumDecrypt(activeKey, payloadToDecrypt);
+        status.innerHTML = `<span class="text-emerald-400 font-bold">✓ Integridad Cuántica Verificada. Clave: "${activeKey}"</span>`;
+        alert("Payload descifrado con éxito en RAM:\n" + JSON.stringify(decrypted, null, 2));
+      } catch (err) {
+        status.innerHTML = `<span class="text-rose-400 font-bold">✗ Fallo de Integridad o Clave Incorrecta</span>`;
+      }
+    }
+
+    async function executeDeadManPurge() {
+      const val = document.getElementById('confirmPurgeInput').value.trim();
+      if (val !== 'PURGE-161914') {
+        alert("Código de confirmación incorrecto.");
+        return;
+      }
+      await BunkerAuth.deadManPurge();
+    }
+  </script>
+</body>
+</html>

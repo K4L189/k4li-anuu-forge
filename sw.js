@@ -1,10 +1,12 @@
 // Service Worker - K4L1 Studio & Anuu-Forge (ACE Concilium 161914)
 // Frecuencia Operativa: 189.89.619 Hz
-const CACHE_NAME = 'k4li-anuu-forge-v1.90';
+const CACHE_NAME = 'k4li-anuu-forge-v1.95';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
+  './assets/css/fullwallpaper.css',
+  './assets/js/fullwallpaper.js',
   './assets/js/bunker_vault.js',
   './assets/vault_payload.json',
   './components/internal_crm.html',
@@ -15,9 +17,14 @@ const ASSETS_TO_CACHE = [
   './components/roi_calculator.html',
   './components/security_audit_tool.html',
   './components/market_arbitrage_engine.html',
-  './assets/wallpapers/kilonova_sovereign.jpg',
-  './assets/wallpapers/bg_nexus.png',
+  './components/sovereign_sanctuary.html',
   './assets/wallpapers/anu_banner.png',
+  './assets/wallpapers/anuu_core.jpg',
+  './assets/wallpapers/anuu_hero.png',
+  './assets/wallpapers/bg_nexus.png',
+  './assets/wallpapers/bruma_mist.jpg',
+  './assets/wallpapers/kilonova_sovereign.jpg',
+  './assets/wallpapers/nexus_stellar.png',
   './assets/icon-192.png',
   './assets/icon-512.png'
 ];

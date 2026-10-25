@@ -1,0 +1,246 @@
+# ==============================================================================
+# K4L1 STUDIO // ANUU-FORGE (161914) // ESCUDO ANTI-INDEXACIÓN & CERO RASTREO
+# Frecuencia Operativa: 189.89.619 Hz | Concilio ACE
+# Prohibición estricta de indexación, crawling, scraping y entrenamiento de IA.
+# ==============================================================================
+
+# Regla Universal de Descarte Absoluto
+User-agent: *
+Disallow: /
+
+# ------------------------------------------------------------------------------
+# MOTORES DE IA GENERATIVA & CRAWLERS DE LLMS (PROHIBICIÓN TOTAL)
+# ------------------------------------------------------------------------------
+
+# Perplexity AI (Perplexity Search & Web Crawler)
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-Search
+Disallow: /
+
+# OpenAI (ChatGPT, GPT-4, SearchGPT)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Anthropic (Claude & Subagentes)
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Google Gemini, Vertex & Extended Training Scrapers
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: GoogleOther
+Disallow: /
+
+User-agent: GoogleOther-Image
+Disallow: /
+
+User-agent: GoogleOther-Video
+Disallow: /
+
+# Meta (LLaMA Training, Threads & Facebook Crawler)
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+# ByteDance / TikTok
+User-agent: Bytespider
+Disallow: /
+
+# Amazon AI & Alexa
+User-agent: Amazonbot
+Disallow: /
+
+# Apple Intelligence & Siri Crawler
+User-agent: Applebot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+# Common Crawl (Base de datos pública para entrenamiento de LLMs)
+User-agent: CCBot
+Disallow: /
+
+# Diffbot
+User-agent: Diffbot
+Disallow: /
+
+# You.com AI Search
+User-agent: YouBot
+Disallow: /
+
+# Omgili / Webz.io
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Omgili
+Disallow: /
+
+# ------------------------------------------------------------------------------
+# MOTORES DE BÚSQUEDA CLÁSICOS (DES-INDEXACIÓN TOTAL)
+# ------------------------------------------------------------------------------
+
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Googlebot-Image
+Disallow: /
+
+User-agent: Googlebot-News
+Disallow: /
+
+User-agent: Googlebot-Video
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: BingPreview
+Disallow: /
+
+User-agent: msnbot
+Disallow: /
+
+User-agent: msnbot-media
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: DuckDuckGo-Favicons-Bot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Baiduspider-image
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: YandexImages
+Disallow: /
+
+User-agent: Sogou web spider
+Disallow: /
+
+User-agent: Sogou inst spider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Yahoo! Slurp
+Disallow: /
+
+User-agent: Qwantify
+Disallow: /
+
+User-agent: SeznamBot
+Disallow: /
+
+User-agent: NaverBot
+Disallow: /
+
+User-agent: Yeti
+Disallow: /
+
+# ------------------------------------------------------------------------------
+# ARCHIVADORES HISTÓRICOS & CRAWLERS DE MEMORIA PÚBLICA
+# ------------------------------------------------------------------------------
+
+# Internet Archive (Wayback Machine) - Evitar snapshots forenses
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
+
+User-agent: WaybackSavePage
+Disallow: /
+
+# ------------------------------------------------------------------------------
+# ESCÁNERES COMERCIALES DE SEO, VULNERABILIDADES & SCRAPERS MASIVOS
+# ------------------------------------------------------------------------------
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: Rogerbot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: Screaming Frog SEO Spider
+Disallow: /
+
+User-agent: CensysInspect
+Disallow: /
+
+User-agent: Shodan
+Disallow: /
+
+User-agent: ZoomEye
+Disallow: /
+
+User-agent: Nmap
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+User-agent: MegaIndex.ru
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# ------------------------------------------------------------------------------
+# REGLAS DE RETARDO & DILATACIÓN
+# ------------------------------------------------------------------------------
+Crawl-delay: 86400
+# Fin del escudo de des-indexación K4L1

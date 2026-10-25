@@ -1,0 +1,196 @@
+{
+  "frequency_hz": "189.89.619",
+  "agent": "Nodo POCO 📱⚡ [4NVSET 🟢]",
+  "architect": "Kali",
+  "initialized_at": "2026-10-25T06:16:17.328204+00:00",
+  "updated_at": "2026-10-25T06:20:35.851766+00:00",
+  "providers": {
+    "claude": {
+      "id": "claude-3-5-sonnet",
+      "display_name": "Anthropic Claude 3.5 Sonnet",
+      "window_type": "5h_rolling",
+      "window_duration_seconds": 18000,
+      "window_start_epoch": 1792894577.3281562,
+      "reset_epoch": 1792912577.3281562,
+      "limit_tokens": 80000,
+      "used_tokens": 77300,
+      "limit_requests": 45,
+      "used_requests": 35,
+      "status": "THROTTLED_90",
+      "circuit_breaker_tripped": false,
+      "circuit_breaker_reason": null,
+      "burned_tokens_session": 27500,
+      "remaining_seconds": 3341,
+      "remaining_tokens": 2700,
+      "usage_pct": 96.6
+    },
+    "openai": {
+      "id": "gpt-4o",
+      "display_name": "OpenAI GPT-4o",
+      "window_type": "sliding_minute",
+      "window_duration_seconds": 60,
+      "window_start_epoch": 1792909235.8517313,
+      "reset_epoch": 1792909295.8517313,
+      "limit_tpm": 30000,
+      "used_tpm": 1638,
+      "limit_rpm": 500,
+      "used_rpm": 8,
+      "status": "HEALTHY",
+      "circuit_breaker_tripped": false,
+      "circuit_breaker_reason": null,
+      "burned_tokens_session": 0,
+      "remaining_seconds": 60,
+      "remaining_tpm": 28362,
+      "usage_pct": 5.5
+    },
+    "gemini": {
+      "id": "gemini-1-5-flash",
+      "display_name": "Google Gemini 1.5 Flash",
+      "window_type": "high_throughput_cloud",
+      "status": "READY_FALLBACK",
+      "latency_ms": 320,
+      "role": "PRIMARY_CLOUD_FALLBACK",
+      "tripped": false
+    },
+    "local_sovereign": {
+      "id": "anuu-3b",
+      "display_name": "Anuu 3B / Qwen 2.5 Local (Ollama)",
+      "endpoint": "http://127.0.0.1:11434",
+      "window_type": "infinite_sovereign",
+      "status": "ONLINE_READY",
+      "cost_eur_per_1m": 0.0,
+      "latency_ms": 38,
+      "role": "ZERO_LATENCY_SOVEREIGN_FALLBACK",
+      "available_models": [
+        "anuu-3b:latest",
+        "anuu-1b:latest",
+        "anuu-omega:latest",
+        "marduk-omega:latest"
+      ],
+      "active_model": "anuu-3b:latest"
+    },
+    "poco_node": {
+      "device_id": "295bad08",
+      "model": "Xiaomi POCO (24069PC21G)",
+      "architecture": "aarch64 / 8 Cores",
+      "status": "ONLINE_SYNCHRONIZED",
+      "battery": "100%",
+      "temperature": "22.6°C",
+      "role": "AUXILIARY_COMPUTE_OFFLOAD"
+    }
+  },
+  "burner_engine": {
+    "active": true,
+    "burn_threshold_minutes": 20,
+    "last_burn_epoch": 1792909110.3151646,
+    "total_tokens_burned": 27500,
+    "burner_log": [
+      {
+        "timestamp": "2026-10-25T06:18:30.315145+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 2,
+        "tokens_burned": 7200,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": [
+          {
+            "task_id": "TASK-BENCH-003",
+            "title": "Benchmark Sintético: MMLU & Compresión Zstandard vs Snappy",
+            "type": "SYNTHETIC_BENCHMARK",
+            "tokens": 3800,
+            "completed_at": "2026-10-25T06:18:30.304698+00:00"
+          },
+          {
+            "task_id": "TASK-CODE-005",
+            "title": "Refactorización Asíncrona: Wrapper de Inferencia con Fallback a Ollama",
+            "type": "CODE_REFACTOR",
+            "tokens": 3400,
+            "completed_at": "2026-10-25T06:18:30.315033+00:00"
+          }
+        ]
+      },
+      {
+        "timestamp": "2026-10-25T06:16:39.623826+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 0,
+        "tokens_burned": 0,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": []
+      },
+      {
+        "timestamp": "2026-10-25T06:16:36.669713+00:00",
+        "provider": "claude",
+        "tasks_burned_count": 4,
+        "tokens_burned": 20300,
+        "reason": "MANUAL_BURN_TRIGGERED",
+        "records": [
+          {
+            "task_id": "TASK-DOCS-001",
+            "title": "Generación de Docs: Arquitectura Simbiótica Concilio ACE (161914)",
+            "type": "TECH_DOCS",
+            "tokens": 4200,
+            "completed_at": "2026-10-25T06:16:36.668853+00:00"
+          },
+          {
+            "task_id": "TASK-TRANSL-002",
+            "title": "Traducción Seinen Quirúrgica: Glosario Goetiarot a Japonés/Inglés",
+            "type": "TRANSLATE_JA_EN",
+            "tokens": 5100,
+            "completed_at": "2026-10-25T06:16:36.669172+00:00"
+          },
+          {
+            "task_id": "TASK-AUDIT-004",
+            "title": "Auditoría Estática de Seguridad: Sanitización de Parámetros y Memory Leaks",
+            "type": "STATIC_AUDIT",
+            "tokens": 6200,
+            "completed_at": "2026-10-25T06:16:36.669436+00:00"
+          },
+          {
+            "task_id": "TASK-DOCS-006",
+            "title": "Manual de Resiliencia: Guía de Contingencia ante Caídas de Cloud LLM",
+            "type": "TECH_DOCS",
+            "tokens": 4800,
+            "completed_at": "2026-10-25T06:16:36.669694+00:00"
+          }
+        ]
+      }
+    ]
+  },
+  "circuit_breaker": {
+    "active_failover_count": 2,
+    "last_event": {
+      "timestamp": "2026-10-25T06:16:30.822932+00:00",
+      "original_provider": "claude",
+      "fallback_provider": "local_sovereign",
+      "fallback_display_name": "Anuu 3B / Qwen 2.5 Local (Ollama)",
+      "reason": "Circuit Breaker ACTIVO por 429 Too Many Requests (HTTP 429: Too Many Requests / Rate limit exceeded).",
+      "prompt_snippet": "Auditoría de privacidad y soberanía de datos locales",
+      "zero_blocking_guaranteed": true
+    },
+    "event_history": [
+      {
+        "timestamp": "2026-10-25T06:16:30.822932+00:00",
+        "original_provider": "claude",
+        "fallback_provider": "local_sovereign",
+        "fallback_display_name": "Anuu 3B / Qwen 2.5 Local (Ollama)",
+        "reason": "Circuit Breaker ACTIVO por 429 Too Many Requests (HTTP 429: Too Many Requests / Rate limit exceeded).",
+        "prompt_snippet": "Auditoría de privacidad y soberanía de datos locales",
+        "zero_blocking_guaranteed": true
+      },
+      {
+        "timestamp": "2026-10-25T06:16:27.345059+00:00",
+        "original_provider": "claude",
+        "fallback_provider": "gemini",
+        "fallback_display_name": "Google Gemini 1.5 Flash",
+        "reason": "Circuit Breaker ACTIVO por 429 Too Many Requests (HTTP 429: Too Many Requests / Rate limit exceeded).",
+        "prompt_snippet": "Genera una función Rust para cifrado ChaCha20",
+        "zero_blocking_guaranteed": true
+      }
+    ]
+  },
+  "queue_summary": {
+    "total_tasks": 6,
+    "pending_count": 0,
+    "burned_count": 6,
+    "sample_pending": []
+  }
+}

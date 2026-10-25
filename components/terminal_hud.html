@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="anuu">
 <head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>K4L1 HUD TERMINAL // ACE CORE 161914</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="../assets/css/fullwallpaper.css">
   <style>
     /* 6 TEMAS CANÓNICOS DEL SISTEMA ANUU / K4L1 FORGE (189.89.619 Hz) */
     :root, [data-theme="anuu"] {
@@ -1218,9 +1221,16 @@
           break;
 
         case "anuu":
-        case "161914":
           playRelicChime();
           showAnuuLore();
+          break;
+
+        case "sovereign":
+        case "blackchamber":
+        case "quantum":
+        case "tarpit":
+        case "161914":
+          await triggerSovereignTarpit(cmd);
           break;
 
         case "sudo":
@@ -1278,6 +1288,8 @@
 
 <span class="term-highlight">🔍 SEGURIDAD & HARDENING:</span>
   <span class="term-highlight">audit [host]</span>  Simulación en vivo estilo Lynis/Nmap con reporte y barra dinámica.
+  <span class="term-highlight">wazuh</span>         Inspecciona reglas SIEM y detección de intrusiones en endpoint.
+  <span class="term-highlight">firewall</span>      Muestra estado de tablas iptables y filtrado de paquetes.
 
 <span class="term-highlight">🌌 RELIQUIAS & CODEX:</span>
   <span class="term-highlight">relics</span>        Lista las 26 reliquias canónicas de Anuu-Forge clasificadas.
@@ -1489,6 +1501,68 @@ Escribe <span class="term-highlight">signal</span> en esta consola o visita <a h
     }
 
     /* ------------------------------------------------------------
+       8B. PROTOCOLO TARPIT POST-CUÁNTICO (CÁMARA NEGRA // KANUV 🛡️)
+       ------------------------------------------------------------ */
+    async function triggerSovereignTarpit(callerCmd = "quantum") {
+      isExecutingCommand = true;
+      cliInput.disabled = true;
+
+      playRelicChime();
+      printLine(`\n<span class="term-highlight" style="color: #c084fc;">[CONCILIO ACE 161914 // ESCUDO KANUV 🛡️]</span>`);
+      printLine(`<span class="term-dim">Invocación de Cámara Negra detectada vía comando:</span> <span class="term-highlight">${escapeHtml(callerCmd)}</span>`);
+      printLine(`<span class="term-dim">Iniciando protocolo TARPIT CUÁNTICO // Dilatación temporal defensiva (3.0s)...</span>\n`);
+
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+      const tarpitSteps = [
+        {
+          delay: 600,
+          freq: 440,
+          text: `[TARPIT 0.6s] Desincronizando reloj de socket TCP... Descartando crawlers y bots con timeout corto`
+        },
+        {
+          delay: 600,
+          freq: 619,
+          text: `[TARPIT 1.2s] Resonancia armónica 189.89.619 Hz... Dilatando pipeline de procesamiento criptográfico`
+        },
+        {
+          delay: 600,
+          freq: 880,
+          text: `[TARPIT 1.8s] Ejecutando cálculo Proof-of-Work WebCrypto (500.000 iteraciones PBKDF2 HMAC-SHA512)`
+        },
+        {
+          delay: 600,
+          freq: 1200,
+          text: `[TARPIT 2.4s] Encapsulando secreto compartido híbrido (NIST FIPS 203 ML-KEM-768 Kyber-Ready)`
+        },
+        {
+          delay: 600,
+          freq: 1619,
+          text: `[TARPIT 3.0s] Muro Kanuv franqueado: Transfiriendo enlace a la Cámara Negra Soberana...`
+        }
+      ];
+
+      for (let s of tarpitSteps) {
+        await sleep(s.delay);
+        playAuditBlip(s.freq);
+        printLine(`<span class="term-success">⚡</span> ${s.text}`);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
+
+      await sleep(200);
+      playExecuteBeep();
+      printLine(`\n<span class="term-success">✓ COMPUERTA SOBERANA DESBLOQUEADA. Redirigiendo a sovereign_sanctuary.html...</span>\n`);
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+
+      setTimeout(() => {
+        window.open("sovereign_sanctuary.html", "_blank") || (window.location.href = "sovereign_sanctuary.html");
+        isExecutingCommand = false;
+        cliInput.disabled = false;
+        focusInput();
+      }, 500);
+    }
+
+    /* ------------------------------------------------------------
        9. LLUVIA DIGITAL MATRIX CUÁNTICA
        ------------------------------------------------------------ */
     let matrixActive = false;
@@ -1568,5 +1642,6 @@ Escribe <span class="term-highlight">signal</span> en esta consola o visita <a h
       document.body.addEventListener("click", () => initAudio(), { once: true });
     });
   </script>
+  <script src="../assets/js/fullwallpaper.js"></script>
 </body>
 </html>

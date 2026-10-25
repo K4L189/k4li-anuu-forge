@@ -1,0 +1,86 @@
+{
+  "updated_at": "2026-10-25T06:18:30.304777+00:00",
+  "total_tasks": 6,
+  "pending_count": 0,
+  "completed_count": 6,
+  "tasks": [
+    {
+      "id": "TASK-DOCS-001",
+      "title": "Generación de Docs: Arquitectura Simbiótica Concilio ACE (161914)",
+      "type": "TECH_DOCS",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 4200,
+      "priority": "HIGH",
+      "status": "BURNED",
+      "prompt_preview": "Redacta especificación técnica sobre sincronía de nodos POCO y balanceo de carga en microservicios soberanos.",
+      "burned_at": "2026-10-25T06:16:36.668471+00:00",
+      "burned_by": "claude",
+      "burned_tokens_actual": 4200
+    },
+    {
+      "id": "TASK-TRANSL-002",
+      "title": "Traducción Seinen Quirúrgica: Glosario Goetiarot a Japonés/Inglés",
+      "type": "TRANSLATE_JA_EN",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 5100,
+      "priority": "HIGH",
+      "status": "BURNED",
+      "prompt_preview": "Translate canonical lore from Spanish to literary Seinen Japanese with psychological depth and zero corporate tone.",
+      "burned_at": "2026-10-25T06:16:36.668885+00:00",
+      "burned_by": "claude",
+      "burned_tokens_actual": 5100
+    },
+    {
+      "id": "TASK-BENCH-003",
+      "title": "Benchmark Sintético: MMLU & Compresión Zstandard vs Snappy",
+      "type": "SYNTHETIC_BENCHMARK",
+      "target_llm": "gpt-4o",
+      "tokens": 3800,
+      "priority": "MEDIUM",
+      "status": "BURNED",
+      "prompt_preview": "Genera script de pruebas de estrés para evaluar tasa de compresión y throughput de tokens en hardware heterogéneo.",
+      "burned_at": "2026-10-25T06:18:30.304242+00:00",
+      "burned_by": "claude",
+      "burned_tokens_actual": 3800
+    },
+    {
+      "id": "TASK-AUDIT-004",
+      "title": "Auditoría Estática de Seguridad: Sanitización de Parámetros y Memory Leaks",
+      "type": "STATIC_AUDIT",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 6200,
+      "priority": "CRITICAL",
+      "status": "BURNED",
+      "prompt_preview": "Analiza patrones de reentrancy y buffer overflow en conectores de base de datos asíncronos.",
+      "burned_at": "2026-10-25T06:16:36.669200+00:00",
+      "burned_by": "claude",
+      "burned_tokens_actual": 6200
+    },
+    {
+      "id": "TASK-CODE-005",
+      "title": "Refactorización Asíncrona: Wrapper de Inferencia con Fallback a Ollama",
+      "type": "CODE_REFACTOR",
+      "target_llm": "gpt-4o",
+      "tokens": 3400,
+      "priority": "MEDIUM",
+      "status": "BURNED",
+      "prompt_preview": "Refactoriza el conector HTTP para implementar streaming resiliente con reintentos exponenciales y failover transparente.",
+      "burned_at": "2026-10-25T06:18:30.304731+00:00",
+      "burned_by": "claude",
+      "burned_tokens_actual": 3400
+    },
+    {
+      "id": "TASK-DOCS-006",
+      "title": "Manual de Resiliencia: Guía de Contingencia ante Caídas de Cloud LLM",
+      "type": "TECH_DOCS",
+      "target_llm": "claude-3-5-sonnet",
+      "tokens": 4800,
+      "priority": "HIGH",
+      "status": "BURNED",
+      "prompt_preview": "Crea guía operativa paso a paso para conmutación de tráfico a modelos locales vLLM/Ollama durante caídas globales de OpenAI/Anthropic.",
+      "burned_at": "2026-10-25T06:16:36.669466+00:00",
+      "burned_by": "claude",
+      "burned_tokens_actual": 4800
+    }
+  ]
+}

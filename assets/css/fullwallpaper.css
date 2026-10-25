@@ -1,0 +1,180 @@
+/* ==========================================================================
+   K4L1 STUDIO & ANUU-FORGE // FULLWALLPAPER DYNAMIC HD ENGINE
+   Frecuencia Operativa Canónica: 189.89.619 Hz
+   Diseño Estelar: Kilonova 🌟 & Saze 🌿 (Concilio ACE 161914)
+   ========================================================================== */
+
+:root {
+  --fullwallpaper-url: url('../wallpapers/kilonova_sovereign.jpg');
+  --fullwallpaper-opacity: 0.22;
+  --fullwallpaper-blur: 0px;
+  --fullwallpaper-overlay: rgba(6, 6, 12, 0.88);
+}
+
+/* Base de lienzo profundo */
+html {
+  background-color: #06060a;
+}
+
+/* Transparencia en body para permitir la visualización de capas de fondo */
+body.has-fullwallpaper,
+body[data-fullwallpaper="true"],
+body:has(#k4li-bg-layer-a) {
+  background-color: transparent !important;
+}
+
+/* ==========================================================================
+   CLASES MAESTRAS: FONDO FIJO Y CAPA DE PROTECCIÓN DE CONTRASTE
+   ========================================================================== */
+
+/* Fondo de pantalla fijo maestro con cover, center, no-repeat y transición suave */
+.wallpaper-bg-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  pointer-events: none;
+  z-index: -20;
+  opacity: var(--fullwallpaper-opacity, 0.22);
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1), filter 1000ms ease-in-out;
+  will-change: opacity, transform;
+}
+
+/* Capa de protección de legibilidad: viñeta radial y gradiente Seinen */
+.wallpaper-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -10;
+  background-color: var(--fullwallpaper-overlay, rgba(6, 6, 12, 0.88));
+  background-image: 
+    radial-gradient(circle at 50% 35%, rgba(6, 6, 12, 0.70) 0%, rgba(6, 6, 12, 0.88) 70%, rgba(4, 4, 8, 0.98) 100%),
+    linear-gradient(180deg, rgba(6, 6, 12, 0.80) 0%, rgba(6, 6, 12, 0.88) 50%, rgba(4, 4, 8, 0.96) 100%);
+  backdrop-filter: blur(var(--fullwallpaper-blur, 0px));
+  -webkit-backdrop-filter: blur(var(--fullwallpaper-blur, 0px));
+  transition: background-color 1000ms ease, backdrop-filter 1000ms ease;
+}
+
+/* ==========================================================================
+   CAPAS DE CROSSFADE DUAL (Layer A / Layer B)
+   ========================================================================== */
+#k4li-bg-layer-a,
+#k4li-bg-layer-b,
+.wallpaper-layer-a,
+.wallpaper-layer-b {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: -20;
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+#k4li-bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -10;
+  background-color: var(--fullwallpaper-overlay, rgba(6, 6, 12, 0.88));
+  background-image: 
+    radial-gradient(circle at 50% 35%, rgba(6, 6, 12, 0.70) 0%, rgba(6, 6, 12, 0.88) 70%, rgba(4, 4, 8, 0.98) 100%),
+    linear-gradient(180deg, rgba(6, 6, 12, 0.80) 0%, rgba(6, 6, 12, 0.88) 50%, rgba(4, 4, 8, 0.96) 100%);
+  backdrop-filter: blur(var(--fullwallpaper-blur, 0px));
+  -webkit-backdrop-filter: blur(var(--fullwallpaper-blur, 0px));
+}
+
+.wallpaper-layer-active {
+  opacity: var(--fullwallpaper-opacity, 0.22) !important;
+}
+
+.wallpaper-layer-inactive {
+  opacity: 0 !important;
+}
+
+/* ==========================================================================
+   CONTROLES FLOTANTES DISCRETOS (K4L1 WALLPAPER WIDGET)
+   ========================================================================== */
+.k4li-wallpaper-hud {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(8, 8, 16, 0.82);
+  border: 1px solid rgba(147, 51, 234, 0.3);
+  border-radius: 9999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 10px rgba(147, 51, 234, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  color: #c084fc;
+  transition: all 0.25s ease;
+  user-select: none;
+  opacity: 0.6;
+}
+
+.k4li-wallpaper-hud:hover {
+  opacity: 1;
+  border-color: rgba(168, 85, 247, 0.7);
+  box-shadow: 0 0 16px rgba(147, 51, 234, 0.4);
+  background: rgba(10, 10, 20, 0.94);
+}
+
+.k4li-wallpaper-hud button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #d8b4fe;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.k4li-wallpaper-hud button:hover {
+  color: #ffffff;
+  transform: scale(1.15);
+}
+
+.k4li-wallpaper-hud .hud-name {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  color: #e9d5ff;
+  font-weight: 500;
+}
