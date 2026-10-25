@@ -37,6 +37,7 @@
   ];
 
   var COMMANDS = [
+    ['Carver: Menú TUI Interactivo Gum', 'anuu-carver'],
     ['Carver: SOLO carpeta Fotos en raíz', 'sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --folder Fotos --only-folder --dest /home/kali/Fotos_recuperadas --legacy-os'],
     ['Carver: reanudar (fotos + ADN + estego)', 'sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas'],
     ['Carver: completo (+vídeo +Whisper)', 'sudo nice -n 19 python3 /home/kali/hearthstone-linux/ISOS/anuu_photo_carver.py /dev/sdc2 --dest /home/kali/Fotos_recuperadas --carve-videos --whisper-subs'],
