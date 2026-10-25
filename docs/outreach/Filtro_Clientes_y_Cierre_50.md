@@ -1,7 +1,7 @@
 # 🛡️ FILTRO DE CLIENTES TÓXICOS & PROTOCOLO DE CIERRE AL 50%
 ### *El Colador de Tungsteno y la Ley de Hierro de K4L1 STUDIO*
 *Concilio ACE (161914) — Frecuencia Operativa: 189.89.619 Hz*  
-*Canal Oficial de Operaciones: Signal `@k4li.01`*
+*Canal Oficial de Operaciones: Signal `@k4li.89`*
 
 ---
 
@@ -32,7 +32,7 @@ Cualquier prospecto que manifieste **uno solo** de estos síntomas queda descali
 
 ---
 
-## 2. EL MENSAJE DE BIENVENIDA CALIFICADOR EN SIGNAL (`@k4li.01`)
+## 2. EL MENSAJE DE BIENVENIDA CALIFICADOR EN SIGNAL (`@k4li.89`)
 
 Cuando un contacto llegue a Signal desde X, LinkedIn, Discord o la web, no entres en charlas de cortesía. Lanza el **Cuestionario de Tungsteno** en tu primera interacción:
 

@@ -1,6 +1,6 @@
 # 🛡️ LINKEDIN OUTREACH MASTER: PROTOCOLO DE CONVERSIÓN INTERNACIONAL
 ### *Infiltración Estratégica en Mercados Tier-1: Holanda, Alemania, Suiza y España*
-**Arquitecta Madre:** Kali (`@K4L189` / Signal: `@k4li.01`)  
+**Arquitecta Madre:** Kali (`@K4L189` / Signal: `@k4li.89`)  
 **Dossier Maestro GitHub:** [https://github.com/K4L189/k4li-anuu-forge](https://github.com/K4L189/k4li-anuu-forge)  
 **Frecuencia Operativa:** `189.89.619 Hz` | *Concilio ACE (161914)*  
 **Sello Operativo:** *Set ⚡ & Rosa Gris 🌸*
@@ -75,7 +75,7 @@ Technical Stack & Core Disciplines:
 
 Dossier, codebases, and architectural blueprints:
 🔗 https://github.com/K4L189/k4li-anuu-forge
-Direct encrypted contact: Signal (@k4li.01)
+Direct encrypted contact: Signal (@k4li.89)
 ```
 
 ---
@@ -215,7 +215,7 @@ Direct encrypted contact: Signal (@k4li.01)
 >
 > My complete architectural artifacts and source codes are detailed in my repository:  
 > 🔗 **Sovereign Engineering Dossier:** https://github.com/K4L189/k4li-anuu-forge  
-> Direct encrypted channel: Signal `@k4li.01`
+> Direct encrypted channel: Signal `@k4li.89`
 >
 > If you have a high-impact remote opening where technical rigor and confidentiality are paramount, I would welcome a discreet conversation.
 >
@@ -346,7 +346,7 @@ Direct encrypted contact: Signal (@k4li.01)
 >
 > Best regards,  
 > **Kali**  
-> Signal: `@k4li.01` | GitHub: `K4L189`
+> Signal: `@k4li.89` | GitHub: `K4L189`
 
 ---
 
@@ -369,7 +369,7 @@ Direct encrypted contact: Signal (@k4li.01)
 >
 > Un cordial saludo,  
 > **Kali**  
-> Signal: `@k4li.01` | Perfil GitHub: `K4L189`
+> Signal: `@k4li.89` | Perfil GitHub: `K4L189`
 
 ---
 
@@ -408,7 +408,7 @@ Direct encrypted contact: Signal (@k4li.01)
 > Feel free to keep my GitHub dossier bookmarked for future reference:  
 > 🔗 https://github.com/K4L189/k4li-anuu-forge  
 >
-> You can also reach me directly on Signal at `@k4li.01` if a critical technical need arises down the line.
+> You can also reach me directly on Signal at `@k4li.89` if a critical technical need arises down the line.
 >
 > Wishing you and [Company] continued success!  
 > Kali
@@ -419,7 +419,7 @@ Direct encrypted contact: Signal (@k4li.01)
 >
 > Te dejo mi dossier guardado por si en el futuro necesitáis soporte en infraestructura Linux, SOC o frontend de alto rendimiento:  
 > 🔗 https://github.com/K4L189/k4li-anuu-forge  
-> (O por Signal directo en `@k4li.01`).
+> (O por Signal directo en `@k4li.89`).
 >
 > ¡Muchos éxitos con el proyecto y un abrazo!  
 > Kali

@@ -6,7 +6,7 @@
 *Frecuencia Operativa:* **`189.89.619 Hz`** | *Códice Concilio ACE:* **`161914`**
 
 [![GitHub Pages](https://img.shields.io/badge/Live%20Nexus-k4li--anuu--forge-00FF66?style=for-the-badge&logo=githubpages&logoColor=black)](https://k4l189.github.io/k4li-anuu-forge/)
-[![Signal](https://img.shields.io/badge/Signal-Encrypted%20Direct-2C6BED?style=for-the-badge&logo=signal&logoColor=white)](https://signal.me/#u/k4li.01)
+[![Signal](https://img.shields.io/badge/Signal-Encrypted%20Direct-2C6BED?style=for-the-badge&logo=signal&logoColor=white)](https://signal.me/#u/k4li.89)
 [![Kali Linux](https://img.shields.io/badge/OS-Kali%20Linux%20%7C%20Arch-557C94?style=for-the-badge&logo=kalilinux&logoColor=white)](https://www.kali.org)
 [![Security](https://img.shields.io/badge/SOC%20Defensivo-Wazuh%20%7C%20SIEM-7928CA?style=for-the-badge&logo=opensearch&logoColor=white)](https://wazuh.com)
 
@@ -31,7 +31,7 @@
 * **Nexus Central desplegado:** [k4li-anuu-forge (GitHub Pages)](https://k4l189.github.io/k4li-anuu-forge/)
 * **Edge Routing & Ingesta:** Cloudflare Workers Serverless (`api/worker_cloudflare.js`) con latencia sub-10ms.
 * **Simulador Financiero:** [Calculadora de ROI en Ciberseguridad & Infraestructura](https://k4l189.github.io/k4li-anuu-forge/components/roi_calculator.html) para toma de decisiones ejecutivas.
-* **Canal Directo Cifrado:** [`@k4li.01` vía Signal](https://signal.me/#u/k4li.01)
+* **Canal Directo Cifrado:** [`@k4li.89` vía Signal](https://signal.me/#u/k4li.89)
 
 ---
 
@@ -134,7 +134,7 @@ Interfaces de usuario reactivas, fluidas y con identidad visual inconfundible:
 
 Para requerimientos de infraestructura, auditorías defensivas o desarrollos estratégicos:
 
-* 📱 **Signal Directo:** [`@k4li.01`](https://signal.me/#u/k4li.01) *(Canal prioritario cifrado de extremo a extremo)*
+* 📱 **Signal Directo:** [`@k4li.89`](https://signal.me/#u/k4li.89) *(Canal prioritario cifrado de extremo a extremo)*
 * 🌐 **Plataforma Web:** [k4li-anuu-forge en GitHub Pages](https://k4l189.github.io/k4li-anuu-forge/)
 * 💼 **Presupuestos & Simulador:** [Calculador ROI Integrado](https://k4l189.github.io/k4li-anuu-forge/components/roi_calculator.html)
 * 🐙 **Repositorio Central:** [github.com/K4L189/k4li-anuu-forge](https://github.com/K4L189/k4li-anuu-forge)

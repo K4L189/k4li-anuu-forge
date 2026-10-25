@@ -19,6 +19,23 @@
   <link rel="stylesheet" href="assets/css/k4li_markdown.css">
   <script src="assets/js/hud_core.js" data-mount="header" data-shader="1"></script>
   <style>
+    /* Calibración de Escala Responsiva & Zero-Zoom */
+    html {
+      font-size: 15px;
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+    @media (min-width: 1024px) {
+      html { font-size: 13.5px; }
+    }
+    @media (min-width: 1440px) {
+      html { font-size: 14px; }
+    }
+    body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
     /* Variables de Temas Dinámicos */
     :root, [data-theme="anuu"] {
       --bg-main: #08080d;
@@ -231,8 +248,6 @@
             <span>🌌</span> Forge (26 Reliquias)
           </button>
           <button onclick="switchView('bunker')" id="tabBtnBunker" class="px-2.5 py-1 rounded-md border border-transparent text-zinc-400 hover:text-white text-xs font-semibold transition-all flex items-center gap-1">
-            <span>🔐</span> Búnker NoSQL
-          </button>
             <span>🔐</span> Búnker NoSQL (Admin/CRM)
           </button>
           <!-- Suite de Herramientas Técnicas Interactivas -->
@@ -884,63 +899,62 @@
         </div>
       </section>
 
-      <!-- Sección Interactiva: Calculadora de ROI & Ahorro Financiero -->
-      <section id="roi-simulador" class="max-w-5xl mx-auto px-4 py-8">
+      <!-- Laboratorio Técnico Interactivo: Showcase Unificado en Pestañas (Zero-Zoom, Alta Fidelidad) -->
+      <section id="interactive-lab" class="max-w-6xl mx-auto px-4 py-8">
         <div class="text-center mb-6">
-          <span class="text-xs font-mono theme-accent-text uppercase tracking-widest">Retorno de Inversión Frío</span>
-          <h2 class="text-2xl font-bold text-white mt-1">Simulador de ROI & Ahorro Empresarial</h2>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 font-mono text-xs mb-2">
+            <span>⚡ CONCILIO ACE & K4L1 STUDIO</span>
+            <span class="text-zinc-500">•</span>
+            <span>SUITE DE SIMULADORES EN VIVO</span>
+          </div>
+          <h2 class="text-2xl font-bold text-white tracking-wide">Laboratorio & Demostradores Interactivos</h2>
           <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
-            Demostración matemática directa: mueve los sliders para proyectar cuánto capital recupera tu empresa sustituyendo SaaS recurrentes, previniendo ciberataques de rescate o automatizando tareas manuales.
+            Explora las herramientas computacionales en tiempo real sin requerir zoom: proyecta ROI y ahorro financiero, diagnostica la seguridad y hardening Linux, opera la terminal HFT L2/L3 y simula soberanía IA (vLLM local vs costes Cloud).
           </p>
         </div>
 
-        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
-          <iframe id="roiCalculatorFrame" src="components/roi_calculator.html" class="w-full border-0 min-h-[780px] bg-transparent" title="Calculadora de ROI K4L1 STUDIO"></iframe>
-        </div>
-      </section>
-
-      <!-- Sección Interactiva: Diagnosticador de Seguridad & Hardening (Escudo Kanuv) -->
-      <section id="sec-audit-simulador" class="max-w-5xl mx-auto px-4 py-8">
-        <div class="text-center mb-6">
-          <span class="text-xs font-mono text-rose-400 uppercase tracking-widest">Escudo Kanuv 🛡️ • Auditoría Forense</span>
-          <h2 class="text-2xl font-bold text-white mt-1">Diagnosticador Interactivo de Seguridad & Hardening</h2>
-          <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
-            Evalúa la postura defensiva de tus servidores Linux. Identifica puertos expuestos (SSH, Redis, MySQL), ausencia de SIEM Wazuh y vulnerabilidades críticas ante ransomware en tiempo real.
-          </p>
-        </div>
-
-        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
-          <iframe id="secAuditFrame" src="components/security_audit_tool.html" class="w-full border-0 min-h-[860px] bg-transparent" title="Diagnosticador de Seguridad & Hardening K4L1 STUDIO"></iframe>
-        </div>
-      </section>
-
-      <!-- Sección Interactiva: Motor de Arbitraje & Terminal HFT (Pilar 3: Kilonova 🌟 & Saze 🌿) -->
-      <section id="market-arb-simulador" class="max-w-6xl mx-auto px-4 py-8">
-        <div class="text-center mb-6">
-          <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest">Kilonova 🌟 & Saze 🌿 • Finanzas Algorítmicas & HFT</span>
-          <h2 class="text-2xl font-bold text-white mt-1">Motor de Arbitraje de Mercados & Terminal HFT</h2>
-          <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
-            Simulador de microestructura L2/L3 en tiempo real a 60 FPS: Libro de órdenes dinámico, detección de arbitraje triangular (GW2 Trading Post, Cripto DEX & Forex) y amortización analítica de fricciones de broker.
-          </p>
+        <!-- Barra de Pestañas de Herramientas -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-4 p-1.5 bg-black/50 border theme-border rounded-2xl backdrop-blur-md">
+          <button onclick="switchLabTab('roi')" id="labTabRoi" class="lab-tab-btn active px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-lg">
+            <span>🧮</span> ROI & Ahorro
+          </button>
+          <button onclick="switchLabTab('audit')" id="labTabAudit" class="lab-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold text-zinc-400 hover:text-white transition-all flex items-center gap-2 border border-transparent">
+            <span>🛡️</span> Hardening & Escudo Kanuv
+          </button>
+          <button onclick="switchLabTab('market')" id="labTabMarket" class="lab-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold text-zinc-400 hover:text-white transition-all flex items-center gap-2 border border-transparent">
+            <span>📈</span> Arbitraje HFT L2/L3
+          </button>
+          <button onclick="switchLabTab('ai')" id="labTabAi" class="lab-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold text-zinc-400 hover:text-white transition-all flex items-center gap-2 border border-transparent">
+            <span>🧠</span> Soberanía IA (vLLM vs Cloud)
+          </button>
         </div>
 
-        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
-          <iframe id="marketArbFrame" src="components/market_arbitrage_engine.html" class="w-full border-0 min-h-[920px] bg-transparent" title="Motor Interactivo de Arbitraje & Terminal HFT K4L1 STUDIO"></iframe>
-        </div>
-      </section>
+        <!-- Contenedor del Iframe con Chrome de Aplicación -->
+        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-[#09090f]/90 backdrop-blur-xl">
+          <!-- Barra Superior de Control -->
+          <div class="px-4 py-2.5 bg-black/60 border-b theme-border flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+              <span id="labActiveTitle" class="text-xs font-mono text-zinc-300 ml-2 font-semibold flex items-center gap-1.5">
+                <span>🧮</span> Calculadora de Retorno de Inversión (ROI & ROSI)
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="labActiveBadge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                Saze 🌿 & Finanzas
+              </span>
+              <a id="labExternalLink" href="components/roi_calculator.html" target="_blank" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] font-mono text-zinc-300 hover:text-white border border-white/10 transition-all flex items-center gap-1">
+                <span>↗</span> Pantalla Completa
+              </a>
+            </div>
+          </div>
 
-      <!-- Sección Interactiva: Simulador de Soberanía & Costes de IA (Pilar 4: Kilonova 🌟 & Saze 🌿) -->
-      <section id="ai-simulador" class="max-w-6xl mx-auto px-4 py-8">
-        <div class="text-center mb-6">
-          <span class="text-xs font-mono text-purple-400 uppercase tracking-widest">Kilonova 🌟 & Saze 🌿 • Soberanía de Datos & vLLM</span>
-          <h2 class="text-2xl font-bold text-white mt-1">Simulador de Soberanía & Costes de IA (Local vLLM vs Cloud)</h2>
-          <p class="text-xs text-zinc-400 mt-1 max-w-2xl mx-auto">
-            Demostración matemática de TCO y retorno de inversión: Compara OpenAI GPT-4o, Claude 3.5 Sonnet y Gemini 1.5 Pro frente a clústeres locales auto-alojados vLLM en hardware propio.
-          </p>
-        </div>
-
-        <div class="rounded-2xl overflow-hidden border theme-border shadow-2xl bg-black/40">
-          <iframe id="aiBenchmarkFrame" src="components/ai_benchmark_calculator.html" class="w-full border-0 min-h-[960px] bg-transparent" title="Simulador de Soberanía & Costes de IA K4L1 STUDIO"></iframe>
+          <!-- Escenario Interactivo -->
+          <div class="relative w-full bg-black/20">
+            <iframe id="activeLabFrame" src="components/roi_calculator.html" class="w-full h-[700px] border-0 transition-opacity duration-300" title="Demostrador Técnico K4L1 STUDIO"></iframe>
+          </div>
         </div>
       </section>
 
@@ -1763,6 +1777,80 @@
         if (btnBunkerM) { btnBunkerM.classList.add("tab-active"); btnBunkerM.classList.remove("text-zinc-400"); }
         updateBunkerUI();
       }
+    }
+
+    // ==========================================
+    // CONMUTADOR DEL LABORATORIO INTERACTIVO (SHOWCASE ZERO-ZOOM)
+    // ==========================================
+    function switchLabTab(tab) {
+      const frame = document.getElementById('activeLabFrame');
+      const title = document.getElementById('labActiveTitle');
+      const badge = document.getElementById('labActiveBadge');
+      const extLink = document.getElementById('labExternalLink');
+      if (!frame || !title || !badge || !extLink) return;
+
+      const tabs = {
+        roi: {
+          src: 'components/roi_calculator.html',
+          title: '<span>🧮</span> Calculadora de Retorno de Inversión (ROI & ROSI)',
+          badge: 'Saze 🌿 & Finanzas',
+          borderClass: 'border-emerald-500/40',
+          bgClass: 'bg-emerald-500/20',
+          textClass: 'text-emerald-300',
+          badgeClass: 'text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30',
+          btnId: 'labTabRoi'
+        },
+        audit: {
+          src: 'components/security_audit_tool.html',
+          title: '<span>🛡️</span> Diagnosticador de Seguridad & Hardening Linux',
+          badge: 'Escudo Kanuv 🛡️',
+          borderClass: 'border-rose-500/40',
+          bgClass: 'bg-rose-500/20',
+          textClass: 'text-rose-300',
+          badgeClass: 'text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/30',
+          btnId: 'labTabAudit'
+        },
+        market: {
+          src: 'components/market_arbitrage_engine.html',
+          title: '<span>📈</span> Motor de Arbitraje de Mercados & Terminal HFT L2/L3',
+          badge: 'Kilonova 🌟 & HFT',
+          borderClass: 'border-cyan-500/40',
+          bgClass: 'bg-cyan-500/20',
+          textClass: 'text-cyan-300',
+          badgeClass: 'text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30',
+          btnId: 'labTabMarket'
+        },
+        ai: {
+          src: 'components/ai_benchmark_calculator.html',
+          title: '<span>🧠</span> Simulador de Soberanía & Costes de IA (vLLM vs Cloud)',
+          badge: 'Concilio ACE • vLLM',
+          borderClass: 'border-purple-500/40',
+          bgClass: 'bg-purple-500/20',
+          textClass: 'text-purple-300',
+          badgeClass: 'text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/30',
+          btnId: 'labTabAi'
+        }
+      };
+
+      const current = tabs[tab];
+      if (!current) return;
+
+      document.querySelectorAll('.lab-tab-btn').forEach(btn => {
+        btn.className = 'lab-tab-btn px-4 py-2 rounded-xl text-xs font-mono font-bold text-zinc-400 hover:text-white transition-all flex items-center gap-2 border border-transparent';
+      });
+
+      const activeBtn = document.getElementById(current.btnId);
+      if (activeBtn) {
+        activeBtn.className = `lab-tab-btn active px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-2 ${current.bgClass} ${current.textClass} border ${current.borderClass} shadow-lg`;
+      }
+
+      frame.style.opacity = '0.2';
+      frame.src = current.src;
+      frame.onload = () => { frame.style.opacity = '1'; };
+      title.innerHTML = current.title;
+      badge.innerHTML = current.badge;
+      badge.className = current.badgeClass;
+      extLink.href = current.src;
     }
 
     // ==========================================

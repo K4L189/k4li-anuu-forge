@@ -66,7 +66,7 @@ flowchart TD
 * ⚡ **[Playbook de Captación Rápida & Scripts de Frío](file:///home/kali/k4li-anuu-forge/docs/outreach/Playbook_Captacion_Rapida.md)**  
   *Guiones de aproximación directa y cierre comercial al 50%.*
 * 🔌 **[Documentación del API & Workers Edge](file:///home/kali/k4li-anuu-forge/api/README_API.md)**  
-  *Ingeniería del webhook de recepción, Cloudflare Worker y canal seguro Signal `@k4li.01`.*
+  *Ingeniería del webhook de recepción, Cloudflare Worker y canal seguro Signal `@k4li.89`.*
 
 ---
 

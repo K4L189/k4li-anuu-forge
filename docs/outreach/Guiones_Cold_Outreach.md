@@ -1,7 +1,7 @@
 # 🎯 GUIONES DE ASALTO TÁCTICO: COLD OUTREACH DIRECTO
 ### *Arsenal de Prospección Quirúrgica de Alta Conversión — K4L1 STUDIO*
 *Concilio ACE (161914) — Frecuencia Operativa: 189.89.619 Hz*  
-*Canal Oficial de Operaciones: Signal `@k4li.01`*
+*Canal Oficial de Operaciones: Signal `@k4li.89`*
 
 ---
 
@@ -38,7 +38,7 @@
 > Te dejo un ejemplo interactivo de lo que monto en 48 horas sin mareos:  
 > 🔗 `https://kali-anuu.github.io/k4li-anuu-forge/` (Prueba el selector de 6 temas en vivo).
 > 
-> Si necesitas tener el nuevo panel listo y corriendo antes del fin de semana, pásate por mi Signal: `@k4li.01` y cerramos el prototipo hoy mismo.»
+> Si necesitas tener el nuevo panel listo y corriendo antes del fin de semana, pásate por mi Signal: `@k4li.89` y cerramos el prototipo hoy mismo.»
 
 ### 🔄 Seguimiento 1 (A las 48 horas):
 > «[Nombre], sé que estás en modo trinchera con el lanzamiento.  
@@ -47,7 +47,7 @@
 
 ### 🚪 Mensaje de Ruptura (Break-Up Message - A los 4 días):
 > «[Nombre], asumo que ya tenéis cubierta la parte de frontend para este sprint.  
-> Libero el slot de trabajo que tenía disponible para esta semana para otro cliente. Si en el futuro os surge una urgencia de rendimiento en React/Tailwind, tenéis mi contacto en Signal `@k4li.01`.  
+> Libero el slot de trabajo que tenía disponible para esta semana para otro cliente. Si en el futuro os surge una urgencia de rendimiento en React/Tailwind, tenéis mi contacto en Signal `@k4li.89`.  
 > ¡Mucho éxito con el despliegue!»
 
 ---
@@ -70,11 +70,11 @@
 > 
 > El despliegue se realiza en 48-72 horas, llave en mano y con soporte técnico.
 > 
-> Si le preocupa la seguridad de la información de sus clientes, podemos agendar un audio o demostración privada por Signal (`@k4li.01`) o remitirle la ficha técnica detallada.
+> Si le preocupa la seguridad de la información de sus clientes, podemos agendar un audio o demostración privada por Signal (`@k4li.89`) o remitirle la ficha técnica detallada.
 > 
 > Atentamente,  
 > **K4L1 Studio** | Arquitectura Defensiva e IA Soberana  
-> Canal Encriptado: `@k4li.01` (Signal) | Web: `https://kali-anuu.github.io/k4li-anuu-forge/`»
+> Canal Encriptado: `@k4li.89` (Signal) | Web: `https://kali-anuu.github.io/k4li-anuu-forge/`»
 
 ### 🔄 Seguimiento 1 (A los 3 días):
 > «Estimado/a [Nombre],  
@@ -102,7 +102,7 @@
 > 
 > El desarrollo completo se entrega en 48 horas con el código fuente y Docker listo para correr en 1 clic.
 > 
-> Si quieres que os monte un prototipo piloto esta misma semana, escríbeme directamente por Signal a `@k4li.01` o respóndeme a este correo.»
+> Si quieres que os monte un prototipo piloto esta misma semana, escríbeme directamente por Signal a `@k4li.89` o respóndeme a este correo.»
 
 ### 🔄 Seguimiento 1 (A las 48 horas):
 > «[Nombre], acabo de extraer una muestra de 15 productos de la competencia para comprobar su estructura de datos y no tienen protección activa contra el bot.  
@@ -127,7 +127,7 @@
 > - Entrega de **Informe Forense Ejecutivo** formal con nivel de riesgo y mitigación documentada.
 > 
 > El servicio se ejecuta en 48 horas sin caída de servicios.  
-> Si queréis sanear la infraestructura antes de sufrir un incidente real, podéis contactarme de forma confidencial por Signal en `@k4li.01` o ver mis credenciales en `https://kali-anuu.github.io/k4li-anuu-forge/`.»
+> Si queréis sanear la infraestructura antes de sufrir un incidente real, podéis contactarme de forma confidencial por Signal en `@k4li.89` o ver mis credenciales en `https://kali-anuu.github.io/k4li-anuu-forge/`.»
 
 ### 🔄 Seguimiento 1 (A las 48 horas):
 > «[Nombre], os preparé una checklist técnica de 7 puntos críticos para verificar en vuestro `/etc/ssh/sshd_config` y en las reglas de kernel.  
@@ -160,7 +160,7 @@
 > Aquí puedes ver un dashboard en vivo que construí optimizado para arbitraje y trading en tiempo real:  
 > 🔗 `https://kali-anuu.github.io/k4li-anuu-forge/`
 > 
-> Si tienes presupuesto para delegar módulos y ganar 2 semanas de ventaja, dime qué pantalla tienes atascada y te la liquido en 48 horas. Contáctame en Signal: `@k4li.01`.»
+> Si tienes presupuesto para delegar módulos y ganar 2 semanas de ventaja, dime qué pantalla tienes atascada y te la liquido en 48 horas. Contáctame en Signal: `@k4li.89`.»
 
 ---
 
@@ -171,7 +171,7 @@
        │
        ├─── 2-3 Respuestas con interés
        │        │
-       │        └─── Traslado inmediato a Signal (@k4li.01)
+       │        └─── Traslado inmediato a Signal (@k4li.89)
        │                 │
        │                 ├─── Filtro de Seriedad (Presupuesto + 50% anticipo)
        │                 │

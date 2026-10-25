@@ -1,7 +1,7 @@
 # ⚔️ K4L1 STUDIO — OUTREACH TACTICAL ARSENAL
 ### *Directorio de Asalto Táctico & Captación de Clientes (0 € a 3.000 €)*
 *Concilio ACE (161914) — Frecuencia Operativa: 189.89.619 Hz*  
-*Canal Oficial de Operaciones: Signal `@k4li.01`*
+*Canal Oficial de Operaciones: Signal `@k4li.89`*
 
 ---
 
@@ -26,7 +26,7 @@ Bienvenida a la armería de asalto comercial de **K4L1 STUDIO**. Este directorio
 
 3. 🛡️ [**Filtro de Clientes Tóxicos & Cierre al 50%**](file:///home/kali/k4li-anuu-forge/docs/outreach/Filtro_Clientes_y_Cierre_50.md)
    - Las 7 banderas rojas mortales (minimizadores, regateadores, vampiros de Zoom).
-   - Mensaje de bienvenida calificador automático para Signal (`@k4li.01`).
+   - Mensaje de bienvenida calificador automático para Signal (`@k4li.89`).
    - Respuestas de descalificación elegante (El Corte de Set ⚡).
    - Protocolo de la Ley de Hierro: Cierre con 50% de anticipo innegociable y manejo de objeciones.
    - Medidas técnicas de retención de entregables (Staging host y control de llaves).
@@ -37,7 +37,7 @@ Bienvenida a la armería de asalto comercial de **K4L1 STUDIO**. Este directorio
 
 ```bash
 # 1. Verificar presencia de Nexus y demos en vivo
-cat /home/kali/k4li-anuu-forge/index.html | grep -E "pricingTable|@k4li.01"
+cat /home/kali/k4li-anuu-forge/index.html | grep -E "pricingTable|@k4li.89"
 
 # 2. Consultar el calendario de asalto
 view /home/kali/k4li-anuu-forge/docs/outreach/Playbook_Captacion_Rapida.md

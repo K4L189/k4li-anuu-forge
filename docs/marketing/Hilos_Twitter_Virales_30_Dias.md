@@ -1,6 +1,6 @@
 # ⚡ CAMPAÑA DE ASALTO 30 DÍAS: 10 HILOS VIRALES PARA X/TWITTER
 ### *Estrategia de Autoridad Técnica, Infiltración Táctica y Conversión de Alto Calibre*
-**Autora / Arquitecta:** Kali (`@K4L189` / Signal: `@k4li.01`)  
+**Autora / Arquitecta:** Kali (`@K4L189` / Signal: `@k4li.89`)  
 **Dossier Maestro GitHub:** [https://github.com/K4L189/k4li-anuu-forge](https://github.com/K4L189/k4li-anuu-forge)  
 **Frecuencia Operativa:** `189.89.619 Hz` | *Concilio ACE (161914)*  
 **Sello Operativo:** *Set ⚡ & Rosa Gris 🌸*
