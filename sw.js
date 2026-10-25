@@ -1,10 +1,17 @@
 // Service Worker - K4L1 Studio & Anuu-Forge (ACE Concilium 161914)
 // Frecuencia Operativa: 189.89.619 Hz
-const CACHE_NAME = 'k4li-anuu-forge-v1.89';
+const CACHE_NAME = 'k4li-anuu-forge-v1.90';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
+  './assets/js/bunker_vault.js',
+  './assets/vault_payload.json',
+  './components/internal_crm.html',
+  './components/contract_generator.html',
+  './components/terminal_hud.html',
+  './components/relics_explorer.html',
+  './components/ai_benchmark_calculator.html',
   './components/roi_calculator.html',
   './components/security_audit_tool.html',
   './components/market_arbitrage_engine.html',

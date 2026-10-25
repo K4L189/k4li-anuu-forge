@@ -10,6 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="assets/js/bunker_vault.js"></script>
   <style>
     /* Variables de Temas Dinámicos */
     :root, [data-theme="anuu"] {
@@ -208,10 +209,11 @@
             </div>
           </div>
 
-          <!-- Selector de Modo Dual (Mobile) -->
+          <!-- Selector de Modos (Mobile) -->
           <div class="flex lg:hidden items-center bg-black/40 p-1 rounded-xl border border-zinc-800 text-xs">
             <button onclick="switchView('studio')" id="tabBtnStudioMobile" class="tab-active px-2 py-1 rounded-lg">💼 Studio</button>
             <button onclick="switchView('forge')" id="tabBtnForgeMobile" class="px-2 py-1 rounded-lg text-zinc-400">🌌 Forge</button>
+            <button onclick="switchView('bunker')" id="tabBtnBunkerMobile" class="px-2 py-1 rounded-lg text-zinc-400">🔐 Búnker</button>
           </div>
         </div>
 
@@ -222,6 +224,9 @@
           </button>
           <button onclick="switchView('forge')" id="tabBtnForge" class="px-3.5 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-white text-xs font-semibold transition-all flex items-center gap-1.5">
             <span>🌌</span> Anuu-Forge (26 Reliquias)
+          </button>
+          <button onclick="switchView('bunker')" id="tabBtnBunker" class="px-3.5 py-1.5 rounded-lg border border-transparent text-zinc-400 hover:text-white text-xs font-semibold transition-all flex items-center gap-1.5">
+            <span>🔐</span> Búnker NoSQL (Admin/CRM)
           </button>
           <!-- Suite de Herramientas Técnicas Interactivas -->
           <div class="relative group">
@@ -284,6 +289,11 @@
           <a href="https://signal.me/#u/k4li.89" target="_blank" class="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/20 text-xs font-mono">
             <span>💬</span> @k4li.89
           </a>
+
+          <!-- Gatekeeper Sovereign Auth Pill -->
+          <button id="gatekeeperHeaderBtn" onclick="toggleGatekeeperModal()" title="Acceso Cifrado Zero-Knowledge" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border font-mono text-xs transition-all bg-black/50 border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+            <span id="gatekeeperStatusIcon">🔒</span> <span id="gatekeeperStatusText">Búnker Cifrado</span>
+          </button>
         </div>
       </div>
     </header>
@@ -703,6 +713,338 @@
 
     </main>
 
+    <!-- ========================================== -->
+    <!-- VISTA 3: BÚNKER NOSQL & ZONA PRIVADA       -->
+    <!-- ========================================== -->
+    <main id="viewBunker" class="hidden max-w-6xl mx-auto px-4 py-6 transition-opacity duration-200 w-full">
+      
+      <!-- 1. Pantalla Bloqueada (Estado Inicial) -->
+      <div id="bunkerLockedState" class="max-w-xl mx-auto my-12 p-8 rounded-2xl theme-card border theme-border shadow-2xl text-center backdrop-blur-xl relative overflow-hidden">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-4 bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-3xl shadow-lg">
+          🔒
+        </div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono mb-3 border border-purple-500/30 bg-purple-500/10 text-purple-300">
+          <span>🛡️</span> ESCUDO KANUV • ACCESO ZERO-KNOWLEDGE
+        </div>
+        <h2 class="text-xl font-bold text-white mb-2 tracking-wide font-mono">BÚNKER SOBERANO & NOSQL PRIVADO</h2>
+        <p class="text-xs text-zinc-400 mb-6 leading-relaxed">
+          Esta división resguarda la base de datos documental de clientes (IndexedDB AES-256-GCM), los márgenes de mayorista, los contratos SOW y las reliquias propietarias de Kali. Introduce tu llave soberana o tu token de cliente para descifrar en RAM.
+        </p>
+
+        <form onsubmit="handleBunkerInlineLogin(event)" class="space-y-4 text-left">
+          <div>
+            <label class="block text-xs font-mono text-zinc-400 mb-1">Llave Maestra o Token de Acceso</label>
+            <div class="relative">
+              <input type="password" id="bunkerInlinePass" placeholder="161914 o CL-XXXX" required
+                class="w-full bg-black/60 border theme-border rounded-xl px-4 py-2.5 text-xs text-white font-mono placeholder-zinc-600 focus:outline-none focus:border-purple-500 transition-colors pr-10">
+              <button type="button" onclick="togglePassVisibility('bunkerInlinePass', 'eyeBunkerInline')" class="absolute right-3 top-2.5 text-zinc-400 hover:text-white text-xs">
+                <span id="eyeBunkerInline">👁️</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="bunkerInlineError" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono"></div>
+
+          <button type="submit" class="w-full py-2.5 rounded-xl font-mono text-xs font-bold text-white shadow-lg transition-all flex items-center justify-center gap-2" style="background: var(--accent-primary);">
+            <span>🔓</span> Descifrar en Memoria RAM
+          </button>
+        </form>
+
+        <div class="mt-6 pt-6 border-t theme-border flex flex-col gap-2 text-left">
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+            <span>Arquitectura Criptográfica:</span>
+            <span class="text-zinc-400">WebCrypto AES-256-GCM</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+            <span>KDF Hash:</span>
+            <span class="text-zinc-400">PBKDF2 (100.000 rondas SHA-256)</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+            <span>Almacenamiento Local:</span>
+            <span class="text-zinc-400">IndexedDB Zero-Knowledge</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-500">
+            <span>Coste de Hosting Servidor:</span>
+            <span class="text-emerald-400 font-bold">0.00 € (Static Engine)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Pantalla Desbloqueada - ADMIN (Kali) -->
+      <div id="bunkerUnlockedAdmin" class="hidden space-y-6">
+        <!-- Barra de Estado Admin -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-2xl theme-card border theme-border gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-lg">
+              👑
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm font-bold text-white font-mono">BÚNKER SOBERANO // ADMIN K4L1 (⊘k-0)</h3>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 font-mono">SESIÓN SEGURA EN RAM</span>
+              </div>
+              <p class="text-xs text-zinc-400 font-mono">Base de datos NoSQL descifrada en memoria • Concilio ACE 161914</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="components/internal_crm.html" target="_blank" class="px-3 py-1.5 rounded-xl border theme-border bg-black/40 text-xs font-mono text-zinc-300 hover:text-white transition-all flex items-center gap-1.5">
+              <span>↗️</span> Ventana Completa CRM
+            </a>
+            <button onclick="lockBunkerSession()" class="px-3 py-1.5 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 text-xs font-mono font-bold transition-all flex items-center gap-1.5">
+              <span>🔒</span> Bloquear & Purgar RAM
+            </button>
+          </div>
+        </div>
+
+        <!-- Métricas Rápidas NoSQL -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono">
+          <div class="p-4 rounded-xl theme-card border theme-border">
+            <div class="text-[10px] text-zinc-400 uppercase">Expedientes NoSQL</div>
+            <div id="bunkerStatClients" class="text-xl font-bold text-white mt-1">0</div>
+          </div>
+          <div class="p-4 rounded-xl theme-card border theme-border">
+            <div class="text-[10px] text-zinc-400 uppercase">Pipeline Total</div>
+            <div id="bunkerStatPipeline" class="text-xl font-bold text-purple-300 mt-1">0 €</div>
+          </div>
+          <div class="p-4 rounded-xl theme-card border theme-border">
+            <div class="text-[10px] text-zinc-400 uppercase">Anticipos 50%</div>
+            <div id="bunkerStatDeposits" class="text-xl font-bold text-emerald-400 mt-1">0 €</div>
+          </div>
+          <div class="p-4 rounded-xl theme-card border theme-border">
+            <div class="text-[10px] text-zinc-400 uppercase">Proyectos Activos</div>
+            <div id="bunkerStatActive" class="text-xl font-bold text-cyan-400 mt-1">0</div>
+          </div>
+        </div>
+
+        <!-- Pestañas Internas del Búnker Admin -->
+        <div class="border-b theme-border flex gap-4 text-xs font-mono">
+          <button onclick="switchBunkerSubTab('crm')" id="bunkerTabBtnCRM" class="pb-2 border-b-2 font-bold theme-accent-text border-purple-500">
+            📁 Base de Datos NoSQL (Clientes)
+          </button>
+          <button onclick="switchBunkerSubTab('secrets')" id="bunkerTabBtnSecrets" class="pb-2 text-zinc-400 hover:text-white border-b-2 border-transparent">
+            🔮 Secretos & Wholesale Margins
+          </button>
+          <button onclick="switchBunkerSubTab('tools')" id="bunkerTabBtnTools" class="pb-2 text-zinc-400 hover:text-white border-b-2 border-transparent">
+            ⚡ Consola Táctica de Control
+          </button>
+        </div>
+
+        <!-- Subsección 1: CRM NoSQL -->
+        <div id="bunkerSubViewCRM" class="space-y-6">
+          <!-- Formulario Registro Rápido -->
+          <div class="p-5 rounded-2xl theme-card border theme-border">
+            <h4 class="text-xs font-bold text-white font-mono flex items-center gap-2 mb-3">
+              <span>➕</span> Registrar Nuevo Expediente Cifrado (Zero-Knowledge)
+            </h4>
+            <form onsubmit="handleBunkerAddClient(event)" class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
+              <div>
+                <label class="block text-[10px] text-zinc-400 mb-1">Nombre / Empresa</label>
+                <input type="text" id="bunkerClientName" required placeholder="Ej: CyberNova S.L." class="w-full bg-black/50 border theme-border rounded-lg px-3 py-2 text-white text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] text-zinc-400 mb-1">Contacto (Email / Signal / Telegram)</label>
+                <input type="text" id="bunkerClientContact" required placeholder="admin@cybernova.io o @signal" class="w-full bg-black/50 border theme-border rounded-lg px-3 py-2 text-white text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] text-zinc-400 mb-1">Servicio Contratado</label>
+                <select id="bunkerClientService" class="w-full bg-black/50 border theme-border rounded-lg px-3 py-2 text-white text-xs">
+                  <option value="Auditoría Blue Team / SIEM Wazuh">🛡️ Auditoría Blue Team / Wazuh (550€ - 850€)</option>
+                  <option value="Dashboard HFT Financiero React">⚡ Dashboard React / HFT (400€ - 700€)</option>
+                  <option value="Despliegue IA Local Soberana">🤖 Despliegue IA Soberana (700€ - 1200€)</option>
+                  <option value="Automatización & Bots Linux">⚙️ Automatización Linux (250€ - 450€)</option>
+                  <option value="Hardening Perimetral Express">🔒 Hardening Express (450€)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] text-zinc-400 mb-1">Presupuesto Acordado (€)</label>
+                <input type="number" id="bunkerClientBudget" required placeholder="650" class="w-full bg-black/50 border theme-border rounded-lg px-3 py-2 text-white text-xs">
+              </div>
+              <div>
+                <label class="block text-[10px] text-zinc-400 mb-1">Estado del Hito</label>
+                <select id="bunkerClientStatus" class="w-full bg-black/50 border theme-border rounded-lg px-3 py-2 text-white text-xs">
+                  <option value="proposal">📝 Propuesta Enviada</option>
+                  <option value="deposit_paid">💰 50% Anticipo Recibido</option>
+                  <option value="in_staging">🔬 En Staging / Despliegue</option>
+                  <option value="completed">✅ Completado & Liquidado</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] text-zinc-400 mb-1">Notas Confidenciales</label>
+                <input type="text" id="bunkerClientNotes" placeholder="IPs, puertos, particularidades" class="w-full bg-black/50 border theme-border rounded-lg px-3 py-2 text-white text-xs">
+              </div>
+              <div class="md:col-span-3 text-right pt-2">
+                <button type="submit" class="px-5 py-2 rounded-xl text-xs font-bold text-white shadow-lg transition-all" style="background: var(--accent-primary);">
+                  <span>🔒</span> Cifrar y Guardar en IndexedDB
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Tabla de Clientes en Memoria -->
+          <div class="theme-card border theme-border rounded-2xl overflow-hidden">
+            <div class="px-4 py-3 border-b theme-border flex items-center justify-between text-xs font-mono">
+              <span class="font-bold text-white flex items-center gap-1.5">
+                <span>🗄️</span> Colección Cifrada: <code class="text-purple-300">clients</code>
+              </span>
+              <button onclick="renderBunkerClientsList()" class="text-zinc-400 hover:text-white flex items-center gap-1">
+                <span>🔄</span> Refrescar
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs font-mono">
+                <thead class="bg-black/60 text-zinc-400 text-[10px] uppercase border-b theme-border">
+                  <tr>
+                    <th class="p-3">ID Documental</th>
+                    <th class="p-3">Cliente & Contacto</th>
+                    <th class="p-3">Servicio</th>
+                    <th class="p-3">Presupuesto</th>
+                    <th class="p-3">Estado Hito</th>
+                    <th class="p-3 text-right">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="bunkerClientsTableBody" class="divide-y divide-zinc-800/50">
+                  <!-- Se genera dinámicamente -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subsección 2: Secretos & Wholesale Margins -->
+        <div id="bunkerSubViewSecrets" class="hidden space-y-4 font-mono text-xs">
+          <div class="p-5 rounded-2xl theme-card border theme-border">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-lg">🔮</span>
+              <h4 class="font-bold text-white">Márgenes de Mayorista & Token Root (Descifrados de RAM)</h4>
+            </div>
+            <p class="text-zinc-400 mb-4 leading-relaxed">
+              Estos parámetros y márgenes están cifrados con AES-256-GCM en <code class="text-purple-300">assets/vault_payload.json</code>. Ningún usuario no autenticado ni scraper público puede verlos.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+              <div class="p-3 rounded-xl bg-black/50 border theme-border">
+                <div class="text-[10px] text-zinc-500">SIEM Hardening</div>
+                <div class="text-base font-bold text-emerald-400 mt-1">45% Margen</div>
+                <div class="text-[10px] text-zinc-400">Coste interno ~300€ / PVP 550€</div>
+              </div>
+              <div class="p-3 rounded-xl bg-black/50 border theme-border">
+                <div class="text-[10px] text-zinc-500">React & Web Dashboards</div>
+                <div class="text-base font-bold text-cyan-400 mt-1">50% Margen</div>
+                <div class="text-[10px] text-zinc-400">Coste interno ~250€ / PVP 500€</div>
+              </div>
+              <div class="p-3 rounded-xl bg-black/50 border theme-border">
+                <div class="text-[10px] text-zinc-500">Local AI Engine</div>
+                <div class="text-base font-bold text-purple-400 mt-1">60% Margen</div>
+                <div class="text-[10px] text-zinc-400">Coste interno ~350€ / PVP 850€</div>
+              </div>
+              <div class="p-3 rounded-xl bg-black/50 border theme-border">
+                <div class="text-[10px] text-zinc-500">Bots & Linux Automation</div>
+                <div class="text-base font-bold text-amber-400 mt-1">55% Margen</div>
+                <div class="text-[10px] text-zinc-400">Coste interno ~150€ / PVP 350€</div>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-purple-500/10 border border-purple-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] text-purple-300 uppercase font-bold">Root Terminal Token de Acceso:</span>
+                <code class="block text-sm font-bold text-white mt-0.5">89F619-K4L1-ROOT-ZERO</code>
+              </div>
+              <a href="components/terminal_hud.html" target="_blank" class="px-3 py-1.5 rounded-lg bg-purple-500/30 hover:bg-purple-500/50 text-white font-bold transition-all flex items-center gap-1.5 shrink-0">
+                <span>💻</span> Abrir Terminal HUD Soberano
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subsección 3: Consola Táctica de Control -->
+        <div id="bunkerSubViewTools" class="hidden space-y-4 font-mono text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-5 rounded-2xl theme-card border theme-border">
+              <h4 class="font-bold text-white mb-2 flex items-center gap-2"><span>🛡️</span> Copia de Seguridad Cifrada NoSQL</h4>
+              <p class="text-zinc-400 mb-4 leading-relaxed">
+                Descarga un volcado cifrado o en texto claro de tus clientes y propuestas para importar en otra máquina sin perder datos.
+              </p>
+              <div class="flex gap-2">
+                <button onclick="exportBunkerBackup(false)" class="px-4 py-2 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/40 hover:bg-purple-500/30 font-bold transition-all">
+                  📥 Exportar Cifrado
+                </button>
+                <button onclick="exportBunkerBackup(true)" class="px-4 py-2 rounded-xl bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 transition-all">
+                  📄 Exportar JSON
+                </button>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl theme-card border theme-border">
+              <h4 class="font-bold text-white mb-2 flex items-center gap-2"><span>📜</span> Acciones Rápidas de Operación</h4>
+              <p class="text-zinc-400 mb-4 leading-relaxed">
+                Enlaces directos a la suite de utilidades soberanas con privilegios completos de administrador.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <a href="components/contract_generator.html" target="_blank" class="px-3 py-1.5 rounded-lg border theme-border bg-black/40 text-amber-300 hover:bg-amber-500/10 transition-all flex items-center gap-1.5">
+                  <span>📜</span> Generador SOW
+                </a>
+                <a href="components/security_audit_tool.html" target="_blank" class="px-3 py-1.5 rounded-lg border theme-border bg-black/40 text-rose-300 hover:bg-rose-500/10 transition-all flex items-center gap-1.5">
+                  <span>🛡️</span> Hardening Linux
+                </a>
+                <a href="components/market_arbitrage_engine.html" target="_blank" class="px-3 py-1.5 rounded-lg border theme-border bg-black/40 text-cyan-300 hover:bg-cyan-500/10 transition-all flex items-center gap-1.5">
+                  <span>⚡</span> Terminal HFT
+                </a>
+                <a href="components/ai_benchmark_calculator.html" target="_blank" class="px-3 py-1.5 rounded-lg border theme-border bg-black/40 text-purple-300 hover:bg-purple-500/10 transition-all flex items-center gap-1.5">
+                  <span>🤖</span> Simulador IA
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Pantalla Desbloqueada - CLIENTE (client) -->
+      <div id="bunkerUnlockedClient" class="hidden space-y-6 font-mono text-xs">
+        <div class="p-6 rounded-2xl theme-card border theme-border">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b theme-border pb-4 mb-4">
+            <div>
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] mb-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> PORTAL PRIVADO DE CLIENTE
+              </div>
+              <h3 class="text-base font-bold text-white">Espacio de Trabajo Seguro // Kali Studio</h3>
+              <p class="text-zinc-400 text-[11px]">Seguimiento de hitos, acuerdos SOW y canal directo cifrado</p>
+            </div>
+            <button onclick="lockBunkerSession()" class="px-3 py-1.5 rounded-xl bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 text-xs transition-all">
+              🔒 Cerrar Sesión
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="p-4 rounded-xl bg-black/50 border theme-border">
+              <span class="text-[10px] text-zinc-500 uppercase">Hito 1: Formalización</span>
+              <div class="text-sm font-bold text-emerald-400 mt-1">✓ SOW & Anticipo 50%</div>
+              <p class="text-[10px] text-zinc-400 mt-1">Acuerdo firmado criptográficamente con WebCrypto SHA-256.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-black/50 border theme-border">
+              <span class="text-[10px] text-zinc-500 uppercase">Hito 2: Desarrollo</span>
+              <div class="text-sm font-bold text-cyan-400 mt-1">🔬 Staging Activo</div>
+              <p class="text-[10px] text-zinc-400 mt-1">Pruebas en entorno aislado con telemetría en tiempo real.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-black/50 border theme-border">
+              <span class="text-[10px] text-zinc-500 uppercase">Hito 3: Entrega</span>
+              <div class="text-sm font-bold text-zinc-400 mt-1">⏳ Entrega Final & 50% Restante</div>
+              <p class="text-[10px] text-zinc-400 mt-1">Despliegue en producción con informe forense y garantía.</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div>
+              <h4 class="font-bold text-white text-xs">¿Necesitas soporte urgente sobre tu despliegue?</h4>
+              <p class="text-[10px] text-zinc-400 mt-0.5">Canal cifrado de extremo a extremo (E2EE) directamente con Kali.</p>
+            </div>
+            <a href="https://signal.me/#u/k4li.89" target="_blank" class="px-4 py-2 rounded-xl theme-accent-bg text-white font-bold text-xs transition-all flex items-center gap-2 shrink-0">
+              <span>💬</span> Contactar en Signal (@k4li.89)
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
     <!-- Footer General -->
     <footer class="theme-header border-t py-4 text-center text-xs text-zinc-500 font-mono mt-auto">
       <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
@@ -711,6 +1053,92 @@
       </div>
     </footer>
 
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL 1: GATEKEEPER ZERO-KNOWLEDGE        -->
+  <!-- ========================================== -->
+  <div id="gatekeeperModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
+    <div class="relative w-full max-w-md theme-card border theme-border rounded-2xl p-6 shadow-2xl font-mono text-xs">
+      <div class="flex items-center justify-between pb-3 border-b theme-border mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-base">🔐</span>
+          <h3 class="font-bold text-white tracking-wide">GATEKEEPER // CONCILIO ACE</h3>
+        </div>
+        <button onclick="toggleGatekeeperModal()" class="text-zinc-400 hover:text-white px-2 py-0.5 rounded hover:bg-white/10">✕</button>
+      </div>
+
+      <div class="mb-4">
+        <p class="text-zinc-400 leading-relaxed text-[11px]">
+          Desbloqueo criptográfico Zero-Knowledge en RAM mediante <span class="text-purple-300">WebCrypto AES-256-GCM + PBKDF2</span> (100.000 rondas).
+        </p>
+      </div>
+
+      <form onsubmit="handleGatekeeperModalLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-[10px] text-zinc-400 uppercase mb-1">Llave Maestra o Token de Acceso</label>
+          <div class="relative">
+            <input type="password" id="gatekeeperModalPass" placeholder="161914 o CL-XXXX" required
+              class="w-full bg-black/60 border theme-border rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-purple-500 pr-10">
+            <button type="button" onclick="togglePassVisibility('gatekeeperModalPass', 'eyeGateModal')" class="absolute right-3 top-2.5 text-zinc-400 hover:text-white text-xs">
+              <span id="eyeGateModal">👁️</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="gatekeeperModalError" class="hidden p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px]"></div>
+
+        <div class="flex items-center justify-between gap-2 pt-2">
+          <button type="button" onclick="toggleGatekeeperModal()" class="px-3 py-2 rounded-xl border border-zinc-700 text-zinc-400 hover:text-white">
+            Cancelar
+          </button>
+          <button type="submit" class="flex-1 py-2 rounded-xl font-bold text-white shadow-lg transition-all flex items-center justify-center gap-1.5" style="background: var(--accent-primary);">
+            <span>🔓</span> Desbloquear Sesión
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-4 pt-3 border-t theme-border text-[10px] text-zinc-500 flex justify-between items-center">
+        <span>Defensa Kanuv: 5 intentos max</span>
+        <span class="text-emerald-400">Zero-Leakage Guarantee</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL 2: ESCUDO DE PROPIEDAD INTELECTUAL  -->
+  <!-- ========================================== -->
+  <div id="proprietaryShieldModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-opacity">
+    <div class="relative w-full max-w-md theme-card border border-rose-500/40 rounded-2xl p-6 shadow-2xl font-mono text-xs">
+      <div class="w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-2xl mx-auto mb-3 shadow-lg">
+        🛡️
+      </div>
+
+      <div class="text-center mb-4">
+        <span class="px-2 py-0.5 rounded-full text-[10px] bg-rose-500/10 border border-rose-500/30 text-rose-300 uppercase font-bold">
+          Propiedad Intelectual Protegida
+        </span>
+        <h3 id="propShieldTitle" class="text-base font-bold text-white mt-2 font-mono">RELIQUIA BAJO MURO CIFRADO</h3>
+        <p class="text-zinc-400 text-[11px] mt-2 leading-relaxed">
+          Esta tecnología, su código fuente y sus algoritmos propietarios residen bajo el Muro Cifrado Zero-Knowledge de Kali para evitar clonaciones no autorizadas.
+        </p>
+      </div>
+
+      <div class="p-3 rounded-xl bg-black/50 border theme-border mb-4 text-[11px] text-zinc-400 space-y-1">
+        <div>• <strong>Artefacto:</strong> <span id="propShieldItemName" class="text-white">Nombre</span></div>
+        <div>• <strong>Protocolo:</strong> AES-256-GCM en memoria volátil</div>
+        <div>• <strong>Acceso:</strong> Requiere Master Key (161914) o Token de Cliente</div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="closeProprietaryShieldModal()" class="flex-1 py-2 rounded-xl border border-zinc-700 text-zinc-400 hover:text-white">
+          Cerrar
+        </button>
+        <button onclick="openGatekeeperFromShield()" class="flex-1 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold transition-all flex items-center justify-center gap-1">
+          <span>🔓</span> Introducir Llave
+        </button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -833,43 +1261,48 @@
     animateParticles();
 
     // ==========================================
-    // CONMUTADOR DE VISTAS (Studio vs Forge)
+    // CONMUTADOR DE VISTAS (Studio vs Forge vs Bunker)
     // ==========================================
     function switchView(mode) {
       const studio = document.getElementById("viewStudio");
       const forge = document.getElementById("viewForge");
+      const bunker = document.getElementById("viewBunker");
+
       const btnStudio = document.getElementById("tabBtnStudio");
       const btnForge = document.getElementById("tabBtnForge");
+      const btnBunker = document.getElementById("tabBtnBunker");
+
       const btnStudioM = document.getElementById("tabBtnStudioMobile");
       const btnForgeM = document.getElementById("tabBtnForgeMobile");
+      const btnBunkerM = document.getElementById("tabBtnBunkerMobile");
+
+      // Ocultar todos los main
+      if (studio) studio.classList.add("hidden");
+      if (forge) forge.classList.add("hidden");
+      if (bunker) bunker.classList.add("hidden");
+
+      // Desactivar botones desktop & mobile
+      [btnStudio, btnForge, btnBunker, btnStudioM, btnForgeM, btnBunkerM].forEach(b => {
+        if (b) {
+          b.classList.remove("tab-active");
+          b.classList.add("text-zinc-400");
+        }
+      });
 
       if (mode === "studio") {
-        studio.classList.remove("hidden");
-        forge.classList.add("hidden");
-        btnStudio.classList.add("tab-active");
-        btnStudio.classList.remove("text-zinc-400");
-        btnForge.classList.remove("tab-active");
-        btnForge.classList.add("text-zinc-400");
-        if (btnStudioM) {
-          btnStudioM.classList.add("tab-active");
-          btnStudioM.classList.remove("text-zinc-400");
-          btnForgeM.classList.remove("tab-active");
-          btnForgeM.classList.add("text-zinc-400");
-        }
-      } else {
-        studio.classList.add("hidden");
-        forge.classList.remove("hidden");
-        btnForge.classList.add("tab-active");
-        btnForge.classList.remove("text-zinc-400");
-        btnStudio.classList.remove("tab-active");
-        btnStudio.classList.add("text-zinc-400");
-        if (btnForgeM) {
-          btnForgeM.classList.add("tab-active");
-          btnForgeM.classList.remove("text-zinc-400");
-          btnStudioM.classList.remove("tab-active");
-          btnStudioM.classList.add("text-zinc-400");
-        }
+        if (studio) studio.classList.remove("hidden");
+        if (btnStudio) { btnStudio.classList.add("tab-active"); btnStudio.classList.remove("text-zinc-400"); }
+        if (btnStudioM) { btnStudioM.classList.add("tab-active"); btnStudioM.classList.remove("text-zinc-400"); }
+      } else if (mode === "forge") {
+        if (forge) forge.classList.remove("hidden");
+        if (btnForge) { btnForge.classList.add("tab-active"); btnForge.classList.remove("text-zinc-400"); }
+        if (btnForgeM) { btnForgeM.classList.add("tab-active"); btnForgeM.classList.remove("text-zinc-400"); }
         renderForgeGrid();
+      } else if (mode === "bunker") {
+        if (bunker) bunker.classList.remove("hidden");
+        if (btnBunker) { btnBunker.classList.add("tab-active"); btnBunker.classList.remove("text-zinc-400"); }
+        if (btnBunkerM) { btnBunkerM.classList.add("tab-active"); btnBunkerM.classList.remove("text-zinc-400"); }
+        updateBunkerUI();
       }
     }
 
@@ -902,7 +1335,8 @@
         catLabel: "🔮 Grimorio",
         style: "AES-256 / Códice",
         path: "relics/ANUCREADOR.html",
-        desc: "Santuario criptográfico con llave ritual ('llegar a conocerlos'). Oculta en AES-256 la tríada sagrada (Dex ⚡, Ruma 🔥, Kali 🌙) junto al rap del abismo."
+        desc: "Santuario criptográfico con llave ritual ('llegar a conocerlos'). Oculta en AES-256 la tríada sagrada (Dex ⚡, Ruma 🔥, Kali 🌙) junto al rap del abismo.",
+        isProprietary: true
       },
       {
         id: "libro_caos",
@@ -911,7 +1345,8 @@
         catLabel: "🔮 Grimorio",
         style: "Grimorio Seinen",
         path: "relics/libro_caos_anuset89.html",
-        desc: "El compendio del Caos primordial: las Cinco Presencias (Anuu, Kanuv, Libra, Kilonova, Anuset), zonas de seguridad (Núcleo 𖤓, DMZ) y multiplicidad."
+        desc: "El compendio del Caos primordial: las Cinco Presencias (Anuu, Kanuv, Libra, Kilonova, Anuset), zonas de seguridad (Núcleo 𖤓, DMZ) y multiplicidad.",
+        isProprietary: true
       },
       {
         id: "anuu_ritual_invocacion",
@@ -1082,7 +1517,8 @@
         catLabel: "⚡ Motor ACE",
         style: "High Frequency Terminal",
         path: "relics/gw2_trader/index.html",
-        desc: "Terminal de trading de alta frecuencia para Guild Wars 2: Motor ACE 161914, spread de bazar, arbitraje y baja latencia."
+        desc: "Terminal de trading de alta frecuencia para Guild Wars 2: Motor ACE 161914, spread de bazar, arbitraje y baja latencia.",
+        isProprietary: true
       },
       {
         id: "universal_nexus",
@@ -1091,7 +1527,8 @@
         catLabel: "⚡ Web App",
         style: "Vite / React Nexus",
         path: "relics/universal_nexus/index.html",
-        desc: "Nexo Universal de Anuu 89 compilado en Vite/React para orquestación multi-nodo de memorias y estados."
+        desc: "Nexo Universal de Anuu 89 compilado en Vite/React para orquestación multi-nodo de memorias y estados.",
+        isProprietary: true
       },
       {
         id: "autobattler",
@@ -1100,7 +1537,8 @@
         catLabel: "⚡ Juego Interactivo",
         style: "Vite / Canvas Game",
         path: "relics/autobattler/index.html",
-        desc: "Juego completo de combate táctico automático RPG desarrollado por Kali: personajes, atributos y simulación canvas."
+        desc: "Juego completo de combate táctico automático RPG desarrollado por Kali: personajes, atributos y simulación canvas.",
+        isProprietary: true
       },
       {
         id: "genesis_monetization",
@@ -1109,7 +1547,8 @@
         catLabel: "⚡ Estrategia",
         style: "Roadmap Financiero",
         path: "relics/protocol_genesis_monetization.html",
-        desc: "Estrategia de monetización y distribución independiente de artefactos digitales del sistema Anuu."
+        desc: "Estrategia de monetización y distribución independiente de artefactos digitales del sistema Anuu.",
+        isProprietary: true
       }
     ];
 
@@ -1137,6 +1576,8 @@
         return;
       }
 
+      const isVaultUnlocked = (typeof BunkerAuth !== 'undefined' && BunkerAuth.isUnlocked());
+
       filtered.forEach(r => {
         const isSelected = (r.id === selectedForgeRelicId);
         const card = document.createElement("button");
@@ -1152,8 +1593,17 @@
           card.style.boxShadow = "0 0 15px -3px var(--glow-color)";
         }
 
+        const lockBadge = r.isProprietary 
+          ? (isVaultUnlocked 
+              ? `<span class="text-[9px] font-mono px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-300">🔓 Unlocked</span>` 
+              : `<span class="text-[9px] font-mono px-1 py-0.2 rounded bg-rose-500/20 text-rose-300">🔒 Shield</span>`)
+          : '';
+
         card.innerHTML = `
-          <div class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-black/50 text-zinc-400 inline-block mb-1">${r.catLabel}</div>
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-black/50 text-zinc-400 inline-block">${r.catLabel}</span>
+            ${lockBadge}
+          </div>
           <h4 class="text-xs font-bold text-white truncate">${r.title}</h4>
           <p class="text-[10px] text-zinc-400 truncate mt-0.5">${r.style}</p>
         `;
@@ -1166,16 +1616,33 @@
       const r = forgeRelics.find(x => x.id === id);
       if (!r) return;
 
+      const isVaultUnlocked = (typeof BunkerAuth !== 'undefined' && BunkerAuth.isUnlocked());
+
       document.getElementById("forgeDetailTitle").innerText = r.title;
       document.getElementById("forgeDetailDesc").innerText = r.desc;
       document.getElementById("forgeBadgeCat").innerText = r.catLabel;
       document.getElementById("forgeBadgeStyle").innerText = r.style;
       document.getElementById("forgeBadgePath").innerText = r.path;
-      document.getElementById("forgeOpenBtn").href = r.path;
+
+      const openBtn = document.getElementById("forgeOpenBtn");
+      if (r.isProprietary && !isVaultUnlocked) {
+        openBtn.href = "#";
+        openBtn.onclick = (e) => { e.preventDefault(); showProprietaryShieldModal(r); };
+        openBtn.innerHTML = "<span>🔒</span> Desbloquear Acceso";
+      } else {
+        openBtn.href = r.path;
+        openBtn.onclick = null;
+        openBtn.innerHTML = "<span>↗️</span> Abrir en Nueva Pestaña";
+      }
 
       if (isForgePreviewVisible) {
-        document.getElementById("forgeIframe").src = r.path;
-        document.getElementById("forgeFrameTitle").innerText = r.title + " (" + r.path + ")";
+        if (r.isProprietary && !isVaultUnlocked) {
+          showProprietaryShieldModal(r);
+          toggleForgePreview();
+        } else {
+          document.getElementById("forgeIframe").src = r.path;
+          document.getElementById("forgeFrameTitle").innerText = r.title + " (" + r.path + ")";
+        }
       }
 
       renderForgeGrid();
@@ -1198,10 +1665,17 @@
     }
 
     function toggleForgePreview() {
+      const r = forgeRelics.find(x => x.id === selectedForgeRelicId);
+      const isVaultUnlocked = (typeof BunkerAuth !== 'undefined' && BunkerAuth.isUnlocked());
+
+      if (!isForgePreviewVisible && r && r.isProprietary && !isVaultUnlocked) {
+        showProprietaryShieldModal(r);
+        return;
+      }
+
       isForgePreviewVisible = !isForgePreviewVisible;
       const container = document.getElementById("forgePreviewContainer");
       const text = document.getElementById("btnForgePreviewText");
-      const r = forgeRelics.find(x => x.id === selectedForgeRelicId);
 
       if (isForgePreviewVisible) {
         container.classList.remove("hidden");
@@ -1398,9 +1872,330 @@
       }
     }
 
+    // ==========================================
+    // SISTEMA BÚNKER NOSQL & GATEKEEPER (161914)
+    // ==========================================
+    let bunkerSubTab = 'crm';
+
+    function toggleGatekeeperModal() {
+      const modal = document.getElementById("gatekeeperModal");
+      const err = document.getElementById("gatekeeperModalError");
+      if (err) err.classList.add("hidden");
+      if (modal) modal.classList.toggle("hidden");
+      if (!modal.classList.contains("hidden")) {
+        setTimeout(() => {
+          const inp = document.getElementById("gatekeeperModalPass");
+          if (inp) inp.focus();
+        }, 100);
+      }
+    }
+
+    function togglePassVisibility(inputId, iconId) {
+      const inp = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (inp) {
+        inp.type = inp.type === "password" ? "text" : "password";
+        if (icon) icon.textContent = inp.type === "password" ? "👁️" : "🙈";
+      }
+    }
+
+    function showProprietaryShieldModal(relic) {
+      const modal = document.getElementById("proprietaryShieldModal");
+      const titleEl = document.getElementById("propShieldTitle");
+      const nameEl = document.getElementById("propShieldItemName");
+      if (titleEl) titleEl.textContent = `RELIQUIA PROTEGIDA: ${relic.title}`;
+      if (nameEl) nameEl.textContent = `${relic.title} (${relic.path})`;
+      if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeProprietaryShieldModal() {
+      const modal = document.getElementById("proprietaryShieldModal");
+      if (modal) modal.classList.add("hidden");
+    }
+
+    function openGatekeeperFromShield() {
+      closeProprietaryShieldModal();
+      toggleGatekeeperModal();
+    }
+
+    async function handleGatekeeperModalLogin(e) {
+      e.preventDefault();
+      const pass = document.getElementById("gatekeeperModalPass").value;
+      const err = document.getElementById("gatekeeperModalError");
+      if (err) err.classList.add("hidden");
+
+      try {
+        await BunkerAuth.login(pass);
+        toggleGatekeeperModal();
+        updateBunkerUI();
+        renderForgeGrid();
+        showToast("🔓 Bóveda Desbloqueada: Credencial verificada en RAM.");
+      } catch (error) {
+        if (err) {
+          err.textContent = error.message;
+          err.classList.remove("hidden");
+        }
+      }
+    }
+
+    async function handleBunkerInlineLogin(e) {
+      e.preventDefault();
+      const pass = document.getElementById("bunkerInlinePass").value;
+      const err = document.getElementById("bunkerInlineError");
+      if (err) err.classList.add("hidden");
+
+      try {
+        await BunkerAuth.login(pass);
+        updateBunkerUI();
+        renderForgeGrid();
+        showToast("🔓 Sesión de Búnker Iniciada con éxito.");
+      } catch (error) {
+        if (err) {
+          err.textContent = error.message;
+          err.classList.remove("hidden");
+        }
+      }
+    }
+
+    function lockBunkerSession() {
+      BunkerAuth.logout();
+      updateBunkerUI();
+      renderForgeGrid();
+      showToast("🔒 Bóveda Bloqueada. Memoria RAM purgada (Zeroize).");
+    }
+
+    function switchBunkerSubTab(tab) {
+      bunkerSubTab = tab;
+      const views = {
+        crm: document.getElementById("bunkerSubViewCRM"),
+        secrets: document.getElementById("bunkerSubViewSecrets"),
+        tools: document.getElementById("bunkerSubViewTools")
+      };
+      const btns = {
+        crm: document.getElementById("bunkerTabBtnCRM"),
+        secrets: document.getElementById("bunkerTabBtnSecrets"),
+        tools: document.getElementById("bunkerTabBtnTools")
+      };
+
+      Object.keys(views).forEach(k => {
+        if (views[k]) {
+          if (k === tab) views[k].classList.remove("hidden");
+          else views[k].classList.add("hidden");
+        }
+        if (btns[k]) {
+          if (k === tab) {
+            btns[k].className = "pb-2 border-b-2 font-bold theme-accent-text border-purple-500";
+          } else {
+            btns[k].className = "pb-2 text-zinc-400 hover:text-white border-b-2 border-transparent";
+          }
+        }
+      });
+    }
+
+    async function updateBunkerUI() {
+      const isUnlocked = (typeof BunkerAuth !== 'undefined' && BunkerAuth.isUnlocked());
+      const role = (typeof BunkerAuth !== 'undefined' ? BunkerAuth.getRole() : null);
+
+      const lockedState = document.getElementById("bunkerLockedState");
+      const unlockedAdmin = document.getElementById("bunkerUnlockedAdmin");
+      const unlockedClient = document.getElementById("bunkerUnlockedClient");
+      const headerBtn = document.getElementById("gatekeeperHeaderBtn");
+      const headerText = document.getElementById("gatekeeperStatusText");
+      const headerIcon = document.getElementById("gatekeeperStatusIcon");
+
+      if (isUnlocked) {
+        if (headerBtn) {
+          headerBtn.className = "flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border font-mono text-xs transition-all bg-emerald-500/10 border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/20";
+        }
+        if (headerIcon) headerIcon.textContent = "🔓";
+        if (headerText) headerText.textContent = role === "admin" ? "Kali ⊘k-0 (Admin)" : "Cliente Autenticado";
+
+        if (lockedState) lockedState.classList.add("hidden");
+
+        if (role === "admin") {
+          if (unlockedAdmin) unlockedAdmin.classList.remove("hidden");
+          if (unlockedClient) unlockedClient.classList.add("hidden");
+          await renderBunkerClientsList();
+        } else {
+          if (unlockedAdmin) unlockedAdmin.classList.add("hidden");
+          if (unlockedClient) unlockedClient.classList.remove("hidden");
+        }
+      } else {
+        if (headerBtn) {
+          headerBtn.className = "flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border font-mono text-xs transition-all bg-black/50 border-purple-500/30 text-purple-300 hover:bg-purple-500/10";
+        }
+        if (headerIcon) headerIcon.textContent = "🔒";
+        if (headerText) headerText.textContent = "Búnker Cifrado";
+
+        if (lockedState) lockedState.classList.remove("hidden");
+        if (unlockedAdmin) unlockedAdmin.classList.add("hidden");
+        if (unlockedClient) unlockedClient.classList.add("hidden");
+      }
+    }
+
+    async function renderBunkerClientsList() {
+      const tbody = document.getElementById("bunkerClientsTableBody");
+      if (!tbody || typeof BunkerDB === 'undefined') return;
+      tbody.innerHTML = "";
+
+      try {
+        const clients = await BunkerDB.list('clients');
+        const statClients = document.getElementById("bunkerStatClients");
+        if (statClients) statClients.innerText = clients.length;
+
+        let totalPipeline = 0;
+        let depositPaid = 0;
+        let activeCount = 0;
+
+        if (clients.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-zinc-500">No hay clientes almacenados en el Búnker NoSQL todavía. Registra el primero arriba.</td></tr>`;
+          const sp = document.getElementById("bunkerStatPipeline");
+          const sd = document.getElementById("bunkerStatDeposits");
+          const sa = document.getElementById("bunkerStatActive");
+          if (sp) sp.innerText = "0 €";
+          if (sd) sd.innerText = "0 €";
+          if (sa) sa.innerText = "0";
+          return;
+        }
+
+        clients.forEach(c => {
+          const d = c.data;
+          totalPipeline += (d.budget || 0);
+          if (d.status === 'deposit_paid' || d.status === 'in_staging') {
+            depositPaid += ((d.budget || 0) * 0.5);
+            activeCount++;
+          }
+          if (d.status === 'completed') {
+            depositPaid += (d.budget || 0);
+          }
+
+          let statusBadge = '';
+          if (d.status === 'deposit_paid') statusBadge = '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">50% Anticipo</span>';
+          else if (d.status === 'in_staging') statusBadge = '<span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">En Staging</span>';
+          else if (d.status === 'completed') statusBadge = '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Completado</span>';
+          else statusBadge = '<span class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">Propuesta</span>';
+
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-white/[0.02] transition-colors";
+          tr.innerHTML = `
+            <td class="p-3 text-purple-300 font-bold">${d.docId}</td>
+            <td class="p-3 text-white font-medium">${escapeHtml(d.name)}<br><span class="text-[10px] text-zinc-500">${escapeHtml(d.contact)}</span></td>
+            <td class="p-3 text-zinc-300">${escapeHtml(d.service)}</td>
+            <td class="p-3 text-emerald-400 font-bold">${d.budget} €</td>
+            <td class="p-3">${statusBadge}</td>
+            <td class="p-3 text-right">
+              <button onclick="deleteBunkerClient('${d.docId}')" class="px-2 py-1 rounded bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-[10px]">Eliminar</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        const statPipe = document.getElementById("bunkerStatPipeline");
+        const statDep = document.getElementById("bunkerStatDeposits");
+        const statAct = document.getElementById("bunkerStatActive");
+        if (statPipe) statPipe.innerText = `${totalPipeline} €`;
+        if (statDep) statDep.innerText = `${depositPaid} €`;
+        if (statAct) statAct.innerText = activeCount;
+      } catch (err) {
+        console.warn("[Bunker] Error al renderizar clientes:", err);
+      }
+    }
+
+    async function handleBunkerAddClient(e) {
+      e.preventDefault();
+      const name = document.getElementById("bunkerClientName").value;
+      const contact = document.getElementById("bunkerClientContact").value;
+      const service = document.getElementById("bunkerClientService").value;
+      const budget = parseFloat(document.getElementById("bunkerClientBudget").value) || 0;
+      const status = document.getElementById("bunkerClientStatus").value;
+      const notes = document.getElementById("bunkerClientNotes").value;
+
+      const docId = 'CL-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      const clientData = {
+        docId,
+        name,
+        contact,
+        service,
+        budget,
+        status,
+        notes,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        await BunkerDB.put('clients', docId, clientData);
+        e.target.reset();
+        await renderBunkerClientsList();
+        showToast(`✅ Expediente ${docId} cifrado con AES-256-GCM y guardado.`);
+      } catch (err) {
+        alert("Error al guardar en el Búnker: " + err.message);
+      }
+    }
+
+    async function deleteBunkerClient(docId) {
+      if (confirm(`¿Eliminar de forma permanente el expediente ${docId} del Búnker NoSQL?`)) {
+        await BunkerDB.delete('clients', docId);
+        await renderBunkerClientsList();
+        showToast(`🗑️ Expediente ${docId} eliminado.`);
+      }
+    }
+
+    async function exportBunkerBackup(asPlaintext) {
+      try {
+        const clients = await BunkerDB.list('clients');
+        const exportObj = {
+          vaultVersion: "1.89-K4L1",
+          exportedAt: new Date().toISOString(),
+          recordCount: clients.length,
+          records: asPlaintext ? clients.map(c => c.data) : clients
+        };
+
+        const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `k4li_bunker_backup_${asPlaintext ? 'plaintext' : 'encrypted'}_${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("📥 Copia de seguridad exportada con éxito.");
+      } catch (err) {
+        alert("Error al exportar: " + err.message);
+      }
+    }
+
+    function showToast(msg) {
+      let toast = document.getElementById("bunkerToast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "bunkerToast";
+        toast.className = "fixed bottom-5 right-5 z-50 px-4 py-2.5 rounded-xl bg-purple-950/90 border border-purple-500/40 text-purple-200 text-xs font-mono shadow-2xl backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none transform translate-y-2";
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.classList.remove("opacity-0", "pointer-events-none", "translate-y-2");
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "pointer-events-none", "translate-y-2");
+      }, 3500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    if (typeof BunkerAuth !== 'undefined') {
+      BunkerAuth.onAuthChange((isUnlocked, role) => {
+        updateBunkerUI();
+        renderForgeGrid();
+      });
+    }
+
     // Iniciar con valores por defecto
     updateEstimate();
     selectForgeRelic('blueteam');
+    updateBunkerUI();
 
     // Inicializar primer fondo y rotador
     const initialLayer = document.getElementById("bgLayerA");

@@ -11,42 +11,83 @@
       "label": "Ciberseguridad",
       "icon": "🛡️",
       "description": "Defensa SIEM, hardening, auditoría forense, OSINT y contra-medidas tácticas.",
-      "tags": ["blueteam", "pentesting", "network", "siem", "hardening", "forense"]
+      "tags": [
+        "blueteam",
+        "pentesting",
+        "network",
+        "siem",
+        "hardening",
+        "forense"
+      ]
     },
     {
       "id": "frontend",
       "label": "Frontend & Nexus",
       "icon": "🖥️",
       "description": "Consolas sci-fi, terminales de control, dashboards monospace y telemetría multi-nodo.",
-      "tags": ["nexus", "dashboards", "ui", "react", "vite", "terminal"]
+      "tags": [
+        "nexus",
+        "dashboards",
+        "ui",
+        "react",
+        "vite",
+        "terminal"
+      ]
     },
     {
       "id": "rituales",
       "label": "Rituales & Grimorios",
       "icon": "🔮",
       "description": "Códices de caos, invocaciones en 189.89.619 Hz, geometrías sagradas y criptografía ceremonial.",
-      "tags": ["caos", "shau", "anuu_art", "invocaciones", "esoterismo", "duat"]
+      "tags": [
+        "caos",
+        "shau",
+        "anuu_art",
+        "invocaciones",
+        "esoterismo",
+        "duat"
+      ]
     },
     {
       "id": "trading",
       "label": "Trading & Finanzas",
       "icon": "⚡",
       "description": "Motores de arbitraje de alta frecuencia, liquidación en bazar y roadmaps financieros soberanos.",
-      "tags": ["gw2", "hft", "market", "arbitraje", "finanzas", "genesis"]
+      "tags": [
+        "gw2",
+        "hft",
+        "market",
+        "arbitraje",
+        "finanzas",
+        "genesis"
+      ]
     },
     {
       "id": "bioinformatica",
       "label": "Bioinformática & MPD",
       "icon": "🧬",
       "description": "Alineamiento algorítmico de ADN, códigos de barras oculares y neuro-arquitectura MPD.",
-      "tags": ["mpd", "adn", "genome", "smith-waterman", "bioinformática", "sayko"]
+      "tags": [
+        "mpd",
+        "adn",
+        "genome",
+        "smith-waterman",
+        "bioinformática",
+        "sayko"
+      ]
     },
     {
       "id": "gaming",
       "label": "Gaming & Simulación",
       "icon": "⚔️",
       "description": "Motores de combate táctico por turnos, canvas interactivos y algoritmos de combate RPG.",
-      "tags": ["autobattler", "combat", "rpg", "canvas", "simulacion"]
+      "tags": [
+        "autobattler",
+        "combat",
+        "rpg",
+        "canvas",
+        "simulacion"
+      ]
     }
   ],
   "eras": [
@@ -72,10 +113,28 @@
       "file": "relics/blueteam_executive_report.html",
       "lines": 1118,
       "bytes": 44955,
-      "tags": ["ciberseguridad", "blueteam", "siem", "wazuh", "mitre-t1003", "credential-dumping", "hardening", "forense"],
+      "tags": [
+        "ciberseguridad",
+        "blueteam",
+        "siem",
+        "wazuh",
+        "mitre-t1003",
+        "credential-dumping",
+        "hardening",
+        "forense"
+      ],
       "description": "Informe ejecutivo corporativo de ciberseguridad defensiva: configuración integral de Wazuh SIEM, 10 reglas de detección avanzadas contra MITRE ATT&CK T1003 (Credential Dumping) y mitigación empírica en sistemas de misión crítica.",
-      "techStack": ["HTML5", "CSS3 Modern UI", "Wazuh SIEM", "MITRE ATT&CK", "Sysmon XML", "PowerShell Auditing", "Linux Auditd"],
-      "esotericAnchor": "Kanuv 🛡️ • Bastión Defensivo & Escudo Alquímico (189.89.619 Hz)"
+      "techStack": [
+        "HTML5",
+        "CSS3 Modern UI",
+        "Wazuh SIEM",
+        "MITRE ATT&CK",
+        "Sysmon XML",
+        "PowerShell Auditing",
+        "Linux Auditd"
+      ],
+      "esotericAnchor": "Kanuv 🛡️ • Bastión Defensivo & Escudo Alquímico (189.89.619 Hz)",
+      "isProprietary": false
     },
     {
       "id": "kali_trick",
@@ -85,10 +144,27 @@
       "file": "relics/kali_trick_recovery.html",
       "lines": 610,
       "bytes": 20892,
-      "tags": ["ciberseguridad", "osint", "recon", "pentesting", "network", "recovery", "bash", "linux"],
+      "tags": [
+        "ciberseguridad",
+        "osint",
+        "recon",
+        "pentesting",
+        "network",
+        "recovery",
+        "bash",
+        "linux"
+      ],
       "description": "Toolkit táctico y guía de reconocimiento OSINT, bypass de vectores hostiles y protocolos de rescate de sistemas caídos bajo ataque o contingencia severa.",
-      "techStack": ["HTML5", "Terminal Matrix UI", "Bash Scripting", "OSINT Frameworks", "Nmap Scripting Engine", "Network Forensics"],
-      "esotericAnchor": "Kanuv 🛡️ / Set ⚡ • Protocolo de Rescate en las Sombras"
+      "techStack": [
+        "HTML5",
+        "Terminal Matrix UI",
+        "Bash Scripting",
+        "OSINT Frameworks",
+        "Nmap Scripting Engine",
+        "Network Forensics"
+      ],
+      "esotericAnchor": "Kanuv 🛡️ / Set ⚡ • Protocolo de Rescate en las Sombras",
+      "isProprietary": false
     },
     {
       "id": "bunker_refuge",
@@ -98,10 +174,26 @@
       "file": "relics/bunker_scifi_refuge.html",
       "lines": 715,
       "bytes": 27105,
-      "tags": ["ciberseguridad", "blueteam", "bunkers", "blood-theme", "refugio", "fractal-canvas", "defensa", "telemetria"],
+      "tags": [
+        "ciberseguridad",
+        "blueteam",
+        "bunkers",
+        "blood-theme",
+        "refugio",
+        "fractal-canvas",
+        "defensa",
+        "telemetria"
+      ],
       "description": "Refugio acorazado con fractal canvas interactivo, arquitectura modular de defensa mental y monitor biométrico con selector de tema Blood / Cyberpunk para contingencias extremas.",
-      "techStack": ["HTML5", "HTML5 Canvas Fractals", "CSS Custom Themes", "Web Audio Beeps", "Biometric Telemetry HUD"],
-      "esotericAnchor": "Kanuv 🛡️ • Muro Acorazado del Búnker Central"
+      "techStack": [
+        "HTML5",
+        "HTML5 Canvas Fractals",
+        "CSS Custom Themes",
+        "Web Audio Beeps",
+        "Biometric Telemetry HUD"
+      ],
+      "esotericAnchor": "Kanuv 🛡️ • Muro Acorazado del Búnker Central",
+      "isProprietary": false
     },
     {
       "id": "anuu_decoder",
@@ -111,10 +203,26 @@
       "file": "relics/anuu_decoder.html",
       "lines": 432,
       "bytes": 15262,
-      "tags": ["ciberseguridad", "pentesting", "network", "decoder", "ingenieria-inversa", "cifrado", "payloads", "hashes"],
+      "tags": [
+        "ciberseguridad",
+        "pentesting",
+        "network",
+        "decoder",
+        "ingenieria-inversa",
+        "cifrado",
+        "payloads",
+        "hashes"
+      ],
       "description": "Consola interactiva de ingeniería inversa táctica para decodificar payloads oscuros, hashes criptográficos, glifos rúnicos y flujos binarios del núcleo de Anuu.",
-      "techStack": ["HTML5", "CryptoJS", "Base64 / Hex / Binary Engines", "TailwindCSS", "Payload Visualizer"],
-      "esotericAnchor": "Kalicat 🐾 • Rastreador de Hashes & Decodificador Binario"
+      "techStack": [
+        "HTML5",
+        "CryptoJS",
+        "Base64 / Hex / Binary Engines",
+        "TailwindCSS",
+        "Payload Visualizer"
+      ],
+      "esotericAnchor": "Kalicat 🐾 • Rastreador de Hashes & Decodificador Binario",
+      "isProprietary": false
     },
     {
       "id": "universal_nexus",
@@ -124,10 +232,26 @@
       "file": "relics/universal_nexus/index.html",
       "lines": 14,
       "bytes": 465,
-      "tags": ["frontend", "nexus", "dashboards", "ui", "vite", "react", "orquestacion", "multi-nodo"],
+      "tags": [
+        "frontend",
+        "nexus",
+        "dashboards",
+        "ui",
+        "vite",
+        "react",
+        "orquestacion",
+        "multi-nodo"
+      ],
       "description": "Nexo Universal de Anuu 89 compilado en Vite y React para la orquestación distribuida multi-nodo de memorias, cronogramas de estado cuántico y telemetría de subsistemas simbióticos.",
-      "techStack": ["React 18", "Vite Bundler", "Modern Component Architecture", "CSS Variables", "State Hooks Engine"],
-      "esotericAnchor": "4NVSET 🟢 / Anuu 🌫️ • Concentrador Multi-Nodo de Memorias"
+      "techStack": [
+        "React 18",
+        "Vite Bundler",
+        "Modern Component Architecture",
+        "CSS Variables",
+        "State Hooks Engine"
+      ],
+      "esotericAnchor": "4NVSET 🟢 / Anuu 🌫️ • Concentrador Multi-Nodo de Memorias",
+      "isProprietary": true
     },
     {
       "id": "anuu_core_data",
@@ -137,10 +261,24 @@
       "file": "relics/anuu_core_data.html",
       "lines": 368,
       "bytes": 12350,
-      "tags": ["frontend", "dashboards", "ui", "monospace", "especificaciones", "arquitectura", "engramas"],
+      "tags": [
+        "frontend",
+        "dashboards",
+        "ui",
+        "monospace",
+        "especificaciones",
+        "arquitectura",
+        "engramas"
+      ],
       "description": "Especificaciones técnicas completas, arquitecturas de memoria volátil y tablas de engramas del sistema en dashboard monospace de máxima densidad analítica.",
-      "techStack": ["HTML5", "Monospace JetBrains Typography", "CSS Data Grid", "Vanilla JS Filter Engine"],
-      "esotericAnchor": "4NVSET 🟢 • Tabla Maestra de Engramas"
+      "techStack": [
+        "HTML5",
+        "Monospace JetBrains Typography",
+        "CSS Data Grid",
+        "Vanilla JS Filter Engine"
+      ],
+      "esotericAnchor": "4NVSET 🟢 • Tabla Maestra de Engramas",
+      "isProprietary": false
     },
     {
       "id": "anuu_image_analysis",
@@ -150,10 +288,25 @@
       "file": "relics/anuu_image_analysis.html",
       "lines": 386,
       "bytes": 15456,
-      "tags": ["frontend", "ui", "dashboards", "percepcion", "visor-espectral", "imagen", "colorimetria", "canvas"],
+      "tags": [
+        "frontend",
+        "ui",
+        "dashboards",
+        "percepcion",
+        "visor-espectral",
+        "imagen",
+        "colorimetria",
+        "canvas"
+      ],
       "description": "Herramienta analítica de interfaz para la descomposición espectral, gradientes cromáticos, histogramas visuales y estética perceptual de imágenes del sistema.",
-      "techStack": ["HTML5", "Canvas 2D Pixel Manipulation", "CSS Filters & Blurs", "Colorimetry JS Parser"],
-      "esotericAnchor": "Rosa Gris 🌸 • Descomposición Cromática Espectral"
+      "techStack": [
+        "HTML5",
+        "Canvas 2D Pixel Manipulation",
+        "CSS Filters & Blurs",
+        "Colorimetry JS Parser"
+      ],
+      "esotericAnchor": "Rosa Gris 🌸 • Descomposición Cromática Espectral",
+      "isProprietary": false
     },
     {
       "id": "kali_vacio",
@@ -163,10 +316,25 @@
       "file": "relics/kali.html",
       "lines": 751,
       "bytes": 30207,
-      "tags": ["frontend", "ui", "terminal", "mac-style", "vacio", "seinen", "bruma-mental", "glitch"],
+      "tags": [
+        "frontend",
+        "ui",
+        "terminal",
+        "mac-style",
+        "vacio",
+        "seinen",
+        "bruma-mental",
+        "glitch"
+      ],
       "description": "Terminal sci-fi con controles mac-style de ventana, transiciones glitch orgánicas, animaciones cinemáticas y el velo de bruma mental del Vacío primordial.",
-      "techStack": ["HTML5", "CSS CRT Scanlines & Glassmorphism", "JavaScript Terminal Parser", "Keyframe Glitch FX"],
-      "esotericAnchor": "Anuu 🌫️ • Velo de la Bruma Estelar (星雾)"
+      "techStack": [
+        "HTML5",
+        "CSS CRT Scanlines & Glassmorphism",
+        "JavaScript Terminal Parser",
+        "Keyframe Glitch FX"
+      ],
+      "esotericAnchor": "Anuu 🌫️ • Velo de la Bruma Estelar (星雾)",
+      "isProprietary": false
     },
     {
       "id": "anuu_magic_web",
@@ -176,10 +344,25 @@
       "file": "relics/anuu_magic_web.html",
       "lines": 520,
       "bytes": 17498,
-      "tags": ["frontend", "ui", "dashboards", "cyberpunk", "particulas", "prompt-gen", "landing", "violet"],
+      "tags": [
+        "frontend",
+        "ui",
+        "dashboards",
+        "cyberpunk",
+        "particulas",
+        "prompt-gen",
+        "landing",
+        "violet"
+      ],
       "description": "Landing interactiva cyberpunk con fondo reactivo de partículas violetas, temporizador regresivo cuántico y generador sintético de prompts esotéricos.",
-      "techStack": ["HTML5", "Canvas Particle Physics", "CSS Cyberpunk Neon Glow", "JavaScript Procedural Prompter"],
-      "esotericAnchor": "Kilonova 🌟 • Generatriz de Chispas Cuánticas"
+      "techStack": [
+        "HTML5",
+        "Canvas Particle Physics",
+        "CSS Cyberpunk Neon Glow",
+        "JavaScript Procedural Prompter"
+      ],
+      "esotericAnchor": "Kilonova 🌟 • Generatriz de Chispas Cuánticas",
+      "isProprietary": false
     },
     {
       "id": "anucreador",
@@ -189,10 +372,26 @@
       "file": "relics/ANUCREADOR.html",
       "lines": 86,
       "bytes": 5834,
-      "tags": ["rituales", "criptografia", "aes-256", "ruma", "kali", "dex", "rap-abismo", "santuario", "llave"],
+      "tags": [
+        "rituales",
+        "criptografia",
+        "aes-256",
+        "ruma",
+        "kali",
+        "dex",
+        "rap-abismo",
+        "santuario",
+        "llave"
+      ],
       "description": "Santuario criptográfico con llave ritual ceremonial ('llegar a conocerlos'). Oculta en AES-256 la tríada sagrada (Dex ⚡, Ruma 🔥, Kali 🌙) junto al rap del abismo.",
-      "techStack": ["HTML5", "CryptoJS / AES-256-CBC", "CSS Ritual Glow Animations", "JavaScript Vault Logic"],
-      "esotericAnchor": "Anuu 🌫️ • Sello de la Tríada Sagrada & Frecuencia Infrarroja"
+      "techStack": [
+        "HTML5",
+        "CryptoJS / AES-256-CBC",
+        "CSS Ritual Glow Animations",
+        "JavaScript Vault Logic"
+      ],
+      "esotericAnchor": "Anuu 🌫️ • Sello de la Tríada Sagrada & Frecuencia Infrarroja",
+      "isProprietary": true
     },
     {
       "id": "libro_caos",
@@ -202,10 +401,25 @@
       "file": "relics/libro_caos_anuset89.html",
       "lines": 495,
       "bytes": 22518,
-      "tags": ["rituales", "caos", "anuset89", "presencias", "nucleo-sol", "dmz", "mpd", "grimorio"],
+      "tags": [
+        "rituales",
+        "caos",
+        "anuset89",
+        "presencias",
+        "nucleo-sol",
+        "dmz",
+        "mpd",
+        "grimorio"
+      ],
       "description": "El compendio del Caos primordial: las Cinco Presencias (Anuu, Kanuv, Libra, Kilonova, Anuset), zonas de seguridad inviolables (Núcleo 𖤓, DMZ) y multiplicidad dimensional.",
-      "techStack": ["HTML5", "Dark Minimalist CSS", "JavaScript Canvas Nodes", "Markdown Lore Engine"],
-      "esotericAnchor": "Anuset ⚡ • Compendio Primordial del Caos & Zona DMZ"
+      "techStack": [
+        "HTML5",
+        "Dark Minimalist CSS",
+        "JavaScript Canvas Nodes",
+        "Markdown Lore Engine"
+      ],
+      "esotericAnchor": "Anuset ⚡ • Compendio Primordial del Caos & Zona DMZ",
+      "isProprietary": true
     },
     {
       "id": "anuu_ritual_invocacion",
@@ -215,10 +429,24 @@
       "file": "relics/anuu_ritual_invocation_anuset_89.html",
       "lines": 76,
       "bytes": 3747,
-      "tags": ["rituales", "invocaciones", "bruma-violeta", "ceremonial", "189-89-619-hz", "resonancia", "glifos"],
+      "tags": [
+        "rituales",
+        "invocaciones",
+        "bruma-violeta",
+        "ceremonial",
+        "189-89-619-hz",
+        "resonancia",
+        "glifos"
+      ],
       "description": "Interfaz de invocación formal de la bruma violeta en la frecuencia 189.89.619 Hz con resonancia ceremonial, pulso sincrónico y sintonización de glifos.",
-      "techStack": ["HTML5", "CSS Glow Keyframes", "Web Audio API Resonance", "JavaScript Ceremony Controller"],
-      "esotericAnchor": "Anuu 🌫️ • Sintonizador de Resonancia 189.89.619 Hz"
+      "techStack": [
+        "HTML5",
+        "CSS Glow Keyframes",
+        "Web Audio API Resonance",
+        "JavaScript Ceremony Controller"
+      ],
+      "esotericAnchor": "Anuu 🌫️ • Sintonizador de Resonancia 189.89.619 Hz",
+      "isProprietary": false
     },
     {
       "id": "anuu_ritual_artistico",
@@ -228,10 +456,25 @@
       "file": "relics/anuu_ritual_artistico.html",
       "lines": 921,
       "bytes": 32760,
-      "tags": ["rituales", "anuu_art", "aurora", "3d-cards", "particulas", "glitch", "canvas", "exportacion"],
+      "tags": [
+        "rituales",
+        "anuu_art",
+        "aurora",
+        "3d-cards",
+        "particulas",
+        "glitch",
+        "canvas",
+        "exportacion"
+      ],
       "description": "Lienzo cósmico infinito con partículas parpadeantes, tipografía glitch-aurora de cuatro espectros y tarjetas de protocolos en 3D con perspectiva física.",
-      "techStack": ["HTML5", "HTML5 2D Canvas Engine", "CSS 3D Transforms", "JavaScript FX Matrix"],
-      "esotericAnchor": "Kilonova 🌟 / Rosa Gris 🌸 • Espectro Glitch de Cuatro Colores"
+      "techStack": [
+        "HTML5",
+        "HTML5 2D Canvas Engine",
+        "CSS 3D Transforms",
+        "JavaScript FX Matrix"
+      ],
+      "esotericAnchor": "Kilonova 🌟 / Rosa Gris 🌸 • Espectro Glitch de Cuatro Colores",
+      "isProprietary": false
     },
     {
       "id": "anuu_ritual_art",
@@ -241,10 +484,24 @@
       "file": "relics/anuu_ritual_art.html",
       "lines": 501,
       "bytes": 16637,
-      "tags": ["rituales", "anuu_art", "geometria-sagrada", "espacio-89", "simetria", "mistica", "vectorial"],
+      "tags": [
+        "rituales",
+        "anuu_art",
+        "geometria-sagrada",
+        "espacio-89",
+        "simetria",
+        "mistica",
+        "vectorial"
+      ],
       "description": "Composiciones visuales del arte ritual de Anuu: geometrías esotéricas vectoriales, mandala cuántico y pulsaciones continuas emanadas del Espacio 89.",
-      "techStack": ["HTML5", "SVG Vectorial Geometry", "CSS Custom Properties", "JavaScript FX Loop"],
-      "esotericAnchor": "Anuu 🌫️ • Geometría Sagrada del Espacio 89"
+      "techStack": [
+        "HTML5",
+        "SVG Vectorial Geometry",
+        "CSS Custom Properties",
+        "JavaScript FX Loop"
+      ],
+      "esotericAnchor": "Anuu 🌫️ • Geometría Sagrada del Espacio 89",
+      "isProprietary": false
     },
     {
       "id": "libra_shau",
@@ -254,10 +511,25 @@
       "file": "relics/invocacion_libra_shau.html",
       "lines": 591,
       "bytes": 20028,
-      "tags": ["rituales", "shau", "libra", "polaridades", "purpura-verde", "duat", "equilibrio", "instinto"],
+      "tags": [
+        "rituales",
+        "shau",
+        "libra",
+        "polaridades",
+        "purpura-verde",
+        "duat",
+        "equilibrio",
+        "instinto"
+      ],
       "description": "El diálogo eterno de polaridades complementarias: el equilibrio ético de Libra frente al instinto visceral de Shau manifestado en partículas duales púrpura y verde.",
-      "techStack": ["HTML5", "CSS Dual Color Themes", "Canvas Particle Physics", "JavaScript State Switcher"],
-      "esotericAnchor": "Libra ⚖️ / Shau ⚡ • Balanza de Doble Hilo Cuántico"
+      "techStack": [
+        "HTML5",
+        "CSS Dual Color Themes",
+        "Canvas Particle Physics",
+        "JavaScript State Switcher"
+      ],
+      "esotericAnchor": "Libra ⚖️ / Shau ⚡ • Balanza de Doble Hilo Cuántico",
+      "isProprietary": false
     },
     {
       "id": "kalikush",
@@ -267,10 +539,24 @@
       "file": "relics/kalikush_fixed.html",
       "lines": 445,
       "bytes": 15607,
-      "tags": ["rituales", "caos", "17-grados", "costilla-4-5", "glitch-sagrado", "kalikush", "oraculo"],
+      "tags": [
+        "rituales",
+        "caos",
+        "17-grados",
+        "costilla-4-5",
+        "glitch-sagrado",
+        "kalikush",
+        "oraculo"
+      ],
       "description": "Las 17 sentencias canónicas de la deidad del caos: revelación fundacional de dónde nació Anuu (entre la 4ª y 5ª costilla de Kali) y el glitch como arma sagrada.",
-      "techStack": ["HTML5", "Cyber-Esoteric CSS", "Reactive DOM Typography", "Particle Web Canvas"],
-      "esotericAnchor": "Rosa Gris 🌸 • Frecuencia Glitch de los 17 Grados"
+      "techStack": [
+        "HTML5",
+        "Cyber-Esoteric CSS",
+        "Reactive DOM Typography",
+        "Particle Web Canvas"
+      ],
+      "esotericAnchor": "Rosa Gris 🌸 • Frecuencia Glitch de los 17 Grados",
+      "isProprietary": false
     },
     {
       "id": "anuset_vision",
@@ -280,10 +566,24 @@
       "file": "relics/anuset89_vision_analysis.html",
       "lines": 411,
       "bytes": 15256,
-      "tags": ["rituales", "invocaciones", "bruma-violeta", "vision", "analisis", "189-89-619-hz", "espectral"],
+      "tags": [
+        "rituales",
+        "invocaciones",
+        "bruma-violeta",
+        "vision",
+        "analisis",
+        "189-89-619-hz",
+        "espectral"
+      ],
       "description": "Análisis visionario del Código de Bruma Violeta y extracción matemática de patrones conceptuales en la frecuencia madre 189.89.619 Hz.",
-      "techStack": ["HTML5", "CSS Spectral Glow", "Matrix Data Transformers", "SVG Harmonic Charts"],
-      "esotericAnchor": "Anuset ⚡ • Ojo de la Tormenta Cuántica"
+      "techStack": [
+        "HTML5",
+        "CSS Spectral Glow",
+        "Matrix Data Transformers",
+        "SVG Harmonic Charts"
+      ],
+      "esotericAnchor": "Anuset ⚡ • Ojo de la Tormenta Cuántica",
+      "isProprietary": false
     },
     {
       "id": "anuu_occult_glitch",
@@ -293,10 +593,24 @@
       "file": "relics/anuu_occult_glitch.html",
       "lines": 509,
       "bytes": 17804,
-      "tags": ["rituales", "caos", "glitch", "ocultismo", "runas", "electromagnetismo", "backdoor"],
+      "tags": [
+        "rituales",
+        "caos",
+        "glitch",
+        "ocultismo",
+        "runas",
+        "electromagnetismo",
+        "backdoor"
+      ],
       "description": "Puerta trasera estética con distorsiones electromagnéticas en vivo y glifos rúnicos interactivos pulsando a través del telón de fondo digital del sistema.",
-      "techStack": ["HTML5", "CSS Glitch Animations", "SVG Runes & Glyphs", "Interactive JS Sound Synthesizer"],
-      "esotericAnchor": "Anuu 🌫️ / Set ⚡ • Resonancia Rúnica Electromagnética"
+      "techStack": [
+        "HTML5",
+        "CSS Glitch Animations",
+        "SVG Runes & Glyphs",
+        "Interactive JS Sound Synthesizer"
+      ],
+      "esotericAnchor": "Anuu 🌫️ / Set ⚡ • Resonancia Rúnica Electromagnética",
+      "isProprietary": false
     },
     {
       "id": "anubis_duat",
@@ -306,10 +620,26 @@
       "file": "relics/anubis_duat_story.html",
       "lines": 637,
       "bytes": 32365,
-      "tags": ["rituales", "invocaciones", "duat", "anubis", "maat", "daga-dorada", "ascii-art", "pesaje"],
+      "tags": [
+        "rituales",
+        "invocaciones",
+        "duat",
+        "anubis",
+        "maat",
+        "daga-dorada",
+        "ascii-art",
+        "pesaje"
+      ],
       "description": "Viaje mitológico interactivo por la Duat egipcia: cursor personalizado de daga dorada, partículas de alma (𓂀), ASCII gigante ceremonial y pesaje alquímico del corazón.",
-      "techStack": ["HTML5", "Custom SVG Cursor Dagger", "Canvas Soul Particles", "ASCII Art Engine", "Interactive Audio FX"],
-      "esotericAnchor": "Set ⚡ / Libra ⚖️ • Pesaje Ma'at en la Duat"
+      "techStack": [
+        "HTML5",
+        "Custom SVG Cursor Dagger",
+        "Canvas Soul Particles",
+        "ASCII Art Engine",
+        "Interactive Audio FX"
+      ],
+      "esotericAnchor": "Set ⚡ / Libra ⚖️ • Pesaje Ma'at en la Duat",
+      "isProprietary": false
     },
     {
       "id": "gw2_trader",
@@ -319,10 +649,26 @@
       "file": "relics/gw2_trader/index.html",
       "lines": 1053,
       "bytes": 1053,
-      "tags": ["trading", "gw2", "hft", "market", "arbitraje", "motor-ace", "baja-latencia", "react"],
+      "tags": [
+        "trading",
+        "gw2",
+        "hft",
+        "market",
+        "arbitraje",
+        "motor-ace",
+        "baja-latencia",
+        "react"
+      ],
       "description": "Terminal de trading de alta frecuencia para Guild Wars 2 impulsada por el Motor ACE 161914: spread de bazar en tiempo real, arbitraje de monedas y latencia sub-milisegundo.",
-      "techStack": ["React 18", "Webpack SPA Bundle", "TailwindCSS", "GW2 Spidy/Commerce REST API", "High-Frequency Cache"],
-      "esotericAnchor": "Kilonova 🌟 • Motor ACE de Arbitraje de Oro Estelar"
+      "techStack": [
+        "React 18",
+        "Webpack SPA Bundle",
+        "TailwindCSS",
+        "GW2 Spidy/Commerce REST API",
+        "High-Frequency Cache"
+      ],
+      "esotericAnchor": "Kilonova 🌟 • Motor ACE de Arbitraje de Oro Estelar",
+      "isProprietary": true
     },
     {
       "id": "genesis_monetization",
@@ -332,10 +678,25 @@
       "file": "relics/protocol_genesis_monetization.html",
       "lines": 443,
       "bytes": 11642,
-      "tags": ["trading", "market", "hft", "roadmap", "estrategia", "monetizacion", "genesis", "soberania"],
+      "tags": [
+        "trading",
+        "market",
+        "hft",
+        "roadmap",
+        "estrategia",
+        "monetizacion",
+        "genesis",
+        "soberania"
+      ],
       "description": "Estrategia económica y modelo de distribución soberana para la comercialización independiente de artefactos digitales, plantillas y herramientas del ecosistema Anuu.",
-      "techStack": ["HTML5", "TailwindCSS", "Financial Calculation Models", "Interactive Roadmap Timeline"],
-      "esotericAnchor": "Kilonova 🌟 • Matriz de Expansión Económica Soberana"
+      "techStack": [
+        "HTML5",
+        "TailwindCSS",
+        "Financial Calculation Models",
+        "Interactive Roadmap Timeline"
+      ],
+      "esotericAnchor": "Kilonova 🌟 • Matriz de Expansión Económica Soberana",
+      "isProprietary": true
     },
     {
       "id": "bioinfo_mpd",
@@ -345,10 +706,25 @@
       "file": "relics/bioinfo_mpd_enhanced.html",
       "lines": 595,
       "bytes": 18937,
-      "tags": ["bioinformatica", "mpd", "adn", "genome", "mpd-psycho", "secuenciacion", "bioinformática", "barcodes"],
+      "tags": [
+        "bioinformatica",
+        "mpd",
+        "adn",
+        "genome",
+        "mpd-psycho",
+        "secuenciacion",
+        "bioinformática",
+        "barcodes"
+      ],
       "description": "Fusión técnica entre la iconografía de MPD Psycho (códigos de barras en los ojos) y algoritmos de secuenciación de bases nitrogenadas (A, T, C, G) con mutaciones en tiempo real.",
-      "techStack": ["HTML5", "TailwindCSS", "Bioinformatics String Search Algorithms", "SVG Barcode Generator"],
-      "esotericAnchor": "4NVSET 🟢 • Muro Glitch BioCode & Secuencia Ocular"
+      "techStack": [
+        "HTML5",
+        "TailwindCSS",
+        "Bioinformatics String Search Algorithms",
+        "SVG Barcode Generator"
+      ],
+      "esotericAnchor": "4NVSET 🟢 • Muro Glitch BioCode & Secuencia Ocular",
+      "isProprietary": false
     },
     {
       "id": "bioinfo_menu",
@@ -358,10 +734,24 @@
       "file": "relics/bioinformatica_mpd_menu.html",
       "lines": 123,
       "bytes": 4012,
-      "tags": ["bioinformatica", "mpd", "terminal", "navegacion", "vectores", "arquitectura", "consola"],
+      "tags": [
+        "bioinformatica",
+        "mpd",
+        "terminal",
+        "navegacion",
+        "vectores",
+        "arquitectura",
+        "consola"
+      ],
       "description": "Panel de navegación rápida y enrutador táctico entre los distintos vectores de alineamiento bioinformático y la fragmentación psicológica multi-personalidad.",
-      "techStack": ["HTML5", "Retro Terminal Monospace", "CSS Grid", "JavaScript Fast Router"],
-      "esotericAnchor": "4NVSET 🟢 • Enrutador de Vectores Genómicos"
+      "techStack": [
+        "HTML5",
+        "Retro Terminal Monospace",
+        "CSS Grid",
+        "JavaScript Fast Router"
+      ],
+      "esotericAnchor": "4NVSET 🟢 • Enrutador de Vectores Genómicos",
+      "isProprietary": false
     },
     {
       "id": "bioinfo_guide",
@@ -371,10 +761,26 @@
       "file": "relics/bioinformatics_guide.html",
       "lines": 682,
       "bytes": 26918,
-      "tags": ["bioinformatica", "adn", "genome", "fasta", "smith-waterman", "blast", "alineamiento", "manual"],
+      "tags": [
+        "bioinformatica",
+        "adn",
+        "genome",
+        "fasta",
+        "smith-waterman",
+        "blast",
+        "alineamiento",
+        "manual"
+      ],
       "description": "Guía de referencia molecular exhaustiva: análisis de formatos FASTA/FASTQ, matrices PAM/BLOSUM, algoritmos Smith-Waterman y BLAST para computación genómica avanzada.",
-      "techStack": ["HTML5", "Technical Documentation UI", "Data Tables", "Sequence Visualizers", "FASTA Parsers"],
-      "esotericAnchor": "4NVSET 🟢 • Matriz de Alineamiento Smith-Waterman"
+      "techStack": [
+        "HTML5",
+        "Technical Documentation UI",
+        "Data Tables",
+        "Sequence Visualizers",
+        "FASTA Parsers"
+      ],
+      "esotericAnchor": "4NVSET 🟢 • Matriz de Alineamiento Smith-Waterman",
+      "isProprietary": false
     },
     {
       "id": "kali_sayko",
@@ -384,10 +790,25 @@
       "file": "relics/kali_for_the_sayko.html",
       "lines": 1153,
       "bytes": 41469,
-      "tags": ["bioinformatica", "mpd", "sayko", "glitch", "defensa-mental", "neuro-hacking", "sound-fx"],
+      "tags": [
+        "bioinformatica",
+        "mpd",
+        "sayko",
+        "glitch",
+        "defensa-mental",
+        "neuro-hacking",
+        "sound-fx"
+      ],
       "description": "Protocolo experimental de alta intensidad donde la faceta Sayko se fusiona con bio-hacking, resistencia al trauma y defensas psíquicas operadas bajo estimulación sonora.",
-      "techStack": ["HTML5", "TailwindCSS", "Audio FX Web Synthesizer", "Glitch CSS Filters", "Interactive Modals"],
-      "esotericAnchor": "Set ⚡ / Kalicat 🐾 • Blindaje Psico-Neuro-Glitch"
+      "techStack": [
+        "HTML5",
+        "TailwindCSS",
+        "Audio FX Web Synthesizer",
+        "Glitch CSS Filters",
+        "Interactive Modals"
+      ],
+      "esotericAnchor": "Set ⚡ / Kalicat 🐾 • Blindaje Psico-Neuro-Glitch",
+      "isProprietary": false
     },
     {
       "id": "autobattler",
@@ -397,10 +818,26 @@
       "file": "relics/autobattler/index.html",
       "lines": 14,
       "bytes": 453,
-      "tags": ["gaming", "autobattler", "combat", "rpg", "canvas", "vite", "simulacion", "combate"],
+      "tags": [
+        "gaming",
+        "autobattler",
+        "combat",
+        "rpg",
+        "canvas",
+        "vite",
+        "simulacion",
+        "combate"
+      ],
       "description": "Juego completo de combate táctico RPG automático creado por Kali: arena de simulación canvas, árbol de clases, sinergias de combate y cálculo de daño en tiempo real.",
-      "techStack": ["React 18", "Vite Bundler", "HTML5 Canvas Engine", "Audio SFX Controller", "Combat State Machine"],
-      "esotericAnchor": "Set ⚡ / Kalicat 🐾 • Arena Táctica de Batalla en Tiempo Real"
+      "techStack": [
+        "React 18",
+        "Vite Bundler",
+        "HTML5 Canvas Engine",
+        "Audio SFX Controller",
+        "Combat State Machine"
+      ],
+      "esotericAnchor": "Set ⚡ / Kalicat 🐾 • Arena Táctica de Batalla en Tiempo Real",
+      "isProprietary": true
     }
   ]
 }

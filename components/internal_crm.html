@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="anuu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BÚNKER CRM NOSQL // GESTOR CIFRADO DE CLIENTES | K4L1 STUDIO</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="../assets/js/bunker_vault.js"></script>
+  <style>
+    :root, [data-theme="anuu"] {
+      --bg-main: #08080d;
+      --bg-header: rgba(13, 13, 21, 0.95);
+      --bg-card: #0e0e17;
+      --bg-card-sub: #07070b;
+      --border-card: #27273a;
+      --accent-primary: #9333ea;
+      --accent-hover: #7e22ce;
+      --accent-secondary: #c084fc;
+      --text-main: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --glow-color: rgba(147, 51, 234, 0.35);
+      --badge-bg: rgba(147, 51, 234, 0.15);
+      --badge-border: rgba(168, 85, 247, 0.4);
+    }
+    [data-theme="blood"] {
+      --bg-main: #0f0204;
+      --bg-header: rgba(24, 4, 8, 0.95);
+      --bg-card: #180509;
+      --bg-card-sub: #0a0103;
+      --border-card: #450a0f;
+      --accent-primary: #e11d48;
+      --accent-hover: #be123c;
+      --accent-secondary: #fb7185;
+      --text-main: #ffe4e6;
+      --text-muted: #f43f5e;
+      --glow-color: rgba(225, 29, 72, 0.35);
+      --badge-bg: rgba(225, 29, 72, 0.15);
+      --badge-border: rgba(244, 63, 94, 0.4);
+    }
+    [data-theme="gw2"] {
+      --bg-main: #060b16;
+      --bg-header: rgba(10, 18, 36, 0.95);
+      --bg-card: #0c162d;
+      --bg-card-sub: #040812;
+      --border-card: #1e293b;
+      --accent-primary: #10b981;
+      --accent-hover: #059669;
+      --accent-secondary: #34d399;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --glow-color: rgba(16, 185, 129, 0.35);
+      --badge-bg: rgba(16, 185, 129, 0.15);
+      --badge-border: rgba(52, 211, 153, 0.4);
+    }
+    [data-theme="bioinfo"] {
+      --bg-main: #040d12;
+      --bg-header: rgba(6, 21, 29, 0.95);
+      --bg-card: #081a24;
+      --bg-card-sub: #030b10;
+      --border-card: #153243;
+      --accent-primary: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-secondary: #67e8f9;
+      --text-main: #ecfeff;
+      --text-muted: #a5f3fc;
+      --glow-color: rgba(6, 182, 212, 0.35);
+      --badge-bg: rgba(6, 182, 212, 0.15);
+      --badge-border: rgba(103, 232, 249, 0.4);
+    }
+    [data-theme="duat"] {
+      --bg-main: #0d0a04;
+      --bg-header: rgba(23, 17, 7, 0.95);
+      --bg-card: #1a1308;
+      --bg-card-sub: #0a0702;
+      --border-card: #3d2c12;
+      --accent-primary: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #fcd34d;
+      --text-main: #fffbeb;
+      --text-muted: #fde68a;
+      --glow-color: rgba(245, 158, 11, 0.35);
+      --badge-bg: rgba(245, 158, 11, 0.15);
+      --badge-border: rgba(252, 211, 77, 0.4);
+    }
+    [data-theme="neon"] {
+      --bg-main: #0d040e;
+      --bg-header: rgba(22, 6, 24, 0.95);
+      --bg-card: #18081a;
+      --bg-card-sub: #0a020b;
+      --border-card: #421047;
+      --accent-primary: #ec4899;
+      --accent-hover: #db2777;
+      --accent-secondary: #f472b6;
+      --text-main: #fdf2f8;
+      --text-muted: #fbcfe8;
+      --glow-color: rgba(236, 72, 153, 0.35);
+      --badge-bg: rgba(236, 72, 153, 0.15);
+      --badge-border: rgba(244, 114, 182, 0.4);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .theme-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+    }
+    .theme-border { border-color: var(--border-card); }
+    .theme-accent-text { color: var(--accent-secondary); }
+    .theme-accent-bg { background-color: var(--accent-primary); }
+    .theme-accent-bg:hover { background-color: var(--accent-hover); }
+  </style>
+</head>
+<body class="min-h-screen p-4 sm:p-6">
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header y Estado Criptográfico -->
+    <header class="theme-card p-4 sm:p-5 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-xl text-purple-400">
+          🏛️
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-purple-300">Búnker NoSQL Cifrado</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30" id="badgeVaultStatus">
+              ● AES-256-GCM Activo
+            </span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-white">Gestor Interno de Clientes & Encargos</h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href="../index.html" class="px-3 py-1.5 rounded-xl border theme-border bg-black/40 text-xs font-mono text-zinc-300 hover:text-white transition-colors">
+          ⬅ Volver a K4L1 Studio
+        </a>
+        <button onclick="lockVaultAndExit()" class="px-3 py-1.5 rounded-xl border border-rose-500/40 bg-rose-500/10 text-xs font-mono text-rose-300 hover:bg-rose-500/20 transition-colors flex items-center gap-1.5">
+          <span>🔒</span> Bloquear Sesión
+        </button>
+      </div>
+    </header>
+
+    <!-- Estado de Desbloqueo Requerido -->
+    <div id="lockScreen" class="theme-card p-8 rounded-2xl border text-center space-y-4 max-w-md mx-auto my-12">
+      <div class="text-4xl">🔐</div>
+      <h2 class="text-xl font-bold text-white">Búnker NoSQL Bloqueado</h2>
+      <p class="text-xs text-zinc-400 leading-relaxed">
+        Los datos de clientes y presupuestos se encuentran cifrados con AES-256-GCM en el almacenamiento local. Introduce tu llave soberana para descifrar en memoria.
+      </p>
+      <div class="space-y-3">
+        <input type="password" id="inputPassphrase" placeholder="Llave Maestra (ej: 161914-K4L1)" class="w-full px-3 py-2 rounded-xl bg-black/50 border theme-border text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-purple-500 font-mono">
+        <button onclick="unlockVaultUI()" class="w-full py-2.5 rounded-xl theme-accent-bg text-white font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2">
+          <span>🔓</span> Descifrar Búnker NoSQL
+        </button>
+        <p id="authErrorMsg" class="text-[11px] font-mono text-rose-400 hidden"></p>
+      </div>
+    </div>
+
+    <!-- Contenido del CRM Desbloqueado -->
+    <div id="unlockedContent" class="space-y-6 hidden">
+      <!-- Estadísticas de Cartera -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="theme-card p-4 rounded-xl border">
+          <span class="text-[11px] font-mono text-zinc-400 uppercase">Total Encargos</span>
+          <div class="text-2xl font-black text-white mt-1" id="statTotalClients">0</div>
+        </div>
+        <div class="theme-card p-4 rounded-xl border">
+          <span class="text-[11px] font-mono text-emerald-400 uppercase">En Staging / Activos</span>
+          <div class="text-2xl font-black text-emerald-300 mt-1" id="statActiveClients">0</div>
+        </div>
+        <div class="theme-card p-4 rounded-xl border">
+          <span class="text-[11px] font-mono text-amber-400 uppercase">50% Anticipo Recibido</span>
+          <div class="text-2xl font-black text-amber-300 mt-1" id="statDepositPaid">0 €</div>
+        </div>
+        <div class="theme-card p-4 rounded-xl border">
+          <span class="text-[11px] font-mono text-purple-400 uppercase">Pipeline Total</span>
+          <div class="text-2xl font-black text-purple-300 mt-1" id="statTotalPipeline">0 €</div>
+        </div>
+      </div>
+
+      <!-- Formulario para Registrar Nuevo Cliente / Encargo -->
+      <div class="theme-card p-5 rounded-2xl border">
+        <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+          <span>➕</span> Registrar Nuevo Cliente en la Base NoSQL Cifrada
+        </h3>
+        <form onsubmit="handleSaveClient(event)" class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-[11px] font-mono text-zinc-400 mb-1">Nombre / Empresa</label>
+            <input type="text" id="clientName" required placeholder="Ej: CyberDef Systems SL" class="w-full px-3 py-1.5 rounded-lg bg-black/40 border theme-border text-xs text-white focus:outline-none focus:border-purple-500">
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono text-zinc-400 mb-1">Contacto (Signal / Email)</label>
+            <input type="text" id="clientContact" required placeholder="@handle.01 o email" class="w-full px-3 py-1.5 rounded-lg bg-black/40 border theme-border text-xs text-white focus:outline-none focus:border-purple-500">
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono text-zinc-400 mb-1">Servicio</label>
+            <select id="clientService" class="w-full px-3 py-1.5 rounded-lg bg-black/40 border theme-border text-xs text-white focus:outline-none focus:border-purple-500">
+              <option value="siem">🛡️ Hardening & SIEM (450 €)</option>
+              <option value="react">⚡ Dashboards React (350 €)</option>
+              <option value="ai_local">🤖 IA Local Soberana (600 €)</option>
+              <option value="bots">⚙️ Bots & Scrapers (200 €)</option>
+              <option value="custom">🔮 Encargo a Medida</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono text-zinc-400 mb-1">Presupuesto Acordado (€)</label>
+            <input type="number" id="clientBudget" required min="100" placeholder="450" class="w-full px-3 py-1.5 rounded-lg bg-black/40 border theme-border text-xs text-white focus:outline-none focus:border-purple-500 font-mono">
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono text-zinc-400 mb-1">Estado del Hito</label>
+            <select id="clientStatus" class="w-full px-3 py-1.5 rounded-lg bg-black/40 border theme-border text-xs text-white focus:outline-none focus:border-purple-500 font-mono">
+              <option value="lead">Propuesta Enviada</option>
+              <option value="deposit_paid">50% Anticipo Recibido (Kick-off)</option>
+              <option value="in_staging">En Staging / Validación</option>
+              <option value="completed">100% Pagado & Entregado</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-mono text-zinc-400 mb-1">Notas Confidenciales</label>
+            <input type="text" id="clientNotes" placeholder="Detalles de SSH, requisitos, etc." class="w-full px-3 py-1.5 rounded-lg bg-black/40 border theme-border text-xs text-white focus:outline-none focus:border-purple-500">
+          </div>
+          <div class="md:col-span-3 flex justify-end">
+            <button type="submit" class="px-4 py-2 rounded-xl theme-accent-bg text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5">
+              <span>💾</span> Cifrar y Guardar en NoSQL
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Listado de Clientes Almacenados Cifrados -->
+      <div class="theme-card rounded-2xl border overflow-hidden">
+        <div class="p-4 border-b theme-border flex items-center justify-between">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>📑</span> Expedientes de Clientes Cifrados en IndexedDB Zero-Knowledge
+          </h3>
+          <button onclick="renderClientsList()" class="px-2.5 py-1 rounded-lg border theme-border bg-black/30 text-xs font-mono text-zinc-400 hover:text-white transition-colors">
+            🔄 Refrescar
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs font-mono">
+            <thead class="bg-black/50 text-zinc-400 border-b theme-border">
+              <tr>
+                <th class="p-3">ID / Token</th>
+                <th class="p-3">Cliente</th>
+                <th class="p-3">Servicio</th>
+                <th class="p-3">Presupuesto</th>
+                <th class="p-3">Estado</th>
+                <th class="p-3 text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="clientsTableBody" class="divide-y theme-border">
+              <!-- Renderizado dinámico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Sincronizar tema con localStorage
+    const savedTheme = localStorage.getItem("k4li_theme") || "anuu";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+
+    async function unlockVaultUI() {
+      const pass = document.getElementById("inputPassphrase").value;
+      const errorMsg = document.getElementById("authErrorMsg");
+      errorMsg.classList.add("hidden");
+
+      try {
+        await BunkerAuth.login(pass);
+        document.getElementById("lockScreen").classList.add("hidden");
+        document.getElementById("unlockedContent").classList.remove("hidden");
+        document.getElementById("badgeVaultStatus").innerText = "🔓 Desbloqueado // Admin Kali ⊘k-0";
+        document.getElementById("badgeVaultStatus").classList.replace("bg-emerald-500/20", "bg-purple-500/20");
+        document.getElementById("badgeVaultStatus").classList.replace("text-emerald-300", "text-purple-300");
+        await renderClientsList();
+      } catch (err) {
+        errorMsg.innerText = err.message;
+        errorMsg.classList.remove("hidden");
+      }
+    }
+
+    function lockVaultAndExit() {
+      BunkerAuth.logout();
+      window.location.reload();
+    }
+
+    async function handleSaveClient(e) {
+      e.preventDefault();
+      const name = document.getElementById("clientName").value;
+      const contact = document.getElementById("clientContact").value;
+      const service = document.getElementById("clientService").value;
+      const budget = parseFloat(document.getElementById("clientBudget").value) || 0;
+      const status = document.getElementById("clientStatus").value;
+      const notes = document.getElementById("clientNotes").value;
+
+      const docId = 'CL-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+      const clientData = {
+        docId,
+        name,
+        contact,
+        service,
+        budget,
+        status,
+        notes,
+        createdAt: new Date().toISOString()
+      };
+
+      await BunkerDB.put('clients', docId, clientData);
+      e.target.reset();
+      await renderClientsList();
+    }
+
+    async function renderClientsList() {
+      const tbody = document.getElementById("clientsTableBody");
+      tbody.innerHTML = "";
+
+      const clients = await BunkerDB.list('clients');
+      document.getElementById("statTotalClients").innerText = clients.length;
+
+      let totalPipeline = 0;
+      let depositPaid = 0;
+      let activeCount = 0;
+
+      if (clients.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-zinc-500">No hay clientes almacenados en el Búnker NoSQL todavía. Añade el primero arriba.</td></tr>`;
+        return;
+      }
+
+      clients.forEach(c => {
+        const d = c.data;
+        totalPipeline += d.budget;
+        if (d.status === 'deposit_paid' || d.status === 'in_staging') {
+          depositPaid += (d.budget * 0.5);
+          activeCount++;
+        }
+        if (d.status === 'completed') depositPaid += d.budget;
+
+        let statusBadge = '';
+        if (d.status === 'deposit_paid') statusBadge = '<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">50% Anticipo</span>';
+        else if (d.status === 'in_staging') statusBadge = '<span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">En Staging</span>';
+        else if (d.status === 'completed') statusBadge = '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Completado</span>';
+        else statusBadge = '<span class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">Propuesta</span>';
+
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-white/[0.02] transition-colors";
+        tr.innerHTML = `
+          <td class="p-3 text-purple-300 font-bold">${d.docId}</td>
+          <td class="p-3 text-white">${d.name}<br><span class="text-[10px] text-zinc-500">${d.contact}</span></td>
+          <td class="p-3 text-zinc-300">${d.service}</td>
+          <td class="p-3 text-emerald-400 font-bold">${d.budget} €</td>
+          <td class="p-3">${statusBadge}</td>
+          <td class="p-3 text-right">
+            <button onclick="deleteClientRecord('${d.docId}')" class="px-2 py-1 rounded bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 text-[10px]">Eliminar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("statTotalPipeline").innerText = `${totalPipeline} €`;
+      document.getElementById("statDepositPaid").innerText = `${depositPaid} €`;
+      document.getElementById("statActiveClients").innerText = activeCount;
+    }
+
+    async function deleteClientRecord(docId) {
+      if (confirm(`¿Eliminar de forma permanente el expediente ${docId}?`)) {
+        await BunkerDB.delete('clients', docId);
+        await renderClientsList();
+      }
+    }
+  </script>
+</body>
+</html>

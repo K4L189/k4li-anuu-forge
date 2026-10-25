@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Museo de las 26 Reliquias | ANUU-FORGE 161914</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="../assets/js/bunker_vault.js"></script>
   <style>
     /* 6 ESTILOS CANÓNICOS DEL CONCILIO ACE (161914) */
     :root, [data-theme="anuu"] {
@@ -1247,12 +1248,51 @@
         `<span class="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 whitespace-nowrap">${escapeHtml(t)}</span>`
       ).join("");
 
-      externalLink.href = `../${relic.file}`;
+      // Verificación de blindaje criptográfico para reliquias propietarias
+      const isLocked = relic.isProprietary && (!window.BunkerAuth || !window.BunkerAuth.isUnlocked());
 
-      // Iniciar carga del iframe
-      loading.style.opacity = "1";
-      loading.classList.remove("pointer-events-none");
-      iframe.src = `../${relic.file}`;
+      if (isLocked) {
+        externalLink.removeAttribute("href");
+        externalLink.onclick = (e) => {
+          e.preventDefault();
+          alert("Esta reliquia y sus algoritmos están protegidos por el Muro Cifrado de Kali. Inicia sesión en el Búnker Soberano.");
+        };
+        loading.style.opacity = "0";
+        loading.classList.add("pointer-events-none");
+        iframe.removeAttribute("src");
+        iframe.srcdoc = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <style>
+              body { background: #08080d; color: #e4e4e7; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; text-align: center; }
+              .box { max-width: 460px; border: 1px solid #7e22ce; padding: 32px; border-radius: 16px; background: #0e0e17; box-shadow: 0 0 30px rgba(147, 51, 234, 0.25); }
+              .badge { display: inline-block; padding: 3px 10px; border-radius: 9999px; background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc; font-size: 11px; margin-bottom: 12px; font-weight: bold; }
+              h2 { font-size: 16px; color: #fff; margin: 0 0 10px; }
+              p { font-size: 11px; color: #a1a1aa; line-height: 1.6; margin: 0 0 20px; }
+              a { display: inline-block; padding: 10px 20px; border-radius: 10px; background: #9333ea; color: #fff; text-decoration: none; font-size: 12px; font-weight: bold; }
+              a:hover { background: #7e22ce; }
+            </style>
+          </head>
+          <body>
+            <div class="box">
+              <div style="font-size: 32px; margin-bottom: 8px;">🛡️</div>
+              <div class="badge">MURO CIFRADO // PROPIEDAD INTELECTUAL</div>
+              <h2>${escapeHtml(relic.title)}</h2>
+              <p>Esta tecnología contiene algoritmos soberanos desarrollados en el Espacio 89. El acceso a su código fuente e interfaz interactiva requiere autenticación en el Búnker.</p>
+              <a href="../index.html" target="_top">🔓 Desbloquear en Búnker K4L1</a>
+            </div>
+          </body>
+          </html>
+        `;
+      } else {
+        externalLink.href = `../${relic.file}`;
+        externalLink.onclick = null;
+        loading.style.opacity = "1";
+        loading.classList.remove("pointer-events-none");
+        iframe.removeAttribute("srcdoc");
+        iframe.src = `../${relic.file}`;
+      }
 
       modal.classList.remove("hidden");
       document.body.style.overflow = "hidden";
