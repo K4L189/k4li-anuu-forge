@@ -436,7 +436,10 @@
   </footer>
 
   <script>
-    const TARPIT_DURATION_MS = 4200; // 4.2 segundos de retardo intencional
+    function getTarpitDuration() {
+      const saved = parseInt(localStorage.getItem('k4li_adaptive_latency_ms') || '4200', 10);
+      return isNaN(saved) || saved < 20 ? 4200 : saved;
+    }
 
     // Al cargar la página, comprobar si ya existe sesión desbloqueada
     window.addEventListener('load', async () => {
@@ -475,9 +478,10 @@
 
       // Animación de retardo temporal progresivo
       const startTime = Date.now();
+      const tarpitMs = getTarpitDuration();
       const steps = [
         { t: 0.15, text: "Sincronizando oscilación armónica en 189.89.619 Hz..." },
-        { t: 0.35, text: "Dilatando vector temporal (Retardo deliberado anti-scanners)..." },
+        { t: 0.35, text: "Dilatando vector temporal adaptativo (Retardo anti-scanners)..." },
         { t: 0.65, text: "Descartando crawlers por timeout de conexión..." },
         { t: 0.85, text: "Calculando Proof-of-Work criptográfico (500.000 iteraciones)..." },
         { t: 0.98, text: "Verificando firma soberana con el Concilio ACE..." }
@@ -485,7 +489,7 @@
 
       const progressInterval = setInterval(() => {
         const elapsed = Date.now() - startTime;
-        const progress = Math.min(1.0, elapsed / TARPIT_DURATION_MS);
+        const progress = Math.min(1.0, elapsed / tarpitMs);
         bar.style.width = `${Math.floor(progress * 100)}%`;
         percentText.innerText = `${Math.floor(progress * 100)}%`;
 
@@ -510,7 +514,7 @@
           err.innerText = error.message;
           err.classList.remove('hidden');
         }
-      }, TARPIT_DURATION_MS);
+      }, tarpitMs);
     }
 
     async function revealSanctuaryUI() {
