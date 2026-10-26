@@ -59,6 +59,8 @@ jobs:
 
       - name: "Setup Pages Protocol"
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: "Upload GitHub Pages Artifact"
         uses: actions/upload-pages-artifact@v3
