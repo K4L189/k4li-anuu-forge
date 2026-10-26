@@ -1,0 +1,163 @@
+/* ==============================================================================
+   K4L1 STUDIO // PRE-INDEX SENTINEL GATE (161914)
+   Frecuencia: 189.89.619 Hz | Concilio ACE
+   Bloqueo Óptico Incondicional: La web no existe sin la clave
+   ============================================================================== */
+
+#anuu-sentinel-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  background: radial-gradient(circle at 50% 30%, #0d0a1a 0%, #050508 70%, #000000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: #e4e4e7;
+  overflow: hidden;
+}
+
+#anuu-sentinel-gate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 245, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 212, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.gate-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(14, 11, 26, 0.85);
+  border: 1px solid rgba(147, 51, 234, 0.35);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 0 50px rgba(147, 51, 234, 0.2), 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  text-align: center;
+  animation: gateCardAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes gateCardAppear {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.gate-card:hover {
+  border-color: rgba(0, 245, 212, 0.5);
+  box-shadow: 0 0 60px rgba(0, 245, 212, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+}
+
+.gate-emblem {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  filter: drop-shadow(0 0 16px rgba(0, 245, 212, 0.6));
+  animation: emblemPulse 4s ease-in-out infinite;
+}
+
+@keyframes emblemPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 16px rgba(0, 245, 212, 0.6)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 24px rgba(147, 51, 234, 0.8)); }
+}
+
+.gate-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+  background: linear-gradient(135deg, #00f5d4, #ffffff, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gate-subtitle {
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+.gate-input-wrap {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.gate-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 0.85rem 1.2rem;
+  font-size: 1.05rem;
+  text-align: center;
+  color: #00f5d4;
+  letter-spacing: 0.35em;
+  font-family: inherit;
+  font-weight: 700;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.gate-input:focus {
+  border-color: #00f5d4;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.35);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.gate-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #9333ea, #6b21a8);
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  border-radius: 12px;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.gate-btn:hover {
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
+  transform: translateY(-1px);
+}
+
+.gate-error {
+  min-height: 1.25rem;
+  margin-top: 1rem;
+  font-size: 0.72rem;
+  color: #fb7185;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s ease;
+}
+
+.gate-footer {
+  margin-top: 1.5rem;
+  font-size: 0.65rem;
+  color: #52525b;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gate-shake {
+  animation: gateShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes gateShake {
+  10%, 90% { transform: translate3d(-2px, 0, 0); }
+  20%, 80% { transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
